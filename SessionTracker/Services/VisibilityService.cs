@@ -8,20 +8,20 @@ namespace SessionTracker.Services
     {
         public static bool WindowIsVisible(SettingService settingsService)
         {
-            var mapType = GameService.Gw2Mumble.CurrentMap.Type;
-            var mapId   = GameService.Gw2Mumble.CurrentMap.Id;
-
             var show                                   = settingsService.UiIsVisibleSetting.Value;
             var showOnMap                              = settingsService.WindowIsVisibleOnWorldMapSetting.Value;
             var showOnCharSelectLoadingScreenCutScenes = settingsService.WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting.Value;
             var showOutsideOfWvwAndSpvp                = settingsService.WindowIsVisibleOutsideOfWvwAndSpvpSetting.Value;
             var showInWvw                              = settingsService.WindowIsVisibleInWvwSetting.Value;
             var showInSpvp                             = settingsService.WindowIsVisibleInSpvpSetting.Value;
-            var mapIsClosed                            = GameService.Gw2Mumble.UI.IsMapOpen == false;
-            var isInGame                               = GameService.GameIntegration.Gw2Instance.IsInGame;
-            var isWvwMap                               = IsWorldVsWorldMap(mapType);
-            var isSpvpMap                              = IsSpvpMap(mapType, mapId);
-            var isOutsideOfWvwAndSpvp                  = IsOutsideOfWvwAndSpvp(mapType, isSpvpMap, isWvwMap);
+
+            var mapType = GameService.Gw2Mumble.CurrentMap.Type;
+
+            var mapIsClosed           = GameService.Gw2Mumble.UI.IsMapOpen == false;
+            var isInGame              = GameService.GameIntegration.Gw2Instance.IsInGame;
+            var isWvwMap              = IsWorldVsWorldMap(mapType);
+            var isSpvpMap             = IsSpvpMap(mapType, GameService.Gw2Mumble.CurrentMap.Id);
+            var isOutsideOfWvwAndSpvp = IsOutsideOfWvwAndSpvp(mapType, isSpvpMap, isWvwMap);
 
             return show
                    && (showOnMap || mapIsClosed)
