@@ -49,7 +49,7 @@ namespace SessionTracker.Controls
 
         public void ToggleVisibility()
         {
-            _settingService.UiIsVisible.Value = !_settingService.UiIsVisible.Value;
+            _settingService.UiIsVisibleSetting.Value = !_settingService.UiIsVisibleSetting.Value;
         }
 
         public void ResetSession()
@@ -61,7 +61,7 @@ namespace SessionTracker.Controls
         // Update2() because Update() already exists in base class. Update() is not always called but Update2() is!
         public void Update2(GameTime gameTime)
         {
-            Visible = VisibilityService.WindowIsVisible(_settingService, GameService.Gw2Mumble.CurrentMap.Type);
+            Visible = VisibilityService.WindowIsVisible(_settingService);
 
             if (_model.UiHasToBeUpdated)
             {

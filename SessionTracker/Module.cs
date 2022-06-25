@@ -51,13 +51,15 @@ namespace SessionTracker
                 HeightSizingMode = SizingMode.AutoSize,
                 WidthSizingMode  = SizingMode.AutoSize,
                 BackgroundColor  = new Color(Color.Black, _settingService.BackgroundOpacitySetting.Value),
-                Visible          = _settingService.UiIsVisible.Value,
+                Visible          = _settingService.UiIsVisibleSetting.Value,
                 Parent           = GameService.Graphics.SpriteScreen
             };
 
             _cornerIconService = new CornerIconService(
-                _settingService.CornerIconIsVisible, 
-                "Click to show/hide the session tracker UI.\nIcon can be hidden by module settings.",
+                _settingService.CornerIconIsVisibleSetting, 
+                "Click to show or hide the session tracker UI.\nIcon can be hidden by module settings.\n" +
+                "Whether UI is really shown depends on other visibility settings. " +
+                "e.g. when 'on world map' is unchecked, clicking the icon will still not show the UI on the world map.",
                 CornerIconClickEventHandler, 
                 _textureService);
 

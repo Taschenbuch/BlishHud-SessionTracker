@@ -6,23 +6,42 @@ namespace SessionTracker.Services
 {
     public class VisibilityService
     {
-        public static bool WindowIsVisible(SettingService settingsService, MapType mapType)
+        public static bool WindowIsVisible(SettingService settingsService)
         {
-            if (settingsService.UiIsVisible.Value == false)
+            var mapType = GameService.Gw2Mumble.CurrentMap.Type;
+            var mapId   = GameService.Gw2Mumble.CurrentMap.Id;
+
+            var show                                   = settingsService.UiIsVisibleSetting.Value;
+            var showOnMap                              = settingsService.WindowIsVisibleOnWorldMapSetting.Value;
+            var showOnCharSelectLoadingScreenCutScenes = settingsService.WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting.Value;
+            var showOutsideOfWvwAndSpvp                = settingsService.WindowIsVisibleOutsideOfWvwAndSpvpSetting.Value;
+            var showInWvw                              = settingsService.WindowIsVisibleInWvwSetting.Value;
+            var showInSpvp                             = settingsService.WindowIsVisibleInSpvpSetting.Value;
+            var mapIsClosed                            = GameService.Gw2Mumble.UI.IsMapOpen == false;
+            var isInGame                               = GameService.GameIntegration.Gw2Instance.IsInGame;
+            var isWvwMap                               = IsWorldVsWorldMap(mapType);
+            var isSpvpMap                              = IsSpvpMap(mapType, mapId);
+            var isOutsideOfWvwAndSpvp                  = IsOutsideOfWvwAndSpvp(mapType, isSpvpMap, isWvwMap);
+
+            return show
+                   && (showOnMap || mapIsClosed)
+                   && (showOnCharSelectLoadingScreenCutScenes || isInGame)
+                   && (showOutsideOfWvwAndSpvp || isWvwMap || isSpvpMap || isInGame == false)
+                   && (showInWvw || isOutsideOfWvwAndSpvp || isSpvpMap || isInGame == false)
+                   && (showInSpvp || isOutsideOfWvwAndSpvp || isWvwMap || isInGame == false);
+        }
+
+        private static bool IsOutsideOfWvwAndSpvp(MapType mapType, bool isSpvpMap, bool isWvwMap)
+        {
+            if (isWvwMap)
                 return false;
 
-            if (settingsService.WindowIsVisibleEverywhere.Value)
-                return true;
-
-            if (GameService.GameIntegration.Gw2Instance.IsInGame == false)
+            if (isSpvpMap)
                 return false;
 
-            if (GameService.Gw2Mumble.UI.IsMapOpen)
+            if (mapType == MapType.Redirect)
                 return false;
 
-            if (settingsService.WindowIsOnlyVisibleInWvwSetting.Value) 
-                return IsWorldVsWorldMap(mapType);
-            
             return true;
         }
 
@@ -43,5 +62,23 @@ namespace SessionTracker.Services
                     return false;
             }
         }
+
+        private static bool IsSpvpMap(MapType mapType, int mapId)
+        {
+            if (mapId == PVP_LOBBY_MAP_ID)
+                return true;
+
+            switch (mapType)
+            {
+                case MapType.Pvp:
+                case MapType.Tournament:
+                case MapType.UserTournament:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        private const int PVP_LOBBY_MAP_ID = 350;
     }
 }

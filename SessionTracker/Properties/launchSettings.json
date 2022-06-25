@@ -3,7 +3,7 @@
     "powershell": {
       "commandName": "Executable",
       "executablePath": "C:\\gw2\\Blish.HUD\\Blish HUD.exe",
-      "commandLineArgs": "--process powershell --window ConsoleWindowClass --module \"$(MSBuildProjectDirectory)\\$(BaseOutputPath)\\$(Configuration)/$(TargetFramework)\\$(MSBuildProjectName).bhm\" --settings \"..\\Settings_$(MSBuildProjectName)\""
+      "commandLineArgs": "--debug --process powershell --window ConsoleWindowClass --module \"$(MSBuildProjectDirectory)\\$(BaseOutputPath)\\$(Configuration)/$(TargetFramework)\\$(MSBuildProjectName).bhm\" --settings \"..\\Settings_$(MSBuildProjectName)\""
     },
     "gw2": {
       "commandName": "Executable",

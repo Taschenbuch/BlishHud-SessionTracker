@@ -36,18 +36,21 @@ namespace SessionTracker.Settings
             ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.ValueLabelColorSetting);
             ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.SessionValuesAreVisibleSetting);
             ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.TotalValuesAreVisibleSetting);
-            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleEverywhere);
-            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.WindowIsOnlyVisibleInWvwSetting);
             ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.DragWindowWithMouseIsEnabledSetting);
-            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.CornerIconIsVisible);
+            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.CornerIconIsVisibleSetting);
             ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.UiVisibilityKeyBindingSetting);
+            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOutsideOfWvwAndSpvpSetting);
+            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleInSpvpSetting);
+            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleInWvwSetting);
+            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOnWorldMapSetting);
+            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting);
 
             _entriesFlowPanel                = ControlFactory.CreateSettingsGroupFlowPanel("Tracked stats", _rootFlowPanel);
             _entriesFlowPanel.ControlPadding = new Vector2(0, 10);
             ControlFactory.CreateHintLabel(
+                _entriesFlowPanel, 
                 "Hint: click the Hide-all-button and then select the stats you want to see.\n" +
-                "Currencies are hidden by default because there are so many of them.",
-                _entriesFlowPanel);
+                "Currencies are hidden by default because there are so many of them.");
             ShowHideAndShowAllButtons(_visibilityCheckBoxes, _entriesFlowPanel);
             ShowEntryRows(_entriesFlowPanel);
         }

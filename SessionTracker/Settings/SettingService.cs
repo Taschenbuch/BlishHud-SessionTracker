@@ -33,38 +33,57 @@ namespace SessionTracker.Settings
             SessionValuesAreVisibleSetting = settings.DefineSetting(
                 "show session values",
                 true,
-                () => "show SESSION values",
+                () => "SESSION values",
                 () => "Show values of the current session. " +
                       "Total or session values can not be both hidden.");
 
             TotalValuesAreVisibleSetting = settings.DefineSetting(
                 "show total values",
                 false,
-                () => "show TOTAL values",
+                () => "TOTAL values",
                 () => "Show total values for the whole account. " +
                       "Total or session values can not be both hidden.");
 
-            WindowIsVisibleEverywhere = settings.DefineSetting(
-                "show window everywhere",
+            WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting = settings.DefineSetting(
+                "show window on cutScenes and characterSelection and loadingScreens",
                 true,
-                () => "show everywhere",
-                () => "show window everywhere even on world map or character select screen. " +
-                      "But it will not work on character select right after logging into Guild Wars 2 because Blish does not know " +
-                      "which API key it should use at this point.");
+                () => "on character selection / loading screens / cut scenes",
+                () => "show window on character selection, loading screens and cut scences. " +
+                          "It will not show values on character selection screen right after starting Guild Wars 2 because " +
+                          "at that point Blish does not know " +
+                          "which API key it should use. You have to log into a character first.");
 
-            WindowIsOnlyVisibleInWvwSetting = settings.DefineSetting(
-                "show window only in WvW",
+            WindowIsVisibleOnWorldMapSetting = settings.DefineSetting(
+                "show window on world map",
                 true,
-                () => "show only in WvW",
-                () => "show window only when you are on a world vs world map");
+                () => "on world map",
+                () => "show window on world map.");
+
+            WindowIsVisibleOutsideOfWvwAndSpvpSetting = settings.DefineSetting(
+                "show window outside of wvw and spvp",
+                true,
+                () => "outside of WvW and sPvP",
+                () => "show window outside of wvw and spvp. e.g. on open world maps");
+
+            WindowIsVisibleInSpvpSetting = settings.DefineSetting(
+                "show window in spvp",
+                true,
+                () => "in sPvP",
+                () => "show window on structured PvP maps.");
+
+            WindowIsVisibleInWvwSetting = settings.DefineSetting(
+                "show window in wvw",
+                true,
+                () => "in WvW",
+                () => "show window on world vs world maps.");
 
             DragWindowWithMouseIsEnabledSetting = settings.DefineSetting(
                 "dragging window is allowed",
                 true,
-                () => "move window by dragging with mouse",
+                () => "drag with mouse",
                 () => "Allow dragging the window by moving the mouse when left mouse button is pressed inside window");
 
-            CornerIconIsVisible = settings.DefineSetting(
+            CornerIconIsVisibleSetting = settings.DefineSetting(
                 "cornerIcon is visible",
                 false,
                 () => "corner icon",
@@ -81,28 +100,33 @@ namespace SessionTracker.Settings
                 "ui visibility key binding",
                 new KeyBinding(Keys.None),
                 () => "show/hide UI",
-                () => "Double-click to change it. Will show or hide the UI of this module.");
+                () => "Double-click to change it. Will show or hide the session-tracker UI. " +
+                      "Whether UI is really shown depends on other visibility settings. " +
+                      "e.g. when 'on world map' is unchecked, using the key binding will still not show the UI on the world map.");
 
             var internalSettings = settings.AddSubCollection("internal settings (not visible in UI)");
             SettingsVersionSetting             = internalSettings.DefineSetting("settings version", 1);
             XMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location x", 0.5f);
             YMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location y", 0.5f);
-            UiIsVisible                        = internalSettings.DefineSetting("ui is visible", true);
+            UiIsVisibleSetting                        = internalSettings.DefineSetting("ui is visible", true);
         }
 
         public SettingEntry<ColorType> ValueLabelColorSetting { get; }
         public SettingEntry<ColorType> TitleLabelColorSetting { get; }
         public SettingEntry<float> XMainWindowRelativeLocationSetting { get; }
         public SettingEntry<float> YMainWindowRelativeLocationSetting { get; }
-        public SettingEntry<bool> UiIsVisible { get; }
+        public SettingEntry<bool> UiIsVisibleSetting { get; }
         public SettingEntry<int> BackgroundOpacitySetting { get; }
         public SettingEntry<int> FontSizeIndexSetting { get; }
         public SettingEntry<bool> SessionValuesAreVisibleSetting { get; }
         public SettingEntry<bool> TotalValuesAreVisibleSetting { get; }
-        public SettingEntry<bool> WindowIsVisibleEverywhere { get; }
-        public SettingEntry<bool> WindowIsOnlyVisibleInWvwSetting { get; }
+        public SettingEntry<bool> WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting { get; }
+        public SettingEntry<bool> WindowIsVisibleOnWorldMapSetting { get; }
+        public SettingEntry<bool> WindowIsVisibleOutsideOfWvwAndSpvpSetting { get; }
+        public SettingEntry<bool> WindowIsVisibleInSpvpSetting { get; }
+        public SettingEntry<bool> WindowIsVisibleInWvwSetting { get; }
         public SettingEntry<bool> DragWindowWithMouseIsEnabledSetting { get; }
-        public SettingEntry<bool> CornerIconIsVisible { get; }
+        public SettingEntry<bool> CornerIconIsVisibleSetting { get; }
         public SettingEntry<KeyBinding> UiVisibilityKeyBindingSetting { get; }
         public SettingEntry<LabelType> LabelTypeSetting { get; }
         public SettingEntry<int> SettingsVersionSetting { get; }

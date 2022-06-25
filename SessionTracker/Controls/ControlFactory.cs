@@ -7,7 +7,7 @@ namespace SessionTracker.Controls
 {
     public class ControlFactory
     {
-        public static Label CreateHintLabel(string text, Container parent)
+        public static Label CreateHintLabel(Container parent, string text)
         {
             return new Label
             {
