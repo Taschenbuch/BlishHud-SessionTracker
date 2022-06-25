@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Blish_HUD.Controls;
@@ -26,7 +27,8 @@ namespace SessionTracker.Settings
             _scrollbar     = (Scrollbar)buildPanel.Children.FirstOrDefault(c => c is Scrollbar);
 
             var generalFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("General", _rootFlowPanel);
-            CreateResetSessionButton(generalFlowPanel);
+            CreatePatchNotesButton(generalFlowPanel);
+            CreateResetSessionButton(generalFlowPanel, _entriesContainer);
             ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.LabelTypeSetting);
             ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.BackgroundOpacitySetting);
             ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.FontSizeIndexSetting);
@@ -50,7 +52,26 @@ namespace SessionTracker.Settings
             ShowEntryRows(_entriesFlowPanel);
         }
 
-        private void CreateResetSessionButton(Container parent)
+        private static void CreatePatchNotesButton(Container parent)
+        {
+            var patchNotesButton = new StandardButton
+            {
+                Text             = "Patch notes",
+                BasicTooltipText = "Show patch notes in your default web browser.",
+                Parent           = parent
+            };
+
+            patchNotesButton.Click += (s, e) =>
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName        = "https://pkgs.blishhud.com/ecksofa.sessiontracker.html",
+                    UseShellExecute = true
+                });
+            };
+        }
+
+        private static void CreateResetSessionButton(Container parent, EntriesContainer entriesContainer)
         {
             var resetSessionButton = new StandardButton
             {
@@ -59,7 +80,7 @@ namespace SessionTracker.Settings
                 Parent           = parent
             };
 
-            resetSessionButton.Click += (s, e) => _entriesContainer.ResetSession();
+            resetSessionButton.Click += (s, e) => entriesContainer.ResetSession();
         }
 
         private static void ShowHideAndShowAllButtons(List<Checkbox> visibilityCheckBoxes, FlowPanel entriesFlowPanel)
