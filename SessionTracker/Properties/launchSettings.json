@@ -1,0 +1,24 @@
+{
+  "profiles": {
+    "powershell": {
+      "commandName": "Executable",
+      "executablePath": "C:\\gw2\\Blish.HUD\\Blish HUD.exe",
+      "commandLineArgs": "--process powershell --window ConsoleWindowClass --module \"$(MSBuildProjectDirectory)\\$(BaseOutputPath)\\$(Configuration)/$(TargetFramework)\\$(MSBuildProjectName).bhm\" --settings \"..\\Settings_$(MSBuildProjectName)\""
+    },
+    "gw2": {
+      "commandName": "Executable",
+      "executablePath": "C:\\gw2\\Blish.HUD\\Blish HUD.exe",
+      "commandLineArgs": "--module \"$(MSBuildProjectDirectory)\\$(BaseOutputPath)\\$(Configuration)/$(TargetFramework)\\$(MSBuildProjectName).bhm\" --settings \"..\\Settings_$(MSBuildProjectName)\""
+    },
+    "prerelease_test": {
+      "commandName": "Executable",
+      "executablePath": "C:\\gw2\\Blish.HUD.0.11.8-ci.113\\Blish HUD.exe",
+      "commandLineArgs": "--process powershell --window ConsoleWindowClass --module \"$(MSBuildProjectDirectory)\\$(BaseOutputPath)\\$(Configuration)/$(TargetFramework)\\$(MSBuildProjectName).bhm\" --settings \"..\\Settings_$(MSBuildProjectName)_prerelease\""
+    },
+    "test": {
+      "commandName": "Executable",
+      "executablePath": "C:\\gw2\\Blish.HUD\\Blish HUD.exe",
+      "commandLineArgs": "--process powershell --window ConsoleWindowClass --module \"$(MSBuildProjectDirectory)\\$(BaseOutputPath)\\$(Configuration)/$(TargetFramework)\\$(MSBuildProjectName).bhm\" --settings \"..\\Settings_$(MSBuildProjectName)\""
+    }
+  }
+}
