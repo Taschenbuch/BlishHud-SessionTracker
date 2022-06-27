@@ -49,9 +49,9 @@ namespace SessionTracker.Settings
                 true,
                 () => "on character selection / loading screens / cut scenes",
                 () => "show window on character selection, loading screens and cut scences. " +
-                          "It will not show values on character selection screen right after starting Guild Wars 2 because " +
-                          "at that point Blish does not know " +
-                          "which API key it should use. You have to log into a character first.");
+                      "It will not show values on character selection screen right after starting Guild Wars 2 because " +
+                      "at that point Blish does not know " +
+                      "which API key it should use. You have to log into a character first.");
 
             WindowIsVisibleOnWorldMapSetting = settings.DefineSetting(
                 "show window on world map",
@@ -104,13 +104,32 @@ namespace SessionTracker.Settings
                       "Whether UI is really shown depends on other visibility settings. " +
                       "e.g. when 'on world map' is unchecked, using the key binding will still not show the UI on the world map.");
 
+            UiHeightIsFixedSetting = settings.DefineSetting(
+                "ui height is fixed",
+                false,
+                () => "fixed height",
+                () => "CHECKED: height is fixed and can be adjusted with the ui height slider.\n" +
+                      "UNCHECKED: height adjusts automatically to the number of stats shown.\n" +
+                      "BUG: There is a not fixable bug, that the scrollbar is visible when the mouse is not " +
+                      "over the UI after adding/removing stats or loading the module. Just move the mouse one time over the UI to hide the scrollbar again.");
+
+            UiHeightSetting = settings.DefineSetting(
+                "ui height",
+                200,
+                () => "height",
+                () => "");
+
+            UiHeightSetting.SetRange(5, 2000);
+
             var internalSettings = settings.AddSubCollection("internal settings (not visible in UI)");
             SettingsVersionSetting             = internalSettings.DefineSetting("settings version", 1);
             XMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location x", 0.5f);
             YMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location y", 0.5f);
-            UiIsVisibleSetting                        = internalSettings.DefineSetting("ui is visible", true);
+            UiIsVisibleSetting                 = internalSettings.DefineSetting("ui is visible", true);
         }
 
+        public SettingEntry<int> UiHeightSetting { get; }
+        public SettingEntry<bool> UiHeightIsFixedSetting { get; }
         public SettingEntry<ColorType> ValueLabelColorSetting { get; }
         public SettingEntry<ColorType> TitleLabelColorSetting { get; }
         public SettingEntry<float> XMainWindowRelativeLocationSetting { get; }

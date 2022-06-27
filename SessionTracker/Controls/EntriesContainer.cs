@@ -183,6 +183,8 @@ namespace SessionTracker.Controls
                 _titleFlowPanelByEntryId[entry.Id].Show();
                 _valueLabelByEntryId[entry.Id].Parent = _valuesFlowPanel;
             }
+
+            _rootFlowPanel.HideScrollbarIfExists();
         }
 
         private void CreateUi()
@@ -192,20 +194,14 @@ namespace SessionTracker.Controls
             _hintLabel = new HintLabel("All stats are hidden.\nUse module settings to select which stats are visible.", this);
             _hintLabel.SetVisibility(allEntriesAreHidden);
 
-            var rootFlowPanel = new FlowPanel()
-            {
-                FlowDirection    = ControlFlowDirection.SingleLeftToRight,
-                HeightSizingMode = SizingMode.AutoSize,
-                WidthSizingMode  = SizingMode.AutoSize,
-                Parent           = this
-            };
+            _rootFlowPanel = new RootFlowPanel(this, _settingService);
 
             _titlesFlowPanel = new FlowPanel()
             {
                 FlowDirection    = ControlFlowDirection.SingleTopToBottom,
                 HeightSizingMode = SizingMode.AutoSize,
                 WidthSizingMode  = SizingMode.AutoSize,
-                Parent           = rootFlowPanel
+                Parent           = _rootFlowPanel
             };
 
             _valuesFlowPanel = new FlowPanel()
@@ -213,7 +209,7 @@ namespace SessionTracker.Controls
                 FlowDirection    = ControlFlowDirection.SingleTopToBottom,
                 HeightSizingMode = SizingMode.AutoSize,
                 WidthSizingMode  = SizingMode.AutoSize,
-                Parent           = rootFlowPanel
+                Parent           = _rootFlowPanel
             };
 
             var font = FontService.Fonts[_settingService.FontSizeIndexSetting.Value];
@@ -233,6 +229,8 @@ namespace SessionTracker.Controls
 
                 _titleFlowPanelByEntryId[entry.Id] = new EntryTitleFlowPanel(entry, font, _titlesFlowPanel, _textureService, _settingService);
             }
+
+            _rootFlowPanel.HideScrollbarIfExists();
         }
 
         private void OnValueLabelColorSettingChanged(object sender, ValueChangedEventArgs<ColorType> e)
@@ -288,6 +286,7 @@ namespace SessionTracker.Controls
         private FlowPanel _titlesFlowPanel;
         private FlowPanel _valuesFlowPanel;
         private HintLabel _hintLabel;
+        private RootFlowPanel _rootFlowPanel;
         private const int INSTANT_INITIALIZE_INTERVAL_IN_MILLISECONDS = 0;
 
         private const int RETRY_INITIALIZE_INTERVAL_IN_MILLISECONDS = 5 * 1000;

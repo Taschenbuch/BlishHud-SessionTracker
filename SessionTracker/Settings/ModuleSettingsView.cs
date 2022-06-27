@@ -30,6 +30,8 @@ namespace SessionTracker.Settings
             CreatePatchNotesButton(generalFlowPanel);
             CreateResetSessionButton(generalFlowPanel, _entriesContainer);
             ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.LabelTypeSetting);
+            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.UiHeightIsFixedSetting);
+            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.UiHeightSetting);
             ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.BackgroundOpacitySetting);
             ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.FontSizeIndexSetting);
             ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.TitleLabelColorSetting);
