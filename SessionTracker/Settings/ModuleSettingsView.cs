@@ -50,7 +50,7 @@ namespace SessionTracker.Settings
             _entriesFlowPanel                = ControlFactory.CreateSettingsGroupFlowPanel("Tracked stats", _rootFlowPanel);
             _entriesFlowPanel.ControlPadding = new Vector2(0, 10);
             ControlFactory.CreateHintLabel(
-                _entriesFlowPanel, 
+                _entriesFlowPanel,
                 "Hint: click the Hide-all-button and then select the stats you want to see.\n" +
                 "Currencies are hidden by default because there are so many of them.");
             ShowHideAndShowAllButtons(_visibilityCheckBoxes, _entriesFlowPanel);
@@ -136,7 +136,7 @@ namespace SessionTracker.Settings
             var entryFlowPanel = new FlowPanel
             {
                 FlowDirection    = ControlFlowDirection.SingleLeftToRight,
-                BackgroundColor  = new Color(Color.Black, 0.5f),
+                BackgroundColor  = DetermineBackgroundColor(entry.IsVisible),
                 Width            = 400,
                 HeightSizingMode = SizingMode.AutoSize,
                 Parent           = entriesFlowPanel
@@ -173,9 +173,18 @@ namespace SessionTracker.Settings
                 Parent           = entryFlowPanel
             };
 
+            var clickFlowPanel = new FlowPanel()
+            {
+                FlowDirection    = ControlFlowDirection.SingleLeftToRight,
+                HeightSizingMode = SizingMode.Fill,
+                WidthSizingMode  = SizingMode.Fill,
+                BasicTooltipText = "Click to show or hide stat",
+                Parent           = entryFlowPanel
+            };
+
             if (entry.HasIcon)
             {
-                var iconContainer = ControlFactory.CreateAdjustableChildLocationContainer(entryFlowPanel);
+                var iconContainer = ControlFactory.CreateAdjustableChildLocationContainer(clickFlowPanel);
 
                 var asyncTexture2D = _textureService.EntryTextureByEntryId[entry.Id];
                 new Image(asyncTexture2D)
@@ -187,7 +196,7 @@ namespace SessionTracker.Settings
                 };
             }
 
-            var labelContainer = ControlFactory.CreateAdjustableChildLocationContainer(entryFlowPanel);
+            var labelContainer = ControlFactory.CreateAdjustableChildLocationContainer(clickFlowPanel);
 
             new Label
             {
@@ -199,10 +208,13 @@ namespace SessionTracker.Settings
                 Parent           = labelContainer
             };
 
+            clickFlowPanel.Click += (s, e) => isVisibleCheckbox.Checked = isVisibleCheckbox.Checked == false;
+
             isVisibleCheckbox.CheckedChanged += (s, e) =>
             {
-                entry.IsVisible         = e.Checked;
-                _model.UiHasToBeUpdated = true;
+                entry.IsVisible                = e.Checked;
+                entryFlowPanel.BackgroundColor = DetermineBackgroundColor(e.Checked);
+                _model.UiHasToBeUpdated        = true;
             };
 
             moveEntryUpwardsButton.Click += (s, e) =>
@@ -232,6 +244,13 @@ namespace SessionTracker.Settings
             };
         }
 
+        private static Color DetermineBackgroundColor(bool isVisible)
+        {
+            return isVisible
+                ? VISIBLE_COLOR
+                : NOT_VISIBLE_COLOR;
+        }
+
         private void UpdateEntryRows()
         {
             var scrollDistance = _scrollbar.ScrollDistance;
@@ -254,5 +273,7 @@ namespace SessionTracker.Settings
         private FlowPanel _rootFlowPanel;
         private FlowPanel _entriesFlowPanel;
         private readonly List<Checkbox> _visibilityCheckBoxes = new List<Checkbox>();
+        private static readonly Color VISIBLE_COLOR = new Color(17, 64, 9) * 0.9f;
+        private static readonly Color NOT_VISIBLE_COLOR = new Color(Color.Black, 0.5f);
     }
 }

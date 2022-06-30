@@ -18,7 +18,7 @@ namespace SessionTracker.Controls
             };
         }
 
-        public static LocationContainer CreateAdjustableChildLocationContainer(FlowPanel parent)
+        public static LocationContainer CreateAdjustableChildLocationContainer(Container parent)
         {
             return new LocationContainer()
             {
