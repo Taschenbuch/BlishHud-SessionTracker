@@ -30,12 +30,7 @@ namespace SessionTracker.Controls
             {
                 var newLocation = Input.Mouse.Position - _mousePressedLocationInsideContainer;
 
-                Location = ScreenBoundariesService.AdjustCoordinatesToKeepContainerInsideScreenBoundaries(
-                    newLocation,
-                    Width,
-                    Height,
-                    GameService.Graphics.SpriteScreen.Size.X,
-                    GameService.Graphics.SpriteScreen.Size.Y);
+                Location = ScreenBoundariesService.AdjustCoordinatesToKeepContainerInsideScreenBoundaries(newLocation, Size, GameService.Graphics.SpriteScreen.Size);
             }
         }
 

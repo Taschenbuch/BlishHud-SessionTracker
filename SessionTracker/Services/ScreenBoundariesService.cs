@@ -4,31 +4,28 @@ namespace SessionTracker.Services
 {
     public class ScreenBoundariesService
     {
-        /// <summary>
-        /// WARNING: this will only work properly for containers that are smaller than the SpriteScreen in X and Y dimension.
-        /// </summary>
-        public static Point AdjustCoordinatesToKeepContainerInsideScreenBoundaries(Point coordinates,
-                                                                                   int containerWidth,
-                                                                                   int containerHeight, 
-                                                                                   int screenWidth, 
-                                                                                   int screenHeight)
+        public static Point AdjustCoordinatesToKeepContainerInsideScreenBoundaries(Point coordinates, Point containerSize, Point screenSize)
         {
             var x = AdjustCoordinateToKeepContainerInsideScreenBoundaries(
                 coordinates.X,
-                containerWidth,
-                screenWidth);
+                containerSize.X,
+                screenSize.X);
 
             var y = AdjustCoordinateToKeepContainerInsideScreenBoundaries(
                 coordinates.Y,
-                containerHeight,
-                screenHeight);
+                containerSize.Y,
+                screenSize.Y);
 
             return new Point(x, y);
         }
 
         private static int AdjustCoordinateToKeepContainerInsideScreenBoundaries(int coordinate, int containerWidthOrHeight, int screenWidthOrHeight)
         {
-            var containerIsOutsideOfLeftOrTopScreenBoundary = coordinate < 0;
+            var containerIsTooBigForScreenDimension = containerWidthOrHeight >= screenWidthOrHeight;
+            if (containerIsTooBigForScreenDimension)
+                return 0;
+
+            var containerIsOutsideOfLeftOrTopScreenBoundary = coordinate <= 0;
             if (containerIsOutsideOfLeftOrTopScreenBoundary)
                 return 0;
 

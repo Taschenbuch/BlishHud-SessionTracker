@@ -109,6 +109,7 @@ namespace SessionTracker.Settings
                 false,
                 () => "fixed height",
                 () => "CHECKED: height is fixed and can be adjusted with the ui height slider.\n" +
+                      "Stats can be scrolled in the UI via mouse wheel or by dragging the scrollbar. Dragging the scrollbar only works when 'drag with mouse' setting is disabled.\n" +
                       "UNCHECKED: height adjusts automatically to the number of stats shown.\n" +
                       "BUG: There is a not fixable bug, that the scrollbar is visible when the mouse is not " +
                       "over the UI after adding/removing stats or loading the module. Just move the mouse one time over the UI to hide the scrollbar again.");
