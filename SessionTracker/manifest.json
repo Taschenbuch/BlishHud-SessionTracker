@@ -4,12 +4,8 @@
   "namespace": "ecksofa.sessiontracker",
   "package": "SessionTracker.dll",
   "manifest_version": 1,
-
-  "description": "Window to track different stats in the current gaming session. Stats can be sPvP/WvW kills, kdr, deaths, currencies like karma and skirmish tickets and achievements like captured WvW towers and many more.
-WARNING: The data is read from the GW2 API and is therefore delayed. Expect delays of at least 5 minutes. Even 30min and higher is possible.
-The window is only visible in wvw by default. That can be changed in the settings.",
-  "dependencies": 
-  {
+  "description": "Window to track different stats in the current gaming session. Stats can be sPvP/WvW kills, kdr, deaths, currencies like karma and skirmish tickets and achievements like captured WvW towers and many more.\nWARNING: The data is read from the GW2 API and is therefore delayed. Expect delays of at least 5 minutes. Even 30min and higher is possible.\nThe window is only visible in wvw by default. That can be changed in the settings.",
+  "dependencies": {
     "bh.blishhud": ">=0.11.7"
   },
   "url": "https://github.com/Taschenbuch/BlishHud-SessionTracker",
@@ -26,25 +22,24 @@ The window is only visible in wvw by default. That can be changed in the setting
     }
   ],
   "directories": [ "session-tracker" ],
-  "api_permissions": 
-  {
-    "account": 
-    {
+  "api_permissions": {
+    "account": {
       "optional": false,
       "details": "For tracking stats"
     },
-    "characters": 
-    {
+    "characters": {
       "optional": false,
       "details": "For tracking stats"
     },
-    "progression":
-    {
+    "progression": {
       "optional": false,
       "details": "For tracking stats"
     },
-    "wallet": 
-    {
+    "wallet": {
+      "optional": false,
+      "details": "For tracking stats"
+    },
+    "pvp": {
       "optional": false,
       "details": "For tracking stats"
     }

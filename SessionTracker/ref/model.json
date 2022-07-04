@@ -9,50 +9,6 @@
   },
   "Entries": [
     {
-      "Id": "pvp kills",
-      "LabelText": "PvP Kills",
-      "LabelTooltip": "PvP Kills",
-      "PlaceholderInTooltip": "kills",
-      "AchievementId": 239,
-      "CurrencyId": 0,
-      "IconUrl": null,
-      "IconFileName": "kill.png",
-      "IsVisible": true
-    },
-    {
-      "Id": "wvw kills",
-      "LabelText": "WvW Kills",
-      "LabelTooltip": "WvW Kills",
-      "PlaceholderInTooltip": "kills",
-      "AchievementId": 283,
-      "CurrencyId": 0,
-      "IconUrl": null,
-      "IconFileName": "kill.png",
-      "IsVisible": true
-    },
-    {
-      "Id": "pvp kdr",
-      "LabelText": "PvP K/D",
-      "LabelTooltip": "PvP Kills/Deathsß ratio",
-      "PlaceholderInTooltip": "kills/death",
-      "AchievementId": 0,
-      "CurrencyId": 0,
-      "IconUrl": null,
-      "IconFileName": "kdr.png",
-      "IsVisible": true
-    },
-    {
-      "Id": "wvw kdr",
-      "LabelText": "WvW K/D",
-      "LabelTooltip": "WvW Kills/Deaths ratio",
-      "PlaceholderInTooltip": "kills/death",
-      "AchievementId": 0,
-      "CurrencyId": 0,
-      "IconUrl": null,
-      "IconFileName": "kdr.png",
-      "IsVisible": true
-    },
-    {
       "Id": "deaths",
       "LabelText": "Deaths",
       "LabelTooltip": "Deaths",
@@ -61,6 +17,160 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "death.png",
+      "IsVisible": true
+    },
+    {
+      "Id": "pvp kills",
+      "LabelText": "PvP kills",
+      "LabelTooltip": "PvP kills",
+      "PlaceholderInTooltip": "kills",
+      "AchievementId": 239,
+      "CurrencyId": 0,
+      "IconUrl": null,
+      "IconFileName": "kill.png",
+      "IsVisible": true
+    },
+    {
+      "Id": "pvp kdr",
+      "LabelText": "PvP k/d",
+      "LabelTooltip": "PvP kills/deaths ratio",
+      "PlaceholderInTooltip": "kills/death",
+      "AchievementId": 0,
+      "CurrencyId": 0,
+      "IconUrl": null,
+      "IconFileName": "kdr.png",
+      "IsVisible": true
+    },
+    {
+      "Id": "pvp total wins",
+      "LabelText": "PvP total wins",
+      "LabelTooltip": "PvP total wins",
+      "PlaceholderInTooltip": "total wins",
+      "AchievementId": 0,
+      "CurrencyId": 0,
+      "IconUrl": null,
+      "IconFileName": "pvpWins.png",
+      "IsVisible": true
+    },
+    {
+      "Id": "pvp total losses",
+      "LabelText": "PvP total losses",
+      "LabelTooltip": "PvP total losses",
+      "PlaceholderInTooltip": "total losses",
+      "AchievementId": 0,
+      "CurrencyId": 0,
+      "IconUrl": null,
+      "IconFileName": "pvpLosses.png",
+      "IsVisible": true
+    },
+    {
+      "Id": "pvp ranked wins",
+      "LabelText": "PvP ranked wins",
+      "LabelTooltip": "PvP ranked wins",
+      "PlaceholderInTooltip": "ranked wins",
+      "AchievementId": 0,
+      "CurrencyId": 0,
+      "IconUrl": null,
+      "IconFileName": "pvpWins.png",
+      "IsVisible": true
+    },
+    {
+      "Id": "pvp ranked losses",
+      "LabelText": "PvP ranked losses",
+      "LabelTooltip": "PvP ranked losses",
+      "PlaceholderInTooltip": "ranked losses",
+      "AchievementId": 0,
+      "CurrencyId": 0,
+      "IconUrl": null,
+      "IconFileName": "pvpLosses.png",
+      "IsVisible": true
+    },
+    {
+      "Id": "pvp unranked wins",
+      "LabelText": "PvP unranked wins",
+      "LabelTooltip": "PvP unranked wins",
+      "PlaceholderInTooltip": "unranked wins",
+      "AchievementId": 0,
+      "CurrencyId": 0,
+      "IconUrl": null,
+      "IconFileName": "pvpWins.png",
+      "IsVisible": true
+    },
+    {
+      "Id": "pvp unranked losses",
+      "LabelText": "PvP unranked losses",
+      "LabelTooltip": "PvP unranked losses",
+      "PlaceholderInTooltip": "unranked losses",
+      "AchievementId": 0,
+      "CurrencyId": 0,
+      "IconUrl": null,
+      "IconFileName": "pvpLosses.png",
+      "IsVisible": true
+    },
+    {
+      "Id": "pvp custom wins",
+      "LabelText": "PvP custom wins",
+      "LabelTooltip": "PvP custom wins",
+      "PlaceholderInTooltip": "custom wins",
+      "AchievementId": 0,
+      "CurrencyId": 0,
+      "IconUrl": null,
+      "IconFileName": "pvpWins.png",
+      "IsVisible": true
+    },
+    {
+      "Id": "pvp custom losses",
+      "LabelText": "PvP custom losses",
+      "LabelTooltip": "PvP custom losses",
+      "PlaceholderInTooltip": "custom losses",
+      "AchievementId": 0,
+      "CurrencyId": 0,
+      "IconUrl": null,
+      "IconFileName": "pvpLosses.png",
+      "IsVisible": true
+    },
+    {
+      "Id": "pvp rank",
+      "LabelText": "PvP rank",
+      "LabelTooltip": "PvP rank",
+      "PlaceholderInTooltip": "ranks",
+      "AchievementId": 0,
+      "CurrencyId": 0,
+      "IconUrl": null,
+      "IconFileName": "pvpRank.png",
+      "IsVisible": true
+    },
+    {
+      "Id": "pvp ranking points",
+      "LabelText": "PvP ranking points",
+      "LabelTooltip": "PvP ranking points",
+      "PlaceholderInTooltip": "ranking points",
+      "AchievementId": 0,
+      "CurrencyId": 0,
+      "IconUrl": null,
+      "IconFileName": "pvpRankingPoints.png",
+      "IsVisible": true
+    },
+    {
+      "Id": "wvw kills",
+      "LabelText": "WvW kills",
+      "LabelTooltip": "WvW kills",
+      "PlaceholderInTooltip": "kills",
+      "AchievementId": 283,
+      "CurrencyId": 0,
+      "IconUrl": null,
+      "IconFileName": "kill.png",
+      "IsVisible": true
+    },
+    {
+      "Id": "wvw kdr",
+      "LabelText": "WvW k/d",
+      "LabelTooltip": "WvW kills/deaths ratio",
+      "PlaceholderInTooltip": "kills/death",
+      "AchievementId": 0,
+      "CurrencyId": 0,
+      "IconUrl": null,
+      "IconFileName": "kdr.png",
       "IsVisible": true
     },
     {

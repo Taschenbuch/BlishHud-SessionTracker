@@ -14,13 +14,33 @@ namespace SessionTracker.Services
         {
             var charactersTask   = gw2ApiManager.Gw2ApiClient.V2.Characters.AllAsync();
             var accountTask      = gw2ApiManager.Gw2ApiClient.V2.Account.GetAsync();
+            var pvpStatsTask     = gw2ApiManager.Gw2ApiClient.V2.Pvp.Stats.GetAsync();
             var achievementsTask = gw2ApiManager.Gw2ApiClient.V2.Account.Achievements.GetAsync();
             var walletTask       = gw2ApiManager.Gw2ApiClient.V2.Account.Wallet.GetAsync();
 
             await Task.WhenAll(charactersTask, accountTask, achievementsTask, walletTask);
 
-            model.GetEntry(EntryId.DEATHS).Value.Total   = charactersTask.Result.Sum(c => c.Deaths);
-            model.GetEntry(EntryId.WVW_RANK).Value.Total = accountTask.Result.WvwRank ?? 0;
+            var pvpRank          = pvpStatsTask.Result.PvpRank;
+            var pvpRankRollovers = pvpStatsTask.Result.PvpRankRollovers;
+            var totalWins        = pvpStatsTask.Result.Aggregate.Wins;
+            var totalLosses      = pvpStatsTask.Result.Aggregate.Losses;
+            var rankedWins       = pvpStatsTask.Result.Ladders["ranked"].Wins;
+            var rankedLosses     = pvpStatsTask.Result.Ladders["ranked"].Losses;
+            var unrankedWins     = pvpStatsTask.Result.Ladders["unranked"].Wins;
+            var unrankedLosses   = pvpStatsTask.Result.Ladders["unranked"].Losses;
+
+            model.GetEntry(EntryId.PVP_RANK).Value.Total            = pvpRank + pvpRankRollovers;
+            model.GetEntry(EntryId.PVP_RANKING_POINTS).Value.Total  = pvpStatsTask.Result.PvpRankPoints;
+            model.GetEntry(EntryId.PVP_TOTAL_WINS).Value.Total      = totalLosses;
+            model.GetEntry(EntryId.PVP_TOTAL_LOSSES).Value.Total    = totalWins;
+            model.GetEntry(EntryId.PVP_RANKED_WINS).Value.Total     = rankedWins;
+            model.GetEntry(EntryId.PVP_RANKED_LOSSES).Value.Total   = rankedLosses;
+            model.GetEntry(EntryId.PVP_UNRANKED_WINS).Value.Total   = unrankedWins;
+            model.GetEntry(EntryId.PVP_UNRANKED_LOSSES).Value.Total = unrankedLosses;
+            model.GetEntry(EntryId.PVP_CUSTOM_WINS).Value.Total     = totalWins - rankedWins - unrankedWins;
+            model.GetEntry(EntryId.PVP_CUSTOM_LOSSES).Value.Total   = totalLosses - rankedLosses - unrankedLosses;
+            model.GetEntry(EntryId.DEATHS).Value.Total              = charactersTask.Result.Sum(c => c.Deaths);
+            model.GetEntry(EntryId.WVW_RANK).Value.Total            = accountTask.Result.WvwRank ?? 0;
 
             foreach (var entry in model.Entries.Where(v => v.IsCurrency))
                 entry.Value.Total = GetCurrencyValue(walletTask, entry.CurrencyId);
@@ -52,6 +72,7 @@ namespace SessionTracker.Services
             TokenPermission.Characters,
             TokenPermission.Progression,
             TokenPermission.Wallet,
+            TokenPermission.Pvp,
         };
     }
 }
