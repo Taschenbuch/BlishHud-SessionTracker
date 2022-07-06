@@ -11,7 +11,7 @@ namespace SessionTracker.Services
 {
     public class TextureService : IDisposable
     {
-        public TextureService(ContentsManager contentsManager, Logger logger)
+        public TextureService(Model model, ContentsManager contentsManager, Logger logger)
         {
             _contentsManager            = contentsManager;
             _logger                     = logger;
@@ -22,6 +22,7 @@ namespace SessionTracker.Services
             EntryIconPlaceholderTexture = contentsManager.GetTexture("entryIconPlaceholder_1444524.png");
             CornerIconTexture           = contentsManager.GetTexture("cornerIcon.png");
             CornerIconHoverTexture      = contentsManager.GetTexture("cornerIconHover.png");
+            CreateEntryTextures(model);
         }
 
         public void Dispose()
@@ -38,30 +39,28 @@ namespace SessionTracker.Services
                 entryIcon?.Dispose();
         }
 
-        public void CreateEntryTextures(Model model)
+        public Texture2D MoveDownTexture { get; }
+        public Texture2D MoveDownActiveTexture { get; }
+        public Texture2D MoveUpTexture { get; }
+        public Texture2D MoveUpActiveTexture { get; }
+        public Texture2D EntryIconPlaceholderTexture { get; }
+        public Texture2D CornerIconTexture { get; }
+        public Texture2D CornerIconHoverTexture { get; }
+        public Dictionary<string, AsyncTexture2D> EntryTextureByEntryId { get; } = new Dictionary<string, AsyncTexture2D>();
+
+        private void CreateEntryTextures(Model model)
         {
             var       notFoundTextures = new List<string>();
             Exception exception        = new Exception("i am a dummy. ignore me");
 
-            foreach (var entry in model.Entries.Where(e => e.HasIconUrl))
+            foreach (var entry in model.Entries)
             {
                 try
                 {
-                    EntryTextureByEntryId[entry.Id] = GameService.Content.GetRenderServiceTexture(entry.IconUrl);
-                }
-                catch (Exception e)
-                {
-                    EntryTextureByEntryId[entry.Id] = new AsyncTexture2D(EntryIconPlaceholderTexture);
-                    notFoundTextures.Add(entry.LabelText);
-                    exception = e;
-                }
-            }
-
-            foreach (var entry in model.Entries.Where(e => e.HasIconFile))
-            {
-                try
-                {
-                    EntryTextureByEntryId[entry.Id] = _contentsManager.GetTexture(entry.IconFileName);
+                    if(entry.HasIconUrl)
+                        EntryTextureByEntryId[entry.Id] = GameService.Content.GetRenderServiceTexture(entry.IconUrl);
+                    else if (entry.HasIconFile)
+                        EntryTextureByEntryId[entry.Id] = _contentsManager.GetTexture(entry.IconFileName);
                 }
                 catch (Exception e)
                 {
@@ -75,14 +74,6 @@ namespace SessionTracker.Services
                 _logger.Error(exception, $"Could not get entry texture for: {string.Join(", ", notFoundTextures)}. :(");
         }
 
-        public Texture2D MoveDownTexture { get; }
-        public Texture2D MoveDownActiveTexture { get; }
-        public Texture2D MoveUpTexture { get; }
-        public Texture2D MoveUpActiveTexture { get; }
-        public Texture2D EntryIconPlaceholderTexture { get; }
-        public Texture2D CornerIconTexture { get; }
-        public Texture2D CornerIconHoverTexture { get; }
-        public Dictionary<string, AsyncTexture2D> EntryTextureByEntryId { get; } = new Dictionary<string, AsyncTexture2D>();
         private readonly ContentsManager _contentsManager;
         private readonly Logger _logger;
     }

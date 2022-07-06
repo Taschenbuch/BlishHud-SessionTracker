@@ -43,8 +43,7 @@ namespace SessionTracker
         {
             _fileService    = new FileService(DirectoriesManager, ContentsManager, Logger);
             _model          = await _fileService.LoadModelFromFile();
-            _textureService = new TextureService(ContentsManager, Logger);
-            _textureService.CreateEntryTextures(_model);
+            _textureService = new TextureService(_model, ContentsManager, Logger);
 
             _entriesContainer = new EntriesContainer(_model, Gw2ApiManager, _textureService, _settingService, Logger)
             {
