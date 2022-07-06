@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,35 +27,52 @@ namespace SessionTracker.Settings
             _rootFlowPanel = ControlFactory.CreateSettingsRootFlowPanel(buildPanel);
             _scrollbar     = (Scrollbar)buildPanel.Children.FirstOrDefault(c => c is Scrollbar);
 
-            var generalFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("General", _rootFlowPanel);
-            CreatePatchNotesButton(generalFlowPanel);
-            CreateResetSessionButton(generalFlowPanel, _entriesContainer);
-            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.LabelTypeSetting);
-            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.UiHeightIsFixedSetting);
-            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.UiHeightSetting);
-            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.BackgroundOpacitySetting);
-            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.FontSizeIndexSetting);
-            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.TitleLabelColorSetting);
-            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.ValueLabelColorSetting);
-            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.SessionValuesAreVisibleSetting);
-            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.TotalValuesAreVisibleSetting);
-            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.DragWindowWithMouseIsEnabledSetting);
-            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.CornerIconIsVisibleSetting);
-            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.UiVisibilityKeyBindingSetting);
-            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOutsideOfWvwAndSpvpSetting);
-            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleInSpvpSetting);
-            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleInWvwSetting);
-            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOnWorldMapSetting);
-            ControlFactory.CreateSetting(generalFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting);
+            var generalSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("General", _rootFlowPanel);
+            CreatePatchNotesButton(generalSectionFlowPanel);
+            CreateResetSessionButton(generalSectionFlowPanel, _entriesContainer);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.LabelTypeSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.UiHeightIsFixedSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.UiHeightSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.BackgroundOpacitySetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.FontSizeIndexSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.TitleLabelColorSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.ValueLabelColorSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.SessionValuesAreVisibleSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.TotalValuesAreVisibleSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.DragWindowWithMouseIsEnabledSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.CornerIconIsVisibleSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.UiVisibilityKeyBindingSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOutsideOfWvwAndSpvpSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleInSpvpSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleInWvwSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOnWorldMapSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting);
 
-            _entriesFlowPanel                = ControlFactory.CreateSettingsGroupFlowPanel("Tracked stats", _rootFlowPanel);
-            _entriesFlowPanel.ControlPadding = new Vector2(0, 10);
+            var trackedStatsSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Tracked stats", _rootFlowPanel);
+
             ControlFactory.CreateHintLabel(
-                _entriesFlowPanel,
-                "Hint: click the Hide-all-button and then select the stats you want to see.\n" +
-                "Currencies are hidden by default because there are so many of them.");
-            ShowHideAndShowAllButtons(_visibilityCheckBoxes, _entriesFlowPanel);
-            ShowEntryRows(_entriesFlowPanel);
+                trackedStatsSectionFlowPanel,
+                "Click the 'Hide all'-button and then select the stats you want to see by clicking on one\n" +
+                "of the stats category buttons (e.g. 'PvP', 'Fractals') " +
+                "or by clicking on the individual stats below.\n" +
+                "After that click on the 'Move visible to top'-button to make hiding or reordering easier.\n" +
+                "You can reorder the stats with the up and down buttons.");
+
+            ShowHideAndShowAllButtons(_visibilityCheckBoxByEntryId, trackedStatsSectionFlowPanel);
+            ShowCategoryButtons(_visibilityCheckBoxByEntryId, trackedStatsSectionFlowPanel);
+            ShowMoveVisibleToTopButton(_visibilityCheckBoxByEntryId, trackedStatsSectionFlowPanel);
+
+            _entryRowsFlowPanel = new FlowPanel
+            {
+                FlowDirection       = ControlFlowDirection.SingleTopToBottom,
+                OuterControlPadding = new Vector2(0, 5),
+                ControlPadding      = new Vector2(0, 5),
+                HeightSizingMode    = SizingMode.AutoSize,
+                WidthSizingMode     = SizingMode.AutoSize,
+                Parent              = trackedStatsSectionFlowPanel
+            };
+
+            ShowEntryRows(_model.Entries, _entryRowsFlowPanel);
         }
 
         private static void CreatePatchNotesButton(Container parent)
@@ -88,7 +106,7 @@ namespace SessionTracker.Settings
             resetSessionButton.Click += (s, e) => entriesContainer.ResetSession();
         }
 
-        private static void ShowHideAndShowAllButtons(List<Checkbox> visibilityCheckBoxes, FlowPanel entriesFlowPanel)
+        private static void ShowHideAndShowAllButtons(Dictionary<string, Checkbox> visibilityCheckBoxByEntryId, FlowPanel entriesFlowPanel)
         {
             var buttonsFlowPanel = new FlowPanel
             {
@@ -114,24 +132,135 @@ namespace SessionTracker.Settings
 
             hideAllButton.Click += (s, e) =>
             {
-                foreach (var visibilityCheckBox in visibilityCheckBoxes)
+                foreach (var visibilityCheckBox in visibilityCheckBoxByEntryId.Values)
                     visibilityCheckBox.Checked = false;
             };
 
             showAllButton.Click += (s, e) =>
             {
-                foreach (var visibilityCheckBox in visibilityCheckBoxes)
+                foreach (var visibilityCheckBox in visibilityCheckBoxByEntryId.Values)
                     visibilityCheckBox.Checked = true;
             };
         }
 
-        private void ShowEntryRows(FlowPanel entriesFlowPanel)
+        private void ShowMoveVisibleToTopButton(Dictionary<string, Checkbox> visibilityCheckBoxByEntryId, FlowPanel entriesFlowPanel)
         {
-            foreach (var entry in _model.Entries)
-                ShowEntryRow(entriesFlowPanel, entry);
+            var moveVisibleEntryRowsToTopButton = new StandardButton
+            {
+                Text             = "Move visible to top",
+                BasicTooltipText = "Move all visible stats to the top for easier hiding or reordering.",
+                Width            = 200,
+                Parent           = entriesFlowPanel
+            };
+
+            moveVisibleEntryRowsToTopButton.Click += (s, e) =>
+            {
+                var sortedEntries = _model.Entries.OrderByDescending(entry => entry.IsVisible).ToList();
+                _model.Entries.Clear();
+                _model.Entries.AddRange(sortedEntries);
+                UpdateEntryRows();
+            };
         }
 
-        private void ShowEntryRow(FlowPanel entriesFlowPanel, Entry entry)
+        private void ShowCategoryButtons(Dictionary<string, Checkbox> visibilityCheckBoxByEntryId, FlowPanel entriesFlowPanel)
+        {
+            var buttonsFlowPanel = new FlowPanel
+            {
+                FlowDirection    = ControlFlowDirection.SingleLeftToRight,
+                WidthSizingMode  = SizingMode.AutoSize,
+                HeightSizingMode = SizingMode.AutoSize,
+                Parent           = entriesFlowPanel,
+            };
+
+            var buttonWidth = 100;
+
+            var pvpButton = new StandardButton
+            {
+                Text             = "PvP",
+                BasicTooltipText = "Click to show pvp related stats.",
+                Width            = buttonWidth,
+                Parent           = buttonsFlowPanel
+            };
+
+            var wvwButton = new StandardButton
+            {
+                Text             = "WvW",
+                BasicTooltipText = "Click to show wvw related stats.",
+                Width            = buttonWidth,
+                Parent           = buttonsFlowPanel
+            };
+
+            var fractalsButton = new StandardButton
+            {
+                Text             = "Fractals",
+                BasicTooltipText = "Click to show fractal related stats.",
+                Width            = buttonWidth,
+                Parent           = buttonsFlowPanel
+            };
+
+            var strikesButton = new StandardButton
+            {
+                Text             = "Strikes",
+                BasicTooltipText = "Click to show strike related stats.",
+                Width            = buttonWidth,
+                Parent           = buttonsFlowPanel
+            };
+
+            var raidsButton = new StandardButton
+            {
+                Text             = "Raids",
+                BasicTooltipText = "Click to show raid related stats.",
+                Width            = buttonWidth,
+                Parent           = buttonsFlowPanel
+            };
+
+            var openWorldButton = new StandardButton
+            {
+                Text             = "Open World",
+                BasicTooltipText = "Click to show some open world related stats.",
+                Width            = buttonWidth,
+                Parent           = buttonsFlowPanel
+            };
+
+            pvpButton.Click += (s, e) =>
+            {
+                ShowByEntryIdStartingWith("pvp", visibilityCheckBoxByEntryId);
+                ShowByCurrencyId(PVP_CURRENCY_IDS, visibilityCheckBoxByEntryId);
+                visibilityCheckBoxByEntryId[EntryId.DEATHS].Checked = true;
+            };
+
+            wvwButton.Click += (s, e) =>
+            {
+                ShowByEntryIdStartingWith("wvw", visibilityCheckBoxByEntryId);
+                ShowByCurrencyId(WVW_CURRENCY_IDS, visibilityCheckBoxByEntryId);
+                visibilityCheckBoxByEntryId[EntryId.DEATHS].Checked = true;
+            };
+
+            fractalsButton.Click  += (s, e) => ShowByCurrencyId(FRACTAL_CURRENCY_IDS, visibilityCheckBoxByEntryId);
+            strikesButton.Click   += (s, e) => ShowByCurrencyId(STRIKE_CURRENCY_IDS, visibilityCheckBoxByEntryId);
+            raidsButton.Click     += (s, e) => ShowByCurrencyId(RAID_CURRENCY_IDS, visibilityCheckBoxByEntryId);
+            openWorldButton.Click += (s, e) => ShowByCurrencyId(OPEN_WORLD_CURRENCY_IDS, visibilityCheckBoxByEntryId);
+        }
+
+        private static void ShowByEntryIdStartingWith(string searchTerm, Dictionary<string, Checkbox> visibilityCheckBoxByEntryId)
+        {
+            foreach (var checkBoxStringPair in visibilityCheckBoxByEntryId.Where(i => i.Key.StartsWith(searchTerm, StringComparison.OrdinalIgnoreCase)))
+                checkBoxStringPair.Value.Checked = true;
+        }
+
+        private void ShowByCurrencyId(List<int> currencyIds, Dictionary<string, Checkbox> visibilityCheckBoxByEntryId)
+        {
+            foreach (var entry in _model.Entries.Where(entry => currencyIds.Contains(entry.CurrencyId)))
+                visibilityCheckBoxByEntryId[entry.Id].Checked = true;
+        }
+
+        private void ShowEntryRows(List<Entry> entries, FlowPanel entryRowsFlowPanel)
+        {
+            foreach (var entry in entries)
+                ShowEntryRow(entryRowsFlowPanel, entry);
+        }
+
+        private void ShowEntryRow(FlowPanel entryRowsFlowPanel, Entry entry)
         {
             var entryFlowPanel = new FlowPanel
             {
@@ -139,7 +268,7 @@ namespace SessionTracker.Settings
                 BackgroundColor  = DetermineBackgroundColor(entry.IsVisible),
                 Width            = 400,
                 HeightSizingMode = SizingMode.AutoSize,
-                Parent           = entriesFlowPanel
+                Parent           = entryRowsFlowPanel
             };
 
             var checkBoxContainer = ControlFactory.CreateAdjustableChildLocationContainer(entryFlowPanel);
@@ -153,7 +282,7 @@ namespace SessionTracker.Settings
                 Parent           = checkBoxContainer
             };
 
-            _visibilityCheckBoxes.Add(isVisibleCheckbox);
+            _visibilityCheckBoxByEntryId[entry.Id] = (isVisibleCheckbox);
 
             var moveEntryUpwardsButton = new GlowButton
             {
@@ -254,8 +383,8 @@ namespace SessionTracker.Settings
         private void UpdateEntryRows()
         {
             var scrollDistance = _scrollbar.ScrollDistance;
-            _entriesFlowPanel.ClearChildren();
-            ShowEntryRows(_entriesFlowPanel);
+            _entryRowsFlowPanel.ClearChildren();
+            ShowEntryRows(_model.Entries, _entryRowsFlowPanel);
             _model.UiHasToBeUpdated = true;
 
             Task.Run(async () =>
@@ -271,9 +400,50 @@ namespace SessionTracker.Settings
         private readonly TextureService _textureService;
         private Scrollbar _scrollbar;
         private FlowPanel _rootFlowPanel;
-        private FlowPanel _entriesFlowPanel;
-        private readonly List<Checkbox> _visibilityCheckBoxes = new List<Checkbox>();
+        private FlowPanel _entryRowsFlowPanel;
+        private readonly Dictionary<string, Checkbox> _visibilityCheckBoxByEntryId = new Dictionary<string, Checkbox>();
         private static readonly Color VISIBLE_COLOR = new Color(17, 64, 9) * 0.9f;
         private static readonly Color NOT_VISIBLE_COLOR = new Color(Color.Black, 0.5f);
+
+        private static readonly List<int> PVP_CURRENCY_IDS = new List<int>
+        {
+            30, // PvpLeagueTicket
+            33, // PvpAscendedShardsOfGlory
+            46, // PvpTournamentVoucher
+        };
+
+        private static readonly List<int> WVW_CURRENCY_IDS = new List<int>
+        {
+            26, // WvW Skirmish Claim Ticket
+            15, // Badge of Honor
+        };
+
+        private static readonly List<int> FRACTAL_CURRENCY_IDS = new List<int>
+        {
+            7, // Fractal Relic 
+            24, // Pristine Fractal Relic
+            59, // Unstable Fractal Essence
+        };
+
+        private static readonly List<int> STRIKE_CURRENCY_IDS = new List<int>
+        {
+            53, // Green Prophet Shard
+            54, // Blue Prophet Crystal
+            57, // Blue Prophet Shard
+        };
+
+        private static readonly List<int> RAID_CURRENCY_IDS = new List<int>
+        {
+            28, // Magnetite Shard 
+            39, // Gaeting Crystal
+        };
+
+        private static readonly List<int> OPEN_WORLD_CURRENCY_IDS = new List<int>
+        {
+            2, // Karma
+            23, // Spirit Shard
+            32, // Unbound Magic
+            45, // Volatile Magic
+        };
     }
 }

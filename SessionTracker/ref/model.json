@@ -185,7 +185,7 @@
       "IsVisible": true
     },
     {
-      "Id": "WvwSupplySpentOnRepairs",
+      "Id": "wvw supply spent on repairs",
       "LabelText": "Supply (repair)",
       "LabelTooltip": "Supply spent on repairs",
       "PlaceholderInTooltip": "supplies",
@@ -196,7 +196,7 @@
       "IsVisible": true
     },
     {
-      "Id": "WvwDolyaksKilled",
+      "Id": "wvw dolyaks killed",
       "LabelText": "Dolyaks killed",
       "LabelTooltip": "Dolyaks killed",
       "PlaceholderInTooltip": "dolyaks",
@@ -207,7 +207,7 @@
       "IsVisible": true
     },
     {
-      "Id": "WvwDolyakEscorted",
+      "Id": "wvw dolyaks escorted",
       "LabelText": "Dolyaks escorted",
       "LabelTooltip": "Dolyaks escorted",
       "PlaceholderInTooltip": "dolyaks",
@@ -218,7 +218,7 @@
       "IsVisible": true
     },
     {
-      "Id": "WvwCampsCaptured",
+      "Id": "wvw camps captured",
       "LabelText": "Camps captured",
       "LabelTooltip": "Supply camp captured",
       "PlaceholderInTooltip": "camps",
@@ -229,7 +229,7 @@
       "IsVisible": true
     },
     {
-      "Id": "WvwCampsDefended",
+      "Id": "wvw camps defended",
       "LabelText": "Camps defended",
       "LabelTooltip": "Supply camps defended",
       "PlaceholderInTooltip": "camps",
@@ -240,7 +240,7 @@
       "IsVisible": true
     },
     {
-      "Id": "WvwTowersCaptured",
+      "Id": "wvw towers captured",
       "LabelText": "Towers captured",
       "LabelTooltip": "Towers captured",
       "PlaceholderInTooltip": "towers",
@@ -251,7 +251,7 @@
       "IsVisible": true
     },
     {
-      "Id": "WvwTowersDefended",
+      "Id": "wvw towers defended",
       "LabelText": "Towers defended",
       "LabelTooltip": "Towers defended",
       "PlaceholderInTooltip": "towers",
@@ -262,7 +262,7 @@
       "IsVisible": true
     },
     {
-      "Id": "WvwKeepsCaptured",
+      "Id": "wvw keeps captured",
       "LabelText": "Keeps captured",
       "LabelTooltip": "Keeps captured",
       "PlaceholderInTooltip": "keeps",
@@ -273,7 +273,7 @@
       "IsVisible": true
     },
     {
-      "Id": "WvwKeepsDefended",
+      "Id": "wvw keeps defended",
       "LabelText": "Keeps defended",
       "LabelTooltip": "Keeps defended",
       "PlaceholderInTooltip": "keeps",
@@ -284,7 +284,7 @@
       "IsVisible": true
     },
     {
-      "Id": "WvwCastlesCaptured",
+      "Id": "wvw castles captured",
       "LabelText": "Castles captured",
       "LabelTooltip": "Stonemist castles captured",
       "PlaceholderInTooltip": "castles",
@@ -295,7 +295,7 @@
       "IsVisible": true
     },
     {
-      "Id": "WvwCastlesDefended",
+      "Id": "wvw castles defended",
       "LabelText": "Castles defended",
       "LabelTooltip": "Stonemist castles defended",
       "PlaceholderInTooltip": "castles",
@@ -306,7 +306,7 @@
       "IsVisible": true
     },
     {
-      "Id": "WvwObjectivesCaptured",
+      "Id": "wvw objectives captured",
       "LabelText": "Objectives captured",
       "LabelTooltip": "Objectives captured",
       "PlaceholderInTooltip": "objectives",
@@ -317,7 +317,7 @@
       "IsVisible": true
     },
     {
-      "Id": "WvwObjectivesDefended",
+      "Id": "wvw objectives defended",
       "LabelText": "Objectives defended",
       "LabelTooltip": "Objectives defended",
       "PlaceholderInTooltip": "objectives",
