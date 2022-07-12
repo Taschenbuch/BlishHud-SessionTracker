@@ -153,13 +153,15 @@ namespace SessionTracker.Settings
                 Parent           = entriesFlowPanel
             };
 
-            moveVisibleEntryRowsToTopButton.Click += (s, e) =>
-            {
-                var sortedEntries = _model.Entries.OrderByDescending(entry => entry.IsVisible).ToList();
-                _model.Entries.Clear();
-                _model.Entries.AddRange(sortedEntries);
-                UpdateEntryRows();
-            };
+            moveVisibleEntryRowsToTopButton.Click += (s, e) => MoveVisibleEntriesToTop();
+        }
+
+        private void MoveVisibleEntriesToTop()
+        {
+            var sortedEntries = _model.Entries.OrderByDescending(entry => entry.IsVisible).ToList();
+            _model.Entries.Clear();
+            _model.Entries.AddRange(sortedEntries);
+            UpdateEntryRows();
         }
 
         private void ShowCategoryButtons(Dictionary<string, Checkbox> visibilityCheckBoxByEntryId, FlowPanel entriesFlowPanel)
@@ -227,6 +229,7 @@ namespace SessionTracker.Settings
                 ShowByEntryIdStartingWith("pvp", visibilityCheckBoxByEntryId);
                 ShowByCurrencyId(PVP_CURRENCY_IDS, visibilityCheckBoxByEntryId);
                 visibilityCheckBoxByEntryId[EntryId.DEATHS].Checked = true;
+                MoveVisibleEntriesToTop();
             };
 
             wvwButton.Click += (s, e) =>
@@ -234,12 +237,32 @@ namespace SessionTracker.Settings
                 ShowByEntryIdStartingWith("wvw", visibilityCheckBoxByEntryId);
                 ShowByCurrencyId(WVW_CURRENCY_IDS, visibilityCheckBoxByEntryId);
                 visibilityCheckBoxByEntryId[EntryId.DEATHS].Checked = true;
+                MoveVisibleEntriesToTop();
             };
 
-            fractalsButton.Click  += (s, e) => ShowByCurrencyId(FRACTAL_CURRENCY_IDS, visibilityCheckBoxByEntryId);
-            strikesButton.Click   += (s, e) => ShowByCurrencyId(STRIKE_CURRENCY_IDS, visibilityCheckBoxByEntryId);
-            raidsButton.Click     += (s, e) => ShowByCurrencyId(RAID_CURRENCY_IDS, visibilityCheckBoxByEntryId);
-            openWorldButton.Click += (s, e) => ShowByCurrencyId(OPEN_WORLD_CURRENCY_IDS, visibilityCheckBoxByEntryId);
+            fractalsButton.Click  += (s, e) =>
+            {
+                ShowByCurrencyId(FRACTAL_CURRENCY_IDS, visibilityCheckBoxByEntryId);
+                MoveVisibleEntriesToTop();
+            };
+
+            strikesButton.Click   += (s, e) =>
+            {
+                ShowByCurrencyId(STRIKE_CURRENCY_IDS, visibilityCheckBoxByEntryId);
+                MoveVisibleEntriesToTop();
+            };
+
+            raidsButton.Click     += (s, e) =>
+            {
+                ShowByCurrencyId(RAID_CURRENCY_IDS, visibilityCheckBoxByEntryId);
+                MoveVisibleEntriesToTop();
+            };
+
+            openWorldButton.Click += (s, e) =>
+            {
+                ShowByCurrencyId(OPEN_WORLD_CURRENCY_IDS, visibilityCheckBoxByEntryId);
+                MoveVisibleEntriesToTop();
+            };
         }
 
         private static void ShowByEntryIdStartingWith(string searchTerm, Dictionary<string, Checkbox> visibilityCheckBoxByEntryId)
