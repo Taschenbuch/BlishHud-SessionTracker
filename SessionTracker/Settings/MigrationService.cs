@@ -81,9 +81,6 @@ namespace SessionTracker.Settings
                                              .Select(e => e.Id)
                                              .ToList();
 
-            // genauso anordnen wie im model
-            // neue einträge kommen an den anfang, weil visibility = true
-
             var orderedRefEntries = refModel.Entries
                                             .OrderBy(d => persistedIds.IndexOf(d.Id))
                                             .ToList();
