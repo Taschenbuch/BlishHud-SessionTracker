@@ -439,6 +439,7 @@ namespace SessionTracker.Settings
         {
             26, // WvW Skirmish Claim Ticket
             15, // Badge of Honor
+            2,  // Karma
         };
 
         private static readonly List<int> FRACTAL_CURRENCY_IDS = new List<int>
@@ -458,7 +459,7 @@ namespace SessionTracker.Settings
         private static readonly List<int> RAID_CURRENCY_IDS = new List<int>
         {
             28, // Magnetite Shard 
-            39, // Gaeting Crystal
+            70, // Legendary Insight 
         };
 
         private static readonly List<int> OPEN_WORLD_CURRENCY_IDS = new List<int>
