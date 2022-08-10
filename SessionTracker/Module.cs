@@ -69,11 +69,10 @@ namespace SessionTracker
         private void CornerIconClickEventHandler(object s, MouseEventArgs e) => _entriesContainer.ToggleVisibility();
         private void OnUiVisibilityKeyBindingActivated(object s, EventArgs e) => _entriesContainer.ToggleVisibility();
 
-
         protected override void Unload()
         {
             if (_model != null)
-                _fileService.SaveModelToFile(_model, Logger);
+                _fileService.SaveModelToFile(_model);
 
             _settingService.UiVisibilityKeyBindingSetting.Value.Activated -= OnUiVisibilityKeyBindingActivated;
 

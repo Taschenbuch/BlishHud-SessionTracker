@@ -18,7 +18,7 @@ namespace SessionTracker.Settings
             _modelFilePath = Path.Combine(moduleFolderPath, MODEL_FILE_NAME);
         }
 
-        public void SaveModelToFile(Model model, Logger logger)
+        public void SaveModelToFile(Model model)
         {
             try
             {
@@ -28,18 +28,24 @@ namespace SessionTracker.Settings
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error: Failed to save model to file in Module.Unload(). :(");
+                _logger.Error(e, "Error: Failed to save model to file in Module.Unload(). :(");
             }
         }
 
         public async Task<Model> LoadModelFromFile()
         {
-            if (File.Exists(_modelFilePath))
-                return await LoadModelFromModuleFolder(_modelFilePath, _logger);
+            var refFolderModel = await LoadModelFromRefFolder(_contentsManager, _logger);
 
-            return await LoadModelFromRefFolder(_contentsManager, _logger);
+            var noModuleFolderModelExists = File.Exists(_modelFilePath) == false;
+            if (noModuleFolderModelExists)
+                return refFolderModel;
+                
+            var moduleFolderModel = await LoadModelFromModuleFolder(_modelFilePath, _logger);
+            moduleFolderModel = MigrationService.MigratePersistedModelIfNecessary(moduleFolderModel, refFolderModel, _logger);
+            
+            return moduleFolderModel;
         }
-
+       
         private static async Task<Model> LoadModelFromModuleFolder(string modelFilePath, Logger logger)
         {
             try
@@ -62,13 +68,13 @@ namespace SessionTracker.Settings
         {
             try
             {
-                string modelJson;
 
                 using (var fileStream = contentsManager.GetFileStream(MODEL_FILE_NAME))
                 using (var streamReader = new StreamReader(fileStream))
-                    modelJson = await streamReader.ReadToEndAsync();
-
-                return JsonConvert.DeserializeObject<Model>(modelJson);
+                {
+                    var modelJson = await streamReader.ReadToEndAsync();
+                    return JsonConvert.DeserializeObject<Model>(modelJson);
+                }
             }
             catch (Exception e)
             {

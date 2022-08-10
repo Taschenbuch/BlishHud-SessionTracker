@@ -1,12 +1,6 @@
 {
-  "Version": {
-    "Major": 1,
-    "Minor": 0,
-    "Build": 0,
-    "Revision": -1,
-    "MajorRevision": -1,
-    "MinorRevision": -1
-  },
+  "MajorVersion": 1,
+  "MinorVersion": 0,
   "Entries": [
     {
       "Id": "deaths",
@@ -594,7 +588,7 @@
     {
       "Id": "currency28",
       "LabelText": "Magnetite Shard",
-      "LabelTooltip": "Earned from bosses and events inside Heart of Thorns raids.",
+      "LabelTooltip": "Earned from bosses and events inside Heart of Thorns and Path of Fire raids.",
       "PlaceholderInTooltip": "Magnetite Shard",
       "AchievementId": 0,
       "CurrencyId": 28,
@@ -1017,6 +1011,17 @@
       "AchievementId": 0,
       "CurrencyId": 69,
       "IconUrl": "https://render.guildwars2.com/file/37CCE672250A3170B71760949C4C9C9B186517B1/619327.png",
+      "IconFileName": null,
+      "IsVisible": false
+    },
+    {
+      "Id": "currency70",
+      "LabelText": "Legendary Insight",
+      "LabelTooltip": "Earned from bosses and events inside raids and challenge mode Strike Missions.",
+      "PlaceholderInTooltip": "Legendary Insight",
+      "AchievementId": 0,
+      "CurrencyId": 70,
+      "IconUrl": "https://render.guildwars2.com/file/6D33B7387BAF2E2CC9B5D37D1D1B01246AB6FA22/1302744.png",
       "IconFileName": null,
       "IsVisible": false
     }
