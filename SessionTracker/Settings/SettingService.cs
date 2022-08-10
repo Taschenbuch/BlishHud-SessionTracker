@@ -10,7 +10,7 @@ namespace SessionTracker.Settings
         {
             BackgroundOpacitySetting = settings.DefineSetting(
                 "window background opacity",
-                0,
+                125,
                 () => "window background opacity",
                 () => "Change window background opacity");
 
@@ -124,8 +124,8 @@ namespace SessionTracker.Settings
 
             var internalSettings = settings.AddSubCollection("internal settings (not visible in UI)");
             SettingsVersionSetting             = internalSettings.DefineSetting("settings version", 1);
-            XMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location x", 0.5f);
-            YMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location y", 0.5f);
+            XMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location x", 0.2f);
+            YMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location y", 0.2f);
             UiIsVisibleSetting                 = internalSettings.DefineSetting("ui is visible", true);
         }
 

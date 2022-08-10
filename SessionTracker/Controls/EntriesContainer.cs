@@ -191,7 +191,7 @@ namespace SessionTracker.Controls
         {
             var allEntriesAreHidden = _model.Entries.Any(e => e.IsVisible) == false;
 
-            _hintLabel = new HintLabel("All stats are hidden.\nUse module settings to select which stats are visible.", this);
+            _hintLabel = new HintLabel("All stats are hidden.\nOpen the blish window and go to the session tracker's module settings to select which stats are visible.", this);
             _hintLabel.SetVisibility(allEntriesAreHidden);
 
             _rootFlowPanel = new RootFlowPanel(this, _settingService);

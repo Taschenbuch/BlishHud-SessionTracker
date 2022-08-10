@@ -11,7 +11,7 @@ namespace SessionTracker.Settings
         {
             var fontSizeIndexSetting = settings.DefineSetting(
                 "font size index",
-                3,
+                5,
                 () => "font size",
                 () => "Change font size");
 
