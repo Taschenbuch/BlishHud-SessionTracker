@@ -122,12 +122,22 @@ namespace SessionTracker.Settings
 
             UiHeightSetting.SetRange(5, 2000);
 
+            DebugModeIsEnabledSetting = settings.DefineSetting(
+                "debug mode",
+                false,
+                () => "debug mode",
+                () => "Increases polling rate beyond api cache time limit (polls every 5 seconds instead of every 5 minutes) and it may have other effects, too. " +
+                      "This won't update stats faster! " +
+                      "It is only useful for debugging purposes for the module developer. So better don't enable this checkbox. Seriously! Don't touch it!");
+
             var internalSettings = settings.AddSubCollection("internal settings (not visible in UI)");
             SettingsVersionSetting             = internalSettings.DefineSetting("settings version", 1);
             XMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location x", 0.2f);
             YMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location y", 0.2f);
             UiIsVisibleSetting                 = internalSettings.DefineSetting("ui is visible", true);
         }
+
+        public SettingEntry<bool> DebugModeIsEnabledSetting { get; set; }
 
         public SettingEntry<int> UiHeightSetting { get; }
         public SettingEntry<bool> UiHeightIsFixedSetting { get; }

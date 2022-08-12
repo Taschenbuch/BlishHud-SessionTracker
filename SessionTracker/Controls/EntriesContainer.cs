@@ -28,12 +28,21 @@ namespace SessionTracker.Controls
 
             _valueLabelTextService = new ValueLabelTextService(_valueLabelByEntryId, _model, settingService);
             _summaryTooltipService = new SummaryTooltipService(_valueLabelByEntryId);
+            OnDebugModeIsEnabledSettingChanged(null, null);
 
             settingService.FontSizeIndexSetting.SettingChanged           += OnFontSizeIndexSettingChanged;
             settingService.SessionValuesAreVisibleSetting.SettingChanged += OnSessionValueVisibilitySettingChanged;
             settingService.TotalValuesAreVisibleSetting.SettingChanged   += OnTotalValueVisibilitySettingChanged;
             settingService.BackgroundOpacitySetting.SettingChanged       += OnBackgroundOpacitySettingChanged;
             settingService.ValueLabelColorSetting.SettingChanged         += OnValueLabelColorSettingChanged;
+            settingService.DebugModeIsEnabledSetting.SettingChanged      += OnDebugModeIsEnabledSettingChanged;
+        }
+
+        private void OnDebugModeIsEnabledSettingChanged(object sender, ValueChangedEventArgs<bool> e)
+        {
+            _updateIntervalInMilliseconds = _settingService.DebugModeIsEnabledSetting.Value
+                ? DEBUG_UPDATE_INTERVAL_IN_MILLISECONDS
+                : REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS;
         }
 
         protected override void DisposeControl()
@@ -43,6 +52,7 @@ namespace SessionTracker.Controls
             _settingService.TotalValuesAreVisibleSetting.SettingChanged   -= OnTotalValueVisibilitySettingChanged;
             _settingService.BackgroundOpacitySetting.SettingChanged       -= OnBackgroundOpacitySettingChanged;
             _settingService.ValueLabelColorSetting.SettingChanged         -= OnValueLabelColorSettingChanged;
+            _settingService.DebugModeIsEnabledSetting.SettingChanged      -= OnDebugModeIsEnabledSettingChanged;
 
             base.DisposeControl();
         }
@@ -72,7 +82,7 @@ namespace SessionTracker.Controls
             _elapsedTimeInMilliseconds += gameTime.ElapsedGameTime.TotalMilliseconds;
 
             var shouldInit   = _isInitialized == false && _elapsedTimeInMilliseconds >= _initializeIntervalInMilliseconds;
-            var shouldUpdate = _isInitialized && _elapsedTimeInMilliseconds >= UPDATE_INTERVAL_IN_MILLISECONDS;
+            var shouldUpdate = _isInitialized && _elapsedTimeInMilliseconds >= _updateIntervalInMilliseconds;
 
             if (shouldInit || shouldUpdate)
             {
@@ -287,11 +297,10 @@ namespace SessionTracker.Controls
         private FlowPanel _valuesFlowPanel;
         private HintLabel _hintLabel;
         private RootFlowPanel _rootFlowPanel;
+        private int _updateIntervalInMilliseconds = REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS;
+        private const int REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 60 * 1000;
+        private const int DEBUG_UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 1000;
         private const int INSTANT_INITIALIZE_INTERVAL_IN_MILLISECONDS = 0;
-
         private const int RETRY_INITIALIZE_INTERVAL_IN_MILLISECONDS = 5 * 1000;
-        //private const int UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 60 * 1000; // todo release
-
-        private const int UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 1000; // todo debug. too fast
     }
 }
