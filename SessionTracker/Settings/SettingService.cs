@@ -118,7 +118,7 @@ namespace SessionTracker.Settings
                 "ui height",
                 200,
                 () => "height",
-                () => "");
+                () => "UI height when fixed height setting is checked.");
 
             UiHeightSetting.SetRange(5, 2000);
 
