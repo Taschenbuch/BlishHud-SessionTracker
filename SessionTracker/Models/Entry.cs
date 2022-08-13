@@ -18,7 +18,6 @@ namespace SessionTracker.Models
         [JsonIgnore] public List<string> SessionHistory { get; } = new List<string>();
         [JsonIgnore] public bool IsAchievement => AchievementId != 0;
         [JsonIgnore] public bool IsCurrency => CurrencyId != 0;
-        [JsonIgnore] public bool HasIcon => HasIconFile || HasIconUrl;
         [JsonIgnore] public bool HasIconFile => IconFileName != null;
         [JsonIgnore] public bool HasIconUrl => IconUrl != null;
     }

@@ -338,19 +338,16 @@ namespace SessionTracker.Settings
                 Parent           = entryFlowPanel
             };
 
-            if (entry.HasIcon)
+            var iconContainer = ControlFactory.CreateAdjustableChildLocationContainer(clickFlowPanel);
+            var asyncTexture2D = _textureService.EntryTextureByEntryId[entry.Id];
+            
+            new Image(asyncTexture2D)
             {
-                var iconContainer = ControlFactory.CreateAdjustableChildLocationContainer(clickFlowPanel);
-
-                var asyncTexture2D = _textureService.EntryTextureByEntryId[entry.Id];
-                new Image(asyncTexture2D)
-                {
-                    BasicTooltipText = entry.LabelTooltip,
-                    Size             = new Point(24),
-                    Location         = new Point(20, 0),
-                    Parent           = iconContainer,
-                };
-            }
+                BasicTooltipText = entry.LabelTooltip,
+                Size             = new Point(24),
+                Location         = new Point(20, 0),
+                Parent           = iconContainer,
+            };
 
             var labelContainer = ControlFactory.CreateAdjustableChildLocationContainer(clickFlowPanel);
 

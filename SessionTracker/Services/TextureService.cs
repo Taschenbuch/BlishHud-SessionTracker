@@ -50,17 +50,22 @@ namespace SessionTracker.Services
 
         private void CreateEntryTextures(Model model)
         {
-            var       notFoundTextures = new List<string>();
-            Exception exception        = new Exception("i am a dummy. ignore me");
+            var notFoundTextures = new List<string>();
+            var exception        = new Exception("i am a dummy. ignore me");
 
             foreach (var entry in model.Entries)
             {
                 try
                 {
-                    if(entry.HasIconUrl)
+                    if (entry.HasIconUrl)
                         EntryTextureByEntryId[entry.Id] = GameService.Content.GetRenderServiceTexture(entry.IconUrl);
                     else if (entry.HasIconFile)
                         EntryTextureByEntryId[entry.Id] = _contentsManager.GetTexture(entry.IconFileName);
+                    else
+                    {
+                        _logger.Error($"Error: Icon texture missing for entryId: {entry.Id}. Use placeholder icon as fallback.");
+                        EntryTextureByEntryId[entry.Id] = EntryIconPlaceholderTexture;
+                    }
                 }
                 catch (Exception e)
                 {
