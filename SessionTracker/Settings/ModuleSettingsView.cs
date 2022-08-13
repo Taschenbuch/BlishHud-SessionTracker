@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -228,7 +229,7 @@ namespace SessionTracker.Settings
             pvpButton.Click += (s, e) =>
             {
                 ShowByEntryIdStartingWith("pvp", visibilityCheckBoxByEntryId);
-                ShowByCurrencyId(PVP_CURRENCY_IDS, visibilityCheckBoxByEntryId);
+                ShowByCurrencyId(CurrencyIds.Pvp, visibilityCheckBoxByEntryId);
                 visibilityCheckBoxByEntryId[EntryId.DEATHS].Checked = true;
                 MoveVisibleEntriesToTop();
             };
@@ -236,32 +237,32 @@ namespace SessionTracker.Settings
             wvwButton.Click += (s, e) =>
             {
                 ShowByEntryIdStartingWith("wvw", visibilityCheckBoxByEntryId);
-                ShowByCurrencyId(WVW_CURRENCY_IDS, visibilityCheckBoxByEntryId);
+                ShowByCurrencyId(CurrencyIds.Wvw, visibilityCheckBoxByEntryId);
                 visibilityCheckBoxByEntryId[EntryId.DEATHS].Checked = true;
                 MoveVisibleEntriesToTop();
             };
 
-            fractalsButton.Click  += (s, e) =>
+            fractalsButton.Click += (s, e) =>
             {
-                ShowByCurrencyId(FRACTAL_CURRENCY_IDS, visibilityCheckBoxByEntryId);
+                ShowByCurrencyId(CurrencyIds.Fractal, visibilityCheckBoxByEntryId);
                 MoveVisibleEntriesToTop();
             };
 
-            strikesButton.Click   += (s, e) =>
+            strikesButton.Click += (s, e) =>
             {
-                ShowByCurrencyId(STRIKE_CURRENCY_IDS, visibilityCheckBoxByEntryId);
+                ShowByCurrencyId(CurrencyIds.Strike, visibilityCheckBoxByEntryId);
                 MoveVisibleEntriesToTop();
             };
 
-            raidsButton.Click     += (s, e) =>
+            raidsButton.Click += (s, e) =>
             {
-                ShowByCurrencyId(RAID_CURRENCY_IDS, visibilityCheckBoxByEntryId);
+                ShowByCurrencyId(CurrencyIds.Raid, visibilityCheckBoxByEntryId);
                 MoveVisibleEntriesToTop();
             };
 
             openWorldButton.Click += (s, e) =>
             {
-                ShowByCurrencyId(OPEN_WORLD_CURRENCY_IDS, visibilityCheckBoxByEntryId);
+                ShowByCurrencyId(CurrencyIds.OpenWorld, visibilityCheckBoxByEntryId);
                 MoveVisibleEntriesToTop();
             };
         }
@@ -272,7 +273,7 @@ namespace SessionTracker.Settings
                 checkBoxStringPair.Value.Checked = true;
         }
 
-        private void ShowByCurrencyId(List<int> currencyIds, Dictionary<string, Checkbox> visibilityCheckBoxByEntryId)
+        private void ShowByCurrencyId(ReadOnlyCollection<int> currencyIds, Dictionary<string, Checkbox> visibilityCheckBoxByEntryId)
         {
             foreach (var entry in _model.Entries.Where(entry => currencyIds.Contains(entry.CurrencyId)))
                 visibilityCheckBoxByEntryId[entry.Id].Checked = true;
@@ -428,47 +429,5 @@ namespace SessionTracker.Settings
         private readonly Dictionary<string, Checkbox> _visibilityCheckBoxByEntryId = new Dictionary<string, Checkbox>();
         private static readonly Color VISIBLE_COLOR = new Color(17, 64, 9) * 0.9f;
         private static readonly Color NOT_VISIBLE_COLOR = new Color(Color.Black, 0.5f);
-
-        private static readonly List<int> PVP_CURRENCY_IDS = new List<int>
-        {
-            30, // PvpLeagueTicket
-            33, // PvpAscendedShardsOfGlory
-            46, // PvpTournamentVoucher
-        };
-
-        private static readonly List<int> WVW_CURRENCY_IDS = new List<int>
-        {
-            26, // WvW Skirmish Claim Ticket
-            15, // Badge of Honor
-            2,  // Karma
-        };
-
-        private static readonly List<int> FRACTAL_CURRENCY_IDS = new List<int>
-        {
-            7, // Fractal Relic 
-            24, // Pristine Fractal Relic
-            59, // Unstable Fractal Essence
-        };
-
-        private static readonly List<int> STRIKE_CURRENCY_IDS = new List<int>
-        {
-            53, // Green Prophet Shard
-            54, // Blue Prophet Crystal
-            57, // Blue Prophet Shard
-        };
-
-        private static readonly List<int> RAID_CURRENCY_IDS = new List<int>
-        {
-            28, // Magnetite Shard 
-            70, // Legendary Insight 
-        };
-
-        private static readonly List<int> OPEN_WORLD_CURRENCY_IDS = new List<int>
-        {
-            2, // Karma
-            23, // Spirit Shard
-            32, // Unbound Magic
-            45, // Volatile Magic
-        };
     }
 }
