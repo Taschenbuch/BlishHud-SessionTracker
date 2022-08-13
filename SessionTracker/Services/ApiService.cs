@@ -31,8 +31,8 @@ namespace SessionTracker.Services
 
             model.GetEntry(EntryId.PVP_RANK).Value.Total            = pvpRank + pvpRankRollovers;
             model.GetEntry(EntryId.PVP_RANKING_POINTS).Value.Total  = pvpStatsTask.Result.PvpRankPoints;
-            model.GetEntry(EntryId.PVP_TOTAL_WINS).Value.Total      = totalLosses;
-            model.GetEntry(EntryId.PVP_TOTAL_LOSSES).Value.Total    = totalWins;
+            model.GetEntry(EntryId.PVP_TOTAL_WINS).Value.Total      = totalWins;
+            model.GetEntry(EntryId.PVP_TOTAL_LOSSES).Value.Total    = totalLosses;
             model.GetEntry(EntryId.PVP_RANKED_WINS).Value.Total     = rankedWins;
             model.GetEntry(EntryId.PVP_RANKED_LOSSES).Value.Total   = rankedLosses;
             model.GetEntry(EntryId.PVP_UNRANKED_WINS).Value.Total   = unrankedWins;
