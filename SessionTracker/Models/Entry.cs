@@ -13,7 +13,7 @@ namespace SessionTracker.Models
         public int CurrencyId { get; set; }
         public string IconUrl { get; set; }
         public string IconFileName { get; set; }
-        public bool IsVisible { get; set; } = true;
+        public bool IsVisible { get; set; }
         [JsonIgnore] public Value Value { get; } = new Value();
         [JsonIgnore] public List<string> SessionHistory { get; } = new List<string>();
         [JsonIgnore] public bool IsAchievement => AchievementId != 0;

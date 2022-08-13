@@ -11,7 +11,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "death.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "pvp kills",
@@ -22,7 +22,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "kill.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "pvp kdr",
@@ -33,7 +33,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "kdr.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "pvp total wins",
@@ -44,7 +44,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "pvpWins.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "pvp total losses",
@@ -55,7 +55,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "pvpLosses.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "pvp ranked wins",
@@ -66,7 +66,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "pvpWins.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "pvp ranked losses",
@@ -77,7 +77,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "pvpLosses.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "pvp unranked wins",
@@ -88,7 +88,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "pvpWins.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "pvp unranked losses",
@@ -99,7 +99,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "pvpLosses.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "pvp custom wins",
@@ -110,7 +110,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "pvpWins.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "pvp custom losses",
@@ -121,7 +121,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "pvpLosses.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "pvp rank",
@@ -132,7 +132,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "pvpRank.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "pvp ranking points",
@@ -143,7 +143,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "pvpRankingPoints.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "wvw kills",
@@ -154,7 +154,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "kill.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "wvw kdr",
@@ -165,7 +165,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "kdr.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "wvw rank",
@@ -176,7 +176,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "wvwRank.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "wvw supply spent on repairs",
@@ -187,7 +187,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "supplySpend.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "wvw dolyaks killed",
@@ -198,7 +198,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "dolyak.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "wvw dolyaks escorted",
@@ -209,7 +209,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "dolyakDefended.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "wvw camps captured",
@@ -220,7 +220,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "camp.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "wvw camps defended",
@@ -231,7 +231,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "campDefended.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "wvw towers captured",
@@ -242,7 +242,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "tower.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "wvw towers defended",
@@ -253,7 +253,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "towerDefended.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "wvw keeps captured",
@@ -264,7 +264,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "keep.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "wvw keeps defended",
@@ -275,7 +275,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "keepDefended.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "wvw castles captured",
@@ -286,7 +286,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "castle.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "wvw castles defended",
@@ -297,7 +297,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "castleDefended.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "wvw objectives captured",
@@ -308,7 +308,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "objective.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "wvw objectives defended",
@@ -319,7 +319,7 @@
       "CurrencyId": 0,
       "IconUrl": null,
       "IconFileName": "objectiveDefended.png",
-      "IsVisible": true
+      "IsVisible": false
     },
     {
       "Id": "currency1",
