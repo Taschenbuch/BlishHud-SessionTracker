@@ -22,8 +22,8 @@ namespace SessionTracker.Settings
 
         public static readonly List<BitmapFont> Fonts = new List<BitmapFont>
         {
-            GetFont(ContentService.FontSize.Size11),
-            GetFont(ContentService.FontSize.Size12),
+            GetFont(ContentService.FontSize.Size8),
+            GetFont(ContentService.FontSize.Size11), // Size12 removed because it has lower font.LineHeight than Size11
             GetFont(ContentService.FontSize.Size14),
             GetFont(ContentService.FontSize.Size16),
             GetFont(ContentService.FontSize.Size18),
