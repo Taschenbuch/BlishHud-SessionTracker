@@ -1,4 +1,5 @@
 ﻿using Blish_HUD.Controls;
+using Microsoft.Xna.Framework;
 
 namespace SessionTracker.Controls
 {
@@ -8,6 +9,7 @@ namespace SessionTracker.Controls
         {
             Text             = text;
             BasicTooltipText = text;
+            ShowShadow       = true;
             AutoSizeHeight   = true;
             AutoSizeWidth    = true;
             Parent           = parent;

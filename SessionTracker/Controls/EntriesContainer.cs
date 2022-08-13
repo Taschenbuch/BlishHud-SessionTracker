@@ -199,9 +199,15 @@ namespace SessionTracker.Controls
 
         private void CreateUi()
         {
+            var font                = FontService.Fonts[_settingService.FontSizeIndexSetting.Value];
             var allEntriesAreHidden = _model.Entries.Any(e => e.IsVisible) == false;
+            var hintText = "All stats are hidden.\n" +
+                           "Open the Blish HUD settings window.\n" +
+                           "Select the Session Tracker's module settings tab.\n" +
+                           "There you can select which stats you want to see. :)";
 
-            _hintLabel = new HintLabel("All stats are hidden.\nOpen the blish window and go to the session tracker's module settings to select which stats are visible.", this);
+            _hintLabel = new HintLabel(hintText, this);
+            _hintLabel.Font = font;
             _hintLabel.SetVisibility(allEntriesAreHidden);
 
             _rootFlowPanel = new RootFlowPanel(this, _settingService);
@@ -221,8 +227,6 @@ namespace SessionTracker.Controls
                 WidthSizingMode  = SizingMode.AutoSize,
                 Parent           = _rootFlowPanel
             };
-
-            var font = FontService.Fonts[_settingService.FontSizeIndexSetting.Value];
 
             foreach (var entry in _model.Entries)
             {
@@ -254,6 +258,7 @@ namespace SessionTracker.Controls
         private void OnFontSizeIndexSettingChanged(object sender, ValueChangedEventArgs<int> valueChangedEventArgs)
         {
             var font = FontService.Fonts[_settingService.FontSizeIndexSetting.Value];
+            _hintLabel.Font = font;
 
             foreach (var label in _valueLabelByEntryId.Values)
                 label.Font = font;
