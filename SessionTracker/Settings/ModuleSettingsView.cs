@@ -48,7 +48,9 @@ namespace SessionTracker.Settings
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleInWvwSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOnWorldMapSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting);
+#if DEBUG
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.DebugModeIsEnabledSetting);
+#endif
 
             var trackedStatsSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Tracked stats", _rootFlowPanel);
 
