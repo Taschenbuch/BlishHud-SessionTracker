@@ -15,16 +15,21 @@ namespace SessionTracker.Controls
 {
     public class EntriesContainer : RelativePositionAndMouseDraggableContainer
     {
-        public EntriesContainer(Model model, Gw2ApiManager gw2ApiManager, TextureService textureService, SettingService settingService, Logger logger)
+        public EntriesContainer(Model model, 
+                                Gw2ApiManager gw2ApiManager, 
+                                TextureService textureService, 
+                                SettingsWindowService settingsWindowService, 
+                                SettingService settingService, 
+                                Logger logger)
             : base(settingService)
         {
-            _model          = model;
-            _gw2ApiManager  = gw2ApiManager;
-            _textureService = textureService;
-            _settingService = settingService;
-            _logger         = logger;
+            _model                 = model;
+            _gw2ApiManager         = gw2ApiManager;
+            _textureService        = textureService;
+            _settingService        = settingService;
+            _logger                = logger;
 
-            CreateUi();
+            CreateUi(settingsWindowService);
 
             _valueLabelTextService = new ValueLabelTextService(_valueLabelByEntryId, _model, settingService);
             _summaryTooltipService = new SummaryTooltipService(_valueLabelByEntryId);
@@ -186,7 +191,7 @@ namespace SessionTracker.Controls
 
             var visibleEntries      = _model.Entries.Where(e => e.IsVisible).ToList();
             var allEntriesAreHidden = visibleEntries.Any() == false;
-            _hintLabel.SetVisibility(allEntriesAreHidden);
+            _hintFlowPanel.SetVisibility(allEntriesAreHidden);
 
             foreach (var entry in visibleEntries)
             {
@@ -197,18 +202,18 @@ namespace SessionTracker.Controls
             _rootFlowPanel.HideScrollbarIfExists();
         }
 
-        private void CreateUi()
+        private void CreateUi(SettingsWindowService settingsWindowService)
         {
-            var font                = FontService.Fonts[_settingService.FontSizeIndexSetting.Value];
             var allEntriesAreHidden = _model.Entries.Any(e => e.IsVisible) == false;
-            var hintText = "All stats are hidden.\n" +
-                           "Open the Blish HUD settings window.\n" +
-                           "Select the Session Tracker's module settings tab.\n" +
-                           "There you can select which stats you want to see. :)";
 
-            _hintLabel = new HintLabel(hintText, this);
-            _hintLabel.Font = font;
-            _hintLabel.SetVisibility(allEntriesAreHidden);
+            _hintFlowPanel = new HintFlowPanel(settingsWindowService, _settingService, this)
+            {
+                FlowDirection    = ControlFlowDirection.SingleTopToBottom,
+                WidthSizingMode  = SizingMode.AutoSize,
+                HeightSizingMode = SizingMode.AutoSize,
+            };
+
+            _hintFlowPanel.SetVisibility(allEntriesAreHidden);
 
             _rootFlowPanel = new RootFlowPanel(this, _settingService);
 
@@ -227,6 +232,8 @@ namespace SessionTracker.Controls
                 WidthSizingMode  = SizingMode.AutoSize,
                 Parent           = _rootFlowPanel
             };
+
+            var font = FontService.Fonts[_settingService.FontSizeIndexSetting.Value];
 
             foreach (var entry in _model.Entries)
             {
@@ -258,7 +265,6 @@ namespace SessionTracker.Controls
         private void OnFontSizeIndexSettingChanged(object sender, ValueChangedEventArgs<int> valueChangedEventArgs)
         {
             var font = FontService.Fonts[_settingService.FontSizeIndexSetting.Value];
-            _hintLabel.Font = font;
 
             foreach (var label in _valueLabelByEntryId.Values)
                 label.Font = font;
@@ -300,7 +306,7 @@ namespace SessionTracker.Controls
         private int _initializeIntervalInMilliseconds = INSTANT_INITIALIZE_INTERVAL_IN_MILLISECONDS;
         private FlowPanel _titlesFlowPanel;
         private FlowPanel _valuesFlowPanel;
-        private HintLabel _hintLabel;
+        private HintFlowPanel _hintFlowPanel;
         private RootFlowPanel _rootFlowPanel;
         private int _updateIntervalInMilliseconds = REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS;
         private const int REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 60 * 1000;

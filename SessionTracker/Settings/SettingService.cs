@@ -86,8 +86,8 @@ namespace SessionTracker.Settings
             CornerIconIsVisibleSetting = settings.DefineSetting(
                 "cornerIcon is visible",
                 true,
-                () => "corner icon",
-                () => "Show an icon at the top left of GW2 next to other menu icons. " +
+                () => "menu icon",
+                () => "Show a menu icon at the top left of GW2 next to other menu icons." +
                       "Icon can be clicked to show/hide the stats UI.");
 
             LabelTypeSetting = settings.DefineSetting(

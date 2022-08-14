@@ -13,8 +13,10 @@ namespace SessionTracker.Services
     {
         public TextureService(Model model, ContentsManager contentsManager, Logger logger)
         {
-            _contentsManager            = contentsManager;
-            _logger                     = logger;
+            _contentsManager = contentsManager;
+            _logger          = logger;
+
+            WindowBackground            = contentsManager.GetTexture("windowBackground_155985.png");
             MoveDownTexture             = contentsManager.GetTexture("moveDown_155953.png");
             MoveDownActiveTexture       = contentsManager.GetTexture("moveDownActive_155953.png");
             MoveUpTexture               = contentsManager.GetTexture("moveUp_155953.png");
@@ -27,6 +29,7 @@ namespace SessionTracker.Services
 
         public void Dispose()
         {
+            WindowBackground?.Dispose();
             MoveDownTexture?.Dispose();
             MoveDownActiveTexture?.Dispose();
             MoveUpTexture?.Dispose();
@@ -39,6 +42,7 @@ namespace SessionTracker.Services
                 entryIcon?.Dispose();
         }
 
+        public Texture2D WindowBackground { get; }
         public Texture2D MoveDownTexture { get; }
         public Texture2D MoveDownActiveTexture { get; }
         public Texture2D MoveUpTexture { get; }

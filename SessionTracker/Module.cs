@@ -36,16 +36,17 @@ namespace SessionTracker
 
         public override IView GetSettingsView()
         {
-            return new ModuleSettingsView(_model, _entriesContainer, _settingService, _textureService);
+            return new ModuleSettingsView(_settingsWindowService);
         }
 
         protected override async Task LoadAsync()
         {
-            _fileService    = new FileService(DirectoriesManager, ContentsManager, Logger);
-            _model          = await _fileService.LoadModelFromFile();
-            _textureService = new TextureService(_model, ContentsManager, Logger);
+            _fileService = new FileService(DirectoriesManager, ContentsManager, Logger);
+            var model                 = await _fileService.LoadModelFromFile();
+            var textureService        = new TextureService(model, ContentsManager, Logger);
+            var settingsWindowService = new SettingsWindowService(model, _settingService, textureService);
 
-            _entriesContainer = new EntriesContainer(_model, Gw2ApiManager, _textureService, _settingService, Logger)
+            var entriesContainer = new EntriesContainer(model, Gw2ApiManager, textureService, settingsWindowService, _settingService, Logger)
             {
                 HeightSizingMode = SizingMode.AutoSize,
                 WidthSizingMode  = SizingMode.AutoSize,
@@ -54,13 +55,14 @@ namespace SessionTracker
                 Parent           = GameService.Graphics.SpriteScreen
             };
 
-            _cornerIconService = new CornerIconService(
-                _settingService.CornerIconIsVisibleSetting, 
-                "Click to show or hide the session tracker UI.\nIcon can be hidden by module settings.\n" +
-                "Whether UI is really shown depends on other visibility settings. " +
-                "e.g. when 'on world map' is unchecked, clicking the icon will still not show the UI on the world map.",
-                CornerIconClickEventHandler, 
-                _textureService);
+            _cornerIconService = new CornerIconService(_settingService.CornerIconIsVisibleSetting, entriesContainer, settingsWindowService, CornerIconClickEventHandler, textureService);
+
+            // set at the end to prevents that one of the ctors accidently gets a null reference because of creating the objects above in the wrong order.
+            // e.g. creating model after textureService, though model needs the reference of model.
+            _model                 = model;
+            _textureService        = textureService;
+            _entriesContainer      = entriesContainer;
+            _settingsWindowService = settingsWindowService;
 
             _settingService.UiVisibilityKeyBindingSetting.Value.Activated += OnUiVisibilityKeyBindingActivated;
             _settingService.UiVisibilityKeyBindingSetting.Value.Enabled   =  true;
@@ -76,6 +78,7 @@ namespace SessionTracker
 
             _settingService.UiVisibilityKeyBindingSetting.Value.Activated -= OnUiVisibilityKeyBindingActivated;
 
+            _settingsWindowService?.Dispose();
             _cornerIconService?.Dispose();
             _textureService?.Dispose();
             _entriesContainer?.Dispose();
@@ -93,5 +96,6 @@ namespace SessionTracker
         private Model _model;
         private TextureService _textureService;
         private CornerIconService _cornerIconService;
+        private SettingsWindowService _settingsWindowService;
     }
 }
