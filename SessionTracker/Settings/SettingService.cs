@@ -56,7 +56,7 @@ namespace SessionTracker.Settings
             WindowIsVisibleOnWorldMapSetting = settings.DefineSetting(
                 "show window on world map",
                 true,
-                () => "on world map",
+                () => ON_WORLD_MAP_SETTING_DISPLAY_NAME,
                 () => "show window on world map.");
 
             WindowIsVisibleOutsideOfWvwAndSpvpSetting = settings.DefineSetting(
@@ -130,11 +130,17 @@ namespace SessionTracker.Settings
                       "This won't update stats faster! " +
                       "It is only useful for debugging purposes for the module developer. So better don't enable this checkbox. Seriously! Don't touch it!");
 
+            UiIsVisibleSetting = settings.DefineSetting(
+                "ui is visible",
+                true,
+                () => "ui visible (read tooltip)",
+                () => $"Show or hide sessions tracker UI. Has the same effect as clicking the menu icon or using the key binding. " +
+                      $"Whether the UI is really shown depends on further settings like '{ON_WORLD_MAP_SETTING_DISPLAY_NAME}'.");
+
             var internalSettings = settings.AddSubCollection("internal settings (not visible in UI)");
             SettingsVersionSetting             = internalSettings.DefineSetting("settings version", 1);
             XMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location x", 0.2f);
             YMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location y", 0.2f);
-            UiIsVisibleSetting                 = internalSettings.DefineSetting("ui is visible", true);
         }
 
         public SettingEntry<bool> DebugModeIsEnabledSetting { get; set; }
@@ -160,5 +166,7 @@ namespace SessionTracker.Settings
         public SettingEntry<KeyBinding> UiVisibilityKeyBindingSetting { get; }
         public SettingEntry<LabelType> LabelTypeSetting { get; }
         public SettingEntry<int> SettingsVersionSetting { get; }
+     
+        private const string ON_WORLD_MAP_SETTING_DISPLAY_NAME = "on world map";
     }
 }

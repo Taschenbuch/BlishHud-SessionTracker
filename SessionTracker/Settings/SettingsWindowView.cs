@@ -40,17 +40,20 @@ namespace SessionTracker.Settings
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.TotalValuesAreVisibleSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.DragWindowWithMouseIsEnabledSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.CornerIconIsVisibleSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.UiVisibilityKeyBindingSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOutsideOfWvwAndSpvpSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleInSpvpSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleInWvwSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOnWorldMapSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting);
 #if DEBUG
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.DebugModeIsEnabledSetting);
 #endif
+            
+            var visibilitySectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("UI Visibility", _rootFlowPanel);
+            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.UiVisibilityKeyBindingSetting);
+            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.UiIsVisibleSetting);
+            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOutsideOfWvwAndSpvpSetting);
+            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleInSpvpSetting);
+            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleInWvwSetting);
+            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOnWorldMapSetting);
+            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting);
 
-            var trackedStatsSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Tracked stats", _rootFlowPanel);
+            var trackedStatsSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Tracked Stats", _rootFlowPanel);
 
             ControlFactory.CreateHintLabel(
                 trackedStatsSectionFlowPanel,
