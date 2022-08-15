@@ -29,16 +29,13 @@ namespace SessionTracker.Controls
                 AutoSizeHeight   = true,
                 AutoSizeWidth    = true,
             };
-            
+
             var asyncTexture2D = textureService.EntryTextureByEntryId[entry.Id];
             _image = new Image(asyncTexture2D)
             {
                 BasicTooltipText = entry.LabelTooltip,
                 Size             = new Point(_label.Height),
-                Parent           = this,
             };
-
-            _label.Parent = this; // because image has to be first, but image needs label height
 
             ShowOrHideTextAndIcon(settingService.LabelTypeSetting.Value);
             settingService.LabelTypeSetting.SettingChanged       += OnLabelTypeSettingChanged;
