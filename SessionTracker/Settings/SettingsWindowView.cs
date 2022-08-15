@@ -34,6 +34,7 @@ namespace SessionTracker.Settings
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.UiHeightSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.BackgroundOpacitySetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.FontSizeIndexSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.StatTitlePaddingSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.TitleLabelColorSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.ValueLabelColorSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.SessionValuesAreVisibleSetting);

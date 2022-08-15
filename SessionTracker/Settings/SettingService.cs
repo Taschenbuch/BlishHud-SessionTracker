@@ -18,6 +18,14 @@ namespace SessionTracker.Settings
 
             FontSizeIndexSetting = FontService.CreateFontSizeIndexSetting(settings);
 
+            StatTitlePaddingSetting = settings.DefineSetting(
+                "stat title padding",
+                2,
+                () => "padding",
+                () => "Change padding between icon, title and value of a stat");
+
+            StatTitlePaddingSetting.SetRange(0, 5);
+
             TitleLabelColorSetting = settings.DefineSetting(
                 "title label color",
                 ColorType.White,
@@ -144,7 +152,7 @@ namespace SessionTracker.Settings
         }
 
         public SettingEntry<bool> DebugModeIsEnabledSetting { get; set; }
-
+        public SettingEntry<int> StatTitlePaddingSetting { get; }
         public SettingEntry<int> UiHeightSetting { get; }
         public SettingEntry<bool> UiHeightIsFixedSetting { get; }
         public SettingEntry<ColorType> ValueLabelColorSetting { get; }
