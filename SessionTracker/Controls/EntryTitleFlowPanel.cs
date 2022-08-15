@@ -19,11 +19,6 @@ namespace SessionTracker.Controls
             HeightSizingMode = SizingMode.AutoSize;
             Parent           = entry.IsVisible ? parent : null;
 
-            var asyncTexture2D = textureService.EntryTextureByEntryId[entry.Id];
-            var tooltip = entry.HasIconFile
-                ? entry.LabelText
-                : $"{entry.LabelText}\n{entry.LabelTooltip}";
-
             _label = new Label()
             {
                 Text             = entry.LabelText,
@@ -34,10 +29,11 @@ namespace SessionTracker.Controls
                 AutoSizeHeight   = true,
                 AutoSizeWidth    = true,
             };
-
+            
+            var asyncTexture2D = textureService.EntryTextureByEntryId[entry.Id];
             _image = new Image(asyncTexture2D)
             {
-                BasicTooltipText = tooltip,
+                BasicTooltipText = entry.LabelTooltip,
                 Size             = new Point(_label.Height),
                 Parent           = this,
             };

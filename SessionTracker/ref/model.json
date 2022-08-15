@@ -5,7 +5,7 @@
     {
       "Id": "deaths",
       "LabelText": "Deaths",
-      "LabelTooltip": "Deaths",
+      "LabelTooltip": "Deaths\nCombined deaths from all sources like WvW, sPvP, PvE",
       "PlaceholderInTooltip": "deaths",
       "AchievementId": 0,
       "CurrencyId": 0,
@@ -324,7 +324,7 @@
     {
       "Id": "currency1",
       "LabelText": "Coin",
-      "LabelTooltip": "The primary currency of Tyria. Spent at vendors throughout the world.",
+      "LabelTooltip": "Coin\nThe primary currency of Tyria. Spent at vendors throughout the world.",
       "PlaceholderInTooltip": "Coin",
       "AchievementId": 0,
       "CurrencyId": 1,
@@ -335,7 +335,7 @@
     {
       "Id": "currency2",
       "LabelText": "Karma",
-      "LabelTooltip": "Earned through various activities. Spent at vendors throughout the world.",
+      "LabelTooltip": "Karma\nEarned through various activities. Spent at vendors throughout the world.",
       "PlaceholderInTooltip": "Karma",
       "AchievementId": 0,
       "CurrencyId": 2,
@@ -346,7 +346,7 @@
     {
       "Id": "currency3",
       "LabelText": "Laurel",
-      "LabelTooltip": "Earned through the Log-in Reward Chest. Spent in major cities. Used to purchase various rewards.",
+      "LabelTooltip": "Laurel\nEarned through the Log-in Reward Chest. Spent in major cities. Used to purchase various rewards.",
       "PlaceholderInTooltip": "Laurel",
       "AchievementId": 0,
       "CurrencyId": 3,
@@ -357,7 +357,7 @@
     {
       "Id": "currency4",
       "LabelText": "Gem",
-      "LabelTooltip": "Purchased and spent via the Black Lion Trading Company.",
+      "LabelTooltip": "Gem\nPurchased and spent via the Black Lion Trading Company.",
       "PlaceholderInTooltip": "Gem",
       "AchievementId": 0,
       "CurrencyId": 4,
@@ -368,7 +368,7 @@
     {
       "Id": "currency5",
       "LabelText": "Ascalonian Tear",
-      "LabelTooltip": "Earned in Ascalonian Catacombs. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Ascalon\" component used in creating legendary weapons.",
+      "LabelTooltip": "Ascalonian Tear\nEarned in Ascalonian Catacombs. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Ascalon\" component used in creating legendary weapons.",
       "PlaceholderInTooltip": "Ascalonian Tear",
       "AchievementId": 0,
       "CurrencyId": 5,
@@ -379,7 +379,7 @@
     {
       "Id": "currency6",
       "LabelText": "Shard of Zhaitan",
-      "LabelTooltip": "Earned in the Ruined City of Arah. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Zhaitan\" component used in creating legendary weapons.",
+      "LabelTooltip": "Shard of Zhaitan\nEarned in the Ruined City of Arah. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Zhaitan\" component used in creating legendary weapons.",
       "PlaceholderInTooltip": "Shard of Zhaitan",
       "AchievementId": 0,
       "CurrencyId": 6,
@@ -390,7 +390,7 @@
     {
       "Id": "currency7",
       "LabelText": "Fractal Relic",
-      "LabelTooltip": "Earned and spent in Fractals of the Mists. Also used as a crafting ingredient.",
+      "LabelTooltip": "Fractal Relic\nEarned and spent in Fractals of the Mists. Also used as a crafting ingredient.",
       "PlaceholderInTooltip": "Fractal Relic",
       "AchievementId": 0,
       "CurrencyId": 7,
@@ -401,7 +401,7 @@
     {
       "Id": "currency9",
       "LabelText": "Seal of Beetletun",
-      "LabelTooltip": "Earned in Caudecus's Manor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Nobleman\" component used in creating legendary weapons.",
+      "LabelTooltip": "Seal of Beetletun\nEarned in Caudecus's Manor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Nobleman\" component used in creating legendary weapons.",
       "PlaceholderInTooltip": "Seal of Beetletun",
       "AchievementId": 0,
       "CurrencyId": 9,
@@ -412,7 +412,7 @@
     {
       "Id": "currency10",
       "LabelText": "Manifesto of the Moletariate",
-      "LabelTooltip": "Earned in Sorrow's Embrace. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Forgeman\" component used in creating legendary weapons.",
+      "LabelTooltip": "Manifesto of the Moletariate\nEarned in Sorrow's Embrace. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Forgeman\" component used in creating legendary weapons.",
       "PlaceholderInTooltip": "Manifesto of the Moletariate",
       "AchievementId": 0,
       "CurrencyId": 10,
@@ -423,7 +423,7 @@
     {
       "Id": "currency11",
       "LabelText": "Deadly Bloom",
-      "LabelTooltip": "Earned in Twilight Arbor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Thorns\" component used in creating legendary weapons.",
+      "LabelTooltip": "Deadly Bloom\nEarned in Twilight Arbor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Thorns\" component used in creating legendary weapons.",
       "PlaceholderInTooltip": "Deadly Bloom",
       "AchievementId": 0,
       "CurrencyId": 11,
@@ -434,7 +434,7 @@
     {
       "Id": "currency12",
       "LabelText": "Symbol of Koda",
-      "LabelTooltip": "Earned in Honor of the Waves. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Sanctuary\" component used in creating legendary weapons.",
+      "LabelTooltip": "Symbol of Koda\nEarned in Honor of the Waves. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Sanctuary\" component used in creating legendary weapons.",
       "PlaceholderInTooltip": "Symbol of Koda",
       "AchievementId": 0,
       "CurrencyId": 12,
@@ -445,7 +445,7 @@
     {
       "Id": "currency13",
       "LabelText": "Flame Legion Charr Carving",
-      "LabelTooltip": "Earned in Citadel of Flame. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Baelfire\" component used in creating legendary weapons.",
+      "LabelTooltip": "Flame Legion Charr Carving\nEarned in Citadel of Flame. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Baelfire\" component used in creating legendary weapons.",
       "PlaceholderInTooltip": "Flame Legion Charr Carving",
       "AchievementId": 0,
       "CurrencyId": 13,
@@ -456,7 +456,7 @@
     {
       "Id": "currency14",
       "LabelText": "Knowledge Crystal",
-      "LabelTooltip": "Earned in Crucible of Eternity. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Knowledge\" component used in creating legendary weapons.",
+      "LabelTooltip": "Knowledge Crystal\nEarned in Crucible of Eternity. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Knowledge\" component used in creating legendary weapons.",
       "PlaceholderInTooltip": "Knowledge Crystal",
       "AchievementId": 0,
       "CurrencyId": 14,
@@ -467,7 +467,7 @@
     {
       "Id": "currency15",
       "LabelText": "Badge of Honor",
-      "LabelTooltip": "Earned and spent in WvW to purchase various items.",
+      "LabelTooltip": "Badge of Honor\nEarned and spent in WvW to purchase various items.",
       "PlaceholderInTooltip": "Badge of Honor",
       "AchievementId": 0,
       "CurrencyId": 15,
@@ -478,7 +478,7 @@
     {
       "Id": "currency16",
       "LabelText": "Guild Commendation",
-      "LabelTooltip": "Earned through Guild Missions. Spent in Lion's Arch. Used to purchase various rewards.",
+      "LabelTooltip": "Guild Commendation\nEarned through Guild Missions. Spent in Lion's Arch. Used to purchase various rewards.",
       "PlaceholderInTooltip": "Guild Commendation",
       "AchievementId": 0,
       "CurrencyId": 16,
@@ -489,7 +489,7 @@
     {
       "Id": "currency18",
       "LabelText": "Transmutation Charge",
-      "LabelTooltip": "Purchased via the Black Lion Trading Company. Spent in the wardrobe to change appearance.",
+      "LabelTooltip": "Transmutation Charge\nPurchased via the Black Lion Trading Company. Spent in the wardrobe to change appearance.",
       "PlaceholderInTooltip": "Transmutation Charge",
       "AchievementId": 0,
       "CurrencyId": 18,
@@ -500,7 +500,7 @@
     {
       "Id": "currency19",
       "LabelText": "Airship Part",
-      "LabelTooltip": "Earned and spent in Verdant Brink. Train the Itzel Language Mastery ability to trade with Itzel vendors for bladed armor and other goods.",
+      "LabelTooltip": "Airship Part\nEarned and spent in Verdant Brink. Train the Itzel Language Mastery ability to trade with Itzel vendors for bladed armor and other goods.",
       "PlaceholderInTooltip": "Airship Part",
       "AchievementId": 0,
       "CurrencyId": 19,
@@ -511,7 +511,7 @@
     {
       "Id": "currency20",
       "LabelText": "Ley Line Crystal",
-      "LabelTooltip": "Earned and spent in Tangled Depths. Train the Nuhoch Language Mastery ability to trade with Nuhoch vendors for chak weapons and other goods.",
+      "LabelTooltip": "Ley Line Crystal\nEarned and spent in Tangled Depths. Train the Nuhoch Language Mastery ability to trade with Nuhoch vendors for chak weapons and other goods.",
       "PlaceholderInTooltip": "Ley Line Crystal",
       "AchievementId": 0,
       "CurrencyId": 20,
@@ -522,7 +522,7 @@
     {
       "Id": "currency22",
       "LabelText": "Lump of Aurillium",
-      "LabelTooltip": "Earned and spent in Auric Basin. Train the Exalted Acceptance Mastery line to trade with Exalted merchants for auric weapon recipes and other goods.",
+      "LabelTooltip": "Lump of Aurillium\nEarned and spent in Auric Basin. Train the Exalted Acceptance Mastery line to trade with Exalted merchants for auric weapon recipes and other goods.",
       "PlaceholderInTooltip": "Lump of Aurillium",
       "AchievementId": 0,
       "CurrencyId": 22,
@@ -533,7 +533,7 @@
     {
       "Id": "currency23",
       "LabelText": "Spirit Shard",
-      "LabelTooltip": "Used by Miyani to maintain the Mystic Forge.",
+      "LabelTooltip": "Spirit Shard\nUsed by Miyani to maintain the Mystic Forge.",
       "PlaceholderInTooltip": "Spirit Shard",
       "AchievementId": 0,
       "CurrencyId": 23,
@@ -544,7 +544,7 @@
     {
       "Id": "currency24",
       "LabelText": "Pristine Fractal Relic",
-      "LabelTooltip": "Earned and spent in the Fractals of the Mists. Used to purchase ascended rings.",
+      "LabelTooltip": "Pristine Fractal Relic\nEarned and spent in the Fractals of the Mists. Used to purchase ascended rings.",
       "PlaceholderInTooltip": "Pristine Fractal Relic",
       "AchievementId": 0,
       "CurrencyId": 24,
@@ -555,7 +555,7 @@
     {
       "Id": "currency25",
       "LabelText": "Geode",
-      "LabelTooltip": "Earned by completing events in Dry Top. Accepted by vendors throughout the area.\nCan be traded for valuable items including recipes for foods, Nomad's gear, and ambrite weapons.",
+      "LabelTooltip": "Geode\nEarned by completing events in Dry Top. Accepted by vendors throughout the area.\nCan be traded for valuable items including recipes for foods, Nomad's gear, and ambrite weapons.",
       "PlaceholderInTooltip": "Geode",
       "AchievementId": 0,
       "CurrencyId": 25,
@@ -566,7 +566,7 @@
     {
       "Id": "currency26",
       "LabelText": "WvW Skirmish Claim Ticket",
-      "LabelTooltip": "Earned by participating in WvW skirmishes. Traded for various rewards at a WvW Skirmish Supervisor.",
+      "LabelTooltip": "WvW Skirmish Claim Ticket\nEarned by participating in WvW skirmishes. Traded for various rewards at a WvW Skirmish Supervisor.",
       "PlaceholderInTooltip": "WvW Skirmish Claim Ticket",
       "AchievementId": 0,
       "CurrencyId": 26,
@@ -577,7 +577,7 @@
     {
       "Id": "currency27",
       "LabelText": "Bandit Crest",
-      "LabelTooltip": "Earned by completing events in the Silverwastes. Accepted by vendors in Camp Resolve and at secured outposts.\nCan be traded for valuable items including Carapace armor and recipes for sinister gear.",
+      "LabelTooltip": "Bandit Crest\nEarned by completing events in the Silverwastes. Accepted by vendors in Camp Resolve and at secured outposts.\nCan be traded for valuable items including Carapace armor and recipes for sinister gear.",
       "PlaceholderInTooltip": "Bandit Crest",
       "AchievementId": 0,
       "CurrencyId": 27,
@@ -588,7 +588,7 @@
     {
       "Id": "currency28",
       "LabelText": "Magnetite Shard",
-      "LabelTooltip": "Earned from bosses and events inside Heart of Thorns and Path of Fire raids.",
+      "LabelTooltip": "Magnetite Shard\nEarned from bosses and events inside Heart of Thorns and Path of Fire raids.",
       "PlaceholderInTooltip": "Magnetite Shard",
       "AchievementId": 0,
       "CurrencyId": 28,
@@ -599,7 +599,7 @@
     {
       "Id": "currency29",
       "LabelText": "Provisioner Token",
-      "LabelTooltip": "Earned by helping Faction Provisioners.",
+      "LabelTooltip": "Provisioner Token\nEarned by helping Faction Provisioners.",
       "PlaceholderInTooltip": "Provisioner Token",
       "AchievementId": 0,
       "CurrencyId": 29,
@@ -610,7 +610,7 @@
     {
       "Id": "currency30",
       "LabelText": "PvP League Ticket",
-      "LabelTooltip": "Earned when crossing division thresholds during PvP league seasons. Spend in the Heart of the Mists and trade for various rewards at the PvP League Vendor.",
+      "LabelTooltip": "PvP League Ticket\nEarned when crossing division thresholds during PvP league seasons. Spend in the Heart of the Mists and trade for various rewards at the PvP League Vendor.",
       "PlaceholderInTooltip": "PvP League Ticket",
       "AchievementId": 0,
       "CurrencyId": 30,
@@ -621,7 +621,7 @@
     {
       "Id": "currency31",
       "LabelText": "Proof of Heroics",
-      "LabelTooltip": "Earned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points.",
+      "LabelTooltip": "Proof of Heroics\nEarned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points.",
       "PlaceholderInTooltip": "Proof of Heroics",
       "AchievementId": 0,
       "CurrencyId": 31,
@@ -632,7 +632,7 @@
     {
       "Id": "currency32",
       "LabelText": "Unbound Magic",
-      "LabelTooltip": "Earned from creatures empowered by unbound magic.",
+      "LabelTooltip": "Unbound Magic\nEarned from creatures empowered by unbound magic.",
       "PlaceholderInTooltip": "Unbound Magic",
       "AchievementId": 0,
       "CurrencyId": 32,
@@ -643,7 +643,7 @@
     {
       "Id": "currency33",
       "LabelText": "Ascended Shards of Glory",
-      "LabelTooltip": "Earned from PvP League Division Chests.",
+      "LabelTooltip": "Ascended Shards of Glory\nEarned from PvP League Division Chests.",
       "PlaceholderInTooltip": "Ascended Shards of Glory",
       "AchievementId": 0,
       "CurrencyId": 33,
@@ -654,7 +654,7 @@
     {
       "Id": "currency34",
       "LabelText": "Trade Contract",
-      "LabelTooltip": "Earned in the Crystal Desert. Spend at karma merchants to purchase trade crates with crafting materials, new crafting recipes, and other rewards unique to the Crystal Desert.",
+      "LabelTooltip": "Trade Contract\nEarned in the Crystal Desert. Spend at karma merchants to purchase trade crates with crafting materials, new crafting recipes, and other rewards unique to the Crystal Desert.",
       "PlaceholderInTooltip": "Trade Contract",
       "AchievementId": 0,
       "CurrencyId": 34,
@@ -665,7 +665,7 @@
     {
       "Id": "currency35",
       "LabelText": "Elegy Mosaic",
-      "LabelTooltip": "Earned by completing legendary bounties in the Crystal Desert. Spend at the Tomb of Primeval Kings.\n\n<c=@Flavor>These markers were used to commemorate great deeds in the Dynastic Era of ancient Elona.</c>",
+      "LabelTooltip": "Elegy Mosaic\nEarned by completing legendary bounties in the Crystal Desert. Spend at the Tomb of Primeval Kings.\n\n<c=@Flavor>These markers were used to commemorate great deeds in the Dynastic Era of ancient Elona.</c>",
       "PlaceholderInTooltip": "Elegy Mosaic",
       "AchievementId": 0,
       "CurrencyId": 35,
@@ -676,7 +676,7 @@
     {
       "Id": "currency36",
       "LabelText": "Testimony of Desert Heroics",
-      "LabelTooltip": "Earned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points.",
+      "LabelTooltip": "Testimony of Desert Heroics\nEarned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points.",
       "PlaceholderInTooltip": "Testimony of Desert Heroics",
       "AchievementId": 0,
       "CurrencyId": 36,
@@ -687,7 +687,7 @@
     {
       "Id": "currency37",
       "LabelText": "Exalted Key",
-      "LabelTooltip": "Used to open Exalted chests in Auric Basin. Chests can contain armor, weapons, and recipes.",
+      "LabelTooltip": "Exalted Key\nUsed to open Exalted chests in Auric Basin. Chests can contain armor, weapons, and recipes.",
       "PlaceholderInTooltip": "Exalted Key",
       "AchievementId": 0,
       "CurrencyId": 37,
@@ -698,7 +698,7 @@
     {
       "Id": "currency38",
       "LabelText": "Machete",
-      "LabelTooltip": "Used to open noxious pods in Dragon's Stand. Pods can contain armor, weapons, and recipes.",
+      "LabelTooltip": "Machete\nUsed to open noxious pods in Dragon's Stand. Pods can contain armor, weapons, and recipes.",
       "PlaceholderInTooltip": "Machete",
       "AchievementId": 0,
       "CurrencyId": 38,
@@ -709,7 +709,7 @@
     {
       "Id": "currency39",
       "LabelText": "Gaeting Crystal",
-      "LabelTooltip": "Earned from bosses and events inside Path of Fire raids.",
+      "LabelTooltip": "Gaeting Crystal\nEarned from bosses and events inside Path of Fire raids.",
       "PlaceholderInTooltip": "Gaeting Crystal",
       "AchievementId": 0,
       "CurrencyId": 39,
@@ -720,7 +720,7 @@
     {
       "Id": "currency40",
       "LabelText": "Bandit Skeleton Key",
-      "LabelTooltip": "Used to open lost bandit chests in the Silverwastes. Chests can contain armor, weapons, recipes, ambrite, and more.",
+      "LabelTooltip": "Bandit Skeleton Key\nUsed to open lost bandit chests in the Silverwastes. Chests can contain armor, weapons, recipes, ambrite, and more.",
       "PlaceholderInTooltip": "Bandit Skeleton Key",
       "AchievementId": 0,
       "CurrencyId": 40,
@@ -731,7 +731,7 @@
     {
       "Id": "currency41",
       "LabelText": "Pact Crowbar",
-      "LabelTooltip": "Used to open airship cargo in Verdant Brink. Cargo can contain crafting materials, armor, weapons, and recipes.",
+      "LabelTooltip": "Pact Crowbar\nUsed to open airship cargo in Verdant Brink. Cargo can contain crafting materials, armor, weapons, and recipes.",
       "PlaceholderInTooltip": "Pact Crowbar",
       "AchievementId": 0,
       "CurrencyId": 41,
@@ -742,7 +742,7 @@
     {
       "Id": "currency42",
       "LabelText": "Vial of Chak Acid",
-      "LabelTooltip": "Used to open crystallized supply caches in Tangled Depths. Caches can contain armor, weapons, and recipes.",
+      "LabelTooltip": "Vial of Chak Acid\nUsed to open crystallized supply caches in Tangled Depths. Caches can contain armor, weapons, and recipes.",
       "PlaceholderInTooltip": "Vial of Chak Acid",
       "AchievementId": 0,
       "CurrencyId": 42,
@@ -753,7 +753,7 @@
     {
       "Id": "currency43",
       "LabelText": "Zephyrite Lockpick",
-      "LabelTooltip": "Used to open buried locked chests in Dry Top. These chests are only visible during sandstorms. Chests can contain armor, weapons, rare skins, recipes, ambrite, and more.",
+      "LabelTooltip": "Zephyrite Lockpick\nUsed to open buried locked chests in Dry Top. These chests are only visible during sandstorms. Chests can contain armor, weapons, rare skins, recipes, ambrite, and more.",
       "PlaceholderInTooltip": "Zephyrite Lockpick",
       "AchievementId": 0,
       "CurrencyId": 43,
@@ -764,7 +764,7 @@
     {
       "Id": "currency44",
       "LabelText": "Trader's Key",
-      "LabelTooltip": "Used to open trade crates in the Crystal Desert.",
+      "LabelTooltip": "Trader's Key\nUsed to open trade crates in the Crystal Desert.",
       "PlaceholderInTooltip": "Trader's Key",
       "AchievementId": 0,
       "CurrencyId": 44,
@@ -775,7 +775,7 @@
     {
       "Id": "currency45",
       "LabelText": "Volatile Magic",
-      "LabelTooltip": "Unstable magic lingering from the fall of a god and two Elder Dragons. Spent at vendors to purchase unlocks and rewards.",
+      "LabelTooltip": "Volatile Magic\nUnstable magic lingering from the fall of a god and two Elder Dragons. Spent at vendors to purchase unlocks and rewards.",
       "PlaceholderInTooltip": "Volatile Magic",
       "AchievementId": 0,
       "CurrencyId": 45,
@@ -786,7 +786,7 @@
     {
       "Id": "currency46",
       "LabelText": "PvP Tournament Voucher",
-      "LabelTooltip": "Earned in monthly automated tournaments and some special event tournaments.",
+      "LabelTooltip": "PvP Tournament Voucher\nEarned in monthly automated tournaments and some special event tournaments.",
       "PlaceholderInTooltip": "PvP Tournament Voucher",
       "AchievementId": 0,
       "CurrencyId": 46,
@@ -797,7 +797,7 @@
     {
       "Id": "currency47",
       "LabelText": "Racing Medallion",
-      "LabelTooltip": "Earned by participating in roller beetle races and time trials.",
+      "LabelTooltip": "Racing Medallion\nEarned by participating in roller beetle races and time trials.",
       "PlaceholderInTooltip": "Racing Medallion",
       "AchievementId": 0,
       "CurrencyId": 47,
@@ -808,7 +808,7 @@
     {
       "Id": "currency49",
       "LabelText": "Mistborn Key",
-      "LabelTooltip": "Used to open Mistborn Coffers in Dragonfall.",
+      "LabelTooltip": "Mistborn Key\nUsed to open Mistborn Coffers in Dragonfall.",
       "PlaceholderInTooltip": "Mistborn Key",
       "AchievementId": 0,
       "CurrencyId": 49,
@@ -819,7 +819,7 @@
     {
       "Id": "currency50",
       "LabelText": "Festival Token",
-      "LabelTooltip": "Earned by participating in the yearly Festival of the Four Winds.",
+      "LabelTooltip": "Festival Token\nEarned by participating in the yearly Festival of the Four Winds.",
       "PlaceholderInTooltip": "Festival Token",
       "AchievementId": 0,
       "CurrencyId": 50,
@@ -830,7 +830,7 @@
     {
       "Id": "currency51",
       "LabelText": "Cache Key",
-      "LabelTooltip": "Used to loot cache chests around Drizzlewood Coast.",
+      "LabelTooltip": "Cache Key\nUsed to loot cache chests around Drizzlewood Coast.",
       "PlaceholderInTooltip": "Cache Key",
       "AchievementId": 0,
       "CurrencyId": 51,
@@ -841,7 +841,7 @@
     {
       "Id": "currency52",
       "LabelText": "Red Prophet Shard",
-      "LabelTooltip": "Crystalline shards of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these.",
+      "LabelTooltip": "Red Prophet Shard\nCrystalline shards of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these.",
       "PlaceholderInTooltip": "Red Prophet Shard",
       "AchievementId": 0,
       "CurrencyId": 52,
@@ -852,7 +852,7 @@
     {
       "Id": "currency53",
       "LabelText": "Green Prophet Shard",
-      "LabelTooltip": "Crystalline shards of dragon magic, veined with green.\nCan be exchanged for rewards in Arborstone.",
+      "LabelTooltip": "Green Prophet Shard\nCrystalline shards of dragon magic, veined with green.\nCan be exchanged for rewards in Arborstone.",
       "PlaceholderInTooltip": "Green Prophet Shard",
       "AchievementId": 0,
       "CurrencyId": 53,
@@ -863,7 +863,7 @@
     {
       "Id": "currency54",
       "LabelText": "Blue Prophet Crystal",
-      "LabelTooltip": "Crystalline formations of dragon magic, veined with blue.\nUsed to open the weekly strike rewards chest in the Eye of the North.\nObtained from Priority Strikes or by combining shards.",
+      "LabelTooltip": "Blue Prophet Crystal\nCrystalline formations of dragon magic, veined with blue.\nUsed to open the weekly strike rewards chest in the Eye of the North.\nObtained from Priority Strikes or by combining shards.",
       "PlaceholderInTooltip": "Blue Prophet Crystal",
       "AchievementId": 0,
       "CurrencyId": 54,
@@ -874,7 +874,7 @@
     {
       "Id": "currency55",
       "LabelText": "Green Prophet Crystal",
-      "LabelTooltip": "Crystalline formations of dragon magic, veined with green.\nEmissaries in the Eye of the North have interest in these.\nObtained from Priority Strikes or by combining shards.",
+      "LabelTooltip": "Green Prophet Crystal\nCrystalline formations of dragon magic, veined with green.\nEmissaries in the Eye of the North have interest in these.\nObtained from Priority Strikes or by combining shards.",
       "PlaceholderInTooltip": "Green Prophet Crystal",
       "AchievementId": 0,
       "CurrencyId": 55,
@@ -885,7 +885,7 @@
     {
       "Id": "currency56",
       "LabelText": "Red Prophet Crystal",
-      "LabelTooltip": "Crystalline formations of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these.\nObtained from Priority Strikes or by combining shards.",
+      "LabelTooltip": "Red Prophet Crystal\nCrystalline formations of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these.\nObtained from Priority Strikes or by combining shards.",
       "PlaceholderInTooltip": "Red Prophet Crystal",
       "AchievementId": 0,
       "CurrencyId": 56,
@@ -896,7 +896,7 @@
     {
       "Id": "currency57",
       "LabelText": "Blue Prophet Shard",
-      "LabelTooltip": "Crystalline shards of dragon magic, veined with blue.\nCan be exchanged for rewards in the Eye of the North.",
+      "LabelTooltip": "Blue Prophet Shard\nCrystalline shards of dragon magic, veined with blue.\nCan be exchanged for rewards in the Eye of the North.",
       "PlaceholderInTooltip": "Blue Prophet Shard",
       "AchievementId": 0,
       "CurrencyId": 57,
@@ -907,7 +907,7 @@
     {
       "Id": "currency58",
       "LabelText": "War Supplies",
-      "LabelTooltip": "Materials to aid in the ongoing conflict in the Drizzlewood Coast. Can be traded for war equipment and items or used to upgrade bases.",
+      "LabelTooltip": "War Supplies\nMaterials to aid in the ongoing conflict in the Drizzlewood Coast. Can be traded for war equipment and items or used to upgrade bases.",
       "PlaceholderInTooltip": "War Supplies",
       "AchievementId": 0,
       "CurrencyId": 58,
@@ -918,7 +918,7 @@
     {
       "Id": "currency59",
       "LabelText": "Unstable Fractal Essence",
-      "LabelTooltip": "Earned and spent in Fractals of the Mists. Used to purchase prestigious rewards.",
+      "LabelTooltip": "Unstable Fractal Essence\nEarned and spent in Fractals of the Mists. Used to purchase prestigious rewards.",
       "PlaceholderInTooltip": "Unstable Fractal Essence",
       "AchievementId": 0,
       "CurrencyId": 59,
@@ -929,7 +929,7 @@
     {
       "Id": "currency60",
       "LabelText": "Tyrian Defense Seal",
-      "LabelTooltip": "Earned by protecting Tyria in Dragon Response Missions. Spent at faction vendors in Eye of the North.",
+      "LabelTooltip": "Tyrian Defense Seal\nEarned by protecting Tyria in Dragon Response Missions. Spent at faction vendors in Eye of the North.",
       "PlaceholderInTooltip": "Tyrian Defense Seal",
       "AchievementId": 0,
       "CurrencyId": 60,
@@ -940,7 +940,7 @@
     {
       "Id": "currency61",
       "LabelText": "Research Note",
-      "LabelTooltip": "Acquired by deconstructing crafted items with research kits. Used at vendors in Cantha and to craft newer recipes.",
+      "LabelTooltip": "Research Note\nAcquired by deconstructing crafted items with research kits. Used at vendors in Cantha and to craft newer recipes.",
       "PlaceholderInTooltip": "Research Note",
       "AchievementId": 0,
       "CurrencyId": 61,
@@ -951,7 +951,7 @@
     {
       "Id": "currency62",
       "LabelText": "Unusual Coin",
-      "LabelTooltip": "Acquired by opening hidden chests in Cantha. Used at vendors in Cantha.",
+      "LabelTooltip": "Unusual Coin\nAcquired by opening hidden chests in Cantha. Used at vendors in Cantha.",
       "PlaceholderInTooltip": "Unusual Coin",
       "AchievementId": 0,
       "CurrencyId": 62,
@@ -962,7 +962,7 @@
     {
       "Id": "currency64",
       "LabelText": "Jade Sliver",
-      "LabelTooltip": "Acquired from junk items recycled by the Jade Bot Recycler.",
+      "LabelTooltip": "Jade Sliver\nAcquired from junk items recycled by the Jade Bot Recycler.",
       "PlaceholderInTooltip": "Jade Sliver",
       "AchievementId": 0,
       "CurrencyId": 64,
@@ -973,7 +973,7 @@
     {
       "Id": "currency65",
       "LabelText": "Testimony of Jade Heroics",
-      "LabelTooltip": "Earned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points.",
+      "LabelTooltip": "Testimony of Jade Heroics\nEarned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points.",
       "PlaceholderInTooltip": "Testimony of Jade Heroics",
       "AchievementId": 0,
       "CurrencyId": 65,
@@ -984,7 +984,7 @@
     {
       "Id": "currency67",
       "LabelText": "Canach Coins",
-      "LabelTooltip": "Acquired by playing the Coin Rush in Club Canach. May be used to obtain rewards in Club Canach.",
+      "LabelTooltip": "Canach Coins\nAcquired by playing the Coin Rush in Club Canach. May be used to obtain rewards in Club Canach.",
       "PlaceholderInTooltip": "Canach Coins",
       "AchievementId": 0,
       "CurrencyId": 67,
@@ -995,7 +995,7 @@
     {
       "Id": "currency68",
       "LabelText": "Imperial Favor",
-      "LabelTooltip": "Acquired by assisting in events throughout Cantha. Used at vendors in Cantha.",
+      "LabelTooltip": "Imperial Favor\nAcquired by assisting in events throughout Cantha. Used at vendors in Cantha.",
       "PlaceholderInTooltip": "Imperial Favor",
       "AchievementId": 0,
       "CurrencyId": 68,
@@ -1006,7 +1006,7 @@
     {
       "Id": "currency69",
       "LabelText": "Tales of Dungeon Delving",
-      "LabelTooltip": "Earned in dungeons. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the legendary crafting components used in creating legendary weapons.",
+      "LabelTooltip": "Tales of Dungeon Delving\nEarned in dungeons. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the legendary crafting components used in creating legendary weapons.",
       "PlaceholderInTooltip": "Tales of Dungeon Delving",
       "AchievementId": 0,
       "CurrencyId": 69,
@@ -1017,7 +1017,7 @@
     {
       "Id": "currency70",
       "LabelText": "Legendary Insight",
-      "LabelTooltip": "Earned from bosses and events inside raids and challenge mode Strike Missions.",
+      "LabelTooltip": "Legendary Insight\nEarned from bosses and events inside raids and challenge mode Strike Missions.",
       "PlaceholderInTooltip": "Legendary Insight",
       "AchievementId": 0,
       "CurrencyId": 70,
