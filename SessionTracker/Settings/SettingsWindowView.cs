@@ -291,7 +291,7 @@ namespace SessionTracker.Settings
             var isVisibleCheckbox = new Checkbox
             {
                 Checked          = entry.IsVisible,
-                BasicTooltipText = "Show in UI. Values for hidden stats are still tracked.",
+                BasicTooltipText = SHOW_HIDE_STAT_TOOLTIP,
                 Size             = new Point(16, 16),
                 Location         = new Point(5, 5),
                 Parent           = checkBoxContainer
@@ -322,7 +322,7 @@ namespace SessionTracker.Settings
                 FlowDirection    = ControlFlowDirection.SingleLeftToRight,
                 HeightSizingMode = SizingMode.Fill,
                 WidthSizingMode  = SizingMode.Fill,
-                BasicTooltipText = "Click to show or hide stat",
+                BasicTooltipText = SHOW_HIDE_STAT_TOOLTIP,
                 Parent           = entryFlowPanel
             };
 
@@ -415,5 +415,6 @@ namespace SessionTracker.Settings
         private readonly Dictionary<string, Checkbox> _visibilityCheckBoxByEntryId = new Dictionary<string, Checkbox>();
         private static readonly Color VISIBLE_COLOR = new Color(17, 64, 9) * 0.9f;
         private static readonly Color NOT_VISIBLE_COLOR = new Color(Color.Black, 0.5f);
+        private const string SHOW_HIDE_STAT_TOOLTIP = "Show or hide stat by clicking on the checkbox or directly on the row. Values for hidden stats are still tracked.";
     }
 }
