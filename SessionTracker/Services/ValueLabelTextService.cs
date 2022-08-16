@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using Blish_HUD.Controls;
 using SessionTracker.Models;
 using SessionTracker.Settings;
@@ -41,9 +42,11 @@ namespace SessionTracker.Services
 
         private static string CreateKillsDeathsRatioText(int kills, int deaths)
         {
-            return deaths == 0
-                ? "0,00"
-                : $"{(double)kills / deaths:0.00}";
+            var killsDeathsRatio = deaths == 0
+                ? 0.00
+                : (double)kills / deaths;
+
+            return killsDeathsRatio.ToString("N2", CultureInfo.CurrentUICulture);
         }
 
         private static string CreateSessionAndTotalValueText(int sessionValue, int totalValue, bool sessionValuesAreVisible, bool totalValuesAreVisible)
@@ -51,13 +54,13 @@ namespace SessionTracker.Services
             var text = string.Empty;
 
             if (sessionValuesAreVisible)
-                text += sessionValue.ToString();
+                text += sessionValue.ToString("N0", CultureInfo.CurrentUICulture);
 
             if (sessionValuesAreVisible && totalValuesAreVisible)
                 text += " | ";
 
             if (totalValuesAreVisible)
-                text += totalValue.ToString();
+                text += totalValue.ToString("N0", CultureInfo.CurrentUICulture);
 
             return text;
         }
