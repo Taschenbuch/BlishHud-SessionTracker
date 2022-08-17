@@ -9,7 +9,7 @@ using SessionTracker.Settings;
 
 namespace SessionTracker.Services
 {
-    public class ValueLabelTextService
+    public class ValueLabelTextService : IDisposable
     {
         public ValueLabelTextService(Dictionary<string, Label> valueLabelByEntryId,
                                      Model model,
@@ -20,6 +20,17 @@ namespace SessionTracker.Services
             _model               = model;
             _settingService      = settingService;
             _logger              = logger;
+
+            settingService.SessionValuesAreVisibleSetting.SettingChanged += OnSessionValueVisibilitySettingChanged;
+            settingService.TotalValuesAreVisibleSetting.SettingChanged   += OnTotalValueVisibilitySettingChanged;
+            settingService.CoinDisplayFormatSetting.SettingChanged       += OnCoinDisplayFormatSettingChanged;
+        }
+
+        public void Dispose()
+        {
+            _settingService.SessionValuesAreVisibleSetting.SettingChanged -= OnSessionValueVisibilitySettingChanged;
+            _settingService.TotalValuesAreVisibleSetting.SettingChanged   -= OnTotalValueVisibilitySettingChanged;
+            _settingService.CoinDisplayFormatSetting.SettingChanged       -= OnCoinDisplayFormatSettingChanged;
         }
 
         public void UpdateValueLabelTexts()
@@ -63,6 +74,27 @@ namespace SessionTracker.Services
                         _settingService.TotalValuesAreVisibleSetting.Value);
                 }
             }
+        }
+
+        private void OnTotalValueVisibilitySettingChanged(object sender, ValueChangedEventArgs<bool> valueChangedEventArgs)
+        {
+            if (_settingService.SessionValuesAreVisibleSetting.Value == false && _settingService.TotalValuesAreVisibleSetting.Value == false)
+                _settingService.SessionValuesAreVisibleSetting.Value = true;
+
+            UpdateValueLabelTexts();
+        }
+
+        private void OnSessionValueVisibilitySettingChanged(object sender, ValueChangedEventArgs<bool> valueChangedEventArgs)
+        {
+            if (_settingService.SessionValuesAreVisibleSetting.Value == false && _settingService.TotalValuesAreVisibleSetting.Value == false)
+                _settingService.TotalValuesAreVisibleSetting.Value = true;
+
+            UpdateValueLabelTexts();
+        }
+
+        private void OnCoinDisplayFormatSettingChanged(object sender, ValueChangedEventArgs<CoinDisplayFormat> e)
+        {
+            UpdateValueLabelTexts();
         }
 
         private readonly Dictionary<string, Label> _valueLabelByEntryId;

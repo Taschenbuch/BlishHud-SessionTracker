@@ -36,9 +36,6 @@ namespace SessionTracker.Controls
             OnDebugModeIsEnabledSettingChanged(null, null);
 
             settingService.FontSizeIndexSetting.SettingChanged           += OnFontSizeIndexSettingChanged;
-            settingService.SessionValuesAreVisibleSetting.SettingChanged += OnSessionValueVisibilitySettingChanged;
-            settingService.TotalValuesAreVisibleSetting.SettingChanged   += OnTotalValueVisibilitySettingChanged;
-            settingService.CoinDisplayFormatSetting.SettingChanged       += OnCoinDisplayFormatSettingChanged;
             settingService.BackgroundOpacitySetting.SettingChanged       += OnBackgroundOpacitySettingChanged;
             settingService.ValueLabelColorSetting.SettingChanged         += OnValueLabelColorSettingChanged;
             settingService.DebugModeIsEnabledSetting.SettingChanged      += OnDebugModeIsEnabledSettingChanged;
@@ -53,10 +50,8 @@ namespace SessionTracker.Controls
 
         protected override void DisposeControl()
         {
+            _valueLabelTextService.Dispose();
             _settingService.FontSizeIndexSetting.SettingChanged           -= OnFontSizeIndexSettingChanged;
-            _settingService.SessionValuesAreVisibleSetting.SettingChanged -= OnSessionValueVisibilitySettingChanged;
-            _settingService.TotalValuesAreVisibleSetting.SettingChanged   -= OnTotalValueVisibilitySettingChanged;
-            _settingService.CoinDisplayFormatSetting.SettingChanged       -= OnCoinDisplayFormatSettingChanged;
             _settingService.BackgroundOpacitySetting.SettingChanged       -= OnBackgroundOpacitySettingChanged;
             _settingService.ValueLabelColorSetting.SettingChanged         -= OnValueLabelColorSettingChanged;
             _settingService.DebugModeIsEnabledSetting.SettingChanged      -= OnDebugModeIsEnabledSettingChanged;
@@ -271,28 +266,7 @@ namespace SessionTracker.Controls
             foreach (var label in _valueLabelByEntryId.Values)
                 label.Font = font;
         }
-
-        private void OnTotalValueVisibilitySettingChanged(object sender, ValueChangedEventArgs<bool> valueChangedEventArgs)
-        {
-            if (_settingService.SessionValuesAreVisibleSetting.Value == false && _settingService.TotalValuesAreVisibleSetting.Value == false)
-                _settingService.SessionValuesAreVisibleSetting.Value = true;
-
-            _valueLabelTextService.UpdateValueLabelTexts();
-        }
-
-        private void OnSessionValueVisibilitySettingChanged(object sender, ValueChangedEventArgs<bool> valueChangedEventArgs)
-        {
-            if (_settingService.SessionValuesAreVisibleSetting.Value == false && _settingService.TotalValuesAreVisibleSetting.Value == false)
-                _settingService.TotalValuesAreVisibleSetting.Value = true;
-
-            _valueLabelTextService.UpdateValueLabelTexts();
-        }
-
-        private void OnCoinDisplayFormatSettingChanged(object sender, ValueChangedEventArgs<CoinDisplayFormat> e)
-        {
-            _valueLabelTextService.UpdateValueLabelTexts();
-        }
-
+        
         private void OnBackgroundOpacitySettingChanged(object sender, ValueChangedEventArgs<int> valueChangedEventArgs)
         {
             BackgroundColor = new Color(Color.Black, _settingService.BackgroundOpacitySetting.Value);
