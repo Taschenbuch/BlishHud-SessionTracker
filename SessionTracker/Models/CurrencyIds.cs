@@ -26,6 +26,7 @@ namespace SessionTracker.Models
             7, // Fractal Relic 
             24, // Pristine Fractal Relic
             59, // Unstable Fractal Essence
+            1, // Coin
         }.AsReadOnly();
 
         public static readonly ReadOnlyCollection<int> Strike = new List<int>
@@ -33,12 +34,14 @@ namespace SessionTracker.Models
             53, // Green Prophet Shard
             54, // Blue Prophet Crystal
             57, // Blue Prophet Shard
+            1, // Coin
         }.AsReadOnly();
 
         public static readonly ReadOnlyCollection<int> Raid = new List<int>
         {
             28, // Magnetite Shard 
             70, // Legendary Insight 
+            1, // Coin
         }.AsReadOnly();
 
         public static readonly ReadOnlyCollection<int> OpenWorld = new List<int>
@@ -47,6 +50,7 @@ namespace SessionTracker.Models
             23, // Spirit Shard
             32, // Unbound Magic
             45, // Volatile Magic
+            1, // Coin
         }.AsReadOnly();
     }
 }
