@@ -104,6 +104,12 @@ namespace SessionTracker.Settings
                 () => "label type",
                 () => "The label in front of the value in the UI can be text or icon");
 
+            CoinDisplayFormatSetting = settings.DefineSetting(
+                "coin display format",
+                CoinDisplayFormat.XgXXsXXc,
+                () => "gold format",
+                () => "Display format of the gold/coin stat. Dropdown shows examples of how 123456 copper are displayed in the different formats.");
+
             UiVisibilityKeyBindingSetting = settings.DefineSetting(
                 "ui visibility key binding",
                 new KeyBinding(Keys.None),
@@ -151,7 +157,8 @@ namespace SessionTracker.Settings
             YMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location y", 0.2f);
         }
 
-        public SettingEntry<bool> DebugModeIsEnabledSetting { get; set; }
+        public SettingEntry<CoinDisplayFormat> CoinDisplayFormatSetting { get; }
+        public SettingEntry<bool> DebugModeIsEnabledSetting { get; }
         public SettingEntry<int> StatTitlePaddingSetting { get; }
         public SettingEntry<int> UiHeightSetting { get; }
         public SettingEntry<bool> UiHeightIsFixedSetting { get; }

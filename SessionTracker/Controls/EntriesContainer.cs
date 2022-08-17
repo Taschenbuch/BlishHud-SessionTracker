@@ -15,29 +15,30 @@ namespace SessionTracker.Controls
 {
     public class EntriesContainer : RelativePositionAndMouseDraggableContainer
     {
-        public EntriesContainer(Model model, 
-                                Gw2ApiManager gw2ApiManager, 
-                                TextureService textureService, 
-                                SettingsWindowService settingsWindowService, 
-                                SettingService settingService, 
+        public EntriesContainer(Model model,
+                                Gw2ApiManager gw2ApiManager,
+                                TextureService textureService,
+                                SettingsWindowService settingsWindowService,
+                                SettingService settingService,
                                 Logger logger)
             : base(settingService)
         {
-            _model                 = model;
-            _gw2ApiManager         = gw2ApiManager;
-            _textureService        = textureService;
-            _settingService        = settingService;
-            _logger                = logger;
+            _model          = model;
+            _gw2ApiManager  = gw2ApiManager;
+            _textureService = textureService;
+            _settingService = settingService;
+            _logger         = logger;
 
             CreateUi(settingsWindowService);
 
-            _valueLabelTextService = new ValueLabelTextService(_valueLabelByEntryId, _model, settingService);
+            _valueLabelTextService = new ValueLabelTextService(_valueLabelByEntryId, _model, settingService, logger);
             _summaryTooltipService = new SummaryTooltipService(_valueLabelByEntryId);
             OnDebugModeIsEnabledSettingChanged(null, null);
 
             settingService.FontSizeIndexSetting.SettingChanged           += OnFontSizeIndexSettingChanged;
             settingService.SessionValuesAreVisibleSetting.SettingChanged += OnSessionValueVisibilitySettingChanged;
             settingService.TotalValuesAreVisibleSetting.SettingChanged   += OnTotalValueVisibilitySettingChanged;
+            settingService.CoinDisplayFormatSetting.SettingChanged       += OnCoinDisplayFormatSettingChanged;
             settingService.BackgroundOpacitySetting.SettingChanged       += OnBackgroundOpacitySettingChanged;
             settingService.ValueLabelColorSetting.SettingChanged         += OnValueLabelColorSettingChanged;
             settingService.DebugModeIsEnabledSetting.SettingChanged      += OnDebugModeIsEnabledSettingChanged;
@@ -55,6 +56,7 @@ namespace SessionTracker.Controls
             _settingService.FontSizeIndexSetting.SettingChanged           -= OnFontSizeIndexSettingChanged;
             _settingService.SessionValuesAreVisibleSetting.SettingChanged -= OnSessionValueVisibilitySettingChanged;
             _settingService.TotalValuesAreVisibleSetting.SettingChanged   -= OnTotalValueVisibilitySettingChanged;
+            _settingService.CoinDisplayFormatSetting.SettingChanged       -= OnCoinDisplayFormatSettingChanged;
             _settingService.BackgroundOpacitySetting.SettingChanged       -= OnBackgroundOpacitySettingChanged;
             _settingService.ValueLabelColorSetting.SettingChanged         -= OnValueLabelColorSettingChanged;
             _settingService.DebugModeIsEnabledSetting.SettingChanged      -= OnDebugModeIsEnabledSettingChanged;
@@ -283,6 +285,11 @@ namespace SessionTracker.Controls
             if (_settingService.SessionValuesAreVisibleSetting.Value == false && _settingService.TotalValuesAreVisibleSetting.Value == false)
                 _settingService.TotalValuesAreVisibleSetting.Value = true;
 
+            _valueLabelTextService.UpdateValueLabelTexts();
+        }
+
+        private void OnCoinDisplayFormatSettingChanged(object sender, ValueChangedEventArgs<CoinDisplayFormat> e)
+        {
             _valueLabelTextService.UpdateValueLabelTexts();
         }
 

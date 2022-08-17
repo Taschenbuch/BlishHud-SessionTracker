@@ -45,7 +45,6 @@ namespace SessionTracker.Services
             foreach (var entry in model.Entries.Where(v => v.IsCurrency))
                 entry.Value.Total = GetCurrencyValue(walletTask, entry.CurrencyId);
 
-
             foreach (var entry in model.Entries.Where(v => v.IsAchievement))
                 entry.Value.Total = GetAchievementValue(achievementsTask, entry.AchievementId);
         }

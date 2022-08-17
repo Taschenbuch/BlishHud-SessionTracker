@@ -41,6 +41,7 @@ namespace SessionTracker.Settings
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.TotalValuesAreVisibleSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.DragWindowWithMouseIsEnabledSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.CornerIconIsVisibleSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.CoinDisplayFormatSetting);
 #if DEBUG
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.DebugModeIsEnabledSetting);
 #endif

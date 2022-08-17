@@ -18,5 +18,6 @@
         public const string WVW_KDR = "wvw kdr";
         public const string WVW_RANK = "wvw rank";
         public const string DEATHS = "deaths";
+        public const string COPPER = "currency1"; // 
     }
 }
