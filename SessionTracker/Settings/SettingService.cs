@@ -106,7 +106,7 @@ namespace SessionTracker.Settings
 
             CoinDisplayFormatSetting = settings.DefineSetting(
                 "coin display format",
-                CoinDisplayFormat.XgXXsXXc,
+                CoinDisplayFormat.XgXsXc,
                 () => "gold format",
                 () => "Display format of the gold/coin stat. Dropdown shows examples of how 123456 copper are displayed in the different formats.");
 

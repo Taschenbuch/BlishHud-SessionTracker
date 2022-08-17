@@ -11,7 +11,7 @@ namespace SessionTracker.Settings
         [Description("12g34")]
         XgXX,
         [Description("12g34s56c")]
-        XgXXsXXc,
+        XgXsXc,
         [Description("123456c")]
         Xc
     }

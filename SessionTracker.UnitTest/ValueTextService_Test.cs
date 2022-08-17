@@ -65,19 +65,19 @@ namespace SessionTracker.UnitTest
         [TestCase(CoinDisplayFormat.XgXX, 10000, "1g00")]
         [TestCase(CoinDisplayFormat.XgXX, 123456, "12g34")] 
         [TestCase(CoinDisplayFormat.XgXX, 1234567890, "123456g78")] 
-        // XgXXsXXc
-        [TestCase(CoinDisplayFormat.XgXXsXXc, -1234567890, "-123456g\u200978s\u200990c")]
-        [TestCase(CoinDisplayFormat.XgXXsXXc, -123456, "-12g\u200934s\u200956c")]
-        [TestCase(CoinDisplayFormat.XgXXsXXc, -10, "-0g\u20090s\u200910c")]
-        [TestCase(CoinDisplayFormat.XgXXsXXc, -1, "-0g\u20090s\u20091c")]
-        [TestCase(CoinDisplayFormat.XgXXsXXc, 0, "0g\u20090s\u20090c")]
-        [TestCase(CoinDisplayFormat.XgXXsXXc, 1, "0g\u20090s\u20091c")]
-        [TestCase(CoinDisplayFormat.XgXXsXXc, 10, "0g\u20090s\u200910c")]
-        [TestCase(CoinDisplayFormat.XgXXsXXc, 100, "0g\u20091s\u20090c")]
-        [TestCase(CoinDisplayFormat.XgXXsXXc, 1000, "0g\u200910s\u20090c")]
-        [TestCase(CoinDisplayFormat.XgXXsXXc, 10000, "1g\u20090s\u20090c")]
-        [TestCase(CoinDisplayFormat.XgXXsXXc, 123456, "12g\u200934s\u200956c")]
-        [TestCase(CoinDisplayFormat.XgXXsXXc, 1234567890, "123456g\u200978s\u200990c")]
+        // XgXsXc
+        [TestCase(CoinDisplayFormat.XgXsXc, -1234567890, "-123456g\u200978s\u200990c")]
+        [TestCase(CoinDisplayFormat.XgXsXc, -123456, "-12g\u200934s\u200956c")]
+        [TestCase(CoinDisplayFormat.XgXsXc, -10, "-0g\u20090s\u200910c")]
+        [TestCase(CoinDisplayFormat.XgXsXc, -1, "-0g\u20090s\u20091c")]
+        [TestCase(CoinDisplayFormat.XgXsXc, 0, "0g\u20090s\u20090c")]
+        [TestCase(CoinDisplayFormat.XgXsXc, 1, "0g\u20090s\u20091c")]
+        [TestCase(CoinDisplayFormat.XgXsXc, 10, "0g\u20090s\u200910c")]
+        [TestCase(CoinDisplayFormat.XgXsXc, 100, "0g\u20091s\u20090c")]
+        [TestCase(CoinDisplayFormat.XgXsXc, 1000, "0g\u200910s\u20090c")]
+        [TestCase(CoinDisplayFormat.XgXsXc, 10000, "1g\u20090s\u20090c")]
+        [TestCase(CoinDisplayFormat.XgXsXc, 123456, "12g\u200934s\u200956c")]
+        [TestCase(CoinDisplayFormat.XgXsXc, 1234567890, "123456g\u200978s\u200990c")]
         public void Create_coin_text_depending_on_displayFormat(CoinDisplayFormat coinDisplayFormat, int valueInCopper, string expectedText)
         {
             Remove1000SeparatorForThisTest();
