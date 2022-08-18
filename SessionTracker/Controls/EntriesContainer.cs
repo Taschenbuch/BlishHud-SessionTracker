@@ -83,6 +83,26 @@ namespace SessionTracker.Controls
 
             _elapsedTimeInMilliseconds += gameTime.ElapsedGameTime.TotalMilliseconds;
 
+            // to prevent showing an api key error message right after the module start
+            if (_waitingForApiTokenAfterModuleStartup)
+            {
+                if (_elapsedTimeInMilliseconds < CHECK_FOR_API_TOKEN_AFTER_MODULE_STARTUP_INTERVAL_IN_MILLISECONDS)
+                    return;
+
+                _timeWaitedForApiTokenInMilliseconds += _elapsedTimeInMilliseconds;
+                _elapsedTimeInMilliseconds           =  0;
+
+                var waitedLongEnoughAndApiKeyIsProbablyMissing = _timeWaitedForApiTokenInMilliseconds >= MAX_WAIT_TIME_FOR_API_TOKEN_AFTER_MODULE_STARTUP_IN_MILLISECONDS;
+
+                if (waitedLongEnoughAndApiKeyIsProbablyMissing)
+                    _waitingForApiTokenAfterModuleStartup = false;
+
+                if (_gw2ApiManager.HasPermissions(ApiService.ACCOUNT_API_TOKEN_PERMISSION))
+                    _waitingForApiTokenAfterModuleStartup = false;
+
+                return;
+            }
+
             var shouldInit   = _isInitialized == false && _elapsedTimeInMilliseconds >= _initializeIntervalInMilliseconds;
             var shouldUpdate = _isInitialized && _elapsedTimeInMilliseconds >= _updateIntervalInMilliseconds;
 
@@ -236,7 +256,7 @@ namespace SessionTracker.Controls
             {
                 _valueLabelByEntryId[entry.Id] = new Label()
                 {
-                    Text           = "Get API data...",
+                    Text           = "Loading...",
                     TextColor      = _settingService.ValueLabelColorSetting.Value.GetColor(),
                     Font           = font,
                     ShowShadow     = true,
@@ -254,9 +274,7 @@ namespace SessionTracker.Controls
         private void OnValueLabelColorSettingChanged(object sender, ValueChangedEventArgs<ColorType> e)
         {
             foreach (var valueLabel in _valueLabelByEntryId.Values)
-            {
                 valueLabel.TextColor = e.NewValue.GetColor();
-            }
         }
 
         private void OnFontSizeIndexSettingChanged(object sender, ValueChangedEventArgs<int> valueChangedEventArgs)
@@ -282,17 +300,21 @@ namespace SessionTracker.Controls
         private readonly Dictionary<string, EntryTitleFlowPanel> _titleFlowPanelByEntryId = new Dictionary<string, EntryTitleFlowPanel>();
         private readonly Dictionary<string, Label> _valueLabelByEntryId = new Dictionary<string, Label>();
         private double _elapsedTimeInMilliseconds;
+        private double _timeWaitedForApiTokenInMilliseconds;
         private bool _waitingForApiResponse;
         private bool _isInitialized;
-        private int _initializeIntervalInMilliseconds = INSTANT_INITIALIZE_INTERVAL_IN_MILLISECONDS;
+        private bool _waitingForApiTokenAfterModuleStartup = true;
         private FlowPanel _titlesFlowPanel;
         private FlowPanel _valuesFlowPanel;
         private HintFlowPanel _hintFlowPanel;
         private RootFlowPanel _rootFlowPanel;
+        private int _initializeIntervalInMilliseconds = INSTANT_INITIALIZE_INTERVAL_IN_MILLISECONDS;
         private int _updateIntervalInMilliseconds = REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS;
         private const int REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 60 * 1000;
         private const int DEBUG_UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 1000;
         private const int INSTANT_INITIALIZE_INTERVAL_IN_MILLISECONDS = 0;
         private const int RETRY_INITIALIZE_INTERVAL_IN_MILLISECONDS = 5 * 1000;
+        private const int MAX_WAIT_TIME_FOR_API_TOKEN_AFTER_MODULE_STARTUP_IN_MILLISECONDS = 15 * 1000;
+        private const int CHECK_FOR_API_TOKEN_AFTER_MODULE_STARTUP_INTERVAL_IN_MILLISECONDS = 200;
     }
 }

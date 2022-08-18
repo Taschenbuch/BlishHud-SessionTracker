@@ -65,6 +65,11 @@ namespace SessionTracker.Services
                                    ?.Current ?? 0;
         }
 
+        public static List<TokenPermission> ACCOUNT_API_TOKEN_PERMISSION => new List<TokenPermission>
+        {
+            TokenPermission.Account
+        };
+
         public static List<TokenPermission> NECESSARY_API_TOKEN_PERMISSIONS => new List<TokenPermission>
         {
             TokenPermission.Account,
