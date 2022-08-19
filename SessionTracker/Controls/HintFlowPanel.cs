@@ -55,11 +55,6 @@ namespace SessionTracker.Controls
             base.Hide();
         }
 
-        private void OnSettingsButtonClick(object sender, Blish_HUD.Input.MouseEventArgs e)
-        {
-            _settingsWindowService.ShowWindow();
-        }
-
         private void OnFontSizeIndexSettingChanged(object sender, ValueChangedEventArgs<int> e)
         {
             _hintLabel.Font = FontService.Fonts[_settingService.FontSizeIndexSetting.Value];
