@@ -136,6 +136,19 @@ namespace SessionTracker.Settings
 
             UiHeightSetting.SetRange(5, 2000);
 
+            ScrollbarFixDelay = settings.DefineSetting(
+                "scrollbar fix delay",
+                50,
+                () => "scrollbar fix (read tooltip)",
+                () => "The scrollbar is a bit buggy :(. It jumps to the top after reordering stats or pressing buttons that affect the stats list " +
+                      "in the settings window. " +
+                      "A fix for that is implemented. But this fix does not work reliable for everybody. " +
+                      "If the scrollbar keeps jumping to the top, try moving the slider to the right until this issue does not happen anymore. " +
+                      "You will still notice that the scrollbar jumps to the top, especially when the slider is far to the right. But it should jump back " +
+                      "to the correct position after a very short time.");
+
+            ScrollbarFixDelay.SetRange(50, 500);
+
             DebugModeIsEnabledSetting = settings.DefineSetting(
                 "debug mode",
                 false,
@@ -157,6 +170,7 @@ namespace SessionTracker.Settings
             YMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location y", 0.2f);
         }
 
+        public SettingEntry<int> ScrollbarFixDelay { get; }
         public SettingEntry<CoinDisplayFormat> CoinDisplayFormatSetting { get; }
         public SettingEntry<bool> DebugModeIsEnabledSetting { get; }
         public SettingEntry<int> StatTitlePaddingSetting { get; }

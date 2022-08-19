@@ -42,6 +42,7 @@ namespace SessionTracker.Settings
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.DragWindowWithMouseIsEnabledSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.CornerIconIsVisibleSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.CoinDisplayFormatSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.ScrollbarFixDelay);
 #if DEBUG
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.DebugModeIsEnabledSetting);
 #endif
@@ -403,7 +404,7 @@ namespace SessionTracker.Settings
 
             Task.Run(async () =>
             {
-                await Task.Delay(50);
+                await Task.Delay(_settingService.ScrollbarFixDelay.Value);
                 _scrollbar.ScrollDistance = scrollDistance;
             });
         }
