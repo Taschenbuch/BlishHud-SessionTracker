@@ -114,7 +114,7 @@ namespace SessionTracker.Settings.SettingEntries
                 "ui visibility key binding",
                 new KeyBinding(Keys.None),
                 () => "show/hide UI",
-                () => "Double-click to change it. Will show or hide the session-tracker UI. " +
+                () => "Double-click to change the key binding. Will show or hide the session-tracker UI. " +
                       "Whether UI is really shown depends on other visibility settings. " +
                       "e.g. when 'on world map' is unchecked, using the key binding will still not show the UI on the world map.");
 
