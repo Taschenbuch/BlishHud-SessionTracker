@@ -2,7 +2,7 @@
 using Blish_HUD.Settings;
 using Microsoft.Xna.Framework.Input;
 
-namespace SessionTracker.Settings
+namespace SessionTracker.Settings.SettingEntries
 {
     public class SettingService // do not mix up with blish setting"S"service 
     {
@@ -165,7 +165,7 @@ namespace SessionTracker.Settings
                       $"Whether the UI is really shown depends on further settings like '{ON_WORLD_MAP_SETTING_DISPLAY_NAME}'.");
 
             var internalSettings = settings.AddSubCollection("internal settings (not visible in UI)");
-            SettingsVersionSetting             = internalSettings.DefineSetting("settings version", 1);
+            SettingsVersionSetting = internalSettings.DefineSetting("settings version", 1);
             XMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location x", 0.2f);
             YMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location y", 0.2f);
         }
@@ -195,7 +195,7 @@ namespace SessionTracker.Settings
         public SettingEntry<KeyBinding> UiVisibilityKeyBindingSetting { get; }
         public SettingEntry<LabelType> LabelTypeSetting { get; }
         public SettingEntry<int> SettingsVersionSetting { get; }
-     
+
         private const string ON_WORLD_MAP_SETTING_DISPLAY_NAME = "on world map";
     }
 }

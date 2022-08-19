@@ -13,6 +13,8 @@ using SessionTracker.Controls;
 using SessionTracker.Models;
 using SessionTracker.Services;
 using SessionTracker.Settings;
+using SessionTracker.Settings.SettingEntries;
+using SessionTracker.Settings.Window;
 
 namespace SessionTracker
 {

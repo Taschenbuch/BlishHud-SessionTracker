@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using Blish_HUD;
-using SessionTracker.Settings;
+using SessionTracker.Settings.SettingEntries;
 
 namespace SessionTracker.Services
 {

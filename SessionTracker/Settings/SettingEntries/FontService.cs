@@ -3,7 +3,7 @@ using Blish_HUD;
 using Blish_HUD.Settings;
 using MonoGame.Extended.BitmapFonts;
 
-namespace SessionTracker.Settings
+namespace SessionTracker.Settings.SettingEntries
 {
     public class FontService
     {

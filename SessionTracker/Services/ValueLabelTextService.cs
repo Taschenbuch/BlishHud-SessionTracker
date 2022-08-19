@@ -5,7 +5,7 @@ using Blish_HUD;
 using Blish_HUD.Controls;
 using Blish_HUD.Settings;
 using SessionTracker.Models;
-using SessionTracker.Settings;
+using SessionTracker.Settings.SettingEntries;
 
 namespace SessionTracker.Services
 {

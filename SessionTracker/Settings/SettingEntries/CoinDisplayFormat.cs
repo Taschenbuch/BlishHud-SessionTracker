@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace SessionTracker.Settings
+namespace SessionTracker.Settings.SettingEntries
 {
     public enum CoinDisplayFormat
     {

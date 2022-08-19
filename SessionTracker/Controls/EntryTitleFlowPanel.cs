@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using MonoGame.Extended.BitmapFonts;
 using SessionTracker.Models;
 using SessionTracker.Services;
-using SessionTracker.Settings;
+using SessionTracker.Settings.SettingEntries;
 
 namespace SessionTracker.Controls
 {

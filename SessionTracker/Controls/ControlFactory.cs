@@ -34,7 +34,7 @@ namespace SessionTracker.Controls
             {
                 FlowDirection       = ControlFlowDirection.SingleTopToBottom,
                 CanScroll           = true,
-                OuterControlPadding = new Vector2(10, 20),
+                OuterControlPadding = new Vector2(10, 0),
                 ControlPadding      = new Vector2(0, 10),
                 Size                = new Point(690, 0),
                 HeightSizingMode    = SizingMode.Fill,

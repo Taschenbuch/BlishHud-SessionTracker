@@ -3,7 +3,7 @@ using System.Threading;
 using FluentAssertions;
 using NUnit.Framework;
 using SessionTracker.Services;
-using SessionTracker.Settings;
+using SessionTracker.Settings.SettingEntries;
 
 namespace SessionTracker.UnitTest
 {

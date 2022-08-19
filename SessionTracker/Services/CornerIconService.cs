@@ -5,7 +5,7 @@ using Blish_HUD.Input;
 using Blish_HUD.Settings;
 using Microsoft.Xna.Framework.Graphics;
 using SessionTracker.Controls;
-using SessionTracker.Settings;
+using SessionTracker.Settings.Window;
 
 namespace SessionTracker.Services
 {

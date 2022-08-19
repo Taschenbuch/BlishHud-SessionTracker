@@ -1,4 +1,4 @@
-﻿namespace SessionTracker.Settings
+﻿namespace SessionTracker.Settings.SettingEntries
 {
     public enum ColorType
     {

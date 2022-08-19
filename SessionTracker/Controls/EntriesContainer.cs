@@ -8,7 +8,8 @@ using Blish_HUD.Modules.Managers;
 using Microsoft.Xna.Framework;
 using SessionTracker.Models;
 using SessionTracker.Services;
-using SessionTracker.Settings;
+using SessionTracker.Settings.SettingEntries;
+using SessionTracker.Settings.Window;
 using Color = Microsoft.Xna.Framework.Color;
 
 namespace SessionTracker.Controls

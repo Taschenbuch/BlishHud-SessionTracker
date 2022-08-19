@@ -1,4 +1,5 @@
 ﻿using Blish_HUD.Controls;
+using SessionTracker.Settings.Window;
 
 namespace SessionTracker.Settings
 {
@@ -24,7 +25,7 @@ namespace SessionTracker.Settings
 
         private void OnSettingsButtonClick(object sender, Blish_HUD.Input.MouseEventArgs e)
         {
-            _settingsWindowService.ShowWindow();
+            _settingsWindowService.ShowWindowAndSelectStatsTab();
         }
 
         private readonly SettingsWindowService _settingsWindowService;

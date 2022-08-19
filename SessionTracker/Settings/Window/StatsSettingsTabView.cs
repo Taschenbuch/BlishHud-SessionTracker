@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Blish_HUD.Controls;
@@ -10,51 +9,23 @@ using Microsoft.Xna.Framework;
 using SessionTracker.Controls;
 using SessionTracker.Models;
 using SessionTracker.Services;
+using SessionTracker.Settings.SettingEntries;
 
-namespace SessionTracker.Settings
+namespace SessionTracker.Settings.Window
 {
-    public class SettingsWindowView : View
+    public class StatsSettingsTabView : View
     {
-        public SettingsWindowView(Model model, SettingService settingService, TextureService textureService)
+        public StatsSettingsTabView(Model model, SettingService settingService, TextureService textureService)
         {
-            _model            = model;
-            _settingService   = settingService;
-            _textureService   = textureService;
+            _model = model;
+            _settingService = settingService;
+            _textureService = textureService;
         }
 
         protected override void Build(Container buildPanel)
         {
             _rootFlowPanel = ControlFactory.CreateSettingsRootFlowPanel(buildPanel);
-            _scrollbar     = (Scrollbar)buildPanel.Children.FirstOrDefault(c => c is Scrollbar);
-
-            var generalSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("General", _rootFlowPanel);
-            CreatePatchNotesButton(generalSectionFlowPanel);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.LabelTypeSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.UiHeightIsFixedSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.UiHeightSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.BackgroundOpacitySetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.FontSizeIndexSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.StatTitlePaddingSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.TitleLabelColorSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.ValueLabelColorSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.SessionValuesAreVisibleSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.TotalValuesAreVisibleSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.DragWindowWithMouseIsEnabledSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.CornerIconIsVisibleSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.CoinDisplayFormatSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.ScrollbarFixDelay);
-#if DEBUG
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.DebugModeIsEnabledSetting);
-#endif
-            
-            var visibilitySectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("UI Visibility", _rootFlowPanel);
-            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.UiVisibilityKeyBindingSetting);
-            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.UiIsVisibleSetting);
-            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOutsideOfWvwAndSpvpSetting);
-            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleInSpvpSetting);
-            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleInWvwSetting);
-            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOnWorldMapSetting);
-            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting);
+            _scrollbar = (Scrollbar)buildPanel.Children.FirstOrDefault(c => c is Scrollbar);
 
             var trackedStatsSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Tracked Stats", _rootFlowPanel);
 
@@ -71,58 +42,38 @@ namespace SessionTracker.Settings
 
             _entryRowsFlowPanel = new FlowPanel
             {
-                FlowDirection       = ControlFlowDirection.SingleTopToBottom,
+                FlowDirection = ControlFlowDirection.SingleTopToBottom,
                 OuterControlPadding = new Vector2(0, 5),
-                ControlPadding      = new Vector2(0, 5),
-                HeightSizingMode    = SizingMode.AutoSize,
-                WidthSizingMode     = SizingMode.AutoSize,
-                Parent              = trackedStatsSectionFlowPanel
+                ControlPadding = new Vector2(0, 5),
+                HeightSizingMode = SizingMode.AutoSize,
+                WidthSizingMode = SizingMode.AutoSize,
+                Parent = trackedStatsSectionFlowPanel
             };
 
             ShowEntryRows(_model.Entries, _entryRowsFlowPanel);
         }
-
-        private static void CreatePatchNotesButton(Container parent)
-        {
-            var patchNotesButton = new StandardButton
-            {
-                Text             = "Patch notes",
-                BasicTooltipText = "Show patch notes in your default web browser.",
-                Parent           = parent
-            };
-
-            patchNotesButton.Click += (s, e) =>
-            {
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName        = "https://pkgs.blishhud.com/ecksofa.sessiontracker.html",
-                    UseShellExecute = true
-                });
-            };
-        }
-
         private static void ShowHideAndShowAllButtons(Dictionary<string, Checkbox> visibilityCheckBoxByEntryId, FlowPanel entriesFlowPanel)
         {
             var buttonsFlowPanel = new FlowPanel
             {
-                FlowDirection    = ControlFlowDirection.SingleLeftToRight,
-                WidthSizingMode  = SizingMode.AutoSize,
+                FlowDirection = ControlFlowDirection.SingleLeftToRight,
+                WidthSizingMode = SizingMode.AutoSize,
                 HeightSizingMode = SizingMode.AutoSize,
-                Parent           = entriesFlowPanel,
+                Parent = entriesFlowPanel,
             };
 
             var hideAllButton = new StandardButton
             {
-                Text             = "Hide all",
+                Text = "Hide all",
                 BasicTooltipText = "Hide all stats rows in UI.",
-                Parent           = buttonsFlowPanel
+                Parent = buttonsFlowPanel
             };
 
             var showAllButton = new StandardButton
             {
-                Text             = "Show all",
+                Text = "Show all",
                 BasicTooltipText = "Show all stats rows in UI.",
-                Parent           = buttonsFlowPanel
+                Parent = buttonsFlowPanel
             };
 
             hideAllButton.Click += (s, e) =>
@@ -142,10 +93,10 @@ namespace SessionTracker.Settings
         {
             var moveVisibleEntryRowsToTopButton = new StandardButton
             {
-                Text             = "Move visible to top",
+                Text = "Move visible to top",
                 BasicTooltipText = "Move all visible stats to the top for easier hiding or reordering.",
-                Width            = 200,
-                Parent           = entriesFlowPanel
+                Width = 200,
+                Parent = entriesFlowPanel
             };
 
             moveVisibleEntryRowsToTopButton.Click += (s, e) => MoveVisibleEntriesToTop();
@@ -163,60 +114,60 @@ namespace SessionTracker.Settings
         {
             var buttonsFlowPanel = new FlowPanel
             {
-                FlowDirection    = ControlFlowDirection.SingleLeftToRight,
-                WidthSizingMode  = SizingMode.AutoSize,
+                FlowDirection = ControlFlowDirection.SingleLeftToRight,
+                WidthSizingMode = SizingMode.AutoSize,
                 HeightSizingMode = SizingMode.AutoSize,
-                Parent           = entriesFlowPanel,
+                Parent = entriesFlowPanel,
             };
 
             var buttonWidth = 100;
 
             var pvpButton = new StandardButton
             {
-                Text             = "PvP",
+                Text = "PvP",
                 BasicTooltipText = "Click to show pvp related stats.",
-                Width            = buttonWidth,
-                Parent           = buttonsFlowPanel
+                Width = buttonWidth,
+                Parent = buttonsFlowPanel
             };
 
             var wvwButton = new StandardButton
             {
-                Text             = "WvW",
+                Text = "WvW",
                 BasicTooltipText = "Click to show wvw related stats.",
-                Width            = buttonWidth,
-                Parent           = buttonsFlowPanel
+                Width = buttonWidth,
+                Parent = buttonsFlowPanel
             };
 
             var fractalsButton = new StandardButton
             {
-                Text             = "Fractals",
+                Text = "Fractals",
                 BasicTooltipText = "Click to show fractal related stats.",
-                Width            = buttonWidth,
-                Parent           = buttonsFlowPanel
+                Width = buttonWidth,
+                Parent = buttonsFlowPanel
             };
 
             var strikesButton = new StandardButton
             {
-                Text             = "Strikes",
+                Text = "Strikes",
                 BasicTooltipText = "Click to show strike related stats.",
-                Width            = buttonWidth,
-                Parent           = buttonsFlowPanel
+                Width = buttonWidth,
+                Parent = buttonsFlowPanel
             };
 
             var raidsButton = new StandardButton
             {
-                Text             = "Raids",
+                Text = "Raids",
                 BasicTooltipText = "Click to show raid related stats.",
-                Width            = buttonWidth,
-                Parent           = buttonsFlowPanel
+                Width = buttonWidth,
+                Parent = buttonsFlowPanel
             };
 
             var openWorldButton = new StandardButton
             {
-                Text             = "Open World",
+                Text = "Open World",
                 BasicTooltipText = "Click to show some open world related stats.",
-                Width            = buttonWidth,
-                Parent           = buttonsFlowPanel
+                Width = buttonWidth,
+                Parent = buttonsFlowPanel
             };
 
             pvpButton.Click += (s, e) =>
@@ -282,83 +233,83 @@ namespace SessionTracker.Settings
         {
             var entryFlowPanel = new FlowPanel
             {
-                FlowDirection    = ControlFlowDirection.SingleLeftToRight,
-                BackgroundColor  = DetermineBackgroundColor(entry.IsVisible),
-                Width            = 400,
+                FlowDirection = ControlFlowDirection.SingleLeftToRight,
+                BackgroundColor = DetermineBackgroundColor(entry.IsVisible),
+                Width = 400,
                 HeightSizingMode = SizingMode.AutoSize,
-                Parent           = entryRowsFlowPanel
+                Parent = entryRowsFlowPanel
             };
 
             var checkBoxContainer = ControlFactory.CreateAdjustableChildLocationContainer(entryFlowPanel);
 
             var isVisibleCheckbox = new Checkbox
             {
-                Checked          = entry.IsVisible,
+                Checked = entry.IsVisible,
                 BasicTooltipText = SHOW_HIDE_STAT_TOOLTIP,
-                Size             = new Point(16, 16),
-                Location         = new Point(5, 5),
-                Parent           = checkBoxContainer
+                Size = new Point(16, 16),
+                Location = new Point(5, 5),
+                Parent = checkBoxContainer
             };
 
-            _visibilityCheckBoxByEntryId[entry.Id] = (isVisibleCheckbox);
+            _visibilityCheckBoxByEntryId[entry.Id] = isVisibleCheckbox;
 
             var moveEntryUpwardsButton = new GlowButton
             {
-                Icon             = _textureService.MoveUpTexture,
-                ActiveIcon       = _textureService.MoveUpActiveTexture,
+                Icon = _textureService.MoveUpTexture,
+                ActiveIcon = _textureService.MoveUpActiveTexture,
                 BasicTooltipText = "Move up",
-                Size             = new Point(25, 25),
-                Parent           = entryFlowPanel
+                Size = new Point(25, 25),
+                Parent = entryFlowPanel
             };
 
             var moveEntryDownwardsButton = new GlowButton()
             {
-                Icon             = _textureService.MoveDownTexture,
-                ActiveIcon       = _textureService.MoveDownActiveTexture,
+                Icon = _textureService.MoveDownTexture,
+                ActiveIcon = _textureService.MoveDownActiveTexture,
                 BasicTooltipText = "Move down",
-                Size             = new Point(25, 25),
-                Parent           = entryFlowPanel
+                Size = new Point(25, 25),
+                Parent = entryFlowPanel
             };
 
             var clickFlowPanel = new FlowPanel()
             {
-                FlowDirection    = ControlFlowDirection.SingleLeftToRight,
+                FlowDirection = ControlFlowDirection.SingleLeftToRight,
                 HeightSizingMode = SizingMode.Fill,
-                WidthSizingMode  = SizingMode.Fill,
+                WidthSizingMode = SizingMode.Fill,
                 BasicTooltipText = SHOW_HIDE_STAT_TOOLTIP,
-                Parent           = entryFlowPanel
+                Parent = entryFlowPanel
             };
 
             var iconContainer = ControlFactory.CreateAdjustableChildLocationContainer(clickFlowPanel);
             var asyncTexture2D = _textureService.EntryTextureByEntryId[entry.Id];
-            
+
             new Image(asyncTexture2D)
             {
                 BasicTooltipText = entry.LabelTooltip,
-                Size             = new Point(24),
-                Location         = new Point(20, 0),
-                Parent           = iconContainer,
+                Size = new Point(24),
+                Location = new Point(20, 0),
+                Parent = iconContainer,
             };
 
             var labelContainer = ControlFactory.CreateAdjustableChildLocationContainer(clickFlowPanel);
 
             new Label
             {
-                Text             = entry.LabelText,
+                Text = entry.LabelText,
                 BasicTooltipText = entry.LabelTooltip,
-                AutoSizeWidth    = true,
-                AutoSizeHeight   = true,
-                Location         = new Point(5, 3),
-                Parent           = labelContainer
+                AutoSizeWidth = true,
+                AutoSizeHeight = true,
+                Location = new Point(5, 3),
+                Parent = labelContainer
             };
 
             clickFlowPanel.Click += (s, e) => isVisibleCheckbox.Checked = isVisibleCheckbox.Checked == false;
 
             isVisibleCheckbox.CheckedChanged += (s, e) =>
             {
-                entry.IsVisible                = e.Checked;
+                entry.IsVisible = e.Checked;
                 entryFlowPanel.BackgroundColor = DetermineBackgroundColor(e.Checked);
-                _model.UiHasToBeUpdated        = true;
+                _model.UiHasToBeUpdated = true;
             };
 
             moveEntryUpwardsButton.Click += (s, e) =>
