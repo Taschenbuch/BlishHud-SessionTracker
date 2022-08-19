@@ -16,20 +16,28 @@ namespace SessionTracker.Services
             _contentsManager = contentsManager;
             _logger          = logger;
 
-            WindowBackground            = contentsManager.GetTexture("windowBackground_155985.png");
-            MoveDownTexture             = contentsManager.GetTexture("moveDown_155953.png");
-            MoveDownActiveTexture       = contentsManager.GetTexture("moveDownActive_155953.png");
-            MoveUpTexture               = contentsManager.GetTexture("moveUp_155953.png");
-            MoveUpActiveTexture         = contentsManager.GetTexture("moveUpActive_155953.png");
-            EntryIconPlaceholderTexture = contentsManager.GetTexture("entryIconPlaceholder_1444524.png");
-            CornerIconTexture           = contentsManager.GetTexture("cornerIcon.png");
-            CornerIconHoverTexture      = contentsManager.GetTexture("cornerIconHover.png");
+            VisibilityTabTexture        = contentsManager.GetTexture(@"settingsWindow\visibilityTab.png");
+            StatsTabTexture             = contentsManager.GetTexture(@"settingsWindow\statsTab_156909.png");
+            GeneralTabTexture           = contentsManager.GetTexture(@"settingsWindow\generalTab_156736.png");
+            SettingsWindowEmblemTexture = contentsManager.GetTexture(@"settingsWindow\settingsWindowEmblem.png");
+            WindowBackgroundTexture     = contentsManager.GetTexture(@"settingsWindow\windowBackground_155985.png");
+            MoveDownTexture             = contentsManager.GetTexture(@"settingsWindow\moveDown_155953.png");
+            MoveDownActiveTexture       = contentsManager.GetTexture(@"settingsWindow\moveDownActive_155953.png");
+            MoveUpTexture               = contentsManager.GetTexture(@"settingsWindow\moveUp_155953.png");
+            MoveUpActiveTexture         = contentsManager.GetTexture(@"settingsWindow\moveUpActive_155953.png");
+            EntryIconPlaceholderTexture = contentsManager.GetTexture(@"stats\entryIconPlaceholder_1444524.png");
+            CornerIconTexture           = contentsManager.GetTexture(@"cornerIcon.png");
+            CornerIconHoverTexture      = contentsManager.GetTexture(@"cornerIconHover.png");
             CreateEntryTextures(model);
         }
 
         public void Dispose()
         {
-            WindowBackground?.Dispose();
+            VisibilityTabTexture?.Dispose();
+            GeneralTabTexture?.Dispose();
+            StatsTabTexture?.Dispose();
+            SettingsWindowEmblemTexture?.Dispose();
+            WindowBackgroundTexture?.Dispose();
             MoveDownTexture?.Dispose();
             MoveDownActiveTexture?.Dispose();
             MoveUpTexture?.Dispose();
@@ -42,7 +50,11 @@ namespace SessionTracker.Services
                 entryIcon?.Dispose();
         }
 
-        public Texture2D WindowBackground { get; }
+        public Texture2D SettingsWindowEmblemTexture { get; }
+        public Texture2D StatsTabTexture { get; }
+        public Texture2D GeneralTabTexture { get; }
+        public Texture2D VisibilityTabTexture { get; }
+        public Texture2D WindowBackgroundTexture { get; }
         public Texture2D MoveDownTexture { get; }
         public Texture2D MoveDownActiveTexture { get; }
         public Texture2D MoveUpTexture { get; }
@@ -64,7 +76,7 @@ namespace SessionTracker.Services
                     if (entry.HasIconUrl)
                         EntryTextureByEntryId[entry.Id] = GameService.Content.GetRenderServiceTexture(entry.IconUrl);
                     else if (entry.HasIconFile)
-                        EntryTextureByEntryId[entry.Id] = _contentsManager.GetTexture(entry.IconFileName);
+                        EntryTextureByEntryId[entry.Id] = _contentsManager.GetTexture($@"stats\{entry.IconFileName}");
                     else
                     {
                         _logger.Error($"Error: Icon texture missing for entryId: {entry.Id}. Use placeholder icon as fallback.");
