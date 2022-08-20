@@ -11,6 +11,7 @@ namespace SessionTracker.Controls
     {
         public EntryTitleFlowPanel(Entry entry, BitmapFont font, Container parent, TextureService textureService, SettingService settingService)
         {
+            _entry          = entry;
             _parent         = parent;
             _settingService = settingService;
 
@@ -21,10 +22,10 @@ namespace SessionTracker.Controls
 
             var label = new Label()
             {
-                Text             = entry.LabelText,
+                Text             = entry.LabelText.Localized,
                 TextColor        = settingService.TitleLabelColorSetting.Value.GetColor(),
                 Font             = font,
-                BasicTooltipText = entry.LabelTooltip,
+                BasicTooltipText = entry.LabelTooltip.Localized,
                 ShowShadow       = true,
                 AutoSizeHeight   = true,
                 AutoSizeWidth    = true,
@@ -33,7 +34,7 @@ namespace SessionTracker.Controls
             var asyncTexture2D = textureService.EntryTextureByEntryId[entry.Id];
             _image = new Image(asyncTexture2D)
             {
-                BasicTooltipText = entry.LabelTooltip,
+                BasicTooltipText = entry.LabelTooltip.Localized,
                 Size             = new Point(label.Height),
             };
 
@@ -56,6 +57,13 @@ namespace SessionTracker.Controls
             _settingService.FontSizeIndexSetting.SettingChanged    -= OnFontSizeIndexSettingChanged;
             _settingService.TitleLabelColorSetting.SettingChanged  -= OnTitleLabelColorSettingChanged;
             base.DisposeControl();
+        }
+
+        public void UpdateLabelText()
+        {
+            _label.Text             = _entry.LabelText.Localized;
+            _label.BasicTooltipText = _entry.LabelTooltip.Localized;
+            _image.BasicTooltipText = _entry.LabelTooltip.Localized;
         }
 
         public override void Show()
@@ -131,6 +139,7 @@ namespace SessionTracker.Controls
 
         private readonly Image _image;
         private readonly Label _label;
+        private readonly Entry _entry;
         private readonly Container _parent;
         private readonly SettingService _settingService;
         private readonly Label _paddingLabelBetweenIconAndText;

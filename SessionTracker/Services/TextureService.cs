@@ -4,6 +4,7 @@ using System.Linq;
 using Blish_HUD;
 using Blish_HUD.Content;
 using Blish_HUD.Modules.Managers;
+using Gw2Sharp.WebApi;
 using Microsoft.Xna.Framework.Graphics;
 using Model = SessionTracker.Models.Model;
 
@@ -86,7 +87,7 @@ namespace SessionTracker.Services
                 catch (Exception e)
                 {
                     EntryTextureByEntryId[entry.Id] = new AsyncTexture2D(EntryIconPlaceholderTexture);
-                    notFoundTextures.Add(entry.LabelText);
+                    notFoundTextures.Add(entry.LabelText.GetLocalizedText(Locale.English));
                     exception = e;
                 }
             }

@@ -285,7 +285,7 @@ namespace SessionTracker.Settings.Window
 
             new Image(asyncTexture2D)
             {
-                BasicTooltipText = entry.LabelTooltip,
+                BasicTooltipText = entry.LabelTooltip.Localized,
                 Size = new Point(24),
                 Location = new Point(20, 0),
                 Parent = iconContainer,
@@ -295,8 +295,8 @@ namespace SessionTracker.Settings.Window
 
             new Label
             {
-                Text = entry.LabelText,
-                BasicTooltipText = entry.LabelTooltip,
+                Text = entry.LabelText.Localized,
+                BasicTooltipText = entry.LabelTooltip.Localized,
                 AutoSizeWidth = true,
                 AutoSizeHeight = true,
                 Location = new Point(5, 3),

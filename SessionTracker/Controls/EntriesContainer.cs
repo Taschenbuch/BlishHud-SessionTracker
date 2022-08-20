@@ -36,26 +36,21 @@ namespace SessionTracker.Controls
             _summaryTooltipService = new SummaryTooltipService(_valueLabelByEntryId);
             OnDebugModeIsEnabledSettingChanged(null, null);
 
-            settingService.FontSizeIndexSetting.SettingChanged           += OnFontSizeIndexSettingChanged;
-            settingService.BackgroundOpacitySetting.SettingChanged       += OnBackgroundOpacitySettingChanged;
-            settingService.ValueLabelColorSetting.SettingChanged         += OnValueLabelColorSettingChanged;
-            settingService.DebugModeIsEnabledSetting.SettingChanged      += OnDebugModeIsEnabledSettingChanged;
+            settingService.FontSizeIndexSetting.SettingChanged      += OnFontSizeIndexSettingChanged;
+            settingService.BackgroundOpacitySetting.SettingChanged  += OnBackgroundOpacitySettingChanged;
+            settingService.ValueLabelColorSetting.SettingChanged    += OnValueLabelColorSettingChanged;
+            settingService.DebugModeIsEnabledSetting.SettingChanged += OnDebugModeIsEnabledSettingChanged;
+            GameService.Overlay.UserLocaleChanged                   += OnUserChangedLanguageInBlishSettings;
         }
-
-        private void OnDebugModeIsEnabledSettingChanged(object sender, ValueChangedEventArgs<bool> e)
-        {
-            _updateIntervalInMilliseconds = _settingService.DebugModeIsEnabledSetting.Value
-                ? DEBUG_UPDATE_INTERVAL_IN_MILLISECONDS
-                : REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS;
-        }
-
+        
         protected override void DisposeControl()
         {
             _valueLabelTextService.Dispose();
-            _settingService.FontSizeIndexSetting.SettingChanged           -= OnFontSizeIndexSettingChanged;
-            _settingService.BackgroundOpacitySetting.SettingChanged       -= OnBackgroundOpacitySettingChanged;
-            _settingService.ValueLabelColorSetting.SettingChanged         -= OnValueLabelColorSettingChanged;
-            _settingService.DebugModeIsEnabledSetting.SettingChanged      -= OnDebugModeIsEnabledSettingChanged;
+            _settingService.FontSizeIndexSetting.SettingChanged      -= OnFontSizeIndexSettingChanged;
+            _settingService.BackgroundOpacitySetting.SettingChanged  -= OnBackgroundOpacitySettingChanged;
+            _settingService.ValueLabelColorSetting.SettingChanged    -= OnValueLabelColorSettingChanged;
+            _settingService.DebugModeIsEnabledSetting.SettingChanged -= OnDebugModeIsEnabledSettingChanged;
+            GameService.Overlay.UserLocaleChanged                    -= OnUserChangedLanguageInBlishSettings;
 
             base.DisposeControl();
         }
@@ -270,6 +265,19 @@ namespace SessionTracker.Controls
             }
 
             _rootFlowPanel.HideScrollbarIfExists();
+        }
+
+        private void OnUserChangedLanguageInBlishSettings(object sender, ValueEventArgs<System.Globalization.CultureInfo> e)
+        {
+            foreach (var titleFlowPanel in _titleFlowPanelByEntryId)
+                titleFlowPanel.Value.UpdateLabelText();
+        }
+
+        private void OnDebugModeIsEnabledSettingChanged(object sender, ValueChangedEventArgs<bool> e)
+        {
+            _updateIntervalInMilliseconds = _settingService.DebugModeIsEnabledSetting.Value
+                ? DEBUG_UPDATE_INTERVAL_IN_MILLISECONDS
+                : REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS;
         }
 
         private void OnValueLabelColorSettingChanged(object sender, ValueChangedEventArgs<ColorType> e)

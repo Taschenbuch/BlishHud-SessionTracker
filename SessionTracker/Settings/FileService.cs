@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Blish_HUD;
 using Blish_HUD.Modules.Managers;
+using Gw2Sharp.WebApi;
 using Newtonsoft.Json;
 using SessionTracker.Models;
 
@@ -13,7 +14,7 @@ namespace SessionTracker.Settings
         public FileService(DirectoriesManager directoriesManager, ContentsManager contentsManager, Logger logger)
         {
             _contentsManager = contentsManager;
-            _logger = logger;
+            _logger          = logger;
             var moduleFolderPath = directoriesManager.GetFullDirectoryPath(MODULE_FOLDER_NAME);
             _modelFilePath = Path.Combine(moduleFolderPath, MODEL_FILE_NAME);
         }
@@ -39,13 +40,13 @@ namespace SessionTracker.Settings
             var noModuleFolderModelExists = File.Exists(_modelFilePath) == false;
             if (noModuleFolderModelExists)
                 return refFolderModel;
-                
+
             var moduleFolderModel = await LoadModelFromModuleFolder(_modelFilePath, _logger);
             moduleFolderModel = MigrationService.MigratePersistedModelIfNecessary(moduleFolderModel, refFolderModel, _logger);
-            
+
             return moduleFolderModel;
         }
-       
+
         private static async Task<Model> LoadModelFromModuleFolder(string modelFilePath, Logger logger)
         {
             try
@@ -89,12 +90,17 @@ namespace SessionTracker.Settings
         private readonly ContentsManager _contentsManager;
         private readonly Logger _logger;
 
-        private static readonly Model MODEL_WITH_ERROR_ENTRY = new Model() 
+        private static Model MODEL_WITH_ERROR_ENTRY
         {
-            Entries =
+            get
             {
-                new Entry(){LabelText = "Failed to load model from file"}
+                var dummyEntry = new Entry();
+                dummyEntry.LabelText.SetLocalizedText("Failed to load model from file", Locale.English);
+
+                return new Model {
+                    Entries = { dummyEntry }
+                };
             }
-        };
+        }
     }
 }

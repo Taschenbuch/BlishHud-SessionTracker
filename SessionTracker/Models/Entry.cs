@@ -6,9 +6,9 @@ namespace SessionTracker.Models
     public class Entry
     {
         public string Id { get; set; } = string.Empty;
-        public string LabelText { get; set; } = string.Empty;
-        public string LabelTooltip { get; set; } = string.Empty;
-        public string PlaceholderInTooltip { get; set; } = string.Empty;
+        public LocalizedText LabelText { get; } = new LocalizedText();
+        public LocalizedText LabelTooltip { get; } = new LocalizedText();
+        public LocalizedText PlaceholderInTooltip { get; } = new LocalizedText();
         public int AchievementId { get; set; }
         public int CurrencyId { get; set; }
         public string IconUrl { get; set; }
