@@ -18,8 +18,11 @@ namespace SessionTracker.Models
 
         private string GetLocalizedText(Locale locale)
         {
-            return LocalizedTextByLocale.ContainsKey(locale) 
-                ? LocalizedTextByLocale[locale] 
+            var localizationExists = LocalizedTextByLocale.ContainsKey(locale) 
+                                     && string.IsNullOrWhiteSpace(LocalizedTextByLocale[locale]) == false;
+            
+            return localizationExists
+                ? LocalizedTextByLocale[locale]
                 : LocalizedTextByLocale[Locale.English];
         }
 
