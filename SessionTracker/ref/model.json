@@ -14,10 +14,10 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Deaths\nCombined deaths from all sources like WvW, sPvP, PvE",
-          "German": "Tode",
-          "French": "Morts",
-          "Spanish": "Muertes"
+          "English": "Deaths\nCombined deaths from all sources (WvW, sPvP, PvE)",
+          "German": "Tode\nAufsummierte Tode aus allen Quellen (WvW, sPvP, PvE)",
+          "French": "Morts\nNombre total de morts venant de toutes les sources (JcE, JcJ, McM)",
+          "Spanish": "Muertes\nNúmero total de muertes de todas las fuentes (McM, JcJ, JcE)"
         }
       },
       "AchievementId": 0,
@@ -32,16 +32,16 @@
         "LocalizedTextByLocale": {
           "English": "PvP kills",
           "German": "PvP Feinde besiegt",
-          "French": "JcJ victimes",
-          "Spanish": "PvP eliminados"
+          "French": "Victimes JcJ",
+          "Spanish": "PvP bajas"
         }
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "PvP kills",
           "German": "PvP Feinde besiegt",
-          "French": "JcJ victimes",
-          "Spanish": "PvP eliminados"
+          "French": "Victimes JcJ",
+          "Spanish": "PvP bajas"
         }
       },
       "AchievementId": 239,
@@ -54,18 +54,18 @@
       "Id": "pvp kdr",
       "LabelText": {
         "LocalizedTextByLocale": {
-          "English": "PvP k/d",
-          "German": "PvP b/t",
-          "French": "JcJ v/m",
-          "Spanish": "PvP e/m"
+          "English": "PvP KDR",
+          "German": "PvP KDR",
+          "French": "KDR JcJ",
+          "Spanish": "PvP B/M"
         }
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "PvP kills/deaths ratio",
-          "German": "PvP b/t",
-          "French": "JcJ v/m",
-          "Spanish": "PvP e/m"
+          "German": "PvP Verhältnis besiegte Feinde/Tode",
+          "French": "Ratio Victimes/Morts JcJ",
+          "Spanish": "PvP Ratio de Bajas/Muertes"
         }
       },
       "AchievementId": 0,
@@ -80,16 +80,16 @@
         "LocalizedTextByLocale": {
           "English": "PvP total wins",
           "German": "PvP gesamt gewonnen",
-          "French": "JcJ total remporte",
-          "Spanish": "PvP total victorias"
+          "French": "Victoires JcJ",
+          "Spanish": "PvP Victorias totales"
         }
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "PvP total wins",
           "German": "PvP gesamt gewonnen",
-          "French": "JcJ total remporte",
-          "Spanish": "PvP total victorias"
+          "French": "Victoires JcJ",
+          "Spanish": "PvP Victorias totales"
         }
       },
       "AchievementId": 0,
@@ -104,16 +104,16 @@
         "LocalizedTextByLocale": {
           "English": "PvP total losses",
           "German": "PvP gesamt verloren",
-          "French": "JcJ total pertes",
-          "Spanish": "PvP total perdido"
+          "French": "Défaites JcJ",
+          "Spanish": "PvP Derrotas totales"
         }
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "PvP total losses",
           "German": "PvP gesamt verloren",
-          "French": "JcJ total pertes",
-          "Spanish": "PvP total perdido"
+          "French": "Défaites JcJ",
+          "Spanish": "PvP Derrotas totales"
         }
       },
       "AchievementId": 0,
@@ -128,16 +128,16 @@
         "LocalizedTextByLocale": {
           "English": "PvP ranked wins",
           "German": "PvP mit rangwertung gewonnen",
-          "French": "JcJ classée remporte",
-          "Spanish": "PvP clasificatoria victorias"
+          "French": "Victoires JcJ classées",
+          "Spanish": "PvP Victorias en clasificatorias"
         }
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "PvP ranked wins",
           "German": "PvP mit rangwertung gewonnen",
-          "French": "JcJ classée remporte",
-          "Spanish": "PvP clasificatoria victorias"
+          "French": "Victoires JcJ classées",
+          "Spanish": "PvP Victorias en clasificatorias"
         }
       },
       "AchievementId": 0,
@@ -152,16 +152,16 @@
         "LocalizedTextByLocale": {
           "English": "PvP ranked losses",
           "German": "PvP mit rangwertung verloren",
-          "French": "JcJ classée pertes",
-          "Spanish": "PvP clasificatoria perdido"
+          "French": "Défaites JcJ classées",
+          "Spanish": "PvP Derrotas en clasificatorias"
         }
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "PvP ranked losses",
           "German": "PvP mit rangwertung verloren",
-          "French": "JcJ classée pertes",
-          "Spanish": "PvP clasificatoria perdido"
+          "French": "Défaites JcJ classées",
+          "Spanish": "PvP Derrotas en clasificatorias"
         }
       },
       "AchievementId": 0,
@@ -176,16 +176,16 @@
         "LocalizedTextByLocale": {
           "English": "PvP unranked wins",
           "German": "PvP ohne rangwertung gewonnen",
-          "French": "JcJ non classée remporte",
-          "Spanish": "PvP libre victorias"
+          "French": "Victoires JcJ non classées",
+          "Spanish": "PvP Victorias en libres"
         }
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "PvP unranked wins",
           "German": "PvP ohne rangwertung gewonnen",
-          "French": "JcJ non classée remporte",
-          "Spanish": "PvP libre victorias"
+          "French": "Victoires JcJ non classées",
+          "Spanish": "PvP Victorias en libres"
         }
       },
       "AchievementId": 0,
@@ -200,16 +200,16 @@
         "LocalizedTextByLocale": {
           "English": "PvP unranked losses",
           "German": "PvP ohne rangwertung verloren",
-          "French": "JcJ non classée pertes",
-          "Spanish": "PvP libre perdido"
+          "French": "Défaites JcJ non classées",
+          "Spanish": "PvP Derrotas en libres"
         }
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "PvP unranked losses",
           "German": "PvP ohne rangwertung verloren",
-          "French": "JcJ non classée pertes",
-          "Spanish": "PvP libre perdido"
+          "French": "Défaites JcJ non classées",
+          "Spanish": "PvP Derrotas en libres"
         }
       },
       "AchievementId": 0,
@@ -224,16 +224,16 @@
         "LocalizedTextByLocale": {
           "English": "PvP custom wins",
           "German": "Pvp selbsterstellt gewonnen",
-          "French": "JcJ personnalisées remporte",
-          "Spanish": "PvP personalizadas victorias"
+          "French": "Victoires JcJ personnalisé",
+          "Spanish": "PvP Victorias en personalidadas"
         }
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "PvP custom wins",
           "German": "Pvp selbsterstellt gewonnen",
-          "French": "JcJ personnalisées remporte",
-          "Spanish": "PvP personalizadas victorias"
+          "French": "Victoires JcJ personnalisé",
+          "Spanish": "PvP Victorias en personalidadas"
         }
       },
       "AchievementId": 0,
@@ -248,16 +248,16 @@
         "LocalizedTextByLocale": {
           "English": "PvP custom losses",
           "German": "PvP selbsterstellt verloren",
-          "French": "JcJ personnalisées pertes",
-          "Spanish": "PvP personalizadas perdido"
+          "French": "Défaites JcJ personnalisé",
+          "Spanish": "PvP Derrotas en personalidadas"
         }
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "PvP custom losses",
           "German": "PvP selbsterstellt verloren",
-          "French": "JcJ personnalisées pertes",
-          "Spanish": "PvP personalizadas perdido"
+          "French": "Défaites JcJ personnalisé",
+          "Spanish": "PvP Derrotas en personalidadas"
         }
       },
       "AchievementId": 0,
@@ -272,16 +272,16 @@
         "LocalizedTextByLocale": {
           "English": "PvP rank",
           "German": "PvP rang",
-          "French": "JcJ rang",
-          "Spanish": "PvP rango"
+          "French": "Rang JcJ",
+          "Spanish": "PvP Rango"
         }
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "PvP rank",
           "German": "PvP rang",
-          "French": "JcJ rang",
-          "Spanish": "PvP rango"
+          "French": "Rang JcJ",
+          "Spanish": "PvP Rango"
         }
       },
       "AchievementId": 0,
@@ -296,16 +296,16 @@
         "LocalizedTextByLocale": {
           "English": "PvP ranking points",
           "German": "PvP rang punkte",
-          "French": "JcJ points de classement",
-          "Spanish": "PvP puntos de clasificación"
+          "French": "Points de classement JcJ",
+          "Spanish": "PvP Puntos de clasificación"
         }
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "PvP ranking points",
           "German": "PvP rang punkte",
-          "French": "JcJ points de classement",
-          "Spanish": "PvP puntos de clasificación"
+          "French": "Points de classement JcJ",
+          "Spanish": "PvP Puntos de clasificación"
         }
       },
       "AchievementId": 0,
@@ -320,16 +320,16 @@
         "LocalizedTextByLocale": {
           "English": "WvW kills",
           "German": "WvW Feinde besiegt",
-          "French": "McM victimes",
-          "Spanish": "McM eliminados"
+          "French": "Victimes McM",
+          "Spanish": "McM Bajas"
         }
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "WvW kills",
           "German": "WvW Feinde besiegt",
-          "French": "McM victimes",
-          "Spanish": "McM eliminados"
+          "French": "Victimes McM",
+          "Spanish": "McM Bajas"
         }
       },
       "AchievementId": 283,
@@ -342,18 +342,18 @@
       "Id": "wvw kdr",
       "LabelText": {
         "LocalizedTextByLocale": {
-          "English": "WvW k/d",
-          "German": "WvW b/t",
-          "French": "McM v/m",
-          "Spanish": "McM e/m"
+          "English": "WvW KDR",
+          "German": "WvW KDR",
+          "French": "KDR McM",
+          "Spanish": "McM B/M"
         }
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "WvW kills/deaths ratio",
-          "German": "WvW b/t",
-          "French": "McM v/m",
-          "Spanish": "McM e/m"
+          "German": "WvW Verhältnis besiegte Feinde/Tode",
+          "French": "Ratio Victimes/Morts en McM",
+          "Spanish": "McM Ratio de Bajas/Muertes"
         }
       },
       "AchievementId": 0,
@@ -368,16 +368,16 @@
         "LocalizedTextByLocale": {
           "English": "WvW rank",
           "German": "WvW rang",
-          "French": "McM rang",
-          "Spanish": "McM rango"
+          "French": "Rang McM",
+          "Spanish": "McM Rango"
         }
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "WvW rank",
           "German": "WvW rang",
-          "French": "McM rang",
-          "Spanish": "McM rango"
+          "French": "Rang McM",
+          "Spanish": "McM Rango"
         }
       },
       "AchievementId": 0,
@@ -392,16 +392,16 @@
         "LocalizedTextByLocale": {
           "English": "Supply (repair)",
           "German": "Vorräte (reparieren)",
-          "French": "Ravitaillement (réparation)",
+          "French": "Ravitaillement (réparations)",
           "Spanish": "Suministros (reparaciones)"
         }
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "Supply spent on repairs",
-          "German": "Vorräte (reparieren)",
-          "French": "Ravitaillement (réparation)",
-          "Spanish": "Suministros (reparaciones)"
+          "German": "Durch Reparieren verbrauchte Vorräte",
+          "French": "Quantité de ravitaillement utilisé pour les réparations",
+          "Spanish": "Suministros gastados en reparaciones"
         }
       },
       "AchievementId": 306,
@@ -416,7 +416,7 @@
         "LocalizedTextByLocale": {
           "English": "Dolyaks killed",
           "German": "Karawane besiegt",
-          "French": "Caravane tuée",
+          "French": "Caravanes tuées",
           "Spanish": "Caravanas asesinadas"
         }
       },
@@ -424,7 +424,7 @@
         "LocalizedTextByLocale": {
           "English": "Dolyaks killed",
           "German": "Karawane besiegt",
-          "French": "Caravane tuée",
+          "French": "Caravanes tuées",
           "Spanish": "Caravanas asesinadas"
         }
       },
@@ -440,7 +440,7 @@
         "LocalizedTextByLocale": {
           "English": "Dolyaks escorted",
           "German": "Karawane verteidgt",
-          "French": "Caravane escortée",
+          "French": "Caravanes escortées",
           "Spanish": "Caravanas escoltadas"
         }
       },
@@ -448,7 +448,7 @@
         "LocalizedTextByLocale": {
           "English": "Dolyaks escorted",
           "German": "Karawane verteidgt",
-          "French": "Caravane escortée",
+          "French": "Caravanes escortées",
           "Spanish": "Caravanas escoltadas"
         }
       },
@@ -560,7 +560,7 @@
         "LocalizedTextByLocale": {
           "English": "Keeps captured",
           "German": "Festungen erobert",
-          "French": "Fort capturé",
+          "French": "Forts capturés",
           "Spanish": "Fortalezas capturadas"
         }
       },
@@ -568,7 +568,7 @@
         "LocalizedTextByLocale": {
           "English": "Keeps captured",
           "German": "Festungen erobert",
-          "French": "Fort capturé",
+          "French": "Forts capturés",
           "Spanish": "Fortalezas capturadas"
         }
       },
@@ -584,7 +584,7 @@
         "LocalizedTextByLocale": {
           "English": "Keeps defended",
           "German": "Festungen verteidgt",
-          "French": "Fort défendu",
+          "French": "Forts défendus",
           "Spanish": "Fortalezas defendidas"
         }
       },
@@ -592,7 +592,7 @@
         "LocalizedTextByLocale": {
           "English": "Keeps defended",
           "German": "Festungen verteidgt",
-          "French": "Fort défendu",
+          "French": "Forts défendus",
           "Spanish": "Fortalezas defendidas"
         }
       },
@@ -657,7 +657,7 @@
           "English": "Objectives captured",
           "German": "Objekte erobert",
           "French": "Objectifs capturés",
-          "Spanish": "Objetivos captados"
+          "Spanish": "Objetivos capturados"
         }
       },
       "LabelTooltip": {
@@ -665,7 +665,7 @@
           "English": "Objectives captured",
           "German": "Objekte erobert",
           "French": "Objectifs capturés",
-          "Spanish": "Objetivos captados"
+          "Spanish": "Objetivos capturados"
         }
       },
       "AchievementId": 303,
