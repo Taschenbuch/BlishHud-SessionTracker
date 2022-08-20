@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using Blish_HUD;
 using Blish_HUD.Controls;
-using Blish_HUD.Settings;
 using SessionTracker.Models;
 using SessionTracker.Settings.SettingEntries;
 
@@ -37,7 +35,7 @@ namespace SessionTracker.Services
         {
             foreach (var entry in _model.Entries)
             {
-                if (entry.CurrencyId == CurrencyIds.GOLD_IN_COPPER)
+                if (entry.CurrencyId == CurrencyIds.COIN_IN_COPPER)
                 {
                     var sessionCoinText = ValueTextService.CreateCoinValueText(entry.Value.Session, _settingService.CoinDisplayFormatSetting.Value);
                     var totalCoinText   = ValueTextService.CreateCoinValueText(entry.Value.Total, _settingService.CoinDisplayFormatSetting.Value);
@@ -64,8 +62,8 @@ namespace SessionTracker.Services
                 }
                 else
                 {
-                    var sessionValueText = entry.Value.Session.ToString("N0", CultureInfo.CurrentUICulture);
-                    var totalValueText   = entry.Value.Total.ToString("N0", CultureInfo.CurrentUICulture);
+                    var sessionValueText = entry.Value.Session.IntToCulturedString();
+                    var totalValueText   = entry.Value.Total.IntToCulturedString();
 
                     _valueLabelByEntryId[entry.Id].Text = ValueTextService.CreateSessionAndTotalValueText(
                         sessionValueText,

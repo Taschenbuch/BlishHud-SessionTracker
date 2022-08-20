@@ -5,7 +5,7 @@ namespace SessionTracker.Models
 {
     public class CurrencyIds
     {
-        public const int GOLD_IN_COPPER = 1;
+        public const int COIN_IN_COPPER = 1;
 
         public static readonly ReadOnlyCollection<int> Pvp = new List<int>
         {

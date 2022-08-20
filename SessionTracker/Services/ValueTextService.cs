@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using Blish_HUD;
 using SessionTracker.Settings.SettingEntries;
 
 namespace SessionTracker.Services
@@ -13,7 +12,7 @@ namespace SessionTracker.Services
                 ? 0.00
                 : (double)kills / deaths;
 
-            return killsDeathsRatio.ToString("N2", CultureInfo.CurrentUICulture);
+            return killsDeathsRatio.DoubleToCulturedStringWith2DecimalPlaces();
         }
 
         public static string CreateSessionAndTotalValueText(string sessionValueText, string totalValueText, bool sessionValuesAreVisible, bool totalValuesAreVisible)
@@ -41,10 +40,10 @@ namespace SessionTracker.Services
             var silver = (unsignedValueInCopper - gold * 10000) / 100;
             var copper = unsignedValueInCopper % 100;
 
-            var goldText         = gold.ToString("N0", CultureInfo.CurrentUICulture);
+            var goldText         = gold.IntToCulturedString();
             var silverInTens     = silver / 10;
             var silver2DigitText = silver.ToString("00", CultureInfo.CurrentUICulture);
-            var allInCopperText  = unsignedValueInCopper.ToString("N0", CultureInfo.CurrentUICulture);
+            var allInCopperText  = unsignedValueInCopper.IntToCulturedString();
 
             switch (coinDisplayFormat)
             {

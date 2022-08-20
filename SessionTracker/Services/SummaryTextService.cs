@@ -2,49 +2,70 @@
 using System.Collections.Generic;
 using System.Linq;
 using SessionTracker.Models;
+using SessionTracker.Settings.SettingEntries;
 
 namespace SessionTracker.Services
 {
     public class SummaryTextService
     {
+        public SummaryTextService(SettingService settingService)
+        {
+            _settingService = settingService;
+        }
+
         public string ResetAndReturnSummaryText(Entry entry)
         {
             entry.SessionHistory.Clear();
-            InsertNewHistoryEntryAtBeginning(0, entry.SessionHistory);
+            InsertNewHistoryEntryAtBeginning(entry);
 
             _startTime = DateTime.Now;
-            return CreateSummaryText(entry, 0, new TimeSpan(0));
+            return CreateSummaryText(entry, new TimeSpan(0));
         }
 
         public string UpdateAndReturnSummaryText(Entry entry)
         {
-            InsertNewHistoryEntryAtBeginning(entry.Value.Session, entry.SessionHistory);
+            InsertNewHistoryEntryAtBeginning(entry);
 
             if (HistoryIsTooLong(entry.SessionHistory.Count))
                 RemoveOldestHistoryEntry(entry.SessionHistory);
 
             var sessionDuration = DateTime.Now - _startTime;
+
+            return CreateSummaryText(entry, sessionDuration);
+        }
+
+        private string CreateSessionValuePerHourText(Entry entry, TimeSpan sessionDuration)
+        {
             var sessionValuePerHour = sessionDuration.TotalHours == 0
                 ? 0
                 : entry.Value.Session / sessionDuration.TotalHours;
 
-            return CreateSummaryText(entry, sessionValuePerHour, sessionDuration);
+            return entry.CurrencyId == CurrencyIds.COIN_IN_COPPER
+                ? ValueTextService.CreateCoinValueText((int)sessionValuePerHour, _settingService.CoinDisplayFormatSetting.Value)
+                : sessionValuePerHour.DoubleToCulturedStringWith1DecimalPlace();
         }
 
-        private string CreateSummaryText(Entry entry, double sessionValuePerHour, TimeSpan sessionDuration)
+        private string CreateSummaryText(Entry entry, TimeSpan sessionDuration)
         {
+            var sessionValuePerHourText = CreateSessionValuePerHourText(entry, sessionDuration);
+
             return $"== TOTAL ==\n" +
-                   $"{entry.Value.Total} {entry.LabelText.Localized}\n" +
-                   $"\n== CURRENT SESSION ==\n" +
-                   $"{sessionValuePerHour:0} {entry.LabelText.Localized}/hour\n" +
-                   $"{sessionDuration:hh':'mm} hour : minute\n\n" +
-                   $"time | {entry.LabelText.Localized}\n" +
+                   $"{entry.Value.Total.IntToCulturedString()} {entry.LabelText.Localized}\n" +
+                   $"\n== CURRENT SESSION ==\n" + // todo übersetzen oder lassen?
+                   $"{sessionValuePerHourText} {entry.LabelText.Localized}/hour\n" +
+                   $"{sessionDuration:hh':'mm} hour : minute\n" + // todo  hour : minute
+                   $"\n" +
+                   $"time | {entry.LabelText.Localized}\n" + // todo time
                    $"{string.Join("\n", entry.SessionHistory)}";
         }
 
-        private static void InsertNewHistoryEntryAtBeginning(int sessionValue, List<string> historyEntries)
+        private void InsertNewHistoryEntryAtBeginning(Entry entry)
         {
-            historyEntries.Insert(0, $"{DateTime.Now:HH:mm} | {sessionValue}");
+            var sessionValueText = entry.CurrencyId == CurrencyIds.COIN_IN_COPPER
+                ? ValueTextService.CreateCoinValueText(entry.Value.Session, _settingService.CoinDisplayFormatSetting.Value)
+                : entry.Value.Session.IntToCulturedString();
+
+            entry.SessionHistory.Insert(0, $"{DateTime.Now:HH:mm} | {sessionValueText}");
         }
 
         private static bool HistoryIsTooLong(int entriesCount)
@@ -58,6 +79,7 @@ namespace SessionTracker.Services
         }
 
         private DateTime _startTime;
+        private readonly SettingService _settingService;
         private const int MAX_NUMBER_OF_ENTRIES = 12;
     }
 }
