@@ -353,7 +353,7 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Supply camps captured"
+          "English": "Camps captured"
         }
       },
       "AchievementId": 291,
@@ -371,7 +371,7 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Supply camps defended"
+          "English": "Camps defended"
         }
       },
       "AchievementId": 310,
@@ -461,7 +461,7 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Stonemist castles captured"
+          "English": "Castles captured"
         }
       },
       "AchievementId": 294,
@@ -479,7 +479,7 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Stonemist castles defended"
+          "English": "Castles defended"
         }
       },
       "AchievementId": 313,

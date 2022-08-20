@@ -10,17 +10,17 @@ namespace SessionTracker.JsonFileCreator
 {
     public class CurrencyService
     {
-        public static async Task<List<Entry>> CreateCurrencyEntries()
+        public static async Task<List<Entry>> CreateCurrencyStats()
         {
             var entries = new List<Entry>();
 
-            await CreateEntries(entries);
+            await CreateStats(entries);
             await AddLocalizedTexts(entries);
 
             return entries;
         }
 
-        private static async Task CreateEntries(List<Entry> entries)
+        private static async Task CreateStats(List<Entry> entries)
         {
             using (var client = new Gw2Client(new Connection(Locale.English)))
             {
