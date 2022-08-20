@@ -14,11 +14,6 @@
           "English": "Deaths\nCombined deaths from all sources like WvW, sPvP, PvE"
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "deaths"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 0,
       "IconUrl": null,
@@ -35,11 +30,6 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "PvP kills"
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "kills"
         }
       },
       "AchievementId": 239,
@@ -60,11 +50,6 @@
           "English": "PvP kills/deaths ratio"
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "kills/death"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 0,
       "IconUrl": null,
@@ -81,11 +66,6 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "PvP total wins"
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "total wins"
         }
       },
       "AchievementId": 0,
@@ -106,11 +86,6 @@
           "English": "PvP total losses"
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "total losses"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 0,
       "IconUrl": null,
@@ -127,11 +102,6 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "PvP ranked wins"
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "ranked wins"
         }
       },
       "AchievementId": 0,
@@ -152,11 +122,6 @@
           "English": "PvP ranked losses"
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "ranked losses"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 0,
       "IconUrl": null,
@@ -173,11 +138,6 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "PvP unranked wins"
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "unranked wins"
         }
       },
       "AchievementId": 0,
@@ -198,11 +158,6 @@
           "English": "PvP unranked losses"
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "unranked losses"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 0,
       "IconUrl": null,
@@ -219,11 +174,6 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "PvP custom wins"
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "custom wins"
         }
       },
       "AchievementId": 0,
@@ -244,11 +194,6 @@
           "English": "PvP custom losses"
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "custom losses"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 0,
       "IconUrl": null,
@@ -265,11 +210,6 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "PvP rank"
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "ranks"
         }
       },
       "AchievementId": 0,
@@ -290,11 +230,6 @@
           "English": "PvP ranking points"
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "ranking points"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 0,
       "IconUrl": null,
@@ -311,11 +246,6 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "WvW kills"
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "kills"
         }
       },
       "AchievementId": 283,
@@ -336,11 +266,6 @@
           "English": "WvW kills/deaths ratio"
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "kills/death"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 0,
       "IconUrl": null,
@@ -357,11 +282,6 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "WvW rank"
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "ranks"
         }
       },
       "AchievementId": 0,
@@ -382,11 +302,6 @@
           "English": "Supply spent on repairs"
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "supplies"
-        }
-      },
       "AchievementId": 306,
       "CurrencyId": 0,
       "IconUrl": null,
@@ -403,11 +318,6 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "Dolyaks killed"
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "dolyaks"
         }
       },
       "AchievementId": 288,
@@ -428,11 +338,6 @@
           "English": "Dolyaks escorted"
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "dolyaks"
-        }
-      },
       "AchievementId": 285,
       "CurrencyId": 0,
       "IconUrl": null,
@@ -449,11 +354,6 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "Supply camps captured"
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "camps"
         }
       },
       "AchievementId": 291,
@@ -474,11 +374,6 @@
           "English": "Supply camps defended"
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "camps"
-        }
-      },
       "AchievementId": 310,
       "CurrencyId": 0,
       "IconUrl": null,
@@ -495,11 +390,6 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "Towers captured"
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "towers"
         }
       },
       "AchievementId": 297,
@@ -520,11 +410,6 @@
           "English": "Towers defended"
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "towers"
-        }
-      },
       "AchievementId": 322,
       "CurrencyId": 0,
       "IconUrl": null,
@@ -541,11 +426,6 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "Keeps captured"
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "keeps"
         }
       },
       "AchievementId": 300,
@@ -566,11 +446,6 @@
           "English": "Keeps defended"
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "keeps"
-        }
-      },
       "AchievementId": 316,
       "CurrencyId": 0,
       "IconUrl": null,
@@ -587,11 +462,6 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "Stonemist castles captured"
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "castles"
         }
       },
       "AchievementId": 294,
@@ -612,11 +482,6 @@
           "English": "Stonemist castles defended"
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "castles"
-        }
-      },
       "AchievementId": 313,
       "CurrencyId": 0,
       "IconUrl": null,
@@ -635,11 +500,6 @@
           "English": "Objectives captured"
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "objectives"
-        }
-      },
       "AchievementId": 303,
       "CurrencyId": 0,
       "IconUrl": null,
@@ -656,11 +516,6 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {
           "English": "Objectives defended"
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "objectives"
         }
       },
       "AchievementId": 319,
@@ -691,16 +546,6 @@
           "Korean": "Coin\nThe primary currency of Tyria. Spent at vendors throughout the world."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Coin",
-          "French": "Pièce",
-          "German": "Münze",
-          "Spanish": "Moneda",
-          "Chinese": "钱币",
-          "Korean": "Coin"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 1,
       "IconUrl": "https://render.guildwars2.com/file/98457F504BA2FAC8457F532C4B30EDC23929ACF9/619316.png",
@@ -727,16 +572,6 @@
           "Spanish": "Karma\nSe puede conseguir a través de varias actividades. Se pueden gastar con los comerciantes del mundo.",
           "Chinese": "业力\n从各种活动获得。可在全世界的商人那里使用。",
           "Korean": "Karma\nEarned through various activities. Spent at vendors throughout the world."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Karma",
-          "French": "Karma",
-          "German": "Karma",
-          "Spanish": "Karma",
-          "Chinese": "业力",
-          "Korean": "Karma"
         }
       },
       "AchievementId": 0,
@@ -767,16 +602,6 @@
           "Korean": "Laurel\nEarned through the Log-in Reward Chest. Spent in major cities. Used to purchase various rewards."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Laurel",
-          "French": "Laurier",
-          "German": "Lorbeer",
-          "Spanish": "Laurel",
-          "Chinese": "桂冠",
-          "Korean": "Laurel"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 3,
       "IconUrl": "https://render.guildwars2.com/file/A1BD345AD9192C3A585BE2F6CB0617C5A797A1E2/619317.png",
@@ -803,16 +628,6 @@
           "Spanish": "Gema\nSe pueden comprar y gastar a través de la Compañía de Comercio del León Negro.",
           "Chinese": "宝石\n从黑狮交易商会购得或使用。",
           "Korean": "Gem\nPurchased and spent via the Black Lion Trading Company."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Gem",
-          "French": "Gemme",
-          "German": "Edelstein",
-          "Spanish": "Gema",
-          "Chinese": "宝石",
-          "Korean": "Gem"
         }
       },
       "AchievementId": 0,
@@ -843,16 +658,6 @@
           "Korean": "Ascalonian Tear\nEarned in Ascalonian Catacombs. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Ascalon\" component used in creating legendary weapons."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Ascalonian Tear",
-          "French": "Larme ascalonienne",
-          "German": "Ascalonische Träne",
-          "Spanish": "Lágrima ascaloniana",
-          "Chinese": "阿斯卡隆之泪",
-          "Korean": "Ascalonian Tear"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 5,
       "IconUrl": "https://render.guildwars2.com/file/2AA9C0B030BE152B915E0174D7F0495FDA711C54/619318.png",
@@ -879,16 +684,6 @@
           "Spanish": "Esquirla de Zhaitan\nSe pueden conseguir en la ciudad en ruinas de Arah. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo de Zhaitan\", que sirve para fabricar armas legendarias.",
           "Chinese": "泽坦碎片\n从亚拉城废墟获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"泽坦礼赠\"。",
           "Korean": "Shard of Zhaitan\nEarned in the Ruined City of Arah. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Zhaitan\" component used in creating legendary weapons."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Shard of Zhaitan",
-          "French": "Éclat de Zhaïtan",
-          "German": "Scherbe des Zhaitan",
-          "Spanish": "Esquirla de Zhaitan",
-          "Chinese": "泽坦碎片",
-          "Korean": "Shard of Zhaitan"
         }
       },
       "AchievementId": 0,
@@ -919,16 +714,6 @@
           "Korean": "Fractal Relic\nEarned and spent in Fractals of the Mists. Also used as a crafting ingredient."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Fractal Relic",
-          "French": "Relique fractale",
-          "German": "Fraktal-Relikt",
-          "Spanish": "Reliquia fractal",
-          "Chinese": "碎层古物",
-          "Korean": "Fractal Relic"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 7,
       "IconUrl": "https://render.guildwars2.com/file/0204DAD0D40674035F9F5F5270043C3207EEA7E8/619320.png",
@@ -955,16 +740,6 @@
           "Spanish": "Sello de Beetletun\nSe pueden conseguir en la mansión de Caudecus. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo del noble\", que sirve para fabricar armas legendarias.",
           "Chinese": "甲虫郡封印\n从考迪克斯庄园获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"贵族礼赠\"。",
           "Korean": "Seal of Beetletun\nEarned in Caudecus's Manor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Nobleman\" component used in creating legendary weapons."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Seal of Beetletun",
-          "French": "Sceau de Beetletun",
-          "German": "Beetletuns Siegel",
-          "Spanish": "Sello de Beetletun",
-          "Chinese": "甲虫郡封印",
-          "Korean": "Seal of Beetletun"
         }
       },
       "AchievementId": 0,
@@ -995,16 +770,6 @@
           "Korean": "Manifesto of the Moletariate\nEarned in Sorrow's Embrace. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Forgeman\" component used in creating legendary weapons."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Manifesto of the Moletariate",
-          "French": "Manifeste du taupinariat",
-          "German": "Manifest des Maulwetariats",
-          "Spanish": "Manifiesto del topotariado",
-          "Chinese": "掘洞宣言",
-          "Korean": "Manifesto of the Moletariate"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 10,
       "IconUrl": "https://render.guildwars2.com/file/B83A4ED528FC237D4D1862CDD0250B773EAB36AA/619323.png",
@@ -1031,16 +796,6 @@
           "Spanish": "Flor mortal\nSe pueden conseguir en la Pérgola del Crepúsculo. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo de espinas\", que sirve para fabricar armas legendarias.",
           "Chinese": "死亡之花\n从暮光之根获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"荆棘礼赠\"。",
           "Korean": "Deadly Bloom\nEarned in Twilight Arbor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Thorns\" component used in creating legendary weapons."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Deadly Bloom",
-          "French": "Pousse mortelle",
-          "German": "Tödliche Blüte",
-          "Spanish": "Flor mortal",
-          "Chinese": "死亡之花",
-          "Korean": "Deadly Bloom"
         }
       },
       "AchievementId": 0,
@@ -1071,16 +826,6 @@
           "Korean": "Symbol of Koda\nEarned in Honor of the Waves. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Sanctuary\" component used in creating legendary weapons."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Symbol of Koda",
-          "French": "Symbole de Koda",
-          "German": "Symbol Kodas",
-          "Spanish": "Símbolo de Koda",
-          "Chinese": "克达之符",
-          "Korean": "Symbol of Koda"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 12,
       "IconUrl": "https://render.guildwars2.com/file/2B9E2BC9D5D080C54C17E27CECACEFFC0D64EE22/619325.png",
@@ -1107,16 +852,6 @@
           "Spanish": "Talla de charr de la Legión de la Llama\nSe pueden conseguir en la Ciudadela de la Llama. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo de Fuegobael\", que sirve para fabricar armas legendarias.",
           "Chinese": "烈焰军团夏尔雕像\n从烈焰壁垒获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"巴火礼赠\"。",
           "Korean": "Flame Legion Charr Carving\nEarned in Citadel of Flame. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Baelfire\" component used in creating legendary weapons."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Flame Legion Charr Carving",
-          "French": "Gravure de Charr de la Légion de la Flamme",
-          "German": "Flammen-Legion-Charr-Schnitzerei",
-          "Spanish": "Talla de charr de la Legión de la Llama",
-          "Chinese": "烈焰军团夏尔雕像",
-          "Korean": "Flame Legion Charr Carving"
         }
       },
       "AchievementId": 0,
@@ -1147,16 +882,6 @@
           "Korean": "Knowledge Crystal\nEarned in Crucible of Eternity. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Knowledge\" component used in creating legendary weapons."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Knowledge Crystal",
-          "French": "Cristal de connaissance",
-          "German": "Wissenskristall",
-          "Spanish": "Cristal del conocimiento",
-          "Chinese": "知识水晶",
-          "Korean": "Knowledge Crystal"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 14,
       "IconUrl": "https://render.guildwars2.com/file/37CCE672250A3170B71760949C4C9C9B186517B1/619327.png",
@@ -1183,16 +908,6 @@
           "Spanish": "Insignia de honor\nSe pueden conseguir y gastar en WvW para comprar varios objetos.",
           "Chinese": "荣誉徽章\n在世界之战中获得，并可以在世界之战中购买多种物品。",
           "Korean": "Badge of Honor\nEarned and spent in WvW to purchase various items."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Badge of Honor",
-          "French": "Insigne d'honneur",
-          "German": "Ehrenabzeichen",
-          "Spanish": "Insignia de honor",
-          "Chinese": "荣誉徽章",
-          "Korean": "Badge of Honor"
         }
       },
       "AchievementId": 0,
@@ -1223,16 +938,6 @@
           "Korean": "Guild Commendation\nEarned through Guild Missions. Spent in Lion's Arch. Used to purchase various rewards."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Guild Commendation",
-          "French": "Recommandation de guilde",
-          "German": "Gilden-Belobigung",
-          "Spanish": "Mención de clan",
-          "Chinese": "公会奖状",
-          "Korean": "Guild Commendation"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 16,
       "IconUrl": "https://render.guildwars2.com/file/1DB12CF3E9D8D3CF77DA805B2008D417EA32C172/699005.png",
@@ -1259,16 +964,6 @@
           "Spanish": "Carga de transmutación\nSe puede comprar a través de la Compañía de Comercio del León Negro. Se puede gastar en el guardarropa para cambiar el aspecto.",
           "Chinese": "幻化力\n从黑狮交易商会购得。在衣柜中使用，改变外观。",
           "Korean": "Transmutation Charge\nPurchased via the Black Lion Trading Company. Spent in the wardrobe to change appearance."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Transmutation Charge",
-          "French": "Charge de transmutation",
-          "German": "Transmutation-Ladung",
-          "Spanish": "Carga de transmutación",
-          "Chinese": "幻化力",
-          "Korean": "Transmutation Charge"
         }
       },
       "AchievementId": 0,
@@ -1299,16 +994,6 @@
           "Korean": "Airship Part\nEarned and spent in Verdant Brink. Train the Itzel Language Mastery ability to trade with Itzel vendors for bladed armor and other goods."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Airship Part",
-          "French": "Pièce d'aéronef",
-          "German": "Luftschiff-Teil",
-          "Spanish": "Pieza de aeronave",
-          "Chinese": "飞船部件",
-          "Korean": "Airship Part"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 19,
       "IconUrl": "https://render.guildwars2.com/file/07EC38BCBE979B7F4557057F51785F0930075F35/1029833.png",
@@ -1335,16 +1020,6 @@
           "Spanish": "Cristal de línea ley\nSe ganan y gastan en las Profundidades Enredadas. Aprende la habilidad de dominio Idioma nuhoch para intercambiárselos a los comerciantes nuhoch por armas chak y otros bienes.",
           "Chinese": "魔径水晶\n缠藤深渊中获得和使用。训练奴霍奇蛙语言专精后与奴霍奇蛙商贩交易，兑换查克虫武器和其他货物。",
           "Korean": "Ley Line Crystal\nEarned and spent in Tangled Depths. Train the Nuhoch Language Mastery ability to trade with Nuhoch vendors for chak weapons and other goods."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Ley Line Crystal",
-          "French": "Cristal des lignes de force",
-          "German": "Ley-Linien-Kristall",
-          "Spanish": "Cristal de línea ley",
-          "Chinese": "魔径水晶",
-          "Korean": "Ley Line Crystal"
         }
       },
       "AchievementId": 0,
@@ -1375,16 +1050,6 @@
           "Korean": "Lump of Aurillium\nEarned and spent in Auric Basin. Train the Exalted Acceptance Mastery line to trade with Exalted merchants for auric weapon recipes and other goods."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Lump of Aurillium",
-          "French": "Bloc d'aurillium",
-          "German": "Aurilliumklumpen",
-          "Spanish": "Trozo de aurilio",
-          "Chinese": "块状赤金元素",
-          "Korean": "Lump of Aurillium"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 22,
       "IconUrl": "https://render.guildwars2.com/file/5D74D6D3D8179FC49D572975CC5E0CC701025508/1206836.png",
@@ -1411,16 +1076,6 @@
           "Spanish": "Esquirla espiritual\nEmpleado por Miyani para encargarse del mantenimiento de la Forja Mística.",
           "Chinese": "灵魂碎片\n米亚妮用它来维持神秘熔炉的运转。",
           "Korean": "Spirit Shard\nUsed by Miyani to maintain the Mystic Forge."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Spirit Shard",
-          "French": "Éclat d'esprit",
-          "German": "Geister-Scherbe",
-          "Spanish": "Esquirla espiritual",
-          "Chinese": "灵魂碎片",
-          "Korean": "Spirit Shard"
         }
       },
       "AchievementId": 0,
@@ -1451,16 +1106,6 @@
           "Korean": "Pristine Fractal Relic\nEarned and spent in the Fractals of the Mists. Used to purchase ascended rings."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Pristine Fractal Relic",
-          "French": "Relique fractale immaculée",
-          "German": "Makelloses Fraktal-Relikt",
-          "Spanish": "Reliquia fractal prístina",
-          "Chinese": "原始碎层古物",
-          "Korean": "Pristine Fractal Relic"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 24,
       "IconUrl": "https://render.guildwars2.com/file/77B0F842ED036D71E46B80570D6CFE25CB4C0677/619321.png",
@@ -1487,16 +1132,6 @@
           "Spanish": "Geoda\nSe pueden conseguir al completar eventos en Cima Seca. Tienen validez para los comerciantes de la zona.\nSe pueden intercambiar por objetos de valor, como recetas de comida, equipo de nómada y armas de ambrita.",
           "Chinese": "晶块\n完成干涸高地事件后获得，可在干涸高地区域内的商人处进行交易。\n用于兑换食物、游牧装备、灰黄琥珀武器的配方和其他珍贵物品。",
           "Korean": "Geode\nEarned by completing events in Dry Top. Accepted by vendors throughout the area.\nCan be traded for valuable items including recipes for foods, Nomad's gear, and ambrite weapons."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Geode",
-          "French": "Géode",
-          "German": "Geode",
-          "Spanish": "Geoda",
-          "Chinese": "晶块",
-          "Korean": "Geode"
         }
       },
       "AchievementId": 0,
@@ -1527,16 +1162,6 @@
           "Korean": "WvW Skirmish Claim Ticket\nEarned by participating in WvW skirmishes. Traded for various rewards at a WvW Skirmish Supervisor."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "WvW Skirmish Claim Ticket",
-          "French": "Billet de retrait d'escarmouche McM",
-          "German": "WvW-Gefecht-Ticket",
-          "Spanish": "Tique de recogida de escaramuzas WvW",
-          "Chinese": "世界之战突袭兑换劵",
-          "Korean": "WvW Skirmish Claim Ticket"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 26,
       "IconUrl": "https://render.guildwars2.com/file/0F911F55FF800FC0589970FF9137BF050699392F/1010702.png",
@@ -1563,16 +1188,6 @@
           "Spanish": "Enseña de bandido\nSe pueden conseguir al completar eventos en los Páramos Argentos. Tienen validez para los comerciantes del Campamento Determinación y los puestos avanzados asegurados.\nSe pueden intercambiar por objetos de valor, como la armadura de carapacho y recetas de equipo siniestro.",
           "Chinese": "强盗徽饰\n完成白银荒地事件后获得，前往决心营地和占领后的前哨，寻找商人进行兑换。\n用于兑换甲壳护甲、凶恶装备配方和其他珍贵物品。",
           "Korean": "Bandit Crest\nEarned by completing events in the Silverwastes. Accepted by vendors in Camp Resolve and at secured outposts.\nCan be traded for valuable items including Carapace armor and recipes for sinister gear."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Bandit Crest",
-          "French": "Écu de bandit",
-          "German": "Banditen-Wappen",
-          "Spanish": "Enseña de bandido",
-          "Chinese": "强盗徽饰",
-          "Korean": "Bandit Crest"
         }
       },
       "AchievementId": 0,
@@ -1603,16 +1218,6 @@
           "Korean": "Magnetite Shard\nEarned from bosses and events inside Heart of Thorns and Path of Fire raids."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Magnetite Shard",
-          "French": "Éclat de magnétite",
-          "German": "Magnetitscherbe",
-          "Spanish": "Esquirla de magnetita",
-          "Chinese": "磁铁碎块",
-          "Korean": "Magnetite Shard"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 28,
       "IconUrl": "https://render.guildwars2.com/file/95F8F70D97186780CE45B54600B90BE356D8EA7C/1302741.png",
@@ -1639,16 +1244,6 @@
           "Spanish": "Vale de suministrador\nSe gana al ayudar a los proveedores de facción.",
           "Chinese": "供给官徽记\n帮助势力供给官后获得。",
           "Korean": "Provisioner Token\nEarned by helping Faction Provisioners."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Provisioner Token",
-          "French": "Coupon de fournisseur",
-          "German": "Versorger-Marke",
-          "Spanish": "Vale de suministrador",
-          "Chinese": "供给官徽记",
-          "Korean": "Provisioner Token"
         }
       },
       "AchievementId": 0,
@@ -1679,16 +1274,6 @@
           "Korean": "PvP League Ticket\nEarned when crossing division thresholds during PvP league seasons. Spend in the Heart of the Mists and trade for various rewards at the PvP League Vendor."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "PvP League Ticket",
-          "French": "Ticket de ligue JcJ",
-          "German": "PvP-Liga-Ticket",
-          "Spanish": "Tique de liga PvP",
-          "Chinese": "PvP联赛兑换券",
-          "Korean": "PvP League Ticket"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 30,
       "IconUrl": "https://render.guildwars2.com/file/DB05F5F20B94A3D12AF11041F60E194D66584957/1313248.png",
@@ -1715,16 +1300,6 @@
           "Spanish": "Prueba de hazañas\nSe gana al subir de rango en Mundo contra Mundo. Se puede gastar en cualquier Notaría de hazañas de Mundo contra Mundo para obtener puntos de héroe.",
           "Chinese": "英雄证明\n提升世界之战等级后可获得。可在任意英雄公证员处购买英雄点数。",
           "Korean": "Proof of Heroics\nEarned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Proof of Heroics",
-          "French": "Preuve d'héroïsme",
-          "German": "Beweis der Heldentaten",
-          "Spanish": "Prueba de hazañas",
-          "Chinese": "英雄证明",
-          "Korean": "Proof of Heroics"
         }
       },
       "AchievementId": 0,
@@ -1755,16 +1330,6 @@
           "Korean": "Unbound Magic\nEarned from creatures empowered by unbound magic."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Unbound Magic",
-          "French": "Magie déliée",
-          "German": "Entfesselte Magie",
-          "Spanish": "Magia liberada",
-          "Chinese": "未受约束的魔法",
-          "Korean": "Unbound Magic"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 32,
       "IconUrl": "https://render.guildwars2.com/file/55CBF5154BC749F0BE7B01F9C75C04F2CD4BC561/1465799.png",
@@ -1791,16 +1356,6 @@
           "Spanish": "Esquirlas de gloria ascendidas\nSe consiguen en los cofres de división de las ligas PvP.",
           "Chinese": "升华荣誉碎片\n打开联赛阶段宝箱获得。",
           "Korean": "Ascended Shards of Glory\nEarned from PvP League Division Chests."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Ascended Shards of Glory",
-          "French": "Éclats de gloire élevés",
-          "German": "Aufgestiegene Scherben des Ruhms",
-          "Spanish": "Esquirlas de gloria ascendidas",
-          "Chinese": "升华荣誉碎片",
-          "Korean": "Ascended Shards of Glory"
         }
       },
       "AchievementId": 0,
@@ -1831,16 +1386,6 @@
           "Korean": "Trade Contract\nEarned in the Crystal Desert. Spend at karma merchants to purchase trade crates with crafting materials, new crafting recipes, and other rewards unique to the Crystal Desert."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Trade Contract",
-          "French": "Contrat commercial",
-          "German": "Handelsvertrag",
-          "Spanish": "Contrato comercial",
-          "Chinese": "交易合同",
-          "Korean": "Trade Contract"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 34,
       "IconUrl": "https://render.guildwars2.com/file/DEC2276FB1D5637BE563F618A012DEE63402170C/1767459.png",
@@ -1867,16 +1412,6 @@
           "Spanish": "Mosaico de elegía\nSe consiguen como recompensas legendarias en el Desierto de Cristal. Puedes gastarlas en la Tumba de los Reyes Primigenios.\n\n<c=Flavor>Estas marcas se usaban durante la Era Dinástica de la antigua Elona para conmemorar grandes hazañas.</c>",
           "Chinese": "挽歌马赛克\n在水晶沙漠完成传奇悬赏任务后获得。在先王墓穴使用。\n<c=@Flavor>这些标记曾被用来纪念古代伊伦娜王朝时期的壮举。</c>",
           "Korean": "Elegy Mosaic\nEarned by completing legendary bounties in the Crystal Desert. Spend at the Tomb of Primeval Kings.\n\n<c=@Flavor>These markers were used to commemorate great deeds in the Dynastic Era of ancient Elona.</c>"
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Elegy Mosaic",
-          "French": "Mosaïque d'élégie",
-          "German": "Elegie-Mosaik",
-          "Spanish": "Mosaico de elegía",
-          "Chinese": "挽歌马赛克",
-          "Korean": "Elegy Mosaic"
         }
       },
       "AchievementId": 0,
@@ -1907,16 +1442,6 @@
           "Korean": "Testimony of Desert Heroics\nEarned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Testimony of Desert Heroics",
-          "French": "Témoignage de consignation d'actes héroïques du désert",
-          "German": "Zeugnis von Wüsten-Heldentaten",
-          "Spanish": "Testimonio de hazañas desérticas",
-          "Chinese": "沙漠英雄证词",
-          "Korean": "Testimony of Desert Heroics"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 36,
       "IconUrl": "https://render.guildwars2.com/file/29A2465AE376091D3871B42D14D90B453060B69C/1822313.png",
@@ -1943,16 +1468,6 @@
           "Spanish": "Llave exaltada\nSe utiliza para abrir cofres exaltados en el Valle Áurico. Los cofres pueden contener armaduras, armas y recetas.",
           "Chinese": "尊者钥匙\n用于打开赤金盆地的尊者宝箱。宝箱内包含护甲、武器和配方。",
           "Korean": "Exalted Key\nUsed to open Exalted chests in Auric Basin. Chests can contain armor, weapons, and recipes."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Exalted Key",
-          "French": "Clé exaltée",
-          "German": "Erhabenen-Schlüssel",
-          "Spanish": "Llave exaltada",
-          "Chinese": "尊者钥匙",
-          "Korean": "Exalted Key"
         }
       },
       "AchievementId": 0,
@@ -1983,16 +1498,6 @@
           "Korean": "Machete\nUsed to open noxious pods in Dragon's Stand. Pods can contain armor, weapons, and recipes."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Machete",
-          "French": "Machette",
-          "German": "Machete",
-          "Spanish": "Machete",
-          "Chinese": "大砍刀",
-          "Korean": "Machete"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 38,
       "IconUrl": "https://render.guildwars2.com/file/2539DA0C2F1259A20DEE6707B8D8BCDA050372E2/1203080.png",
@@ -2019,16 +1524,6 @@
           "Spanish": "Cristal de Gaets\nSe obtiene de jefes y eventos en incursiones de Path of Fire.",
           "Chinese": "盖廷水晶\n可从烈焰征途资料片大型地下城的头目和事件中获得。",
           "Korean": "Gaeting Crystal\nEarned from bosses and events inside Path of Fire raids."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Gaeting Crystal",
-          "French": "Cristal de Gaets",
-          "German": "Gaets-Kristall",
-          "Spanish": "Cristal de Gaets",
-          "Chinese": "盖廷水晶",
-          "Korean": "Gaeting Crystal"
         }
       },
       "AchievementId": 0,
@@ -2059,16 +1554,6 @@
           "Korean": "Bandit Skeleton Key\nUsed to open lost bandit chests in the Silverwastes. Chests can contain armor, weapons, recipes, ambrite, and more."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Bandit Skeleton Key",
-          "French": "Passe-partout de bandit",
-          "German": "Banditen-Dietrich",
-          "Spanish": "Llave maestra de bandido",
-          "Chinese": "强盗万能钥匙",
-          "Korean": "Bandit Skeleton Key"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 40,
       "IconUrl": "https://render.guildwars2.com/file/332FF8697F27CEC0A599A008C901ACD8273E0C1E/65724.png",
@@ -2095,16 +1580,6 @@
           "Spanish": "Palanca del Pacto\nSe utiliza para abrir cargamentos de aeronave en el Umbral Verdeante. El cargamento puede contener materiales de artesanía, armaduras, armas y recetas.",
           "Chinese": "契约团撬棍\n用于打开苍翠边界的飞船货物。货物内包含制作材料、护甲、武器和配方。",
           "Korean": "Pact Crowbar\nUsed to open airship cargo in Verdant Brink. Cargo can contain crafting materials, armor, weapons, and recipes."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Pact Crowbar",
-          "French": "Pied-de-biche du Pacte",
-          "German": "Pakt-Brechstange",
-          "Spanish": "Palanca del Pacto",
-          "Chinese": "契约团撬棍",
-          "Korean": "Pact Crowbar"
         }
       },
       "AchievementId": 0,
@@ -2135,16 +1610,6 @@
           "Korean": "Vial of Chak Acid\nUsed to open crystallized supply caches in Tangled Depths. Caches can contain armor, weapons, and recipes."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Vial of Chak Acid",
-          "French": "Fiole d'acide chak",
-          "German": "Phiole Chak-Säure",
-          "Spanish": "Vial de ácido chak",
-          "Chinese": "瓶装查克虫酸液",
-          "Korean": "Vial of Chak Acid"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 42,
       "IconUrl": "https://render.guildwars2.com/file/B60BE97A3899A1D36CE81CB3C896CACACCA79237/1203046.png",
@@ -2171,16 +1636,6 @@
           "Spanish": "Ganzúa cefirita\nSe utiliza para abrir cofres cerrados enterrados en Cima Seca. Estos cofres solo se pueden ver durante tormentas de arena. Los cofres pueden contener armaduras, armas, diseños excepcionales, recetas, ambrita y mucho más.",
           "Chinese": "风裔开锁器\n用于打开干涸高地的埋藏的上锁宝箱。这些宝箱只在沙尘暴期间可见。宝箱内包含护甲、武器、稀有皮肤、配方、灰黄琥珀等物品。",
           "Korean": "Zephyrite Lockpick\nUsed to open buried locked chests in Dry Top. These chests are only visible during sandstorms. Chests can contain armor, weapons, rare skins, recipes, ambrite, and more."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Zephyrite Lockpick",
-          "French": "Crochet zéphyrite",
-          "German": "Zephyriten-Dietrich",
-          "Spanish": "Ganzúa cefirita",
-          "Chinese": "风裔开锁器",
-          "Korean": "Zephyrite Lockpick"
         }
       },
       "AchievementId": 0,
@@ -2211,16 +1666,6 @@
           "Korean": "Trader's Key\nUsed to open trade crates in the Crystal Desert."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Trader's Key",
-          "French": "Clé de marchand",
-          "German": "Schlüssel des Händlers",
-          "Spanish": "Llave del Comerciante",
-          "Chinese": "商人钥匙",
-          "Korean": "Trader's Key"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 44,
       "IconUrl": "https://render.guildwars2.com/file/7CD20D4B072AD23F97202F05E4130CF8A4B069C5/69116.png",
@@ -2247,16 +1692,6 @@
           "Spanish": "Magia volátil\nMagia inestable producto de la caída de un dios y dos dragones ancianos. Se usa para comprar elementos desbloqueables y recompensas a comerciantes.",
           "Chinese": "烈性魔法\n神明和两条上古巨龙死后释放出不稳定的魔法，可用来向商贩购买解锁物品或奖励。",
           "Korean": "Volatile Magic\nUnstable magic lingering from the fall of a god and two Elder Dragons. Spent at vendors to purchase unlocks and rewards."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Volatile Magic",
-          "French": "Magie volatile",
-          "German": "Flüchtige Magie",
-          "Spanish": "Magia volátil",
-          "Chinese": "烈性魔法",
-          "Korean": "Volatile Magic"
         }
       },
       "AchievementId": 0,
@@ -2287,16 +1722,6 @@
           "Korean": "PvP Tournament Voucher\nEarned in monthly automated tournaments and some special event tournaments."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "PvP Tournament Voucher",
-          "French": "Bon de tournoi JcJ",
-          "German": "PvP-Turnier-Gutschein",
-          "Spanish": "Vale de torneo PvP",
-          "Chinese": "PvP联赛兑换券",
-          "Korean": "PvP Tournament Voucher"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 46,
       "IconUrl": "https://render.guildwars2.com/file/C30D1480E3383F999DE87921706D9D39E49CDC7A/2010217.png",
@@ -2323,16 +1748,6 @@
           "Spanish": "Medallón de carreras\nSe consigue participando en carreras de escarabajos y pruebas contrarreloj.",
           "Chinese": "比赛徽记\n参加翻滚甲虫赛跑和限时试炼获得。",
           "Korean": "Racing Medallion\nEarned by participating in roller beetle races and time trials."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Racing Medallion",
-          "French": "Médaillon de course",
-          "German": "Renn-Medaille",
-          "Spanish": "Medallón de carreras",
-          "Chinese": "比赛徽记",
-          "Korean": "Racing Medallion"
         }
       },
       "AchievementId": 0,
@@ -2363,16 +1778,6 @@
           "Korean": "Mistborn Key\nUsed to open Mistborn Coffers in Dragonfall."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Mistborn Key",
-          "French": "Clé de la Brumaille",
-          "German": "Nebelgeborener Schlüssel",
-          "Spanish": "Llave surgida de la Niebla",
-          "Chinese": "雾凝钥匙",
-          "Korean": "Mistborn Key"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 49,
       "IconUrl": "https://render.guildwars2.com/file/2C47C1C30F61DB3A743BA47FB7E70808156A9009/2140520.png",
@@ -2399,16 +1804,6 @@
           "Spanish": "Vale del festival\nSe consigue participando en el Festival de los Cuatro Vientos anual.",
           "Chinese": "节日徽记\n参加年度四风节日获得。",
           "Korean": "Festival Token\nEarned by participating in the yearly Festival of the Four Winds."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Festival Token",
-          "French": "Coupon du festival",
-          "German": "Festmarke",
-          "Spanish": "Vale del festival",
-          "Chinese": "节日徽记",
-          "Korean": "Festival Token"
         }
       },
       "AchievementId": 0,
@@ -2439,16 +1834,6 @@
           "Korean": "Cache Key\nUsed to loot cache chests around Drizzlewood Coast."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Cache Key",
-          "French": "Clé de cache",
-          "German": "Lager-Schlüssel",
-          "Spanish": "Llave de alijo",
-          "Chinese": "补给箱钥匙",
-          "Korean": "Cache Key"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 51,
       "IconUrl": "https://render.guildwars2.com/file/7D7CAD2BF4527006CFE6BE3DBF306353260DC8B2/2292743.png",
@@ -2475,16 +1860,6 @@
           "Spanish": "Esquirla de profecía roja\nEsquirlas cristalinas de magia dracónica con vetas rojas.\n\nLes interesan a los emisarios del Ojo del Norte.",
           "Chinese": "红色先知水晶碎片\n水晶形态的巨龙魔法，带有红色纹理。\n北方之眼的密使对此感兴趣。",
           "Korean": "Red Prophet Shard\nCrystalline shards of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Red Prophet Shard",
-          "French": "Éclat rouge du prophète",
-          "German": "Rote Propheten-Scherbe",
-          "Spanish": "Esquirla de profecía roja",
-          "Chinese": "红色先知水晶碎片",
-          "Korean": "Red Prophet Shard"
         }
       },
       "AchievementId": 0,
@@ -2515,16 +1890,6 @@
           "Korean": "Green Prophet Shard\nCrystalline shards of dragon magic, veined with green.\nCan be exchanged for rewards in Arborstone."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Green Prophet Shard",
-          "French": "Éclat vert du prophète",
-          "German": "Grüne Propheten-Scherbe",
-          "Spanish": "Esquirla de profecía verde",
-          "Chinese": "绿色先知水晶碎片",
-          "Korean": "Green Prophet Shard"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 53,
       "IconUrl": "https://render.guildwars2.com/file/BFEDF6110C69BE3521010E7F23B5147919B90FA9/2270834.png",
@@ -2551,16 +1916,6 @@
           "Spanish": "Cristal de profecía azul\nFormaciones cristalinas de magia dracónica con vetas azules.\nSe emplean para abrir los cofres de recompensas semanales por misiones de ataque en el Ojo del Norte.\nSe consiguen en ataques prioritarios o combinando esquirlas.",
           "Chinese": "蓝色先知水晶\n水晶形态的巨龙魔法，带有蓝色纹理。\n用于打开北方之眼的每周进攻任务奖励宝箱。\n通过优先进攻任务或者组合碎片获得。",
           "Korean": "Blue Prophet Crystal\nCrystalline formations of dragon magic, veined with blue.\nUsed to open the weekly strike rewards chest in the Eye of the North.\nObtained from Priority Strikes or by combining shards."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Blue Prophet Crystal",
-          "French": "Cristal bleu du prophète",
-          "German": "Blauer Propheten-Kristall",
-          "Spanish": "Cristal de profecía azul",
-          "Chinese": "蓝色先知水晶",
-          "Korean": "Blue Prophet Crystal"
         }
       },
       "AchievementId": 0,
@@ -2591,16 +1946,6 @@
           "Korean": "Green Prophet Crystal\nCrystalline formations of dragon magic, veined with green.\nEmissaries in the Eye of the North have interest in these.\nObtained from Priority Strikes or by combining shards."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Green Prophet Crystal",
-          "French": "Cristal vert du prophète",
-          "German": "Grüner Propheten-Kristall",
-          "Spanish": "Cristal de profecía verde",
-          "Chinese": "绿色先知水晶",
-          "Korean": "Green Prophet Crystal"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 55,
       "IconUrl": "https://render.guildwars2.com/file/361BEAAEB637D90905060E4A59365118C7A6790D/2270831.png",
@@ -2627,16 +1972,6 @@
           "Spanish": "Cristal de profecía rojo\nFormaciones cristalinas de magia dracónica con vetas rojas.\nLes interesan a los emisarios del Ojo del Norte.\nSe consiguen en ataques prioritarios o combinando esquirlas.",
           "Chinese": "红色先知水晶\n水晶形态的巨龙魔法，带有红色纹理。\n北方之眼的密使对此感兴趣。\n通过优先进攻任务或者组合碎片获得。",
           "Korean": "Red Prophet Crystal\nCrystalline formations of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these.\nObtained from Priority Strikes or by combining shards."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Red Prophet Crystal",
-          "French": "Cristal rouge du prophète",
-          "German": "Roter Propheten-Kristall",
-          "Spanish": "Cristal de profecía rojo",
-          "Chinese": "红色先知水晶",
-          "Korean": "Red Prophet Crystal"
         }
       },
       "AchievementId": 0,
@@ -2667,16 +2002,6 @@
           "Korean": "Blue Prophet Shard\nCrystalline shards of dragon magic, veined with blue.\nCan be exchanged for rewards in the Eye of the North."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Blue Prophet Shard",
-          "French": "Éclat bleu du prophète",
-          "German": "Blaue Propheten-Scherbe",
-          "Spanish": "Esquirla de profecía azul",
-          "Chinese": "蓝色先知水晶碎片",
-          "Korean": "Blue Prophet Shard"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 57,
       "IconUrl": "https://render.guildwars2.com/file/A0ECC4DEE6E84062649EA464079AE46B61089130/2270833.png",
@@ -2703,16 +2028,6 @@
           "Spanish": "Suministros bélicos\nMateriales para ayudar en el conflicto abierto en la Costa de Bosquellovizna. Pueden intercambiarse por objetos y equipamientos bélicos o para mejorar bases.",
           "Chinese": "战争补给\n用于支援雨森海岸激烈战争的材料。可以交换战争装备和物品，或用于升级基地。",
           "Korean": "War Supplies\nMaterials to aid in the ongoing conflict in the Drizzlewood Coast. Can be traded for war equipment and items or used to upgrade bases."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "War Supplies",
-          "French": "Ravitaillement de guerre",
-          "German": "Kriegs-Vorräte",
-          "Spanish": "Suministros bélicos",
-          "Chinese": "战争补给",
-          "Korean": "War Supplies"
         }
       },
       "AchievementId": 0,
@@ -2743,16 +2058,6 @@
           "Korean": "Unstable Fractal Essence\nEarned and spent in Fractals of the Mists. Used to purchase prestigious rewards."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Unstable Fractal Essence",
-          "French": "Essence de fractale instable",
-          "German": "Instabile Fraktal-Essenz",
-          "Spanish": "Esencia de fractal inestable",
-          "Chinese": "不稳定碎层精华",
-          "Korean": "Unstable Fractal Essence"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 59,
       "IconUrl": "https://render.guildwars2.com/file/AD0AF3F321EB250B5FB4C44A7B3392CD1208921A/1202328.png",
@@ -2779,16 +2084,6 @@
           "Spanish": "Sello de defensa de Tyria\nSe consigue protegiendo Tyria en misiones de respuesta dracónica y se gasta en los comerciantes de facciones del Ojo del Norte.",
           "Chinese": "泰瑞亚防御封印\n通过在巨龙响应任务中保护泰瑞亚获得。在北方之眼与势力商贩做交易。",
           "Korean": "Tyrian Defense Seal\nEarned by protecting Tyria in Dragon Response Missions. Spent at faction vendors in Eye of the North."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Tyrian Defense Seal",
-          "French": "Sceau de défense tyrienne",
-          "German": "Tyrianisches Verteidigungssiegel",
-          "Spanish": "Sello de defensa de Tyria",
-          "Chinese": "泰瑞亚防御封印",
-          "Korean": "Tyrian Defense Seal"
         }
       },
       "AchievementId": 0,
@@ -2819,16 +2114,6 @@
           "Korean": "Research Note\nAcquired by deconstructing crafted items with research kits. Used at vendors in Cantha and to craft newer recipes."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Research Note",
-          "French": "Note de recherche",
-          "German": "Forschungsnotiz",
-          "Spanish": "Nota de investigación",
-          "Chinese": "研究记录",
-          "Korean": "Research Note"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 61,
       "IconUrl": "https://render.guildwars2.com/file/BC2EACDA78BC950263F901E8EBA6E74D08E97E23/2596976.png",
@@ -2855,16 +2140,6 @@
           "Spanish": "Moneda inusual\nSe pueden adquirir abriendo cofres ocultos en Cantha. Se usan con comerciantes de Cantha.",
           "Chinese": "独特硬币\n通过打开凯珊各处的隐藏宝箱获得。可在凯珊商人处使用。",
           "Korean": "Unusual Coin\nAcquired by opening hidden chests in Cantha. Used at vendors in Cantha."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Unusual Coin",
-          "French": "Pièce inhabituelle",
-          "German": "Ungewöhnliche Münze",
-          "Spanish": "Moneda inusual",
-          "Chinese": "独特硬币",
-          "Korean": "Unusual Coin"
         }
       },
       "AchievementId": 0,
@@ -2895,16 +2170,6 @@
           "Korean": "Jade Sliver\nAcquired from junk items recycled by the Jade Bot Recycler."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Jade Sliver",
-          "French": "Esquille de jade",
-          "German": "Jade-Span",
-          "Spanish": "Triza de jade",
-          "Chinese": "翠玉薄片",
-          "Korean": "Jade Sliver"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 64,
       "IconUrl": "https://render.guildwars2.com/file/90FF7B7D0CBBC031B04F7E0A18576D7EBECB1C90/2596975.png",
@@ -2931,16 +2196,6 @@
           "Spanish": "Testimonio de hazañas de jade\nSe gana al subir de rango en Mundo contra Mundo. Se puede gastar en cualquier Notaría de hazañas de Mundo contra Mundo para obtener puntos de héroe.",
           "Chinese": "翠玉英雄证词\n提升世界之战等级后可获得。可在任意英雄公证员处购买英雄点数。",
           "Korean": "Testimony of Jade Heroics\nEarned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Testimony of Jade Heroics",
-          "French": "Témoignage d'actes héroïques de Jade",
-          "German": "Zeugnis von Jade-Heldentaten",
-          "Spanish": "Testimonio de hazañas de jade",
-          "Chinese": "翠玉英雄证词",
-          "Korean": "Testimony of Jade Heroics"
         }
       },
       "AchievementId": 0,
@@ -2971,16 +2226,6 @@
           "Korean": "Canach Coins\nAcquired by playing the Coin Rush in Club Canach. May be used to obtain rewards in Club Canach."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Canach Coins",
-          "French": "Pièces de Canach",
-          "German": "Canach-Münzen",
-          "Spanish": "Monedas de Canach",
-          "Chinese": "卡纳克硬币",
-          "Korean": "Canach Coins"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 67,
       "IconUrl": "https://render.guildwars2.com/file/F5FDD02592E10C3E63CF64D44713220FB6C70D03/2596973.png",
@@ -3007,16 +2252,6 @@
           "Spanish": "Favor imperial\nSe pueden adquirir asistiendo a eventos por toda Cantha. Se usan con comerciantes de Cantha.",
           "Chinese": "帝国恩典\n通过参加凯珊各处的事件获得。可在凯珊商人处使用。",
           "Korean": "Imperial Favor\nAcquired by assisting in events throughout Cantha. Used at vendors in Cantha."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Imperial Favor",
-          "French": "Faveur impériale",
-          "German": "Kaiserliche Gunst",
-          "Spanish": "Favor imperial",
-          "Chinese": "帝国恩典",
-          "Korean": "Imperial Favor"
         }
       },
       "AchievementId": 0,
@@ -3047,16 +2282,6 @@
           "Korean": "Tales of Dungeon Delving\nEarned in dungeons. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the legendary crafting components used in creating legendary weapons."
         }
       },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Tales of Dungeon Delving",
-          "French": "Haut fait d'exploration de donjon",
-          "German": "Anekdote der Verlieserkundung",
-          "Spanish": "Relatos de exploración de mazmorras",
-          "Chinese": "地下城探险传说",
-          "Korean": "Tales of Dungeon Delving"
-        }
-      },
       "AchievementId": 0,
       "CurrencyId": 69,
       "IconUrl": "https://render.guildwars2.com/file/37CCE672250A3170B71760949C4C9C9B186517B1/619327.png",
@@ -3083,16 +2308,6 @@
           "Spanish": "Conocimiento legendario\nSe obtiene de jefes y eventos en incursiones y misiones de ataque en modo desafío.",
           "Chinese": "传奇见解\n在大型地下城和启用挑战模式的进攻任务中，通过头目和事件获得。",
           "Korean": "Legendary Insight\nEarned from bosses and events inside raids and challenge mode Strike Missions."
-        }
-      },
-      "PlaceholderInTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Legendary Insight",
-          "French": "Connaissance légendaire",
-          "German": "Legendäre Einsicht",
-          "Spanish": "Conocimiento legendario",
-          "Chinese": "传奇见解",
-          "Korean": "Legendary Insight"
         }
       },
       "AchievementId": 0,

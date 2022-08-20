@@ -65,7 +65,6 @@ namespace SessionTracker.JsonFileCreator
                 var matchingEntry = entries.Single(e => e.CurrencyId == currency.Id);
                 matchingEntry.LabelText.SetLocalizedText(currency.Name, local);
                 matchingEntry.LabelTooltip.SetLocalizedText($"{currency.Name}\n{currency.Description}", local);
-                matchingEntry.PlaceholderInTooltip.SetLocalizedText(currency.Name, local);
             }
         }
     }

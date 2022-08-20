@@ -34,11 +34,11 @@ namespace SessionTracker.Services
         private string CreateSummaryText(Entry entry, double sessionValuePerHour, TimeSpan sessionDuration)
         {
             return $"== TOTAL ==\n" +
-                   $"{entry.Value.Total} {entry.PlaceholderInTooltip}\n" +
+                   $"{entry.Value.Total} {entry.LabelText.Localized}\n" +
                    $"\n== CURRENT SESSION ==\n" +
-                   $"{sessionValuePerHour:0} {entry.PlaceholderInTooltip}/hour\n" +
+                   $"{sessionValuePerHour:0} {entry.LabelText.Localized}/hour\n" +
                    $"{sessionDuration:hh':'mm} hour : minute\n\n" +
-                   $"time | {entry.PlaceholderInTooltip}\n" +
+                   $"time | {entry.LabelText.Localized}\n" +
                    $"{string.Join("\n", entry.SessionHistory)}";
         }
 
