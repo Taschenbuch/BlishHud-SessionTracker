@@ -11,11 +11,12 @@ namespace SessionTracker.Models
         [JsonIgnore] public string English
         {
             set => SetLocalizedText(value, Locale.English);
+            get => GetLocalizedText(Locale.English);
         }
 
         [JsonIgnore] public string Localized => GetLocalizedText(GameService.Overlay.UserLocale.Value);
 
-        public string GetLocalizedText(Locale locale)
+        private string GetLocalizedText(Locale locale)
         {
             return LocalizedTextByLocale.ContainsKey(locale) 
                 ? LocalizedTextByLocale[locale] 

@@ -87,7 +87,7 @@ namespace SessionTracker.Services
                 catch (Exception e)
                 {
                     EntryTextureByEntryId[entry.Id] = new AsyncTexture2D(EntryIconPlaceholderTexture);
-                    notFoundTextures.Add(entry.LabelText.GetLocalizedText(Locale.English));
+                    notFoundTextures.Add(entry.LabelText.English);
                     exception = e;
                 }
             }
