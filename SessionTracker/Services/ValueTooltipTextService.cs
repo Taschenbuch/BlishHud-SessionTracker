@@ -7,9 +7,9 @@ using SessionTracker.Settings.SettingEntries;
 
 namespace SessionTracker.Services
 {
-    public class SummaryTextService
+    public class ValueTooltipTextService
     {
-        public SummaryTextService(SettingService settingService)
+        public ValueTooltipTextService(SettingService settingService)
         {
             _settingService = settingService;
         }

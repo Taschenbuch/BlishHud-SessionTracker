@@ -33,7 +33,7 @@ namespace SessionTracker.Controls
             CreateUi(settingsWindowService);
 
             _valueLabelTextService = new ValueLabelTextService(_valueLabelByEntryId, _model, settingService, logger);
-            _summaryTooltipService = new SummaryTooltipService(_valueLabelByEntryId, _settingService);
+            _valueLabelTooltipService = new ValueLabelTooltipService(_valueLabelByEntryId, _settingService);
             OnDebugModeIsEnabledSettingChanged(null, null);
 
             settingService.FontSizeIndexSetting.SettingChanged      += OnFontSizeIndexSettingChanged;
@@ -141,7 +141,7 @@ namespace SessionTracker.Controls
                 _model.StartSession();
 
                 _valueLabelTextService.UpdateValueLabelTexts();
-                _summaryTooltipService.ResetSummaryTooltip(_model);
+                _valueLabelTooltipService.ResetSummaryTooltip(_model);
 
                 _isInitialized = true;
             }
@@ -181,7 +181,7 @@ namespace SessionTracker.Controls
                 await ApiService.UpdateTotalValuesInModel(_model, _gw2ApiManager);
 
                 _valueLabelTextService.UpdateValueLabelTexts();
-                _summaryTooltipService.UpdateSummaryTooltip(_model);
+                _valueLabelTooltipService.UpdateSummaryTooltip(_model);
             }
             catch (Exception e)
             {
@@ -304,7 +304,7 @@ namespace SessionTracker.Controls
         private readonly Logger _logger;
         private readonly Model _model;
         private readonly SettingService _settingService;
-        private readonly SummaryTooltipService _summaryTooltipService;
+        private readonly ValueLabelTooltipService _valueLabelTooltipService;
         private readonly ValueLabelTextService _valueLabelTextService;
         private readonly Dictionary<string, EntryTitleFlowPanel> _titleFlowPanelByEntryId = new Dictionary<string, EntryTitleFlowPanel>();
         private readonly Dictionary<string, Label> _valueLabelByEntryId = new Dictionary<string, Label>();

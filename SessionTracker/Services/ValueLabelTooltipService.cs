@@ -5,12 +5,12 @@ using SessionTracker.Settings.SettingEntries;
 
 namespace SessionTracker.Services
 {
-    public class SummaryTooltipService
+    public class ValueLabelTooltipService
     {
-        public SummaryTooltipService(Dictionary<string, Label> valueLabelByEntryId, SettingService settingService)
+        public ValueLabelTooltipService(Dictionary<string, Label> valueLabelByEntryId, SettingService settingService)
         {
             _valueLabelByEntryId = valueLabelByEntryId;
-            _summaryTextService  = new SummaryTextService(settingService);
+            _summaryTextService  = new ValueTooltipTextService(settingService);
         }
 
         public void UpdateSummaryTooltip(Model model)
@@ -46,7 +46,7 @@ namespace SessionTracker.Services
             valueLabelByEntryId[EntryId.PVP_KDR].BasicTooltipText = string.Empty;
         }
 
-        private readonly SummaryTextService _summaryTextService;
+        private readonly ValueTooltipTextService _summaryTextService;
         private readonly Dictionary<string, Label> _valueLabelByEntryId;
     }
 }
