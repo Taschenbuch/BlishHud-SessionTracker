@@ -43,7 +43,7 @@ namespace SessionTracker.Services
 
             return entry.CurrencyId == CurrencyIds.COIN_IN_COPPER
                 ? ValueTextService.CreateCoinValueText((int)sessionValuePerHour, _settingService.CoinDisplayFormatSetting.Value)
-                : sessionValuePerHour.DoubleToCulturedStringWith1DecimalPlace();
+                : sessionValuePerHour.To0DecimalPlacesCulturedString();
         }
 
         private string CreateSummaryText(Entry entry, TimeSpan sessionDuration)
@@ -51,12 +51,12 @@ namespace SessionTracker.Services
             var sessionValuePerHourText = CreateSessionValuePerHourText(entry, sessionDuration);
 
             return $"== TOTAL ==\n" +
-                   $"{entry.Value.Total.IntToCulturedString()} {entry.LabelText.Localized}\n" +
-                   $"\n== {Localization.SummaryTooltip_HeaderCurrentSession} ==\n" + // todo übersetzen oder lassen?
+                   $"{entry.Value.Total.To0DecimalPlacesCulturedString()} {entry.LabelText.Localized}\n" +
+                   $"\n== {Localization.SummaryTooltip_HeaderCurrentSession} ==\n" +
                    $"{sessionValuePerHourText} {entry.LabelText.Localized} / {Localization.SummaryTooltip_Hour}\n" +
-                   $"{sessionDuration:hh':'mm} {Localization.SummaryTooltip_HoursMinutes}\n" + // todo  hour : minute
+                   $"{sessionDuration:hh':'mm} {Localization.SummaryTooltip_HoursMinutes}\n" +
                    $"\n" +
-                   $"{Localization.SummaryTooltip_historyTimeColumnTitle} | {entry.LabelText.Localized}\n" + // todo time
+                   $"{Localization.SummaryTooltip_historyTimeColumnTitle} | {entry.LabelText.Localized}\n" +
                    $"{string.Join("\n", entry.SessionHistory)}";
         }
 
@@ -64,7 +64,7 @@ namespace SessionTracker.Services
         {
             var sessionValueText = entry.CurrencyId == CurrencyIds.COIN_IN_COPPER
                 ? ValueTextService.CreateCoinValueText(entry.Value.Session, _settingService.CoinDisplayFormatSetting.Value)
-                : entry.Value.Session.IntToCulturedString();
+                : entry.Value.Session.To0DecimalPlacesCulturedString();
 
             entry.SessionHistory.Insert(0, $"{DateTime.Now:HH:mm} | {sessionValueText}");
         }

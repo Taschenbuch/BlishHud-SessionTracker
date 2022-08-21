@@ -62,8 +62,8 @@ namespace SessionTracker.Services
                 }
                 else
                 {
-                    var sessionValueText = entry.Value.Session.IntToCulturedString();
-                    var totalValueText   = entry.Value.Total.IntToCulturedString();
+                    var sessionValueText = entry.Value.Session.To0DecimalPlacesCulturedString();
+                    var totalValueText   = entry.Value.Total.To0DecimalPlacesCulturedString();
 
                     _valueLabelByEntryId[entry.Id].Text = ValueTextService.CreateSessionAndTotalValueText(
                         sessionValueText,

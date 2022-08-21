@@ -12,7 +12,7 @@ namespace SessionTracker.Services
                 ? 0.00
                 : (double)kills / deaths;
 
-            return killsDeathsRatio.DoubleToCulturedStringWith2DecimalPlaces();
+            return killsDeathsRatio.To2DecimalPlacesCulturedString();
         }
 
         public static string CreateSessionAndTotalValueText(string sessionValueText, string totalValueText, bool sessionValuesAreVisible, bool totalValuesAreVisible)
@@ -40,10 +40,10 @@ namespace SessionTracker.Services
             var silver = (unsignedValueInCopper - gold * 10000) / 100;
             var copper = unsignedValueInCopper % 100;
 
-            var goldText         = gold.IntToCulturedString();
+            var goldText         = gold.To0DecimalPlacesCulturedString();
             var silverInTens     = silver / 10;
             var silver2DigitText = silver.ToString("00", CultureInfo.CurrentUICulture);
-            var allInCopperText  = unsignedValueInCopper.IntToCulturedString();
+            var allInCopperText  = unsignedValueInCopper.To0DecimalPlacesCulturedString();
 
             switch (coinDisplayFormat)
             {
