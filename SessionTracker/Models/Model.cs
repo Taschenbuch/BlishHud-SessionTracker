@@ -12,8 +12,7 @@ namespace SessionTracker.Models
         public List<Entry> Entries { get; } = new List<Entry>();
         [JsonIgnore] public bool UiHasToBeUpdated { get; set; }
         [JsonIgnore] public string Version => $"{MajorVersion}.{MinorVersion}";
-        [JsonIgnore] public DateTime SessionStartTime => _sessionStartTime;
-        [JsonIgnore] public TimeSpan SessionDuration => DateTime.Now - _sessionStartTime;
+        [JsonIgnore] public TimeSpan SessionDuration => DateTime.Now - _sessionStartTime; 
 
         public void StartSession()
         {
@@ -28,6 +27,6 @@ namespace SessionTracker.Models
             return Entries.Single(e => e.Id == entryId);
         }
 
-        private DateTime _sessionStartTime = DateTime.MinValue;
+        private DateTime _sessionStartTime; 
     }
 }

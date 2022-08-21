@@ -131,7 +131,7 @@ namespace SessionTracker.Controls
             {
                 if (_gw2ApiManager.HasPermissions(ApiService.NECESSARY_API_TOKEN_PERMISSIONS) == false)
                 {
-                    var tooltip = "Error: Not logged into character or API key missing or API permissions missing.\n" +
+                    var tooltip = "Error: Not logged into character or API key missing or API permissions missing. :(\n" +
                                   $"Required permissions: {string.Join(", ", ApiService.NECESSARY_API_TOKEN_PERMISSIONS)}\n" +
                                   "Retry in 5s…";
 

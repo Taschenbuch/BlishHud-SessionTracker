@@ -36,10 +36,7 @@ namespace SessionTracker.Value.Tooltip
 
         private void InsertNewHistoryEntryAtBeginning(Entry entry)
         {
-            var sessionValueText = entry.CurrencyId == CurrencyIds.COIN_IN_COPPER
-                ? ValueTextService.CreateCoinValueText(entry.Value.Session, _settingService.CoinDisplayFormatSetting.Value)
-                : entry.Value.Session.To0DecimalPlacesCulturedString();
-
+            var sessionValueText = CreateValueText(entry.Value.Session, entry.CurrencyId);
             entry.SessionHistory.Insert(0, $"{DateTime.Now:HH:mm} | {sessionValueText}");
         }
 
@@ -55,10 +52,12 @@ namespace SessionTracker.Value.Tooltip
 
         private string CreateSummaryText(Entry entry)
         {
-            var sessionValuePerHourText = CreateSessionValuePerHourText(entry, _model.SessionDuration);
+            var sessionValuePerHour     = GetValuePerHourAsInteger(entry.Value.Session);
+            var sessionValuePerHourText = CreateValueText(sessionValuePerHour, entry.CurrencyId);
+            var totalValueText          = CreateValueText(entry.Value.Total, entry.CurrencyId);
 
             return $"== TOTAL ==\n" +
-                   $"{entry.Value.Total.To0DecimalPlacesCulturedString()} {entry.LabelText.Localized}\n" +
+                   $"{totalValueText} {entry.LabelText.Localized}\n" +
                    $"\n== {Localization.SummaryTooltip_HeaderCurrentSession} ==\n" +
                    $"{sessionValuePerHourText} {entry.LabelText.Localized} / {Localization.SummaryTooltip_Hour}\n" +
                    $"{_model.SessionDuration:hh':'mm} {Localization.SummaryTooltip_HoursMinutes}\n" +
@@ -67,19 +66,32 @@ namespace SessionTracker.Value.Tooltip
                    $"{string.Join("\n", entry.SessionHistory)}";
         }
 
-        private string CreateSessionValuePerHourText(Entry entry, TimeSpan sessionDuration)
+        private int GetValuePerHourAsInteger(int value)
         {
-            var sessionValuePerHour = sessionDuration.TotalHours == 0
-                ? 0
-                : entry.Value.Session / sessionDuration.TotalHours;
+            if (value == 0)
+                return 0;
 
-            return entry.CurrencyId == CurrencyIds.COIN_IN_COPPER
-                ? ValueTextService.CreateCoinValueText((int)sessionValuePerHour, _settingService.CoinDisplayFormatSetting.Value)
-                : sessionValuePerHour.To0DecimalPlacesCulturedString();
+            // - the value == 0 guard should be actually enough to catch the session start/reset case. Because on session start all values are 0.
+            // - this prevents division by 0 and cases where a value is divided by a very small session duration which would create unrealistic high values
+            var sessionJustStarted = _model.SessionDuration.TotalHours < ONE_MINUTE_IN_HOURS; 
+            if (sessionJustStarted) 
+                return 0;
+
+            // int: because everything that has less than 1/h is not interesting to track anyway.
+            // showing decimals would make the more common >>1/h values harder to read. (e.g. 12345 vs 12345.67)
+            return (int) (value / _model.SessionDuration.TotalHours);
+        }
+
+        private string CreateValueText(int value, int entryCurrencyId)
+        {
+            return entryCurrencyId == CurrencyIds.COIN_IN_COPPER
+                ? ValueTextService.CreateCoinValueText(value, _settingService.CoinDisplayFormatSetting.Value)
+                : value.To0DecimalPlacesCulturedString();
         }
 
         private readonly Model _model;
         private readonly SettingService _settingService;
         private const int MAX_NUMBER_OF_ENTRIES = 12;
+        private const double ONE_MINUTE_IN_HOURS = 0.017;
     }
 }
