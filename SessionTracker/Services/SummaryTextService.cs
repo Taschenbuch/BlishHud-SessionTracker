@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using SessionTracker.Models;
+using SessionTracker.Properties;
 using SessionTracker.Settings.SettingEntries;
 
 namespace SessionTracker.Services
@@ -51,11 +52,11 @@ namespace SessionTracker.Services
 
             return $"== TOTAL ==\n" +
                    $"{entry.Value.Total.IntToCulturedString()} {entry.LabelText.Localized}\n" +
-                   $"\n== CURRENT SESSION ==\n" + // todo übersetzen oder lassen?
-                   $"{sessionValuePerHourText} {entry.LabelText.Localized}/hour\n" +
-                   $"{sessionDuration:hh':'mm} hour : minute\n" + // todo  hour : minute
+                   $"\n== {Localization.SummaryTooltip_HeaderCurrentSession} ==\n" + // todo übersetzen oder lassen?
+                   $"{sessionValuePerHourText} {entry.LabelText.Localized} / {Localization.SummaryTooltip_Hour}\n" +
+                   $"{sessionDuration:hh':'mm} {Localization.SummaryTooltip_HoursMinutes}\n" + // todo  hour : minute
                    $"\n" +
-                   $"time | {entry.LabelText.Localized}\n" + // todo time
+                   $"{Localization.SummaryTooltip_historyTimeColumnTitle} | {entry.LabelText.Localized}\n" + // todo time
                    $"{string.Join("\n", entry.SessionHistory)}";
         }
 
