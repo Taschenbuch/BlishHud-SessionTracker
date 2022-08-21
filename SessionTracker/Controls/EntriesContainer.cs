@@ -10,6 +10,8 @@ using SessionTracker.Models;
 using SessionTracker.Services;
 using SessionTracker.Settings.SettingEntries;
 using SessionTracker.Settings.Window;
+using SessionTracker.Value.Text;
+using SessionTracker.Value.Tooltip;
 using Color = Microsoft.Xna.Framework.Color;
 
 namespace SessionTracker.Controls

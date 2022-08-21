@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace SessionTracker.Services
+namespace SessionTracker.Value
 {
     public static class ValueToStringExtensions
     {

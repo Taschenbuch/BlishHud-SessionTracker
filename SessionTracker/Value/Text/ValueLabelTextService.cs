@@ -5,7 +5,7 @@ using Blish_HUD.Controls;
 using SessionTracker.Models;
 using SessionTracker.Settings.SettingEntries;
 
-namespace SessionTracker.Services
+namespace SessionTracker.Value.Text
 {
     public class ValueLabelTextService : IDisposable
     {
@@ -15,20 +15,20 @@ namespace SessionTracker.Services
                                      Logger logger)
         {
             _valueLabelByEntryId = valueLabelByEntryId;
-            _model               = model;
-            _settingService      = settingService;
-            _logger              = logger;
+            _model = model;
+            _settingService = settingService;
+            _logger = logger;
 
             settingService.SessionValuesAreVisibleSetting.SettingChanged += OnSessionValueVisibilitySettingChanged;
-            settingService.TotalValuesAreVisibleSetting.SettingChanged   += OnTotalValueVisibilitySettingChanged;
-            settingService.CoinDisplayFormatSetting.SettingChanged       += OnCoinDisplayFormatSettingChanged;
+            settingService.TotalValuesAreVisibleSetting.SettingChanged += OnTotalValueVisibilitySettingChanged;
+            settingService.CoinDisplayFormatSetting.SettingChanged += OnCoinDisplayFormatSettingChanged;
         }
 
         public void Dispose()
         {
             _settingService.SessionValuesAreVisibleSetting.SettingChanged -= OnSessionValueVisibilitySettingChanged;
-            _settingService.TotalValuesAreVisibleSetting.SettingChanged   -= OnTotalValueVisibilitySettingChanged;
-            _settingService.CoinDisplayFormatSetting.SettingChanged       -= OnCoinDisplayFormatSettingChanged;
+            _settingService.TotalValuesAreVisibleSetting.SettingChanged -= OnTotalValueVisibilitySettingChanged;
+            _settingService.CoinDisplayFormatSetting.SettingChanged -= OnCoinDisplayFormatSettingChanged;
         }
 
         public void UpdateValueLabelTexts()
@@ -38,7 +38,7 @@ namespace SessionTracker.Services
                 if (entry.CurrencyId == CurrencyIds.COIN_IN_COPPER)
                 {
                     var sessionCoinText = ValueTextService.CreateCoinValueText(entry.Value.Session, _settingService.CoinDisplayFormatSetting.Value);
-                    var totalCoinText   = ValueTextService.CreateCoinValueText(entry.Value.Total, _settingService.CoinDisplayFormatSetting.Value);
+                    var totalCoinText = ValueTextService.CreateCoinValueText(entry.Value.Total, _settingService.CoinDisplayFormatSetting.Value);
 
                     _valueLabelByEntryId[entry.Id].Text = ValueTextService.CreateSessionAndTotalValueText(
                         sessionCoinText,
@@ -50,20 +50,20 @@ namespace SessionTracker.Services
                 {
                     // only calculate session ratio. total ratio would be very incorrect because total deaths come from all game modes over the account life time.
                     var wvwKills = _model.GetEntry(EntryId.WVW_KILLS).Value.Session;
-                    var deaths   = _model.GetEntry(EntryId.DEATHS).Value.Session;
+                    var deaths = _model.GetEntry(EntryId.DEATHS).Value.Session;
                     _valueLabelByEntryId[EntryId.WVW_KDR].Text = ValueTextService.CreateKillsDeathsRatioText(wvwKills, deaths);
                 }
                 else if (entry.Id == EntryId.PVP_KDR)
                 {
                     // only calculate session ratio. total ratio would be very incorrect because total deaths come from all game modes over the account life time.
                     var pvpKills = _model.GetEntry(EntryId.PVP_KILLS).Value.Session;
-                    var deaths   = _model.GetEntry(EntryId.DEATHS).Value.Session;
+                    var deaths = _model.GetEntry(EntryId.DEATHS).Value.Session;
                     _valueLabelByEntryId[EntryId.PVP_KDR].Text = ValueTextService.CreateKillsDeathsRatioText(pvpKills, deaths);
                 }
                 else
                 {
                     var sessionValueText = entry.Value.Session.To0DecimalPlacesCulturedString();
-                    var totalValueText   = entry.Value.Total.To0DecimalPlacesCulturedString();
+                    var totalValueText = entry.Value.Total.To0DecimalPlacesCulturedString();
 
                     _valueLabelByEntryId[entry.Id].Text = ValueTextService.CreateSessionAndTotalValueText(
                         sessionValueText,

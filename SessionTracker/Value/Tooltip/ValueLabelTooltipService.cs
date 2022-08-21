@@ -3,21 +3,21 @@ using Blish_HUD.Controls;
 using SessionTracker.Models;
 using SessionTracker.Settings.SettingEntries;
 
-namespace SessionTracker.Services
+namespace SessionTracker.Value.Tooltip
 {
     public class ValueLabelTooltipService
     {
         public ValueLabelTooltipService(Dictionary<string, Label> valueLabelByEntryId, SettingService settingService)
         {
             _valueLabelByEntryId = valueLabelByEntryId;
-            _summaryTextService  = new ValueTooltipTextService(settingService);
+            _summaryService = new ValueTooltipService(settingService);
         }
 
         public void UpdateSummaryTooltip(Model model)
         {
             foreach (var entry in model.Entries)
             {
-                var tooltipText = _summaryTextService.UpdateAndReturnSummaryText(entry);
+                var tooltipText = _summaryService.UpdateAndReturnSummaryText(entry);
                 SetSummaryTooltips(tooltipText, entry.Id);
             }
 
@@ -28,7 +28,7 @@ namespace SessionTracker.Services
         {
             foreach (var entry in model.Entries)
             {
-                var tooltipText = _summaryTextService.ResetAndReturnSummaryText(entry);
+                var tooltipText = _summaryService.ResetAndReturnSummaryText(entry);
                 SetSummaryTooltips(tooltipText, entry.Id);
             }
 
@@ -46,7 +46,7 @@ namespace SessionTracker.Services
             valueLabelByEntryId[EntryId.PVP_KDR].BasicTooltipText = string.Empty;
         }
 
-        private readonly ValueTooltipTextService _summaryTextService;
+        private readonly ValueTooltipService _summaryService;
         private readonly Dictionary<string, Label> _valueLabelByEntryId;
     }
 }

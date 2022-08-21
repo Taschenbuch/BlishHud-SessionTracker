@@ -4,12 +4,13 @@ using System.Linq;
 using SessionTracker.Models;
 using SessionTracker.Properties;
 using SessionTracker.Settings.SettingEntries;
+using SessionTracker.Value.Text;
 
-namespace SessionTracker.Services
+namespace SessionTracker.Value.Tooltip
 {
-    public class ValueTooltipTextService
+    public class ValueTooltipService
     {
-        public ValueTooltipTextService(SettingService settingService)
+        public ValueTooltipService(SettingService settingService)
         {
             _settingService = settingService;
         }
