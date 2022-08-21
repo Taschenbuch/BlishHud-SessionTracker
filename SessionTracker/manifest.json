@@ -4,7 +4,7 @@
   "namespace": "ecksofa.sessiontracker",
   "package": "SessionTracker.dll",
   "manifest_version": 1,
-  "description": "Window to track different stats in the current gaming session. Stats can be sPvP/WvW kills, kdr, deaths, currencies like karma and skirmish tickets and achievements like captured WvW towers and many more.\nWARNING: The data is read from the GW2 API and is therefore delayed. Expect delays of at least 5 minutes.",
+  "description": "Window to track different stats in your current gaming session for WvW, PvP and PvE. Stats can be:\n- wallet currencies (gold, karma, volatile magic, fractal relics, wvw skirmish tickets, ...)\n- PvP wins/losses, kill/death-ratios, deaths, ...\n- achievements (killed players in PvP/WvW, captured WvW towers, killed dolyaks, ...).\nWARNING: The data is read from the official GW2 API with your API key and is therefore delayed. Expect delays of at least 5 minutes.",
   "dependencies": {
     "bh.blishhud": ">=0.11.7"
   },
