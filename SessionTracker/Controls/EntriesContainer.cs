@@ -35,7 +35,7 @@ namespace SessionTracker.Controls
             CreateUi(settingsWindowService);
 
             _valueLabelTextService = new ValueLabelTextService(_valueLabelByEntryId, _model, settingService, logger);
-            _valueLabelTooltipService = new ValueLabelTooltipService(_valueLabelByEntryId, _settingService);
+            _valueLabelTooltipService = new ValueLabelTooltipService(_valueLabelByEntryId, model, _settingService);
             OnDebugModeIsEnabledSettingChanged(null, null);
 
             settingService.FontSizeIndexSetting.SettingChanged      += OnFontSizeIndexSettingChanged;

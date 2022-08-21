@@ -7,10 +7,10 @@ namespace SessionTracker.Value.Tooltip
 {
     public class ValueLabelTooltipService
     {
-        public ValueLabelTooltipService(Dictionary<string, Label> valueLabelByEntryId, SettingService settingService)
+        public ValueLabelTooltipService(Dictionary<string, Label> valueLabelByEntryId, Model model, SettingService settingService)
         {
             _valueLabelByEntryId = valueLabelByEntryId;
-            _summaryService = new ValueTooltipService(settingService);
+            _summaryService      = new ValueTooltipService(model, settingService);
         }
 
         public void UpdateSummaryTooltip(Model model)
