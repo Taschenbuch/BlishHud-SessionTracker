@@ -164,12 +164,20 @@ namespace SessionTracker.Settings.SettingEntries
                 () => $"Show or hide sessions tracker UI. Has the same effect as clicking the menu icon or using the key binding. " +
                       $"Whether the UI is really shown depends on further settings like '{ON_WORLD_MAP_SETTING_DISPLAY_NAME}'.");
 
+            HideStatsWithValueZeroSetting = settings.DefineSetting(
+                "hide stats with value zero",
+                false,
+                () => "hide stats with value = 0",
+                () => "Stats with a session value of 0 are hidden until the session value changes to a non-zero value. " +
+                      "At the start of a session all values will be 0 so the whole UI is hidden.");
+
             var internalSettings = settings.AddSubCollection("internal settings (not visible in UI)");
             SettingsVersionSetting = internalSettings.DefineSetting("settings version", 1);
             XMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location x", 0.2f);
             YMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location y", 0.2f);
         }
 
+        public SettingEntry<bool> HideStatsWithValueZeroSetting { get; }
         public SettingEntry<int> ScrollbarFixDelay { get; }
         public SettingEntry<CoinDisplayFormat> CoinDisplayFormatSetting { get; }
         public SettingEntry<bool> DebugModeIsEnabledSetting { get; }

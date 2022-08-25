@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Blish_HUD;
 using Blish_HUD.Controls;
 using Blish_HUD.Modules.Managers;
 using Microsoft.Xna.Framework;
+using SessionTracker.Controls.Hint;
 using SessionTracker.Models;
 using SessionTracker.Services;
 using SessionTracker.Settings.SettingEntries;
@@ -38,21 +38,23 @@ namespace SessionTracker.Controls
             _valueLabelTooltipService = new ValueLabelTooltipService(_valueLabelByEntryId, model, _settingService);
             OnDebugModeIsEnabledSettingChanged(null, null);
 
-            settingService.FontSizeIndexSetting.SettingChanged      += OnFontSizeIndexSettingChanged;
-            settingService.BackgroundOpacitySetting.SettingChanged  += OnBackgroundOpacitySettingChanged;
-            settingService.ValueLabelColorSetting.SettingChanged    += OnValueLabelColorSettingChanged;
-            settingService.DebugModeIsEnabledSetting.SettingChanged += OnDebugModeIsEnabledSettingChanged;
-            GameService.Overlay.UserLocaleChanged                   += OnUserChangedLanguageInBlishSettings;
+            settingService.HideStatsWithValueZeroSetting.SettingChanged += OnHideStatsWithValueZeroSettingChanged;
+            settingService.FontSizeIndexSetting.SettingChanged          += OnFontSizeIndexSettingChanged;
+            settingService.BackgroundOpacitySetting.SettingChanged      += OnBackgroundOpacitySettingChanged;
+            settingService.ValueLabelColorSetting.SettingChanged        += OnValueLabelColorSettingChanged;
+            settingService.DebugModeIsEnabledSetting.SettingChanged     += OnDebugModeIsEnabledSettingChanged;
+            GameService.Overlay.UserLocaleChanged                       += OnUserChangedLanguageInBlishSettings;
         }
         
         protected override void DisposeControl()
         {
             _valueLabelTextService.Dispose();
-            _settingService.FontSizeIndexSetting.SettingChanged      -= OnFontSizeIndexSettingChanged;
-            _settingService.BackgroundOpacitySetting.SettingChanged  -= OnBackgroundOpacitySettingChanged;
-            _settingService.ValueLabelColorSetting.SettingChanged    -= OnValueLabelColorSettingChanged;
-            _settingService.DebugModeIsEnabledSetting.SettingChanged -= OnDebugModeIsEnabledSettingChanged;
-            GameService.Overlay.UserLocaleChanged                    -= OnUserChangedLanguageInBlishSettings;
+            _settingService.HideStatsWithValueZeroSetting.SettingChanged -= OnHideStatsWithValueZeroSettingChanged;
+            _settingService.FontSizeIndexSetting.SettingChanged          -= OnFontSizeIndexSettingChanged;
+            _settingService.BackgroundOpacitySetting.SettingChanged      -= OnBackgroundOpacitySettingChanged;
+            _settingService.ValueLabelColorSetting.SettingChanged        -= OnValueLabelColorSettingChanged;
+            _settingService.DebugModeIsEnabledSetting.SettingChanged     -= OnDebugModeIsEnabledSettingChanged;
+            GameService.Overlay.UserLocaleChanged                        -= OnUserChangedLanguageInBlishSettings;
 
             base.DisposeControl();
         }
@@ -76,7 +78,9 @@ namespace SessionTracker.Controls
             if (_model.UiHasToBeUpdated)
             {
                 _model.UiHasToBeUpdated = false;
-                UpdateEntryVisibilityEtcButNotValues();
+                ShowOrHideEntries();
+                _rootFlowPanel.HideScrollbarIfExists();
+                _hintFlowPanel.ShowHintWhenAllEntriesAreHidden();
             }
 
             _elapsedTimeInMilliseconds += gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -141,10 +145,10 @@ namespace SessionTracker.Controls
 
                 await ApiService.UpdateTotalValuesInModel(_model, _gw2ApiManager);
                 _model.StartSession();
-
+                
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _valueLabelTooltipService.ResetSummaryTooltip(_model);
-
+                
                 _isInitialized = true;
             }
             catch (Exception e)
@@ -184,6 +188,7 @@ namespace SessionTracker.Controls
 
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _valueLabelTooltipService.UpdateSummaryTooltip(_model);
+
             }
             catch (Exception e)
             {
@@ -199,36 +204,34 @@ namespace SessionTracker.Controls
             }
         }
 
-        private void UpdateEntryVisibilityEtcButNotValues()
+        private void ShowOrHideEntries()
         {
             _titlesFlowPanel.ClearChildren();
             _valuesFlowPanel.ClearChildren();
 
-            var visibleEntries      = _model.Entries.Where(e => e.IsVisible).ToList();
-            var allEntriesAreHidden = visibleEntries.Any() == false;
-            _hintFlowPanel.SetVisibility(allEntriesAreHidden);
+            var visibleEntries = _model.Entries.WhereUserSetToBeVisible();
+
+            if (_settingService.HideStatsWithValueZeroSetting.Value)
+                visibleEntries = visibleEntries.WhereSessionValueIsNonZero();
 
             foreach (var entry in visibleEntries)
             {
                 _titleFlowPanelByEntryId[entry.Id].Show();
                 _valueLabelByEntryId[entry.Id].Parent = _valuesFlowPanel;
             }
-
-            _rootFlowPanel.HideScrollbarIfExists();
         }
 
         private void CreateUi(SettingsWindowService settingsWindowService)
         {
-            var allEntriesAreHidden = _model.Entries.Any(e => e.IsVisible) == false;
 
-            _hintFlowPanel = new HintFlowPanel(settingsWindowService, _settingService, this)
+            _hintFlowPanel = new HintFlowPanel(_model.Entries, settingsWindowService, _textureService, _settingService, this)
             {
                 FlowDirection    = ControlFlowDirection.SingleTopToBottom,
                 WidthSizingMode  = SizingMode.AutoSize,
                 HeightSizingMode = SizingMode.AutoSize,
             };
 
-            _hintFlowPanel.SetVisibility(allEntriesAreHidden);
+            _hintFlowPanel.ShowHintWhenAllEntriesAreHidden();
 
             _rootFlowPanel = new RootFlowPanel(this, _settingService);
 
@@ -299,6 +302,11 @@ namespace SessionTracker.Controls
         private void OnBackgroundOpacitySettingChanged(object sender, ValueChangedEventArgs<int> valueChangedEventArgs)
         {
             BackgroundColor = new Color(Color.Black, _settingService.BackgroundOpacitySetting.Value);
+        }
+
+        private void OnHideStatsWithValueZeroSettingChanged(object sender, ValueChangedEventArgs<bool> e)
+        {
+            _model.UiHasToBeUpdated = true;
         }
 
         private readonly Gw2ApiManager _gw2ApiManager;

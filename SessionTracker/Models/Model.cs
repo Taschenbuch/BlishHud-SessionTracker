@@ -10,7 +10,7 @@ namespace SessionTracker.Models
         public int MajorVersion { get; set; } = 1;
         public int MinorVersion { get; set; } = 0;
         public List<Entry> Entries { get; } = new List<Entry>();
-        [JsonIgnore] public bool UiHasToBeUpdated { get; set; }
+        [JsonIgnore] public bool UiHasToBeUpdated { get; set; } // i hate it... but using an event would suck too
         [JsonIgnore] public string Version => $"{MajorVersion}.{MinorVersion}";
         [JsonIgnore] public TimeSpan SessionDuration => DateTime.Now - _sessionStartTime; 
 

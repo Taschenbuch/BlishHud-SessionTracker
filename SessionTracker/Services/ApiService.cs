@@ -47,6 +47,8 @@ namespace SessionTracker.Services
 
             foreach (var entry in model.Entries.Where(v => v.IsAchievement))
                 entry.Value.Total = GetAchievementValue(achievementsTask, entry.AchievementId);
+
+            model.UiHasToBeUpdated = true;
         }
 
         private static int GetCurrencyValue(Task<IApiV2ObjectList<AccountCurrency>> walletTask, int currencyId)
