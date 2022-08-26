@@ -179,8 +179,8 @@ namespace SessionTracker.Controls
                 {
                     _isInitialized                    = false;
                     _initializeIntervalInMilliseconds = INSTANT_INITIALIZE_INTERVAL_IN_MILLISECONDS;
-                    _logger.Error("Error when fetching values: api token is missing permissions. " +
-                                  "Possible reasons: api key got removed or new api key is missing permissions.");
+                    _logger.Warn("Error when fetching values: api token is missing permissions. " +
+                                 "Possible reasons: api key got removed or new api key is missing permissions.");
                     return;
                 }
 

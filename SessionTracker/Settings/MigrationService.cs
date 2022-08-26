@@ -43,11 +43,11 @@ namespace SessionTracker.Settings
 
             if (refModel.MajorVersion < persistedModel.MajorVersion)
             {
-                logger.Error($"Error: ref MajorVersion <  persisted MajorVersion. " +
-                              $"This can happen when previously a newer module version was installed. " +
-                              $"This module version will not be able to handle the new data format. " +
-                              $"Because of that it will use a fresh model from the ref folder instead. " +
-                              $"{settingsResetText} {versionText} :(");
+                logger.Warn($"Error: ref MajorVersion <  persisted MajorVersion. " +
+                            $"This can happen when previously a newer module version was installed. " +
+                            $"This module version will not be able to handle the new data format. " +
+                            $"Because of that it will use a fresh model from the ref folder instead. " +
+                            $"{settingsResetText} {versionText} :(");
 
                 return refModel;
             }
