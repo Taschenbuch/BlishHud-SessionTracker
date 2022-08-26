@@ -47,6 +47,8 @@ namespace SessionTracker.Value.Text
 
             switch (coinDisplayFormat)
             {
+                case CoinDisplayFormat.Xc:
+                    return $"{sign}{allInCopperText}c";
                 case CoinDisplayFormat.Xg:
                     return gold == 0
                         ? "0g"
@@ -60,13 +62,7 @@ namespace SessionTracker.Value.Text
                         ? "0g"
                         : $"{sign}{goldText}g{silver2DigitText}";
                 case CoinDisplayFormat.XgXsXc:
-                    return gold == 0 && silver == 0 && copper == 0
-                        ? "0g\u20090s\u20090c"
-                        : $"{sign}{goldText}g\u2009{silver}s\u2009{copper}c";
-                case CoinDisplayFormat.Xc:
-                    return $"{sign}{allInCopperText}c";
                 default:
-                    //logger.Error($"Error: unknown coinDisplayFormat: {coinDisplayFormat}. Use XgXsXc format as fallback");
                     return gold == 0 && silver == 0 && copper == 0
                         ? "0g\u20090s\u20090c"
                         : $"{sign}{goldText}g\u2009{silver}s\u2009{copper}c";
