@@ -36,25 +36,27 @@ namespace SessionTracker.Controls
 
             _valueLabelTextService = new ValueLabelTextService(_valueLabelByEntryId, _model, settingService, logger);
             _valueLabelTooltipService = new ValueLabelTooltipService(_valueLabelByEntryId, model, _settingService);
-            OnDebugModeIsEnabledSettingChanged(null, null);
+            OnDebugApiIntervalEnabledSettingChanged(null, null);
 
-            settingService.HideStatsWithValueZeroSetting.SettingChanged += OnHideStatsWithValueZeroSettingChanged;
-            settingService.FontSizeIndexSetting.SettingChanged          += OnFontSizeIndexSettingChanged;
-            settingService.BackgroundOpacitySetting.SettingChanged      += OnBackgroundOpacitySettingChanged;
-            settingService.ValueLabelColorSetting.SettingChanged        += OnValueLabelColorSettingChanged;
-            settingService.DebugModeIsEnabledSetting.SettingChanged     += OnDebugModeIsEnabledSettingChanged;
-            GameService.Overlay.UserLocaleChanged                       += OnUserChangedLanguageInBlishSettings;
+            settingService.HideStatsWithValueZeroSetting.SettingChanged  += OnHideStatsWithValueZeroSettingChanged;
+            settingService.FontSizeIndexSetting.SettingChanged           += OnFontSizeIndexSettingChanged;
+            settingService.BackgroundOpacitySetting.SettingChanged       += OnBackgroundOpacitySettingChanged;
+            settingService.ValueLabelColorSetting.SettingChanged         += OnValueLabelColorSettingChanged;
+            settingService.DebugApiIntervalEnabledSetting.SettingChanged += OnDebugApiIntervalEnabledSettingChanged;
+            settingService.DebugApiIntervalValueSetting.SettingChanged   += OnDebugApiIntervalValueSettingChanged;
+            GameService.Overlay.UserLocaleChanged                        += OnUserChangedLanguageInBlishSettings;
         }
         
         protected override void DisposeControl()
         {
             _valueLabelTextService.Dispose();
-            _settingService.HideStatsWithValueZeroSetting.SettingChanged -= OnHideStatsWithValueZeroSettingChanged;
-            _settingService.FontSizeIndexSetting.SettingChanged          -= OnFontSizeIndexSettingChanged;
-            _settingService.BackgroundOpacitySetting.SettingChanged      -= OnBackgroundOpacitySettingChanged;
-            _settingService.ValueLabelColorSetting.SettingChanged        -= OnValueLabelColorSettingChanged;
-            _settingService.DebugModeIsEnabledSetting.SettingChanged     -= OnDebugModeIsEnabledSettingChanged;
-            GameService.Overlay.UserLocaleChanged                        -= OnUserChangedLanguageInBlishSettings;
+            _settingService.HideStatsWithValueZeroSetting.SettingChanged  -= OnHideStatsWithValueZeroSettingChanged;
+            _settingService.FontSizeIndexSetting.SettingChanged           -= OnFontSizeIndexSettingChanged;
+            _settingService.BackgroundOpacitySetting.SettingChanged       -= OnBackgroundOpacitySettingChanged;
+            _settingService.ValueLabelColorSetting.SettingChanged         -= OnValueLabelColorSettingChanged;
+            _settingService.DebugApiIntervalEnabledSetting.SettingChanged -= OnDebugApiIntervalEnabledSettingChanged;
+            _settingService.DebugApiIntervalValueSetting.SettingChanged   -= OnDebugApiIntervalValueSettingChanged;
+            GameService.Overlay.UserLocaleChanged                         -= OnUserChangedLanguageInBlishSettings;
 
             base.DisposeControl();
         }
@@ -278,11 +280,17 @@ namespace SessionTracker.Controls
                 titleFlowPanel.Value.UpdateLabelText();
         }
 
-        private void OnDebugModeIsEnabledSettingChanged(object sender, ValueChangedEventArgs<bool> e)
+        private void OnDebugApiIntervalEnabledSettingChanged(object sender, ValueChangedEventArgs<bool> e)
         {
-            _updateIntervalInMilliseconds = _settingService.DebugModeIsEnabledSetting.Value
-                ? DEBUG_UPDATE_INTERVAL_IN_MILLISECONDS
+            _updateIntervalInMilliseconds = _settingService.DebugApiIntervalEnabledSetting.Value
+                ? _settingService.DebugApiIntervalValueSetting.Value
                 : REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS;
+        }
+
+        private void OnDebugApiIntervalValueSettingChanged(object sender, ValueChangedEventArgs<int> e)
+        {
+            if (_settingService.DebugApiIntervalEnabledSetting.Value)
+                _updateIntervalInMilliseconds = _settingService.DebugApiIntervalValueSetting.Value;
         }
 
         private void OnValueLabelColorSettingChanged(object sender, ValueChangedEventArgs<ColorType> e)
@@ -330,7 +338,6 @@ namespace SessionTracker.Controls
         private int _initializeIntervalInMilliseconds = INSTANT_INITIALIZE_INTERVAL_IN_MILLISECONDS;
         private int _updateIntervalInMilliseconds = REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS;
         private const int REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 60 * 1000;
-        private const int DEBUG_UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 1000;
         private const int INSTANT_INITIALIZE_INTERVAL_IN_MILLISECONDS = 0;
         private const int RETRY_INITIALIZE_INTERVAL_IN_MILLISECONDS = 5 * 1000;
         private const int MAX_WAIT_TIME_FOR_API_TOKEN_AFTER_MODULE_STARTUP_IN_MILLISECONDS = 15 * 1000;

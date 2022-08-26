@@ -17,10 +17,27 @@ namespace SessionTracker.Settings.Window
             _rootFlowPanel = ControlFactory.CreateSettingsRootFlowPanel(buildPanel);
 
             var debugSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Debug (developer only settings)", _rootFlowPanel);
-            ControlFactory.CreateSetting(debugSectionFlowPanel, buildPanel.Width, _settingService.DebugModeIsEnabledSetting);
+            ControlFactory.CreateSetting(debugSectionFlowPanel, buildPanel.Width, _settingService.DebugApiIntervalEnabledSetting);
+            ControlFactory.CreateSetting(debugSectionFlowPanel, buildPanel.Width, _settingService.DebugApiIntervalValueSetting);
+
+            _apiIntervalInMillisecondsLabel = new Label()
+            {
+                AutoSizeHeight = true,
+                AutoSizeWidth  = true,
+                Parent = debugSectionFlowPanel
+            };
+
+            OnDebugApiIntervalValueSettingChanged(null, null);
+            _settingService.DebugApiIntervalValueSetting.SettingChanged += OnDebugApiIntervalValueSettingChanged;
         }
-        
+
+        private void OnDebugApiIntervalValueSettingChanged(object sender, Blish_HUD.ValueChangedEventArgs<int> e)
+        {
+            _apiIntervalInMillisecondsLabel.Text = $"api interval: {_settingService.DebugApiIntervalValueSetting.Value} ms";
+        }
+
         private readonly SettingService _settingService;
         private FlowPanel _rootFlowPanel;
+        private Label _apiIntervalInMillisecondsLabel;
     }
 }

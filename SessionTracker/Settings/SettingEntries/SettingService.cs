@@ -149,13 +149,19 @@ namespace SessionTracker.Settings.SettingEntries
 
             ScrollbarFixDelay.SetRange(50, 500);
 
-            DebugModeIsEnabledSetting = settings.DefineSetting(
+            DebugApiIntervalEnabledSetting = settings.DefineSetting(
                 "debug mode",
                 false,
-                () => "debug mode",
-                () => "Increases polling rate beyond api cache time limit (polls every 5 seconds instead of every 5 minutes) and it may have other effects, too. " +
-                      "This won't update stats faster! " +
-                      "It is only useful for debugging purposes for the module developer. So better don't enable this checkbox. Seriously! Don't touch it!");
+                () => "use debug api interval",
+                () => "Use debug api interval instead of normal api interval.");
+
+            DebugApiIntervalValueSetting = settings.DefineSetting(
+                "debug api interval",
+                5 * 1000,
+                () => "debug api interval",
+                () => "Increases polling rate beyond api cache time limit.");
+
+            DebugApiIntervalValueSetting.SetRange(1000, 20 * 1000);
 
             UiIsVisibleSetting = settings.DefineSetting(
                 "ui is visible",
@@ -177,10 +183,11 @@ namespace SessionTracker.Settings.SettingEntries
             YMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location y", 0.2f);
         }
 
+        public SettingEntry<int> DebugApiIntervalValueSetting { get; }
         public SettingEntry<bool> HideStatsWithValueZeroSetting { get; }
         public SettingEntry<int> ScrollbarFixDelay { get; }
         public SettingEntry<CoinDisplayFormat> CoinDisplayFormatSetting { get; }
-        public SettingEntry<bool> DebugModeIsEnabledSetting { get; }
+        public SettingEntry<bool> DebugApiIntervalEnabledSetting { get; }
         public SettingEntry<int> StatTitlePaddingSetting { get; }
         public SettingEntry<int> UiHeightSetting { get; }
         public SettingEntry<bool> UiHeightIsFixedSetting { get; }
