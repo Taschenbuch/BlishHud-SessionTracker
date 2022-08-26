@@ -17,6 +17,7 @@ namespace SessionTracker.Services
             _contentsManager = contentsManager;
             _logger          = logger;
 
+            DebugTabTexture             = contentsManager.GetTexture(@"settingsWindow\debugTab_440025.png");
             VisibilityTabTexture        = contentsManager.GetTexture(@"settingsWindow\visibilityTab.png");
             StatsTabTexture             = contentsManager.GetTexture(@"settingsWindow\statsTab_156909.png");
             GeneralTabTexture           = contentsManager.GetTexture(@"settingsWindow\generalTab_156736.png");
@@ -35,6 +36,7 @@ namespace SessionTracker.Services
 
         public void Dispose()
         {
+            DebugTabTexture?.Dispose();
             VisibilityTabTexture?.Dispose();
             GeneralTabTexture?.Dispose();
             StatsTabTexture?.Dispose();
@@ -53,6 +55,7 @@ namespace SessionTracker.Services
                 entryIcon?.Dispose();
         }
 
+        public Texture2D DebugTabTexture { get; }
         public Texture2D HiddenStatsTexture { get; }
         public Texture2D SettingsWindowEmblemTexture { get; }
         public Texture2D StatsTabTexture { get; }

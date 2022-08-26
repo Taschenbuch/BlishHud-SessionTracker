@@ -36,6 +36,12 @@ namespace SessionTracker.Settings.Window
             _settingsWindow.Tabs.Add(_statsTab);
             _settingsWindow.Tabs.Add(_generalTab);
             _settingsWindow.Tabs.Add(_visibilityTab);
+
+#if DEBUG
+            _debugSettingsTabView = new DebugSettingsTabView(settingService);
+            _debugTab = new Tab(textureService.DebugTabTexture, () => _debugSettingsTabView, "Debug");
+            _settingsWindow.Tabs.Add(_debugTab);
+#endif
         }
 
         public void Dispose()
@@ -58,8 +64,10 @@ namespace SessionTracker.Settings.Window
         private readonly StatsSettingsTabView _statsSettingsTabView;
         private readonly GeneralSettingsTabView _generalSettingsTabView;
         private readonly VisibilitySettingsTabView _visibilitySettingsTabView;
+        private readonly DebugSettingsTabView _debugSettingsTabView;
         private readonly Tab _statsTab;
         private readonly Tab _generalTab;
         private readonly Tab _visibilityTab;
+        private readonly Tab _debugTab;
     }
 }

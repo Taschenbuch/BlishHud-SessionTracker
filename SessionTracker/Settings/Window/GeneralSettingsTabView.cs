@@ -34,9 +34,6 @@ namespace SessionTracker.Settings.Window
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.CoinDisplayFormatSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.HideStatsWithValueZeroSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.ScrollbarFixDelay);
-#if DEBUG
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.DebugModeIsEnabledSetting);
-#endif
         }
 
         private static void CreatePatchNotesButton(Container parent)
