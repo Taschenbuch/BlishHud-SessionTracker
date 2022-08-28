@@ -8,7 +8,9 @@ namespace SessionTracker.Models
     public class LocalizedText
     {
         public Dictionary<Locale, string> LocalizedTextByLocale { get; set; } = new Dictionary<Locale, string>();
-        [JsonIgnore] public string English
+
+        [JsonIgnore]
+        public string English
         {
             set => SetLocalizedText(value, Locale.English);
             get => GetLocalizedText(Locale.English);
@@ -18,12 +20,19 @@ namespace SessionTracker.Models
 
         private string GetLocalizedText(Locale locale)
         {
-            var localizationExists = LocalizedTextByLocale.ContainsKey(locale) 
+            var localizationExists = LocalizedTextByLocale.ContainsKey(locale)
                                      && string.IsNullOrWhiteSpace(LocalizedTextByLocale[locale]) == false;
-            
-            return localizationExists
-                ? LocalizedTextByLocale[locale]
-                : LocalizedTextByLocale[Locale.English];
+
+            if (localizationExists)
+                return LocalizedTextByLocale[locale];
+
+
+            var englishLocalizationCanBeUsedAsFallback = LocalizedTextByLocale.ContainsKey(Locale.English)
+                                                         && string.IsNullOrWhiteSpace(LocalizedTextByLocale[Locale.English]) == false;
+
+            return englishLocalizationCanBeUsedAsFallback
+                ? LocalizedTextByLocale[Locale.English]
+                : string.Empty;
         }
 
         public void SetLocalizedText(string localizedText, Locale locale)

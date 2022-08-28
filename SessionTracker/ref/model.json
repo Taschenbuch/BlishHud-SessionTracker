@@ -14,10 +14,10 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Deaths\nCombined deaths from all sources (WvW, sPvP, PvE)",
-          "German": "Tode\nAufsummierte Tode aus allen Quellen (WvW, sPvP, PvE)",
-          "French": "Morts\nNombre total de morts venant de toutes les sources (JcE, JcJ, McM)",
-          "Spanish": "Muertes\nNúmero total de muertes de todas las fuentes (McM, JcJ, JcE)"
+          "English": "Combined deaths from all sources (WvW, sPvP, PvE)",
+          "German": "Aufsummierte Tode aus allen Quellen (WvW, sPvP, PvE)",
+          "French": "Nombre total de morts venant de toutes les sources (JcE, JcJ, McM)",
+          "Spanish": "Número total de muertes de todas las fuentes (McM, JcJ, JcE)"
         }
       },
       "AchievementId": 0,
@@ -37,12 +37,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "PvP kills",
-          "German": "PvP Feinde besiegt",
-          "French": "Victimes JcJ",
-          "Spanish": "PvP bajas"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 239,
       "CurrencyId": 0,
@@ -85,12 +80,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "PvP total wins",
-          "German": "PvP gesamt gewonnen",
-          "French": "Victoires JcJ",
-          "Spanish": "PvP Victorias totales"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 0,
       "CurrencyId": 0,
@@ -109,12 +99,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "PvP total losses",
-          "German": "PvP gesamt verloren",
-          "French": "Défaites JcJ",
-          "Spanish": "PvP Derrotas totales"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 0,
       "CurrencyId": 0,
@@ -133,12 +118,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "PvP ranked wins",
-          "German": "PvP mit rangwertung gewonnen",
-          "French": "Victoires JcJ classées",
-          "Spanish": "PvP Victorias en clasificatorias"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 0,
       "CurrencyId": 0,
@@ -157,12 +137,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "PvP ranked losses",
-          "German": "PvP mit rangwertung verloren",
-          "French": "Défaites JcJ classées",
-          "Spanish": "PvP Derrotas en clasificatorias"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 0,
       "CurrencyId": 0,
@@ -181,12 +156,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "PvP unranked wins",
-          "German": "PvP ohne rangwertung gewonnen",
-          "French": "Victoires JcJ non classées",
-          "Spanish": "PvP Victorias en libres"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 0,
       "CurrencyId": 0,
@@ -205,12 +175,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "PvP unranked losses",
-          "German": "PvP ohne rangwertung verloren",
-          "French": "Défaites JcJ non classées",
-          "Spanish": "PvP Derrotas en libres"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 0,
       "CurrencyId": 0,
@@ -229,12 +194,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "PvP custom wins",
-          "German": "Pvp selbsterstellt gewonnen",
-          "French": "Victoires JcJ personnalisé",
-          "Spanish": "PvP Victorias en personalidadas"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 0,
       "CurrencyId": 0,
@@ -253,12 +213,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "PvP custom losses",
-          "German": "PvP selbsterstellt verloren",
-          "French": "Défaites JcJ personnalisé",
-          "Spanish": "PvP Derrotas en personalidadas"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 0,
       "CurrencyId": 0,
@@ -277,12 +232,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "PvP rank",
-          "German": "PvP rang",
-          "French": "Rang JcJ",
-          "Spanish": "PvP Rango"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 0,
       "CurrencyId": 0,
@@ -301,12 +251,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "PvP ranking points",
-          "German": "PvP rang punkte",
-          "French": "Points de classement JcJ",
-          "Spanish": "PvP Puntos de clasificación"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 0,
       "CurrencyId": 0,
@@ -325,12 +270,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "WvW kills",
-          "German": "WvW Feinde besiegt",
-          "French": "Victimes McM",
-          "Spanish": "McM Bajas"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 283,
       "CurrencyId": 0,
@@ -373,12 +313,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "WvW rank",
-          "German": "WvW rang",
-          "French": "Rang McM",
-          "Spanish": "McM Rango"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 0,
       "CurrencyId": 0,
@@ -421,12 +356,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Dolyaks killed",
-          "German": "Karawane besiegt",
-          "French": "Caravanes tuées",
-          "Spanish": "Caravanas asesinadas"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 288,
       "CurrencyId": 0,
@@ -445,12 +375,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Dolyaks escorted",
-          "German": "Karawane verteidgt",
-          "French": "Caravanes escortées",
-          "Spanish": "Caravanas escoltadas"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 285,
       "CurrencyId": 0,
@@ -469,12 +394,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Camps captured",
-          "German": "Lager erobert",
-          "French": "Camps capturés",
-          "Spanish": "Campamentos capturados"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 291,
       "CurrencyId": 0,
@@ -493,12 +413,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Camps defended",
-          "German": "Lager verteidigt",
-          "French": "Camps défendus",
-          "Spanish": "Campamentos defendidos"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 310,
       "CurrencyId": 0,
@@ -517,12 +432,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Towers captured",
-          "German": "Türme erobert",
-          "French": "Tours capturées",
-          "Spanish": "Torres capturadas"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 297,
       "CurrencyId": 0,
@@ -541,12 +451,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Towers defended",
-          "German": "Türme verteidigt",
-          "French": "Tours défendues",
-          "Spanish": "Torres defendidas"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 322,
       "CurrencyId": 0,
@@ -565,12 +470,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Keeps captured",
-          "German": "Festungen erobert",
-          "French": "Forts capturés",
-          "Spanish": "Fortalezas capturadas"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 300,
       "CurrencyId": 0,
@@ -589,12 +489,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Keeps defended",
-          "German": "Festungen verteidgt",
-          "French": "Forts défendus",
-          "Spanish": "Fortalezas defendidas"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 316,
       "CurrencyId": 0,
@@ -613,12 +508,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Castles captured",
-          "German": "Schloss erobert",
-          "French": "Châteaux capturés",
-          "Spanish": "Castillos capturados"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 294,
       "CurrencyId": 0,
@@ -637,12 +527,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Castles defended",
-          "German": "Schloss verteidgt",
-          "French": "Châteaux défendus",
-          "Spanish": "Castillos defendidos"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 313,
       "CurrencyId": 0,
@@ -661,12 +546,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Objectives captured",
-          "German": "Objekte erobert",
-          "French": "Objectifs capturés",
-          "Spanish": "Objetivos capturados"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 303,
       "CurrencyId": 0,
@@ -685,12 +565,7 @@
         }
       },
       "LabelTooltip": {
-        "LocalizedTextByLocale": {
-          "English": "Objectives defended",
-          "German": "Objekte verteidigt",
-          "French": "Objectifs défendus",
-          "Spanish": "Objetivos defendidos"
-        }
+        "LocalizedTextByLocale": {}
       },
       "AchievementId": 319,
       "CurrencyId": 0,
@@ -712,12 +587,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Coin\nThe primary currency of Tyria. Spent at vendors throughout the world.",
-          "French": "Pièce\nLa monnaie principale de la Tyrie. A dépenser chez les marchands du monde entier.",
-          "German": "Münze\nDie Hauptwährung in Tyria. Können bei Händlern in der ganzen Welt ausgegeben werden.",
-          "Spanish": "Moneda\nLa divisa primaria de Tyria. Se pueden gastar con los comerciantes del mundo.",
-          "Chinese": "钱币\n泰瑞亚的主要流通货币。可在全世界的商人那里使用。",
-          "Korean": "Coin\nThe primary currency of Tyria. Spent at vendors throughout the world."
+          "English": "The primary currency of Tyria. Spent at vendors throughout the world.",
+          "French": "La monnaie principale de la Tyrie. A dépenser chez les marchands du monde entier.",
+          "German": "Die Hauptwährung in Tyria. Können bei Händlern in der ganzen Welt ausgegeben werden.",
+          "Spanish": "La divisa primaria de Tyria. Se pueden gastar con los comerciantes del mundo.",
+          "Chinese": "泰瑞亚的主要流通货币。可在全世界的商人那里使用。",
+          "Korean": "The primary currency of Tyria. Spent at vendors throughout the world."
         }
       },
       "AchievementId": 0,
@@ -740,12 +615,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Karma\nEarned through various activities. Spent at vendors throughout the world.",
-          "French": "Karma\nÀ gagner dans diverses activités. À dépenser chez les marchands du monde entier.",
-          "German": "Karma\nKann durch verschiedene Aktivitäten verdient und bei Händlern in der ganzen Welt ausgegeben werden.",
-          "Spanish": "Karma\nSe puede conseguir a través de varias actividades. Se pueden gastar con los comerciantes del mundo.",
-          "Chinese": "业力\n从各种活动获得。可在全世界的商人那里使用。",
-          "Korean": "Karma\nEarned through various activities. Spent at vendors throughout the world."
+          "English": "Earned through various activities. Spent at vendors throughout the world.",
+          "French": "À gagner dans diverses activités. À dépenser chez les marchands du monde entier.",
+          "German": "Kann durch verschiedene Aktivitäten verdient und bei Händlern in der ganzen Welt ausgegeben werden.",
+          "Spanish": "Se puede conseguir a través de varias actividades. Se pueden gastar con los comerciantes del mundo.",
+          "Chinese": "从各种活动获得。可在全世界的商人那里使用。",
+          "Korean": "Earned through various activities. Spent at vendors throughout the world."
         }
       },
       "AchievementId": 0,
@@ -768,12 +643,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Laurel\nEarned through the Log-in Reward Chest. Spent in major cities. Used to purchase various rewards.",
-          "French": "Laurier\nÀ gagner via le coffre de récompense de connexion. À dépenser dans les villes principales. À utiliser pour acheter diverses récompenses.",
-          "German": "Lorbeer\nKann durch Login-Belohnungstruhen verdient werden. Kann in den großen Städten ausgegeben werden. Verwendbar zum Kauf verschiedener Belohnungen.",
-          "Spanish": "Laurel\nSe pueden conseguir en el cofre de recompensas por iniciar sesión. Se pueden gastar en las ciudades principales. Se pueden usar para comprar varias recompensas.",
-          "Chinese": "桂冠\n打开登陆奖励宝箱即可获得。可在主城里购买各种奖励。",
-          "Korean": "Laurel\nEarned through the Log-in Reward Chest. Spent in major cities. Used to purchase various rewards."
+          "English": "Earned through the Log-in Reward Chest. Spent in major cities. Used to purchase various rewards.",
+          "French": "À gagner via le coffre de récompense de connexion. À dépenser dans les villes principales. À utiliser pour acheter diverses récompenses.",
+          "German": "Kann durch Login-Belohnungstruhen verdient werden. Kann in den großen Städten ausgegeben werden. Verwendbar zum Kauf verschiedener Belohnungen.",
+          "Spanish": "Se pueden conseguir en el cofre de recompensas por iniciar sesión. Se pueden gastar en las ciudades principales. Se pueden usar para comprar varias recompensas.",
+          "Chinese": "打开登陆奖励宝箱即可获得。可在主城里购买各种奖励。",
+          "Korean": "Earned through the Log-in Reward Chest. Spent in major cities. Used to purchase various rewards."
         }
       },
       "AchievementId": 0,
@@ -796,12 +671,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Gem\nPurchased and spent via the Black Lion Trading Company.",
-          "French": "Gemme\nÀ acheter et à dépenser via la Compagnie commerciale du Lion noir.",
-          "German": "Edelstein\nKönnen über die Schwarzlöwen-Handelsgesellschaft gekauft und ausgegeben werden.",
-          "Spanish": "Gema\nSe pueden comprar y gastar a través de la Compañía de Comercio del León Negro.",
-          "Chinese": "宝石\n从黑狮交易商会购得或使用。",
-          "Korean": "Gem\nPurchased and spent via the Black Lion Trading Company."
+          "English": "Purchased and spent via the Black Lion Trading Company.",
+          "French": "À acheter et à dépenser via la Compagnie commerciale du Lion noir.",
+          "German": "Können über die Schwarzlöwen-Handelsgesellschaft gekauft und ausgegeben werden.",
+          "Spanish": "Se pueden comprar y gastar a través de la Compañía de Comercio del León Negro.",
+          "Chinese": "从黑狮交易商会购得或使用。",
+          "Korean": "Purchased and spent via the Black Lion Trading Company."
         }
       },
       "AchievementId": 0,
@@ -824,12 +699,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Ascalonian Tear\nEarned in Ascalonian Catacombs. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Ascalon\" component used in creating legendary weapons.",
-          "French": "Larme ascalonienne\nÀ gagner dans les Catacombes d'Ascalon. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don d'Ascalon\" permettant de créer des armes légendaires.",
-          "German": "Ascalonische Träne\nKönnen in den Katakomben von Ascalon verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe Ascalons\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
-          "Spanish": "Lágrima ascaloniana\nSe pueden conseguir en las Catacumbas Ascalonianas. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo de Ascalon\", que sirve para fabricar armas legendarias.",
-          "Chinese": "阿斯卡隆之泪\n从阿斯卡隆墓穴获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"阿斯卡隆礼赠\"。",
-          "Korean": "Ascalonian Tear\nEarned in Ascalonian Catacombs. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Ascalon\" component used in creating legendary weapons."
+          "English": "Earned in Ascalonian Catacombs. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Ascalon\" component used in creating legendary weapons.",
+          "French": "À gagner dans les Catacombes d'Ascalon. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don d'Ascalon\" permettant de créer des armes légendaires.",
+          "German": "Können in den Katakomben von Ascalon verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe Ascalons\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
+          "Spanish": "Se pueden conseguir en las Catacumbas Ascalonianas. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo de Ascalon\", que sirve para fabricar armas legendarias.",
+          "Chinese": "从阿斯卡隆墓穴获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"阿斯卡隆礼赠\"。",
+          "Korean": "Earned in Ascalonian Catacombs. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Ascalon\" component used in creating legendary weapons."
         }
       },
       "AchievementId": 0,
@@ -852,12 +727,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Shard of Zhaitan\nEarned in the Ruined City of Arah. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Zhaitan\" component used in creating legendary weapons.",
-          "French": "Éclat de Zhaïtan\nÀ gagner dans la Cité en ruine d'Arah. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don de Zhaïtan\" permettant de créer des armes légendaires.",
-          "German": "Scherbe des Zhaitan\nKönnen in der Ruinenstadt Arah verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe Zhaitans\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
-          "Spanish": "Esquirla de Zhaitan\nSe pueden conseguir en la ciudad en ruinas de Arah. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo de Zhaitan\", que sirve para fabricar armas legendarias.",
-          "Chinese": "泽坦碎片\n从亚拉城废墟获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"泽坦礼赠\"。",
-          "Korean": "Shard of Zhaitan\nEarned in the Ruined City of Arah. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Zhaitan\" component used in creating legendary weapons."
+          "English": "Earned in the Ruined City of Arah. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Zhaitan\" component used in creating legendary weapons.",
+          "French": "À gagner dans la Cité en ruine d'Arah. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don de Zhaïtan\" permettant de créer des armes légendaires.",
+          "German": "Können in der Ruinenstadt Arah verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe Zhaitans\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
+          "Spanish": "Se pueden conseguir en la ciudad en ruinas de Arah. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo de Zhaitan\", que sirve para fabricar armas legendarias.",
+          "Chinese": "从亚拉城废墟获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"泽坦礼赠\"。",
+          "Korean": "Earned in the Ruined City of Arah. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Zhaitan\" component used in creating legendary weapons."
         }
       },
       "AchievementId": 0,
@@ -880,12 +755,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Fractal Relic\nEarned and spent in Fractals of the Mists. Also used as a crafting ingredient.",
-          "French": "Relique fractale\nÀ gagner et à dépenser dans les Fractales des Brumes. À utiliser en tant qu'ingrédient d'artisanat.",
-          "German": "Fraktal-Relikt\nKann in den Fraktalen der Nebel verdient und ausgegeben werden. Wird auch als Handwerksmaterial verwendet.",
-          "Spanish": "Reliquia fractal\nSe pueden conseguir y gastar en los Fractales de la Niebla. También se pueden usar como ingrediente de artesanía.",
-          "Chinese": "碎层古物\n从迷雾碎层获得并在迷雾碎层使用。也可用作制作原料。",
-          "Korean": "Fractal Relic\nEarned and spent in Fractals of the Mists. Also used as a crafting ingredient."
+          "English": "Earned and spent in Fractals of the Mists. Also used as a crafting ingredient.",
+          "French": "À gagner et à dépenser dans les Fractales des Brumes. À utiliser en tant qu'ingrédient d'artisanat.",
+          "German": "Kann in den Fraktalen der Nebel verdient und ausgegeben werden. Wird auch als Handwerksmaterial verwendet.",
+          "Spanish": "Se pueden conseguir y gastar en los Fractales de la Niebla. También se pueden usar como ingrediente de artesanía.",
+          "Chinese": "从迷雾碎层获得并在迷雾碎层使用。也可用作制作原料。",
+          "Korean": "Earned and spent in Fractals of the Mists. Also used as a crafting ingredient."
         }
       },
       "AchievementId": 0,
@@ -908,12 +783,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Seal of Beetletun\nEarned in Caudecus's Manor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Nobleman\" component used in creating legendary weapons.",
-          "French": "Sceau de Beetletun\nÀ gagner dans le Manoir de Caudecus. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don du noble\" permettant de créer des armes légendaires.",
-          "German": "Beetletuns Siegel\nKönnen in Caudecus' Anwesen verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe des Edelmanns\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
-          "Spanish": "Sello de Beetletun\nSe pueden conseguir en la mansión de Caudecus. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo del noble\", que sirve para fabricar armas legendarias.",
-          "Chinese": "甲虫郡封印\n从考迪克斯庄园获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"贵族礼赠\"。",
-          "Korean": "Seal of Beetletun\nEarned in Caudecus's Manor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Nobleman\" component used in creating legendary weapons."
+          "English": "Earned in Caudecus's Manor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Nobleman\" component used in creating legendary weapons.",
+          "French": "À gagner dans le Manoir de Caudecus. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don du noble\" permettant de créer des armes légendaires.",
+          "German": "Können in Caudecus' Anwesen verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe des Edelmanns\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
+          "Spanish": "Se pueden conseguir en la mansión de Caudecus. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo del noble\", que sirve para fabricar armas legendarias.",
+          "Chinese": "从考迪克斯庄园获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"贵族礼赠\"。",
+          "Korean": "Earned in Caudecus's Manor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Nobleman\" component used in creating legendary weapons."
         }
       },
       "AchievementId": 0,
@@ -936,12 +811,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Manifesto of the Moletariate\nEarned in Sorrow's Embrace. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Forgeman\" component used in creating legendary weapons.",
-          "French": "Manifeste du taupinariat\nÀ gagner dans l'Étreinte des lamentations. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don du forgeron\" permettant de créer des armes légendaires.",
-          "German": "Manifest des Maulwetariats\nKönnen in der Umarmung der Betrübnis verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe des Schmieds\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
-          "Spanish": "Manifiesto del topotariado\nSe pueden conseguir en Abrazo del Pesar. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo del herrador\", que sirve para fabricar armas legendarias.",
-          "Chinese": "掘洞宣言\n从悲伤之拥获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"铸匠礼赠\"。",
-          "Korean": "Manifesto of the Moletariate\nEarned in Sorrow's Embrace. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Forgeman\" component used in creating legendary weapons."
+          "English": "Earned in Sorrow's Embrace. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Forgeman\" component used in creating legendary weapons.",
+          "French": "À gagner dans l'Étreinte des lamentations. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don du forgeron\" permettant de créer des armes légendaires.",
+          "German": "Können in der Umarmung der Betrübnis verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe des Schmieds\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
+          "Spanish": "Se pueden conseguir en Abrazo del Pesar. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo del herrador\", que sirve para fabricar armas legendarias.",
+          "Chinese": "从悲伤之拥获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"铸匠礼赠\"。",
+          "Korean": "Earned in Sorrow's Embrace. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Forgeman\" component used in creating legendary weapons."
         }
       },
       "AchievementId": 0,
@@ -964,12 +839,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Deadly Bloom\nEarned in Twilight Arbor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Thorns\" component used in creating legendary weapons.",
-          "French": "Pousse mortelle\nÀ gagner dans la Tonnelle du crépuscule. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don des épines\" permettant de créer des armes légendaires.",
-          "German": "Tödliche Blüte\nKönnen im Zwielichtgarten verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe der Dornen\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
-          "Spanish": "Flor mortal\nSe pueden conseguir en la Pérgola del Crepúsculo. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo de espinas\", que sirve para fabricar armas legendarias.",
-          "Chinese": "死亡之花\n从暮光之根获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"荆棘礼赠\"。",
-          "Korean": "Deadly Bloom\nEarned in Twilight Arbor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Thorns\" component used in creating legendary weapons."
+          "English": "Earned in Twilight Arbor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Thorns\" component used in creating legendary weapons.",
+          "French": "À gagner dans la Tonnelle du crépuscule. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don des épines\" permettant de créer des armes légendaires.",
+          "German": "Können im Zwielichtgarten verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe der Dornen\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
+          "Spanish": "Se pueden conseguir en la Pérgola del Crepúsculo. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo de espinas\", que sirve para fabricar armas legendarias.",
+          "Chinese": "从暮光之根获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"荆棘礼赠\"。",
+          "Korean": "Earned in Twilight Arbor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Thorns\" component used in creating legendary weapons."
         }
       },
       "AchievementId": 0,
@@ -992,12 +867,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Symbol of Koda\nEarned in Honor of the Waves. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Sanctuary\" component used in creating legendary weapons.",
-          "French": "Symbole de Koda\nÀ gagner dans l'Honneur des vagues. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don du sanctuaire\" permettant de créer des armes légendaires.",
-          "German": "Symbol Kodas\nKönnen in der Zierde der Wogen verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe der Zuflucht\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
-          "Spanish": "Símbolo de Koda\nSe pueden conseguir en el Honor de las Olas. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo del santuario\", que sirve para fabricar armas legendarias.",
-          "Chinese": "克达之符\n从海浪之誉获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"圣船礼赠\"。",
-          "Korean": "Symbol of Koda\nEarned in Honor of the Waves. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Sanctuary\" component used in creating legendary weapons."
+          "English": "Earned in Honor of the Waves. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Sanctuary\" component used in creating legendary weapons.",
+          "French": "À gagner dans l'Honneur des vagues. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don du sanctuaire\" permettant de créer des armes légendaires.",
+          "German": "Können in der Zierde der Wogen verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe der Zuflucht\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
+          "Spanish": "Se pueden conseguir en el Honor de las Olas. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo del santuario\", que sirve para fabricar armas legendarias.",
+          "Chinese": "从海浪之誉获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"圣船礼赠\"。",
+          "Korean": "Earned in Honor of the Waves. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Sanctuary\" component used in creating legendary weapons."
         }
       },
       "AchievementId": 0,
@@ -1020,12 +895,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Flame Legion Charr Carving\nEarned in Citadel of Flame. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Baelfire\" component used in creating legendary weapons.",
-          "French": "Gravure de Charr de la Légion de la Flamme\nÀ gagner dans la Citadelle de la Flamme. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don de Feu-de-Bael\" permettant de créer des armes légendaires.",
-          "German": "Flammen-Legion-Charr-Schnitzerei\nKönnen in der Flammenzitadelle verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gaben des Baelfeuers\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
-          "Spanish": "Talla de charr de la Legión de la Llama\nSe pueden conseguir en la Ciudadela de la Llama. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo de Fuegobael\", que sirve para fabricar armas legendarias.",
-          "Chinese": "烈焰军团夏尔雕像\n从烈焰壁垒获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"巴火礼赠\"。",
-          "Korean": "Flame Legion Charr Carving\nEarned in Citadel of Flame. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Baelfire\" component used in creating legendary weapons."
+          "English": "Earned in Citadel of Flame. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Baelfire\" component used in creating legendary weapons.",
+          "French": "À gagner dans la Citadelle de la Flamme. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don de Feu-de-Bael\" permettant de créer des armes légendaires.",
+          "German": "Können in der Flammenzitadelle verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gaben des Baelfeuers\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
+          "Spanish": "Se pueden conseguir en la Ciudadela de la Llama. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo de Fuegobael\", que sirve para fabricar armas legendarias.",
+          "Chinese": "从烈焰壁垒获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"巴火礼赠\"。",
+          "Korean": "Earned in Citadel of Flame. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Baelfire\" component used in creating legendary weapons."
         }
       },
       "AchievementId": 0,
@@ -1048,12 +923,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Knowledge Crystal\nEarned in Crucible of Eternity. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Knowledge\" component used in creating legendary weapons.",
-          "French": "Cristal de connaissance\nÀ gagner dans le Creuset de l'éternité. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don de savoir\" permettant de créer des armes légendaires.",
-          "German": "Wissenskristall\nKönnen im Schmelztiegel der Ewigkeit verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe des Wissens\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
-          "Spanish": "Cristal del conocimiento\nSe pueden conseguir en el Crisol de la Eternidad. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo de conocimiento\", que sirve para fabricar armas legendarias.",
-          "Chinese": "知识水晶\n从永恒熔炉获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"知识礼赠\"。",
-          "Korean": "Knowledge Crystal\nEarned in Crucible of Eternity. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Knowledge\" component used in creating legendary weapons."
+          "English": "Earned in Crucible of Eternity. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Knowledge\" component used in creating legendary weapons.",
+          "French": "À gagner dans le Creuset de l'éternité. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don de savoir\" permettant de créer des armes légendaires.",
+          "German": "Können im Schmelztiegel der Ewigkeit verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe des Wissens\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
+          "Spanish": "Se pueden conseguir en el Crisol de la Eternidad. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo de conocimiento\", que sirve para fabricar armas legendarias.",
+          "Chinese": "从永恒熔炉获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"知识礼赠\"。",
+          "Korean": "Earned in Crucible of Eternity. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Knowledge\" component used in creating legendary weapons."
         }
       },
       "AchievementId": 0,
@@ -1076,12 +951,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Badge of Honor\nEarned and spent in WvW to purchase various items.",
-          "French": "Insigne d'honneur\nÀ gagner et à dépenser en McM pour acheter divers objets.",
-          "German": "Ehrenabzeichen\nKönnen im WvW verdient und ausgegeben werden, um verschiedene WvW-Gegenstände zu kaufen.",
-          "Spanish": "Insignia de honor\nSe pueden conseguir y gastar en WvW para comprar varios objetos.",
-          "Chinese": "荣誉徽章\n在世界之战中获得，并可以在世界之战中购买多种物品。",
-          "Korean": "Badge of Honor\nEarned and spent in WvW to purchase various items."
+          "English": "Earned and spent in WvW to purchase various items.",
+          "French": "À gagner et à dépenser en McM pour acheter divers objets.",
+          "German": "Können im WvW verdient und ausgegeben werden, um verschiedene WvW-Gegenstände zu kaufen.",
+          "Spanish": "Se pueden conseguir y gastar en WvW para comprar varios objetos.",
+          "Chinese": "在世界之战中获得，并可以在世界之战中购买多种物品。",
+          "Korean": "Earned and spent in WvW to purchase various items."
         }
       },
       "AchievementId": 0,
@@ -1104,12 +979,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Guild Commendation\nEarned through Guild Missions. Spent in Lion's Arch. Used to purchase various rewards.",
-          "French": "Recommandation de guilde\nÀ gagner via les missions de guilde. À dépenser à l'Arche du Lion. À utiliser pour acheter diverses récompenses.",
-          "German": "Gilden-Belobigung\nKönnen durch Gilden-Missionen verdient werden. Können in Löwenstein ausgegeben werden. Verwendbar zum Kauf verschiedener Belohnungen.",
-          "Spanish": "Mención de clan\nSe pueden conseguir a través de las misiones de clan. Se pueden gastar en Arco del León. Se pueden usar para comprar varias recompensas.",
-          "Chinese": "公会奖状\n从公会任务获得。可在狮子拱门购买各种奖励。",
-          "Korean": "Guild Commendation\nEarned through Guild Missions. Spent in Lion's Arch. Used to purchase various rewards."
+          "English": "Earned through Guild Missions. Spent in Lion's Arch. Used to purchase various rewards.",
+          "French": "À gagner via les missions de guilde. À dépenser à l'Arche du Lion. À utiliser pour acheter diverses récompenses.",
+          "German": "Können durch Gilden-Missionen verdient werden. Können in Löwenstein ausgegeben werden. Verwendbar zum Kauf verschiedener Belohnungen.",
+          "Spanish": "Se pueden conseguir a través de las misiones de clan. Se pueden gastar en Arco del León. Se pueden usar para comprar varias recompensas.",
+          "Chinese": "从公会任务获得。可在狮子拱门购买各种奖励。",
+          "Korean": "Earned through Guild Missions. Spent in Lion's Arch. Used to purchase various rewards."
         }
       },
       "AchievementId": 0,
@@ -1132,12 +1007,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Transmutation Charge\nPurchased via the Black Lion Trading Company. Spent in the wardrobe to change appearance.",
-          "French": "Charge de transmutation\nÀ acheter auprès de la Compagnie commerciale du Lion noir. À utiliser dans la garde-robe pour changer d'apparence.",
-          "German": "Transmutation-Ladung\nBei der Schwarzlöwen-Handelsgesellschaft erhältlich. Können zur Aussehensveränderung in der Garderobe verwendet werden.",
-          "Spanish": "Carga de transmutación\nSe puede comprar a través de la Compañía de Comercio del León Negro. Se puede gastar en el guardarropa para cambiar el aspecto.",
-          "Chinese": "幻化力\n从黑狮交易商会购得。在衣柜中使用，改变外观。",
-          "Korean": "Transmutation Charge\nPurchased via the Black Lion Trading Company. Spent in the wardrobe to change appearance."
+          "English": "Purchased via the Black Lion Trading Company. Spent in the wardrobe to change appearance.",
+          "French": "À acheter auprès de la Compagnie commerciale du Lion noir. À utiliser dans la garde-robe pour changer d'apparence.",
+          "German": "Bei der Schwarzlöwen-Handelsgesellschaft erhältlich. Können zur Aussehensveränderung in der Garderobe verwendet werden.",
+          "Spanish": "Se puede comprar a través de la Compañía de Comercio del León Negro. Se puede gastar en el guardarropa para cambiar el aspecto.",
+          "Chinese": "从黑狮交易商会购得。在衣柜中使用，改变外观。",
+          "Korean": "Purchased via the Black Lion Trading Company. Spent in the wardrobe to change appearance."
         }
       },
       "AchievementId": 0,
@@ -1160,12 +1035,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Airship Part\nEarned and spent in Verdant Brink. Train the Itzel Language Mastery ability to trade with Itzel vendors for bladed armor and other goods.",
-          "French": "Pièce d'aéronef\nÀ obtenir et à dépenser à l'Orée d'émeraude. Entraînez la maîtrise Langue itzel pour acheter des armures à lames et d'autres marchandises aux vendeurs itzels.",
-          "German": "Luftschiff-Teil\nKann in der Grasgrünen Schwelle verdient und ausgegeben werden. Trainiert die Beherrschungfähigkeit \"Itzel-Sprache\", um mit Itzel-Händlern Klingen-Rüstungen und andere Waren zu handeln.",
-          "Spanish": "Pieza de aeronave\nSe pueden conseguir y gastar en el Umbral Verdeante. Aprende la habilidad de dominio Lenguaje itzel para intercambiárselas a los comerciantes itzel por armaduras afiladas y otros bienes.",
-          "Chinese": "飞船部件\n苍翠边界中获得和使用。训练伊策尔蛙语言专精后与伊策尔蛙商贩交易，兑换锋刃护甲和其他货物。",
-          "Korean": "Airship Part\nEarned and spent in Verdant Brink. Train the Itzel Language Mastery ability to trade with Itzel vendors for bladed armor and other goods."
+          "English": "Earned and spent in Verdant Brink. Train the Itzel Language Mastery ability to trade with Itzel vendors for bladed armor and other goods.",
+          "French": "À obtenir et à dépenser à l'Orée d'émeraude. Entraînez la maîtrise Langue itzel pour acheter des armures à lames et d'autres marchandises aux vendeurs itzels.",
+          "German": "Kann in der Grasgrünen Schwelle verdient und ausgegeben werden. Trainiert die Beherrschungfähigkeit \"Itzel-Sprache\", um mit Itzel-Händlern Klingen-Rüstungen und andere Waren zu handeln.",
+          "Spanish": "Se pueden conseguir y gastar en el Umbral Verdeante. Aprende la habilidad de dominio Lenguaje itzel para intercambiárselas a los comerciantes itzel por armaduras afiladas y otros bienes.",
+          "Chinese": "苍翠边界中获得和使用。训练伊策尔蛙语言专精后与伊策尔蛙商贩交易，兑换锋刃护甲和其他货物。",
+          "Korean": "Earned and spent in Verdant Brink. Train the Itzel Language Mastery ability to trade with Itzel vendors for bladed armor and other goods."
         }
       },
       "AchievementId": 0,
@@ -1188,12 +1063,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Ley Line Crystal\nEarned and spent in Tangled Depths. Train the Nuhoch Language Mastery ability to trade with Nuhoch vendors for chak weapons and other goods.",
-          "French": "Cristal des lignes de force\nÀ obtenir et à dépenser dans les Profondeurs verdoyantes. Entraînez la maîtrise Langue nuhoch pour acheter des armes chaks et d'autres marchandises aux vendeurs nuhochs.",
-          "German": "Ley-Linien-Kristall\nKann in den Verschlungenen Tiefen verdient und ausgegeben werden. Trainiert die Beherrschungfähigkeit \"Sprache der Nuhoch\", um mit Nuhoch-Händlern Chak-Waffen und andere Waren zu handeln.",
-          "Spanish": "Cristal de línea ley\nSe ganan y gastan en las Profundidades Enredadas. Aprende la habilidad de dominio Idioma nuhoch para intercambiárselos a los comerciantes nuhoch por armas chak y otros bienes.",
-          "Chinese": "魔径水晶\n缠藤深渊中获得和使用。训练奴霍奇蛙语言专精后与奴霍奇蛙商贩交易，兑换查克虫武器和其他货物。",
-          "Korean": "Ley Line Crystal\nEarned and spent in Tangled Depths. Train the Nuhoch Language Mastery ability to trade with Nuhoch vendors for chak weapons and other goods."
+          "English": "Earned and spent in Tangled Depths. Train the Nuhoch Language Mastery ability to trade with Nuhoch vendors for chak weapons and other goods.",
+          "French": "À obtenir et à dépenser dans les Profondeurs verdoyantes. Entraînez la maîtrise Langue nuhoch pour acheter des armes chaks et d'autres marchandises aux vendeurs nuhochs.",
+          "German": "Kann in den Verschlungenen Tiefen verdient und ausgegeben werden. Trainiert die Beherrschungfähigkeit \"Sprache der Nuhoch\", um mit Nuhoch-Händlern Chak-Waffen und andere Waren zu handeln.",
+          "Spanish": "Se ganan y gastan en las Profundidades Enredadas. Aprende la habilidad de dominio Idioma nuhoch para intercambiárselos a los comerciantes nuhoch por armas chak y otros bienes.",
+          "Chinese": "缠藤深渊中获得和使用。训练奴霍奇蛙语言专精后与奴霍奇蛙商贩交易，兑换查克虫武器和其他货物。",
+          "Korean": "Earned and spent in Tangled Depths. Train the Nuhoch Language Mastery ability to trade with Nuhoch vendors for chak weapons and other goods."
         }
       },
       "AchievementId": 0,
@@ -1216,12 +1091,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Lump of Aurillium\nEarned and spent in Auric Basin. Train the Exalted Acceptance Mastery line to trade with Exalted merchants for auric weapon recipes and other goods.",
-          "French": "Bloc d'aurillium\nÀ obtenir et à dépenser au Bassin aurique. Entraînez la maîtrise Acceptation exaltée pour acheter des recettes d'armes auriques et d'autres marchandises aux marchands exaltés.",
-          "German": "Aurilliumklumpen\nKann im Güldenen Talkessel verdient und ausgegeben werden. Trainiert den Beherrschungspfad \"Akzeptanz der Erhabenen\", um mit Erhabenen-Händlern Rezepte für Güldene Waffen und andere Waren zu handeln.",
-          "Spanish": "Trozo de aurilio\nSe pueden conseguir y gastar en el Valle Áurico. Aprende el dominio \"Aceptación exaltada\" para intercambiárselos a los mercaderes exaltados por recetas de armas áuricas y otros bienes.",
-          "Chinese": "块状赤金元素\n赤金盆地中获得和使用。训练尊者信任专精后与尊者商人交易，兑换赤金武器配方和其他货物。",
-          "Korean": "Lump of Aurillium\nEarned and spent in Auric Basin. Train the Exalted Acceptance Mastery line to trade with Exalted merchants for auric weapon recipes and other goods."
+          "English": "Earned and spent in Auric Basin. Train the Exalted Acceptance Mastery line to trade with Exalted merchants for auric weapon recipes and other goods.",
+          "French": "À obtenir et à dépenser au Bassin aurique. Entraînez la maîtrise Acceptation exaltée pour acheter des recettes d'armes auriques et d'autres marchandises aux marchands exaltés.",
+          "German": "Kann im Güldenen Talkessel verdient und ausgegeben werden. Trainiert den Beherrschungspfad \"Akzeptanz der Erhabenen\", um mit Erhabenen-Händlern Rezepte für Güldene Waffen und andere Waren zu handeln.",
+          "Spanish": "Se pueden conseguir y gastar en el Valle Áurico. Aprende el dominio \"Aceptación exaltada\" para intercambiárselos a los mercaderes exaltados por recetas de armas áuricas y otros bienes.",
+          "Chinese": "赤金盆地中获得和使用。训练尊者信任专精后与尊者商人交易，兑换赤金武器配方和其他货物。",
+          "Korean": "Earned and spent in Auric Basin. Train the Exalted Acceptance Mastery line to trade with Exalted merchants for auric weapon recipes and other goods."
         }
       },
       "AchievementId": 0,
@@ -1244,12 +1119,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Spirit Shard\nUsed by Miyani to maintain the Mystic Forge.",
-          "French": "Éclat d'esprit\nUtilisé par Miyani pour entretenir la forge mystique.",
-          "German": "Geister-Scherbe\nVon Miyani verwendet, um die Mystische Schmiede zu bewahren.",
-          "Spanish": "Esquirla espiritual\nEmpleado por Miyani para encargarse del mantenimiento de la Forja Mística.",
-          "Chinese": "灵魂碎片\n米亚妮用它来维持神秘熔炉的运转。",
-          "Korean": "Spirit Shard\nUsed by Miyani to maintain the Mystic Forge."
+          "English": "Used by Miyani to maintain the Mystic Forge.",
+          "French": "Utilisé par Miyani pour entretenir la forge mystique.",
+          "German": "Von Miyani verwendet, um die Mystische Schmiede zu bewahren.",
+          "Spanish": "Empleado por Miyani para encargarse del mantenimiento de la Forja Mística.",
+          "Chinese": "米亚妮用它来维持神秘熔炉的运转。",
+          "Korean": "Used by Miyani to maintain the Mystic Forge."
         }
       },
       "AchievementId": 0,
@@ -1272,12 +1147,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Pristine Fractal Relic\nEarned and spent in the Fractals of the Mists. Used to purchase ascended rings.",
-          "French": "Relique fractale immaculée\nÀ gagner et à dépenser dans les Fractales des Brumes. À utiliser pour acheter des anneaux élevés.",
-          "German": "Makelloses Fraktal-Relikt\nKann in den Fraktalen der Nebel verdient und ausgegeben werden. Kann zum Kauf von aufgestiegenen Ringen verwendet werden.",
-          "Spanish": "Reliquia fractal prístina\nSe pueden conseguir y gastar en los Fractales de la Niebla. Se pueden usar para comprar anillos ascendidos.",
-          "Chinese": "原始碎层古物\n从迷雾碎层获得并使用。可用于购买升华戒指。",
-          "Korean": "Pristine Fractal Relic\nEarned and spent in the Fractals of the Mists. Used to purchase ascended rings."
+          "English": "Earned and spent in the Fractals of the Mists. Used to purchase ascended rings.",
+          "French": "À gagner et à dépenser dans les Fractales des Brumes. À utiliser pour acheter des anneaux élevés.",
+          "German": "Kann in den Fraktalen der Nebel verdient und ausgegeben werden. Kann zum Kauf von aufgestiegenen Ringen verwendet werden.",
+          "Spanish": "Se pueden conseguir y gastar en los Fractales de la Niebla. Se pueden usar para comprar anillos ascendidos.",
+          "Chinese": "从迷雾碎层获得并使用。可用于购买升华戒指。",
+          "Korean": "Earned and spent in the Fractals of the Mists. Used to purchase ascended rings."
         }
       },
       "AchievementId": 0,
@@ -1300,12 +1175,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Geode\nEarned by completing events in Dry Top. Accepted by vendors throughout the area.\nCan be traded for valuable items including recipes for foods, Nomad's gear, and ambrite weapons.",
-          "French": "Géode\nÀ gagner en terminant les événements à la Cimesèche. À dépenser auprès des vendeurs de la zone.\nÉchangeable contre des objets précieux, notamment des recettes de nourriture, les équipements de nomade et les armes en ambrite.",
-          "German": "Geode\nVerdient durch abgeschlossene Events in Trockenkuppe. Wird von Händlern im ganzen Gebiet akzeptiert.\nKann gegen wertvolle Gegenstände eingetauscht werden, darunter auch Kochrezepte, Nomadische Ausrüstung und Ambrit-Waffen.",
-          "Spanish": "Geoda\nSe pueden conseguir al completar eventos en Cima Seca. Tienen validez para los comerciantes de la zona.\nSe pueden intercambiar por objetos de valor, como recetas de comida, equipo de nómada y armas de ambrita.",
-          "Chinese": "晶块\n完成干涸高地事件后获得，可在干涸高地区域内的商人处进行交易。\n用于兑换食物、游牧装备、灰黄琥珀武器的配方和其他珍贵物品。",
-          "Korean": "Geode\nEarned by completing events in Dry Top. Accepted by vendors throughout the area.\nCan be traded for valuable items including recipes for foods, Nomad's gear, and ambrite weapons."
+          "English": "Earned by completing events in Dry Top. Accepted by vendors throughout the area.\nCan be traded for valuable items including recipes for foods, Nomad's gear, and ambrite weapons.",
+          "French": "À gagner en terminant les événements à la Cimesèche. À dépenser auprès des vendeurs de la zone.\nÉchangeable contre des objets précieux, notamment des recettes de nourriture, les équipements de nomade et les armes en ambrite.",
+          "German": "Verdient durch abgeschlossene Events in Trockenkuppe. Wird von Händlern im ganzen Gebiet akzeptiert.\nKann gegen wertvolle Gegenstände eingetauscht werden, darunter auch Kochrezepte, Nomadische Ausrüstung und Ambrit-Waffen.",
+          "Spanish": "Se pueden conseguir al completar eventos en Cima Seca. Tienen validez para los comerciantes de la zona.\nSe pueden intercambiar por objetos de valor, como recetas de comida, equipo de nómada y armas de ambrita.",
+          "Chinese": "完成干涸高地事件后获得，可在干涸高地区域内的商人处进行交易。\n用于兑换食物、游牧装备、灰黄琥珀武器的配方和其他珍贵物品。",
+          "Korean": "Earned by completing events in Dry Top. Accepted by vendors throughout the area.\nCan be traded for valuable items including recipes for foods, Nomad's gear, and ambrite weapons."
         }
       },
       "AchievementId": 0,
@@ -1328,12 +1203,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "WvW Skirmish Claim Ticket\nEarned by participating in WvW skirmishes. Traded for various rewards at a WvW Skirmish Supervisor.",
-          "French": "Billet de retrait d'escarmouche McM\nÀ gagner en participant à des escarmouches McM. Échangeable contre diverses récompenses auprès d'une superviseuse d'escarmouches McM.",
-          "German": "WvW-Gefecht-Ticket\nVerdient durch die Teilnahme an WvW-Gefechten. Eintauschbar gegen verschiedene Belohnungen bei einer WvW-Gefecht-Aufseherin.",
-          "Spanish": "Tique de recogida de escaramuzas WvW\nSe pueden conseguir al participar en escaramuzas WvW. Se pueden intercambiar por diversas recompensas hablando con un supervisor de escaramuzas WvW.",
-          "Chinese": "世界之战突袭兑换劵\n通过参与世界之战突袭战斗获得。可以在世界之战突袭监管员处换取多种奖励。",
-          "Korean": "WvW Skirmish Claim Ticket\nEarned by participating in WvW skirmishes. Traded for various rewards at a WvW Skirmish Supervisor."
+          "English": "Earned by participating in WvW skirmishes. Traded for various rewards at a WvW Skirmish Supervisor.",
+          "French": "À gagner en participant à des escarmouches McM. Échangeable contre diverses récompenses auprès d'une superviseuse d'escarmouches McM.",
+          "German": "Verdient durch die Teilnahme an WvW-Gefechten. Eintauschbar gegen verschiedene Belohnungen bei einer WvW-Gefecht-Aufseherin.",
+          "Spanish": "Se pueden conseguir al participar en escaramuzas WvW. Se pueden intercambiar por diversas recompensas hablando con un supervisor de escaramuzas WvW.",
+          "Chinese": "通过参与世界之战突袭战斗获得。可以在世界之战突袭监管员处换取多种奖励。",
+          "Korean": "Earned by participating in WvW skirmishes. Traded for various rewards at a WvW Skirmish Supervisor."
         }
       },
       "AchievementId": 0,
@@ -1356,12 +1231,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Bandit Crest\nEarned by completing events in the Silverwastes. Accepted by vendors in Camp Resolve and at secured outposts.\nCan be traded for valuable items including Carapace armor and recipes for sinister gear.",
-          "French": "Écu de bandit\nÀ gagner en terminant les événements dans les Contrées sauvages d'argent. À dépenser auprès des vendeurs au Camp de la détermination et dans les avant-postes sécurisés.\nÉchangeable contre des objets précieux comme l'armure carapace et des recettes d'équipement sinistre.",
-          "German": "Banditen-Wappen\nVerdient durch abgeschlossene Events in der Silberwüste. Wird von Händlern im Lager der Standhaftigkeit und an gesicherten Außenposten akzeptiert.\nKann gegen wertvolle Gegenstände eingetauscht werden, darunter auch die Carapax-Rüstung und Rezepte für Finstere Ausrüstung.",
-          "Spanish": "Enseña de bandido\nSe pueden conseguir al completar eventos en los Páramos Argentos. Tienen validez para los comerciantes del Campamento Determinación y los puestos avanzados asegurados.\nSe pueden intercambiar por objetos de valor, como la armadura de carapacho y recetas de equipo siniestro.",
-          "Chinese": "强盗徽饰\n完成白银荒地事件后获得，前往决心营地和占领后的前哨，寻找商人进行兑换。\n用于兑换甲壳护甲、凶恶装备配方和其他珍贵物品。",
-          "Korean": "Bandit Crest\nEarned by completing events in the Silverwastes. Accepted by vendors in Camp Resolve and at secured outposts.\nCan be traded for valuable items including Carapace armor and recipes for sinister gear."
+          "English": "Earned by completing events in the Silverwastes. Accepted by vendors in Camp Resolve and at secured outposts.\nCan be traded for valuable items including Carapace armor and recipes for sinister gear.",
+          "French": "À gagner en terminant les événements dans les Contrées sauvages d'argent. À dépenser auprès des vendeurs au Camp de la détermination et dans les avant-postes sécurisés.\nÉchangeable contre des objets précieux comme l'armure carapace et des recettes d'équipement sinistre.",
+          "German": "Verdient durch abgeschlossene Events in der Silberwüste. Wird von Händlern im Lager der Standhaftigkeit und an gesicherten Außenposten akzeptiert.\nKann gegen wertvolle Gegenstände eingetauscht werden, darunter auch die Carapax-Rüstung und Rezepte für Finstere Ausrüstung.",
+          "Spanish": "Se pueden conseguir al completar eventos en los Páramos Argentos. Tienen validez para los comerciantes del Campamento Determinación y los puestos avanzados asegurados.\nSe pueden intercambiar por objetos de valor, como la armadura de carapacho y recetas de equipo siniestro.",
+          "Chinese": "完成白银荒地事件后获得，前往决心营地和占领后的前哨，寻找商人进行兑换。\n用于兑换甲壳护甲、凶恶装备配方和其他珍贵物品。",
+          "Korean": "Earned by completing events in the Silverwastes. Accepted by vendors in Camp Resolve and at secured outposts.\nCan be traded for valuable items including Carapace armor and recipes for sinister gear."
         }
       },
       "AchievementId": 0,
@@ -1384,12 +1259,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Magnetite Shard\nEarned from bosses and events inside Heart of Thorns and Path of Fire raids.",
-          "French": "Éclat de magnétite\nÀ obtenir sur les boss et dans les événements des raids de \"Heart of Thorns\" et \"Path of Fire\".",
-          "German": "Magnetitscherbe\nKann bei Bossen und Events in \"Heart of Thorns\"- und \"Path of Fire\"-Schlachtzügen verdient werden.",
-          "Spanish": "Esquirla de magnetita\nSe obtiene de jefes y eventos en incursiones de Heart of Thorns y Path of Fire.",
-          "Chinese": "磁铁碎块\n在决战迈古玛和烈焰征途的大型地下城中，通过头目和事件获得。",
-          "Korean": "Magnetite Shard\nEarned from bosses and events inside Heart of Thorns and Path of Fire raids."
+          "English": "Earned from bosses and events inside Heart of Thorns and Path of Fire raids.",
+          "French": "À obtenir sur les boss et dans les événements des raids de \"Heart of Thorns\" et \"Path of Fire\".",
+          "German": "Kann bei Bossen und Events in \"Heart of Thorns\"- und \"Path of Fire\"-Schlachtzügen verdient werden.",
+          "Spanish": "Se obtiene de jefes y eventos en incursiones de Heart of Thorns y Path of Fire.",
+          "Chinese": "在决战迈古玛和烈焰征途的大型地下城中，通过头目和事件获得。",
+          "Korean": "Earned from bosses and events inside Heart of Thorns and Path of Fire raids."
         }
       },
       "AchievementId": 0,
@@ -1412,12 +1287,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Provisioner Token\nEarned by helping Faction Provisioners.",
-          "French": "Coupon de fournisseur\nÀ obtenir en aidant les fournisseurs de faction.",
-          "German": "Versorger-Marke\nKann verdient werden, indem Ihr Fraktions-Versorgern helft.",
-          "Spanish": "Vale de suministrador\nSe gana al ayudar a los proveedores de facción.",
-          "Chinese": "供给官徽记\n帮助势力供给官后获得。",
-          "Korean": "Provisioner Token\nEarned by helping Faction Provisioners."
+          "English": "Earned by helping Faction Provisioners.",
+          "French": "À obtenir en aidant les fournisseurs de faction.",
+          "German": "Kann verdient werden, indem Ihr Fraktions-Versorgern helft.",
+          "Spanish": "Se gana al ayudar a los proveedores de facción.",
+          "Chinese": "帮助势力供给官后获得。",
+          "Korean": "Earned by helping Faction Provisioners."
         }
       },
       "AchievementId": 0,
@@ -1440,12 +1315,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "PvP League Ticket\nEarned when crossing division thresholds during PvP league seasons. Spend in the Heart of the Mists and trade for various rewards at the PvP League Vendor.",
-          "French": "Ticket de ligue JcJ\nÀ gagner en franchissant les seuils de division pendant les saisons de ligue JcJ. À dépenser au Cœur des Brumes et à échanger contre diverses récompenses auprès du vendeur de ligue JcJ.",
-          "German": "PvP-Liga-Ticket\nKann verdient werden, indem Ihr während PvP-Liga-Saisons Divisionsschwellen überschreitet. Kann im Herz der Nebel ausgegeben und bei PvP-Liga-Händlern gegen verschiedene Belohnungen eingetauscht werden.",
-          "Spanish": "Tique de liga PvP\nSe gana cuando pasas de una división a otra durante las temporadas de liga PvP. Se puede gastar en el Corazón de la Niebla e intercambiar por varias recompensas al comerciante de liga PvP.",
-          "Chinese": "PvP联赛兑换券\nPvP联赛赛季中提升阶段时获得。可在迷雾之心的PvP联赛商贩处兑换各类奖励。",
-          "Korean": "PvP League Ticket\nEarned when crossing division thresholds during PvP league seasons. Spend in the Heart of the Mists and trade for various rewards at the PvP League Vendor."
+          "English": "Earned when crossing division thresholds during PvP league seasons. Spend in the Heart of the Mists and trade for various rewards at the PvP League Vendor.",
+          "French": "À gagner en franchissant les seuils de division pendant les saisons de ligue JcJ. À dépenser au Cœur des Brumes et à échanger contre diverses récompenses auprès du vendeur de ligue JcJ.",
+          "German": "Kann verdient werden, indem Ihr während PvP-Liga-Saisons Divisionsschwellen überschreitet. Kann im Herz der Nebel ausgegeben und bei PvP-Liga-Händlern gegen verschiedene Belohnungen eingetauscht werden.",
+          "Spanish": "Se gana cuando pasas de una división a otra durante las temporadas de liga PvP. Se puede gastar en el Corazón de la Niebla e intercambiar por varias recompensas al comerciante de liga PvP.",
+          "Chinese": "PvP联赛赛季中提升阶段时获得。可在迷雾之心的PvP联赛商贩处兑换各类奖励。",
+          "Korean": "Earned when crossing division thresholds during PvP league seasons. Spend in the Heart of the Mists and trade for various rewards at the PvP League Vendor."
         }
       },
       "AchievementId": 0,
@@ -1468,12 +1343,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Proof of Heroics\nEarned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points.",
-          "French": "Preuve d'héroïsme\nÀ récupérer dans les coffres de rang Monde contre Monde. À dépenser auprès de n'importe quel notaire des actes héroïques en Monde contre Monde pour obtenir des points de héros.",
-          "German": "Beweis der Heldentaten\nKönnen bei Erreichen höherer Ränge im Welt gegen Welt verdient werden. Können bei jedem Helden-Notar im Welt gegen Welt für Heldenpunkte ausgegeben werden.",
-          "Spanish": "Prueba de hazañas\nSe gana al subir de rango en Mundo contra Mundo. Se puede gastar en cualquier Notaría de hazañas de Mundo contra Mundo para obtener puntos de héroe.",
-          "Chinese": "英雄证明\n提升世界之战等级后可获得。可在任意英雄公证员处购买英雄点数。",
-          "Korean": "Proof of Heroics\nEarned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points."
+          "English": "Earned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points.",
+          "French": "À récupérer dans les coffres de rang Monde contre Monde. À dépenser auprès de n'importe quel notaire des actes héroïques en Monde contre Monde pour obtenir des points de héros.",
+          "German": "Können bei Erreichen höherer Ränge im Welt gegen Welt verdient werden. Können bei jedem Helden-Notar im Welt gegen Welt für Heldenpunkte ausgegeben werden.",
+          "Spanish": "Se gana al subir de rango en Mundo contra Mundo. Se puede gastar en cualquier Notaría de hazañas de Mundo contra Mundo para obtener puntos de héroe.",
+          "Chinese": "提升世界之战等级后可获得。可在任意英雄公证员处购买英雄点数。",
+          "Korean": "Earned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points."
         }
       },
       "AchievementId": 0,
@@ -1496,12 +1371,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Unbound Magic\nEarned from creatures empowered by unbound magic.",
-          "French": "Magie déliée\nÀ obtenir sur des créatures renforcées par la magie déliée.",
-          "German": "Entfesselte Magie\nKann bei Kreaturen verdient werden, die durch Entfesselte Magie gestärkt sind.",
-          "Spanish": "Magia liberada\nSe consigue de criaturas potenciadas con magia liberada.",
-          "Chinese": "未受约束的魔法\n从未受约束的魔法强化过的生物那里获得。",
-          "Korean": "Unbound Magic\nEarned from creatures empowered by unbound magic."
+          "English": "Earned from creatures empowered by unbound magic.",
+          "French": "À obtenir sur des créatures renforcées par la magie déliée.",
+          "German": "Kann bei Kreaturen verdient werden, die durch Entfesselte Magie gestärkt sind.",
+          "Spanish": "Se consigue de criaturas potenciadas con magia liberada.",
+          "Chinese": "从未受约束的魔法强化过的生物那里获得。",
+          "Korean": "Earned from creatures empowered by unbound magic."
         }
       },
       "AchievementId": 0,
@@ -1524,12 +1399,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Ascended Shards of Glory\nEarned from PvP League Division Chests.",
-          "French": "Éclats de gloire élevés\nObtenus dans les coffres de division de la ligue JcJ.",
-          "German": "Aufgestiegene Scherben des Ruhms\nKann in PvP-Liga-Divisionstruhen verdient werden.",
-          "Spanish": "Esquirlas de gloria ascendidas\nSe consiguen en los cofres de división de las ligas PvP.",
-          "Chinese": "升华荣誉碎片\n打开联赛阶段宝箱获得。",
-          "Korean": "Ascended Shards of Glory\nEarned from PvP League Division Chests."
+          "English": "Earned from PvP League Division Chests.",
+          "French": "Obtenus dans les coffres de division de la ligue JcJ.",
+          "German": "Kann in PvP-Liga-Divisionstruhen verdient werden.",
+          "Spanish": "Se consiguen en los cofres de división de las ligas PvP.",
+          "Chinese": "打开联赛阶段宝箱获得。",
+          "Korean": "Earned from PvP League Division Chests."
         }
       },
       "AchievementId": 0,
@@ -1552,12 +1427,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Trade Contract\nEarned in the Crystal Desert. Spend at karma merchants to purchase trade crates with crafting materials, new crafting recipes, and other rewards unique to the Crystal Desert.",
-          "French": "Contrat commercial\nÀ gagner dans le Désert de cristal. Dépensez-les chez des marchands de karma pour acheter des cargaisons contenant des matériaux d'artisanat, de nouvelles recettes d'artisanat et d'autres récompenses spécifiques au Désert de cristal.",
-          "German": "Handelsvertrag\nKönnen in der Kristallwüste verdient werden. Ersteht damit bei Karma-Kaufleuten Warenkisten mit Handwerksmaterial, neuen Handwerksrezepten und anderen Belohnungen, die es nur in der Kristallwüste gibt.",
-          "Spanish": "Contrato comercial\nSe consiguen en el Desierto de Cristal. Úsalos para comprarles a los mercaderes de karma cajas de comercio con materiales de artesanía, nuevas recetas de artesanía y otras recompensas únicas del Desierto de Cristal.",
-          "Chinese": "交易合同\n在水晶沙漠获得。用来向业力商人购买交易箱，内含制作材料，新的制作配方，以及其它水晶沙漠独有的奖励。",
-          "Korean": "Trade Contract\nEarned in the Crystal Desert. Spend at karma merchants to purchase trade crates with crafting materials, new crafting recipes, and other rewards unique to the Crystal Desert."
+          "English": "Earned in the Crystal Desert. Spend at karma merchants to purchase trade crates with crafting materials, new crafting recipes, and other rewards unique to the Crystal Desert.",
+          "French": "À gagner dans le Désert de cristal. Dépensez-les chez des marchands de karma pour acheter des cargaisons contenant des matériaux d'artisanat, de nouvelles recettes d'artisanat et d'autres récompenses spécifiques au Désert de cristal.",
+          "German": "Können in der Kristallwüste verdient werden. Ersteht damit bei Karma-Kaufleuten Warenkisten mit Handwerksmaterial, neuen Handwerksrezepten und anderen Belohnungen, die es nur in der Kristallwüste gibt.",
+          "Spanish": "Se consiguen en el Desierto de Cristal. Úsalos para comprarles a los mercaderes de karma cajas de comercio con materiales de artesanía, nuevas recetas de artesanía y otras recompensas únicas del Desierto de Cristal.",
+          "Chinese": "在水晶沙漠获得。用来向业力商人购买交易箱，内含制作材料，新的制作配方，以及其它水晶沙漠独有的奖励。",
+          "Korean": "Earned in the Crystal Desert. Spend at karma merchants to purchase trade crates with crafting materials, new crafting recipes, and other rewards unique to the Crystal Desert."
         }
       },
       "AchievementId": 0,
@@ -1580,12 +1455,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Elegy Mosaic\nEarned by completing legendary bounties in the Crystal Desert. Spend at the Tomb of Primeval Kings.\n\n<c=@Flavor>These markers were used to commemorate great deeds in the Dynastic Era of ancient Elona.</c>",
-          "French": "Mosaïque d'élégie\nÀ gagner en obtenant des primes légendaires dans le Désert de cristal. Dépensez-les au tombeau des rois primitifs.\n\n<c=@Flavor>Elles étaient utilisées pour commémorer les hauts faits à l'époque dynastique de l'Elona antique.</c>",
-          "German": "Elegie-Mosaik\nKönnen durch den Abschluss legendärer Kopfgeldaufträge in der Kristallwüste verdient und beim Grab der Altehrwürdigen Könige ausgegeben werden.\n\n<c=@Flavor>Mithilfe dieser Zeichen gedachte man während der Altehrwürdigen Dynastie des antiken Elonas großer Taten.</c>",
-          "Spanish": "Mosaico de elegía\nSe consiguen como recompensas legendarias en el Desierto de Cristal. Puedes gastarlas en la Tumba de los Reyes Primigenios.\n\n<c=Flavor>Estas marcas se usaban durante la Era Dinástica de la antigua Elona para conmemorar grandes hazañas.</c>",
-          "Chinese": "挽歌马赛克\n在水晶沙漠完成传奇悬赏任务后获得。在先王墓穴使用。\n<c=@Flavor>这些标记曾被用来纪念古代伊伦娜王朝时期的壮举。</c>",
-          "Korean": "Elegy Mosaic\nEarned by completing legendary bounties in the Crystal Desert. Spend at the Tomb of Primeval Kings.\n\n<c=@Flavor>These markers were used to commemorate great deeds in the Dynastic Era of ancient Elona.</c>"
+          "English": "Earned by completing legendary bounties in the Crystal Desert. Spend at the Tomb of Primeval Kings.\n\n<c=@Flavor>These markers were used to commemorate great deeds in the Dynastic Era of ancient Elona.</c>",
+          "French": "À gagner en obtenant des primes légendaires dans le Désert de cristal. Dépensez-les au tombeau des rois primitifs.\n\n<c=@Flavor>Elles étaient utilisées pour commémorer les hauts faits à l'époque dynastique de l'Elona antique.</c>",
+          "German": "Können durch den Abschluss legendärer Kopfgeldaufträge in der Kristallwüste verdient und beim Grab der Altehrwürdigen Könige ausgegeben werden.\n\n<c=@Flavor>Mithilfe dieser Zeichen gedachte man während der Altehrwürdigen Dynastie des antiken Elonas großer Taten.</c>",
+          "Spanish": "Se consiguen como recompensas legendarias en el Desierto de Cristal. Puedes gastarlas en la Tumba de los Reyes Primigenios.\n\n<c=Flavor>Estas marcas se usaban durante la Era Dinástica de la antigua Elona para conmemorar grandes hazañas.</c>",
+          "Chinese": "在水晶沙漠完成传奇悬赏任务后获得。在先王墓穴使用。\n<c=@Flavor>这些标记曾被用来纪念古代伊伦娜王朝时期的壮举。</c>",
+          "Korean": "Earned by completing legendary bounties in the Crystal Desert. Spend at the Tomb of Primeval Kings.\n\n<c=@Flavor>These markers were used to commemorate great deeds in the Dynastic Era of ancient Elona.</c>"
         }
       },
       "AchievementId": 0,
@@ -1608,12 +1483,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Testimony of Desert Heroics\nEarned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points.",
-          "French": "Témoignage de consignation d'actes héroïques du désert\nÀ récupérer dans les coffres de rang Monde contre Monde. À dépenser auprès de n'importe quel notaire des actes héroïques en Monde contre Monde pour obtenir des points de héros.",
-          "German": "Zeugnis von Wüsten-Heldentaten\nKönnen bei Erreichen höherer Ränge im Welt gegen Welt verdient werden. Können bei jedem Helden-Notar im Welt gegen Welt für Heldenpunkte ausgegeben werden.",
-          "Spanish": "Testimonio de hazañas desérticas\nSe gana al subir de rango en Mundo contra Mundo. Se puede gastar en cualquier Notaría de hazañas de Mundo contra Mundo para obtener puntos de héroe.",
-          "Chinese": "沙漠英雄证词\n提升世界之战等级后可获得。可在任意英雄公证员处购买英雄点数。",
-          "Korean": "Testimony of Desert Heroics\nEarned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points."
+          "English": "Earned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points.",
+          "French": "À récupérer dans les coffres de rang Monde contre Monde. À dépenser auprès de n'importe quel notaire des actes héroïques en Monde contre Monde pour obtenir des points de héros.",
+          "German": "Können bei Erreichen höherer Ränge im Welt gegen Welt verdient werden. Können bei jedem Helden-Notar im Welt gegen Welt für Heldenpunkte ausgegeben werden.",
+          "Spanish": "Se gana al subir de rango en Mundo contra Mundo. Se puede gastar en cualquier Notaría de hazañas de Mundo contra Mundo para obtener puntos de héroe.",
+          "Chinese": "提升世界之战等级后可获得。可在任意英雄公证员处购买英雄点数。",
+          "Korean": "Earned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points."
         }
       },
       "AchievementId": 0,
@@ -1636,12 +1511,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Exalted Key\nUsed to open Exalted chests in Auric Basin. Chests can contain armor, weapons, and recipes.",
-          "French": "Clé exaltée\nÀ utiliser pour ouvrir des coffres exaltés au Bassin aurique. Les coffres peuvent contenir des pièces d'armure, des armes et des recettes.",
-          "German": "Erhabenen-Schlüssel\nÖffnet Erhabenen-Truhen im Güldenen Talkessel. Truhen können Rüstung, Waffen und Rezepte enthalten.",
-          "Spanish": "Llave exaltada\nSe utiliza para abrir cofres exaltados en el Valle Áurico. Los cofres pueden contener armaduras, armas y recetas.",
-          "Chinese": "尊者钥匙\n用于打开赤金盆地的尊者宝箱。宝箱内包含护甲、武器和配方。",
-          "Korean": "Exalted Key\nUsed to open Exalted chests in Auric Basin. Chests can contain armor, weapons, and recipes."
+          "English": "Used to open Exalted chests in Auric Basin. Chests can contain armor, weapons, and recipes.",
+          "French": "À utiliser pour ouvrir des coffres exaltés au Bassin aurique. Les coffres peuvent contenir des pièces d'armure, des armes et des recettes.",
+          "German": "Öffnet Erhabenen-Truhen im Güldenen Talkessel. Truhen können Rüstung, Waffen und Rezepte enthalten.",
+          "Spanish": "Se utiliza para abrir cofres exaltados en el Valle Áurico. Los cofres pueden contener armaduras, armas y recetas.",
+          "Chinese": "用于打开赤金盆地的尊者宝箱。宝箱内包含护甲、武器和配方。",
+          "Korean": "Used to open Exalted chests in Auric Basin. Chests can contain armor, weapons, and recipes."
         }
       },
       "AchievementId": 0,
@@ -1664,12 +1539,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Machete\nUsed to open noxious pods in Dragon's Stand. Pods can contain armor, weapons, and recipes.",
-          "French": "Machette\nÀ utiliser pour ouvrir des cosses nocives au Repli du dragon. Les cosses peuvent contenir des pièces d'armure, des armes et des recettes.",
-          "German": "Machete\nÖffnet giftige Kapseln in Widerstand des Drachen. Kapseln können Rüstung, Waffen und Rezepte enthalten.",
-          "Spanish": "Machete\nSe utiliza para abrir vainas nocivas en Defensa del Dragón. Las vainas pueden contener armaduras, armas y recetas.",
-          "Chinese": "大砍刀\n用于打开巨龙阵地的毒荚。荚内包含护甲、武器和配方。",
-          "Korean": "Machete\nUsed to open noxious pods in Dragon's Stand. Pods can contain armor, weapons, and recipes."
+          "English": "Used to open noxious pods in Dragon's Stand. Pods can contain armor, weapons, and recipes.",
+          "French": "À utiliser pour ouvrir des cosses nocives au Repli du dragon. Les cosses peuvent contenir des pièces d'armure, des armes et des recettes.",
+          "German": "Öffnet giftige Kapseln in Widerstand des Drachen. Kapseln können Rüstung, Waffen und Rezepte enthalten.",
+          "Spanish": "Se utiliza para abrir vainas nocivas en Defensa del Dragón. Las vainas pueden contener armaduras, armas y recetas.",
+          "Chinese": "用于打开巨龙阵地的毒荚。荚内包含护甲、武器和配方。",
+          "Korean": "Used to open noxious pods in Dragon's Stand. Pods can contain armor, weapons, and recipes."
         }
       },
       "AchievementId": 0,
@@ -1692,12 +1567,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Gaeting Crystal\nEarned from bosses and events inside Path of Fire raids.",
-          "French": "Cristal de Gaets\nÀ obtenir sur les boss et dans les événements de raid de Path of Fire.",
-          "German": "Gaets-Kristall\nKann bei Bossen und Events während \"Path of Fire\"-Schlachtzügen verdient werden.",
-          "Spanish": "Cristal de Gaets\nSe obtiene de jefes y eventos en incursiones de Path of Fire.",
-          "Chinese": "盖廷水晶\n可从烈焰征途资料片大型地下城的头目和事件中获得。",
-          "Korean": "Gaeting Crystal\nEarned from bosses and events inside Path of Fire raids."
+          "English": "Earned from bosses and events inside Path of Fire raids.",
+          "French": "À obtenir sur les boss et dans les événements de raid de Path of Fire.",
+          "German": "Kann bei Bossen und Events während \"Path of Fire\"-Schlachtzügen verdient werden.",
+          "Spanish": "Se obtiene de jefes y eventos en incursiones de Path of Fire.",
+          "Chinese": "可从烈焰征途资料片大型地下城的头目和事件中获得。",
+          "Korean": "Earned from bosses and events inside Path of Fire raids."
         }
       },
       "AchievementId": 0,
@@ -1720,12 +1595,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Bandit Skeleton Key\nUsed to open lost bandit chests in the Silverwastes. Chests can contain armor, weapons, recipes, ambrite, and more.",
-          "French": "Passe-partout de bandit\nÀ utiliser pour ouvrir des coffres de bandit perdus dans les Contrées sauvages d'argent. Les coffres peuvent contenir des pièces d'armure, des armes, des recettes, de l'ambrite, et bien plus encore.",
-          "German": "Banditen-Dietrich\nÖffnet verlorene Banditen-Truhen in der Silberwüste. Truhen können Rüstung, Waffen, Rezepte, Ambrit und vieles mehr enthalten.",
-          "Spanish": "Llave maestra de bandido\nSe utiliza para abrir cofres de bandido perdidos en los Páramos Argentos. Los cofres pueden contener armaduras, armas, recetas, ambrita y más.",
-          "Chinese": "强盗万能钥匙\n用来打开白银荒地里遗失的强盗宝箱。宝箱里内包含护甲、武器、配方、灰黄琥珀等物品。",
-          "Korean": "Bandit Skeleton Key\nUsed to open lost bandit chests in the Silverwastes. Chests can contain armor, weapons, recipes, ambrite, and more."
+          "English": "Used to open lost bandit chests in the Silverwastes. Chests can contain armor, weapons, recipes, ambrite, and more.",
+          "French": "À utiliser pour ouvrir des coffres de bandit perdus dans les Contrées sauvages d'argent. Les coffres peuvent contenir des pièces d'armure, des armes, des recettes, de l'ambrite, et bien plus encore.",
+          "German": "Öffnet verlorene Banditen-Truhen in der Silberwüste. Truhen können Rüstung, Waffen, Rezepte, Ambrit und vieles mehr enthalten.",
+          "Spanish": "Se utiliza para abrir cofres de bandido perdidos en los Páramos Argentos. Los cofres pueden contener armaduras, armas, recetas, ambrita y más.",
+          "Chinese": "用来打开白银荒地里遗失的强盗宝箱。宝箱里内包含护甲、武器、配方、灰黄琥珀等物品。",
+          "Korean": "Used to open lost bandit chests in the Silverwastes. Chests can contain armor, weapons, recipes, ambrite, and more."
         }
       },
       "AchievementId": 0,
@@ -1748,12 +1623,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Pact Crowbar\nUsed to open airship cargo in Verdant Brink. Cargo can contain crafting materials, armor, weapons, and recipes.",
-          "French": "Pied-de-biche du Pacte\nÀ utiliser pour ouvrir une cargaison d'aéronef à l'Orée d'émeraude. La cargaison peut contenir des matériaux d'artisanat, des pièces d'armure, des armes et des recettes.",
-          "German": "Pakt-Brechstange\nÖffnet Luftschiff-Fracht in der Grasgrünen Schwelle. Fracht kann Handwerksmaterialien, Rüstung, Waffen und Rezepte enthalten.",
-          "Spanish": "Palanca del Pacto\nSe utiliza para abrir cargamentos de aeronave en el Umbral Verdeante. El cargamento puede contener materiales de artesanía, armaduras, armas y recetas.",
-          "Chinese": "契约团撬棍\n用于打开苍翠边界的飞船货物。货物内包含制作材料、护甲、武器和配方。",
-          "Korean": "Pact Crowbar\nUsed to open airship cargo in Verdant Brink. Cargo can contain crafting materials, armor, weapons, and recipes."
+          "English": "Used to open airship cargo in Verdant Brink. Cargo can contain crafting materials, armor, weapons, and recipes.",
+          "French": "À utiliser pour ouvrir une cargaison d'aéronef à l'Orée d'émeraude. La cargaison peut contenir des matériaux d'artisanat, des pièces d'armure, des armes et des recettes.",
+          "German": "Öffnet Luftschiff-Fracht in der Grasgrünen Schwelle. Fracht kann Handwerksmaterialien, Rüstung, Waffen und Rezepte enthalten.",
+          "Spanish": "Se utiliza para abrir cargamentos de aeronave en el Umbral Verdeante. El cargamento puede contener materiales de artesanía, armaduras, armas y recetas.",
+          "Chinese": "用于打开苍翠边界的飞船货物。货物内包含制作材料、护甲、武器和配方。",
+          "Korean": "Used to open airship cargo in Verdant Brink. Cargo can contain crafting materials, armor, weapons, and recipes."
         }
       },
       "AchievementId": 0,
@@ -1776,12 +1651,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Vial of Chak Acid\nUsed to open crystallized supply caches in Tangled Depths. Caches can contain armor, weapons, and recipes.",
-          "French": "Fiole d'acide chak\nÀ utiliser pour ouvrir des planques de ravitaillement cristallisées dans les Profondeurs verdoyantes. Les caches peuvent contenir des pièces d'armure, des armes et des recettes.",
-          "German": "Phiole Chak-Säure\nÖffnet kristallisierte Vorratslager in Verschlungene Tiefen. Lager können Rüstung, Waffen und Rezepte enthalten.",
-          "Spanish": "Vial de ácido chak\nSe utiliza para abrir alijos de suministros cristalizados en las Profundidades Enredadas. Los alijos pueden contener armaduras, armas y recetas.",
-          "Chinese": "瓶装查克虫酸液\n用于打开缠藤深渊的晶化补给箱。补给箱内包含护甲、武器和配方。",
-          "Korean": "Vial of Chak Acid\nUsed to open crystallized supply caches in Tangled Depths. Caches can contain armor, weapons, and recipes."
+          "English": "Used to open crystallized supply caches in Tangled Depths. Caches can contain armor, weapons, and recipes.",
+          "French": "À utiliser pour ouvrir des planques de ravitaillement cristallisées dans les Profondeurs verdoyantes. Les caches peuvent contenir des pièces d'armure, des armes et des recettes.",
+          "German": "Öffnet kristallisierte Vorratslager in Verschlungene Tiefen. Lager können Rüstung, Waffen und Rezepte enthalten.",
+          "Spanish": "Se utiliza para abrir alijos de suministros cristalizados en las Profundidades Enredadas. Los alijos pueden contener armaduras, armas y recetas.",
+          "Chinese": "用于打开缠藤深渊的晶化补给箱。补给箱内包含护甲、武器和配方。",
+          "Korean": "Used to open crystallized supply caches in Tangled Depths. Caches can contain armor, weapons, and recipes."
         }
       },
       "AchievementId": 0,
@@ -1804,12 +1679,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Zephyrite Lockpick\nUsed to open buried locked chests in Dry Top. These chests are only visible during sandstorms. Chests can contain armor, weapons, rare skins, recipes, ambrite, and more.",
-          "French": "Crochet zéphyrite\nÀ utiliser pour ouvrir des coffres scellés enterrés à la Cimesèche. Ces coffres ne sont visibles qu'au cours des tempêtes de sable. Ils peuvent contenir des pièces d'armure, des armes, des apparences rares, des recettes, de l'ambrite, et bien plus encore.",
-          "German": "Zephyriten-Dietrich\nÖffnet vergrabene verschlossene Truhen in der Trockenkuppe. Diese Truhen sind nur bei Sandstürmen sichtbar. Truhen können Rüstung, Waffen, seltene Skins, Rezepte, Ambrit und mehr enthalten.",
-          "Spanish": "Ganzúa cefirita\nSe utiliza para abrir cofres cerrados enterrados en Cima Seca. Estos cofres solo se pueden ver durante tormentas de arena. Los cofres pueden contener armaduras, armas, diseños excepcionales, recetas, ambrita y mucho más.",
-          "Chinese": "风裔开锁器\n用于打开干涸高地的埋藏的上锁宝箱。这些宝箱只在沙尘暴期间可见。宝箱内包含护甲、武器、稀有皮肤、配方、灰黄琥珀等物品。",
-          "Korean": "Zephyrite Lockpick\nUsed to open buried locked chests in Dry Top. These chests are only visible during sandstorms. Chests can contain armor, weapons, rare skins, recipes, ambrite, and more."
+          "English": "Used to open buried locked chests in Dry Top. These chests are only visible during sandstorms. Chests can contain armor, weapons, rare skins, recipes, ambrite, and more.",
+          "French": "À utiliser pour ouvrir des coffres scellés enterrés à la Cimesèche. Ces coffres ne sont visibles qu'au cours des tempêtes de sable. Ils peuvent contenir des pièces d'armure, des armes, des apparences rares, des recettes, de l'ambrite, et bien plus encore.",
+          "German": "Öffnet vergrabene verschlossene Truhen in der Trockenkuppe. Diese Truhen sind nur bei Sandstürmen sichtbar. Truhen können Rüstung, Waffen, seltene Skins, Rezepte, Ambrit und mehr enthalten.",
+          "Spanish": "Se utiliza para abrir cofres cerrados enterrados en Cima Seca. Estos cofres solo se pueden ver durante tormentas de arena. Los cofres pueden contener armaduras, armas, diseños excepcionales, recetas, ambrita y mucho más.",
+          "Chinese": "用于打开干涸高地的埋藏的上锁宝箱。这些宝箱只在沙尘暴期间可见。宝箱内包含护甲、武器、稀有皮肤、配方、灰黄琥珀等物品。",
+          "Korean": "Used to open buried locked chests in Dry Top. These chests are only visible during sandstorms. Chests can contain armor, weapons, rare skins, recipes, ambrite, and more."
         }
       },
       "AchievementId": 0,
@@ -1832,12 +1707,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Trader's Key\nUsed to open trade crates in the Crystal Desert.",
-          "French": "Clé de marchand\nÀ utiliser pour ouvrir des cargaisons dans le Désert de cristal.",
-          "German": "Schlüssel des Händlers\nÖffnet Warenkisten in der Kristallwüste.",
-          "Spanish": "Llave del Comerciante\nSe utilizan para abrir cajas de comercio en el Desierto de Cristal.",
-          "Chinese": "商人钥匙\n用于打开水晶沙漠的交易箱。",
-          "Korean": "Trader's Key\nUsed to open trade crates in the Crystal Desert."
+          "English": "Used to open trade crates in the Crystal Desert.",
+          "French": "À utiliser pour ouvrir des cargaisons dans le Désert de cristal.",
+          "German": "Öffnet Warenkisten in der Kristallwüste.",
+          "Spanish": "Se utilizan para abrir cajas de comercio en el Desierto de Cristal.",
+          "Chinese": "用于打开水晶沙漠的交易箱。",
+          "Korean": "Used to open trade crates in the Crystal Desert."
         }
       },
       "AchievementId": 0,
@@ -1860,12 +1735,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Volatile Magic\nUnstable magic lingering from the fall of a god and two Elder Dragons. Spent at vendors to purchase unlocks and rewards.",
-          "French": "Magie volatile\nMagie instable ayant persisté après la mort d'un dieu et de deux dragons ancestraux. À dépenser auprès des vendeurs pour acheter des récompenses et des déverrouillages.",
-          "German": "Flüchtige Magie\nInstabile Magie, die nach dem Sturz eines Gotts und zweier Alt-Drachen zurückgeblieben ist. Gebt sie Händlern, um Freischaltungen und Belohnungen zu erhalten.",
-          "Spanish": "Magia volátil\nMagia inestable producto de la caída de un dios y dos dragones ancianos. Se usa para comprar elementos desbloqueables y recompensas a comerciantes.",
-          "Chinese": "烈性魔法\n神明和两条上古巨龙死后释放出不稳定的魔法，可用来向商贩购买解锁物品或奖励。",
-          "Korean": "Volatile Magic\nUnstable magic lingering from the fall of a god and two Elder Dragons. Spent at vendors to purchase unlocks and rewards."
+          "English": "Unstable magic lingering from the fall of a god and two Elder Dragons. Spent at vendors to purchase unlocks and rewards.",
+          "French": "Magie instable ayant persisté après la mort d'un dieu et de deux dragons ancestraux. À dépenser auprès des vendeurs pour acheter des récompenses et des déverrouillages.",
+          "German": "Instabile Magie, die nach dem Sturz eines Gotts und zweier Alt-Drachen zurückgeblieben ist. Gebt sie Händlern, um Freischaltungen und Belohnungen zu erhalten.",
+          "Spanish": "Magia inestable producto de la caída de un dios y dos dragones ancianos. Se usa para comprar elementos desbloqueables y recompensas a comerciantes.",
+          "Chinese": "神明和两条上古巨龙死后释放出不稳定的魔法，可用来向商贩购买解锁物品或奖励。",
+          "Korean": "Unstable magic lingering from the fall of a god and two Elder Dragons. Spent at vendors to purchase unlocks and rewards."
         }
       },
       "AchievementId": 0,
@@ -1888,12 +1763,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "PvP Tournament Voucher\nEarned in monthly automated tournaments and some special event tournaments.",
-          "French": "Bon de tournoi JcJ\nÀ remporter lors de tournois automatisés mensuels et de tournois événementiels spéciaux.",
-          "German": "PvP-Turnier-Gutschein\nKönnen bei monatlichen automatisierten Turnieren und einigen Sonder-Event-Turnieren gewonnen werden.",
-          "Spanish": "Vale de torneo PvP\nSe consigue en los torneos automáticos mensuales y en algunos torneos especiales de eventos.",
-          "Chinese": "PvP联赛兑换券\n通过每月自匹配锦标赛和特殊事件锦标赛获得。",
-          "Korean": "PvP Tournament Voucher\nEarned in monthly automated tournaments and some special event tournaments."
+          "English": "Earned in monthly automated tournaments and some special event tournaments.",
+          "French": "À remporter lors de tournois automatisés mensuels et de tournois événementiels spéciaux.",
+          "German": "Können bei monatlichen automatisierten Turnieren und einigen Sonder-Event-Turnieren gewonnen werden.",
+          "Spanish": "Se consigue en los torneos automáticos mensuales y en algunos torneos especiales de eventos.",
+          "Chinese": "通过每月自匹配锦标赛和特殊事件锦标赛获得。",
+          "Korean": "Earned in monthly automated tournaments and some special event tournaments."
         }
       },
       "AchievementId": 0,
@@ -1916,12 +1791,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Racing Medallion\nEarned by participating in roller beetle races and time trials.",
-          "French": "Médaillon de course\nÀ gagner en participant à des courses de scaraboules et à des épreuves de Contre la montre.",
-          "German": "Renn-Medaille\nVerdient durch die Teilnahme an Rollkäfer-Rennen und Zeitprüfungen.",
-          "Spanish": "Medallón de carreras\nSe consigue participando en carreras de escarabajos y pruebas contrarreloj.",
-          "Chinese": "比赛徽记\n参加翻滚甲虫赛跑和限时试炼获得。",
-          "Korean": "Racing Medallion\nEarned by participating in roller beetle races and time trials."
+          "English": "Earned by participating in roller beetle races and time trials.",
+          "French": "À gagner en participant à des courses de scaraboules et à des épreuves de Contre la montre.",
+          "German": "Verdient durch die Teilnahme an Rollkäfer-Rennen und Zeitprüfungen.",
+          "Spanish": "Se consigue participando en carreras de escarabajos y pruebas contrarreloj.",
+          "Chinese": "参加翻滚甲虫赛跑和限时试炼获得。",
+          "Korean": "Earned by participating in roller beetle races and time trials."
         }
       },
       "AchievementId": 0,
@@ -1944,12 +1819,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Mistborn Key\nUsed to open Mistborn Coffers in Dragonfall.",
-          "French": "Clé de la Brumaille\nÀ utiliser pour ouvrir des malles de la Brumaille à la Chute draconique.",
-          "German": "Nebelgeborener Schlüssel\nWird verwendet, um Nebelgeborene Kisten in Drachensturz zu öffnen.",
-          "Spanish": "Llave surgida de la Niebla\nSe emplea para abrir cofres surgidos de la Niebla en Dragoncaído.",
-          "Chinese": "雾凝钥匙\n用于打开坠龙之地的雾凝宝匣。",
-          "Korean": "Mistborn Key\nUsed to open Mistborn Coffers in Dragonfall."
+          "English": "Used to open Mistborn Coffers in Dragonfall.",
+          "French": "À utiliser pour ouvrir des malles de la Brumaille à la Chute draconique.",
+          "German": "Wird verwendet, um Nebelgeborene Kisten in Drachensturz zu öffnen.",
+          "Spanish": "Se emplea para abrir cofres surgidos de la Niebla en Dragoncaído.",
+          "Chinese": "用于打开坠龙之地的雾凝宝匣。",
+          "Korean": "Used to open Mistborn Coffers in Dragonfall."
         }
       },
       "AchievementId": 0,
@@ -1972,12 +1847,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Festival Token\nEarned by participating in the yearly Festival of the Four Winds.",
-          "French": "Coupon du festival\nÀ obtenir en participant au Festival annuel des Quatre Vents.",
-          "German": "Festmarke\nVerdient durch die Teilnahme am jährlichen Fest der Vier Winde.",
-          "Spanish": "Vale del festival\nSe consigue participando en el Festival de los Cuatro Vientos anual.",
-          "Chinese": "节日徽记\n参加年度四风节日获得。",
-          "Korean": "Festival Token\nEarned by participating in the yearly Festival of the Four Winds."
+          "English": "Earned by participating in the yearly Festival of the Four Winds.",
+          "French": "À obtenir en participant au Festival annuel des Quatre Vents.",
+          "German": "Verdient durch die Teilnahme am jährlichen Fest der Vier Winde.",
+          "Spanish": "Se consigue participando en el Festival de los Cuatro Vientos anual.",
+          "Chinese": "参加年度四风节日获得。",
+          "Korean": "Earned by participating in the yearly Festival of the Four Winds."
         }
       },
       "AchievementId": 0,
@@ -2000,12 +1875,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Cache Key\nUsed to loot cache chests around Drizzlewood Coast.",
-          "French": "Clé de cache\nSert à ouvrir des coffres de cache dans la Côte de Bruinebois.",
-          "German": "Lager-Schlüssel\nWird benutzt, um Lager-Truhen in der Gegend der Nieselwald-Küste zu plündern.",
-          "Spanish": "Llave de alijo\nSe emplea para abrir cofres de alijos en la Costa de Bosquellovizna.",
-          "Chinese": "补给箱钥匙\n用于打开雨森海岸的补给箱。",
-          "Korean": "Cache Key\nUsed to loot cache chests around Drizzlewood Coast."
+          "English": "Used to loot cache chests around Drizzlewood Coast.",
+          "French": "Sert à ouvrir des coffres de cache dans la Côte de Bruinebois.",
+          "German": "Wird benutzt, um Lager-Truhen in der Gegend der Nieselwald-Küste zu plündern.",
+          "Spanish": "Se emplea para abrir cofres de alijos en la Costa de Bosquellovizna.",
+          "Chinese": "用于打开雨森海岸的补给箱。",
+          "Korean": "Used to loot cache chests around Drizzlewood Coast."
         }
       },
       "AchievementId": 0,
@@ -2028,12 +1903,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Red Prophet Shard\nCrystalline shards of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these.",
-          "French": "Éclat rouge du prophète\nDes éclats cristallins de magie draconique, parcourus de veinures rouges.\n\nLes émissaires de l'Œil du Nord leur portent un grand intérêt.",
-          "German": "Rote Propheten-Scherbe\nKristalline Scherben der Drachenmagie, rot geädert.\n\nGesandte im Auge des Nordens haben Interesse daran.",
-          "Spanish": "Esquirla de profecía roja\nEsquirlas cristalinas de magia dracónica con vetas rojas.\n\nLes interesan a los emisarios del Ojo del Norte.",
-          "Chinese": "红色先知水晶碎片\n水晶形态的巨龙魔法，带有红色纹理。\n北方之眼的密使对此感兴趣。",
-          "Korean": "Red Prophet Shard\nCrystalline shards of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these."
+          "English": "Crystalline shards of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these.",
+          "French": "Des éclats cristallins de magie draconique, parcourus de veinures rouges.\n\nLes émissaires de l'Œil du Nord leur portent un grand intérêt.",
+          "German": "Kristalline Scherben der Drachenmagie, rot geädert.\n\nGesandte im Auge des Nordens haben Interesse daran.",
+          "Spanish": "Esquirlas cristalinas de magia dracónica con vetas rojas.\n\nLes interesan a los emisarios del Ojo del Norte.",
+          "Chinese": "水晶形态的巨龙魔法，带有红色纹理。\n北方之眼的密使对此感兴趣。",
+          "Korean": "Crystalline shards of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these."
         }
       },
       "AchievementId": 0,
@@ -2056,12 +1931,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Green Prophet Shard\nCrystalline shards of dragon magic, veined with green.\nCan be exchanged for rewards in Arborstone.",
-          "French": "Éclat vert du prophète\nDes éclats cristallins de magie draconique, parcourus de veinures vertes.\nÀ échanger contre des récompenses à Pierre Arborea.",
-          "German": "Grüne Propheten-Scherbe\nKristalline Scherben der Drachenmagie, grün geädert.\nKönnen in Arborstein gegen Belohnungen eingetauscht werden.",
-          "Spanish": "Esquirla de profecía verde\nEsquirlas cristalinas de magia dracónica con vetas verdes.\nPueden intercambiarse por recompensas en Piedra Arbórea.",
-          "Chinese": "绿色先知水晶碎片\n水晶形态的巨龙魔法，带有绿色纹理。\n可在亭石兑换奖励。",
-          "Korean": "Green Prophet Shard\nCrystalline shards of dragon magic, veined with green.\nCan be exchanged for rewards in Arborstone."
+          "English": "Crystalline shards of dragon magic, veined with green.\nCan be exchanged for rewards in Arborstone.",
+          "French": "Des éclats cristallins de magie draconique, parcourus de veinures vertes.\nÀ échanger contre des récompenses à Pierre Arborea.",
+          "German": "Kristalline Scherben der Drachenmagie, grün geädert.\nKönnen in Arborstein gegen Belohnungen eingetauscht werden.",
+          "Spanish": "Esquirlas cristalinas de magia dracónica con vetas verdes.\nPueden intercambiarse por recompensas en Piedra Arbórea.",
+          "Chinese": "水晶形态的巨龙魔法，带有绿色纹理。\n可在亭石兑换奖励。",
+          "Korean": "Crystalline shards of dragon magic, veined with green.\nCan be exchanged for rewards in Arborstone."
         }
       },
       "AchievementId": 0,
@@ -2084,12 +1959,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Blue Prophet Crystal\nCrystalline formations of dragon magic, veined with blue.\nUsed to open the weekly strike rewards chest in the Eye of the North.\nObtained from Priority Strikes or by combining shards.",
-          "French": "Cristal bleu du prophète\nDes concrétions cristallines de magie draconique, parcourues de veinures bleues.\nSert à ouvrir le coffre de récompense de missions d'attaque hebdomadaire à l'Œil du Nord.\nÀ récupérer au cours des priorités d'attaque ou en combinant des éclats.",
-          "German": "Blauer Propheten-Kristall\nKristalline Formationen der Drachenmagie, blau geädert.\nWerden verwendet, um im Auge des Nordens die wöchentliche Truhe für Angriffsbelohnungen zu öffnen.\nErhaltet Ihr bei Prioritätsangriffen oder durch die Kombination von Scherben.",
-          "Spanish": "Cristal de profecía azul\nFormaciones cristalinas de magia dracónica con vetas azules.\nSe emplean para abrir los cofres de recompensas semanales por misiones de ataque en el Ojo del Norte.\nSe consiguen en ataques prioritarios o combinando esquirlas.",
-          "Chinese": "蓝色先知水晶\n水晶形态的巨龙魔法，带有蓝色纹理。\n用于打开北方之眼的每周进攻任务奖励宝箱。\n通过优先进攻任务或者组合碎片获得。",
-          "Korean": "Blue Prophet Crystal\nCrystalline formations of dragon magic, veined with blue.\nUsed to open the weekly strike rewards chest in the Eye of the North.\nObtained from Priority Strikes or by combining shards."
+          "English": "Crystalline formations of dragon magic, veined with blue.\nUsed to open the weekly strike rewards chest in the Eye of the North.\nObtained from Priority Strikes or by combining shards.",
+          "French": "Des concrétions cristallines de magie draconique, parcourues de veinures bleues.\nSert à ouvrir le coffre de récompense de missions d'attaque hebdomadaire à l'Œil du Nord.\nÀ récupérer au cours des priorités d'attaque ou en combinant des éclats.",
+          "German": "Kristalline Formationen der Drachenmagie, blau geädert.\nWerden verwendet, um im Auge des Nordens die wöchentliche Truhe für Angriffsbelohnungen zu öffnen.\nErhaltet Ihr bei Prioritätsangriffen oder durch die Kombination von Scherben.",
+          "Spanish": "Formaciones cristalinas de magia dracónica con vetas azules.\nSe emplean para abrir los cofres de recompensas semanales por misiones de ataque en el Ojo del Norte.\nSe consiguen en ataques prioritarios o combinando esquirlas.",
+          "Chinese": "水晶形态的巨龙魔法，带有蓝色纹理。\n用于打开北方之眼的每周进攻任务奖励宝箱。\n通过优先进攻任务或者组合碎片获得。",
+          "Korean": "Crystalline formations of dragon magic, veined with blue.\nUsed to open the weekly strike rewards chest in the Eye of the North.\nObtained from Priority Strikes or by combining shards."
         }
       },
       "AchievementId": 0,
@@ -2112,12 +1987,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Green Prophet Crystal\nCrystalline formations of dragon magic, veined with green.\nEmissaries in the Eye of the North have interest in these.\nObtained from Priority Strikes or by combining shards.",
-          "French": "Cristal vert du prophète\nDes concrétions cristallines de magie draconique, parcourues de veinures vertes.\nLes émissaires de l'Œil du Nord leur portent un grand intérêt.\nÀ récupérer au cours des priorités d'attaque ou en combinant des éclats.",
-          "German": "Grüner Propheten-Kristall\nKristalline Formationen der Drachenmagie, grün geädert.\nGesandte im Auge des Nordens haben Interesse daran.\nErhaltet Ihr bei Prioritätsangriffen oder durch die Kombination von Scherben.",
-          "Spanish": "Cristal de profecía verde\nFormaciones cristalinas de magia dracónica con vetas verdes.\nLes interesan a los emisarios del Ojo del Norte.\nSe consiguen en ataques prioritarios o combinando esquirlas.",
-          "Chinese": "绿色先知水晶\n水晶形态的巨龙魔法，带有绿色纹理。\n北方之眼的密使对此感兴趣。\n通过优先进攻任务或者组合碎片获得。",
-          "Korean": "Green Prophet Crystal\nCrystalline formations of dragon magic, veined with green.\nEmissaries in the Eye of the North have interest in these.\nObtained from Priority Strikes or by combining shards."
+          "English": "Crystalline formations of dragon magic, veined with green.\nEmissaries in the Eye of the North have interest in these.\nObtained from Priority Strikes or by combining shards.",
+          "French": "Des concrétions cristallines de magie draconique, parcourues de veinures vertes.\nLes émissaires de l'Œil du Nord leur portent un grand intérêt.\nÀ récupérer au cours des priorités d'attaque ou en combinant des éclats.",
+          "German": "Kristalline Formationen der Drachenmagie, grün geädert.\nGesandte im Auge des Nordens haben Interesse daran.\nErhaltet Ihr bei Prioritätsangriffen oder durch die Kombination von Scherben.",
+          "Spanish": "Formaciones cristalinas de magia dracónica con vetas verdes.\nLes interesan a los emisarios del Ojo del Norte.\nSe consiguen en ataques prioritarios o combinando esquirlas.",
+          "Chinese": "水晶形态的巨龙魔法，带有绿色纹理。\n北方之眼的密使对此感兴趣。\n通过优先进攻任务或者组合碎片获得。",
+          "Korean": "Crystalline formations of dragon magic, veined with green.\nEmissaries in the Eye of the North have interest in these.\nObtained from Priority Strikes or by combining shards."
         }
       },
       "AchievementId": 0,
@@ -2140,12 +2015,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Red Prophet Crystal\nCrystalline formations of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these.\nObtained from Priority Strikes or by combining shards.",
-          "French": "Cristal rouge du prophète\nDes concrétions cristallines de magie draconique, parcourues de veinures rouges.\nLes émissaires de l'Œil du Nord leur portent un grand intérêt.\nÀ récupérer au cours des priorités d'attaque ou en combinant des éclats.",
-          "German": "Roter Propheten-Kristall\nKristalline Formationen der Drachenmagie, rot geädert.\nGesandte im Auge des Nordens haben Interesse daran.\nErhaltet Ihr bei Prioritätsangriffen oder durch die Kombination von Scherben.",
-          "Spanish": "Cristal de profecía rojo\nFormaciones cristalinas de magia dracónica con vetas rojas.\nLes interesan a los emisarios del Ojo del Norte.\nSe consiguen en ataques prioritarios o combinando esquirlas.",
-          "Chinese": "红色先知水晶\n水晶形态的巨龙魔法，带有红色纹理。\n北方之眼的密使对此感兴趣。\n通过优先进攻任务或者组合碎片获得。",
-          "Korean": "Red Prophet Crystal\nCrystalline formations of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these.\nObtained from Priority Strikes or by combining shards."
+          "English": "Crystalline formations of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these.\nObtained from Priority Strikes or by combining shards.",
+          "French": "Des concrétions cristallines de magie draconique, parcourues de veinures rouges.\nLes émissaires de l'Œil du Nord leur portent un grand intérêt.\nÀ récupérer au cours des priorités d'attaque ou en combinant des éclats.",
+          "German": "Kristalline Formationen der Drachenmagie, rot geädert.\nGesandte im Auge des Nordens haben Interesse daran.\nErhaltet Ihr bei Prioritätsangriffen oder durch die Kombination von Scherben.",
+          "Spanish": "Formaciones cristalinas de magia dracónica con vetas rojas.\nLes interesan a los emisarios del Ojo del Norte.\nSe consiguen en ataques prioritarios o combinando esquirlas.",
+          "Chinese": "水晶形态的巨龙魔法，带有红色纹理。\n北方之眼的密使对此感兴趣。\n通过优先进攻任务或者组合碎片获得。",
+          "Korean": "Crystalline formations of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these.\nObtained from Priority Strikes or by combining shards."
         }
       },
       "AchievementId": 0,
@@ -2168,12 +2043,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Blue Prophet Shard\nCrystalline shards of dragon magic, veined with blue.\nCan be exchanged for rewards in the Eye of the North.",
-          "French": "Éclat bleu du prophète\nDes éclats cristallins de magie draconique, parcourus de veinures bleues.\nÀ échanger contre des récompenses à l'Œil du Nord.",
-          "German": "Blaue Propheten-Scherbe\nKristalline Scherben der Drachenmagie, blau geädert.\nKönnen im Auge des Nordens gegen Belohnungen eingetauscht werden.",
-          "Spanish": "Esquirla de profecía azul\nEsquirlas cristalinas de magia dracónica con vetas azules.\nPueden intercambiarse por recompensas en el Ojo del Norte.",
-          "Chinese": "蓝色先知水晶碎片\n水晶形态的巨龙魔法，带有蓝色纹理。\n可在北方之眼兑换奖励。",
-          "Korean": "Blue Prophet Shard\nCrystalline shards of dragon magic, veined with blue.\nCan be exchanged for rewards in the Eye of the North."
+          "English": "Crystalline shards of dragon magic, veined with blue.\nCan be exchanged for rewards in the Eye of the North.",
+          "French": "Des éclats cristallins de magie draconique, parcourus de veinures bleues.\nÀ échanger contre des récompenses à l'Œil du Nord.",
+          "German": "Kristalline Scherben der Drachenmagie, blau geädert.\nKönnen im Auge des Nordens gegen Belohnungen eingetauscht werden.",
+          "Spanish": "Esquirlas cristalinas de magia dracónica con vetas azules.\nPueden intercambiarse por recompensas en el Ojo del Norte.",
+          "Chinese": "水晶形态的巨龙魔法，带有蓝色纹理。\n可在北方之眼兑换奖励。",
+          "Korean": "Crystalline shards of dragon magic, veined with blue.\nCan be exchanged for rewards in the Eye of the North."
         }
       },
       "AchievementId": 0,
@@ -2196,12 +2071,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "War Supplies\nMaterials to aid in the ongoing conflict in the Drizzlewood Coast. Can be traded for war equipment and items or used to upgrade bases.",
-          "French": "Ravitaillement de guerre\nDes matériaux pour soutenir le conflit dans la Côte de Bruinebois. Ils peuvent être échangés contre de l'équipement de guerre et des objets, ou utilisés pour améliorer les bases.",
-          "German": "Kriegs-Vorräte\nMaterialien zur Hilfe im anhaltenden Konflikt an der Nieselwald-Küste. Können gegen Kriegsausrüstung und -Gegenstände getauscht oder zur Aufwertung von Basen benutzt werden.",
-          "Spanish": "Suministros bélicos\nMateriales para ayudar en el conflicto abierto en la Costa de Bosquellovizna. Pueden intercambiarse por objetos y equipamientos bélicos o para mejorar bases.",
-          "Chinese": "战争补给\n用于支援雨森海岸激烈战争的材料。可以交换战争装备和物品，或用于升级基地。",
-          "Korean": "War Supplies\nMaterials to aid in the ongoing conflict in the Drizzlewood Coast. Can be traded for war equipment and items or used to upgrade bases."
+          "English": "Materials to aid in the ongoing conflict in the Drizzlewood Coast. Can be traded for war equipment and items or used to upgrade bases.",
+          "French": "Des matériaux pour soutenir le conflit dans la Côte de Bruinebois. Ils peuvent être échangés contre de l'équipement de guerre et des objets, ou utilisés pour améliorer les bases.",
+          "German": "Materialien zur Hilfe im anhaltenden Konflikt an der Nieselwald-Küste. Können gegen Kriegsausrüstung und -Gegenstände getauscht oder zur Aufwertung von Basen benutzt werden.",
+          "Spanish": "Materiales para ayudar en el conflicto abierto en la Costa de Bosquellovizna. Pueden intercambiarse por objetos y equipamientos bélicos o para mejorar bases.",
+          "Chinese": "用于支援雨森海岸激烈战争的材料。可以交换战争装备和物品，或用于升级基地。",
+          "Korean": "Materials to aid in the ongoing conflict in the Drizzlewood Coast. Can be traded for war equipment and items or used to upgrade bases."
         }
       },
       "AchievementId": 0,
@@ -2224,12 +2099,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Unstable Fractal Essence\nEarned and spent in Fractals of the Mists. Used to purchase prestigious rewards.",
-          "French": "Essence de fractale instable\nÀ gagner et à dépenser dans les fractales des Brumes. À utiliser pour acheter de prestigieuses récompenses.",
-          "German": "Instabile Fraktal-Essenz\nKann in den Fraktalen der Nebel verdient und ausgegeben werden. Kann zum Kauf prestigeträchtiger Belohnungen verwendet werden.",
-          "Spanish": "Esencia de fractal inestable\nSe pueden conseguir y gastar en los Fractales de la Niebla. Se pueden usar para comprar prestigiosas recompensas.",
-          "Chinese": "不稳定碎层精华\n可以在迷雾碎层获得并花费。用来购买受人尊敬的奖励。",
-          "Korean": "Unstable Fractal Essence\nEarned and spent in Fractals of the Mists. Used to purchase prestigious rewards."
+          "English": "Earned and spent in Fractals of the Mists. Used to purchase prestigious rewards.",
+          "French": "À gagner et à dépenser dans les fractales des Brumes. À utiliser pour acheter de prestigieuses récompenses.",
+          "German": "Kann in den Fraktalen der Nebel verdient und ausgegeben werden. Kann zum Kauf prestigeträchtiger Belohnungen verwendet werden.",
+          "Spanish": "Se pueden conseguir y gastar en los Fractales de la Niebla. Se pueden usar para comprar prestigiosas recompensas.",
+          "Chinese": "可以在迷雾碎层获得并花费。用来购买受人尊敬的奖励。",
+          "Korean": "Earned and spent in Fractals of the Mists. Used to purchase prestigious rewards."
         }
       },
       "AchievementId": 0,
@@ -2252,12 +2127,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Tyrian Defense Seal\nEarned by protecting Tyria in Dragon Response Missions. Spent at faction vendors in Eye of the North.",
-          "French": "Sceau de défense tyrienne\nÀ gagner en protégeant la Tyrie dans les missions d'endiguement de dragon. À dépenser auprès des vendeurs de faction de l'Œil du Nord.",
-          "German": "Tyrianisches Verteidigungssiegel\nKann durch den Schutz Tyrias in Drachenhilfe-Missionen verdient und bei Fraktions-Händlern im Auge des Nordens ausgegeben werden.",
-          "Spanish": "Sello de defensa de Tyria\nSe consigue protegiendo Tyria en misiones de respuesta dracónica y se gasta en los comerciantes de facciones del Ojo del Norte.",
-          "Chinese": "泰瑞亚防御封印\n通过在巨龙响应任务中保护泰瑞亚获得。在北方之眼与势力商贩做交易。",
-          "Korean": "Tyrian Defense Seal\nEarned by protecting Tyria in Dragon Response Missions. Spent at faction vendors in Eye of the North."
+          "English": "Earned by protecting Tyria in Dragon Response Missions. Spent at faction vendors in Eye of the North.",
+          "French": "À gagner en protégeant la Tyrie dans les missions d'endiguement de dragon. À dépenser auprès des vendeurs de faction de l'Œil du Nord.",
+          "German": "Kann durch den Schutz Tyrias in Drachenhilfe-Missionen verdient und bei Fraktions-Händlern im Auge des Nordens ausgegeben werden.",
+          "Spanish": "Se consigue protegiendo Tyria en misiones de respuesta dracónica y se gasta en los comerciantes de facciones del Ojo del Norte.",
+          "Chinese": "通过在巨龙响应任务中保护泰瑞亚获得。在北方之眼与势力商贩做交易。",
+          "Korean": "Earned by protecting Tyria in Dragon Response Missions. Spent at faction vendors in Eye of the North."
         }
       },
       "AchievementId": 0,
@@ -2280,12 +2155,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Research Note\nAcquired by deconstructing crafted items with research kits. Used at vendors in Cantha and to craft newer recipes.",
-          "French": "Note de recherche\nÀ obtenir en démontant des objets fabriqués à l'aide de kits de recherches. À utiliser auprès de vendeurs canthiens et pour fabriquer de nouvelles recettes.",
-          "German": "Forschungsnotiz\nErworben durch die Dekonstruktion von hergestellten Gegenständen mit Forschungskits. Zum Eintauschen bei Händlern in Cantha und zur Herstellung neuerer Rezepte.",
-          "Spanish": "Nota de investigación\nSe consigue desmantelando objetos fabricados con kits de investigación y sirven para vendérselos a comerciantes de Cantha y fabricar nuevas recetas.",
-          "Chinese": "研究记录\n通过使用研究套件分解制作物品获得。可在凯珊的商贩处使用，或制作新的配方。",
-          "Korean": "Research Note\nAcquired by deconstructing crafted items with research kits. Used at vendors in Cantha and to craft newer recipes."
+          "English": "Acquired by deconstructing crafted items with research kits. Used at vendors in Cantha and to craft newer recipes.",
+          "French": "À obtenir en démontant des objets fabriqués à l'aide de kits de recherches. À utiliser auprès de vendeurs canthiens et pour fabriquer de nouvelles recettes.",
+          "German": "Erworben durch die Dekonstruktion von hergestellten Gegenständen mit Forschungskits. Zum Eintauschen bei Händlern in Cantha und zur Herstellung neuerer Rezepte.",
+          "Spanish": "Se consigue desmantelando objetos fabricados con kits de investigación y sirven para vendérselos a comerciantes de Cantha y fabricar nuevas recetas.",
+          "Chinese": "通过使用研究套件分解制作物品获得。可在凯珊的商贩处使用，或制作新的配方。",
+          "Korean": "Acquired by deconstructing crafted items with research kits. Used at vendors in Cantha and to craft newer recipes."
         }
       },
       "AchievementId": 0,
@@ -2308,12 +2183,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Unusual Coin\nAcquired by opening hidden chests in Cantha. Used at vendors in Cantha.",
-          "French": "Pièce inhabituelle\nS'obtient en ouvrant des coffres cachés dans Cantha. À utiliser auprès de vendeurs canthiens.",
-          "German": "Ungewöhnliche Münze\nErworben durch das Öffnen verborgener Truhen in Cantha. Bei Händlern in Cantha einzulösen.",
-          "Spanish": "Moneda inusual\nSe pueden adquirir abriendo cofres ocultos en Cantha. Se usan con comerciantes de Cantha.",
-          "Chinese": "独特硬币\n通过打开凯珊各处的隐藏宝箱获得。可在凯珊商人处使用。",
-          "Korean": "Unusual Coin\nAcquired by opening hidden chests in Cantha. Used at vendors in Cantha."
+          "English": "Acquired by opening hidden chests in Cantha. Used at vendors in Cantha.",
+          "French": "S'obtient en ouvrant des coffres cachés dans Cantha. À utiliser auprès de vendeurs canthiens.",
+          "German": "Erworben durch das Öffnen verborgener Truhen in Cantha. Bei Händlern in Cantha einzulösen.",
+          "Spanish": "Se pueden adquirir abriendo cofres ocultos en Cantha. Se usan con comerciantes de Cantha.",
+          "Chinese": "通过打开凯珊各处的隐藏宝箱获得。可在凯珊商人处使用。",
+          "Korean": "Acquired by opening hidden chests in Cantha. Used at vendors in Cantha."
         }
       },
       "AchievementId": 0,
@@ -2336,12 +2211,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Jade Sliver\nAcquired from junk items recycled by the Jade Bot Recycler.",
-          "French": "Esquille de jade\nÀ trouver dans des objets sans valeur traités par le recycleur de drones de jade.",
-          "German": "Jade-Span\nErhalten aus Schrottgegenständen, die der Jade-Bot-Wiederverwerter aufbereitet hat.",
-          "Spanish": "Triza de jade\nSe obtiene de objetos sin valor reciclados con el reciclador del robot de jade.",
-          "Chinese": "翠玉薄片\n从翠玉机器人回收器的垃圾物品中获取。",
-          "Korean": "Jade Sliver\nAcquired from junk items recycled by the Jade Bot Recycler."
+          "English": "Acquired from junk items recycled by the Jade Bot Recycler.",
+          "French": "À trouver dans des objets sans valeur traités par le recycleur de drones de jade.",
+          "German": "Erhalten aus Schrottgegenständen, die der Jade-Bot-Wiederverwerter aufbereitet hat.",
+          "Spanish": "Se obtiene de objetos sin valor reciclados con el reciclador del robot de jade.",
+          "Chinese": "从翠玉机器人回收器的垃圾物品中获取。",
+          "Korean": "Acquired from junk items recycled by the Jade Bot Recycler."
         }
       },
       "AchievementId": 0,
@@ -2364,12 +2239,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Testimony of Jade Heroics\nEarned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points.",
-          "French": "Témoignage d'actes héroïques de Jade\nÀ récupérer dans les coffres de rang Monde contre Monde. À dépenser auprès de n'importe quel notaire des actes héroïques en Monde contre Monde pour obtenir des points de héros.",
-          "German": "Zeugnis von Jade-Heldentaten\nKönnen bei Erreichen höherer Ränge im Welt gegen Welt verdient werden. Können bei jedem Helden-Notar im Welt gegen Welt für Heldenpunkte ausgegeben werden.",
-          "Spanish": "Testimonio de hazañas de jade\nSe gana al subir de rango en Mundo contra Mundo. Se puede gastar en cualquier Notaría de hazañas de Mundo contra Mundo para obtener puntos de héroe.",
-          "Chinese": "翠玉英雄证词\n提升世界之战等级后可获得。可在任意英雄公证员处购买英雄点数。",
-          "Korean": "Testimony of Jade Heroics\nEarned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points."
+          "English": "Earned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points.",
+          "French": "À récupérer dans les coffres de rang Monde contre Monde. À dépenser auprès de n'importe quel notaire des actes héroïques en Monde contre Monde pour obtenir des points de héros.",
+          "German": "Können bei Erreichen höherer Ränge im Welt gegen Welt verdient werden. Können bei jedem Helden-Notar im Welt gegen Welt für Heldenpunkte ausgegeben werden.",
+          "Spanish": "Se gana al subir de rango en Mundo contra Mundo. Se puede gastar en cualquier Notaría de hazañas de Mundo contra Mundo para obtener puntos de héroe.",
+          "Chinese": "提升世界之战等级后可获得。可在任意英雄公证员处购买英雄点数。",
+          "Korean": "Earned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points."
         }
       },
       "AchievementId": 0,
@@ -2392,12 +2267,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Canach Coins\nAcquired by playing the Coin Rush in Club Canach. May be used to obtain rewards in Club Canach.",
-          "French": "Pièces de Canach\nS'obtient en participant à la course aux pièces dans le Club Canach. À utiliser pour recevoir des récompenses du Club Canach.",
-          "German": "Canach-Münzen\nErhalten beim Spielen des Münzen-Ansturms in Canachs Klub. Hiermit können in Canachs Klub Belohnungen erworben werden.",
-          "Spanish": "Monedas de Canach\nSe consiguen jugando a la carrera de las monedas en Club Canach. Se pueden usar para obtener recompensas en Club Canach.",
-          "Chinese": "卡纳克硬币\n通过在卡纳克俱乐部体验硬币冲刺活动获得。可在卡纳克俱乐部兑换奖励。",
-          "Korean": "Canach Coins\nAcquired by playing the Coin Rush in Club Canach. May be used to obtain rewards in Club Canach."
+          "English": "Acquired by playing the Coin Rush in Club Canach. May be used to obtain rewards in Club Canach.",
+          "French": "S'obtient en participant à la course aux pièces dans le Club Canach. À utiliser pour recevoir des récompenses du Club Canach.",
+          "German": "Erhalten beim Spielen des Münzen-Ansturms in Canachs Klub. Hiermit können in Canachs Klub Belohnungen erworben werden.",
+          "Spanish": "Se consiguen jugando a la carrera de las monedas en Club Canach. Se pueden usar para obtener recompensas en Club Canach.",
+          "Chinese": "通过在卡纳克俱乐部体验硬币冲刺活动获得。可在卡纳克俱乐部兑换奖励。",
+          "Korean": "Acquired by playing the Coin Rush in Club Canach. May be used to obtain rewards in Club Canach."
         }
       },
       "AchievementId": 0,
@@ -2420,12 +2295,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Imperial Favor\nAcquired by assisting in events throughout Cantha. Used at vendors in Cantha.",
-          "French": "Faveur impériale\nS'obtient en participant à des événements dans Cantha. À utiliser auprès de vendeurs canthiens.",
-          "German": "Kaiserliche Gunst\nErworben durch Mithilfe bei Events überall in Cantha. Bei Händlern in Cantha einzulösen.",
-          "Spanish": "Favor imperial\nSe pueden adquirir asistiendo a eventos por toda Cantha. Se usan con comerciantes de Cantha.",
-          "Chinese": "帝国恩典\n通过参加凯珊各处的事件获得。可在凯珊商人处使用。",
-          "Korean": "Imperial Favor\nAcquired by assisting in events throughout Cantha. Used at vendors in Cantha."
+          "English": "Acquired by assisting in events throughout Cantha. Used at vendors in Cantha.",
+          "French": "S'obtient en participant à des événements dans Cantha. À utiliser auprès de vendeurs canthiens.",
+          "German": "Erworben durch Mithilfe bei Events überall in Cantha. Bei Händlern in Cantha einzulösen.",
+          "Spanish": "Se pueden adquirir asistiendo a eventos por toda Cantha. Se usan con comerciantes de Cantha.",
+          "Chinese": "通过参加凯珊各处的事件获得。可在凯珊商人处使用。",
+          "Korean": "Acquired by assisting in events throughout Cantha. Used at vendors in Cantha."
         }
       },
       "AchievementId": 0,
@@ -2448,12 +2323,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Tales of Dungeon Delving\nEarned in dungeons. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the legendary crafting components used in creating legendary weapons.",
-          "French": "Haut fait d'exploration de donjon\nÀ gagner dans les donjons. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et les composants d'artisanat légendaires permettant de créer des armes légendaires.",
-          "German": "Anekdote der Verlieserkundung\nKönnen in Verliesen verdient werden. Auszugeben in Löwenstein, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und die legendären Handwerkskomponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
-          "Spanish": "Relatos de exploración de mazmorras\nSe pueden conseguir en las mazmorras. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y los componentes de artesanía legendarios que sirven para fabricar armas legendarias.",
-          "Chinese": "地下城探险传说\n从地下城获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的传奇制作组件。",
-          "Korean": "Tales of Dungeon Delving\nEarned in dungeons. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the legendary crafting components used in creating legendary weapons."
+          "English": "Earned in dungeons. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the legendary crafting components used in creating legendary weapons.",
+          "French": "À gagner dans les donjons. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et les composants d'artisanat légendaires permettant de créer des armes légendaires.",
+          "German": "Können in Verliesen verdient werden. Auszugeben in Löwenstein, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und die legendären Handwerkskomponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
+          "Spanish": "Se pueden conseguir en las mazmorras. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y los componentes de artesanía legendarios que sirven para fabricar armas legendarias.",
+          "Chinese": "从地下城获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的传奇制作组件。",
+          "Korean": "Earned in dungeons. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the legendary crafting components used in creating legendary weapons."
         }
       },
       "AchievementId": 0,
@@ -2476,12 +2351,12 @@
       },
       "LabelTooltip": {
         "LocalizedTextByLocale": {
-          "English": "Legendary Insight\nEarned from bosses and events inside raids and challenge mode Strike Missions.",
-          "French": "Connaissance légendaire\nÀ obtenir sur les boss et dans les événements des raids, ainsi que dans les missions d'attaque en mode défi.",
-          "German": "Legendäre Einsicht\nKann bei Bossen und Events in Schlachtzügen und bei Angriffsmissionen im Herausforderungsmodus verdient werden.",
-          "Spanish": "Conocimiento legendario\nSe obtiene de jefes y eventos en incursiones y misiones de ataque en modo desafío.",
-          "Chinese": "传奇见解\n在大型地下城和启用挑战模式的进攻任务中，通过头目和事件获得。",
-          "Korean": "Legendary Insight\nEarned from bosses and events inside raids and challenge mode Strike Missions."
+          "English": "Earned from bosses and events inside raids and challenge mode Strike Missions.",
+          "French": "À obtenir sur les boss et dans les événements des raids, ainsi que dans les missions d'attaque en mode défi.",
+          "German": "Kann bei Bossen und Events in Schlachtzügen und bei Angriffsmissionen im Herausforderungsmodus verdient werden.",
+          "Spanish": "Se obtiene de jefes y eventos en incursiones y misiones de ataque en modo desafío.",
+          "Chinese": "在大型地下城和启用挑战模式的进攻任务中，通过头目和事件获得。",
+          "Korean": "Earned from bosses and events inside raids and challenge mode Strike Missions."
         }
       },
       "AchievementId": 0,

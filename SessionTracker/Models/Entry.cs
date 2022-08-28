@@ -20,5 +20,13 @@ namespace SessionTracker.Models
         [JsonIgnore] public bool HasIconFile => IconFileName != null;
         [JsonIgnore] public bool HasIconUrl => IconUrl != null;
         [JsonIgnore] public bool SessionValueIsZero => Value.Session == 0;
+
+        public string GetNameAndDescription()
+        {
+            var descriptionExists = string.IsNullOrWhiteSpace(LabelTooltip.Localized) == false;
+            return descriptionExists
+                ? $"{LabelText.Localized}\n{LabelTooltip.Localized}"
+                : $"{LabelText.Localized}";
+        }
     }
 }

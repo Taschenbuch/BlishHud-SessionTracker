@@ -35,7 +35,7 @@ namespace SessionTracker.Controls
             CreateUi(settingsWindowService);
 
             _valueLabelTextService = new ValueLabelTextService(_valueLabelByEntryId, _model, settingService, logger);
-            _valueLabelTooltipService = new ValueLabelTooltipService(_valueLabelByEntryId, model, _settingService);
+            _statTooltipService    = new StatTooltipService(_titleFlowPanelByEntryId, _valueLabelByEntryId, model, _settingService);
             OnDebugApiIntervalEnabledSettingChanged(null, null);
 
             settingService.HideStatsWithValueZeroSetting.SettingChanged  += OnHideStatsWithValueZeroSettingChanged;
@@ -149,7 +149,7 @@ namespace SessionTracker.Controls
                 _model.StartSession();
                 
                 _valueLabelTextService.UpdateValueLabelTexts();
-                _valueLabelTooltipService.ResetSummaryTooltip(_model);
+                _statTooltipService.ResetSummaryTooltip(_model);
                 
                 _isInitialized = true;
             }
@@ -189,7 +189,7 @@ namespace SessionTracker.Controls
                 await ApiService.UpdateTotalValuesInModel(_model, _gw2ApiManager);
 
                 _valueLabelTextService.UpdateValueLabelTexts();
-                _valueLabelTooltipService.UpdateSummaryTooltip(_model);
+                _statTooltipService.UpdateSummaryTooltip(_model);
 
             }
             catch (Exception e)
@@ -322,7 +322,7 @@ namespace SessionTracker.Controls
         private readonly Logger _logger;
         private readonly Model _model;
         private readonly SettingService _settingService;
-        private readonly ValueLabelTooltipService _valueLabelTooltipService;
+        private readonly StatTooltipService _statTooltipService;
         private readonly ValueLabelTextService _valueLabelTextService;
         private readonly Dictionary<string, EntryTitleFlowPanel> _titleFlowPanelByEntryId = new Dictionary<string, EntryTitleFlowPanel>();
         private readonly Dictionary<string, Label> _valueLabelByEntryId = new Dictionary<string, Label>();

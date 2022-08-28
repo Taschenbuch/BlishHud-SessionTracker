@@ -8,9 +8,9 @@ using SessionTracker.Value.Text;
 
 namespace SessionTracker.Value.Tooltip
 {
-    public class ValueTooltipService
+    public class SummaryTooltipTextService
     {
-        public ValueTooltipService(Model model, SettingService settingService)
+        public SummaryTooltipTextService(Model model, SettingService settingService)
         {
             _model          = model;
             _settingService = settingService;
@@ -52,11 +52,17 @@ namespace SessionTracker.Value.Tooltip
 
         private string CreateSummaryText(Entry entry)
         {
+            // summary tooltip makes no sense for KDRs. Thus they get a shorter tooltip.
+            if (entry.Id == EntryId.WVW_KDR || entry.Id == EntryId.PVP_KDR)
+                return entry.GetNameAndDescription();
+
             var sessionValuePerHour     = GetValuePerHourAsInteger(entry.Value.Session);
             var sessionValuePerHourText = CreateValueText(sessionValuePerHour, entry.CurrencyId);
             var totalValueText          = CreateValueText(entry.Value.Total, entry.CurrencyId);
 
-            return $"== TOTAL ==\n" +
+            return $"{entry.GetNameAndDescription()}\n" +
+                   $"\n" +
+                   $"== TOTAL ==\n" +
                    $"{totalValueText} {entry.LabelText.Localized}\n" +
                    $"\n== {Localization.SummaryTooltip_HeaderCurrentSession} ==\n" +
                    $"{sessionValuePerHourText} {entry.LabelText.Localized} / {Localization.SummaryTooltip_Hour}\n" +

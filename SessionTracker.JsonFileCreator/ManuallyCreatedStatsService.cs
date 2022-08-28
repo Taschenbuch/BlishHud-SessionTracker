@@ -9,21 +9,9 @@ namespace SessionTracker.JsonFileCreator
     {
         public static IEnumerable<Entry> CreateManuallyCreatedStats()
         {
-            SetAllLabelTooltipsToLabelText(_manuallyCreatedStats);
             SetCustomLabelTooltipForSomeStats(_manuallyCreatedStats);
 
             return _manuallyCreatedStats;
-        }
-
-        private static void SetAllLabelTooltipsToLabelText(List<Entry> manuallyCreatedStats)
-        {
-            foreach (var manuallyCreatedStat in manuallyCreatedStats)
-            {
-                manuallyCreatedStat.LabelTooltip.LocalizedTextByLocale.Clear();
-
-                foreach (var labelTextAndLocale in manuallyCreatedStat.LabelText.LocalizedTextByLocale)
-                   manuallyCreatedStat.LabelTooltip.LocalizedTextByLocale[labelTextAndLocale.Key] = labelTextAndLocale.Value;
-            }
         }
 
         private static void SetCustomLabelTooltipForSomeStats(List<Entry> manuallyCreatedStats)
@@ -31,10 +19,10 @@ namespace SessionTracker.JsonFileCreator
             SetTooltip(
                 manuallyCreatedStats, 
                 EntryId.DEATHS, 
-                "Deaths\nCombined deaths from all sources (WvW, sPvP, PvE)", 
-                "Tode\nAufsummierte Tode aus allen Quellen (WvW, sPvP, PvE)", 
-                "Morts\nNombre total de morts venant de toutes les sources (JcE, JcJ, McM)", 
-                "Muertes\nNúmero total de muertes de todas las fuentes (McM, JcJ, JcE)");
+                "Combined deaths from all sources (WvW, sPvP, PvE)", 
+                "Aufsummierte Tode aus allen Quellen (WvW, sPvP, PvE)", 
+                "Nombre total de morts venant de toutes les sources (JcE, JcJ, McM)", 
+                "Número total de muertes de todas las fuentes (McM, JcJ, JcE)");
 
             SetTooltip(
                 manuallyCreatedStats, 

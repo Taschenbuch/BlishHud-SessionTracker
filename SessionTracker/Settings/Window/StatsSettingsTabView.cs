@@ -285,7 +285,7 @@ namespace SessionTracker.Settings.Window
 
             new Image(asyncTexture2D)
             {
-                BasicTooltipText = entry.LabelTooltip.Localized,
+                BasicTooltipText = entry.GetNameAndDescription(),
                 Size = new Point(24),
                 Location = new Point(20, 0),
                 Parent = iconContainer,
@@ -295,12 +295,12 @@ namespace SessionTracker.Settings.Window
 
             new Label
             {
-                Text = entry.LabelText.Localized,
-                BasicTooltipText = entry.LabelTooltip.Localized,
-                AutoSizeWidth = true,
-                AutoSizeHeight = true,
-                Location = new Point(5, 3),
-                Parent = labelContainer
+                Text             = entry.LabelText.Localized,
+                BasicTooltipText = entry.GetNameAndDescription(),
+                AutoSizeWidth    = true,
+                AutoSizeHeight   = true,
+                Location         = new Point(5, 3),
+                Parent           = labelContainer
             };
 
             clickFlowPanel.Click += (s, e) => isVisibleCheckbox.Checked = isVisibleCheckbox.Checked == false;
