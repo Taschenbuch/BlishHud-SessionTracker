@@ -3,6 +3,25 @@
   "MinorVersion": 0,
   "Entries": [
     {
+      "Id": "luck",
+      "LabelText": {
+        "LocalizedTextByLocale": {
+          "English": "Luck",
+          "German": "Glück",
+          "French": "Chance",
+          "Spanish": "Suerte"
+        }
+      },
+      "LabelTooltip": {
+        "LocalizedTextByLocale": {}
+      },
+      "AchievementId": 0,
+      "CurrencyId": 0,
+      "IconUrl": null,
+      "IconFileName": "luck.png",
+      "IsVisible": false
+    },
+    {
       "Id": "deaths",
       "LabelText": {
         "LocalizedTextByLocale": {

@@ -10,16 +10,64 @@ namespace SessionTracker.Services
 {
     public class ApiService
     {
+        public static List<TokenPermission> ACCOUNT_API_TOKEN_PERMISSION => new List<TokenPermission>
+        {
+            TokenPermission.Account
+        };
+
+        public static List<TokenPermission> NECESSARY_API_TOKEN_PERMISSIONS => new List<TokenPermission>
+        {
+            TokenPermission.Account,
+            TokenPermission.Characters,
+            TokenPermission.Progression,
+            TokenPermission.Wallet,
+            TokenPermission.Unlocks,
+            TokenPermission.Pvp,
+        };
+
         public static async Task UpdateTotalValuesInModel(Model model, Gw2ApiManager gw2ApiManager)
         {
             var charactersTask   = gw2ApiManager.Gw2ApiClient.V2.Characters.AllAsync();
-            var accountTask      = gw2ApiManager.Gw2ApiClient.V2.Account.GetAsync();
             var pvpStatsTask     = gw2ApiManager.Gw2ApiClient.V2.Pvp.Stats.GetAsync();
+            var accountTask      = gw2ApiManager.Gw2ApiClient.V2.Account.GetAsync();
             var achievementsTask = gw2ApiManager.Gw2ApiClient.V2.Account.Achievements.GetAsync();
             var walletTask       = gw2ApiManager.Gw2ApiClient.V2.Account.Wallet.GetAsync();
+            var progressionTask  = gw2ApiManager.Gw2ApiClient.V2.Account.Progression.GetAsync();
 
-            await Task.WhenAll(charactersTask, accountTask, achievementsTask, walletTask);
+            await Task.WhenAll(charactersTask, accountTask, achievementsTask, walletTask, progressionTask);
 
+            model.GetEntry(EntryId.DEATHS).Value.Total   = charactersTask.Result.Sum(c => c.Deaths);
+            model.GetEntry(EntryId.WVW_RANK).Value.Total = accountTask.Result.WvwRank ?? 0;
+            
+            SetLuckTotalValue(model, progressionTask);
+            SetPvpTotalValues(model, pvpStatsTask);
+            SetCurrencyTotalValues(model, walletTask);
+            SetAchievementTotalValues(model, achievementsTask);
+
+            model.UiHasToBeUpdated = true;
+        }
+
+        private static void SetAchievementTotalValues(Model model, Task<IApiV2ObjectList<AccountAchievement>> achievementsTask)
+        {
+            foreach (var entry in model.Entries.Where(v => v.IsAchievement))
+                entry.Value.Total = GetAchievementValue(achievementsTask, entry.AchievementId);
+        }
+
+        private static void SetCurrencyTotalValues(Model model, Task<IApiV2ObjectList<AccountCurrency>> walletTask)
+        {
+            foreach (var entry in model.Entries.Where(v => v.IsCurrency))
+                entry.Value.Total = GetCurrencyValue(walletTask, entry.CurrencyId);
+        }
+
+        private static void SetLuckTotalValue(Model model, Task<IApiV2ObjectList<AccountProgression>> progressionTask)
+        {
+            var luck        = progressionTask.Result.SingleOrDefault(p => p.Id == "luck");
+            var hasZeroLuck = luck == null;
+            model.GetEntry(EntryId.LUCK).Value.Total = hasZeroLuck ? 0 : luck.Value;
+        }
+
+        private static void SetPvpTotalValues(Model model, Task<PvpStats> pvpStatsTask)
+        {
             var pvpRank          = pvpStatsTask.Result.PvpRank;
             var pvpRankRollovers = pvpStatsTask.Result.PvpRankRollovers;
             var totalWins        = pvpStatsTask.Result.Aggregate.Wins;
@@ -39,16 +87,6 @@ namespace SessionTracker.Services
             model.GetEntry(EntryId.PVP_UNRANKED_LOSSES).Value.Total = unrankedLosses;
             model.GetEntry(EntryId.PVP_CUSTOM_WINS).Value.Total     = totalWins - rankedWins - unrankedWins;
             model.GetEntry(EntryId.PVP_CUSTOM_LOSSES).Value.Total   = totalLosses - rankedLosses - unrankedLosses;
-            model.GetEntry(EntryId.DEATHS).Value.Total              = charactersTask.Result.Sum(c => c.Deaths);
-            model.GetEntry(EntryId.WVW_RANK).Value.Total            = accountTask.Result.WvwRank ?? 0;
-
-            foreach (var entry in model.Entries.Where(v => v.IsCurrency))
-                entry.Value.Total = GetCurrencyValue(walletTask, entry.CurrencyId);
-
-            foreach (var entry in model.Entries.Where(v => v.IsAchievement))
-                entry.Value.Total = GetAchievementValue(achievementsTask, entry.AchievementId);
-
-            model.UiHasToBeUpdated = true;
         }
 
         private static int GetCurrencyValue(Task<IApiV2ObjectList<AccountCurrency>> walletTask, int currencyId)
@@ -66,19 +104,5 @@ namespace SessionTracker.Services
                                    .FirstOrDefault(a => a.Id == achievementId)
                                    ?.Current ?? 0;
         }
-
-        public static List<TokenPermission> ACCOUNT_API_TOKEN_PERMISSION => new List<TokenPermission>
-        {
-            TokenPermission.Account
-        };
-
-        public static List<TokenPermission> NECESSARY_API_TOKEN_PERMISSIONS => new List<TokenPermission>
-        {
-            TokenPermission.Account,
-            TokenPermission.Characters,
-            TokenPermission.Progression,
-            TokenPermission.Wallet,
-            TokenPermission.Pvp,
-        };
     }
 }

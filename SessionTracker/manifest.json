@@ -42,6 +42,10 @@
     "pvp": {
       "optional": false,
       "details": "For tracking stats"
+    },
+    "unlocks": {
+      "optional": false,
+      "details": "For tracking stats"
     }
   }
 }
