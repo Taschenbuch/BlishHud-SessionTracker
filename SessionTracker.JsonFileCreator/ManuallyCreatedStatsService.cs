@@ -17,35 +17,35 @@ namespace SessionTracker.JsonFileCreator
         private static void SetCustomLabelTooltipForSomeStats(List<Entry> manuallyCreatedStats)
         {
             SetTooltip(
-                manuallyCreatedStats, 
-                EntryId.DEATHS, 
-                "Combined deaths from all sources (WvW, sPvP, PvE)", 
-                "Aufsummierte Tode aus allen Quellen (WvW, sPvP, PvE)", 
-                "Nombre total de morts venant de toutes les sources (JcE, JcJ, McM)", 
+                manuallyCreatedStats,
+                EntryId.DEATHS,
+                "Combined deaths from all sources (WvW, sPvP, PvE)",
+                "Aufsummierte Tode aus allen Quellen (WvW, sPvP, PvE)",
+                "Nombre total de morts venant de toutes les sources (JcE, JcJ, McM)",
                 "Número total de muertes de todas las fuentes (McM, JcJ, JcE)");
 
             SetTooltip(
-                manuallyCreatedStats, 
-                EntryId.PVP_KDR, 
-                "PvP kills/deaths ratio", 
-                "PvP Verhältnis besiegte Feinde/Tode", 
-                "Ratio Victimes/Morts JcJ", 
+                manuallyCreatedStats,
+                EntryId.PVP_KDR,
+                "PvP kills/deaths ratio",
+                "PvP Verhältnis besiegte Feinde/Tode",
+                "Ratio Victimes/Morts JcJ",
                 "PvP Ratio de Bajas/Muertes");
 
             SetTooltip(
-                manuallyCreatedStats, 
-                EntryId.WVW_KDR, 
-                "WvW kills/deaths ratio", 
-                "WvW Verhältnis besiegte Feinde/Tode", 
-                "Ratio Victimes/Morts en McM", 
+                manuallyCreatedStats,
+                EntryId.WVW_KDR,
+                "WvW kills/deaths ratio",
+                "WvW Verhältnis besiegte Feinde/Tode",
+                "Ratio Victimes/Morts en McM",
                 "McM Ratio de Bajas/Muertes");
 
             SetTooltip(
-                manuallyCreatedStats, 
-                EntryId.WVW_SUPPLY_REPAIR, 
-                "Supply spent on repairs", 
-                "Durch Reparieren verbrauchte Vorräte", 
-                "Quantité de ravitaillement utilisé pour les réparations", 
+                manuallyCreatedStats,
+                EntryId.WVW_SUPPLY_REPAIR,
+                "Supply spent on repairs",
+                "Durch Reparieren verbrauchte Vorräte",
+                "Quantité de ravitaillement utilisé pour les réparations",
                 "Suministros gastados en reparaciones");
         }
 
