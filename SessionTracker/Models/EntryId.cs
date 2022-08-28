@@ -19,6 +19,5 @@
         public const string WVW_RANK = "wvw rank";
         public const string WVW_SUPPLY_REPAIR = "wvw supply spent on repairs";
         public const string DEATHS = "deaths";
-        public const string COPPER = "currency1"; // 
     }
 }
