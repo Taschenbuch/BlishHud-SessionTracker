@@ -19,7 +19,6 @@ namespace SessionTracker.Models
         [JsonIgnore] public bool IsCurrency => CurrencyId != 0;
         [JsonIgnore] public bool HasIconFile => IconFileName != null;
         [JsonIgnore] public bool HasIconUrl => IconUrl != null;
-        [JsonIgnore] public bool SessionValueIsZero => Value.Session == 0;
 
         public string GetNameAndDescription()
         {
