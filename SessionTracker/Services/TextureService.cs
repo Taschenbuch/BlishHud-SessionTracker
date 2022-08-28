@@ -30,7 +30,7 @@ namespace SessionTracker.Services
             EntryIconPlaceholderTexture = contentsManager.GetTexture(@"stats\entryIconPlaceholder_1444524.png");
             CornerIconTexture           = contentsManager.GetTexture(@"cornerIcon.png");
             CornerIconHoverTexture      = contentsManager.GetTexture(@"cornerIconHover.png");
-            HiddenStatsTexture          = contentsManager.GetTexture(@"hiddenStats_605021.png");
+            HiddenStatsTexture          = contentsManager.GetTexture(@"hiddenStats.png");
             CreateEntryTextures(model);
         }
 
