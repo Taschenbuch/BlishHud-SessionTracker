@@ -34,7 +34,7 @@ namespace SessionTracker.Services
             var walletTask       = gw2ApiManager.Gw2ApiClient.V2.Account.Wallet.GetAsync();
             var progressionTask  = gw2ApiManager.Gw2ApiClient.V2.Account.Progression.GetAsync();
 
-            await Task.WhenAll(charactersTask, accountTask, achievementsTask, walletTask, progressionTask);
+            await Task.WhenAll(charactersTask, pvpStatsTask, accountTask, achievementsTask, walletTask, progressionTask);
 
             model.GetEntry(EntryId.DEATHS).Value.Total   = charactersTask.Result.Sum(c => c.Deaths);
             model.GetEntry(EntryId.WVW_RANK).Value.Total = accountTask.Result.WvwRank ?? 0;
