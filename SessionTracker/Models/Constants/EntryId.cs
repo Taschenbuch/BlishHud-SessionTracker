@@ -1,4 +1,4 @@
-﻿namespace SessionTracker.Models
+﻿namespace SessionTracker.Models.Constants
 {
     public class EntryId
     {

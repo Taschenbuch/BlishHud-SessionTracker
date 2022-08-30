@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Blish_HUD;
 using Blish_HUD.Controls;
 using SessionTracker.Models;
+using SessionTracker.Models.Constants;
 using SessionTracker.Settings.SettingEntries;
 
 namespace SessionTracker.Value.Text

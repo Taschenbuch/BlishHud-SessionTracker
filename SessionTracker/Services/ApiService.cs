@@ -5,6 +5,7 @@ using Blish_HUD.Modules.Managers;
 using Gw2Sharp.WebApi.V2;
 using Gw2Sharp.WebApi.V2.Models;
 using SessionTracker.Models;
+using SessionTracker.Models.Constants;
 
 namespace SessionTracker.Services
 {

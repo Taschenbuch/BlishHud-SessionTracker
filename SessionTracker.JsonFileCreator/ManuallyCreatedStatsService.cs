@@ -2,6 +2,7 @@
 using System.Linq;
 using Gw2Sharp.WebApi;
 using SessionTracker.Models;
+using SessionTracker.Models.Constants;
 
 namespace SessionTracker.JsonFileCreator
 {
