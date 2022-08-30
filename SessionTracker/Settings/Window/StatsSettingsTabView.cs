@@ -183,6 +183,7 @@ namespace SessionTracker.Settings.Window
             {
                 ShowByEntryIdStartingWith("wvw", visibilityCheckBoxByEntryId);
                 ShowByCurrencyId(CurrencyIds.Wvw, visibilityCheckBoxByEntryId);
+                ShowByItemId(ItemIds.Wvw, visibilityCheckBoxByEntryId);
                 visibilityCheckBoxByEntryId[EntryId.DEATHS].Checked = true;
                 MoveVisibleEntriesToTop();
             };
@@ -221,6 +222,12 @@ namespace SessionTracker.Settings.Window
         private void ShowByCurrencyId(ReadOnlyCollection<int> currencyIds, Dictionary<string, Checkbox> visibilityCheckBoxByEntryId)
         {
             foreach (var entry in _model.Entries.Where(entry => currencyIds.Contains(entry.CurrencyId)))
+                visibilityCheckBoxByEntryId[entry.Id].Checked = true;
+        }
+
+        private void ShowByItemId(ReadOnlyCollection<int> itemIds, Dictionary<string, Checkbox> visibilityCheckBoxByEntryId)
+        {
+            foreach (var entry in _model.Entries.Where(entry => itemIds.Contains(entry.ItemId)))
                 visibilityCheckBoxByEntryId[entry.Id].Checked = true;
         }
 

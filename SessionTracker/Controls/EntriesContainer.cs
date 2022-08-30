@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using SessionTracker.Controls.Hint;
 using SessionTracker.Models;
 using SessionTracker.Services;
+using SessionTracker.Services.Api;
 using SessionTracker.Settings.SettingEntries;
 using SessionTracker.Settings.Window;
 using SessionTracker.Value.Text;
