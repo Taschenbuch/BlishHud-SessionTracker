@@ -46,6 +46,10 @@
     "unlocks": {
       "optional": false,
       "details": "For tracking stats"
+    },
+    "inventories": {
+      "optional": false,
+      "details": "For tracking stats"
     }
   }
 }

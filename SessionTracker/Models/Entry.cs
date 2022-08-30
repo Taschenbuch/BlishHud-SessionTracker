@@ -10,6 +10,7 @@ namespace SessionTracker.Models
         public LocalizedText LabelTooltip { get; } = new LocalizedText();
         public int AchievementId { get; set; }
         public int CurrencyId { get; set; }
+        public int ItemId { get; set; }
         public string IconUrl { get; set; }
         public string IconFileName { get; set; }
         public bool IsVisible { get; set; }
@@ -17,6 +18,7 @@ namespace SessionTracker.Models
         [JsonIgnore] public List<string> SessionHistory { get; } = new List<string>();
         [JsonIgnore] public bool IsAchievement => AchievementId != 0;
         [JsonIgnore] public bool IsCurrency => CurrencyId != 0;
+        [JsonIgnore] public bool IsItem => ItemId != 0;
         [JsonIgnore] public bool HasIconFile => IconFileName != null;
         [JsonIgnore] public bool HasIconUrl => IconUrl != null;
 

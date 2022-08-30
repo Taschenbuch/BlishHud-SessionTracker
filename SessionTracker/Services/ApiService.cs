@@ -23,6 +23,7 @@ namespace SessionTracker.Services
             TokenPermission.Wallet,
             TokenPermission.Unlocks,
             TokenPermission.Pvp,
+            TokenPermission.Inventories,
         };
 
         public static async Task UpdateTotalValuesInModel(Model model, Gw2ApiManager gw2ApiManager)
@@ -38,14 +39,19 @@ namespace SessionTracker.Services
 
             model.GetEntry(EntryId.DEATHS).Value.Total   = charactersTask.Result.Sum(c => c.Deaths);
             model.GetEntry(EntryId.WVW_RANK).Value.Total = accountTask.Result.WvwRank ?? 0;
-            
+
             SetLuckTotalValue(model, progressionTask);
             SetPvpTotalValues(model, pvpStatsTask);
             SetCurrencyTotalValues(model, walletTask);
             SetAchievementTotalValues(model, achievementsTask);
+            SetItemTotalValues(model, charactersTask);
 
             model.UiHasToBeUpdated = true;
         }
+
+        private static bool IsNotEmptyBagSlot(CharacterInventoryBag bag) => bag != null;
+        private static bool IsNotEmptyItemSlot(AccountItem itemSlot) => itemSlot != null;
+
 
         private static void SetAchievementTotalValues(Model model, Task<IApiV2ObjectList<AccountAchievement>> achievementsTask)
         {
@@ -57,6 +63,12 @@ namespace SessionTracker.Services
         {
             foreach (var entry in model.Entries.Where(v => v.IsCurrency))
                 entry.Value.Total = GetCurrencyValue(walletTask, entry.CurrencyId);
+        }
+
+        private static void SetItemTotalValues(Model model, Task<IApiV2ObjectList<Character>> charactersTask)
+        {
+            foreach (var entry in model.Entries.Where(e => e.IsItem))
+                entry.Value.Total = GetItemValue(charactersTask, entry.ItemId);
         }
 
         private static void SetLuckTotalValue(Model model, Task<IApiV2ObjectList<AccountProgression>> progressionTask)
@@ -103,6 +115,31 @@ namespace SessionTracker.Services
             return achievementsTask.Result
                                    .FirstOrDefault(a => a.Id == achievementId)
                                    ?.Current ?? 0;
+        }
+
+        private static int GetItemValue(Task<IApiV2ObjectList<Character>> charactersTask, int itemId)
+        {
+            var itemCount = 0;
+
+            foreach (var character in charactersTask.Result)
+            {
+                if (character.Bags == null)
+                    continue;
+
+                var inventoryItems = character.Bags
+                                              .Where(IsNotEmptyBagSlot)
+                                              .Select(b => b.Inventory)
+                                              .SelectMany(i => i)
+                                              .Where(IsNotEmptyItemSlot)
+                                              .ToList();
+
+
+                foreach (var inventoryItem in inventoryItems)
+                    if (inventoryItem.Id == itemId)
+                        itemCount += inventoryItem.Count;
+            }
+
+            return itemCount;
         }
     }
 }

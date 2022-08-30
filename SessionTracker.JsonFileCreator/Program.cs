@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Gw2Sharp;
+using Gw2Sharp.WebApi;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using SessionTracker.Models;
@@ -19,13 +21,15 @@ namespace SessionTracker.JsonFileCreator
 
         private static async Task AddEntriesToModel(Model model)
         {
-            var currencyEntries      = await CurrencyService.CreateCurrencyStats();
+            var itemStats            = await ItemService.CreateItemStats();
             var manuallyCreatedStats = ManuallyCreatedStatsService.CreateManuallyCreatedStats();
+            var currencyStats        = await CurrencyService.CreateCurrencyStats();
 
+            model.Entries.AddRange(itemStats);
             model.Entries.AddRange(manuallyCreatedStats);
-            model.Entries.AddRange(currencyEntries);
+            model.Entries.AddRange(currencyStats);
         }
-
+        
         private static string SerializeModelToJson(Model model)
         {
             var jsonSerializerSettings = new JsonSerializerSettings

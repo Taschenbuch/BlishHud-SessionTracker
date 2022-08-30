@@ -8,9 +8,9 @@ using SessionTracker.Models;
 
 namespace SessionTracker.JsonFileCreator
 {
-    public class CurrencyService
+    public class ItemService
     {
-        public static async Task<List<Entry>> CreateCurrencyStats()
+        public static async Task<List<Entry>> CreateItemStats()
         {
             var entries = await CreateStats();
             return await AddLocalizedTexts(entries);
@@ -22,16 +22,16 @@ namespace SessionTracker.JsonFileCreator
 
             using (var client = new Gw2Client(new Connection(Locale.English)))
             {
-                var currencies = await client.WebApi.V2.Currencies.AllAsync();
+                var items = await client.WebApi.V2.Items.ManyAsync(ITEM_IDS);
 
-                foreach (var currency in currencies)
+                foreach (var item in items)
                 {
                     var entry = new Entry
                     {
-                        Id         = $"currency{currency.Id}",
-                        CurrencyId = currency.Id,
-                        IconUrl    = currency.Icon.Url.ToString(),
-                        IsVisible  = false
+                        Id        = $"item{item.Id}",
+                        ItemId    = item.Id,
+                        IconUrl   = item.Icon.Url.ToString(),
+                        IsVisible = false
                     };
 
                     entries.Add(entry);
@@ -49,25 +49,32 @@ namespace SessionTracker.JsonFileCreator
             {
                 using (var client = new Gw2Client(new Connection(local)))
                 {
-                    var currencies = await client.WebApi.V2.Currencies.AllAsync();
+                    var items = await client.WebApi.V2.Items.ManyAsync(ITEM_IDS);
 
-                    foreach (var currency in currencies)
-                        UpdateTexts(currency, entries, local);
+                    foreach (var item in items)
+                        UpdateTexts(item, entries, local);
                 }
             }
 
             return entries;
         }
 
-        private static void UpdateTexts(Currency currency, List<Entry> entries, Locale local)
+        private static void UpdateTexts(Item item, List<Entry> entries, Locale local)
         {
-            var entryForCurrencyExists = entries.Any(e => e.CurrencyId == currency.Id);
-            if (entryForCurrencyExists)
+            var entryForItemExists = entries.Any(e => e.ItemId == item.Id);
+            if (entryForItemExists)
             {
-                var matchingEntry = entries.Single(e => e.CurrencyId == currency.Id);
-                matchingEntry.LabelText.SetLocalizedText(currency.Name, local);
-                matchingEntry.LabelTooltip.SetLocalizedText(currency.Description, local);
+                var matchingEntry = entries.Single(e => e.ItemId == item.Id);
+                matchingEntry.LabelText.SetLocalizedText(item.Name, local);
+                matchingEntry.LabelTooltip.SetLocalizedText(item.Description, local);
             }
         }
+
+        public static readonly List<int> ITEM_IDS = new List<int>
+        {
+            ItemIds.MEMORY_OF_BATTLE,
+            ItemIds.HEAVY_LOOT_BAG,
+            83103, // "Eye of Kormir" // todo weg
+        };
     }
 }

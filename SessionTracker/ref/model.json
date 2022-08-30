@@ -2,6 +2,81 @@
   "MajorVersion": 1,
   "Entries": [
     {
+      "Id": "item71581",
+      "LabelText": {
+        "LocalizedTextByLocale": {
+          "English": "Memory of Battle",
+          "French": "Souvenir de combat",
+          "German": "Erinnerung des Kampfes",
+          "Spanish": "Memoria de batalla",
+          "Chinese": "战斗回忆录",
+          "Korean": "Memory of Battle"
+        }
+      },
+      "LabelTooltip": {
+        "LocalizedTextByLocale": {
+          "English": "Found in World vs. World reward tracks.",
+          "French": "À récupérer dans les parcours de récompenses en Monde contre Monde.",
+          "German": "Zu finden in \"Welt gegen Welt\"-Belohnungspfaden.",
+          "Spanish": "Se obtiene en las rutas de recompensas de Mundo contra Mundo.",
+          "Chinese": "可在世界之战奖励分支中找到。",
+          "Korean": "Found in World vs. World reward tracks."
+        }
+      },
+      "ItemId": 71581,
+      "IconUrl": "https://render.guildwars2.com/file/E4D0455D2EFDB0DFC008F4564B38D6545901A05B/1206833.png"
+    },
+    {
+      "Id": "item8920",
+      "LabelText": {
+        "LocalizedTextByLocale": {
+          "English": "Heavy Loot Bag",
+          "French": "Sac de butin lourd",
+          "German": "Schwere Beutetasche",
+          "Spanish": "Saco de botín pesado",
+          "Chinese": "重型战利品包",
+          "Korean": "Heavy Loot Bag"
+        }
+      },
+      "LabelTooltip": {
+        "LocalizedTextByLocale": {
+          "English": "Double-click to open.",
+          "French": "Double-cliquez pour ouvrir.",
+          "German": "Zum Öffnen doppelklicken.",
+          "Spanish": "Haz doble clic para abrir.",
+          "Chinese": "双击后打开。",
+          "Korean": "Double-click to open."
+        }
+      },
+      "ItemId": 8920,
+      "IconUrl": "https://render.guildwars2.com/file/EBC5CEC199D1E51B02756A1C796A65E9D24F04B5/63171.png"
+    },
+    {
+      "Id": "item83103",
+      "LabelText": {
+        "LocalizedTextByLocale": {
+          "English": "Eye of Kormir",
+          "French": "Œil de Kormir",
+          "German": "Auge Kormirs",
+          "Spanish": "Ojo de Kormir",
+          "Chinese": "克米尔之眼",
+          "Korean": "Eye of Kormir"
+        }
+      },
+      "LabelTooltip": {
+        "LocalizedTextByLocale": {
+          "English": "<c=@Flavor>These gleaming metal scales earned their nickname because they are flexible but remain true and whole under great strain.</c>",
+          "French": "<c=@Flavor>Ces écailles de métal brillantes tiennent leur surnom de leur texture souple mais extrêmement résistante.</c>",
+          "German": "<c=@Flavor>Diese schimmernden Metallschuppen verdanken ihren Namen der Tatsache, dass sie biegsam sind, aber auch unter großer Belastung ganz und heil bleiben.</c>",
+          "Spanish": "<c=@Flavor>Esta reluciente escama de metal se ganó su sobrenombre porque es flexible pero es de fiar bajo una gran presión.</c>",
+          "Chinese": "<c=@Flavor>这些发光的金属鳞片虽然有弹性，但是受到巨大张力依然完好无损。</c>",
+          "Korean": "<c=@Flavor>These gleaming metal scales earned their nickname because they are flexible but remain true and whole under great strain.</c>"
+        }
+      },
+      "ItemId": 83103,
+      "IconUrl": "https://render.guildwars2.com/file/F327CD6E33A54C69F19F29DAA7C7D1A1FF4203D6/1767535.png"
+    },
+    {
       "Id": "luck",
       "LabelText": {
         "LocalizedTextByLocale": {
