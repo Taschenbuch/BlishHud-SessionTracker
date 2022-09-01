@@ -37,7 +37,7 @@ namespace SessionTracker.Value.Tooltip
 
         private void InsertNewHistoryEntryAtBeginning(Entry entry)
         {
-            var sessionValueText = CreateValueText(entry.Value.Session, entry.CurrencyId);
+            var sessionValueText = CreateValueText(entry.Value.Session, entry.ApiId);
             entry.SessionHistory.Insert(0, $"{DateTime.Now:HH:mm} | {sessionValueText}");
         }
 
@@ -58,8 +58,8 @@ namespace SessionTracker.Value.Tooltip
                 return entry.GetNameAndDescription();
 
             var sessionValuePerHour     = GetValuePerHourAsInteger(entry.Value.Session);
-            var sessionValuePerHourText = CreateValueText(sessionValuePerHour, entry.CurrencyId);
-            var totalValueText          = CreateValueText(entry.Value.Total, entry.CurrencyId);
+            var sessionValuePerHourText = CreateValueText(sessionValuePerHour, entry.ApiId);
+            var totalValueText          = CreateValueText(entry.Value.Total, entry.ApiId);
 
             return $"{entry.GetNameAndDescription()}\n" +
                    $"\n" +

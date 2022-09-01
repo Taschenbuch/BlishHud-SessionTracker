@@ -8,17 +8,16 @@ namespace SessionTracker.Models
         public string Id { get; set; } = string.Empty;
         public LocalizedText LabelText { get; } = new LocalizedText();
         public LocalizedText LabelTooltip { get; } = new LocalizedText();
-        public int AchievementId { get; set; }
-        public int CurrencyId { get; set; }
-        public int ItemId { get; set; }
+        public int ApiId { get; set; }
+        public ApiIdType ApiIdType{ get; set; } = ApiIdType.None;
         public string IconUrl { get; set; }
         public string IconFileName { get; set; }
         public bool IsVisible { get; set; }
         [JsonIgnore] public Value Value { get; } = new Value();
         [JsonIgnore] public List<string> SessionHistory { get; } = new List<string>();
-        [JsonIgnore] public bool IsAchievement => AchievementId != 0;
-        [JsonIgnore] public bool IsCurrency => CurrencyId != 0;
-        [JsonIgnore] public bool IsItem => ItemId != 0;
+        [JsonIgnore] public bool IsAchievement => ApiIdType == ApiIdType.Achievement;
+        [JsonIgnore] public bool IsCurrency => ApiIdType == ApiIdType.Currency;
+        [JsonIgnore] public bool IsItem => ApiIdType == ApiIdType.Item;
         [JsonIgnore] public bool HasIconFile => IconFileName != null;
         [JsonIgnore] public bool HasIconUrl => IconUrl != null;
 

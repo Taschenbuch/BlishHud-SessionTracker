@@ -11,7 +11,7 @@ namespace SessionTracker.Services.Api
         public static void SetCurrencyTotalValues(Model model, Task<IApiV2ObjectList<AccountCurrency>> walletTask)
         {
             foreach (var entry in model.Entries.Where(v => v.IsCurrency))
-                entry.Value.Total = GetCurrencyValue(walletTask, entry.CurrencyId);
+                entry.Value.Total = GetCurrencyValue(walletTask, entry.ApiId);
         }
 
         private static int GetCurrencyValue(Task<IApiV2ObjectList<AccountCurrency>> walletTask, int currencyId)

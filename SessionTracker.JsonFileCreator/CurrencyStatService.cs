@@ -28,10 +28,11 @@ namespace SessionTracker.JsonFileCreator
                 {
                     var entry = new Entry
                     {
-                        Id         = $"currency{currency.Id}",
-                        CurrencyId = currency.Id,
-                        IconUrl    = currency.Icon.Url.ToString(),
-                        IsVisible  = false
+                        Id        = $"currency{currency.Id}",
+                        ApiId     = currency.Id,
+                        ApiIdType = ApiIdType.Currency,
+                        IconUrl   = currency.Icon.Url.ToString(),
+                        IsVisible = false
                     };
 
                     entries.Add(entry);
@@ -61,10 +62,10 @@ namespace SessionTracker.JsonFileCreator
 
         private static void UpdateTexts(Currency currency, List<Entry> entries, Locale local)
         {
-            var entryForCurrencyExists = entries.Any(e => e.CurrencyId == currency.Id);
+            var entryForCurrencyExists = entries.Any(e => e.ApiId == currency.Id);
             if (entryForCurrencyExists)
             {
-                var matchingEntry = entries.Single(e => e.CurrencyId == currency.Id);
+                var matchingEntry = entries.Single(e => e.ApiId == currency.Id);
                 matchingEntry.LabelText.SetLocalizedText(currency.Name, local);
                 matchingEntry.LabelTooltip.SetLocalizedText(currency.Description, local);
             }

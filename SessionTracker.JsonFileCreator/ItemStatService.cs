@@ -30,7 +30,8 @@ namespace SessionTracker.JsonFileCreator
                     var entry = new Entry
                     {
                         Id        = $"item{item.Id}",
-                        ItemId    = item.Id,
+                        ApiId     = item.Id,
+                        ApiIdType = ApiIdType.Item,
                         IconUrl   = item.Icon.Url.ToString(),
                         IsVisible = false
                     };
@@ -62,10 +63,10 @@ namespace SessionTracker.JsonFileCreator
 
         private static void UpdateTexts(Item item, List<Entry> entries, Locale local)
         {
-            var entryForItemExists = entries.Any(e => e.ItemId == item.Id);
+            var entryForItemExists = entries.Any(e => e.ApiId == item.Id);
             if (entryForItemExists)
             {
-                var matchingEntry = entries.Single(e => e.ItemId == item.Id);
+                var matchingEntry = entries.Single(e => e.ApiId == item.Id);
                 matchingEntry.LabelText.SetLocalizedText(item.Name, local);
                 matchingEntry.LabelTooltip.SetLocalizedText(item.Description, local);
             }

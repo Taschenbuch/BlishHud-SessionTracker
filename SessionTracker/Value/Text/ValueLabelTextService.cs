@@ -36,7 +36,7 @@ namespace SessionTracker.Value.Text
         {
             foreach (var entry in _model.Entries)
             {
-                if (entry.CurrencyId == CurrencyIds.COIN_IN_COPPER)
+                if (entry.ApiId == CurrencyIds.COIN_IN_COPPER)
                 {
                     var sessionCoinText = ValueTextService.CreateCoinValueText(entry.Value.Session, _settingService.CoinDisplayFormatSetting.Value);
                     var totalCoinText   = ValueTextService.CreateCoinValueText(entry.Value.Total, _settingService.CoinDisplayFormatSetting.Value);

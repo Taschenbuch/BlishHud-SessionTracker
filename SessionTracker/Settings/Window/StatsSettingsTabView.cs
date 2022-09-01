@@ -221,13 +221,13 @@ namespace SessionTracker.Settings.Window
 
         private void ShowByCurrencyId(ReadOnlyCollection<int> currencyIds, Dictionary<string, Checkbox> visibilityCheckBoxByEntryId)
         {
-            foreach (var entry in _model.Entries.Where(entry => currencyIds.Contains(entry.CurrencyId)))
+            foreach (var entry in _model.Entries.Where(entry => currencyIds.Contains(entry.ApiId)))
                 visibilityCheckBoxByEntryId[entry.Id].Checked = true;
         }
 
         private void ShowByItemId(ReadOnlyCollection<int> itemIds, Dictionary<string, Checkbox> visibilityCheckBoxByEntryId)
         {
-            foreach (var entry in _model.Entries.Where(entry => itemIds.Contains(entry.ItemId)))
+            foreach (var entry in _model.Entries.Where(entry => itemIds.Contains(entry.ApiId)))
                 visibilityCheckBoxByEntryId[entry.Id].Checked = true;
         }
 

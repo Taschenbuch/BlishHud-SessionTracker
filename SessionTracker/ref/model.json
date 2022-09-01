@@ -23,7 +23,8 @@
           "Korean": "Found in World vs. World reward tracks."
         }
       },
-      "ItemId": 71581,
+      "ApiId": 71581,
+      "ApiIdType": "Item",
       "IconUrl": "https://render.guildwars2.com/file/E4D0455D2EFDB0DFC008F4564B38D6545901A05B/1206833.png"
     },
     {
@@ -48,7 +49,8 @@
           "Korean": "Double-click to open."
         }
       },
-      "ItemId": 8920,
+      "ApiId": 8920,
+      "ApiIdType": "Item",
       "IconUrl": "https://render.guildwars2.com/file/EBC5CEC199D1E51B02756A1C796A65E9D24F04B5/63171.png"
     },
     {
@@ -73,7 +75,8 @@
           "Korean": "<c=@Flavor>These gleaming metal scales earned their nickname because they are flexible but remain true and whole under great strain.</c>"
         }
       },
-      "ItemId": 83103,
+      "ApiId": 83103,
+      "ApiIdType": "Item",
       "IconUrl": "https://render.guildwars2.com/file/F327CD6E33A54C69F19F29DAA7C7D1A1FF4203D6/1767535.png"
     },
     {
@@ -124,7 +127,8 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {}
       },
-      "AchievementId": 239,
+      "ApiId": 239,
+      "ApiIdType": "Achievement",
       "IconFileName": "kill.png"
     },
     {
@@ -310,7 +314,8 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {}
       },
-      "AchievementId": 283,
+      "ApiId": 283,
+      "ApiIdType": "Achievement",
       "IconFileName": "kill.png"
     },
     {
@@ -366,7 +371,8 @@
           "Spanish": "Suministros gastados en reparaciones"
         }
       },
-      "AchievementId": 306,
+      "ApiId": 306,
+      "ApiIdType": "Achievement",
       "IconFileName": "supplySpend.png"
     },
     {
@@ -382,7 +388,8 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {}
       },
-      "AchievementId": 288,
+      "ApiId": 288,
+      "ApiIdType": "Achievement",
       "IconFileName": "dolyak.png"
     },
     {
@@ -398,7 +405,8 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {}
       },
-      "AchievementId": 285,
+      "ApiId": 285,
+      "ApiIdType": "Achievement",
       "IconFileName": "dolyakDefended.png"
     },
     {
@@ -414,7 +422,8 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {}
       },
-      "AchievementId": 291,
+      "ApiId": 291,
+      "ApiIdType": "Achievement",
       "IconFileName": "camp.png"
     },
     {
@@ -430,7 +439,8 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {}
       },
-      "AchievementId": 310,
+      "ApiId": 310,
+      "ApiIdType": "Achievement",
       "IconFileName": "campDefended.png"
     },
     {
@@ -446,7 +456,8 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {}
       },
-      "AchievementId": 297,
+      "ApiId": 297,
+      "ApiIdType": "Achievement",
       "IconFileName": "tower.png"
     },
     {
@@ -462,7 +473,8 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {}
       },
-      "AchievementId": 322,
+      "ApiId": 322,
+      "ApiIdType": "Achievement",
       "IconFileName": "towerDefended.png"
     },
     {
@@ -478,7 +490,8 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {}
       },
-      "AchievementId": 300,
+      "ApiId": 300,
+      "ApiIdType": "Achievement",
       "IconFileName": "keep.png"
     },
     {
@@ -494,7 +507,8 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {}
       },
-      "AchievementId": 316,
+      "ApiId": 316,
+      "ApiIdType": "Achievement",
       "IconFileName": "keepDefended.png"
     },
     {
@@ -510,7 +524,8 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {}
       },
-      "AchievementId": 294,
+      "ApiId": 294,
+      "ApiIdType": "Achievement",
       "IconFileName": "castle.png"
     },
     {
@@ -526,7 +541,8 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {}
       },
-      "AchievementId": 313,
+      "ApiId": 313,
+      "ApiIdType": "Achievement",
       "IconFileName": "castleDefended.png"
     },
     {
@@ -542,7 +558,8 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {}
       },
-      "AchievementId": 303,
+      "ApiId": 303,
+      "ApiIdType": "Achievement",
       "IconFileName": "objective.png"
     },
     {
@@ -558,7 +575,8 @@
       "LabelTooltip": {
         "LocalizedTextByLocale": {}
       },
-      "AchievementId": 319,
+      "ApiId": 319,
+      "ApiIdType": "Achievement",
       "IconFileName": "objectiveDefended.png"
     },
     {
@@ -583,7 +601,8 @@
           "Korean": "The primary currency of Tyria. Spent at vendors throughout the world."
         }
       },
-      "CurrencyId": 1,
+      "ApiId": 1,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/98457F504BA2FAC8457F532C4B30EDC23929ACF9/619316.png"
     },
     {
@@ -608,7 +627,8 @@
           "Korean": "Earned through various activities. Spent at vendors throughout the world."
         }
       },
-      "CurrencyId": 2,
+      "ApiId": 2,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/94953FA23D3E0D23559624015DFEA4CFAA07F0E5/155026.png"
     },
     {
@@ -633,7 +653,8 @@
           "Korean": "Earned through the Log-in Reward Chest. Spent in major cities. Used to purchase various rewards."
         }
       },
-      "CurrencyId": 3,
+      "ApiId": 3,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/A1BD345AD9192C3A585BE2F6CB0617C5A797A1E2/619317.png"
     },
     {
@@ -658,7 +679,8 @@
           "Korean": "Purchased and spent via the Black Lion Trading Company."
         }
       },
-      "CurrencyId": 4,
+      "ApiId": 4,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/220061640ECA41C0577758030357221B4ECCE62C/502065.png"
     },
     {
@@ -683,7 +705,8 @@
           "Korean": "Earned in Ascalonian Catacombs. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Ascalon\" component used in creating legendary weapons."
         }
       },
-      "CurrencyId": 5,
+      "ApiId": 5,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/2AA9C0B030BE152B915E0174D7F0495FDA711C54/619318.png"
     },
     {
@@ -708,7 +731,8 @@
           "Korean": "Earned in the Ruined City of Arah. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Zhaitan\" component used in creating legendary weapons."
         }
       },
-      "CurrencyId": 6,
+      "ApiId": 6,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/06083C4F7321512918E23D57B999F04E94C8D9A3/619319.png"
     },
     {
@@ -733,7 +757,8 @@
           "Korean": "Earned and spent in Fractals of the Mists. Also used as a crafting ingredient."
         }
       },
-      "CurrencyId": 7,
+      "ApiId": 7,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/0204DAD0D40674035F9F5F5270043C3207EEA7E8/619320.png"
     },
     {
@@ -758,7 +783,8 @@
           "Korean": "Earned in Caudecus's Manor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Nobleman\" component used in creating legendary weapons."
         }
       },
-      "CurrencyId": 9,
+      "ApiId": 9,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/C97B0607A6DB1FA1469D1DBBF2F107A057F8A313/619322.png"
     },
     {
@@ -783,7 +809,8 @@
           "Korean": "Earned in Sorrow's Embrace. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Forgeman\" component used in creating legendary weapons."
         }
       },
-      "CurrencyId": 10,
+      "ApiId": 10,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/B83A4ED528FC237D4D1862CDD0250B773EAB36AA/619323.png"
     },
     {
@@ -808,7 +835,8 @@
           "Korean": "Earned in Twilight Arbor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Thorns\" component used in creating legendary weapons."
         }
       },
-      "CurrencyId": 11,
+      "ApiId": 11,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/F6F4F39212AF3324223D73BAA807026BD863997C/619324.png"
     },
     {
@@ -833,7 +861,8 @@
           "Korean": "Earned in Honor of the Waves. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Sanctuary\" component used in creating legendary weapons."
         }
       },
-      "CurrencyId": 12,
+      "ApiId": 12,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/2B9E2BC9D5D080C54C17E27CECACEFFC0D64EE22/619325.png"
     },
     {
@@ -858,7 +887,8 @@
           "Korean": "Earned in Citadel of Flame. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Baelfire\" component used in creating legendary weapons."
         }
       },
-      "CurrencyId": 13,
+      "ApiId": 13,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/310CA245DBF61A54BD0C5D5361E26F0821FCAAFD/619326.png"
     },
     {
@@ -883,7 +913,8 @@
           "Korean": "Earned in Crucible of Eternity. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Knowledge\" component used in creating legendary weapons."
         }
       },
-      "CurrencyId": 14,
+      "ApiId": 14,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/37CCE672250A3170B71760949C4C9C9B186517B1/619327.png"
     },
     {
@@ -908,7 +939,8 @@
           "Korean": "Earned and spent in WvW to purchase various items."
         }
       },
-      "CurrencyId": 15,
+      "ApiId": 15,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/AC3178E7BD066BC597F9D4247848E6033A047EDE/699004.png"
     },
     {
@@ -933,7 +965,8 @@
           "Korean": "Earned through Guild Missions. Spent in Lion's Arch. Used to purchase various rewards."
         }
       },
-      "CurrencyId": 16,
+      "ApiId": 16,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/1DB12CF3E9D8D3CF77DA805B2008D417EA32C172/699005.png"
     },
     {
@@ -958,7 +991,8 @@
           "Korean": "Purchased via the Black Lion Trading Company. Spent in the wardrobe to change appearance."
         }
       },
-      "CurrencyId": 18,
+      "ApiId": 18,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/66A42690C2EA05235C4090372B975117F60EE7E3/779571.png"
     },
     {
@@ -983,7 +1017,8 @@
           "Korean": "Earned and spent in Verdant Brink. Train the Itzel Language Mastery ability to trade with Itzel vendors for bladed armor and other goods."
         }
       },
-      "CurrencyId": 19,
+      "ApiId": 19,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/07EC38BCBE979B7F4557057F51785F0930075F35/1029833.png"
     },
     {
@@ -1008,7 +1043,8 @@
           "Korean": "Earned and spent in Tangled Depths. Train the Nuhoch Language Mastery ability to trade with Nuhoch vendors for chak weapons and other goods."
         }
       },
-      "CurrencyId": 20,
+      "ApiId": 20,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/DD02946A3AB4076C500836533F67303EE464A6AC/1206837.png"
     },
     {
@@ -1033,7 +1069,8 @@
           "Korean": "Earned and spent in Auric Basin. Train the Exalted Acceptance Mastery line to trade with Exalted merchants for auric weapon recipes and other goods."
         }
       },
-      "CurrencyId": 22,
+      "ApiId": 22,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/5D74D6D3D8179FC49D572975CC5E0CC701025508/1206836.png"
     },
     {
@@ -1058,7 +1095,8 @@
           "Korean": "Used by Miyani to maintain the Mystic Forge."
         }
       },
-      "CurrencyId": 23,
+      "ApiId": 23,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/0AD608DE7FDEE0B909905C0AF9401321CF65CD94/1010701.png"
     },
     {
@@ -1083,7 +1121,8 @@
           "Korean": "Earned and spent in the Fractals of the Mists. Used to purchase ascended rings."
         }
       },
-      "CurrencyId": 24,
+      "ApiId": 24,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/77B0F842ED036D71E46B80570D6CFE25CB4C0677/619321.png"
     },
     {
@@ -1108,7 +1147,8 @@
           "Korean": "Earned by completing events in Dry Top. Accepted by vendors throughout the area.\nCan be traded for valuable items including recipes for foods, Nomad's gear, and ambrite weapons."
         }
       },
-      "CurrencyId": 25,
+      "ApiId": 25,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/11C6D8AB5FD04866BF3D751771F90C392739B5DF/1010699.png"
     },
     {
@@ -1133,7 +1173,8 @@
           "Korean": "Earned by participating in WvW skirmishes. Traded for various rewards at a WvW Skirmish Supervisor."
         }
       },
-      "CurrencyId": 26,
+      "ApiId": 26,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/0F911F55FF800FC0589970FF9137BF050699392F/1010702.png"
     },
     {
@@ -1158,7 +1199,8 @@
           "Korean": "Earned by completing events in the Silverwastes. Accepted by vendors in Camp Resolve and at secured outposts.\nCan be traded for valuable items including Carapace armor and recipes for sinister gear."
         }
       },
-      "CurrencyId": 27,
+      "ApiId": 27,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/B8E963AF6D4C66237D44194A6570A1492D1F5EE4/1010697.png"
     },
     {
@@ -1183,7 +1225,8 @@
           "Korean": "Earned from bosses and events inside Heart of Thorns and Path of Fire raids."
         }
       },
-      "CurrencyId": 28,
+      "ApiId": 28,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/95F8F70D97186780CE45B54600B90BE356D8EA7C/1302741.png"
     },
     {
@@ -1208,7 +1251,8 @@
           "Korean": "Earned by helping Faction Provisioners."
         }
       },
-      "CurrencyId": 29,
+      "ApiId": 29,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/5CF6FC0B62554EBECAC6752AAFA2B8D80F726077/1302745.png"
     },
     {
@@ -1233,7 +1277,8 @@
           "Korean": "Earned when crossing division thresholds during PvP league seasons. Spend in the Heart of the Mists and trade for various rewards at the PvP League Vendor."
         }
       },
-      "CurrencyId": 30,
+      "ApiId": 30,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/DB05F5F20B94A3D12AF11041F60E194D66584957/1313248.png"
     },
     {
@@ -1258,7 +1303,8 @@
           "Korean": "Earned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points."
         }
       },
-      "CurrencyId": 31,
+      "ApiId": 31,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/0D971EF54A6FA5146AC9F60A0702DD640CBB8011/1207142.png"
     },
     {
@@ -1283,7 +1329,8 @@
           "Korean": "Earned from creatures empowered by unbound magic."
         }
       },
-      "CurrencyId": 32,
+      "ApiId": 32,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/55CBF5154BC749F0BE7B01F9C75C04F2CD4BC561/1465799.png"
     },
     {
@@ -1308,7 +1355,8 @@
           "Korean": "Earned from PvP League Division Chests."
         }
       },
-      "CurrencyId": 33,
+      "ApiId": 33,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/1AAD230BF65AE92C000E0C18D26D404022092C35/1614710.png"
     },
     {
@@ -1333,7 +1381,8 @@
           "Korean": "Earned in the Crystal Desert. Spend at karma merchants to purchase trade crates with crafting materials, new crafting recipes, and other rewards unique to the Crystal Desert."
         }
       },
-      "CurrencyId": 34,
+      "ApiId": 34,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/DEC2276FB1D5637BE563F618A012DEE63402170C/1767459.png"
     },
     {
@@ -1358,7 +1407,8 @@
           "Korean": "Earned by completing legendary bounties in the Crystal Desert. Spend at the Tomb of Primeval Kings.\n\n<c=@Flavor>These markers were used to commemorate great deeds in the Dynastic Era of ancient Elona.</c>"
         }
       },
-      "CurrencyId": 35,
+      "ApiId": 35,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/4C5D08BCD7F55B250B413F98A9FB4C323E3B0F93/1766338.png"
     },
     {
@@ -1383,7 +1433,8 @@
           "Korean": "Earned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points."
         }
       },
-      "CurrencyId": 36,
+      "ApiId": 36,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/29A2465AE376091D3871B42D14D90B453060B69C/1822313.png"
     },
     {
@@ -1408,7 +1459,8 @@
           "Korean": "Used to open Exalted chests in Auric Basin. Chests can contain armor, weapons, and recipes."
         }
       },
-      "CurrencyId": 37,
+      "ApiId": 37,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/D8A351CBB13B24E49F9755BD290F710964B8FD99/1203022.png"
     },
     {
@@ -1433,7 +1485,8 @@
           "Korean": "Used to open noxious pods in Dragon's Stand. Pods can contain armor, weapons, and recipes."
         }
       },
-      "CurrencyId": 38,
+      "ApiId": 38,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/2539DA0C2F1259A20DEE6707B8D8BCDA050372E2/1203080.png"
     },
     {
@@ -1458,7 +1511,8 @@
           "Korean": "Earned from bosses and events inside Path of Fire raids."
         }
       },
-      "CurrencyId": 39,
+      "ApiId": 39,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/B31002F9772C0DDF7428A7A16BD14945C34AB4A8/1896039.png"
     },
     {
@@ -1483,7 +1537,8 @@
           "Korean": "Used to open lost bandit chests in the Silverwastes. Chests can contain armor, weapons, recipes, ambrite, and more."
         }
       },
-      "CurrencyId": 40,
+      "ApiId": 40,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/332FF8697F27CEC0A599A008C901ACD8273E0C1E/65724.png"
     },
     {
@@ -1508,7 +1563,8 @@
           "Korean": "Used to open airship cargo in Verdant Brink. Cargo can contain crafting materials, armor, weapons, and recipes."
         }
       },
-      "CurrencyId": 41,
+      "ApiId": 41,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/CC21772A9131AEAF4C18EE90172AE2A8DB1850BA/1203099.png"
     },
     {
@@ -1533,7 +1589,8 @@
           "Korean": "Used to open crystallized supply caches in Tangled Depths. Caches can contain armor, weapons, and recipes."
         }
       },
-      "CurrencyId": 42,
+      "ApiId": 42,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/B60BE97A3899A1D36CE81CB3C896CACACCA79237/1203046.png"
     },
     {
@@ -1558,7 +1615,8 @@
           "Korean": "Used to open buried locked chests in Dry Top. These chests are only visible during sandstorms. Chests can contain armor, weapons, rare skins, recipes, ambrite, and more."
         }
       },
-      "CurrencyId": 43,
+      "ApiId": 43,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/A6F57A2C946B2A02062AC0A9452703505CF8B3BE/831466.png"
     },
     {
@@ -1583,7 +1641,8 @@
           "Korean": "Used to open trade crates in the Crystal Desert."
         }
       },
-      "CurrencyId": 44,
+      "ApiId": 44,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/7CD20D4B072AD23F97202F05E4130CF8A4B069C5/69116.png"
     },
     {
@@ -1608,7 +1667,8 @@
           "Korean": "Unstable magic lingering from the fall of a god and two Elder Dragons. Spent at vendors to purchase unlocks and rewards."
         }
       },
-      "CurrencyId": 45,
+      "ApiId": 45,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/57F51A1F62E3FBB7B5E02CBD7C9717371D1CC8F2/1894697.png"
     },
     {
@@ -1633,7 +1693,8 @@
           "Korean": "Earned in monthly automated tournaments and some special event tournaments."
         }
       },
-      "CurrencyId": 46,
+      "ApiId": 46,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/C30D1480E3383F999DE87921706D9D39E49CDC7A/2010217.png"
     },
     {
@@ -1658,7 +1719,8 @@
           "Korean": "Earned by participating in roller beetle races and time trials."
         }
       },
-      "CurrencyId": 47,
+      "ApiId": 47,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/555601A503A5DCFCC90C421AECF1ACEF70B2AFAC/2069367.png"
     },
     {
@@ -1683,7 +1745,8 @@
           "Korean": "Used to open Mistborn Coffers in Dragonfall."
         }
       },
-      "CurrencyId": 49,
+      "ApiId": 49,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/2C47C1C30F61DB3A743BA47FB7E70808156A9009/2140520.png"
     },
     {
@@ -1708,7 +1771,8 @@
           "Korean": "Earned by participating in the yearly Festival of the Four Winds."
         }
       },
-      "CurrencyId": 50,
+      "ApiId": 50,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/63E1A0F023D101045B5BA2331C289327687FC7E3/797790.png"
     },
     {
@@ -1733,7 +1797,8 @@
           "Korean": "Used to loot cache chests around Drizzlewood Coast."
         }
       },
-      "CurrencyId": 51,
+      "ApiId": 51,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/7D7CAD2BF4527006CFE6BE3DBF306353260DC8B2/2292743.png"
     },
     {
@@ -1758,7 +1823,8 @@
           "Korean": "Crystalline shards of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these."
         }
       },
-      "CurrencyId": 52,
+      "ApiId": 52,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/05E12F28F7747F580105C8DACD0FF2027644C5FB/2270835.png"
     },
     {
@@ -1783,7 +1849,8 @@
           "Korean": "Crystalline shards of dragon magic, veined with green.\nCan be exchanged for rewards in Arborstone."
         }
       },
-      "CurrencyId": 53,
+      "ApiId": 53,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/BFEDF6110C69BE3521010E7F23B5147919B90FA9/2270834.png"
     },
     {
@@ -1808,7 +1875,8 @@
           "Korean": "Crystalline formations of dragon magic, veined with blue.\nUsed to open the weekly strike rewards chest in the Eye of the North.\nObtained from Priority Strikes or by combining shards."
         }
       },
-      "CurrencyId": 54,
+      "ApiId": 54,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/2F531F63F5A9A93C624A3CDDC73F9078C00E5097/2270830.png"
     },
     {
@@ -1833,7 +1901,8 @@
           "Korean": "Crystalline formations of dragon magic, veined with green.\nEmissaries in the Eye of the North have interest in these.\nObtained from Priority Strikes or by combining shards."
         }
       },
-      "CurrencyId": 55,
+      "ApiId": 55,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/361BEAAEB637D90905060E4A59365118C7A6790D/2270831.png"
     },
     {
@@ -1858,7 +1927,8 @@
           "Korean": "Crystalline formations of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these.\nObtained from Priority Strikes or by combining shards."
         }
       },
-      "CurrencyId": 56,
+      "ApiId": 56,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/3AB7586DBCB7C9967459FB4F10A8C205E6760BA7/2270832.png"
     },
     {
@@ -1883,7 +1953,8 @@
           "Korean": "Crystalline shards of dragon magic, veined with blue.\nCan be exchanged for rewards in the Eye of the North."
         }
       },
-      "CurrencyId": 57,
+      "ApiId": 57,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/A0ECC4DEE6E84062649EA464079AE46B61089130/2270833.png"
     },
     {
@@ -1908,7 +1979,8 @@
           "Korean": "Materials to aid in the ongoing conflict in the Drizzlewood Coast. Can be traded for war equipment and items or used to upgrade bases."
         }
       },
-      "CurrencyId": 58,
+      "ApiId": 58,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/3A930379AABCB10BDBE42F0FA436F29DD023C274/2293273.png"
     },
     {
@@ -1933,7 +2005,8 @@
           "Korean": "Earned and spent in Fractals of the Mists. Used to purchase prestigious rewards."
         }
       },
-      "CurrencyId": 59,
+      "ApiId": 59,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/AD0AF3F321EB250B5FB4C44A7B3392CD1208921A/1202328.png"
     },
     {
@@ -1958,7 +2031,8 @@
           "Korean": "Earned by protecting Tyria in Dragon Response Missions. Spent at faction vendors in Eye of the North."
         }
       },
-      "CurrencyId": 60,
+      "ApiId": 60,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/A004AF632A0ABA29ACFAB475AF1197B5BF80D9D9/2351816.png"
     },
     {
@@ -1983,7 +2057,8 @@
           "Korean": "Acquired by deconstructing crafted items with research kits. Used at vendors in Cantha and to craft newer recipes."
         }
       },
-      "CurrencyId": 61,
+      "ApiId": 61,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/BC2EACDA78BC950263F901E8EBA6E74D08E97E23/2596976.png"
     },
     {
@@ -2008,7 +2083,8 @@
           "Korean": "Acquired by opening hidden chests in Cantha. Used at vendors in Cantha."
         }
       },
-      "CurrencyId": 62,
+      "ApiId": 62,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/662D371A6C145EDDDA2DE6B53BC05F5F08CE386F/2596977.png"
     },
     {
@@ -2033,7 +2109,8 @@
           "Korean": "Acquired from junk items recycled by the Jade Bot Recycler."
         }
       },
-      "CurrencyId": 64,
+      "ApiId": 64,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/90FF7B7D0CBBC031B04F7E0A18576D7EBECB1C90/2596975.png"
     },
     {
@@ -2058,7 +2135,8 @@
           "Korean": "Earned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points."
         }
       },
-      "CurrencyId": 65,
+      "ApiId": 65,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/7BFCF20F62C7DA650DFA69723E0B4F00E4F0ACF8/2597023.png"
     },
     {
@@ -2083,7 +2161,8 @@
           "Korean": "Acquired by playing the Coin Rush in Club Canach. May be used to obtain rewards in Club Canach."
         }
       },
-      "CurrencyId": 67,
+      "ApiId": 67,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/F5FDD02592E10C3E63CF64D44713220FB6C70D03/2596973.png"
     },
     {
@@ -2108,7 +2187,8 @@
           "Korean": "Acquired by assisting in events throughout Cantha. Used at vendors in Cantha."
         }
       },
-      "CurrencyId": 68,
+      "ApiId": 68,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/D312AE6DB1AE2ECC2494772DF1D312D13B501D4E/2596974.png"
     },
     {
@@ -2133,7 +2213,8 @@
           "Korean": "Earned in dungeons. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the legendary crafting components used in creating legendary weapons."
         }
       },
-      "CurrencyId": 69,
+      "ApiId": 69,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/37CCE672250A3170B71760949C4C9C9B186517B1/619327.png"
     },
     {
@@ -2158,7 +2239,8 @@
           "Korean": "Earned from bosses and events inside raids and challenge mode Strike Missions."
         }
       },
-      "CurrencyId": 70,
+      "ApiId": 70,
+      "ApiIdType": "Currency",
       "IconUrl": "https://render.guildwars2.com/file/6D33B7387BAF2E2CC9B5D37D1D1B01246AB6FA22/1302744.png"
     }
   ]
