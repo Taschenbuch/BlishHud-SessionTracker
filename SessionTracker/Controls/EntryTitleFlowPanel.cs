@@ -22,7 +22,7 @@ namespace SessionTracker.Controls
 
             var titleLabel = new Label()
             {
-                Text           = entry.LabelText.Localized,
+                Text           = entry.Name.Localized,
                 TextColor      = settingService.TitleLabelColorSetting.Value.GetColor(),
                 Font           = font,
                 ShowShadow     = true,
@@ -66,9 +66,9 @@ namespace SessionTracker.Controls
 
         public void UpdateLabelText()
         {
-            _titleLabel.Text             = _entry.LabelText.Localized;
-            _titleLabel.BasicTooltipText = _entry.LabelTooltip.Localized;
-            _titleImage.BasicTooltipText = _entry.LabelTooltip.Localized;
+            _titleLabel.Text             = _entry.Name.Localized;
+            _titleLabel.BasicTooltipText = _entry.Description.Localized;
+            _titleImage.BasicTooltipText = _entry.Description.Localized;
         }
 
         public override void Show()

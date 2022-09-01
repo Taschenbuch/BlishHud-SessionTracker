@@ -29,10 +29,10 @@ namespace SessionTracker.JsonFileCreator.StatServices
                 {
                     var entry = new Entry
                     {
-                        Id = $"item{item.Id}",
-                        ApiId = item.Id,
+                        Id        = $"item{item.Id}",
+                        ApiId     = item.Id,
                         ApiIdType = ApiIdType.Item,
-                        IconUrl = item.Icon.Url.ToString(),
+                        IconUrl   = item.Icon.Url.ToString(),
                         IsVisible = false
                     };
 
@@ -67,8 +67,8 @@ namespace SessionTracker.JsonFileCreator.StatServices
             if (entryForItemExists)
             {
                 var matchingEntry = entries.Single(e => e.ApiId == item.Id);
-                matchingEntry.LabelText.SetLocalizedText(item.Name, local);
-                matchingEntry.LabelTooltip.SetLocalizedText(item.Description, local);
+                matchingEntry.Name.SetLocalizedText(item.Name, local);
+                matchingEntry.Description.SetLocalizedText(item.Description, local);
             }
         }
 

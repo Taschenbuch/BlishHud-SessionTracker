@@ -28,10 +28,10 @@ namespace SessionTracker.JsonFileCreator.StatServices
                 {
                     var entry = new Entry
                     {
-                        Id = $"currency{currency.Id}",
-                        ApiId = currency.Id,
+                        Id        = $"currency{currency.Id}",
+                        ApiId     = currency.Id,
                         ApiIdType = ApiIdType.Currency,
-                        IconUrl = currency.Icon.Url.ToString(),
+                        IconUrl   = currency.Icon.Url.ToString(),
                         IsVisible = false
                     };
 
@@ -66,8 +66,8 @@ namespace SessionTracker.JsonFileCreator.StatServices
             if (entryForCurrencyExists)
             {
                 var matchingEntry = entries.Single(e => e.ApiId == currency.Id);
-                matchingEntry.LabelText.SetLocalizedText(currency.Name, local);
-                matchingEntry.LabelTooltip.SetLocalizedText(currency.Description, local);
+                matchingEntry.Name.SetLocalizedText(currency.Name, local);
+                matchingEntry.Description.SetLocalizedText(currency.Description, local);
             }
         }
     }

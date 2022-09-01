@@ -55,21 +55,21 @@ namespace SessionTracker.Value.Tooltip
         {
             // summary tooltip makes no sense for KDRs. Thus they get a shorter tooltip.
             if (entry.Id == EntryId.WVW_KDR || entry.Id == EntryId.PVP_KDR)
-                return entry.GetNameAndDescription();
+                return entry.GetTextWithNameAndDescription();
 
             var sessionValuePerHour     = GetValuePerHourAsInteger(entry.Value.Session);
             var sessionValuePerHourText = CreateValueText(sessionValuePerHour, entry.ApiId);
             var totalValueText          = CreateValueText(entry.Value.Total, entry.ApiId);
 
-            return $"{entry.GetNameAndDescription()}\n" +
+            return $"{entry.GetTextWithNameAndDescription()}\n" +
                    $"\n" +
                    $"== TOTAL ==\n" +
-                   $"{totalValueText} {entry.LabelText.Localized}\n" +
+                   $"{totalValueText} {entry.Name.Localized}\n" +
                    $"\n== {Localization.SummaryTooltip_HeaderCurrentSession} ==\n" +
-                   $"{sessionValuePerHourText} {entry.LabelText.Localized} / {Localization.SummaryTooltip_Hour}\n" +
+                   $"{sessionValuePerHourText} {entry.Name.Localized} / {Localization.SummaryTooltip_Hour}\n" +
                    $"{_model.SessionDuration:hh':'mm} {Localization.SummaryTooltip_HoursMinutes}\n" +
                    $"\n" +
-                   $"{Localization.SummaryTooltip_historyTimeColumnTitle} | {entry.LabelText.Localized}\n" +
+                   $"{Localization.SummaryTooltip_historyTimeColumnTitle} | {entry.Name.Localized}\n" +
                    $"{string.Join("\n", entry.SessionHistory)}";
         }
 

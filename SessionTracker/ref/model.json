@@ -3,7 +3,7 @@
   "Entries": [
     {
       "Id": "item71581",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Memory of Battle",
           "French": "Souvenir de combat",
@@ -13,7 +13,7 @@
           "Korean": "Memory of Battle"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Found in World vs. World reward tracks.",
           "French": "À récupérer dans les parcours de récompenses en Monde contre Monde.",
@@ -29,7 +29,7 @@
     },
     {
       "Id": "item8920",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Heavy Loot Bag",
           "French": "Sac de butin lourd",
@@ -39,7 +39,7 @@
           "Korean": "Heavy Loot Bag"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Double-click to open.",
           "French": "Double-cliquez pour ouvrir.",
@@ -55,7 +55,7 @@
     },
     {
       "Id": "item83103",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Eye of Kormir",
           "French": "Œil de Kormir",
@@ -65,7 +65,7 @@
           "Korean": "Eye of Kormir"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "<c=@Flavor>These gleaming metal scales earned their nickname because they are flexible but remain true and whole under great strain.</c>",
           "French": "<c=@Flavor>Ces écailles de métal brillantes tiennent leur surnom de leur texture souple mais extrêmement résistante.</c>",
@@ -81,7 +81,7 @@
     },
     {
       "Id": "luck",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Luck",
           "German": "Glück",
@@ -89,14 +89,14 @@
           "Spanish": "Suerte"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "IconFileName": "luck.png"
     },
     {
       "Id": "deaths",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Deaths",
           "German": "Tode",
@@ -104,7 +104,7 @@
           "Spanish": "Muertes"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Combined deaths from all sources (WvW, sPvP, PvE)",
           "German": "Aufsummierte Tode aus allen Quellen (WvW, sPvP, PvE)",
@@ -116,7 +116,7 @@
     },
     {
       "Id": "pvp kills",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "PvP kills",
           "German": "PvP Feinde besiegt",
@@ -124,7 +124,7 @@
           "Spanish": "PvP bajas"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "ApiId": 239,
@@ -133,7 +133,7 @@
     },
     {
       "Id": "pvp kdr",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "PvP KDR",
           "German": "PvP KDR",
@@ -141,7 +141,7 @@
           "Spanish": "PvP B/M"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "PvP kills/deaths ratio",
           "German": "PvP Verhältnis besiegte Feinde/Tode",
@@ -153,7 +153,7 @@
     },
     {
       "Id": "pvp total wins",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "PvP total wins",
           "German": "PvP gesamt gewonnen",
@@ -161,14 +161,14 @@
           "Spanish": "PvP Victorias totales"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "IconFileName": "pvpWins.png"
     },
     {
       "Id": "pvp total losses",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "PvP total losses",
           "German": "PvP gesamt verloren",
@@ -176,14 +176,14 @@
           "Spanish": "PvP Derrotas totales"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "IconFileName": "pvpLosses.png"
     },
     {
       "Id": "pvp ranked wins",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "PvP ranked wins",
           "German": "PvP mit rangwertung gewonnen",
@@ -191,14 +191,14 @@
           "Spanish": "PvP Victorias en clasificatorias"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "IconFileName": "pvpWins.png"
     },
     {
       "Id": "pvp ranked losses",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "PvP ranked losses",
           "German": "PvP mit rangwertung verloren",
@@ -206,14 +206,14 @@
           "Spanish": "PvP Derrotas en clasificatorias"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "IconFileName": "pvpLosses.png"
     },
     {
       "Id": "pvp unranked wins",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "PvP unranked wins",
           "German": "PvP ohne rangwertung gewonnen",
@@ -221,14 +221,14 @@
           "Spanish": "PvP Victorias en libres"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "IconFileName": "pvpWins.png"
     },
     {
       "Id": "pvp unranked losses",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "PvP unranked losses",
           "German": "PvP ohne rangwertung verloren",
@@ -236,14 +236,14 @@
           "Spanish": "PvP Derrotas en libres"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "IconFileName": "pvpLosses.png"
     },
     {
       "Id": "pvp custom wins",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "PvP custom wins",
           "German": "Pvp selbsterstellt gewonnen",
@@ -251,14 +251,14 @@
           "Spanish": "PvP Victorias en personalidadas"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "IconFileName": "pvpWins.png"
     },
     {
       "Id": "pvp custom losses",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "PvP custom losses",
           "German": "PvP selbsterstellt verloren",
@@ -266,14 +266,14 @@
           "Spanish": "PvP Derrotas en personalidadas"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "IconFileName": "pvpLosses.png"
     },
     {
       "Id": "pvp rank",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "PvP rank",
           "German": "PvP rang",
@@ -281,14 +281,14 @@
           "Spanish": "PvP Rango"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "IconFileName": "pvpRank.png"
     },
     {
       "Id": "pvp ranking points",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "PvP ranking points",
           "German": "PvP rang punkte",
@@ -296,14 +296,14 @@
           "Spanish": "PvP Puntos de clasificación"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "IconFileName": "pvpRankingPoints.png"
     },
     {
       "Id": "wvw kills",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "WvW kills",
           "German": "WvW Feinde besiegt",
@@ -311,7 +311,7 @@
           "Spanish": "McM Bajas"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "ApiId": 283,
@@ -320,7 +320,7 @@
     },
     {
       "Id": "wvw kdr",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "WvW KDR",
           "German": "WvW KDR",
@@ -328,7 +328,7 @@
           "Spanish": "McM B/M"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "WvW kills/deaths ratio",
           "German": "WvW Verhältnis besiegte Feinde/Tode",
@@ -340,7 +340,7 @@
     },
     {
       "Id": "wvw rank",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "WvW rank",
           "German": "WvW rang",
@@ -348,14 +348,14 @@
           "Spanish": "McM Rango"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "IconFileName": "wvwRank.png"
     },
     {
       "Id": "wvw supply spent on repairs",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Supply (repair)",
           "German": "Vorräte (reparieren)",
@@ -363,7 +363,7 @@
           "Spanish": "Suministros (reparaciones)"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Supply spent on repairs",
           "German": "Durch Reparieren verbrauchte Vorräte",
@@ -377,7 +377,7 @@
     },
     {
       "Id": "wvw dolyaks killed",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Dolyaks killed",
           "German": "Karawane besiegt",
@@ -385,7 +385,7 @@
           "Spanish": "Caravanas asesinadas"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "ApiId": 288,
@@ -394,7 +394,7 @@
     },
     {
       "Id": "wvw dolyaks escorted",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Dolyaks escorted",
           "German": "Karawane verteidgt",
@@ -402,7 +402,7 @@
           "Spanish": "Caravanas escoltadas"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "ApiId": 285,
@@ -411,7 +411,7 @@
     },
     {
       "Id": "wvw camps captured",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Camps captured",
           "German": "Lager erobert",
@@ -419,7 +419,7 @@
           "Spanish": "Campamentos capturados"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "ApiId": 291,
@@ -428,7 +428,7 @@
     },
     {
       "Id": "wvw camps defended",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Camps defended",
           "German": "Lager verteidigt",
@@ -436,7 +436,7 @@
           "Spanish": "Campamentos defendidos"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "ApiId": 310,
@@ -445,7 +445,7 @@
     },
     {
       "Id": "wvw towers captured",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Towers captured",
           "German": "Türme erobert",
@@ -453,7 +453,7 @@
           "Spanish": "Torres capturadas"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "ApiId": 297,
@@ -462,7 +462,7 @@
     },
     {
       "Id": "wvw towers defended",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Towers defended",
           "German": "Türme verteidigt",
@@ -470,7 +470,7 @@
           "Spanish": "Torres defendidas"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "ApiId": 322,
@@ -479,7 +479,7 @@
     },
     {
       "Id": "wvw keeps captured",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Keeps captured",
           "German": "Festungen erobert",
@@ -487,7 +487,7 @@
           "Spanish": "Fortalezas capturadas"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "ApiId": 300,
@@ -496,7 +496,7 @@
     },
     {
       "Id": "wvw keeps defended",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Keeps defended",
           "German": "Festungen verteidgt",
@@ -504,7 +504,7 @@
           "Spanish": "Fortalezas defendidas"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "ApiId": 316,
@@ -513,7 +513,7 @@
     },
     {
       "Id": "wvw castles captured",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Castles captured",
           "German": "Schloss erobert",
@@ -521,7 +521,7 @@
           "Spanish": "Castillos capturados"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "ApiId": 294,
@@ -530,7 +530,7 @@
     },
     {
       "Id": "wvw castles defended",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Castles defended",
           "German": "Schloss verteidgt",
@@ -538,7 +538,7 @@
           "Spanish": "Castillos defendidos"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "ApiId": 313,
@@ -547,7 +547,7 @@
     },
     {
       "Id": "wvw objectives captured",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Objectives captured",
           "German": "Objekte erobert",
@@ -555,7 +555,7 @@
           "Spanish": "Objetivos capturados"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "ApiId": 303,
@@ -564,7 +564,7 @@
     },
     {
       "Id": "wvw objectives defended",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Objectives defended",
           "German": "Objekte verteidigt",
@@ -572,7 +572,7 @@
           "Spanish": "Objetivos defendidos"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {}
       },
       "ApiId": 319,
@@ -581,7 +581,7 @@
     },
     {
       "Id": "currency1",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Coin",
           "French": "Pièce",
@@ -591,7 +591,7 @@
           "Korean": "Coin"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "The primary currency of Tyria. Spent at vendors throughout the world.",
           "French": "La monnaie principale de la Tyrie. A dépenser chez les marchands du monde entier.",
@@ -607,7 +607,7 @@
     },
     {
       "Id": "currency2",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Karma",
           "French": "Karma",
@@ -617,7 +617,7 @@
           "Korean": "Karma"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned through various activities. Spent at vendors throughout the world.",
           "French": "À gagner dans diverses activités. À dépenser chez les marchands du monde entier.",
@@ -633,7 +633,7 @@
     },
     {
       "Id": "currency3",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Laurel",
           "French": "Laurier",
@@ -643,7 +643,7 @@
           "Korean": "Laurel"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned through the Log-in Reward Chest. Spent in major cities. Used to purchase various rewards.",
           "French": "À gagner via le coffre de récompense de connexion. À dépenser dans les villes principales. À utiliser pour acheter diverses récompenses.",
@@ -659,7 +659,7 @@
     },
     {
       "Id": "currency4",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Gem",
           "French": "Gemme",
@@ -669,7 +669,7 @@
           "Korean": "Gem"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Purchased and spent via the Black Lion Trading Company.",
           "French": "À acheter et à dépenser via la Compagnie commerciale du Lion noir.",
@@ -685,7 +685,7 @@
     },
     {
       "Id": "currency5",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Ascalonian Tear",
           "French": "Larme ascalonienne",
@@ -695,7 +695,7 @@
           "Korean": "Ascalonian Tear"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned in Ascalonian Catacombs. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Ascalon\" component used in creating legendary weapons.",
           "French": "À gagner dans les Catacombes d'Ascalon. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don d'Ascalon\" permettant de créer des armes légendaires.",
@@ -711,7 +711,7 @@
     },
     {
       "Id": "currency6",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Shard of Zhaitan",
           "French": "Éclat de Zhaïtan",
@@ -721,7 +721,7 @@
           "Korean": "Shard of Zhaitan"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned in the Ruined City of Arah. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Zhaitan\" component used in creating legendary weapons.",
           "French": "À gagner dans la Cité en ruine d'Arah. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don de Zhaïtan\" permettant de créer des armes légendaires.",
@@ -737,7 +737,7 @@
     },
     {
       "Id": "currency7",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Fractal Relic",
           "French": "Relique fractale",
@@ -747,7 +747,7 @@
           "Korean": "Fractal Relic"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned and spent in Fractals of the Mists. Also used as a crafting ingredient.",
           "French": "À gagner et à dépenser dans les Fractales des Brumes. À utiliser en tant qu'ingrédient d'artisanat.",
@@ -763,7 +763,7 @@
     },
     {
       "Id": "currency9",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Seal of Beetletun",
           "French": "Sceau de Beetletun",
@@ -773,7 +773,7 @@
           "Korean": "Seal of Beetletun"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned in Caudecus's Manor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Nobleman\" component used in creating legendary weapons.",
           "French": "À gagner dans le Manoir de Caudecus. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don du noble\" permettant de créer des armes légendaires.",
@@ -789,7 +789,7 @@
     },
     {
       "Id": "currency10",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Manifesto of the Moletariate",
           "French": "Manifeste du taupinariat",
@@ -799,7 +799,7 @@
           "Korean": "Manifesto of the Moletariate"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned in Sorrow's Embrace. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Forgeman\" component used in creating legendary weapons.",
           "French": "À gagner dans l'Étreinte des lamentations. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don du forgeron\" permettant de créer des armes légendaires.",
@@ -815,7 +815,7 @@
     },
     {
       "Id": "currency11",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Deadly Bloom",
           "French": "Pousse mortelle",
@@ -825,7 +825,7 @@
           "Korean": "Deadly Bloom"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned in Twilight Arbor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Thorns\" component used in creating legendary weapons.",
           "French": "À gagner dans la Tonnelle du crépuscule. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don des épines\" permettant de créer des armes légendaires.",
@@ -841,7 +841,7 @@
     },
     {
       "Id": "currency12",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Symbol of Koda",
           "French": "Symbole de Koda",
@@ -851,7 +851,7 @@
           "Korean": "Symbol of Koda"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned in Honor of the Waves. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Sanctuary\" component used in creating legendary weapons.",
           "French": "À gagner dans l'Honneur des vagues. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don du sanctuaire\" permettant de créer des armes légendaires.",
@@ -867,7 +867,7 @@
     },
     {
       "Id": "currency13",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Flame Legion Charr Carving",
           "French": "Gravure de Charr de la Légion de la Flamme",
@@ -877,7 +877,7 @@
           "Korean": "Flame Legion Charr Carving"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned in Citadel of Flame. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Baelfire\" component used in creating legendary weapons.",
           "French": "À gagner dans la Citadelle de la Flamme. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don de Feu-de-Bael\" permettant de créer des armes légendaires.",
@@ -893,7 +893,7 @@
     },
     {
       "Id": "currency14",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Knowledge Crystal",
           "French": "Cristal de connaissance",
@@ -903,7 +903,7 @@
           "Korean": "Knowledge Crystal"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned in Crucible of Eternity. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Knowledge\" component used in creating legendary weapons.",
           "French": "À gagner dans le Creuset de l'éternité. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don de savoir\" permettant de créer des armes légendaires.",
@@ -919,7 +919,7 @@
     },
     {
       "Id": "currency15",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Badge of Honor",
           "French": "Insigne d'honneur",
@@ -929,7 +929,7 @@
           "Korean": "Badge of Honor"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned and spent in WvW to purchase various items.",
           "French": "À gagner et à dépenser en McM pour acheter divers objets.",
@@ -945,7 +945,7 @@
     },
     {
       "Id": "currency16",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Guild Commendation",
           "French": "Recommandation de guilde",
@@ -955,7 +955,7 @@
           "Korean": "Guild Commendation"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned through Guild Missions. Spent in Lion's Arch. Used to purchase various rewards.",
           "French": "À gagner via les missions de guilde. À dépenser à l'Arche du Lion. À utiliser pour acheter diverses récompenses.",
@@ -971,7 +971,7 @@
     },
     {
       "Id": "currency18",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Transmutation Charge",
           "French": "Charge de transmutation",
@@ -981,7 +981,7 @@
           "Korean": "Transmutation Charge"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Purchased via the Black Lion Trading Company. Spent in the wardrobe to change appearance.",
           "French": "À acheter auprès de la Compagnie commerciale du Lion noir. À utiliser dans la garde-robe pour changer d'apparence.",
@@ -997,7 +997,7 @@
     },
     {
       "Id": "currency19",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Airship Part",
           "French": "Pièce d'aéronef",
@@ -1007,7 +1007,7 @@
           "Korean": "Airship Part"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned and spent in Verdant Brink. Train the Itzel Language Mastery ability to trade with Itzel vendors for bladed armor and other goods.",
           "French": "À obtenir et à dépenser à l'Orée d'émeraude. Entraînez la maîtrise Langue itzel pour acheter des armures à lames et d'autres marchandises aux vendeurs itzels.",
@@ -1023,7 +1023,7 @@
     },
     {
       "Id": "currency20",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Ley Line Crystal",
           "French": "Cristal des lignes de force",
@@ -1033,7 +1033,7 @@
           "Korean": "Ley Line Crystal"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned and spent in Tangled Depths. Train the Nuhoch Language Mastery ability to trade with Nuhoch vendors for chak weapons and other goods.",
           "French": "À obtenir et à dépenser dans les Profondeurs verdoyantes. Entraînez la maîtrise Langue nuhoch pour acheter des armes chaks et d'autres marchandises aux vendeurs nuhochs.",
@@ -1049,7 +1049,7 @@
     },
     {
       "Id": "currency22",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Lump of Aurillium",
           "French": "Bloc d'aurillium",
@@ -1059,7 +1059,7 @@
           "Korean": "Lump of Aurillium"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned and spent in Auric Basin. Train the Exalted Acceptance Mastery line to trade with Exalted merchants for auric weapon recipes and other goods.",
           "French": "À obtenir et à dépenser au Bassin aurique. Entraînez la maîtrise Acceptation exaltée pour acheter des recettes d'armes auriques et d'autres marchandises aux marchands exaltés.",
@@ -1075,7 +1075,7 @@
     },
     {
       "Id": "currency23",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Spirit Shard",
           "French": "Éclat d'esprit",
@@ -1085,7 +1085,7 @@
           "Korean": "Spirit Shard"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Used by Miyani to maintain the Mystic Forge.",
           "French": "Utilisé par Miyani pour entretenir la forge mystique.",
@@ -1101,7 +1101,7 @@
     },
     {
       "Id": "currency24",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Pristine Fractal Relic",
           "French": "Relique fractale immaculée",
@@ -1111,7 +1111,7 @@
           "Korean": "Pristine Fractal Relic"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned and spent in the Fractals of the Mists. Used to purchase ascended rings.",
           "French": "À gagner et à dépenser dans les Fractales des Brumes. À utiliser pour acheter des anneaux élevés.",
@@ -1127,7 +1127,7 @@
     },
     {
       "Id": "currency25",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Geode",
           "French": "Géode",
@@ -1137,7 +1137,7 @@
           "Korean": "Geode"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned by completing events in Dry Top. Accepted by vendors throughout the area.\nCan be traded for valuable items including recipes for foods, Nomad's gear, and ambrite weapons.",
           "French": "À gagner en terminant les événements à la Cimesèche. À dépenser auprès des vendeurs de la zone.\nÉchangeable contre des objets précieux, notamment des recettes de nourriture, les équipements de nomade et les armes en ambrite.",
@@ -1153,7 +1153,7 @@
     },
     {
       "Id": "currency26",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "WvW Skirmish Claim Ticket",
           "French": "Billet de retrait d'escarmouche McM",
@@ -1163,7 +1163,7 @@
           "Korean": "WvW Skirmish Claim Ticket"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned by participating in WvW skirmishes. Traded for various rewards at a WvW Skirmish Supervisor.",
           "French": "À gagner en participant à des escarmouches McM. Échangeable contre diverses récompenses auprès d'une superviseuse d'escarmouches McM.",
@@ -1179,7 +1179,7 @@
     },
     {
       "Id": "currency27",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Bandit Crest",
           "French": "Écu de bandit",
@@ -1189,7 +1189,7 @@
           "Korean": "Bandit Crest"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned by completing events in the Silverwastes. Accepted by vendors in Camp Resolve and at secured outposts.\nCan be traded for valuable items including Carapace armor and recipes for sinister gear.",
           "French": "À gagner en terminant les événements dans les Contrées sauvages d'argent. À dépenser auprès des vendeurs au Camp de la détermination et dans les avant-postes sécurisés.\nÉchangeable contre des objets précieux comme l'armure carapace et des recettes d'équipement sinistre.",
@@ -1205,7 +1205,7 @@
     },
     {
       "Id": "currency28",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Magnetite Shard",
           "French": "Éclat de magnétite",
@@ -1215,7 +1215,7 @@
           "Korean": "Magnetite Shard"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned from bosses and events inside Heart of Thorns and Path of Fire raids.",
           "French": "À obtenir sur les boss et dans les événements des raids de \"Heart of Thorns\" et \"Path of Fire\".",
@@ -1231,7 +1231,7 @@
     },
     {
       "Id": "currency29",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Provisioner Token",
           "French": "Coupon de fournisseur",
@@ -1241,7 +1241,7 @@
           "Korean": "Provisioner Token"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned by helping Faction Provisioners.",
           "French": "À obtenir en aidant les fournisseurs de faction.",
@@ -1257,7 +1257,7 @@
     },
     {
       "Id": "currency30",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "PvP League Ticket",
           "French": "Ticket de ligue JcJ",
@@ -1267,7 +1267,7 @@
           "Korean": "PvP League Ticket"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned when crossing division thresholds during PvP league seasons. Spend in the Heart of the Mists and trade for various rewards at the PvP League Vendor.",
           "French": "À gagner en franchissant les seuils de division pendant les saisons de ligue JcJ. À dépenser au Cœur des Brumes et à échanger contre diverses récompenses auprès du vendeur de ligue JcJ.",
@@ -1283,7 +1283,7 @@
     },
     {
       "Id": "currency31",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Proof of Heroics",
           "French": "Preuve d'héroïsme",
@@ -1293,7 +1293,7 @@
           "Korean": "Proof of Heroics"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points.",
           "French": "À récupérer dans les coffres de rang Monde contre Monde. À dépenser auprès de n'importe quel notaire des actes héroïques en Monde contre Monde pour obtenir des points de héros.",
@@ -1309,7 +1309,7 @@
     },
     {
       "Id": "currency32",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Unbound Magic",
           "French": "Magie déliée",
@@ -1319,7 +1319,7 @@
           "Korean": "Unbound Magic"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned from creatures empowered by unbound magic.",
           "French": "À obtenir sur des créatures renforcées par la magie déliée.",
@@ -1335,7 +1335,7 @@
     },
     {
       "Id": "currency33",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Ascended Shards of Glory",
           "French": "Éclats de gloire élevés",
@@ -1345,7 +1345,7 @@
           "Korean": "Ascended Shards of Glory"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned from PvP League Division Chests.",
           "French": "Obtenus dans les coffres de division de la ligue JcJ.",
@@ -1361,7 +1361,7 @@
     },
     {
       "Id": "currency34",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Trade Contract",
           "French": "Contrat commercial",
@@ -1371,7 +1371,7 @@
           "Korean": "Trade Contract"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned in the Crystal Desert. Spend at karma merchants to purchase trade crates with crafting materials, new crafting recipes, and other rewards unique to the Crystal Desert.",
           "French": "À gagner dans le Désert de cristal. Dépensez-les chez des marchands de karma pour acheter des cargaisons contenant des matériaux d'artisanat, de nouvelles recettes d'artisanat et d'autres récompenses spécifiques au Désert de cristal.",
@@ -1387,7 +1387,7 @@
     },
     {
       "Id": "currency35",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Elegy Mosaic",
           "French": "Mosaïque d'élégie",
@@ -1397,7 +1397,7 @@
           "Korean": "Elegy Mosaic"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned by completing legendary bounties in the Crystal Desert. Spend at the Tomb of Primeval Kings.\n\n<c=@Flavor>These markers were used to commemorate great deeds in the Dynastic Era of ancient Elona.</c>",
           "French": "À gagner en obtenant des primes légendaires dans le Désert de cristal. Dépensez-les au tombeau des rois primitifs.\n\n<c=@Flavor>Elles étaient utilisées pour commémorer les hauts faits à l'époque dynastique de l'Elona antique.</c>",
@@ -1413,7 +1413,7 @@
     },
     {
       "Id": "currency36",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Testimony of Desert Heroics",
           "French": "Témoignage de consignation d'actes héroïques du désert",
@@ -1423,7 +1423,7 @@
           "Korean": "Testimony of Desert Heroics"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points.",
           "French": "À récupérer dans les coffres de rang Monde contre Monde. À dépenser auprès de n'importe quel notaire des actes héroïques en Monde contre Monde pour obtenir des points de héros.",
@@ -1439,7 +1439,7 @@
     },
     {
       "Id": "currency37",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Exalted Key",
           "French": "Clé exaltée",
@@ -1449,7 +1449,7 @@
           "Korean": "Exalted Key"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Used to open Exalted chests in Auric Basin. Chests can contain armor, weapons, and recipes.",
           "French": "À utiliser pour ouvrir des coffres exaltés au Bassin aurique. Les coffres peuvent contenir des pièces d'armure, des armes et des recettes.",
@@ -1465,7 +1465,7 @@
     },
     {
       "Id": "currency38",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Machete",
           "French": "Machette",
@@ -1475,7 +1475,7 @@
           "Korean": "Machete"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Used to open noxious pods in Dragon's Stand. Pods can contain armor, weapons, and recipes.",
           "French": "À utiliser pour ouvrir des cosses nocives au Repli du dragon. Les cosses peuvent contenir des pièces d'armure, des armes et des recettes.",
@@ -1491,7 +1491,7 @@
     },
     {
       "Id": "currency39",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Gaeting Crystal",
           "French": "Cristal de Gaets",
@@ -1501,7 +1501,7 @@
           "Korean": "Gaeting Crystal"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned from bosses and events inside Path of Fire raids.",
           "French": "À obtenir sur les boss et dans les événements de raid de Path of Fire.",
@@ -1517,7 +1517,7 @@
     },
     {
       "Id": "currency40",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Bandit Skeleton Key",
           "French": "Passe-partout de bandit",
@@ -1527,7 +1527,7 @@
           "Korean": "Bandit Skeleton Key"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Used to open lost bandit chests in the Silverwastes. Chests can contain armor, weapons, recipes, ambrite, and more.",
           "French": "À utiliser pour ouvrir des coffres de bandit perdus dans les Contrées sauvages d'argent. Les coffres peuvent contenir des pièces d'armure, des armes, des recettes, de l'ambrite, et bien plus encore.",
@@ -1543,7 +1543,7 @@
     },
     {
       "Id": "currency41",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Pact Crowbar",
           "French": "Pied-de-biche du Pacte",
@@ -1553,7 +1553,7 @@
           "Korean": "Pact Crowbar"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Used to open airship cargo in Verdant Brink. Cargo can contain crafting materials, armor, weapons, and recipes.",
           "French": "À utiliser pour ouvrir une cargaison d'aéronef à l'Orée d'émeraude. La cargaison peut contenir des matériaux d'artisanat, des pièces d'armure, des armes et des recettes.",
@@ -1569,7 +1569,7 @@
     },
     {
       "Id": "currency42",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Vial of Chak Acid",
           "French": "Fiole d'acide chak",
@@ -1579,7 +1579,7 @@
           "Korean": "Vial of Chak Acid"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Used to open crystallized supply caches in Tangled Depths. Caches can contain armor, weapons, and recipes.",
           "French": "À utiliser pour ouvrir des planques de ravitaillement cristallisées dans les Profondeurs verdoyantes. Les caches peuvent contenir des pièces d'armure, des armes et des recettes.",
@@ -1595,7 +1595,7 @@
     },
     {
       "Id": "currency43",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Zephyrite Lockpick",
           "French": "Crochet zéphyrite",
@@ -1605,7 +1605,7 @@
           "Korean": "Zephyrite Lockpick"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Used to open buried locked chests in Dry Top. These chests are only visible during sandstorms. Chests can contain armor, weapons, rare skins, recipes, ambrite, and more.",
           "French": "À utiliser pour ouvrir des coffres scellés enterrés à la Cimesèche. Ces coffres ne sont visibles qu'au cours des tempêtes de sable. Ils peuvent contenir des pièces d'armure, des armes, des apparences rares, des recettes, de l'ambrite, et bien plus encore.",
@@ -1621,7 +1621,7 @@
     },
     {
       "Id": "currency44",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Trader's Key",
           "French": "Clé de marchand",
@@ -1631,7 +1631,7 @@
           "Korean": "Trader's Key"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Used to open trade crates in the Crystal Desert.",
           "French": "À utiliser pour ouvrir des cargaisons dans le Désert de cristal.",
@@ -1647,7 +1647,7 @@
     },
     {
       "Id": "currency45",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Volatile Magic",
           "French": "Magie volatile",
@@ -1657,7 +1657,7 @@
           "Korean": "Volatile Magic"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Unstable magic lingering from the fall of a god and two Elder Dragons. Spent at vendors to purchase unlocks and rewards.",
           "French": "Magie instable ayant persisté après la mort d'un dieu et de deux dragons ancestraux. À dépenser auprès des vendeurs pour acheter des récompenses et des déverrouillages.",
@@ -1673,7 +1673,7 @@
     },
     {
       "Id": "currency46",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "PvP Tournament Voucher",
           "French": "Bon de tournoi JcJ",
@@ -1683,7 +1683,7 @@
           "Korean": "PvP Tournament Voucher"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned in monthly automated tournaments and some special event tournaments.",
           "French": "À remporter lors de tournois automatisés mensuels et de tournois événementiels spéciaux.",
@@ -1699,7 +1699,7 @@
     },
     {
       "Id": "currency47",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Racing Medallion",
           "French": "Médaillon de course",
@@ -1709,7 +1709,7 @@
           "Korean": "Racing Medallion"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned by participating in roller beetle races and time trials.",
           "French": "À gagner en participant à des courses de scaraboules et à des épreuves de Contre la montre.",
@@ -1725,7 +1725,7 @@
     },
     {
       "Id": "currency49",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Mistborn Key",
           "French": "Clé de la Brumaille",
@@ -1735,7 +1735,7 @@
           "Korean": "Mistborn Key"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Used to open Mistborn Coffers in Dragonfall.",
           "French": "À utiliser pour ouvrir des malles de la Brumaille à la Chute draconique.",
@@ -1751,7 +1751,7 @@
     },
     {
       "Id": "currency50",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Festival Token",
           "French": "Coupon du festival",
@@ -1761,7 +1761,7 @@
           "Korean": "Festival Token"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned by participating in the yearly Festival of the Four Winds.",
           "French": "À obtenir en participant au Festival annuel des Quatre Vents.",
@@ -1777,7 +1777,7 @@
     },
     {
       "Id": "currency51",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Cache Key",
           "French": "Clé de cache",
@@ -1787,7 +1787,7 @@
           "Korean": "Cache Key"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Used to loot cache chests around Drizzlewood Coast.",
           "French": "Sert à ouvrir des coffres de cache dans la Côte de Bruinebois.",
@@ -1803,7 +1803,7 @@
     },
     {
       "Id": "currency52",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Red Prophet Shard",
           "French": "Éclat rouge du prophète",
@@ -1813,7 +1813,7 @@
           "Korean": "Red Prophet Shard"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Crystalline shards of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these.",
           "French": "Des éclats cristallins de magie draconique, parcourus de veinures rouges.\n\nLes émissaires de l'Œil du Nord leur portent un grand intérêt.",
@@ -1829,7 +1829,7 @@
     },
     {
       "Id": "currency53",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Green Prophet Shard",
           "French": "Éclat vert du prophète",
@@ -1839,7 +1839,7 @@
           "Korean": "Green Prophet Shard"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Crystalline shards of dragon magic, veined with green.\nCan be exchanged for rewards in Arborstone.",
           "French": "Des éclats cristallins de magie draconique, parcourus de veinures vertes.\nÀ échanger contre des récompenses à Pierre Arborea.",
@@ -1855,7 +1855,7 @@
     },
     {
       "Id": "currency54",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Blue Prophet Crystal",
           "French": "Cristal bleu du prophète",
@@ -1865,7 +1865,7 @@
           "Korean": "Blue Prophet Crystal"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Crystalline formations of dragon magic, veined with blue.\nUsed to open the weekly strike rewards chest in the Eye of the North.\nObtained from Priority Strikes or by combining shards.",
           "French": "Des concrétions cristallines de magie draconique, parcourues de veinures bleues.\nSert à ouvrir le coffre de récompense de missions d'attaque hebdomadaire à l'Œil du Nord.\nÀ récupérer au cours des priorités d'attaque ou en combinant des éclats.",
@@ -1881,7 +1881,7 @@
     },
     {
       "Id": "currency55",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Green Prophet Crystal",
           "French": "Cristal vert du prophète",
@@ -1891,7 +1891,7 @@
           "Korean": "Green Prophet Crystal"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Crystalline formations of dragon magic, veined with green.\nEmissaries in the Eye of the North have interest in these.\nObtained from Priority Strikes or by combining shards.",
           "French": "Des concrétions cristallines de magie draconique, parcourues de veinures vertes.\nLes émissaires de l'Œil du Nord leur portent un grand intérêt.\nÀ récupérer au cours des priorités d'attaque ou en combinant des éclats.",
@@ -1907,7 +1907,7 @@
     },
     {
       "Id": "currency56",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Red Prophet Crystal",
           "French": "Cristal rouge du prophète",
@@ -1917,7 +1917,7 @@
           "Korean": "Red Prophet Crystal"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Crystalline formations of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these.\nObtained from Priority Strikes or by combining shards.",
           "French": "Des concrétions cristallines de magie draconique, parcourues de veinures rouges.\nLes émissaires de l'Œil du Nord leur portent un grand intérêt.\nÀ récupérer au cours des priorités d'attaque ou en combinant des éclats.",
@@ -1933,7 +1933,7 @@
     },
     {
       "Id": "currency57",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Blue Prophet Shard",
           "French": "Éclat bleu du prophète",
@@ -1943,7 +1943,7 @@
           "Korean": "Blue Prophet Shard"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Crystalline shards of dragon magic, veined with blue.\nCan be exchanged for rewards in the Eye of the North.",
           "French": "Des éclats cristallins de magie draconique, parcourus de veinures bleues.\nÀ échanger contre des récompenses à l'Œil du Nord.",
@@ -1959,7 +1959,7 @@
     },
     {
       "Id": "currency58",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "War Supplies",
           "French": "Ravitaillement de guerre",
@@ -1969,7 +1969,7 @@
           "Korean": "War Supplies"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Materials to aid in the ongoing conflict in the Drizzlewood Coast. Can be traded for war equipment and items or used to upgrade bases.",
           "French": "Des matériaux pour soutenir le conflit dans la Côte de Bruinebois. Ils peuvent être échangés contre de l'équipement de guerre et des objets, ou utilisés pour améliorer les bases.",
@@ -1985,7 +1985,7 @@
     },
     {
       "Id": "currency59",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Unstable Fractal Essence",
           "French": "Essence de fractale instable",
@@ -1995,7 +1995,7 @@
           "Korean": "Unstable Fractal Essence"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned and spent in Fractals of the Mists. Used to purchase prestigious rewards.",
           "French": "À gagner et à dépenser dans les fractales des Brumes. À utiliser pour acheter de prestigieuses récompenses.",
@@ -2011,7 +2011,7 @@
     },
     {
       "Id": "currency60",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Tyrian Defense Seal",
           "French": "Sceau de défense tyrienne",
@@ -2021,7 +2021,7 @@
           "Korean": "Tyrian Defense Seal"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned by protecting Tyria in Dragon Response Missions. Spent at faction vendors in Eye of the North.",
           "French": "À gagner en protégeant la Tyrie dans les missions d'endiguement de dragon. À dépenser auprès des vendeurs de faction de l'Œil du Nord.",
@@ -2037,7 +2037,7 @@
     },
     {
       "Id": "currency61",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Research Note",
           "French": "Note de recherche",
@@ -2047,7 +2047,7 @@
           "Korean": "Research Note"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Acquired by deconstructing crafted items with research kits. Used at vendors in Cantha and to craft newer recipes.",
           "French": "À obtenir en démontant des objets fabriqués à l'aide de kits de recherches. À utiliser auprès de vendeurs canthiens et pour fabriquer de nouvelles recettes.",
@@ -2063,7 +2063,7 @@
     },
     {
       "Id": "currency62",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Unusual Coin",
           "French": "Pièce inhabituelle",
@@ -2073,7 +2073,7 @@
           "Korean": "Unusual Coin"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Acquired by opening hidden chests in Cantha. Used at vendors in Cantha.",
           "French": "S'obtient en ouvrant des coffres cachés dans Cantha. À utiliser auprès de vendeurs canthiens.",
@@ -2089,7 +2089,7 @@
     },
     {
       "Id": "currency64",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Jade Sliver",
           "French": "Esquille de jade",
@@ -2099,7 +2099,7 @@
           "Korean": "Jade Sliver"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Acquired from junk items recycled by the Jade Bot Recycler.",
           "French": "À trouver dans des objets sans valeur traités par le recycleur de drones de jade.",
@@ -2115,7 +2115,7 @@
     },
     {
       "Id": "currency65",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Testimony of Jade Heroics",
           "French": "Témoignage d'actes héroïques de Jade",
@@ -2125,7 +2125,7 @@
           "Korean": "Testimony of Jade Heroics"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned when ranking up in World vs World. Spent at any Notary of Heroics in World vs. World to obtain hero points.",
           "French": "À récupérer dans les coffres de rang Monde contre Monde. À dépenser auprès de n'importe quel notaire des actes héroïques en Monde contre Monde pour obtenir des points de héros.",
@@ -2141,7 +2141,7 @@
     },
     {
       "Id": "currency67",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Canach Coins",
           "French": "Pièces de Canach",
@@ -2151,7 +2151,7 @@
           "Korean": "Canach Coins"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Acquired by playing the Coin Rush in Club Canach. May be used to obtain rewards in Club Canach.",
           "French": "S'obtient en participant à la course aux pièces dans le Club Canach. À utiliser pour recevoir des récompenses du Club Canach.",
@@ -2167,7 +2167,7 @@
     },
     {
       "Id": "currency68",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Imperial Favor",
           "French": "Faveur impériale",
@@ -2177,7 +2177,7 @@
           "Korean": "Imperial Favor"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Acquired by assisting in events throughout Cantha. Used at vendors in Cantha.",
           "French": "S'obtient en participant à des événements dans Cantha. À utiliser auprès de vendeurs canthiens.",
@@ -2193,7 +2193,7 @@
     },
     {
       "Id": "currency69",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Tales of Dungeon Delving",
           "French": "Haut fait d'exploration de donjon",
@@ -2203,7 +2203,7 @@
           "Korean": "Tales of Dungeon Delving"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned in dungeons. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the legendary crafting components used in creating legendary weapons.",
           "French": "À gagner dans les donjons. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et les composants d'artisanat légendaires permettant de créer des armes légendaires.",
@@ -2219,7 +2219,7 @@
     },
     {
       "Id": "currency70",
-      "LabelText": {
+      "Name": {
         "LocalizedTextByLocale": {
           "English": "Legendary Insight",
           "French": "Connaissance légendaire",
@@ -2229,7 +2229,7 @@
           "Korean": "Legendary Insight"
         }
       },
-      "LabelTooltip": {
+      "Description": {
         "LocalizedTextByLocale": {
           "English": "Earned from bosses and events inside raids and challenge mode Strike Missions.",
           "French": "À obtenir sur les boss et dans les événements des raids, ainsi que dans les missions d'attaque en mode défi.",

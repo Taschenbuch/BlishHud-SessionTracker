@@ -109,7 +109,7 @@ namespace SessionTracker.Settings
             get
             {
                 var dummyEntry = new Entry();
-                dummyEntry.LabelText.SetLocalizedText("Failed to load model from file", Locale.English);
+                dummyEntry.Name.SetLocalizedText("Failed to load model from file", Locale.English);
 
                 return new Model {
                     Entries = { dummyEntry }

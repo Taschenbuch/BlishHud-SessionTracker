@@ -6,8 +6,8 @@ namespace SessionTracker.Models
     public class Entry
     {
         public string Id { get; set; } = string.Empty;
-        public LocalizedText LabelText { get; } = new LocalizedText();
-        public LocalizedText LabelTooltip { get; } = new LocalizedText();
+        public LocalizedText Name { get; } = new LocalizedText();
+        public LocalizedText Description { get; } = new LocalizedText();
         public int ApiId { get; set; }
         public ApiIdType ApiIdType{ get; set; } = ApiIdType.None;
         public string IconUrl { get; set; }
@@ -21,12 +21,12 @@ namespace SessionTracker.Models
         [JsonIgnore] public bool HasIconFile => IconFileName != null;
         [JsonIgnore] public bool HasIconUrl => IconUrl != null;
 
-        public string GetNameAndDescription()
+        public string GetTextWithNameAndDescription()
         {
-            var descriptionExists = string.IsNullOrWhiteSpace(LabelTooltip.Localized) == false;
+            var descriptionExists = string.IsNullOrWhiteSpace(Description.Localized) == false;
             return descriptionExists
-                ? $"{LabelText.Localized}\n{LabelTooltip.Localized}"
-                : $"{LabelText.Localized}";
+                ? $"{Name.Localized}\n{Description.Localized}"
+                : $"{Name.Localized}";
         }
     }
 }
