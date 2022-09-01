@@ -6,19 +6,19 @@ using SessionTracker.Models.Constants;
 
 namespace SessionTracker.JsonFileCreator
 {
-    public class ManuallyCreatedStatsService
+    public class CustomStatService
     {
-        public static IEnumerable<Entry> CreateManuallyCreatedStats()
+        public static IEnumerable<Entry> CreateCustomStats()
         {
-            SetCustomLabelTooltipForSomeStats(_manuallyCreatedStats);
+            SetCustomLabelTooltipForSomeStats(_customStats);
 
-            return _manuallyCreatedStats;
+            return _customStats;
         }
 
-        private static void SetCustomLabelTooltipForSomeStats(List<Entry> manuallyCreatedStats)
+        private static void SetCustomLabelTooltipForSomeStats(List<Entry> customStats)
         {
             SetTooltip(
-                manuallyCreatedStats,
+                customStats,
                 EntryId.DEATHS,
                 "Combined deaths from all sources (WvW, sPvP, PvE)",
                 "Aufsummierte Tode aus allen Quellen (WvW, sPvP, PvE)",
@@ -26,7 +26,7 @@ namespace SessionTracker.JsonFileCreator
                 "Número total de muertes de todas las fuentes (McM, JcJ, JcE)");
 
             SetTooltip(
-                manuallyCreatedStats,
+                customStats,
                 EntryId.PVP_KDR,
                 "PvP kills/deaths ratio",
                 "PvP Verhältnis besiegte Feinde/Tode",
@@ -34,7 +34,7 @@ namespace SessionTracker.JsonFileCreator
                 "PvP Ratio de Bajas/Muertes");
 
             SetTooltip(
-                manuallyCreatedStats,
+                customStats,
                 EntryId.WVW_KDR,
                 "WvW kills/deaths ratio",
                 "WvW Verhältnis besiegte Feinde/Tode",
@@ -42,7 +42,7 @@ namespace SessionTracker.JsonFileCreator
                 "McM Ratio de Bajas/Muertes");
 
             SetTooltip(
-                manuallyCreatedStats,
+                customStats,
                 EntryId.WVW_SUPPLY_REPAIR,
                 "Supply spent on repairs",
                 "Durch Reparieren verbrauchte Vorräte",
@@ -50,16 +50,16 @@ namespace SessionTracker.JsonFileCreator
                 "Suministros gastados en reparaciones");
         }
 
-        private static void SetTooltip(List<Entry> manuallyCreatedStats, string entryId, string english, string german, string french, string spanish)
+        private static void SetTooltip(List<Entry> customStats, string entryId, string english, string german, string french, string spanish)
         {
-            var entry = manuallyCreatedStats.Single(s => s.Id == entryId);
+            var entry = customStats.Single(s => s.Id == entryId);
             entry.LabelTooltip.LocalizedTextByLocale[Locale.English] = english;
             entry.LabelTooltip.LocalizedTextByLocale[Locale.German]  = german;
             entry.LabelTooltip.LocalizedTextByLocale[Locale.French]  = french;
             entry.LabelTooltip.LocalizedTextByLocale[Locale.Spanish] = spanish;
         }
 
-        private static readonly List<Entry> _manuallyCreatedStats = new List<Entry>
+        private static readonly List<Entry> _customStats = new List<Entry>
         {
             new Entry { Id = EntryId.LUCK, LabelText                = { LocalizedTextByLocale = { [Locale.English] = "Luck", [Locale.German]                = "Glück", [Locale.French]                         = "Chance", [Locale.Spanish]                       = "Suerte" } }, IconFileName                           = "luck.png" },
             new Entry { Id = EntryId.DEATHS, LabelText              = { LocalizedTextByLocale = { [Locale.English] = "Deaths", [Locale.German]              = "Tode", [Locale.French]                          = "Morts", [Locale.Spanish]                        = "Muertes" } }, IconFileName                          = "death.png" },

@@ -1,10 +1,5 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
-using Gw2Sharp;
-using Gw2Sharp.WebApi;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using SessionTracker.Models;
 using SessionTracker.Settings;
 
@@ -22,12 +17,12 @@ namespace SessionTracker.JsonFileCreator
 
         private static async Task AddEntriesToModel(Model model)
         {
-            var itemStats            = await ItemService.CreateItemStats();
-            var manuallyCreatedStats = ManuallyCreatedStatsService.CreateManuallyCreatedStats();
-            var currencyStats        = await CurrencyService.CreateCurrencyStats();
+            var itemStats     = await ItemService.CreateItemStats();
+            var customStats   = CustomStatService.CreateCustomStats();
+            var currencyStats = await CurrencyStatService.CreateCurrencyStats();
 
             model.Entries.AddRange(itemStats);
-            model.Entries.AddRange(manuallyCreatedStats);
+            model.Entries.AddRange(customStats);
             model.Entries.AddRange(currencyStats);
         }
     }

@@ -8,7 +8,7 @@ using SessionTracker.Models;
 
 namespace SessionTracker.JsonFileCreator
 {
-    public class CurrencyService
+    public class CurrencyStatService
     {
         public static async Task<List<Entry>> CreateCurrencyStats()
         {
