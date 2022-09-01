@@ -6,7 +6,7 @@ using Gw2Sharp.WebApi;
 using Gw2Sharp.WebApi.V2.Models;
 using SessionTracker.Models;
 
-namespace SessionTracker.JsonFileCreator
+namespace SessionTracker.JsonFileCreator.StatServices
 {
     public class CurrencyStatService
     {
@@ -28,10 +28,10 @@ namespace SessionTracker.JsonFileCreator
                 {
                     var entry = new Entry
                     {
-                        Id        = $"currency{currency.Id}",
-                        ApiId     = currency.Id,
+                        Id = $"currency{currency.Id}",
+                        ApiId = currency.Id,
                         ApiIdType = ApiIdType.Currency,
-                        IconUrl   = currency.Icon.Url.ToString(),
+                        IconUrl = currency.Icon.Url.ToString(),
                         IsVisible = false
                     };
 

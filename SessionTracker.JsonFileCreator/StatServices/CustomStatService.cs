@@ -3,7 +3,7 @@ using Gw2Sharp.WebApi;
 using SessionTracker.Models;
 using SessionTracker.Models.Constants;
 
-namespace SessionTracker.JsonFileCreator
+namespace SessionTracker.JsonFileCreator.StatServices
 {
     public class CustomStatService
     {

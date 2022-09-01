@@ -7,7 +7,7 @@ using Gw2Sharp.WebApi.V2.Models;
 using SessionTracker.Models;
 using SessionTracker.Models.Constants;
 
-namespace SessionTracker.JsonFileCreator
+namespace SessionTracker.JsonFileCreator.StatServices
 {
     public class ItemService
     {
@@ -29,10 +29,10 @@ namespace SessionTracker.JsonFileCreator
                 {
                     var entry = new Entry
                     {
-                        Id        = $"item{item.Id}",
-                        ApiId     = item.Id,
+                        Id = $"item{item.Id}",
+                        ApiId = item.Id,
                         ApiIdType = ApiIdType.Item,
-                        IconUrl   = item.Icon.Url.ToString(),
+                        IconUrl = item.Icon.Url.ToString(),
                         IsVisible = false
                     };
 
