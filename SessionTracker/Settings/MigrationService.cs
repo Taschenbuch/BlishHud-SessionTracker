@@ -65,12 +65,11 @@ namespace SessionTracker.Settings
 
             foreach (var refEntry in refModel.Entries)
             {
-                refEntry.IsVisible = false; // to prevent new entries to be visible after a module version update. This can mess up the user's custom stats setup 
-
-                if (isVisibleByEntryId.ContainsKey(refEntry.Id))
-                    refEntry.IsVisible = isVisibleByEntryId[refEntry.Id];
+                // ReSharper disable once SimplifyConditionalTernaryExpression (because much harder to read)
+                refEntry.IsVisible = isVisibleByEntryId.ContainsKey(refEntry.Id)
+                    ? isVisibleByEntryId[refEntry.Id]
+                    : false; // to prevent new stats to be visible after a module version update. This can mess up the user's custom stats setup 
             }
-                
 
             return refModel;
         }
