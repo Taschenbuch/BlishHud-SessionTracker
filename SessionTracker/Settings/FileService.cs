@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Blish_HUD;
 using Blish_HUD.Modules.Managers;
 using Gw2Sharp.WebApi;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using SessionTracker.Models;
 
 namespace SessionTracker.Settings
@@ -24,13 +26,25 @@ namespace SessionTracker.Settings
             try
             {
                 // not async because Modul.Unload() is not async
-                var modelJson = JsonConvert.SerializeObject(model, Formatting.Indented);
+                var modelJson = SerializeModelToJson(model);
                 File.WriteAllText(_modelFilePath, modelJson);
             }
             catch (Exception e)
             {
                 _logger.Error(e, "Error: Failed to save model to file in Module.Unload(). :(");
             }
+        }
+
+        public static string SerializeModelToJson(Model model) // public for JsonConverter project
+        {
+            var jsonSerializerSettings = new JsonSerializerSettings
+            {
+                DefaultValueHandling = DefaultValueHandling.Ignore,
+                Formatting           = Formatting.Indented,
+                Converters           = new List<JsonConverter> { new StringEnumConverter() }
+            };
+
+            return JsonConvert.SerializeObject(model, jsonSerializerSettings);
         }
 
         public async Task<Model> LoadModelFromFile()
