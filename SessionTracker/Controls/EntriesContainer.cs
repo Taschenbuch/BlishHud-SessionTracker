@@ -33,30 +33,27 @@ namespace SessionTracker.Controls
             _settingService = settingService;
             _logger         = logger;
 
+            _updateState = new UpdateState(settingService);
             CreateUi(settingsWindowService);
 
             _valueLabelTextService = new ValueLabelTextService(_valueLabelByEntryId, _model, settingService, logger);
             _statTooltipService    = new StatTooltipService(_titleFlowPanelByEntryId, _valueLabelByEntryId, model, _settingService);
-            OnDebugApiIntervalEnabledSettingChanged(null, null);
 
             settingService.HideStatsWithValueZeroSetting.SettingChanged  += OnHideStatsWithValueZeroSettingChanged;
             settingService.FontSizeIndexSetting.SettingChanged           += OnFontSizeIndexSettingChanged;
             settingService.BackgroundOpacitySetting.SettingChanged       += OnBackgroundOpacitySettingChanged;
             settingService.ValueLabelColorSetting.SettingChanged         += OnValueLabelColorSettingChanged;
-            settingService.DebugApiIntervalEnabledSetting.SettingChanged += OnDebugApiIntervalEnabledSettingChanged;
-            settingService.DebugApiIntervalValueSetting.SettingChanged   += OnDebugApiIntervalValueSettingChanged;
             GameService.Overlay.UserLocaleChanged                        += OnUserChangedLanguageInBlishSettings;
         }
         
         protected override void DisposeControl()
         {
+            _updateState.Dispose();
             _valueLabelTextService.Dispose();
             _settingService.HideStatsWithValueZeroSetting.SettingChanged  -= OnHideStatsWithValueZeroSettingChanged;
             _settingService.FontSizeIndexSetting.SettingChanged           -= OnFontSizeIndexSettingChanged;
             _settingService.BackgroundOpacitySetting.SettingChanged       -= OnBackgroundOpacitySettingChanged;
             _settingService.ValueLabelColorSetting.SettingChanged         -= OnValueLabelColorSettingChanged;
-            _settingService.DebugApiIntervalEnabledSetting.SettingChanged -= OnDebugApiIntervalEnabledSettingChanged;
-            _settingService.DebugApiIntervalValueSetting.SettingChanged   -= OnDebugApiIntervalValueSettingChanged;
             GameService.Overlay.UserLocaleChanged                         -= OnUserChangedLanguageInBlishSettings;
 
             base.DisposeControl();
@@ -69,9 +66,9 @@ namespace SessionTracker.Controls
 
         public void ResetSession()
         {
-            _initializeIntervalInMilliseconds = INSTANT_INITIALIZE_INTERVAL_IN_MILLISECONDS;
-            _isInitialized                    = false;
+            _updateState.SetToUninitializedAndSetToInstantInitializeInterval();
         }
+
 
         // Update2() because Update() already exists in base class. Update() is not always called but Update2() is!
         public void Update2(GameTime gameTime)
@@ -86,47 +83,34 @@ namespace SessionTracker.Controls
                 _hintFlowPanel.ShowHintWhenAllEntriesAreHidden();
             }
 
-            _elapsedTimeInMilliseconds += gameTime.ElapsedGameTime.TotalMilliseconds;
+            _updateState.UpdateElapsedTime(gameTime.ElapsedGameTime.TotalMilliseconds);
 
             // to prevent showing an api key error message right after the module start
-            if (_waitingForApiTokenAfterModuleStartup)
+            if (_updateState.ShouldCheckForApiTokenAfterModuleStartup())
             {
-                if (_elapsedTimeInMilliseconds < CHECK_FOR_API_TOKEN_AFTER_MODULE_STARTUP_INTERVAL_IN_MILLISECONDS)
-                    return;
-
-                _timeWaitedForApiTokenInMilliseconds += _elapsedTimeInMilliseconds;
-                _elapsedTimeInMilliseconds           =  0;
-
-                var waitedLongEnoughAndApiKeyIsProbablyMissing = _timeWaitedForApiTokenInMilliseconds >= MAX_WAIT_TIME_FOR_API_TOKEN_AFTER_MODULE_STARTUP_IN_MILLISECONDS;
-
-                if (waitedLongEnoughAndApiKeyIsProbablyMissing)
-                    _waitingForApiTokenAfterModuleStartup = false;
+                _updateState.CheckIfWaitedLongEnoughAndApiKeyIsProbablyMissing();
+                _updateState.ResetElapsedTime();
 
                 if (_gw2ApiManager.HasPermissions(ApiService.ACCOUNT_API_TOKEN_PERMISSION))
-                    _waitingForApiTokenAfterModuleStartup = false;
+                    _updateState.IsWaitingForApiTokenAfterModuleStartup = false;
 
                 return;
             }
 
-            var shouldInit   = _isInitialized == false && _elapsedTimeInMilliseconds >= _initializeIntervalInMilliseconds;
-            var shouldUpdate = _isInitialized && _elapsedTimeInMilliseconds >= _updateIntervalInMilliseconds;
-
-            if (shouldInit || shouldUpdate)
+            if (_updateState.ShouldInitOrUpdate())
             {
-                _elapsedTimeInMilliseconds = 0;
+                _updateState.ResetElapsedTime(); // reset time before IsWaitingForApiResponse-check prevents possible elapsedTime overflow
 
-                if (_waitingForApiResponse)
+                if (_updateState.IsWaitingForApiResponse) 
                     return;
 
-                _waitingForApiResponse = true;
+                _updateState.IsWaitingForApiResponse = true;
 
-                if (_isInitialized)
-                {
+                if (_updateState.IsInitialized)
                     Task.Run(UpdateValuesAsync);
-                }
                 else
                 {
-                    _initializeIntervalInMilliseconds = RETRY_INITIALIZE_INTERVAL_IN_MILLISECONDS;
+                    _updateState.SetToRetryInitializeInterval();
                     Task.Run(InitializeValuesAsync);
                 }
             }
@@ -152,7 +136,7 @@ namespace SessionTracker.Controls
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _statTooltipService.ResetSummaryTooltip(_model);
                 
-                _isInitialized = true;
+                _updateState.IsInitialized = true;
             }
             catch (Exception e)
             {
@@ -161,7 +145,7 @@ namespace SessionTracker.Controls
             }
             finally
             {
-                _waitingForApiResponse = false;
+                _updateState.IsWaitingForApiResponse = false;
             }
         }
 
@@ -180,8 +164,7 @@ namespace SessionTracker.Controls
             {
                 if (_gw2ApiManager.HasPermissions(ApiService.NECESSARY_API_TOKEN_PERMISSIONS) == false)
                 {
-                    _isInitialized                    = false;
-                    _initializeIntervalInMilliseconds = INSTANT_INITIALIZE_INTERVAL_IN_MILLISECONDS;
+                    _updateState.SetToUninitializedAndSetToInstantInitializeInterval();
                     _logger.Warn("Error when fetching values: api token is missing permissions. " +
                                  "Possible reasons: api key got removed or new api key is missing permissions.");
                     return;
@@ -203,7 +186,7 @@ namespace SessionTracker.Controls
             }
             finally
             {
-                _waitingForApiResponse = false;
+                _updateState.IsWaitingForApiResponse = false;
             }
         }
 
@@ -281,18 +264,9 @@ namespace SessionTracker.Controls
                 titleFlowPanel.Value.UpdateLabelText();
         }
 
-        private void OnDebugApiIntervalEnabledSettingChanged(object sender, ValueChangedEventArgs<bool> e)
-        {
-            _updateIntervalInMilliseconds = _settingService.DebugApiIntervalEnabledSetting.Value
-                ? _settingService.DebugApiIntervalValueSetting.Value
-                : REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS;
-        }
+        
 
-        private void OnDebugApiIntervalValueSettingChanged(object sender, ValueChangedEventArgs<int> e)
-        {
-            if (_settingService.DebugApiIntervalEnabledSetting.Value)
-                _updateIntervalInMilliseconds = _settingService.DebugApiIntervalValueSetting.Value;
-        }
+        
 
         private void OnValueLabelColorSettingChanged(object sender, ValueChangedEventArgs<ColorType> e)
         {
@@ -327,21 +301,11 @@ namespace SessionTracker.Controls
         private readonly ValueLabelTextService _valueLabelTextService;
         private readonly Dictionary<string, EntryTitleFlowPanel> _titleFlowPanelByEntryId = new Dictionary<string, EntryTitleFlowPanel>();
         private readonly Dictionary<string, Label> _valueLabelByEntryId = new Dictionary<string, Label>();
-        private double _elapsedTimeInMilliseconds;
-        private double _timeWaitedForApiTokenInMilliseconds;
-        private bool _waitingForApiResponse;
-        private bool _isInitialized;
-        private bool _waitingForApiTokenAfterModuleStartup = true;
+        private readonly UpdateState _updateState;
         private FlowPanel _titlesFlowPanel;
         private FlowPanel _valuesFlowPanel;
         private HintFlowPanel _hintFlowPanel;
         private RootFlowPanel _rootFlowPanel;
-        private int _initializeIntervalInMilliseconds = INSTANT_INITIALIZE_INTERVAL_IN_MILLISECONDS;
-        private int _updateIntervalInMilliseconds = REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS;
-        private const int REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 60 * 1000;
-        private const int INSTANT_INITIALIZE_INTERVAL_IN_MILLISECONDS = 0;
-        private const int RETRY_INITIALIZE_INTERVAL_IN_MILLISECONDS = 5 * 1000;
-        private const int MAX_WAIT_TIME_FOR_API_TOKEN_AFTER_MODULE_STARTUP_IN_MILLISECONDS = 15 * 1000;
-        private const int CHECK_FOR_API_TOKEN_AFTER_MODULE_STARTUP_INTERVAL_IN_MILLISECONDS = 200;
+        
     }
 }
