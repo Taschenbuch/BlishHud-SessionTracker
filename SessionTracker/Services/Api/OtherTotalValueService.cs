@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Gw2Sharp.WebApi.V2;
 using Gw2Sharp.WebApi.V2.Models;
@@ -22,10 +23,10 @@ namespace SessionTracker.Services.Api
             var pvpRankRollovers = pvpStatsTask.Result.PvpRankRollovers;
             var totalWins        = pvpStatsTask.Result.Aggregate.Wins;
             var totalLosses      = pvpStatsTask.Result.Aggregate.Losses;
-            var rankedWins       = pvpStatsTask.Result.Ladders["ranked"].Wins;
-            var rankedLosses     = pvpStatsTask.Result.Ladders["ranked"].Losses;
-            var unrankedWins     = pvpStatsTask.Result.Ladders["unranked"].Wins;
-            var unrankedLosses   = pvpStatsTask.Result.Ladders["unranked"].Losses;
+            var ladders          = pvpStatsTask.Result.Ladders;
+            var (rankedWins, rankedLosses)     = GetWinsAndLosses(ladders, RANKED_LADDERS_KEY);
+            var (unrankedWins, unrankedLosses) = GetWinsAndLosses(ladders, UNRANKED_LADDERS_KEY);
+
 
             model.GetEntry(EntryId.PVP_RANK).Value.Total            = pvpRank + pvpRankRollovers;
             model.GetEntry(EntryId.PVP_RANKING_POINTS).Value.Total  = pvpStatsTask.Result.PvpRankPoints;
@@ -38,5 +39,21 @@ namespace SessionTracker.Services.Api
             model.GetEntry(EntryId.PVP_CUSTOM_WINS).Value.Total     = totalWins - rankedWins - unrankedWins;
             model.GetEntry(EntryId.PVP_CUSTOM_LOSSES).Value.Total   = totalLosses - rankedLosses - unrankedLosses;
         }
+
+        private static (int wins, int losses) GetWinsAndLosses(IReadOnlyDictionary<string, PvpStatsAggregate> ladders, string ladderKey)
+        {
+            // when no unranked or no ranked pvp games have been played by an account, it can happen that the unranked and/or ranked ladder object is missing.
+            // A user had this issue. We checked their api response to confirm the issue.
+            // On the other hand my test gw2 account has never played pvp either. And it did have the ranked and unranked objects in .Ladders with every value set to 0.
+            // The reason why this is sometimes the case and sometimes not is currently unknown.
+            if (ladders.ContainsKey(ladderKey) == false)
+                return (0, 0);
+
+            var ladder = ladders[ladderKey];
+            return (ladder.Wins, ladder.Losses);
+        }
+
+        private const string RANKED_LADDERS_KEY = "ranked";
+        private const string UNRANKED_LADDERS_KEY = "unranked";
     }
 }
