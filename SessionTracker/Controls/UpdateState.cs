@@ -1,5 +1,4 @@
 ﻿using System;
-using Blish_HUD;
 using SessionTracker.Settings.SettingEntries;
 
 namespace SessionTracker.Controls
@@ -24,13 +23,13 @@ namespace SessionTracker.Controls
         public void UpdateElapsedTime(double totalMilliseconds) => _elapsedTimeInMilliseconds += totalMilliseconds;
         public void ResetElapsedTime() => _elapsedTimeInMilliseconds = 0;
 
-        public void SetToUninitializedAndSetToInstantInitializeInterval()
+        public void SetUninitializedAndUseInstantInitializeInterval()
         {
             IsInitialized                          = false;
             _initializeStatsIntervalInMilliseconds = INSTANT_INITIALIZE_INTERVAL_IN_MILLISECONDS;
         }
 
-        public void SetToRetryInitializeInterval()
+        public void UseRetryInitializeInterval()
         {
             _initializeStatsIntervalInMilliseconds = RETRY_INITIALIZE_INTERVAL_IN_MILLISECONDS;
         }

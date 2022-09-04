@@ -66,7 +66,7 @@ namespace SessionTracker.Controls
 
         public void ResetSession()
         {
-            _updateState.SetToUninitializedAndSetToInstantInitializeInterval();
+            _updateState.SetUninitializedAndUseInstantInitializeInterval();
         }
 
 
@@ -110,7 +110,7 @@ namespace SessionTracker.Controls
                     Task.Run(UpdateValuesAsync);
                 else
                 {
-                    _updateState.SetToRetryInitializeInterval();
+                    _updateState.UseRetryInitializeInterval();
                     Task.Run(InitializeValuesAsync);
                 }
             }
@@ -164,7 +164,7 @@ namespace SessionTracker.Controls
             {
                 if (_gw2ApiManager.HasPermissions(ApiService.NECESSARY_API_TOKEN_PERMISSIONS) == false)
                 {
-                    _updateState.SetToUninitializedAndSetToInstantInitializeInterval();
+                    _updateState.SetUninitializedAndUseInstantInitializeInterval();
                     _logger.Warn("Error when fetching values: api token is missing permissions. " +
                                  "Possible reasons: api key got removed or new api key is missing permissions.");
                     return;
@@ -263,10 +263,6 @@ namespace SessionTracker.Controls
             foreach (var titleFlowPanel in _titleFlowPanelByEntryId)
                 titleFlowPanel.Value.UpdateLabelText();
         }
-
-        
-
-        
 
         private void OnValueLabelColorSettingChanged(object sender, ValueChangedEventArgs<ColorType> e)
         {
