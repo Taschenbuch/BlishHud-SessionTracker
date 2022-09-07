@@ -17,6 +17,12 @@ namespace SessionTracker.Settings.Window
             _rootFlowPanel = ControlFactory.CreateSettingsRootFlowPanel(buildPanel);
 
             var debugSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Debug (developer only settings)", _rootFlowPanel);
+            ControlFactory.CreateHintLabel(
+                debugSectionFlowPanel, 
+                "You are running a beta version of this module if you can see this tab.\n" +
+                "Do not change those settings. They will not speed up stat updates or improve\n" +
+                "your user experience. This tab just helps the developer to speed up testing this module. :)\n");
+
             ControlFactory.CreateSetting(debugSectionFlowPanel, buildPanel.Width, _settingService.DebugApiIntervalEnabledSetting);
             ControlFactory.CreateSetting(debugSectionFlowPanel, buildPanel.Width, _settingService.DebugApiIntervalValueSetting);
 
