@@ -186,7 +186,7 @@
       "Name": {
         "LocalizedTextByLocale": {
           "English": "PvP ranked wins",
-          "German": "PvP mit rangwertung gewonnen",
+          "German": "PvP mit Rangwertung gewonnen",
           "French": "Victoires JcJ classées",
           "Spanish": "PvP Victorias en clasificatorias"
         }
@@ -201,7 +201,7 @@
       "Name": {
         "LocalizedTextByLocale": {
           "English": "PvP ranked losses",
-          "German": "PvP mit rangwertung verloren",
+          "German": "PvP mit Rangwertung verloren",
           "French": "Défaites JcJ classées",
           "Spanish": "PvP Derrotas en clasificatorias"
         }
@@ -216,7 +216,7 @@
       "Name": {
         "LocalizedTextByLocale": {
           "English": "PvP unranked wins",
-          "German": "PvP ohne rangwertung gewonnen",
+          "German": "PvP ohne Rangwertung gewonnen",
           "French": "Victoires JcJ non classées",
           "Spanish": "PvP Victorias en libres"
         }
@@ -231,7 +231,7 @@
       "Name": {
         "LocalizedTextByLocale": {
           "English": "PvP unranked losses",
-          "German": "PvP ohne rangwertung verloren",
+          "German": "PvP ohne Rangwertung verloren",
           "French": "Défaites JcJ non classées",
           "Spanish": "PvP Derrotas en libres"
         }
@@ -276,7 +276,7 @@
       "Name": {
         "LocalizedTextByLocale": {
           "English": "PvP rank",
-          "German": "PvP rang",
+          "German": "PvP Rang",
           "French": "Rang JcJ",
           "Spanish": "PvP Rango"
         }
@@ -291,7 +291,7 @@
       "Name": {
         "LocalizedTextByLocale": {
           "English": "PvP ranking points",
-          "German": "PvP rang punkte",
+          "German": "PvP Rangpunkte",
           "French": "Points de classement JcJ",
           "Spanish": "PvP Puntos de clasificación"
         }
