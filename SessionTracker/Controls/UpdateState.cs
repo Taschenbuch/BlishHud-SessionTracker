@@ -19,49 +19,45 @@ namespace SessionTracker.Controls
             _settingService.DebugApiIntervalEnabledSetting.SettingChanged -= UpdateApiInterval;
             _settingService.DebugApiIntervalValueSetting.SettingChanged   -= UpdateApiInterval;
         }
+        
+        public State State { get; set; } = State.WaitForApiTokenAfterModuleStart;
 
-        public void UpdateElapsedTime(double totalMilliseconds) => _elapsedTimeInMilliseconds += totalMilliseconds;
-        public void ResetElapsedTime() => _elapsedTimeInMilliseconds = 0;
-
-        public void SetUninitializedAndUseInstantInitializeInterval()
+        public void AddToElapsedTime(double elapsedTimeSinceLastUpdateInMilliseconds)
         {
-            IsInitialized                          = false;
-            _initializeStatsIntervalInMilliseconds = INSTANT_INITIALIZE_INTERVAL_IN_MILLISECONDS;
+            _elapsedTimeTotalInMilliseconds += elapsedTimeSinceLastUpdateInMilliseconds;
         }
 
-        public void UseRetryInitializeInterval()
+        public void ResetElapsedTime()
         {
-            _initializeStatsIntervalInMilliseconds = RETRY_INITIALIZE_INTERVAL_IN_MILLISECONDS;
+            _elapsedTimeTotalInMilliseconds = 0;
         }
 
-        public bool ShouldCheckForApiTokenAfterModuleStartup()
+        public void AddToTimeWaitedForApiToken(double elapsedTimeSinceLastUpdateInMilliseconds)
         {
-            if (IsWaitingForApiTokenAfterModuleStartup == false)
-                return false;
-
-            var intervalForNextCheckEnded = _elapsedTimeInMilliseconds >= CHECK_FOR_API_TOKEN_AFTER_MODULE_STARTUP_INTERVAL_IN_MILLISECONDS;
-            return intervalForNextCheckEnded;
+            _timeWaitedForApiTokenInMilliseconds += elapsedTimeSinceLastUpdateInMilliseconds;
         }
 
-        public void CheckIfWaitedLongEnoughAndApiKeyIsProbablyMissing()
+        public bool WaitedLongEnoughForApiTokenEitherApiKeyIsMissingOrUserHasNotLoggedIntoACharacter()
         {
-            _timeWaitedForApiTokenInMilliseconds += _elapsedTimeInMilliseconds;
-
-            if (_timeWaitedForApiTokenInMilliseconds >= MAX_WAIT_TIME_FOR_API_TOKEN_AFTER_MODULE_STARTUP_IN_MILLISECONDS)
-                IsWaitingForApiTokenAfterModuleStartup = false;
+            return _timeWaitedForApiTokenInMilliseconds >= 20 * 1000;
         }
 
-        public bool ShouldInitOrUpdate()
+        public bool IntervalEndedBetweenApiTokenExistsChecks()
         {
-            var shouldInit   = !IsInitialized && _elapsedTimeInMilliseconds >= _initializeStatsIntervalInMilliseconds;
-            var shouldUpdate = IsInitialized && _elapsedTimeInMilliseconds >= _updateStatsIntervalInMilliseconds;
-
-            return shouldInit || shouldUpdate;
+            return _elapsedTimeTotalInMilliseconds >= 200;
         }
 
-        public bool IsInitialized { get; set; }
-        public bool IsWaitingForApiResponse { get; set; }
-        public bool IsWaitingForApiTokenAfterModuleStartup { get; set; } = true;
+        public bool IntervalEndedBetweenInitStatsRetries()
+        {
+            return _elapsedTimeTotalInMilliseconds >= RETRY_INIT_STATS_INTERVAL_IN_SECONDS * 1000;
+        }
+
+        public const int RETRY_INIT_STATS_INTERVAL_IN_SECONDS = 5;
+
+        public bool IntervalEndedBetweenStatsUpdates()
+        {
+            return _elapsedTimeTotalInMilliseconds >= _updateStatsIntervalInMilliseconds;
+        }
 
         private void UpdateApiInterval(object sender, EventArgs e)
         {
@@ -70,15 +66,10 @@ namespace SessionTracker.Controls
                 : REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS;
         }
 
-        private readonly SettingService _settingService;
-        private double _elapsedTimeInMilliseconds;
-        private double _timeWaitedForApiTokenInMilliseconds = 0;
-        private double _initializeStatsIntervalInMilliseconds = INSTANT_INITIALIZE_INTERVAL_IN_MILLISECONDS;
-        private double _updateStatsIntervalInMilliseconds = REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS;
-        private const double INSTANT_INITIALIZE_INTERVAL_IN_MILLISECONDS = 0;
         private const double REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 60 * 1000;
-        private const double RETRY_INITIALIZE_INTERVAL_IN_MILLISECONDS = 5 * 1000;
-        private const double MAX_WAIT_TIME_FOR_API_TOKEN_AFTER_MODULE_STARTUP_IN_MILLISECONDS = 15 * 1000;
-        private const double CHECK_FOR_API_TOKEN_AFTER_MODULE_STARTUP_INTERVAL_IN_MILLISECONDS = 200;
+        private double _updateStatsIntervalInMilliseconds = REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS;
+        private double _elapsedTimeTotalInMilliseconds;
+        private double _timeWaitedForApiTokenInMilliseconds;
+        private readonly SettingService _settingService;
     }
 }

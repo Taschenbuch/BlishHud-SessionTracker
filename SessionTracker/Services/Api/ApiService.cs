@@ -10,21 +10,15 @@ namespace SessionTracker.Services.Api
 {
     public class ApiService
     {
-        public static List<TokenPermission> ACCOUNT_API_TOKEN_PERMISSION => new List<TokenPermission>
+        public static bool ModuleHasApiToken(Gw2ApiManager gw2ApiManager)
         {
-            TokenPermission.Account
-        };
+            return gw2ApiManager.HasPermissions(TOKEN_PERMISSION_EVERY_API_KEY_HAS_AUTOMATICALLY);
+        }
 
-        public static List<TokenPermission> NECESSARY_API_TOKEN_PERMISSIONS => new List<TokenPermission>
+        public static bool ApiKeyIsMissingPermissions(Gw2ApiManager gw2ApiManager)
         {
-            TokenPermission.Account,
-            TokenPermission.Characters,
-            TokenPermission.Progression,
-            TokenPermission.Wallet,
-            TokenPermission.Unlocks,
-            TokenPermission.Pvp,
-            TokenPermission.Inventories,
-        };
+            return gw2ApiManager.HasPermissions(API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE) == false;
+        }
 
         public static async Task UpdateTotalValuesInModel(Model model, Gw2ApiManager gw2ApiManager)
         {
@@ -64,5 +58,21 @@ namespace SessionTracker.Services.Api
 
             model.UiHasToBeUpdated = true;
         }
+
+        public static List<TokenPermission> API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE => new List<TokenPermission>
+        {
+            TokenPermission.Account,
+            TokenPermission.Characters,
+            TokenPermission.Progression,
+            TokenPermission.Wallet,
+            TokenPermission.Unlocks,
+            TokenPermission.Pvp,
+            TokenPermission.Inventories,
+        };
+
+        private static List<TokenPermission> TOKEN_PERMISSION_EVERY_API_KEY_HAS_AUTOMATICALLY => new List<TokenPermission>
+        {
+            TokenPermission.Account
+        };
     }
 }

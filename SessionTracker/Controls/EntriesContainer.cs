@@ -66,9 +66,8 @@ namespace SessionTracker.Controls
 
         public void ResetSession()
         {
-            _updateState.SetUninitializedAndUseInstantInitializeInterval();
+            _updateState.State = State.ResetAndInitStats;
         }
-
 
         // Update2() because Update() already exists in base class. Update() is not always called but Update2() is!
         public void Update2(GameTime gameTime)
@@ -83,89 +82,99 @@ namespace SessionTracker.Controls
                 _hintFlowPanel.ShowHintWhenAllEntriesAreHidden();
             }
 
-            _updateState.UpdateElapsedTime(gameTime.ElapsedGameTime.TotalMilliseconds);
+            _updateState.AddToElapsedTime(gameTime.ElapsedGameTime.TotalMilliseconds);
 
-            // to prevent showing an api key error message right after the module start
-            if (_updateState.ShouldCheckForApiTokenAfterModuleStartup())
+            switch (_updateState.State)
             {
-                _updateState.CheckIfWaitedLongEnoughAndApiKeyIsProbablyMissing();
-                _updateState.ResetElapsedTime();
+                case State.WaitForApiTokenAfterModuleStart: // to prevent showing an api key error message right after the module started
+                    _updateState.AddToTimeWaitedForApiToken(gameTime.ElapsedGameTime.TotalMilliseconds);
 
-                if (_gw2ApiManager.HasPermissions(ApiService.ACCOUNT_API_TOKEN_PERMISSION))
-                    _updateState.IsWaitingForApiTokenAfterModuleStartup = false;
+                    if (_updateState.IntervalEndedBetweenApiTokenExistsChecks() == false)
+                        return;
 
-                return;
-            }
+                    _updateState.ResetElapsedTime();
+                    
+                    if (ApiService.ModuleHasApiToken(_gw2ApiManager))
+                    {
+                        _updateState.State = State.ResetAndInitStats;
+                        return;
+                    }
 
-            if (_updateState.ShouldInitOrUpdate())
-            {
-                _updateState.ResetElapsedTime(); // reset time before IsWaitingForApiResponse-check prevents possible elapsedTime overflow
-
-                if (_updateState.IsWaitingForApiResponse) 
+                    if (_updateState.WaitedLongEnoughForApiTokenEitherApiKeyIsMissingOrUserHasNotLoggedIntoACharacter())
+                    {
+                        _updateState.State = State.ResetAndInitStats; // to provoke api key error message
+                        return;
+                    }
+                    
+                    SetValueTextAndTooltip("Loading...", "Waiting for user to log into a character or API token from blish.", _valueLabelByEntryId.Values);
                     return;
-
-                _updateState.IsWaitingForApiResponse = true;
-
-                if (_updateState.IsInitialized)
-                    Task.Run(UpdateValuesAsync);
-                else
-                {
-                    _updateState.UseRetryInitializeInterval();
-                    Task.Run(InitializeValuesAsync);
-                }
+                case State.WaitBeforeResetAndInitStats:
+                    if (_updateState.IntervalEndedBetweenInitStatsRetries())
+                    {
+                        _updateState.ResetElapsedTime(); 
+                        _updateState.State = State.ResetAndInitStats;
+                        return;
+                    }
+                    return;
+                case State.ResetAndInitStats:
+                    _updateState.ResetElapsedTime();
+                    _updateState.State = State.WaitForApiResponse;
+                    Task.Run(ResetAndInitStatValues);
+                    return;
+                case State.UpdateStats:
+                    if (_updateState.IntervalEndedBetweenStatsUpdates())
+                    {
+                        _updateState.ResetElapsedTime();
+                        _updateState.State = State.WaitForApiResponse;
+                        Task.Run(UpdateStatValues);
+                    }
+                    return;
+                case State.WaitForApiResponse:
+                    // the Task.Run() calls will update the state to leave this state.
+                    // state should not be set here to prevent racing conditions between the Task.Runs and this case
+                    _updateState.ResetElapsedTime();
+                    return;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
-        private async void InitializeValuesAsync()
+        private async void ResetAndInitStatValues()
         {
             try
             {
-                if (_gw2ApiManager.HasPermissions(ApiService.NECESSARY_API_TOKEN_PERMISSIONS) == false)
+                if (ApiService.ApiKeyIsMissingPermissions(_gw2ApiManager))
                 {
-                    var tooltip = "Error: Not logged into character or API key missing or API permissions missing. :(\n" +
-                                  $"Required permissions: {string.Join(", ", ApiService.NECESSARY_API_TOKEN_PERMISSIONS)}\n" +
-                                  "Retry in 5s…";
-
-                    SetTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByEntryId.Values);
+                    SetValuesToApiKeyErrorTextAndTooltip();
+                    _updateState.State = State.WaitBeforeResetAndInitStats;
                     return;
                 }
 
                 await ApiService.UpdateTotalValuesInModel(_model, _gw2ApiManager);
                 _model.StartSession();
-                
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _statTooltipService.ResetSummaryTooltip(_model);
-                
-                _updateState.IsInitialized = true;
+                _updateState.State = State.UpdateStats;
             }
             catch (Exception e)
             {
-                SetTextAndTooltip("Error: read tooltip.", "Error: API call failed.\nRetry in 30s…", _valueLabelByEntryId.Values);
-                _logger.Error(e, "Error when initializing: API failed to respond or bug in module code.");
-            }
-            finally
-            {
-                _updateState.IsWaitingForApiResponse = false;
-            }
-        }
-
-        private static void SetTextAndTooltip(string text, string tooltip, Dictionary<string, Label>.ValueCollection valueLabelByEntryId)
-        {
-            foreach (var valueLabel in valueLabelByEntryId)
-            {
-                valueLabel.Text             = text;
-                valueLabel.BasicTooltipText = tooltip;
+                var tooltip = $"Error: API call failed or bug in module code. :( \n{RETRY_IN_X_SECONDS_MESSAGE}";
+                SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByEntryId.Values);
+                
+                _logger.Error(e, "Error when initializing values: API failed to respond or bug in module code.");
+                _updateState.State = State.WaitBeforeResetAndInitStats;
             }
         }
+        
 
-        private async void UpdateValuesAsync()
+        private async void UpdateStatValues()
         {
             try
             {
-                if (_gw2ApiManager.HasPermissions(ApiService.NECESSARY_API_TOKEN_PERMISSIONS) == false)
+                if (ApiService.ApiKeyIsMissingPermissions(_gw2ApiManager))
                 {
-                    _updateState.SetUninitializedAndUseInstantInitializeInterval();
-                    _logger.Warn("Error when fetching values: api token is missing permissions. " +
+                    SetValuesToApiKeyErrorTextAndTooltip();
+                    _logger.Warn("Error when updating values: api token is missing permissions. " +
                                  "Possible reasons: api key got removed or new api key is missing permissions.");
                     return;
                 }
@@ -174,19 +183,38 @@ namespace SessionTracker.Controls
 
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _statTooltipService.UpdateSummaryTooltip(_model);
-
             }
             catch (Exception e)
             {
-                _logger.Error(e, "Error when fetching values: API failed to respond or bug in module code.");
                 // intentionally no error handling!
                 // when api server does not respond (error code 500, 502) or times out (RequestCanceledException)
-                // the app will just return the previous kill/death values and hope that on the end of the next interval
+                // the app will just return the previous stat values and hope that on the end of the next interval
                 // the api server will answer correctly again.
+                _logger.Error(e, "Error when updating values: API failed to respond or bug in module code.");
             }
             finally
             {
-                _updateState.IsWaitingForApiResponse = false;
+                // even in error case an init makes no sense. It is better to wait for the user to fix the api key to continue to update the old values.
+                // this can only cause issues if in the future blish supports swapping gw2 accounts without doing an unload+load of a module.
+                _updateState.State = State.UpdateStats;
+            }
+        }
+
+        private void SetValuesToApiKeyErrorTextAndTooltip()
+        {
+            var tooltip = "Error: Not logged into a character or API key is missing or missing permissions. :(\n" +
+                          $"Required permissions: {string.Join(", ", ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE)}\n" +
+                          RETRY_IN_X_SECONDS_MESSAGE;
+
+            SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByEntryId.Values);
+        }
+
+        private static void SetValueTextAndTooltip(string text, string tooltip, Dictionary<string, Label>.ValueCollection valueLabelByEntryId)
+        {
+            foreach (var valueLabel in valueLabelByEntryId)
+            {
+                valueLabel.Text             = text;
+                valueLabel.BasicTooltipText = tooltip;
             }
         }
 
@@ -243,7 +271,7 @@ namespace SessionTracker.Controls
             {
                 _valueLabelByEntryId[entry.Id] = new Label()
                 {
-                    Text           = "Loading...",
+                    Text           = "-",
                     TextColor      = _settingService.ValueLabelColorSetting.Value.GetColor(),
                     Font           = font,
                     ShowShadow     = true,
@@ -302,6 +330,6 @@ namespace SessionTracker.Controls
         private FlowPanel _valuesFlowPanel;
         private HintFlowPanel _hintFlowPanel;
         private RootFlowPanel _rootFlowPanel;
-        
+        private static readonly string RETRY_IN_X_SECONDS_MESSAGE = $"Retry in {UpdateState.RETRY_INIT_STATS_INTERVAL_IN_SECONDS}s…";
     }
 }
