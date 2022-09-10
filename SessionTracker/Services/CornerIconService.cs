@@ -1,9 +1,9 @@
 ﻿using System;
 using Blish_HUD;
+using Blish_HUD.Content;
 using Blish_HUD.Controls;
 using Blish_HUD.Input;
 using Blish_HUD.Settings;
-using Microsoft.Xna.Framework.Graphics;
 using SessionTracker.Controls;
 using SessionTracker.Settings.Window;
 
@@ -97,8 +97,8 @@ namespace SessionTracker.Services
                 RemoveCornerIcon();
         }
 
-        private readonly Texture2D _cornerIconTexture;
-        private readonly Texture2D _cornerIconHoverTexture;
+        private readonly AsyncTexture2D _cornerIconTexture;
+        private readonly AsyncTexture2D _cornerIconHoverTexture;
         private readonly SettingEntry<bool> _cornerIconIsVisibleSetting;
         private readonly EntriesContainer _entriesContainer;
         private readonly EventHandler<MouseEventArgs> _cornerIconClickEventHandler;
