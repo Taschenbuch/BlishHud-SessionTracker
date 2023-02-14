@@ -63,7 +63,14 @@ namespace SessionTracker.Controls
 
         public override Control TriggerMouseInput(MouseEventType mouseEventType, MouseState ms)
         {
-            if (_settingService.RootPanelIgnoresMouseInput.Value && !(GameService.Input.Keyboard.ActiveModifiers == ModifierKeys.Alt))
+            
+            if (
+                !_settingService.DragWindowWithMouseIsEnabledSetting.Value &&
+                (
+                    _settingService.RootPanelIgnoresMouseInput.Value && 
+                    !(GameService.Input.Keyboard.ActiveModifiers == ModifierKeys.Alt)
+                )
+            )
             {
                 return null;
             }
