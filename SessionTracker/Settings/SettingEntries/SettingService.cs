@@ -61,6 +61,12 @@ namespace SessionTracker.Settings.SettingEntries
                       "at that point Blish does not know " +
                       "which API key it should use. You have to log into a character first.");
 
+            RootPanelIgnoresMouseInput = settings.DefineSetting(
+                "mouse clickthrough",
+                false,
+                () => "mouse clickthrough (read tooltip)",
+                () => "the stats window will ignore all mouse input unless the ALT keyboard key is held down");
+
             WindowIsVisibleOnWorldMapSetting = settings.DefineSetting(
                 "show window on world map",
                 true,
@@ -193,6 +199,7 @@ namespace SessionTracker.Settings.SettingEntries
         public SettingEntry<int> FontSizeIndexSetting { get; }
         public SettingEntry<bool> SessionValuesAreVisibleSetting { get; }
         public SettingEntry<bool> TotalValuesAreVisibleSetting { get; }
+        public SettingEntry<bool> RootPanelIgnoresMouseInput { get; }
         public SettingEntry<bool> WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting { get; }
         public SettingEntry<bool> WindowIsVisibleOnWorldMapSetting { get; }
         public SettingEntry<bool> WindowIsVisibleOutsideOfWvwAndSpvpSetting { get; }
