@@ -30,7 +30,7 @@ namespace SessionTracker.Settings.Window
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.SessionValuesAreVisibleSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.TotalValuesAreVisibleSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.DragWindowWithMouseIsEnabledSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.RootPanelIgnoresMouseInput);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.WindowCanBeClickedThroughSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.CornerIconIsVisibleSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.CoinDisplayFormatSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.HideStatsWithValueZeroSetting);
