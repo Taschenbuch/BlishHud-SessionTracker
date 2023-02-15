@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Blish_HUD;
 using Blish_HUD.Controls;
+using Blish_HUD.Input;
 using Blish_HUD.Modules.Managers;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using SessionTracker.Controls.Hint;
 using SessionTracker.Models;
 using SessionTracker.Services;
@@ -57,6 +59,17 @@ namespace SessionTracker.Controls
             GameService.Overlay.UserLocaleChanged                         -= OnUserChangedLanguageInBlishSettings;
 
             base.DisposeControl();
+        }
+
+        public override Control TriggerMouseInput(MouseEventType mouseEventType, MouseState ms)
+        {
+            var windowCanBeClickedThrough = !_settingService.DragWindowWithMouseIsEnabledSetting.Value
+                                          && _settingService.WindowCanBeClickedThroughSetting.Value
+                                          && GameService.Input.Keyboard.ActiveModifiers != ModifierKeys.Alt;
+
+            return windowCanBeClickedThrough
+                ? null
+                : base.TriggerMouseInput(mouseEventType, ms);
         }
 
         public void ToggleVisibility()
