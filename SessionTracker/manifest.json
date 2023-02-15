@@ -19,6 +19,9 @@
     },
     {
       "name": "Metallis"
+    },
+    {
+      "name": "Soeed"
     }
   ],
   "directories": [ "session-tracker" ],
