@@ -6,7 +6,7 @@
   "manifest_version": 1,
   "description": "Window to track different stats in your current gaming session for WvW, PvP and PvE. Stats can be:\n- wallet currencies (gold, karma, volatile magic, fractal relics, wvw skirmish tickets, ...)\n- PvP wins/losses, kill/death-ratios, deaths, ...\n- achievements (killed players in PvP/WvW, captured WvW towers, killed dolyaks, ...).\nWARNING: The data is read from the official GW2 API with your API key and is therefore delayed. Expect delays of at least 5 minutes.",
   "dependencies": {
-    "bh.blishhud": ">=0.11.7"
+    "bh.blishhud": ">=1.0.0"
   },
   "url": "https://github.com/Taschenbuch/BlishHud-SessionTracker",
   "contributors": [
