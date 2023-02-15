@@ -61,12 +61,6 @@ namespace SessionTracker.Settings.SettingEntries
                       "at that point Blish does not know " +
                       "which API key it should use. You have to log into a character first.");
 
-            RootPanelIgnoresMouseInput = settings.DefineSetting(
-                "mouse clickthrough",
-                false,
-                () => "mouse clickthrough (read tooltip)",
-                () => "the stats window will ignore all mouse input unless the ALT keyboard key is held down");
-
             WindowIsVisibleOnWorldMapSetting = settings.DefineSetting(
                 "show window on world map",
                 true,
@@ -94,8 +88,16 @@ namespace SessionTracker.Settings.SettingEntries
             DragWindowWithMouseIsEnabledSetting = settings.DefineSetting(
                 "dragging window is allowed",
                 true,
-                () => "drag with mouse",
+                () => DRAG_WITH_MOUSE_LABEL_TEXT,
                 () => "Allow dragging the window by moving the mouse when left mouse button is pressed inside window");
+
+            WindowCanBeClickedThroughSetting = settings.DefineSetting(
+                "window is not capturing mouse clicks",
+                false,
+                () => "mouse clickthrough (read tooltip)",
+                () => "This allows clicking with the mouse through the window to interact with Guild Wars 2 behind the window. " +
+                      "Mouse clicks while ALT key is held down, will disable this feature temporarily. E.g. for scrolling the stats window etc. " +
+                     $"WARNING: feature is disabled when '{DRAG_WITH_MOUSE_LABEL_TEXT}' is checked.");
 
             CornerIconIsVisibleSetting = settings.DefineSetting(
                 "cornerIcon is visible",
@@ -199,7 +201,7 @@ namespace SessionTracker.Settings.SettingEntries
         public SettingEntry<int> FontSizeIndexSetting { get; }
         public SettingEntry<bool> SessionValuesAreVisibleSetting { get; }
         public SettingEntry<bool> TotalValuesAreVisibleSetting { get; }
-        public SettingEntry<bool> RootPanelIgnoresMouseInput { get; }
+        public SettingEntry<bool> WindowCanBeClickedThroughSetting { get; }
         public SettingEntry<bool> WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting { get; }
         public SettingEntry<bool> WindowIsVisibleOnWorldMapSetting { get; }
         public SettingEntry<bool> WindowIsVisibleOutsideOfWvwAndSpvpSetting { get; }
@@ -212,5 +214,6 @@ namespace SessionTracker.Settings.SettingEntries
         public SettingEntry<int> SettingsVersionSetting { get; }
 
         private const string ON_WORLD_MAP_SETTING_DISPLAY_NAME = "on world map";
+        private const string DRAG_WITH_MOUSE_LABEL_TEXT = "drag with mouse";
     }
 }

@@ -63,18 +63,13 @@ namespace SessionTracker.Controls
 
         public override Control TriggerMouseInput(MouseEventType mouseEventType, MouseState ms)
         {
-            
-            if (
-                !_settingService.DragWindowWithMouseIsEnabledSetting.Value &&
-                (
-                    _settingService.RootPanelIgnoresMouseInput.Value && 
-                    !(GameService.Input.Keyboard.ActiveModifiers == ModifierKeys.Alt)
-                )
-            )
-            {
-                return null;
-            }
-            return base.TriggerMouseInput(mouseEventType, ms);
+            var windowCanBeClickedThrough = !_settingService.DragWindowWithMouseIsEnabledSetting.Value
+                                          && _settingService.WindowCanBeClickedThroughSetting.Value
+                                          && GameService.Input.Keyboard.ActiveModifiers != ModifierKeys.Alt;
+
+            return windowCanBeClickedThrough
+                ? null
+                : base.TriggerMouseInput(mouseEventType, ms);
         }
 
         public void ToggleVisibility()
