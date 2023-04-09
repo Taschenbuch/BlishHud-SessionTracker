@@ -174,7 +174,7 @@ namespace SessionTracker.Controls
                 var tooltip = $"Error: API call failed or bug in module code. :( \n{RETRY_IN_X_SECONDS_MESSAGE}";
                 SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByEntryId.Values);
                 
-                _logger.Error(e, "Error when initializing values: API failed to respond or bug in module code.");
+                _logger.Warn(e, "Error when initializing values: API failed to respond or bug in module code.");
                 _updateState.State = State.WaitBeforeResetAndInitStats;
             }
         }
@@ -203,7 +203,7 @@ namespace SessionTracker.Controls
                 // when api server does not respond (error code 500, 502) or times out (RequestCanceledException)
                 // the app will just return the previous stat values and hope that on the end of the next interval
                 // the api server will answer correctly again.
-                _logger.Error(e, "Error when updating values: API failed to respond or bug in module code.");
+                _logger.Warn(e, "Error when updating values: API failed to respond or bug in module code.");
             }
             finally
             {
