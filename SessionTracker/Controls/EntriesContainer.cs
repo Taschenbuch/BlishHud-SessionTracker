@@ -167,7 +167,7 @@ namespace SessionTracker.Controls
             catch (Exception e)
             {
                 SetTextAndTooltip("Error: read tooltip.", "Error: API call failed.\nRetry in 30s…", _valueLabelByEntryId.Values);
-                _logger.Error(e, "Error when initializing: API failed to respond or bug in module code.");
+                _logger.Warn(e, "Error when initializing: API failed to respond or bug in module code.");
             }
             finally
             {
@@ -192,7 +192,7 @@ namespace SessionTracker.Controls
                 {
                     _isInitialized                    = false;
                     _initializeIntervalInMilliseconds = INSTANT_INITIALIZE_INTERVAL_IN_MILLISECONDS;
-                    _logger.Error("Error when fetching values: api token is missing permissions. " +
+                    _logger.Warn("Error when fetching values: api token is missing permissions. " +
                                   "Possible reasons: api key got removed or new api key is missing permissions.");
                     return;
                 }
@@ -205,7 +205,7 @@ namespace SessionTracker.Controls
             }
             catch (Exception e)
             {
-                _logger.Error(e, "Error when fetching values: API failed to respond or bug in module code.");
+                _logger.Warn(e, "Error when fetching values: API failed to respond or bug in module code.");
                 // intentionally no error handling!
                 // when api server does not respond (error code 500, 502) or times out (RequestCanceledException)
                 // the app will just return the previous kill/death values and hope that on the end of the next interval
