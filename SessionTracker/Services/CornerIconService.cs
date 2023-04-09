@@ -48,6 +48,7 @@ namespace SessionTracker.Services
                 HoverIcon        = _cornerIconHoverTexture,
                 BasicTooltipText = TOOLTIP_TEXT,
                 Parent           = GameService.Graphics.SpriteScreen,
+                Priority         = RANDOM_INTEGER_FOR_PRIORITY
             };
 
             _cornerIcon.Menu  =  CreateContextMenu();
@@ -107,6 +108,7 @@ namespace SessionTracker.Services
         private ContextMenuStripItem _settingsContextMenuStripItem;
         private ContextMenuStripItem _resetContextMenuStripItem;
         private ContextMenuStrip _contextMenuStrip;
+        private const int RANDOM_INTEGER_FOR_PRIORITY = 1275551536;
 
         private const string TOOLTIP_TEXT = "Left click:\n" +
                                             "Show or hide the session tracker UI. " +
