@@ -25,7 +25,7 @@
       },
       "ApiId": 71581,
       "ApiIdType": "Item",
-      "IconUrl": "https://render.guildwars2.com/file/E4D0455D2EFDB0DFC008F4564B38D6545901A05B/1206833.png"
+      "IconAssetId": 1206833
     },
     {
       "Id": "item8920",
@@ -51,33 +51,7 @@
       },
       "ApiId": 8920,
       "ApiIdType": "Item",
-      "IconUrl": "https://render.guildwars2.com/file/EBC5CEC199D1E51B02756A1C796A65E9D24F04B5/63171.png"
-    },
-    {
-      "Id": "item83103",
-      "Name": {
-        "LocalizedTextByLocale": {
-          "English": "Eye of Kormir",
-          "French": "Œil de Kormir",
-          "German": "Auge Kormirs",
-          "Spanish": "Ojo de Kormir",
-          "Chinese": "克米尔之眼",
-          "Korean": "Eye of Kormir"
-        }
-      },
-      "Description": {
-        "LocalizedTextByLocale": {
-          "English": "<c=@Flavor>These gleaming metal scales earned their nickname because they are flexible but remain true and whole under great strain.</c>",
-          "French": "<c=@Flavor>Ces écailles de métal brillantes tiennent leur surnom de leur texture souple mais extrêmement résistante.</c>",
-          "German": "<c=@Flavor>Diese schimmernden Metallschuppen verdanken ihren Namen der Tatsache, dass sie biegsam sind, aber auch unter großer Belastung ganz und heil bleiben.</c>",
-          "Spanish": "<c=@Flavor>Esta reluciente escama de metal se ganó su sobrenombre porque es flexible pero es de fiar bajo una gran presión.</c>",
-          "Chinese": "<c=@Flavor>这些发光的金属鳞片虽然有弹性，但是受到巨大张力依然完好无损。</c>",
-          "Korean": "<c=@Flavor>These gleaming metal scales earned their nickname because they are flexible but remain true and whole under great strain.</c>"
-        }
-      },
-      "ApiId": 83103,
-      "ApiIdType": "Item",
-      "IconUrl": "https://render.guildwars2.com/file/F327CD6E33A54C69F19F29DAA7C7D1A1FF4203D6/1767535.png"
+      "IconAssetId": 63171
     },
     {
       "Id": "luck",
@@ -603,7 +577,7 @@
       },
       "ApiId": 1,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/98457F504BA2FAC8457F532C4B30EDC23929ACF9/619316.png"
+      "IconAssetId": 619316
     },
     {
       "Id": "currency2",
@@ -629,7 +603,7 @@
       },
       "ApiId": 2,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/94953FA23D3E0D23559624015DFEA4CFAA07F0E5/155026.png"
+      "IconAssetId": 155026
     },
     {
       "Id": "currency3",
@@ -655,7 +629,7 @@
       },
       "ApiId": 3,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/A1BD345AD9192C3A585BE2F6CB0617C5A797A1E2/619317.png"
+      "IconAssetId": 619317
     },
     {
       "Id": "currency4",
@@ -681,7 +655,7 @@
       },
       "ApiId": 4,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/220061640ECA41C0577758030357221B4ECCE62C/502065.png"
+      "IconAssetId": 502065
     },
     {
       "Id": "currency5",
@@ -707,7 +681,7 @@
       },
       "ApiId": 5,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/2AA9C0B030BE152B915E0174D7F0495FDA711C54/619318.png"
+      "IconAssetId": 619318
     },
     {
       "Id": "currency6",
@@ -733,7 +707,7 @@
       },
       "ApiId": 6,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/06083C4F7321512918E23D57B999F04E94C8D9A3/619319.png"
+      "IconAssetId": 619319
     },
     {
       "Id": "currency7",
@@ -759,7 +733,7 @@
       },
       "ApiId": 7,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/0204DAD0D40674035F9F5F5270043C3207EEA7E8/619320.png"
+      "IconAssetId": 619320
     },
     {
       "Id": "currency9",
@@ -785,7 +759,7 @@
       },
       "ApiId": 9,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/C97B0607A6DB1FA1469D1DBBF2F107A057F8A313/619322.png"
+      "IconAssetId": 619322
     },
     {
       "Id": "currency10",
@@ -811,7 +785,7 @@
       },
       "ApiId": 10,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/B83A4ED528FC237D4D1862CDD0250B773EAB36AA/619323.png"
+      "IconAssetId": 619323
     },
     {
       "Id": "currency11",
@@ -837,7 +811,7 @@
       },
       "ApiId": 11,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/F6F4F39212AF3324223D73BAA807026BD863997C/619324.png"
+      "IconAssetId": 619324
     },
     {
       "Id": "currency12",
@@ -863,7 +837,7 @@
       },
       "ApiId": 12,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/2B9E2BC9D5D080C54C17E27CECACEFFC0D64EE22/619325.png"
+      "IconAssetId": 619325
     },
     {
       "Id": "currency13",
@@ -889,7 +863,7 @@
       },
       "ApiId": 13,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/310CA245DBF61A54BD0C5D5361E26F0821FCAAFD/619326.png"
+      "IconAssetId": 619326
     },
     {
       "Id": "currency14",
@@ -915,7 +889,7 @@
       },
       "ApiId": 14,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/37CCE672250A3170B71760949C4C9C9B186517B1/619327.png"
+      "IconAssetId": 619327
     },
     {
       "Id": "currency15",
@@ -941,7 +915,7 @@
       },
       "ApiId": 15,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/AC3178E7BD066BC597F9D4247848E6033A047EDE/699004.png"
+      "IconAssetId": 699004
     },
     {
       "Id": "currency16",
@@ -967,7 +941,7 @@
       },
       "ApiId": 16,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/1DB12CF3E9D8D3CF77DA805B2008D417EA32C172/699005.png"
+      "IconAssetId": 699005
     },
     {
       "Id": "currency18",
@@ -993,7 +967,7 @@
       },
       "ApiId": 18,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/66A42690C2EA05235C4090372B975117F60EE7E3/779571.png"
+      "IconAssetId": 779571
     },
     {
       "Id": "currency19",
@@ -1019,7 +993,7 @@
       },
       "ApiId": 19,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/07EC38BCBE979B7F4557057F51785F0930075F35/1029833.png"
+      "IconAssetId": 1029833
     },
     {
       "Id": "currency20",
@@ -1045,7 +1019,7 @@
       },
       "ApiId": 20,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/DD02946A3AB4076C500836533F67303EE464A6AC/1206837.png"
+      "IconAssetId": 1206837
     },
     {
       "Id": "currency22",
@@ -1071,7 +1045,7 @@
       },
       "ApiId": 22,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/5D74D6D3D8179FC49D572975CC5E0CC701025508/1206836.png"
+      "IconAssetId": 1206836
     },
     {
       "Id": "currency23",
@@ -1097,7 +1071,7 @@
       },
       "ApiId": 23,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/0AD608DE7FDEE0B909905C0AF9401321CF65CD94/1010701.png"
+      "IconAssetId": 1010701
     },
     {
       "Id": "currency24",
@@ -1123,7 +1097,7 @@
       },
       "ApiId": 24,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/77B0F842ED036D71E46B80570D6CFE25CB4C0677/619321.png"
+      "IconAssetId": 619321
     },
     {
       "Id": "currency25",
@@ -1149,7 +1123,7 @@
       },
       "ApiId": 25,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/11C6D8AB5FD04866BF3D751771F90C392739B5DF/1010699.png"
+      "IconAssetId": 1010699
     },
     {
       "Id": "currency26",
@@ -1159,7 +1133,7 @@
           "French": "Billet de retrait d'escarmouche McM",
           "German": "WvW-Gefecht-Ticket",
           "Spanish": "Tique de recogida de escaramuzas WvW",
-          "Chinese": "世界之战突袭兑换劵",
+          "Chinese": "世界之战突袭兑换券",
           "Korean": "WvW Skirmish Claim Ticket"
         }
       },
@@ -1175,7 +1149,7 @@
       },
       "ApiId": 26,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/0F911F55FF800FC0589970FF9137BF050699392F/1010702.png"
+      "IconAssetId": 1010702
     },
     {
       "Id": "currency27",
@@ -1201,7 +1175,7 @@
       },
       "ApiId": 27,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/B8E963AF6D4C66237D44194A6570A1492D1F5EE4/1010697.png"
+      "IconAssetId": 1010697
     },
     {
       "Id": "currency28",
@@ -1227,7 +1201,7 @@
       },
       "ApiId": 28,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/95F8F70D97186780CE45B54600B90BE356D8EA7C/1302741.png"
+      "IconAssetId": 1302741
     },
     {
       "Id": "currency29",
@@ -1253,7 +1227,7 @@
       },
       "ApiId": 29,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/5CF6FC0B62554EBECAC6752AAFA2B8D80F726077/1302745.png"
+      "IconAssetId": 1302745
     },
     {
       "Id": "currency30",
@@ -1279,7 +1253,7 @@
       },
       "ApiId": 30,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/DB05F5F20B94A3D12AF11041F60E194D66584957/1313248.png"
+      "IconAssetId": 1313248
     },
     {
       "Id": "currency31",
@@ -1305,7 +1279,7 @@
       },
       "ApiId": 31,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/0D971EF54A6FA5146AC9F60A0702DD640CBB8011/1207142.png"
+      "IconAssetId": 1207142
     },
     {
       "Id": "currency32",
@@ -1331,7 +1305,7 @@
       },
       "ApiId": 32,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/55CBF5154BC749F0BE7B01F9C75C04F2CD4BC561/1465799.png"
+      "IconAssetId": 1465799
     },
     {
       "Id": "currency33",
@@ -1357,7 +1331,7 @@
       },
       "ApiId": 33,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/1AAD230BF65AE92C000E0C18D26D404022092C35/1614710.png"
+      "IconAssetId": 1614710
     },
     {
       "Id": "currency34",
@@ -1383,7 +1357,7 @@
       },
       "ApiId": 34,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/DEC2276FB1D5637BE563F618A012DEE63402170C/1767459.png"
+      "IconAssetId": 1767459
     },
     {
       "Id": "currency35",
@@ -1409,7 +1383,7 @@
       },
       "ApiId": 35,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/4C5D08BCD7F55B250B413F98A9FB4C323E3B0F93/1766338.png"
+      "IconAssetId": 1766338
     },
     {
       "Id": "currency36",
@@ -1435,7 +1409,7 @@
       },
       "ApiId": 36,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/29A2465AE376091D3871B42D14D90B453060B69C/1822313.png"
+      "IconAssetId": 1822313
     },
     {
       "Id": "currency37",
@@ -1461,7 +1435,7 @@
       },
       "ApiId": 37,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/D8A351CBB13B24E49F9755BD290F710964B8FD99/1203022.png"
+      "IconAssetId": 1203022
     },
     {
       "Id": "currency38",
@@ -1487,7 +1461,7 @@
       },
       "ApiId": 38,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/2539DA0C2F1259A20DEE6707B8D8BCDA050372E2/1203080.png"
+      "IconAssetId": 1203080
     },
     {
       "Id": "currency39",
@@ -1513,7 +1487,7 @@
       },
       "ApiId": 39,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/B31002F9772C0DDF7428A7A16BD14945C34AB4A8/1896039.png"
+      "IconAssetId": 1896039
     },
     {
       "Id": "currency40",
@@ -1539,7 +1513,7 @@
       },
       "ApiId": 40,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/332FF8697F27CEC0A599A008C901ACD8273E0C1E/65724.png"
+      "IconAssetId": 65724
     },
     {
       "Id": "currency41",
@@ -1565,7 +1539,7 @@
       },
       "ApiId": 41,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/CC21772A9131AEAF4C18EE90172AE2A8DB1850BA/1203099.png"
+      "IconAssetId": 1203099
     },
     {
       "Id": "currency42",
@@ -1591,7 +1565,7 @@
       },
       "ApiId": 42,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/B60BE97A3899A1D36CE81CB3C896CACACCA79237/1203046.png"
+      "IconAssetId": 1203046
     },
     {
       "Id": "currency43",
@@ -1617,7 +1591,7 @@
       },
       "ApiId": 43,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/A6F57A2C946B2A02062AC0A9452703505CF8B3BE/831466.png"
+      "IconAssetId": 831466
     },
     {
       "Id": "currency44",
@@ -1643,7 +1617,7 @@
       },
       "ApiId": 44,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/7CD20D4B072AD23F97202F05E4130CF8A4B069C5/69116.png"
+      "IconAssetId": 69116
     },
     {
       "Id": "currency45",
@@ -1669,7 +1643,7 @@
       },
       "ApiId": 45,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/57F51A1F62E3FBB7B5E02CBD7C9717371D1CC8F2/1894697.png"
+      "IconAssetId": 1894697
     },
     {
       "Id": "currency46",
@@ -1695,7 +1669,7 @@
       },
       "ApiId": 46,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/C30D1480E3383F999DE87921706D9D39E49CDC7A/2010217.png"
+      "IconAssetId": 2010217
     },
     {
       "Id": "currency47",
@@ -1721,7 +1695,7 @@
       },
       "ApiId": 47,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/555601A503A5DCFCC90C421AECF1ACEF70B2AFAC/2069367.png"
+      "IconAssetId": 2069367
     },
     {
       "Id": "currency49",
@@ -1747,7 +1721,7 @@
       },
       "ApiId": 49,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/2C47C1C30F61DB3A743BA47FB7E70808156A9009/2140520.png"
+      "IconAssetId": 2140520
     },
     {
       "Id": "currency50",
@@ -1773,7 +1747,7 @@
       },
       "ApiId": 50,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/63E1A0F023D101045B5BA2331C289327687FC7E3/797790.png"
+      "IconAssetId": 797790
     },
     {
       "Id": "currency51",
@@ -1799,7 +1773,7 @@
       },
       "ApiId": 51,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/7D7CAD2BF4527006CFE6BE3DBF306353260DC8B2/2292743.png"
+      "IconAssetId": 2292743
     },
     {
       "Id": "currency52",
@@ -1825,7 +1799,7 @@
       },
       "ApiId": 52,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/05E12F28F7747F580105C8DACD0FF2027644C5FB/2270835.png"
+      "IconAssetId": 2270835
     },
     {
       "Id": "currency53",
@@ -1851,7 +1825,7 @@
       },
       "ApiId": 53,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/BFEDF6110C69BE3521010E7F23B5147919B90FA9/2270834.png"
+      "IconAssetId": 2270834
     },
     {
       "Id": "currency54",
@@ -1877,7 +1851,7 @@
       },
       "ApiId": 54,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/2F531F63F5A9A93C624A3CDDC73F9078C00E5097/2270830.png"
+      "IconAssetId": 2270830
     },
     {
       "Id": "currency55",
@@ -1903,7 +1877,7 @@
       },
       "ApiId": 55,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/361BEAAEB637D90905060E4A59365118C7A6790D/2270831.png"
+      "IconAssetId": 2270831
     },
     {
       "Id": "currency56",
@@ -1929,7 +1903,7 @@
       },
       "ApiId": 56,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/3AB7586DBCB7C9967459FB4F10A8C205E6760BA7/2270832.png"
+      "IconAssetId": 2270832
     },
     {
       "Id": "currency57",
@@ -1955,7 +1929,7 @@
       },
       "ApiId": 57,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/A0ECC4DEE6E84062649EA464079AE46B61089130/2270833.png"
+      "IconAssetId": 2270833
     },
     {
       "Id": "currency58",
@@ -1981,7 +1955,7 @@
       },
       "ApiId": 58,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/3A930379AABCB10BDBE42F0FA436F29DD023C274/2293273.png"
+      "IconAssetId": 2293273
     },
     {
       "Id": "currency59",
@@ -2007,7 +1981,7 @@
       },
       "ApiId": 59,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/AD0AF3F321EB250B5FB4C44A7B3392CD1208921A/1202328.png"
+      "IconAssetId": 1202328
     },
     {
       "Id": "currency60",
@@ -2033,7 +2007,7 @@
       },
       "ApiId": 60,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/A004AF632A0ABA29ACFAB475AF1197B5BF80D9D9/2351816.png"
+      "IconAssetId": 2351816
     },
     {
       "Id": "currency61",
@@ -2059,7 +2033,7 @@
       },
       "ApiId": 61,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/BC2EACDA78BC950263F901E8EBA6E74D08E97E23/2596976.png"
+      "IconAssetId": 2596976
     },
     {
       "Id": "currency62",
@@ -2075,17 +2049,43 @@
       },
       "Description": {
         "LocalizedTextByLocale": {
-          "English": "Acquired by opening hidden chests in Cantha. Used at vendors in Cantha.",
-          "French": "S'obtient en ouvrant des coffres cachés dans Cantha. À utiliser auprès de vendeurs canthiens.",
-          "German": "Erworben durch das Öffnen verborgener Truhen in Cantha. Bei Händlern in Cantha einzulösen.",
-          "Spanish": "Se pueden adquirir abriendo cofres ocultos en Cantha. Se usan con comerciantes de Cantha.",
-          "Chinese": "通过打开凯珊各处的隐藏宝箱获得。可在凯珊商人处使用。",
-          "Korean": "Acquired by opening hidden chests in Cantha. Used at vendors in Cantha."
+          "English": "Acquired by opening hidden chests in the most recent expansion's content. Can be traded with Unusual Coin Collectors for rewards.",
+          "French": "S'obtient en ouvrant des coffres cachés dans le contenu de l'extension la plus récente. À échanger auprès de collectionneurs de pièces inhabituelles contre des récompenses.",
+          "German": "Erworben durch das Öffnen verborgener Truhen im Inhalt der neuesten Erweiterung. Kann bei Sammlern ungewöhnlicher Münzen gegen Belohnungen eingetauscht werden.",
+          "Spanish": "Se consigue abriendo cofres ocultos en el contenido de la expansión más reciente. Se puede intercambiar con coleccionistas de monedas inusuales por recompensas.",
+          "Chinese": "通过开启最新版本内容的隐藏宝箱获得。可以和不寻常硬币收藏家交易换取奖励。",
+          "Korean": "Acquired by opening hidden chests in the most recent expansion's content. Can be traded with Unusual Coin Collectors for rewards."
         }
       },
       "ApiId": 62,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/662D371A6C145EDDDA2DE6B53BC05F5F08CE386F/2596977.png"
+      "IconAssetId": 2596977
+    },
+    {
+      "Id": "currency63",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Astral Acclaim",
+          "French": "Acclamations astrales",
+          "German": "Astraler Ruhm",
+          "Spanish": "Reconocimiento astral",
+          "Chinese": "星界赞誉",
+          "Korean": "Astral Acclaim"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "",
+          "French": "",
+          "German": "",
+          "Spanish": "",
+          "Chinese": "",
+          "Korean": ""
+        }
+      },
+      "ApiId": 63,
+      "ApiIdType": "Currency",
+      "IconAssetId": 3124964
     },
     {
       "Id": "currency64",
@@ -2111,7 +2111,7 @@
       },
       "ApiId": 64,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/90FF7B7D0CBBC031B04F7E0A18576D7EBECB1C90/2596975.png"
+      "IconAssetId": 2596975
     },
     {
       "Id": "currency65",
@@ -2137,7 +2137,33 @@
       },
       "ApiId": 65,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/7BFCF20F62C7DA650DFA69723E0B4F00E4F0ACF8/2597023.png"
+      "IconAssetId": 2597023
+    },
+    {
+      "Id": "currency66",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Ancient Coin",
+          "French": "Pièce ancienne",
+          "German": "Antike Münze",
+          "Spanish": "Moneda antigua",
+          "Chinese": "远古硬币",
+          "Korean": "Ancient Coin"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Acquired by opening hidden chests in content released prior to the current expansion. Can be traded with Ancient Coin Collectors for rewards.",
+          "French": "S'obtient en ouvrant des coffres cachés dans le contenu publié avant l'extension actuelle. À échanger auprès de collectionneurs de pièces anciennes contre des récompenses.",
+          "German": "Erworben durch das Öffnen verborgener Truhen in Inhalten von vor der neuesten Erweiterung. Kann bei Sammlern antiker Münzen gegen Belohnungen eingetauscht werden.",
+          "Spanish": "Se consigue abriendo cofres ocultos en el contenido lanzado antes de la expansión más reciente. Se puede intercambiar con coleccionistas de monedas antiguas por recompensas.",
+          "Chinese": "通过打开当前资料片上线前的隐秘宝箱获得。能够用来向远古硬币收藏家购买奖励。",
+          "Korean": "Acquired by opening hidden chests in content released prior to the current expansion. Can be traded with Ancient Coin Collectors for rewards."
+        }
+      },
+      "ApiId": 66,
+      "ApiIdType": "Currency",
+      "IconAssetId": 3123700
     },
     {
       "Id": "currency67",
@@ -2163,7 +2189,7 @@
       },
       "ApiId": 67,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/F5FDD02592E10C3E63CF64D44713220FB6C70D03/2596973.png"
+      "IconAssetId": 2596973
     },
     {
       "Id": "currency68",
@@ -2189,7 +2215,7 @@
       },
       "ApiId": 68,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/D312AE6DB1AE2ECC2494772DF1D312D13B501D4E/2596974.png"
+      "IconAssetId": 2596974
     },
     {
       "Id": "currency69",
@@ -2215,7 +2241,7 @@
       },
       "ApiId": 69,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/37CCE672250A3170B71760949C4C9C9B186517B1/619327.png"
+      "IconAssetId": 619327
     },
     {
       "Id": "currency70",
@@ -2241,7 +2267,85 @@
       },
       "ApiId": 70,
       "ApiIdType": "Currency",
-      "IconUrl": "https://render.guildwars2.com/file/6D33B7387BAF2E2CC9B5D37D1D1B01246AB6FA22/1302744.png"
+      "IconAssetId": 1302744
+    },
+    {
+      "Id": "currency71",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Jade Miner's Keycard",
+          "French": "Carte magnétique de mineur de jade",
+          "German": "Jademinenarbeiter-Schlüsselkarte",
+          "Spanish": "Tarjeta de acceso de minero de jade",
+          "Chinese": "翠玉矿工钥匙卡",
+          "Korean": "Jade Miner's Keycard"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Used to open mining caches around Gyala Delve.",
+          "French": "À utiliser pour ouvrir des caches d'extraction à la Fosse de Gyala.",
+          "German": "Hiermit lassen sich Bergwerkslager überall in der Gyala-Senke öffnen.",
+          "Spanish": "Se utiliza para abrir alijos de minería en la Hondonada de Gyala.",
+          "Chinese": "用于打开盖拉洞窟的采矿储藏箱。",
+          "Korean": "Used to open mining caches around Gyala Delve."
+        }
+      },
+      "ApiId": 71,
+      "ApiIdType": "Currency",
+      "IconAssetId": 3004443
+    },
+    {
+      "Id": "currency72",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Static Charge",
+          "French": "Charge statique",
+          "German": "Statische Ladung",
+          "Spanish": "Carga estática",
+          "Chinese": "静电能量",
+          "Korean": "Static Charge"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Earned in Skywatch Archipelago",
+          "French": "À recevoir dans l'Archipel de l'observatoire céleste",
+          "German": "Im Himmelswacht-Archipel verdient",
+          "Spanish": "Se consigue en el Archipiélago Vistacielo",
+          "Chinese": "从天空哨站群岛获得",
+          "Korean": "Earned in Skywatch Archipelago"
+        }
+      },
+      "ApiId": 72,
+      "ApiIdType": "Currency",
+      "IconAssetId": 3123702
+    },
+    {
+      "Id": "currency73",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Pinch of Stardust",
+          "French": "Pincée de poussière d'étoile",
+          "German": "Prise Sternenstaub",
+          "Spanish": "Pizca de polvo de estrellas",
+          "Chinese": "星尘粉末",
+          "Korean": "Pinch of Stardust"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Earned in Amnytas",
+          "French": "À recevoir en Amnytas",
+          "German": "In Amnytas verdient",
+          "Spanish": "Se consigue en Amnytas",
+          "Chinese": "从阿姆尼塔斯获得",
+          "Korean": "Earned in Amnytas"
+        }
+      },
+      "ApiId": 73,
+      "ApiIdType": "Currency",
+      "IconAssetId": 3123701
     }
   ]
 }

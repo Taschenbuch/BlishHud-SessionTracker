@@ -10,7 +10,7 @@ namespace SessionTracker.Models
         public LocalizedText Description { get; } = new LocalizedText();
         public int ApiId { get; set; }
         public ApiIdType ApiIdType{ get; set; } = ApiIdType.None;
-        public string IconUrl { get; set; }
+        public int IconAssetId { get; set; }
         public string IconFileName { get; set; }
         public bool IsVisible { get; set; }
         [JsonIgnore] public Value Value { get; } = new Value();
@@ -19,7 +19,7 @@ namespace SessionTracker.Models
         [JsonIgnore] public bool IsCurrency => ApiIdType == ApiIdType.Currency;
         [JsonIgnore] public bool IsItem => ApiIdType == ApiIdType.Item;
         [JsonIgnore] public bool HasIconFile => IconFileName != null;
-        [JsonIgnore] public bool HasIconUrl => IconUrl != null;
+        [JsonIgnore] public bool HasIconAssetId => IconAssetId != 0;
 
         public string GetTextWithNameAndDescription()
         {

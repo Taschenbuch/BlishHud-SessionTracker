@@ -28,11 +28,11 @@ namespace SessionTracker.JsonFileCreator.StatServices
                 {
                     var entry = new Entry
                     {
-                        Id        = $"currency{currency.Id}",
-                        ApiId     = currency.Id,
-                        ApiIdType = ApiIdType.Currency,
-                        IconUrl   = currency.Icon.Url.ToString(),
-                        IsVisible = false
+                        Id          = $"currency{currency.Id}",
+                        ApiId       = currency.Id,
+                        ApiIdType   = ApiIdType.Currency,
+                        IconAssetId = AssetService.GetIconAssetIdFromIconUrl(currency.Icon.Url.ToString()),
+                        IsVisible   = false
                     };
 
                     entries.Add(entry);

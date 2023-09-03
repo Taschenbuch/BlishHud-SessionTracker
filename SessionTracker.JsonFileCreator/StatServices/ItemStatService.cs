@@ -29,11 +29,11 @@ namespace SessionTracker.JsonFileCreator.StatServices
                 {
                     var entry = new Entry
                     {
-                        Id        = $"item{item.Id}",
-                        ApiId     = item.Id,
-                        ApiIdType = ApiIdType.Item,
-                        IconUrl   = item.Icon.Url.ToString(),
-                        IsVisible = false
+                        Id          = $"item{item.Id}",
+                        ApiId       = item.Id,
+                        ApiIdType   = ApiIdType.Item,
+                        IconAssetId = AssetService.GetIconAssetIdFromIconUrl(item.Icon.Url.ToString()),
+                        IsVisible   = false
                     };
 
                     entries.Add(entry);
@@ -76,7 +76,6 @@ namespace SessionTracker.JsonFileCreator.StatServices
         {
             ItemIds.MEMORY_OF_BATTLE,
             ItemIds.HEAVY_LOOT_BAG,
-            83103, // "Eye of Kormir" // todo weg
         };
     }
 }

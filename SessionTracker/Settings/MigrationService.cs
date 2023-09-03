@@ -7,6 +7,10 @@ namespace SessionTracker.Settings
 {
     public class MigrationService
     {
+        // ==== CHANGE LOG ====
+        // new in 1.4.0:
+        // - string IconUrl -> int IconAssetId
+        //
         // Version definitions
         //
         // ==== MAJOR ====
@@ -43,7 +47,7 @@ namespace SessionTracker.Settings
 
             if (refModel.MajorVersion < persistedModel.MajorVersion)
             {
-                logger.Warn($"Error: ref MajorVersion <  persisted MajorVersion. " +
+                logger.Warn($"Error: ref MajorVersion < persisted MajorVersion. " +
                             $"This can happen when previously a newer module version was installed. " +
                             $"This module version will not be able to handle the new data format. " +
                             $"Because of that it will use a fresh model from the ref folder instead. " +

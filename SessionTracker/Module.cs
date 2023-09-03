@@ -61,7 +61,7 @@ namespace SessionTracker
 
             _cornerIconService = new CornerIconService(_settingService.CornerIconIsVisibleSetting, entriesContainer, settingsWindowService, CornerIconClickEventHandler, textureService);
 
-            // set at the end to prevents that one of the ctors accidently gets a null reference because of creating the objects above in the wrong order.
+            // set at the end to prevent that one of the ctors accidently gets a null reference because of creating the objects above in the wrong order.
             // e.g. creating model after textureService, though model needs the reference of model.
             _model                 = model;
             _textureService        = textureService;

@@ -13,7 +13,7 @@ namespace SessionTracker.JsonFileCreator
             var model = new Model();
             await AddEntriesToModel(model);
             var jsonModel = FileService.SerializeModelToJson(model);
-            File.WriteAllText(@"C:\gw2\session\model.json", jsonModel);
+            File.WriteAllText(@"C:\Dev\blish\model.json", jsonModel);
         }
 
         private static async Task AddEntriesToModel(Model model)

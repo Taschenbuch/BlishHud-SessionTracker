@@ -15,6 +15,7 @@ namespace SessionTracker.Services
         {
             _contentsManager = contentsManager;
             _logger          = logger;
+            _model           = model;
 
             DebugTabTexture = contentsManager.GetTexture(@"settingsWindow\debugTab_440025.png");
             VisibilityTabTexture = contentsManager.GetTexture(@"settingsWindow\visibilityTab.png");
@@ -30,7 +31,6 @@ namespace SessionTracker.Services
             CornerIconTexture = contentsManager.GetTexture(@"cornerIcon.png");
             CornerIconHoverTexture = contentsManager.GetTexture(@"cornerIconHover.png");
             HiddenStatsTexture = contentsManager.GetTexture(@"hiddenStats.png");
-
             CreateEntryTextures(model);
         }
 
@@ -50,9 +50,7 @@ namespace SessionTracker.Services
             CornerIconTexture?.Dispose();
             CornerIconHoverTexture?.Dispose();
             HiddenStatsTexture?.Dispose();
-
-            foreach (var entryIcon in EntryTextureByEntryId.Values)
-                entryIcon?.Dispose();
+            DisposeEntryTextures();
         }
 
         public Texture2D DebugTabTexture { get; }
@@ -80,8 +78,8 @@ namespace SessionTracker.Services
             {
                 try
                 {
-                    if (entry.HasIconUrl)
-                        EntryTextureByEntryId[entry.Id] = GameService.Content.GetRenderServiceTexture(entry.IconUrl);
+                    if (entry.HasIconAssetId)
+                        EntryTextureByEntryId[entry.Id] = GetEntryTexture(entry.Id, entry.IconAssetId, EntryIconPlaceholderTexture, _logger);
                     else if (entry.HasIconFile)
                         EntryTextureByEntryId[entry.Id] = _contentsManager.GetTexture($@"stats\{entry.IconFileName}");
                     else
@@ -102,7 +100,33 @@ namespace SessionTracker.Services
                 _logger.Error(exception, $"Could not get entry texture for: {string.Join(", ", notFoundTextures)}. :(");
         }
 
+        private static AsyncTexture2D GetEntryTexture(string entryId, int entryIconAssetId, Texture2D entryIconPlaceholderTexture, Logger logger)
+        {
+            if (GameService.Content.DatAssetCache.TryGetTextureFromAssetId(entryIconAssetId, out AsyncTexture2D entryTexture))
+                return entryTexture;
+            else
+            {
+                // blish will only show info message for that instead of a warning. That is why this was added here to make it more obvious
+                logger.Warn($"DatAssetCache is missing texture for '{entryId}', iconAssetId: {entryIconAssetId}");
+                return new AsyncTexture2D(entryIconPlaceholderTexture);
+            }
+        }
+
+        private void DisposeEntryTextures()
+        {
+            foreach (var entryTextureAndIdPair in EntryTextureByEntryId)
+            {
+                var entryId = entryTextureAndIdPair.Key;
+                var entryTexture = entryTextureAndIdPair.Value;
+                var isNotErrorIcon = entryTexture.Texture != EntryIconPlaceholderTexture;
+                var isNotFromAssetCache = !_model.GetEntry(entryId).HasIconAssetId;
+                if (isNotErrorIcon && isNotFromAssetCache)
+                    entryTexture?.Dispose();
+            }
+        }
+
         private readonly ContentsManager _contentsManager;
         private readonly Logger _logger;
+        private readonly Model _model;
     }
 }
