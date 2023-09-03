@@ -4,6 +4,7 @@ using System.Linq;
 using Blish_HUD;
 using Blish_HUD.Content;
 using Blish_HUD.Modules.Managers;
+using Microsoft.Xna.Framework.Graphics;
 using Model = SessionTracker.Models.Model;
 
 namespace SessionTracker.Services
@@ -15,24 +16,20 @@ namespace SessionTracker.Services
             _contentsManager = contentsManager;
             _logger          = logger;
 
-            GameService.Graphics.QueueMainThreadRender((graphicsDevice) =>
-            {
-                // hack for blish 0.11.7 because only main thread should use graphicsDevice and thus .GetTexture() has to be called on main thread.
-                DebugTabTexture.SwapTexture(contentsManager.GetTexture(@"settingsWindow\debugTab_440025.png"));
-                VisibilityTabTexture.SwapTexture(contentsManager.GetTexture(@"settingsWindow\visibilityTab.png"));
-                StatsTabTexture.SwapTexture(contentsManager.GetTexture(@"settingsWindow\statsTab_156909.png"));
-                GeneralTabTexture.SwapTexture(contentsManager.GetTexture(@"settingsWindow\generalTab_156736.png"));
-                SettingsWindowBackgroundTexture.SwapTexture(contentsManager.GetTexture(@"settingsWindow\windowBackground_155985.png"));
-                SettingsWindowEmblemTexture.SwapTexture(contentsManager.GetTexture(@"settingsWindow\settingsWindowEmblem.png")); // hack MUST BE below windowBackground! hack for blish 0.11.7 tabbedWindow2 not handling asyncTexture swapping
-                MoveDownTexture.SwapTexture(contentsManager.GetTexture(@"settingsWindow\moveDown_155953.png"));
-                MoveDownActiveTexture.SwapTexture(contentsManager.GetTexture(@"settingsWindow\moveDownActive_155953.png"));
-                MoveUpTexture.SwapTexture(contentsManager.GetTexture(@"settingsWindow\moveUp_155953.png"));
-                MoveUpActiveTexture.SwapTexture(contentsManager.GetTexture(@"settingsWindow\moveUpActive_155953.png"));
-                EntryIconPlaceholderTexture.SwapTexture(contentsManager.GetTexture(@"stats\entryIconPlaceholder_1444524.png"));
-                CornerIconTexture.SwapTexture(contentsManager.GetTexture(@"cornerIcon.png"));
-                CornerIconHoverTexture.SwapTexture(contentsManager.GetTexture(@"cornerIconHover.png"));
-                HiddenStatsTexture.SwapTexture(contentsManager.GetTexture(@"hiddenStats.png"));
-            });
+            DebugTabTexture = contentsManager.GetTexture(@"settingsWindow\debugTab_440025.png");
+            VisibilityTabTexture = contentsManager.GetTexture(@"settingsWindow\visibilityTab.png");
+            StatsTabTexture = contentsManager.GetTexture(@"settingsWindow\statsTab_156909.png");
+            GeneralTabTexture = contentsManager.GetTexture(@"settingsWindow\generalTab_156736.png");
+            SettingsWindowBackgroundTexture = contentsManager.GetTexture(@"settingsWindow\windowBackground_155985.png");
+            SettingsWindowEmblemTexture = contentsManager.GetTexture(@"settingsWindow\settingsWindowEmblem.png");
+            MoveDownTexture = contentsManager.GetTexture(@"settingsWindow\moveDown_155953.png");
+            MoveDownActiveTexture = contentsManager.GetTexture(@"settingsWindow\moveDownActive_155953.png");
+            MoveUpTexture = contentsManager.GetTexture(@"settingsWindow\moveUp_155953.png");
+            MoveUpActiveTexture = contentsManager.GetTexture(@"settingsWindow\moveUpActive_155953.png");
+            EntryIconPlaceholderTexture = contentsManager.GetTexture(@"stats\entryIconPlaceholder_1444524.png");
+            CornerIconTexture = contentsManager.GetTexture(@"cornerIcon.png");
+            CornerIconHoverTexture = contentsManager.GetTexture(@"cornerIconHover.png");
+            HiddenStatsTexture = contentsManager.GetTexture(@"hiddenStats.png");
 
             CreateEntryTextures(model);
         }
@@ -58,20 +55,20 @@ namespace SessionTracker.Services
                 entryIcon?.Dispose();
         }
 
-        public AsyncTexture2D DebugTabTexture { get; } = new AsyncTexture2D();
-        public AsyncTexture2D HiddenStatsTexture { get; } = new AsyncTexture2D(ContentService.Textures.Error);
-        public AsyncTexture2D SettingsWindowEmblemTexture { get; } = new AsyncTexture2D(ContentService.Textures.Error);
-        public AsyncTexture2D StatsTabTexture { get; } = new AsyncTexture2D(ContentService.Textures.Error);
-        public AsyncTexture2D GeneralTabTexture { get; } = new AsyncTexture2D(ContentService.Textures.Error);
-        public AsyncTexture2D VisibilityTabTexture { get; } = new AsyncTexture2D(ContentService.Textures.Error);
-        public AsyncTexture2D SettingsWindowBackgroundTexture { get; } = new AsyncTexture2D(ContentService.Textures.Error);
-        public AsyncTexture2D MoveDownTexture { get; } = new AsyncTexture2D(ContentService.Textures.Error);
-        public AsyncTexture2D MoveDownActiveTexture { get; } = new AsyncTexture2D(ContentService.Textures.Error);
-        public AsyncTexture2D MoveUpTexture { get; } = new AsyncTexture2D(ContentService.Textures.Error);
-        public AsyncTexture2D MoveUpActiveTexture { get; } = new AsyncTexture2D(ContentService.Textures.Error);
-        public AsyncTexture2D EntryIconPlaceholderTexture { get; } = new AsyncTexture2D(ContentService.Textures.Error);
-        public AsyncTexture2D CornerIconTexture { get; } = new AsyncTexture2D(ContentService.Textures.Error);
-        public AsyncTexture2D CornerIconHoverTexture { get; } = new AsyncTexture2D(ContentService.Textures.Error);
+        public Texture2D DebugTabTexture { get; }
+        public Texture2D HiddenStatsTexture { get; }
+        public Texture2D SettingsWindowEmblemTexture { get; }
+        public Texture2D StatsTabTexture { get; }
+        public Texture2D GeneralTabTexture { get; }
+        public Texture2D VisibilityTabTexture { get; }
+        public Texture2D SettingsWindowBackgroundTexture { get; }
+        public Texture2D MoveDownTexture { get; }
+        public Texture2D MoveDownActiveTexture { get; }
+        public Texture2D MoveUpTexture { get; }
+        public Texture2D MoveUpActiveTexture { get; }
+        public Texture2D EntryIconPlaceholderTexture { get; }
+        public Texture2D CornerIconTexture { get; }
+        public Texture2D CornerIconHoverTexture { get; }
         public Dictionary<string, AsyncTexture2D> EntryTextureByEntryId { get; } = new Dictionary<string, AsyncTexture2D>();
 
         private void CreateEntryTextures(Model model)
@@ -86,15 +83,7 @@ namespace SessionTracker.Services
                     if (entry.HasIconUrl)
                         EntryTextureByEntryId[entry.Id] = GameService.Content.GetRenderServiceTexture(entry.IconUrl);
                     else if (entry.HasIconFile)
-                    {
-                        EntryTextureByEntryId[entry.Id] = new AsyncTexture2D(ContentService.Textures.Error);
-
-                        GameService.Graphics.QueueMainThreadRender((graphicsDevice) =>
-                        {
-                            // workaround for blish 0.11.7 because only main thread should use graphicsDevice
-                            EntryTextureByEntryId[entry.Id].SwapTexture(_contentsManager.GetTexture($@"stats\{entry.IconFileName}"));
-                        });
-                    }
+                        EntryTextureByEntryId[entry.Id] = _contentsManager.GetTexture($@"stats\{entry.IconFileName}");
                     else
                     {
                         _logger.Error($"Error: Icon texture missing for entryId: {entry.Id}. Use placeholder icon as fallback.");
