@@ -42,19 +42,17 @@ namespace SessionTracker.Controls
             return _timeWaitedForApiTokenInMilliseconds >= 20 * 1000;
         }
 
-        public bool IntervalEndedBetweenApiTokenExistsChecks()
+        public bool IsTimeForNextApiTokenCheck()
         {
             return _elapsedTimeTotalInMilliseconds >= 200;
         }
 
-        public bool IntervalEndedBetweenInitStatsRetries()
+        public bool IsTimeForNextTryToInitStats()
         {
             return _elapsedTimeTotalInMilliseconds >= RETRY_INIT_STATS_INTERVAL_IN_SECONDS * 1000;
         }
 
-        public const int RETRY_INIT_STATS_INTERVAL_IN_SECONDS = 5;
-
-        public bool IntervalEndedBetweenStatsUpdates()
+        public bool IsTimeForNextStatsUpdate()
         {
             return _elapsedTimeTotalInMilliseconds >= _updateStatsIntervalInMilliseconds;
         }
@@ -66,7 +64,8 @@ namespace SessionTracker.Controls
                 : REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS;
         }
 
-        private const double REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 60 * 1000;
+        public const int RETRY_INIT_STATS_INTERVAL_IN_SECONDS = 5; // seconds instead of milliseconds because value is displayed in UI
+        private const double REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 60 * 1000; // 5 minutes
         private double _updateStatsIntervalInMilliseconds = REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS;
         private double _elapsedTimeTotalInMilliseconds;
         private double _timeWaitedForApiTokenInMilliseconds;

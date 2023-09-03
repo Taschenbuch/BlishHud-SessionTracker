@@ -12,8 +12,8 @@ namespace SessionTracker.Settings.SettingEntries
             var fontSizeIndexSetting = settings.DefineSetting(
                 "font size index",
                 5,
-                () => "ui scaling",
-                () => "Change ui scaling by changing font sizes and icon sizes.");
+                () => "ui size",
+                () => "Change ui size by changing font sizes and icon sizes.");
 
             fontSizeIndexSetting.SetRange(0, Fonts.Count - 1);
 

@@ -99,10 +99,10 @@ namespace SessionTracker.Controls
 
             switch (_updateState.State)
             {
-                case State.WaitForApiTokenAfterModuleStart: // to prevent showing an api key error message right after the module started
+                case State.WaitForApiTokenAfterModuleStart: // prevent showing an api key error message right after the module started
                     _updateState.AddToTimeWaitedForApiToken(gameTime.ElapsedGameTime.TotalMilliseconds);
 
-                    if (_updateState.IntervalEndedBetweenApiTokenExistsChecks() == false)
+                    if (!_updateState.IsTimeForNextApiTokenCheck())
                         return;
 
                     _updateState.ResetElapsedTime();
@@ -115,19 +115,19 @@ namespace SessionTracker.Controls
 
                     if (_updateState.WaitedLongEnoughForApiTokenEitherApiKeyIsMissingOrUserHasNotLoggedIntoACharacter())
                     {
-                        _updateState.State = State.ResetAndInitStats; // to provoke api key error message
+                        // to provoke api key error message for user even in character select.
+                        _updateState.State = State.ResetAndInitStats; 
                         return;
                     }
                     
                     SetValueTextAndTooltip("Loading...", "Waiting for user to log into a character or API token from blish.", _valueLabelByEntryId.Values);
                     return;
                 case State.WaitBeforeResetAndInitStats:
-                    if (_updateState.IntervalEndedBetweenInitStatsRetries())
-                    {
-                        _updateState.ResetElapsedTime(); 
-                        _updateState.State = State.ResetAndInitStats;
+                    if (!_updateState.IsTimeForNextTryToInitStats())
                         return;
-                    }
+                    
+                    _updateState.ResetElapsedTime(); 
+                    _updateState.State = State.ResetAndInitStats;
                     return;
                 case State.ResetAndInitStats:
                     _updateState.ResetElapsedTime();
@@ -135,16 +135,16 @@ namespace SessionTracker.Controls
                     Task.Run(ResetAndInitStatValues);
                     return;
                 case State.UpdateStats:
-                    if (_updateState.IntervalEndedBetweenStatsUpdates())
-                    {
-                        _updateState.ResetElapsedTime();
-                        _updateState.State = State.WaitForApiResponse;
-                        Task.Run(UpdateStatValues);
-                    }
+                    if (!_updateState.IsTimeForNextStatsUpdate())
+                        return;
+
+                    _updateState.ResetElapsedTime();
+                    _updateState.State = State.WaitForApiResponse;
+                    Task.Run(UpdateStatValues);
                     return;
                 case State.WaitForApiResponse:
-                    // the Task.Run() calls will update the state to leave this state.
-                    // state should not be set here to prevent racing conditions between the Task.Runs and this case
+                    // this case is used to wait for the Task.Run(..) to finish. They will update the state to leave this state, too.
+                    // Because of that the state must not be set here directly. It would cause state update racing conditions with the Task.Runs
                     _updateState.ResetElapsedTime();
                     return;
                 default:
@@ -173,12 +173,10 @@ namespace SessionTracker.Controls
             {
                 var tooltip = $"Error: API call failed or bug in module code. :( \n{RETRY_IN_X_SECONDS_MESSAGE}";
                 SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByEntryId.Values);
-                
                 _logger.Warn(e, "Error when initializing values: API failed to respond or bug in module code.");
                 _updateState.State = State.WaitBeforeResetAndInitStats;
             }
         }
-        
 
         private async void UpdateStatValues()
         {
@@ -193,7 +191,6 @@ namespace SessionTracker.Controls
                 }
 
                 await ApiService.UpdateTotalValuesInModel(_model, _gw2ApiManager);
-
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _statTooltipService.UpdateSummaryTooltip(_model);
             }
@@ -235,7 +232,6 @@ namespace SessionTracker.Controls
         {
             _titlesFlowPanel.ClearChildren();
             _valuesFlowPanel.ClearChildren();
-
             var visibleEntries = _model.Entries.WhereUserSetToBeVisible();
 
             if (_settingService.HideStatsWithValueZeroSetting.Value)

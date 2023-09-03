@@ -12,12 +12,12 @@ namespace SessionTracker.Services.Api
     {
         public static bool ModuleHasApiToken(Gw2ApiManager gw2ApiManager)
         {
-            return gw2ApiManager.HasPermissions(TOKEN_PERMISSION_EVERY_API_KEY_HAS_AUTOMATICALLY);
+            return gw2ApiManager.HasPermissions(API_TOKEN_PERMISSIONS_EVERY_API_KEY_HAS_BY_DEFAULT);
         }
 
         public static bool ApiKeyIsMissingPermissions(Gw2ApiManager gw2ApiManager)
         {
-            return gw2ApiManager.HasPermissions(API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE) == false;
+            return !gw2ApiManager.HasPermissions(API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE);
         }
 
         public static async Task UpdateTotalValuesInModel(Model model, Gw2ApiManager gw2ApiManager)
@@ -70,7 +70,7 @@ namespace SessionTracker.Services.Api
             TokenPermission.Inventories,
         };
 
-        private static List<TokenPermission> TOKEN_PERMISSION_EVERY_API_KEY_HAS_AUTOMATICALLY => new List<TokenPermission>
+        private static List<TokenPermission> API_TOKEN_PERMISSIONS_EVERY_API_KEY_HAS_BY_DEFAULT => new List<TokenPermission>
         {
             TokenPermission.Account
         };
