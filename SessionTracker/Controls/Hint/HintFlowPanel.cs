@@ -68,7 +68,7 @@ namespace SessionTracker.Controls.Hint
             // remove all from parent to prevent messing up their order
             _hiddenByZeroSessionValuesImage.Parent = null;
             _hiddenByUserLabel.Parent              = null;
-            _openSettingsButton.Parent                 = null;
+            _openSettingsButton.Parent             = null;
 
             var hintType = DetermineWhichHintToShow(_entries, _settingService.HideStatsWithValueZeroSetting.Value);
 
@@ -77,20 +77,20 @@ namespace SessionTracker.Controls.Hint
                 case HintType.AllStatsHiddenByUser:
                     _hiddenByZeroSessionValuesImage.Parent = null;
                     _hiddenByUserLabel.Parent              = this;
-                    _openSettingsButton.Parent                 = this;
+                    _openSettingsButton.Parent             = this;
                     Show();
                     break;
                 case HintType.AllStatsHiddenBecauseOfZeroValue:
                     _hiddenByZeroSessionValuesImage.Parent = this;
                     _hiddenByUserLabel.Parent              = null;
-                    _openSettingsButton.Parent                 = null;
+                    _openSettingsButton.Parent             = null;
                     Show();
                     break;
                 case HintType.None:
                 default:
                     _hiddenByZeroSessionValuesImage.Parent = null;
                     _hiddenByUserLabel.Parent              = null;
-                    _openSettingsButton.Parent                 = null;
+                    _openSettingsButton.Parent             = null;
                     Hide();
                     break;
             }
