@@ -112,7 +112,7 @@ namespace SessionTracker.Controls.Hint
         {
             var font = FontService.Fonts[_settingService.FontSizeIndexSetting.Value];
             _hiddenByUserLabel.Font = font; 
-            _hiddenByZeroSessionValuesImage.Size = new Point(2 * font.LineHeight);
+            _hiddenByZeroSessionValuesImage.Size = new Point(font.LineHeight);
         }
 
         private static HintType DetermineWhichHintToShow(List<Entry> entries, bool hideStatsWithValueZero)
