@@ -80,6 +80,7 @@ namespace SessionTracker
             if (_model != null)
                 _fileService.SaveModelToFile(_model);
 
+            _settingService.UiVisibilityKeyBindingSetting.Value.Enabled   = false; // workaround to fix keybinding memory leak
             _settingService.UiVisibilityKeyBindingSetting.Value.Activated -= OnUiVisibilityKeyBindingActivated;
 
             _settingsWindowService?.Dispose();
