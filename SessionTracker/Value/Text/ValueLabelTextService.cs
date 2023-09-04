@@ -50,16 +50,19 @@ namespace SessionTracker.Value.Text
                 else if (entry.Id == EntryId.WVW_KDR)
                 {
                     // only calculate session ratio. total ratio would be very incorrect because total deaths come from all game modes over the account life time.
-                    var wvwKills = _model.GetEntry(EntryId.WVW_KILLS).Value.Session;
-                    var deaths   = _model.GetEntry(EntryId.DEATHS).Value.Session;
-                    _valueLabelByEntryId[EntryId.WVW_KDR].Text = ValueTextService.CreateKillsDeathsRatioText(wvwKills, deaths);
+                    var kills = _model.GetEntry(EntryId.WVW_KILLS).Value.Session;
+                    var deaths = _model.GetEntry(EntryId.DEATHS).Value.Session;
+                    _valueLabelByEntryId[EntryId.WVW_KDR].Text = ValueTextService.CreateKillsDeathsRatioText(kills, deaths);
+                    PreventKdrEntryFromAlwaysBeingHiddenByHideZeroValuesSetting(entry, kills, deaths);
+
                 }
                 else if (entry.Id == EntryId.PVP_KDR)
                 {
                     // only calculate session ratio. total ratio would be very incorrect because total deaths come from all game modes over the account life time.
-                    var pvpKills = _model.GetEntry(EntryId.PVP_KILLS).Value.Session;
-                    var deaths   = _model.GetEntry(EntryId.DEATHS).Value.Session;
-                    _valueLabelByEntryId[EntryId.PVP_KDR].Text = ValueTextService.CreateKillsDeathsRatioText(pvpKills, deaths);
+                    var kills = _model.GetEntry(EntryId.PVP_KILLS).Value.Session;
+                    var deaths = _model.GetEntry(EntryId.DEATHS).Value.Session;
+                    _valueLabelByEntryId[EntryId.PVP_KDR].Text = ValueTextService.CreateKillsDeathsRatioText(kills, deaths);
+                    PreventKdrEntryFromAlwaysBeingHiddenByHideZeroValuesSetting(entry, kills, deaths);
                 }
                 else
                 {
@@ -73,6 +76,14 @@ namespace SessionTracker.Value.Text
                         _settingService.TotalValuesAreVisibleSetting.Value);
                 }
             }
+        }
+
+        // factor 200 because 1/200 would be 0.005 which is rounded to 0.01 in UI. So it has to be 200 * kills for integer division to result in "0" for "0.00"
+        private static void PreventKdrEntryFromAlwaysBeingHiddenByHideZeroValuesSetting(Entry kdrEntry, int kills, int deaths)
+        {
+            kdrEntry.Value.Total = deaths == 0 || kills == 0
+                ? 0
+                : (200 * kills) / deaths;
         }
 
         private void OnTotalValueVisibilitySettingChanged(object sender, ValueChangedEventArgs<bool> valueChangedEventArgs)
