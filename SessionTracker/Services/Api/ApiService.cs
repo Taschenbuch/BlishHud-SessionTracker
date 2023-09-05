@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Blish_HUD.Modules.Managers;
+using Gw2Sharp.WebApi.V2;
 using Gw2Sharp.WebApi.V2.Models;
 using SessionTracker.Models;
 using SessionTracker.Models.Constants;
@@ -47,9 +47,8 @@ namespace SessionTracker.Services.Api
 
             await Task.WhenAll(apiResponseTasks);
 
-            model.GetEntry(EntryId.DEATHS).Value.Total   = charactersTask.Result.Sum(c => c.Deaths);
             model.GetEntry(EntryId.WVW_RANK).Value.Total = accountTask.Result.WvwRank ?? 0;
-
+            OtherTotalValueService.SetDeathsTotalValue(model, charactersTask);
             OtherTotalValueService.SetLuckTotalValue(model, progressionTask);
             OtherTotalValueService.SetPvpTotalValues(model, pvpStatsTask);
             CurrencyTotalValueService.SetCurrencyTotalValues(model, walletTask);

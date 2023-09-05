@@ -10,6 +10,24 @@ namespace SessionTracker.Services.Api
 {
     public class OtherTotalValueService
     {
+        public static void SetDeathsTotalValue(Model model, Task<IApiV2ObjectList<Character>> charactersTask)
+        {
+            var newDeaths = charactersTask.Result.Sum(c => c.Deaths);
+            var oldDeaths = model.GetEntry(EntryId.DEATHS).Value.Total;
+            model.GetEntry(EntryId.DEATHS).Value.Total = GetNewValueIfNotApiBug(newDeaths, oldDeaths);
+        }
+
+        // In rare cases the next total value is lower than the previous total value. It is an api bug that is visible in Gw2effiency graphs too.
+        // The next api request typically gives the correct value again. So the issue is only temporary.
+        // Happened with deaths (reported by users) and pvp/wvw kills (happened to me in the past, i think).
+        public static int GetNewValueIfNotApiBug(int newValue, int oldValue)
+        {
+            var hastemporaryApiValueBug = newValue < oldValue;
+            return hastemporaryApiValueBug
+                ? oldValue
+                : newValue;
+        }
+
         public static void SetLuckTotalValue(Model model, Task<IApiV2ObjectList<AccountProgression>> progressionTask)
         {
             var luck        = progressionTask.Result.SingleOrDefault(p => p.Id == "luck");
