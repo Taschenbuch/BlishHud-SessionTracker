@@ -69,7 +69,17 @@ namespace SessionTracker.Settings
                 using (var streamReader = new StreamReader(fileStream))
                 {
                     var modelJson = await streamReader.ReadToEndAsync();
-                    return JsonConvert.DeserializeObject<Model>(modelJson);
+                    var model = JsonConvert.DeserializeObject<Model>(modelJson);
+
+                    // otherwise sentry reports null reference exception in migrationService because model is null. No idea how the file can be empty 
+                    var moduleFolderModuleFileIsEmpty = model == null; 
+                    if (moduleFolderModuleFileIsEmpty)
+                    {
+                        logger.Error("Error: Failed to load model from file in module folder in Module.LoadAsync(). File is empty :(");
+                        return MODEL_WITH_ERROR_ENTRY; // todo richtiges handling hierfür nötig. Das Model ist ja leer
+                    }
+
+                    return model;
                 }
             }
             catch (Exception e)
