@@ -7,12 +7,12 @@ namespace SessionTracker.Settings
 {
     public class MigrationService
     {
-        // ==== CHANGE LOG ====
-        // new in 1.4.0:
+        // ======== CHANGE LOG ========
+        // 2.0:
         // - string IconUrl -> int IconAssetId
+        // - is handled automatically because currently ref model is used with updated order and isVisible property
         //
-        // Version definitions
-        //
+        // ======== Version definitions ======== 
         // ==== MAJOR ====
         // - model format has changed
         // - OR entryIds of existing entries have been modified.
@@ -37,12 +37,15 @@ namespace SessionTracker.Settings
 
             if (refModel.MajorVersion > persistedModel.MajorVersion)
             {
-                // migration will be implemented, when major version >1 is used for the first time
-                logger.Error($"Error: ref MajorVersion > persisted MajorVersion. " +
-                              $"A migration for that is not implemented yet. That is a bug. {versionText} " +
-                              $"Please contact the module developer in blishhud discord. :(");
+                if(refModel.MajorVersion != 2) // no migration required for 1 -> 2
+                {
+                    // migration will be implemented, when major version >1 is used for the first time
+                    logger.Error($"Error: ref MajorVersion > persisted MajorVersion. " +
+                                  $"A migration for that is not implemented yet. That is a bug. {versionText} " +
+                                  $"Please contact the module developer in blishhud discord. :(");
 
-                return refModel;
+                    return refModel;
+                }
             }
 
             if (refModel.MajorVersion < persistedModel.MajorVersion)
