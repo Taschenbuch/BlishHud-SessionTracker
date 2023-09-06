@@ -19,14 +19,14 @@ using Color = Microsoft.Xna.Framework.Color;
 
 namespace SessionTracker.Controls
 {
-    public class EntriesContainer : RelativePositionAndMouseDraggableContainer
+    public class StatsContainer : RelativePositionAndMouseDraggableContainer
     {
-        public EntriesContainer(Model model,
-                                Gw2ApiManager gw2ApiManager,
-                                TextureService textureService,
-                                SettingsWindowService settingsWindowService,
-                                SettingService settingService,
-                                Logger logger)
+        public StatsContainer(Model model,
+                              Gw2ApiManager gw2ApiManager,
+                              TextureService textureService,
+                              SettingsWindowService settingsWindowService,
+                              SettingService settingService,
+                              Logger logger)
             : base(settingService)
         {
             _model          = model;
@@ -38,8 +38,8 @@ namespace SessionTracker.Controls
             _updateState = new UpdateState(settingService);
             CreateUi(settingsWindowService);
 
-            _valueLabelTextService = new ValueLabelTextService(_valueLabelByEntryId, _model, settingService, logger);
-            _statTooltipService    = new StatTooltipService(_titleFlowPanelByEntryId, _valueLabelByEntryId, model, _settingService);
+            _valueLabelTextService = new ValueLabelTextService(_valueLabelByStatId, _model, settingService, logger);
+            _statTooltipService    = new StatTooltipService(_titleFlowPanelByStatId, _valueLabelByStatId, model, _settingService);
 
             settingService.HideStatsWithValueZeroSetting.SettingChanged  += OnHideStatsWithValueZeroSettingChanged;
             settingService.FontSizeIndexSetting.SettingChanged           += OnFontSizeIndexSettingChanged;
@@ -90,9 +90,9 @@ namespace SessionTracker.Controls
             if (_model.UiHasToBeUpdated)
             {
                 _model.UiHasToBeUpdated = false;
-                ShowOrHideEntries();
+                ShowOrHideStats();
                 _rootFlowPanel.HideScrollbarIfExists();
-                _hintFlowPanel.ShowHintWhenAllEntriesAreHidden();
+                _hintFlowPanel.ShowHintWhenAllStatsAreHidden();
             }
 
             _updateState.AddToElapsedTime(gameTime.ElapsedGameTime.TotalMilliseconds);
@@ -120,7 +120,7 @@ namespace SessionTracker.Controls
                         return;
                     }
                     
-                    SetValueTextAndTooltip("Loading...", "Waiting for user to log into a character or API token from blish.", _valueLabelByEntryId.Values);
+                    SetValueTextAndTooltip("Loading...", "Waiting for user to log into a character or API token from blish.", _valueLabelByStatId.Values);
                     return;
                 case State.WaitBeforeResetAndInitStats:
                     if (!_updateState.IsTimeForNextTryToInitStats())
@@ -172,7 +172,7 @@ namespace SessionTracker.Controls
             catch (Exception e)
             {
                 var tooltip = $"Error: API call failed or bug in module code. :( \n{RETRY_IN_X_SECONDS_MESSAGE}";
-                SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByEntryId.Values);
+                SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
                 _logger.Warn(e, "Error when initializing values: API failed to respond or bug in module code.");
                 _updateState.State = State.WaitBeforeResetAndInitStats;
             }
@@ -216,45 +216,45 @@ namespace SessionTracker.Controls
                           $"Required permissions: {string.Join(", ", ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE)}\n" +
                           RETRY_IN_X_SECONDS_MESSAGE;
 
-            SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByEntryId.Values);
+            SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
         }
 
-        private static void SetValueTextAndTooltip(string text, string tooltip, Dictionary<string, Label>.ValueCollection valueLabelByEntryId)
+        private static void SetValueTextAndTooltip(string text, string tooltip, Dictionary<string, Label>.ValueCollection valueLabelByStatId)
         {
-            foreach (var valueLabel in valueLabelByEntryId)
+            foreach (var valueLabel in valueLabelByStatId)
             {
                 valueLabel.Text             = text;
                 valueLabel.BasicTooltipText = tooltip;
             }
         }
 
-        private void ShowOrHideEntries()
+        private void ShowOrHideStats()
         {
             _titlesFlowPanel.ClearChildren();
             _valuesFlowPanel.ClearChildren();
-            var visibleEntries = _model.Entries.WhereUserSetToBeVisible();
+            var visibleStats = _model.Stats.WhereUserSetToBeVisible();
 
             if (_settingService.HideStatsWithValueZeroSetting.Value)
-                visibleEntries = visibleEntries.WhereSessionValueIsNonZero();
+                visibleStats = visibleStats.WhereSessionValueIsNonZero();
 
-            foreach (var entry in visibleEntries)
+            foreach (var stat in visibleStats)
             {
-                _titleFlowPanelByEntryId[entry.Id].Show();
-                _valueLabelByEntryId[entry.Id].Parent = _valuesFlowPanel;
+                _titleFlowPanelByStatId[stat.Id].Show();
+                _valueLabelByStatId[stat.Id].Parent = _valuesFlowPanel;
             }
         }
 
         private void CreateUi(SettingsWindowService settingsWindowService)
         {
 
-            _hintFlowPanel = new HintFlowPanel(_model.Entries, settingsWindowService, _textureService, _settingService, this)
+            _hintFlowPanel = new HintFlowPanel(_model.Stats, settingsWindowService, _textureService, _settingService, this)
             {
                 FlowDirection    = ControlFlowDirection.SingleTopToBottom,
                 WidthSizingMode  = SizingMode.AutoSize,
                 HeightSizingMode = SizingMode.AutoSize,
             };
 
-            _hintFlowPanel.ShowHintWhenAllEntriesAreHidden();
+            _hintFlowPanel.ShowHintWhenAllStatsAreHidden();
 
             _rootFlowPanel = new RootFlowPanel(this, _settingService);
 
@@ -276,9 +276,9 @@ namespace SessionTracker.Controls
 
             var font = FontService.Fonts[_settingService.FontSizeIndexSetting.Value];
 
-            foreach (var entry in _model.Entries)
+            foreach (var stat in _model.Stats)
             {
-                _valueLabelByEntryId[entry.Id] = new Label()
+                _valueLabelByStatId[stat.Id] = new Label()
                 {
                     Text           = "-",
                     TextColor      = _settingService.ValueLabelColorSetting.Value.GetColor(),
@@ -286,10 +286,10 @@ namespace SessionTracker.Controls
                     ShowShadow     = true,
                     AutoSizeHeight = true,
                     AutoSizeWidth  = true,
-                    Parent         = entry.IsVisible ? _valuesFlowPanel : null
+                    Parent         = stat.IsVisible ? _valuesFlowPanel : null
                 };
 
-                _titleFlowPanelByEntryId[entry.Id] = new EntryTitleFlowPanel(entry, font, _titlesFlowPanel, _textureService, _settingService);
+                _titleFlowPanelByStatId[stat.Id] = new StatTitleFlowPanel(stat, font, _titlesFlowPanel, _textureService, _settingService);
             }
 
             _rootFlowPanel.HideScrollbarIfExists();
@@ -297,13 +297,13 @@ namespace SessionTracker.Controls
 
         private void OnUserChangedLanguageInBlishSettings(object sender, ValueEventArgs<System.Globalization.CultureInfo> e)
         {
-            foreach (var titleFlowPanel in _titleFlowPanelByEntryId)
+            foreach (var titleFlowPanel in _titleFlowPanelByStatId)
                 titleFlowPanel.Value.UpdateLabelText();
         }
 
         private void OnValueLabelColorSettingChanged(object sender, ValueChangedEventArgs<ColorType> e)
         {
-            foreach (var valueLabel in _valueLabelByEntryId.Values)
+            foreach (var valueLabel in _valueLabelByStatId.Values)
                 valueLabel.TextColor = e.NewValue.GetColor();
         }
 
@@ -311,7 +311,7 @@ namespace SessionTracker.Controls
         {
             var font = FontService.Fonts[_settingService.FontSizeIndexSetting.Value];
 
-            foreach (var label in _valueLabelByEntryId.Values)
+            foreach (var label in _valueLabelByStatId.Values)
                 label.Font = font;
         }
         
@@ -332,8 +332,8 @@ namespace SessionTracker.Controls
         private readonly SettingService _settingService;
         private readonly StatTooltipService _statTooltipService;
         private readonly ValueLabelTextService _valueLabelTextService;
-        private readonly Dictionary<string, EntryTitleFlowPanel> _titleFlowPanelByEntryId = new Dictionary<string, EntryTitleFlowPanel>();
-        private readonly Dictionary<string, Label> _valueLabelByEntryId = new Dictionary<string, Label>();
+        private readonly Dictionary<string, StatTitleFlowPanel> _titleFlowPanelByStatId = new Dictionary<string, StatTitleFlowPanel>();
+        private readonly Dictionary<string, Label> _valueLabelByStatId = new Dictionary<string, Label>();
         private readonly UpdateState _updateState;
         private FlowPanel _titlesFlowPanel;
         private FlowPanel _valuesFlowPanel;

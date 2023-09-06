@@ -11,19 +11,19 @@ namespace SessionTracker.JsonFileCreator
         static async Task Main()
         {
             var model = new Model();
-            await AddEntriesToModel(model);
+            await AddStatsToModel(model);
             var jsonModel = FileService.SerializeModelToJson(model);
             File.WriteAllText(@"C:\Dev\blish\model.json", jsonModel);
         }
 
-        private static async Task AddEntriesToModel(Model model)
+        private static async Task AddStatsToModel(Model model)
         {
             var itemStats     = await ItemService.CreateItemStats();
             var currencyStats = await CurrencyStatService.CreateCurrencyStats();
 
-            model.Entries.AddRange(itemStats);
-            model.Entries.AddRange(CustomStatService.CustomStats);
-            model.Entries.AddRange(currencyStats);
+            model.Stats.AddRange(itemStats);
+            model.Stats.AddRange(CustomStatService.CustomStats);
+            model.Stats.AddRange(currencyStats);
         }
     }
 }

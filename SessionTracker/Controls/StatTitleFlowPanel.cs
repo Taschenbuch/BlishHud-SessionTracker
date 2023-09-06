@@ -7,22 +7,22 @@ using SessionTracker.Settings.SettingEntries;
 
 namespace SessionTracker.Controls
 {
-    public class EntryTitleFlowPanel : FlowPanel
+    public class StatTitleFlowPanel : FlowPanel
     {
-        public EntryTitleFlowPanel(Entry entry, BitmapFont font, Container parent, TextureService textureService, SettingService settingService)
+        public StatTitleFlowPanel(Stat stat, BitmapFont font, Container parent, TextureService textureService, SettingService settingService)
         {
-            _entry          = entry;
+            _stat          = stat;
             _parent         = parent;
             _settingService = settingService;
 
             FlowDirection    = ControlFlowDirection.SingleLeftToRight;
             WidthSizingMode  = SizingMode.AutoSize;
             HeightSizingMode = SizingMode.AutoSize;
-            Parent           = entry.IsVisible ? parent : null;
+            Parent           = stat.IsVisible ? parent : null;
 
             var titleLabel = new Label()
             {
-                Text           = entry.Name.Localized,
+                Text           = stat.Name.Localized,
                 TextColor      = settingService.TitleLabelColorSetting.Value.GetColor(),
                 Font           = font,
                 ShowShadow     = true,
@@ -30,7 +30,7 @@ namespace SessionTracker.Controls
                 AutoSizeWidth  = true,
             };
 
-            var asyncTexture2D = textureService.EntryTextureByEntryId[entry.Id];
+            var asyncTexture2D = textureService.StatTextureByStatId[stat.Id];
             _titleImage = new Image(asyncTexture2D)
             {
                 Size = new Point(titleLabel.Height),
@@ -66,9 +66,9 @@ namespace SessionTracker.Controls
 
         public void UpdateLabelText()
         {
-            _titleLabel.Text             = _entry.Name.Localized;
-            _titleLabel.BasicTooltipText = _entry.Description.Localized;
-            _titleImage.BasicTooltipText = _entry.Description.Localized;
+            _titleLabel.Text             = _stat.Name.Localized;
+            _titleLabel.BasicTooltipText = _stat.Description.Localized;
+            _titleImage.BasicTooltipText = _stat.Description.Localized;
         }
 
         public override void Show()
@@ -144,7 +144,7 @@ namespace SessionTracker.Controls
 
         private readonly Image _titleImage;
         private readonly Label _titleLabel;
-        private readonly Entry _entry;
+        private readonly Stat _stat;
         private readonly Container _parent;
         private readonly SettingService _settingService;
         private readonly Label _paddingLabelBetweenIconAndText;

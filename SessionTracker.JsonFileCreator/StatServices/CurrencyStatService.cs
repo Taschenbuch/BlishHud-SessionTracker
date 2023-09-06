@@ -10,15 +10,15 @@ namespace SessionTracker.JsonFileCreator.StatServices
 {
     public class CurrencyStatService
     {
-        public static async Task<List<Entry>> CreateCurrencyStats()
+        public static async Task<List<Stat>> CreateCurrencyStats()
         {
-            var entries = await CreateStats();
-            return await AddLocalizedTexts(entries);
+            var stats = await CreateStats();
+            return await AddLocalizedTexts(stats);
         }
 
-        private static async Task<List<Entry>> CreateStats()
+        private static async Task<List<Stat>> CreateStats()
         {
-            var entries = new List<Entry>();
+            var stats = new List<Stat>();
 
             using (var client = new Gw2Client(new Connection(Locale.English)))
             {
@@ -26,7 +26,7 @@ namespace SessionTracker.JsonFileCreator.StatServices
 
                 foreach (var currency in currencies)
                 {
-                    var entry = new Entry
+                    var stat = new Stat
                     {
                         Id          = $"currency{currency.Id}",
                         ApiId       = currency.Id,
@@ -35,14 +35,14 @@ namespace SessionTracker.JsonFileCreator.StatServices
                         IsVisible   = false
                     };
 
-                    entries.Add(entry);
+                    stats.Add(stat);
                 }
             }
 
-            return entries;
+            return stats;
         }
 
-        private static async Task<List<Entry>> AddLocalizedTexts(List<Entry> entries)
+        private static async Task<List<Stat>> AddLocalizedTexts(List<Stat> stats)
         {
             var locales = new List<Locale>() { Locale.English, Locale.French, Locale.German, Locale.Spanish, Locale.Chinese, Locale.Korean };
 
@@ -53,21 +53,21 @@ namespace SessionTracker.JsonFileCreator.StatServices
                     var currencies = await client.WebApi.V2.Currencies.AllAsync();
 
                     foreach (var currency in currencies)
-                        UpdateTexts(currency, entries, local);
+                        UpdateTexts(currency, stats, local);
                 }
             }
 
-            return entries;
+            return stats;
         }
 
-        private static void UpdateTexts(Currency currency, List<Entry> entries, Locale local)
+        private static void UpdateTexts(Currency currency, List<Stat> stats, Locale local)
         {
-            var entryForCurrencyExists = entries.Any(e => e.ApiId == currency.Id);
-            if (entryForCurrencyExists)
+            var statForCurrencyExists = stats.Any(e => e.ApiId == currency.Id);
+            if (statForCurrencyExists)
             {
-                var matchingEntry = entries.Single(e => e.ApiId == currency.Id);
-                matchingEntry.Name.SetLocalizedText(currency.Name, local);
-                matchingEntry.Description.SetLocalizedText(currency.Description, local);
+                var matchingStat = stats.Single(e => e.ApiId == currency.Id);
+                matchingStat.Name.SetLocalizedText(currency.Name, local);
+                matchingStat.Description.SetLocalizedText(currency.Description, local);
             }
         }
     }

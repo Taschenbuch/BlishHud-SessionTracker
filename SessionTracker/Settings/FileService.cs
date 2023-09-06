@@ -76,7 +76,7 @@ namespace SessionTracker.Settings
                     if (moduleFolderModuleFileIsEmpty)
                     {
                         logger.Error("Error: Failed to load model from file in module folder in Module.LoadAsync(). File is empty :(");
-                        return MODEL_WITH_ERROR_ENTRY; // todo richtiges handling hierfür nötig. Das Model ist ja leer
+                        return MODEL_WITH_ERROR_STAT; // todo richtiges handling hierfür nötig. Das Model ist ja leer
                     }
 
                     return model;
@@ -85,7 +85,7 @@ namespace SessionTracker.Settings
             catch (Exception e)
             {
                 logger.Error(e, "Error: Failed to load model from file in module folder in Module.LoadAsync(). :(");
-                return MODEL_WITH_ERROR_ENTRY; // todo richtiges handling hierfür nötig. Das Model ist ja leer
+                return MODEL_WITH_ERROR_STAT; // todo richtiges handling hierfür nötig. Das Model ist ja leer
             }
         }
 
@@ -104,7 +104,7 @@ namespace SessionTracker.Settings
             catch (Exception e)
             {
                 logger.Error(e, "Error: Failed to load model from file in ref folder in Module.LoadAsync(). :(");
-                return MODEL_WITH_ERROR_ENTRY; // todo richtiges handling hierfür nötig. Das Model ist ja leer
+                return MODEL_WITH_ERROR_STAT; // todo richtiges handling hierfür nötig. Das Model ist ja leer
             }
         }
 
@@ -114,15 +114,15 @@ namespace SessionTracker.Settings
         private readonly ContentsManager _contentsManager;
         private readonly Logger _logger;
 
-        private static Model MODEL_WITH_ERROR_ENTRY
+        private static Model MODEL_WITH_ERROR_STAT
         {
             get
             {
-                var dummyEntry = new Entry();
-                dummyEntry.Name.SetLocalizedText("Failed to load model from file", Locale.English);
+                var dummyStat = new Stat();
+                dummyStat.Name.SetLocalizedText("Failed to load model from file", Locale.English);
 
                 return new Model {
-                    Entries = { dummyEntry }
+                    Stats = { dummyStat }
                 };
             }
         }

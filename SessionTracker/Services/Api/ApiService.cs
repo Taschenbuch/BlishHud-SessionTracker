@@ -47,7 +47,7 @@ namespace SessionTracker.Services.Api
 
             await Task.WhenAll(apiResponseTasks);
 
-            model.GetEntry(EntryId.WVW_RANK).Value.Total = accountTask.Result.WvwRank ?? 0;
+            model.GetStat(StatId.WVW_RANK).Value.Total = accountTask.Result.WvwRank ?? 0;
             OtherTotalValueService.SetDeathsTotalValue(model, charactersTask);
             OtherTotalValueService.SetLuckTotalValue(model, progressionTask);
             OtherTotalValueService.SetPvpTotalValues(model, pvpStatsTask);

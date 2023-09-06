@@ -15,15 +15,15 @@ namespace SessionTracker.Settings
         // ======== Version definitions ======== 
         // ==== MAJOR ====
         // - model format has changed
-        // - OR entryIds of existing entries have been modified.
+        // - OR statIds of existing stats have been modified.
         // - A migration has to be implemented which depends on the major versions involved.
         // - migration has to be 1 major version steps.
         // e.g. for a migration from 1.x.x. to 3.x.x the steps would be to migrate from 1.x.x to 2.x.x. and then from 2.x.x to 3.x.x
         //
         // ==== MINOR ====
-        // - values of existing entries have been modified. That does NOT include entryId changes! entryId changes are MAJOR changes.
-        // - or new entries have been added.
-        // - or old entries have been removed.
+        // - values of existing stats have been modified. That does NOT include statId changes! statId changes are MAJOR changes.
+        // - or new stats have been added.
+        // - or old stats have been removed.
         // - A migration has to be implemented which does not depend on the major version.
         // - INFO: no minor version handling yet. probably never. Instead the minor version handling happens every time, when there is no major version change
         // that is dirty but much easier to work with
@@ -59,40 +59,40 @@ namespace SessionTracker.Settings
                 return refModel;
             }
 
-            refModel = UpdatedEntryIsVisibleInRefModel(persistedModel, refModel);
-            refModel = UpdateEntryOrderInRefModel(persistedModel, refModel);
+            refModel = UpdateStatIsVisibleInRefModel(persistedModel, refModel);
+            refModel = UpdateStatsOrderInRefModel(persistedModel, refModel);
             return refModel;
         }
         
-        private static Model UpdatedEntryIsVisibleInRefModel(Model persistedModel, Model refModel)
+        private static Model UpdateStatIsVisibleInRefModel(Model persistedModel, Model refModel)
         {
-            var isVisibleByEntryId = new Dictionary<string, bool>();
-            foreach (var entry in persistedModel.Entries)
-                isVisibleByEntryId[entry.Id] = entry.IsVisible;
+            var isVisibleByStatId = new Dictionary<string, bool>();
+            foreach (var stat in persistedModel.Stats)
+                isVisibleByStatId[stat.Id] = stat.IsVisible;
 
-            foreach (var refEntry in refModel.Entries)
+            foreach (var refStat in refModel.Stats)
             {
                 // ReSharper disable once SimplifyConditionalTernaryExpression (because much harder to read)
-                refEntry.IsVisible = isVisibleByEntryId.ContainsKey(refEntry.Id)
-                    ? isVisibleByEntryId[refEntry.Id]
+                refStat.IsVisible = isVisibleByStatId.ContainsKey(refStat.Id)
+                    ? isVisibleByStatId[refStat.Id]
                     : false; // to prevent new stats to be visible after a module version update. This can mess up the user's custom stats setup 
             }
 
             return refModel;
         }
 
-        private static Model UpdateEntryOrderInRefModel(Model persistedModel, Model refModel)
+        private static Model UpdateStatsOrderInRefModel(Model persistedModel, Model refModel)
         {
-            var persistedIds = persistedModel.Entries
+            var persistedIds = persistedModel.Stats
                                              .Select(e => e.Id)
                                              .ToList();
 
-            var orderedRefEntries = refModel.Entries
-                                            .OrderBy(d => persistedIds.IndexOf(d.Id))
-                                            .ToList();
+            var orderedRefStats = refModel.Stats
+                                          .OrderBy(d => persistedIds.IndexOf(d.Id))
+                                          .ToList();
 
-            refModel.Entries.Clear();
-            refModel.Entries.AddRange(orderedRefEntries);
+            refModel.Stats.Clear();
+            refModel.Stats.AddRange(orderedRefStats);
             return refModel;
         }
     }

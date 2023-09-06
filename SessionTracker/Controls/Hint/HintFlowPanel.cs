@@ -14,13 +14,13 @@ namespace SessionTracker.Controls.Hint
 {
     public class HintFlowPanel : FlowPanel
     {
-        public HintFlowPanel(List<Entry> entries,
+        public HintFlowPanel(List<Stat> stats,
                              SettingsWindowService settingsWindowService,
                              TextureService textureService,
                              SettingService settingService,
                              Container parent)
         {
-            _entries        = entries;
+            _stats        = stats;
             _parent         = parent;
             _settingService = settingService;
 
@@ -63,14 +63,14 @@ namespace SessionTracker.Controls.Hint
             base.DisposeControl();
         }
 
-        public void ShowHintWhenAllEntriesAreHidden()
+        public void ShowHintWhenAllStatsAreHidden()
         {
             // remove all from parent to prevent messing up their order
             _hiddenByZeroSessionValuesImage.Parent = null;
             _hiddenByUserLabel.Parent              = null;
             _openSettingsButton.Parent             = null;
 
-            var hintType = DetermineWhichHintToShow(_entries, _settingService.HideStatsWithValueZeroSetting.Value);
+            var hintType = DetermineWhichHintToShow(_stats, _settingService.HideStatsWithValueZeroSetting.Value);
 
             switch (hintType)
             {
@@ -115,14 +115,14 @@ namespace SessionTracker.Controls.Hint
             _hiddenByZeroSessionValuesImage.Size = new Point(font.LineHeight);
         }
 
-        private static HintType DetermineWhichHintToShow(List<Entry> entries, bool hideStatsWithValueZero)
+        private static HintType DetermineWhichHintToShow(List<Stat> stats, bool hideStatsWithValueZero)
         {
-            var allHiddenByUser = entries.Any(e => e.IsVisible) == false;
+            var allHiddenByUser = stats.Any(e => e.IsVisible) == false;
 
             if (allHiddenByUser)
                 return HintType.AllStatsHiddenByUser;
 
-            var allHiddenBecauseOfZeroValue = entries.Any(e => e.IsVisible && e.Value.Session != 0) == false;
+            var allHiddenBecauseOfZeroValue = stats.Any(e => e.IsVisible && e.Value.Session != 0) == false;
 
             if (hideStatsWithValueZero && allHiddenBecauseOfZeroValue)
                 return HintType.AllStatsHiddenBecauseOfZeroValue;
@@ -131,7 +131,7 @@ namespace SessionTracker.Controls.Hint
         }
 
         private readonly SettingService _settingService;
-        private readonly List<Entry> _entries;
+        private readonly List<Stat> _stats;
         private readonly Container _parent;
         private readonly Label _hiddenByUserLabel;
         private readonly Image _hiddenByZeroSessionValuesImage;

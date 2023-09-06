@@ -1,6 +1,6 @@
 ﻿namespace SessionTracker.Models.Constants
 {
-    public class EntryId
+    public class StatId
     {
         public const string PVP_KILLS = "pvp kills";
         public const string PVP_KDR = "pvp kdr";

@@ -50,7 +50,7 @@ namespace SessionTracker
             var textureService        = new TextureService(model, ContentsManager, Logger);
             var settingsWindowService = new SettingsWindowService(model, _settingService, textureService);
 
-            var entriesContainer = new EntriesContainer(model, Gw2ApiManager, textureService, settingsWindowService, _settingService, Logger)
+            var statsContainer = new StatsContainer(model, Gw2ApiManager, textureService, settingsWindowService, _settingService, Logger)
             {
                 HeightSizingMode = SizingMode.AutoSize,
                 WidthSizingMode  = SizingMode.AutoSize,
@@ -59,21 +59,21 @@ namespace SessionTracker
                 Parent           = GameService.Graphics.SpriteScreen
             };
 
-            _cornerIconService = new CornerIconService(_settingService.CornerIconIsVisibleSetting, entriesContainer, settingsWindowService, CornerIconClickEventHandler, textureService);
+            _cornerIconService = new CornerIconService(_settingService.CornerIconIsVisibleSetting, statsContainer, settingsWindowService, CornerIconClickEventHandler, textureService);
 
             // set at the end to prevent that one of the ctors accidently gets a null reference because of creating the objects above in the wrong order.
             // e.g. creating model after textureService, though model needs the reference of model.
             _model                 = model;
             _textureService        = textureService;
-            _entriesContainer      = entriesContainer;
+            _statsContainer      = statsContainer;
             _settingsWindowService = settingsWindowService;
 
             _settingService.UiVisibilityKeyBindingSetting.Value.Activated += OnUiVisibilityKeyBindingActivated;
             _settingService.UiVisibilityKeyBindingSetting.Value.Enabled   =  true;
         }
 
-        private void CornerIconClickEventHandler(object s, MouseEventArgs e) => _entriesContainer.ToggleVisibility();
-        private void OnUiVisibilityKeyBindingActivated(object s, EventArgs e) => _entriesContainer.ToggleVisibility();
+        private void CornerIconClickEventHandler(object s, MouseEventArgs e) => _statsContainer.ToggleVisibility();
+        private void OnUiVisibilityKeyBindingActivated(object s, EventArgs e) => _statsContainer.ToggleVisibility();
 
         protected override void Unload()
         {
@@ -86,12 +86,12 @@ namespace SessionTracker
             _settingsWindowService?.Dispose();
             _cornerIconService?.Dispose();
             _textureService?.Dispose();
-            _entriesContainer?.Dispose();
+            _statsContainer?.Dispose();
         }
 
         protected override void Update(GameTime gameTime)
         {
-            _entriesContainer.Update2(gameTime);
+            _statsContainer.Update2(gameTime);
         }
 
         private static void runShiftBlishCornerIconsWorkaroundBecauseOfNewWizardVaultIcon()
@@ -109,7 +109,7 @@ namespace SessionTracker
 
         private SettingService _settingService;
         private static readonly Logger Logger = Logger.GetLogger<Module>();
-        private EntriesContainer _entriesContainer;
+        private StatsContainer _statsContainer;
         private FileService _fileService;
         private Model _model;
         private TextureService _textureService;

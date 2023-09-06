@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace SessionTracker.Models
 {
-    public class Entry
+    public class Stat
     {
         public string Id { get; set; } = string.Empty;
         public LocalizedText Name { get; } = new LocalizedText();

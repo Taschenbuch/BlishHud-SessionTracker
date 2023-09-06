@@ -11,15 +11,15 @@ namespace SessionTracker.JsonFileCreator.StatServices
 {
     public class ItemService
     {
-        public static async Task<List<Entry>> CreateItemStats()
+        public static async Task<List<Stat>> CreateItemStats()
         {
-            var entries = await CreateStats();
-            return await AddLocalizedTexts(entries);
+            var stats = await CreateStats();
+            return await AddLocalizedTexts(stats);
         }
 
-        private static async Task<List<Entry>> CreateStats()
+        private static async Task<List<Stat>> CreateStats()
         {
-            var entries = new List<Entry>();
+            var stats = new List<Stat>();
 
             using (var client = new Gw2Client(new Connection(Locale.English)))
             {
@@ -27,7 +27,7 @@ namespace SessionTracker.JsonFileCreator.StatServices
 
                 foreach (var item in items)
                 {
-                    var entry = new Entry
+                    var stat = new Stat
                     {
                         Id          = $"item{item.Id}",
                         ApiId       = item.Id,
@@ -36,14 +36,14 @@ namespace SessionTracker.JsonFileCreator.StatServices
                         IsVisible   = false
                     };
 
-                    entries.Add(entry);
+                    stats.Add(stat);
                 }
             }
 
-            return entries;
+            return stats;
         }
 
-        private static async Task<List<Entry>> AddLocalizedTexts(List<Entry> entries)
+        private static async Task<List<Stat>> AddLocalizedTexts(List<Stat> stats)
         {
             var locales = new List<Locale>() { Locale.English, Locale.French, Locale.German, Locale.Spanish, Locale.Chinese, Locale.Korean };
 
@@ -54,21 +54,21 @@ namespace SessionTracker.JsonFileCreator.StatServices
                     var items = await client.WebApi.V2.Items.ManyAsync(ITEM_IDS);
 
                     foreach (var item in items)
-                        UpdateTexts(item, entries, local);
+                        UpdateTexts(item, stats, local);
                 }
             }
 
-            return entries;
+            return stats;
         }
 
-        private static void UpdateTexts(Item item, List<Entry> entries, Locale local)
+        private static void UpdateTexts(Item item, List<Stat> stats, Locale local)
         {
-            var entryForItemExists = entries.Any(e => e.ApiId == item.Id);
-            if (entryForItemExists)
+            var statForItemExists = stats.Any(e => e.ApiId == item.Id);
+            if (statForItemExists)
             {
-                var matchingEntry = entries.Single(e => e.ApiId == item.Id);
-                matchingEntry.Name.SetLocalizedText(item.Name, local);
-                matchingEntry.Description.SetLocalizedText(item.Description, local);
+                var matchingStat = stats.Single(e => e.ApiId == item.Id);
+                matchingStat.Name.SetLocalizedText(item.Name, local);
+                matchingStat.Description.SetLocalizedText(item.Description, local);
             }
         }
 

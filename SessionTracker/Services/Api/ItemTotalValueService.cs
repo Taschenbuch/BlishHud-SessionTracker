@@ -15,8 +15,8 @@ namespace SessionTracker.Services.Api
                                               Task<IApiV2ObjectList<AccountItem>> sharedInventoryTask,
                                               Task<IApiV2ObjectList<AccountMaterial>> materialStorageTask)
         {
-            foreach (var entry in model.Entries.Where(e => e.IsItem))
-                entry.Value.Total = GetItemValue(charactersTask, bankTask, sharedInventoryTask, materialStorageTask, entry.ApiId);
+            foreach (var stat in model.Stats.Where(e => e.IsItem))
+                stat.Value.Total = GetItemValue(charactersTask, bankTask, sharedInventoryTask, materialStorageTask, stat.ApiId);
         }
 
         private static int GetItemValue(Task<IApiV2ObjectList<Character>> charactersTask,

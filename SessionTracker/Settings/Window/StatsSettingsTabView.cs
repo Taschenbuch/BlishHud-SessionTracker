@@ -37,11 +37,11 @@ namespace SessionTracker.Settings.Window
                 "After that click on the 'Move visible to top'-button to make hiding or reordering easier.\n" +
                 "You can reorder the stats with the up and down buttons.");
 
-            ShowHideAndShowAllButtons(_visibilityCheckBoxByEntryId, trackedStatsSectionFlowPanel);
-            ShowCategoryButtons(_visibilityCheckBoxByEntryId, trackedStatsSectionFlowPanel);
-            ShowMoveVisibleToTopButton(_visibilityCheckBoxByEntryId, trackedStatsSectionFlowPanel);
+            ShowHideAndShowAllButtons(_visibilityCheckBoxByStatId, trackedStatsSectionFlowPanel);
+            ShowCategoryButtons(_visibilityCheckBoxByStatId, trackedStatsSectionFlowPanel);
+            ShowMoveVisibleToTopButton(_visibilityCheckBoxByStatId, trackedStatsSectionFlowPanel);
 
-            _entryRowsFlowPanel = new FlowPanel
+            _statRowsFlowPanel = new FlowPanel
             {
                 FlowDirection = ControlFlowDirection.SingleTopToBottom,
                 OuterControlPadding = new Vector2(0, 5),
@@ -51,16 +51,16 @@ namespace SessionTracker.Settings.Window
                 Parent = trackedStatsSectionFlowPanel
             };
 
-            ShowEntryRows(_model.Entries, _entryRowsFlowPanel);
+            ShowStatRows(_model.Stats, _statRowsFlowPanel);
         }
-        private static void ShowHideAndShowAllButtons(Dictionary<string, Checkbox> visibilityCheckBoxByEntryId, FlowPanel entriesFlowPanel)
+        private static void ShowHideAndShowAllButtons(Dictionary<string, Checkbox> visibilityCheckBoxByStatId, FlowPanel statsFlowPanel)
         {
             var buttonsFlowPanel = new FlowPanel
             {
                 FlowDirection = ControlFlowDirection.SingleLeftToRight,
                 WidthSizingMode = SizingMode.AutoSize,
                 HeightSizingMode = SizingMode.AutoSize,
-                Parent = entriesFlowPanel,
+                Parent = statsFlowPanel,
             };
 
             var hideAllButton = new StandardButton
@@ -79,46 +79,46 @@ namespace SessionTracker.Settings.Window
 
             hideAllButton.Click += (s, e) =>
             {
-                foreach (var visibilityCheckBox in visibilityCheckBoxByEntryId.Values)
+                foreach (var visibilityCheckBox in visibilityCheckBoxByStatId.Values)
                     visibilityCheckBox.Checked = false;
             };
 
             showAllButton.Click += (s, e) =>
             {
-                foreach (var visibilityCheckBox in visibilityCheckBoxByEntryId.Values)
+                foreach (var visibilityCheckBox in visibilityCheckBoxByStatId.Values)
                     visibilityCheckBox.Checked = true;
             };
         }
 
-        private void ShowMoveVisibleToTopButton(Dictionary<string, Checkbox> visibilityCheckBoxByEntryId, FlowPanel entriesFlowPanel)
+        private void ShowMoveVisibleToTopButton(Dictionary<string, Checkbox> visibilityCheckBoxByStatId, FlowPanel statsFlowPanel)
         {
-            var moveVisibleEntryRowsToTopButton = new StandardButton
+            var moveVisibleStatRowsToTopButton = new StandardButton
             {
                 Text = "Move visible to top",
                 BasicTooltipText = "Move all visible stats to the top for easier hiding or reordering.",
                 Width = 200,
-                Parent = entriesFlowPanel
+                Parent = statsFlowPanel
             };
 
-            moveVisibleEntryRowsToTopButton.Click += (s, e) => MoveVisibleEntriesToTop();
+            moveVisibleStatRowsToTopButton.Click += (s, e) => MoveVisibleStatsToTop();
         }
 
-        private void MoveVisibleEntriesToTop()
+        private void MoveVisibleStatsToTop()
         {
-            var sortedEntries = _model.Entries.OrderByDescending(entry => entry.IsVisible).ToList();
-            _model.Entries.Clear();
-            _model.Entries.AddRange(sortedEntries);
-            UpdateEntryRows();
+            var sortedStats = _model.Stats.OrderByDescending(stat => stat.IsVisible).ToList();
+            _model.Stats.Clear();
+            _model.Stats.AddRange(sortedStats);
+            UpdateStatRows();
         }
 
-        private void ShowCategoryButtons(Dictionary<string, Checkbox> visibilityCheckBoxByEntryId, FlowPanel entriesFlowPanel)
+        private void ShowCategoryButtons(Dictionary<string, Checkbox> visibilityCheckBoxByStatId, FlowPanel statsFlowPanel)
         {
             var buttonsFlowPanel = new FlowPanel
             {
                 FlowDirection = ControlFlowDirection.SingleLeftToRight,
                 WidthSizingMode = SizingMode.AutoSize,
                 HeightSizingMode = SizingMode.AutoSize,
-                Parent = entriesFlowPanel,
+                Parent = statsFlowPanel,
             };
 
             var buttonWidth = 100;
@@ -173,110 +173,110 @@ namespace SessionTracker.Settings.Window
 
             pvpButton.Click += (s, e) =>
             {
-                ShowByEntryIdStartingWith("pvp", visibilityCheckBoxByEntryId);
-                ShowByCurrencyId(CurrencyIds.Pvp, visibilityCheckBoxByEntryId);
-                visibilityCheckBoxByEntryId[EntryId.DEATHS].Checked = true;
-                MoveVisibleEntriesToTop();
+                ShowByStatIdStartingWith("pvp", visibilityCheckBoxByStatId);
+                ShowByCurrencyId(CurrencyIds.Pvp, visibilityCheckBoxByStatId);
+                visibilityCheckBoxByStatId[StatId.DEATHS].Checked = true;
+                MoveVisibleStatsToTop();
             };
 
             wvwButton.Click += (s, e) =>
             {
-                ShowByEntryIdStartingWith("wvw", visibilityCheckBoxByEntryId);
-                ShowByCurrencyId(CurrencyIds.Wvw, visibilityCheckBoxByEntryId);
-                ShowByItemId(ItemIds.Wvw, visibilityCheckBoxByEntryId);
-                visibilityCheckBoxByEntryId[EntryId.DEATHS].Checked = true;
-                MoveVisibleEntriesToTop();
+                ShowByStatIdStartingWith("wvw", visibilityCheckBoxByStatId);
+                ShowByCurrencyId(CurrencyIds.Wvw, visibilityCheckBoxByStatId);
+                ShowByItemId(ItemIds.Wvw, visibilityCheckBoxByStatId);
+                visibilityCheckBoxByStatId[StatId.DEATHS].Checked = true;
+                MoveVisibleStatsToTop();
             };
 
             fractalsButton.Click += (s, e) =>
             {
-                ShowByCurrencyId(CurrencyIds.Fractal, visibilityCheckBoxByEntryId);
-                MoveVisibleEntriesToTop();
+                ShowByCurrencyId(CurrencyIds.Fractal, visibilityCheckBoxByStatId);
+                MoveVisibleStatsToTop();
             };
 
             strikesButton.Click += (s, e) =>
             {
-                ShowByCurrencyId(CurrencyIds.Strike, visibilityCheckBoxByEntryId);
-                MoveVisibleEntriesToTop();
+                ShowByCurrencyId(CurrencyIds.Strike, visibilityCheckBoxByStatId);
+                MoveVisibleStatsToTop();
             };
 
             raidsButton.Click += (s, e) =>
             {
-                ShowByCurrencyId(CurrencyIds.Raid, visibilityCheckBoxByEntryId);
-                MoveVisibleEntriesToTop();
+                ShowByCurrencyId(CurrencyIds.Raid, visibilityCheckBoxByStatId);
+                MoveVisibleStatsToTop();
             };
 
             openWorldButton.Click += (s, e) =>
             {
-                ShowByCurrencyId(CurrencyIds.OpenWorld, visibilityCheckBoxByEntryId);
-                MoveVisibleEntriesToTop();
+                ShowByCurrencyId(CurrencyIds.OpenWorld, visibilityCheckBoxByStatId);
+                MoveVisibleStatsToTop();
             };
         }
 
-        private static void ShowByEntryIdStartingWith(string searchTerm, Dictionary<string, Checkbox> visibilityCheckBoxByEntryId)
+        private static void ShowByStatIdStartingWith(string searchTerm, Dictionary<string, Checkbox> visibilityCheckBoxByStatId)
         {
-            foreach (var checkBoxStringPair in visibilityCheckBoxByEntryId.Where(i => i.Key.StartsWith(searchTerm, StringComparison.OrdinalIgnoreCase)))
+            foreach (var checkBoxStringPair in visibilityCheckBoxByStatId.Where(i => i.Key.StartsWith(searchTerm, StringComparison.OrdinalIgnoreCase)))
                 checkBoxStringPair.Value.Checked = true;
         }
 
-        private void ShowByCurrencyId(ReadOnlyCollection<int> currencyIds, Dictionary<string, Checkbox> visibilityCheckBoxByEntryId)
+        private void ShowByCurrencyId(ReadOnlyCollection<int> currencyIds, Dictionary<string, Checkbox> visibilityCheckBoxByStatId)
         {
-            foreach (var entry in _model.Entries.Where(entry => currencyIds.Contains(entry.ApiId)))
-                visibilityCheckBoxByEntryId[entry.Id].Checked = true;
+            foreach (var stat in _model.Stats.Where(stat => currencyIds.Contains(stat.ApiId)))
+                visibilityCheckBoxByStatId[stat.Id].Checked = true;
         }
 
-        private void ShowByItemId(ReadOnlyCollection<int> itemIds, Dictionary<string, Checkbox> visibilityCheckBoxByEntryId)
+        private void ShowByItemId(ReadOnlyCollection<int> itemIds, Dictionary<string, Checkbox> visibilityCheckBoxByStatId)
         {
-            foreach (var entry in _model.Entries.Where(entry => itemIds.Contains(entry.ApiId)))
-                visibilityCheckBoxByEntryId[entry.Id].Checked = true;
+            foreach (var stat in _model.Stats.Where(stat => itemIds.Contains(stat.ApiId)))
+                visibilityCheckBoxByStatId[stat.Id].Checked = true;
         }
 
-        private void ShowEntryRows(List<Entry> entries, FlowPanel entryRowsFlowPanel)
+        private void ShowStatRows(List<Stat> stats, FlowPanel statRowsFlowPanel)
         {
-            foreach (var entry in entries)
-                ShowEntryRow(entryRowsFlowPanel, entry);
+            foreach (var stat in stats)
+                ShowStatRow(statRowsFlowPanel, stat);
         }
 
-        private void ShowEntryRow(FlowPanel entryRowsFlowPanel, Entry entry)
+        private void ShowStatRow(FlowPanel statRowsFlowPanel, Stat stat)
         {
-            var entryFlowPanel = new FlowPanel
+            var statFlowPanel = new FlowPanel
             {
                 FlowDirection = ControlFlowDirection.SingleLeftToRight,
-                BackgroundColor = DetermineBackgroundColor(entry.IsVisible),
+                BackgroundColor = DetermineBackgroundColor(stat.IsVisible),
                 Width = 400,
                 HeightSizingMode = SizingMode.AutoSize,
-                Parent = entryRowsFlowPanel
+                Parent = statRowsFlowPanel
             };
 
-            var checkBoxContainer = ControlFactory.CreateAdjustableChildLocationContainer(entryFlowPanel);
+            var checkBoxContainer = ControlFactory.CreateAdjustableChildLocationContainer(statFlowPanel);
 
             var isVisibleCheckbox = new Checkbox
             {
-                Checked = entry.IsVisible,
+                Checked = stat.IsVisible,
                 BasicTooltipText = SHOW_HIDE_STAT_TOOLTIP,
                 Size = new Point(16, 16),
                 Location = new Point(5, 5),
                 Parent = checkBoxContainer
             };
 
-            _visibilityCheckBoxByEntryId[entry.Id] = isVisibleCheckbox;
+            _visibilityCheckBoxByStatId[stat.Id] = isVisibleCheckbox;
 
-            var moveEntryUpwardsButton = new GlowButton
+            var moveStatUpwardsButton = new GlowButton
             {
                 Icon = _textureService.MoveUpTexture,
                 ActiveIcon = _textureService.MoveUpActiveTexture,
                 BasicTooltipText = "Move up",
                 Size = new Point(25, 25),
-                Parent = entryFlowPanel
+                Parent = statFlowPanel
             };
 
-            var moveEntryDownwardsButton = new GlowButton()
+            var moveStatDownwardsButton = new GlowButton()
             {
                 Icon = _textureService.MoveDownTexture,
                 ActiveIcon = _textureService.MoveDownActiveTexture,
                 BasicTooltipText = "Move down",
                 Size = new Point(25, 25),
-                Parent = entryFlowPanel
+                Parent = statFlowPanel
             };
 
             var clickFlowPanel = new FlowPanel()
@@ -285,15 +285,15 @@ namespace SessionTracker.Settings.Window
                 HeightSizingMode = SizingMode.Fill,
                 WidthSizingMode = SizingMode.Fill,
                 BasicTooltipText = SHOW_HIDE_STAT_TOOLTIP,
-                Parent = entryFlowPanel
+                Parent = statFlowPanel
             };
 
             var iconContainer = ControlFactory.CreateAdjustableChildLocationContainer(clickFlowPanel);
-            var asyncTexture2D = _textureService.EntryTextureByEntryId[entry.Id];
+            var asyncTexture2D = _textureService.StatTextureByStatId[stat.Id];
 
             new Image(asyncTexture2D)
             {
-                BasicTooltipText = entry.GetTextWithNameAndDescription(),
+                BasicTooltipText = stat.GetTextWithNameAndDescription(),
                 Size = new Point(24),
                 Location = new Point(20, 0),
                 Parent = iconContainer,
@@ -303,8 +303,8 @@ namespace SessionTracker.Settings.Window
 
             new Label
             {
-                Text             = entry.Name.Localized,
-                BasicTooltipText = entry.GetTextWithNameAndDescription(),
+                Text             = stat.Name.Localized,
+                BasicTooltipText = stat.GetTextWithNameAndDescription(),
                 AutoSizeWidth    = true,
                 AutoSizeHeight   = true,
                 Location         = new Point(5, 3),
@@ -315,34 +315,34 @@ namespace SessionTracker.Settings.Window
 
             isVisibleCheckbox.CheckedChanged += (s, e) =>
             {
-                entry.IsVisible = e.Checked;
-                entryFlowPanel.BackgroundColor = DetermineBackgroundColor(e.Checked);
+                stat.IsVisible = e.Checked;
+                statFlowPanel.BackgroundColor = DetermineBackgroundColor(e.Checked);
                 _model.UiHasToBeUpdated = true;
             };
 
-            moveEntryUpwardsButton.Click += (s, e) =>
+            moveStatUpwardsButton.Click += (s, e) =>
             {
-                var index = _model.Entries.IndexOf(entry);
+                var index = _model.Stats.IndexOf(stat);
 
-                const int firstEntryIndex = 0;
-                if (index > firstEntryIndex)
+                const int firstStatIndex = 0;
+                if (index > firstStatIndex)
                 {
-                    _model.Entries.Remove(entry);
-                    _model.Entries.Insert(index - 1, entry);
-                    UpdateEntryRows();
+                    _model.Stats.Remove(stat);
+                    _model.Stats.Insert(index - 1, stat);
+                    UpdateStatRows();
                 }
             };
 
-            moveEntryDownwardsButton.Click += (s, e) =>
+            moveStatDownwardsButton.Click += (s, e) =>
             {
-                var index = _model.Entries.IndexOf(entry);
+                var index = _model.Stats.IndexOf(stat);
 
-                var lastEntryIndex = _model.Entries.Count - 1;
-                if (index < lastEntryIndex)
+                var lastStatIndex = _model.Stats.Count - 1;
+                if (index < lastStatIndex)
                 {
-                    _model.Entries.Remove(entry);
-                    _model.Entries.Insert(index + 1, entry);
-                    UpdateEntryRows();
+                    _model.Stats.Remove(stat);
+                    _model.Stats.Insert(index + 1, stat);
+                    UpdateStatRows();
                 }
             };
         }
@@ -354,11 +354,11 @@ namespace SessionTracker.Settings.Window
                 : NOT_VISIBLE_COLOR;
         }
 
-        private void UpdateEntryRows()
+        private void UpdateStatRows()
         {
             var scrollDistance = _scrollbar.ScrollDistance;
-            _entryRowsFlowPanel.ClearChildren();
-            ShowEntryRows(_model.Entries, _entryRowsFlowPanel);
+            _statRowsFlowPanel.ClearChildren();
+            ShowStatRows(_model.Stats, _statRowsFlowPanel);
             _model.UiHasToBeUpdated = true;
 
             Task.Run(async () =>
@@ -373,8 +373,8 @@ namespace SessionTracker.Settings.Window
         private readonly TextureService _textureService;
         private Scrollbar _scrollbar;
         private FlowPanel _rootFlowPanel;
-        private FlowPanel _entryRowsFlowPanel;
-        private readonly Dictionary<string, Checkbox> _visibilityCheckBoxByEntryId = new Dictionary<string, Checkbox>();
+        private FlowPanel _statRowsFlowPanel;
+        private readonly Dictionary<string, Checkbox> _visibilityCheckBoxByStatId = new Dictionary<string, Checkbox>();
         private static readonly Color VISIBLE_COLOR = new Color(17, 64, 9) * 0.9f;
         private static readonly Color NOT_VISIBLE_COLOR = new Color(Color.Black, 0.5f);
         private const string SHOW_HIDE_STAT_TOOLTIP = "Show or hide stat by clicking on the checkbox or directly on the row. Values for hidden stats are still tracked.";

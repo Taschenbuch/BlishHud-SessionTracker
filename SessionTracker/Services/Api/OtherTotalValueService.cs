@@ -13,8 +13,8 @@ namespace SessionTracker.Services.Api
         public static void SetDeathsTotalValue(Model model, Task<IApiV2ObjectList<Character>> charactersTask)
         {
             var newDeaths = charactersTask.Result.Sum(c => c.Deaths);
-            var oldDeaths = model.GetEntry(EntryId.DEATHS).Value.Total;
-            model.GetEntry(EntryId.DEATHS).Value.Total = GetNewValueIfNotApiBug(newDeaths, oldDeaths);
+            var oldDeaths = model.GetStat(StatId.DEATHS).Value.Total;
+            model.GetStat(StatId.DEATHS).Value.Total = GetNewValueIfNotApiBug(newDeaths, oldDeaths);
         }
 
         // In rare cases the next total value is lower than the previous total value. It is an api bug that is visible in Gw2effiency graphs too.
@@ -32,7 +32,7 @@ namespace SessionTracker.Services.Api
         {
             var luck        = progressionTask.Result.SingleOrDefault(p => p.Id == "luck");
             var hasZeroLuck = luck == null;
-            model.GetEntry(EntryId.LUCK).Value.Total = hasZeroLuck ? 0 : luck.Value;
+            model.GetStat(StatId.LUCK).Value.Total = hasZeroLuck ? 0 : luck.Value;
         }
 
         public static void SetPvpTotalValues(Model model, Task<PvpStats> pvpStatsTask)
@@ -46,16 +46,16 @@ namespace SessionTracker.Services.Api
             var (unrankedWins, unrankedLosses) = GetWinsAndLosses(ladders, UNRANKED_LADDERS_KEY);
 
 
-            model.GetEntry(EntryId.PVP_RANK).Value.Total            = pvpRank + pvpRankRollovers;
-            model.GetEntry(EntryId.PVP_RANKING_POINTS).Value.Total  = pvpStatsTask.Result.PvpRankPoints;
-            model.GetEntry(EntryId.PVP_TOTAL_WINS).Value.Total      = totalWins;
-            model.GetEntry(EntryId.PVP_TOTAL_LOSSES).Value.Total    = totalLosses;
-            model.GetEntry(EntryId.PVP_RANKED_WINS).Value.Total     = rankedWins;
-            model.GetEntry(EntryId.PVP_RANKED_LOSSES).Value.Total   = rankedLosses;
-            model.GetEntry(EntryId.PVP_UNRANKED_WINS).Value.Total   = unrankedWins;
-            model.GetEntry(EntryId.PVP_UNRANKED_LOSSES).Value.Total = unrankedLosses;
-            model.GetEntry(EntryId.PVP_CUSTOM_WINS).Value.Total     = totalWins - rankedWins - unrankedWins;
-            model.GetEntry(EntryId.PVP_CUSTOM_LOSSES).Value.Total   = totalLosses - rankedLosses - unrankedLosses;
+            model.GetStat(StatId.PVP_RANK).Value.Total            = pvpRank + pvpRankRollovers;
+            model.GetStat(StatId.PVP_RANKING_POINTS).Value.Total  = pvpStatsTask.Result.PvpRankPoints;
+            model.GetStat(StatId.PVP_TOTAL_WINS).Value.Total      = totalWins;
+            model.GetStat(StatId.PVP_TOTAL_LOSSES).Value.Total    = totalLosses;
+            model.GetStat(StatId.PVP_RANKED_WINS).Value.Total     = rankedWins;
+            model.GetStat(StatId.PVP_RANKED_LOSSES).Value.Total   = rankedLosses;
+            model.GetStat(StatId.PVP_UNRANKED_WINS).Value.Total   = unrankedWins;
+            model.GetStat(StatId.PVP_UNRANKED_LOSSES).Value.Total = unrankedLosses;
+            model.GetStat(StatId.PVP_CUSTOM_WINS).Value.Total     = totalWins - rankedWins - unrankedWins;
+            model.GetStat(StatId.PVP_CUSTOM_LOSSES).Value.Total   = totalLosses - rankedLosses - unrankedLosses;
         }
 
         private static (int wins, int losses) GetWinsAndLosses(IReadOnlyDictionary<string, PvpStatsAggregate> ladders, string ladderKey)

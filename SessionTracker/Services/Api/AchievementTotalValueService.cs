@@ -10,8 +10,8 @@ namespace SessionTracker.Services.Api
     {
         public static void SetAchievementTotalValues(Model model, Task<IApiV2ObjectList<AccountAchievement>> achievementsTask)
         {
-            foreach (var entry in model.Entries.Where(v => v.IsAchievement)) 
-                entry.Value.Total = GetAchievementValue(achievementsTask, entry.ApiId, entry.Value.Total);
+            foreach (var stat in model.Stats.Where(v => v.IsAchievement)) 
+                stat.Value.Total = GetAchievementValue(achievementsTask, stat.ApiId, stat.Value.Total);
         }
 
         private static int GetAchievementValue(Task<IApiV2ObjectList<AccountAchievement>> achievementsTask, int achievementId, int oldValue)

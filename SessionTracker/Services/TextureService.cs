@@ -27,11 +27,11 @@ namespace SessionTracker.Services
             MoveDownActiveTexture = contentsManager.GetTexture(@"settingsWindow\moveDownActive_155953.png");
             MoveUpTexture = contentsManager.GetTexture(@"settingsWindow\moveUp_155953.png");
             MoveUpActiveTexture = contentsManager.GetTexture(@"settingsWindow\moveUpActive_155953.png");
-            EntryIconPlaceholderTexture = contentsManager.GetTexture(@"stats\entryIconPlaceholder_1444524.png");
+            StatIconPlaceholderTexture = contentsManager.GetTexture(@"stats\statIconPlaceholder_1444524.png");
             CornerIconTexture = contentsManager.GetTexture(@"cornerIcon.png");
             CornerIconHoverTexture = contentsManager.GetTexture(@"cornerIconHover.png");
             HiddenStatsTexture = contentsManager.GetTexture(@"hiddenStats.png");
-            CreateEntryTextures(model);
+            CreateStatTextures(model);
         }
 
         public void Dispose()
@@ -46,11 +46,11 @@ namespace SessionTracker.Services
             MoveDownActiveTexture?.Dispose();
             MoveUpTexture?.Dispose();
             MoveUpActiveTexture?.Dispose();
-            EntryIconPlaceholderTexture?.Dispose();
+            StatIconPlaceholderTexture?.Dispose();
             CornerIconTexture?.Dispose();
             CornerIconHoverTexture?.Dispose();
             HiddenStatsTexture?.Dispose();
-            DisposeEntryTextures();
+            DisposeStatTextures();
         }
 
         public Texture2D DebugTabTexture { get; }
@@ -64,64 +64,64 @@ namespace SessionTracker.Services
         public Texture2D MoveDownActiveTexture { get; }
         public Texture2D MoveUpTexture { get; }
         public Texture2D MoveUpActiveTexture { get; }
-        public Texture2D EntryIconPlaceholderTexture { get; }
+        public Texture2D StatIconPlaceholderTexture { get; }
         public Texture2D CornerIconTexture { get; }
         public Texture2D CornerIconHoverTexture { get; }
-        public Dictionary<string, AsyncTexture2D> EntryTextureByEntryId { get; } = new Dictionary<string, AsyncTexture2D>();
+        public Dictionary<string, AsyncTexture2D> StatTextureByStatId { get; } = new Dictionary<string, AsyncTexture2D>();
 
-        private void CreateEntryTextures(Model model)
+        private void CreateStatTextures(Model model)
         {
             var notFoundTextures = new List<string>();
             var exception        = new Exception("i am a dummy. ignore me");
 
-            foreach (var entry in model.Entries)
+            foreach (var stat in model.Stats)
             {
                 try
                 {
-                    if (entry.HasIconAssetId)
-                        EntryTextureByEntryId[entry.Id] = GetEntryTexture(entry.Id, entry.IconAssetId, EntryIconPlaceholderTexture, _logger);
-                    else if (entry.HasIconFile)
-                        EntryTextureByEntryId[entry.Id] = _contentsManager.GetTexture($@"stats\{entry.IconFileName}");
+                    if (stat.HasIconAssetId)
+                        StatTextureByStatId[stat.Id] = GetStatTexture(stat.Id, stat.IconAssetId, StatIconPlaceholderTexture, _logger);
+                    else if (stat.HasIconFile)
+                        StatTextureByStatId[stat.Id] = _contentsManager.GetTexture($@"stats\{stat.IconFileName}");
                     else
                     {
-                        _logger.Error($"Error: Icon texture missing for entryId: {entry.Id}. Use placeholder icon as fallback.");
-                        EntryTextureByEntryId[entry.Id] = EntryIconPlaceholderTexture;
+                        _logger.Error($"Error: Icon texture missing for statId: {stat.Id}. Use placeholder icon as fallback.");
+                        StatTextureByStatId[stat.Id] = StatIconPlaceholderTexture;
                     }
                 }
                 catch (Exception e)
                 {
-                    EntryTextureByEntryId[entry.Id] = new AsyncTexture2D(EntryIconPlaceholderTexture);
-                    notFoundTextures.Add(entry.Name.English);
+                    StatTextureByStatId[stat.Id] = new AsyncTexture2D(StatIconPlaceholderTexture);
+                    notFoundTextures.Add(stat.Name.English);
                     exception = e;
                 }
             }
 
             if (notFoundTextures.Any())
-                _logger.Error(exception, $"Could not get entry texture for: {string.Join(", ", notFoundTextures)}. :(");
+                _logger.Error(exception, $"Could not get stat texture for: {string.Join(", ", notFoundTextures)}. :(");
         }
 
-        private static AsyncTexture2D GetEntryTexture(string entryId, int entryIconAssetId, Texture2D entryIconPlaceholderTexture, Logger logger)
+        private static AsyncTexture2D GetStatTexture(string statId, int statIconAssetId, Texture2D statIconPlaceholderTexture, Logger logger)
         {
-            if (GameService.Content.DatAssetCache.TryGetTextureFromAssetId(entryIconAssetId, out AsyncTexture2D entryTexture))
-                return entryTexture;
+            if (GameService.Content.DatAssetCache.TryGetTextureFromAssetId(statIconAssetId, out AsyncTexture2D statTexture))
+                return statTexture;
             else
             {
                 // blish will only show info message for that instead of a warning. That is why this was added here to make it more obvious
-                logger.Warn($"DatAssetCache is missing texture for '{entryId}', iconAssetId: {entryIconAssetId}");
-                return new AsyncTexture2D(entryIconPlaceholderTexture);
+                logger.Warn($"DatAssetCache is missing texture for '{statId}', iconAssetId: {statIconAssetId}");
+                return new AsyncTexture2D(statIconPlaceholderTexture);
             }
         }
 
-        private void DisposeEntryTextures()
+        private void DisposeStatTextures()
         {
-            foreach (var entryTextureAndIdPair in EntryTextureByEntryId)
+            foreach (var statTextureAndIdPair in StatTextureByStatId)
             {
-                var entryId = entryTextureAndIdPair.Key;
-                var entryTexture = entryTextureAndIdPair.Value;
-                var isNotErrorIcon = entryTexture.Texture != EntryIconPlaceholderTexture;
-                var isNotFromAssetCache = !_model.GetEntry(entryId).HasIconAssetId;
+                var statId = statTextureAndIdPair.Key;
+                var statTexture = statTextureAndIdPair.Value;
+                var isNotErrorIcon = statTexture.Texture != StatIconPlaceholderTexture;
+                var isNotFromAssetCache = !_model.GetStat(statId).HasIconAssetId;
                 if (isNotErrorIcon && isNotFromAssetCache)
-                    entryTexture?.Dispose();
+                    statTexture?.Dispose();
             }
         }
 
