@@ -97,7 +97,7 @@ namespace SessionTracker.Settings.SettingEntries
                 () => "mouse clickthrough (read tooltip)",
                 () => "This allows clicking with the mouse through the window to interact with Guild Wars 2 behind the window. " +
                       "Mouse clicks while ALT key is held down, will disable this feature temporarily. E.g. for scrolling the stats window etc. " +
-                     $"WARNING: feature is disabled when '{DRAG_WITH_MOUSE_LABEL_TEXT}' is checked.");
+                     $"WARNING: Feature is disabled when '{DRAG_WITH_MOUSE_LABEL_TEXT}' is checked. Feature makes scrolling impossible when fixed height setting is set.");
 
             CornerIconIsVisibleSetting = settings.DefineSetting(
                 "cornerIcon is visible",
