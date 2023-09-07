@@ -56,9 +56,9 @@ namespace SessionTracker.Settings
                 return refFolderModel;
 
             var moduleFolderModel = await LoadModelFromModuleFolder(_modelFilePath, _logger);
-            moduleFolderModel = MigrationService.MigratePersistedModelIfNecessary(moduleFolderModel, refFolderModel, _logger);
+            refFolderModel = MigrationService.MigratePersistedModelIfNecessary(moduleFolderModel, refFolderModel, _logger);
 
-            return moduleFolderModel;
+            return refFolderModel;
         }
 
         private static async Task<Model> LoadModelFromModuleFolder(string modelFilePath, Logger logger)

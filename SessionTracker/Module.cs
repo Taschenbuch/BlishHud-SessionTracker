@@ -65,7 +65,7 @@ namespace SessionTracker
             // e.g. creating model after textureService, though model needs the reference of model.
             _model                 = model;
             _textureService        = textureService;
-            _statsContainer      = statsContainer;
+            _statsContainer        = statsContainer;
             _settingsWindowService = settingsWindowService;
 
             _settingService.UiVisibilityKeyBindingSetting.Value.Activated += OnUiVisibilityKeyBindingActivated;
