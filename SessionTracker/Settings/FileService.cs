@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Blish_HUD;
 using Blish_HUD.Modules.Managers;
-using Gw2Sharp.WebApi;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using SessionTracker.Models;
 
 namespace SessionTracker.Settings
@@ -26,25 +23,13 @@ namespace SessionTracker.Settings
             try
             {
                 // not async because Modul.Unload() is not async
-                var modelJson = SerializeModelToJson(model);
+                var modelJson = JsonService.SerializeModelToJson(model);
                 File.WriteAllText(_modelFilePath, modelJson);
             }
             catch (Exception e)
             {
                 _logger.Error(e, "Error: Failed to save model to file in Module.Unload(). :(");
             }
-        }
-
-        public static string SerializeModelToJson(Model model) // public for JsonConverter project
-        {
-            var jsonSerializerSettings = new JsonSerializerSettings
-            {
-                DefaultValueHandling = DefaultValueHandling.Ignore,
-                Formatting           = Formatting.Indented,
-                Converters           = new List<JsonConverter> { new StringEnumConverter() }
-            };
-
-            return JsonConvert.SerializeObject(model, jsonSerializerSettings);
         }
 
         public async Task<Model> LoadModelFromFile()
@@ -55,45 +40,49 @@ namespace SessionTracker.Settings
             if (noModuleFolderModelExists)
                 return refFolderModel;
 
-            var moduleFolderModel = await LoadModelFromModuleFolder(_modelFilePath, _logger);
-            refFolderModel = MigrationService.MigratePersistedModelIfNecessary(moduleFolderModel, refFolderModel, _logger);
-
+            var moduleFolderModel = await LoadModelFromModuleFolder(_modelFilePath, refFolderModel, _logger);
+            refFolderModel = RefModelService.UpdateStatIsVisibleInRefModel(moduleFolderModel, refFolderModel);
+            refFolderModel = RefModelService.UpdateStatsOrderInRefModel(moduleFolderModel, refFolderModel);
             return refFolderModel;
         }
 
-        private static async Task<Model> LoadModelFromModuleFolder(string modelFilePath, Logger logger)
+        private static async Task<Model> LoadModelFromModuleFolder(string modelFilePath, ModelVersion refModelVersion, Logger logger)
         {
             try
             {
-                using (var fileStream = File.OpenRead(modelFilePath))
-                using (var streamReader = new StreamReader(fileStream))
+                var modelJson = await ReadModuleFolderFile(modelFilePath);
+
+                if (string.IsNullOrWhiteSpace(modelJson))
                 {
-                    var modelJson = await streamReader.ReadToEndAsync();
-                    var model = JsonConvert.DeserializeObject<Model>(modelJson);
-
-                    // otherwise sentry reports null reference exception in migrationService because model is null. No idea how the file can be empty 
-                    var moduleFolderModuleFileIsEmpty = model == null; 
-                    if (moduleFolderModuleFileIsEmpty)
-                    {
-                        logger.Error("Error: Failed to load model from file in module folder in Module.LoadAsync(). File is empty :(");
-                        return MODEL_WITH_ERROR_STAT; // todo richtiges handling hierfür nötig. Das Model ist ja leer
-                    }
-
-                    return model;
+                    // fix for sentry null reference exception.
+                    // Because JsonConvert.DeserializeObject returns null instead of throwing an exception when json file is empty string. no idea why file is empty sometimes
+                    logger.Error("Error: Failed to load model from file in module folder in Module.LoadAsync(). File is empty :(");
+                    return new Model();
                 }
+
+                var modelVersion = JsonConvert.DeserializeObject<ModelVersion>(modelJson);
+                modelJson = MigrationService.MigrateModelIfIsOldVersion(modelJson, modelVersion, refModelVersion, logger);
+                var model = JsonConvert.DeserializeObject<Model>(modelJson);
+                return model;
             }
             catch (Exception e)
             {
                 logger.Error(e, "Error: Failed to load model from file in module folder in Module.LoadAsync(). :(");
-                return MODEL_WITH_ERROR_STAT; // todo richtiges handling hierfür nötig. Das Model ist ja leer
+                return new Model();
             }
+        }
+
+        private static async Task<string> ReadModuleFolderFile(string modelFilePath)
+        {
+            using (var fileStream = File.OpenRead(modelFilePath))
+            using (var streamReader = new StreamReader(fileStream))
+                return await streamReader.ReadToEndAsync();
         }
 
         private static async Task<Model> LoadModelFromRefFolder(ContentsManager contentsManager, Logger logger)
         {
             try
             {
-
                 using (var fileStream = contentsManager.GetFileStream(MODEL_FILE_NAME))
                 using (var streamReader = new StreamReader(fileStream))
                 {
@@ -104,7 +93,7 @@ namespace SessionTracker.Settings
             catch (Exception e)
             {
                 logger.Error(e, "Error: Failed to load model from file in ref folder in Module.LoadAsync(). :(");
-                return MODEL_WITH_ERROR_STAT; // todo richtiges handling hierfür nötig. Das Model ist ja leer
+                return new Model();
             }
         }
 
@@ -113,18 +102,5 @@ namespace SessionTracker.Settings
         private const string MODULE_FOLDER_NAME = "session-tracker";
         private readonly ContentsManager _contentsManager;
         private readonly Logger _logger;
-
-        private static Model MODEL_WITH_ERROR_STAT
-        {
-            get
-            {
-                var dummyStat = new Stat();
-                dummyStat.Name.SetLocalizedText("Failed to load model from file", Locale.English);
-
-                return new Model {
-                    Stats = { dummyStat }
-                };
-            }
-        }
     }
 }

@@ -12,7 +12,7 @@ namespace SessionTracker.JsonFileCreator
         {
             var model = new Model();
             await AddStatsToModel(model);
-            var jsonModel = FileService.SerializeModelToJson(model);
+            var jsonModel = JsonService.SerializeModelToJson(model);
             File.WriteAllText(@"C:\Dev\blish\model.json", jsonModel);
         }
 

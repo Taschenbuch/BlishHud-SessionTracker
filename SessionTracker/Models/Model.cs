@@ -5,14 +5,11 @@ using Newtonsoft.Json;
 
 namespace SessionTracker.Models
 {
-    public class Model
+    public class Model : ModelVersion
     {
-        public int MajorVersion { get; set; } = 1;
-        public int MinorVersion { get; set; } = 0;
         public List<Stat> Stats { get; } = new List<Stat>();
         [JsonIgnore] public bool UiHasToBeUpdated { get; set; } // i hate it... but using an event would suck too
-        [JsonIgnore] public string Version => $"{MajorVersion}.{MinorVersion}";
-        [JsonIgnore] public TimeSpan SessionDuration => DateTime.Now - _sessionStartTime; 
+        [JsonIgnore] public TimeSpan SessionDuration => DateTime.Now - _sessionStartTime;
 
         public void StartSession()
         {
