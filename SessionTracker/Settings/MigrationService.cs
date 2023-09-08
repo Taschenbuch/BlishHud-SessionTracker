@@ -42,14 +42,20 @@ namespace SessionTracker.Settings
             var versionSummaryText = $"persisted version: {modelVersion.MajorVersion}; ref folder version: {refModelVersion.MajorVersion}.";
             var settingsWillBeResetedText = "This may result in resetting settings changed by the user like stats visibility/order.";
             throwIfMigrationMethodIsMissing(refModelVersion, versionSummaryText, settingsWillBeResetedText);
-            var migrationRequired = refModelVersion.MajorVersion > modelVersion.MajorVersion;
-            var noMigrationRequired = refModelVersion.MajorVersion == modelVersion.MajorVersion;
-            
-            if (noMigrationRequired)
-                return modelJson;
-            else if (migrationRequired)
-                return migrateModel(modelJson, modelVersion, refModelVersion, logger);
-            else // refModelVersion.MajorVersion < modelVersion.MajorVersion
+            throwIfModelVersionIsTooNew(modelVersion, refModelVersion, logger, versionSummaryText, settingsWillBeResetedText);
+            return migrateModelJson(ref modelJson, modelVersion, refModelVersion, logger);
+        }
+
+        private static void throwIfMigrationMethodIsMissing(ModelVersion refModelVersion, string versionSummaryText, string settingsWillBeResetedText)
+        {
+            var isMigrationMethodMissing = refModelVersion.MajorVersion - 1 > _migrationMethods.Count;
+            if (isMigrationMethodMissing) // called even when no migration is required to prevent it from being released at all.
+                throw new Exception($"Migration method missing. {_migrationMethods.Count} migration methods. {versionSummaryText} {settingsWillBeResetedText}");
+        }
+
+        private static void throwIfModelVersionIsTooNew(ModelVersion modelVersion, ModelVersion refModelVersion, Logger logger, string versionSummaryText, string settingsWillBeResetedText)
+        {
+            if (refModelVersion.MajorVersion < modelVersion.MajorVersion)
             {
                 logger.Warn($"ref MajorVersion < persisted MajorVersion. " +
                             $"This can happen when previously a newer module version was installed. " +
@@ -61,18 +67,11 @@ namespace SessionTracker.Settings
             }
         }
 
-        private static void throwIfMigrationMethodIsMissing(ModelVersion refModelVersion, string versionSummaryText, string settingsWillBeResetedText)
-        {
-            var isMigrationMethodMissing = refModelVersion.MajorVersion - 1 > _migrationMethods.Count;
-            if (isMigrationMethodMissing) // called even when no migration is required to prevent it from being released at all.
-                throw new Exception($"Migration method missing. {_migrationMethods.Count} migration methods. {versionSummaryText} {settingsWillBeResetedText}");
-        }
-
         // e.g. migration from 1 to 2 has to call method1to2 [0]
         // e.g. migration from 1 to 3 has to call method1to2 [0], method2to3 [1]
         // e.g. migration from 2 to 5 has to call method2to3 [1], method3to4 [2], method4to5 [3]
         // e.g. migration from 4 to 5 has to call method4to5 [3]
-        private static string migrateModel(string modelJson, ModelVersion modelVersion, ModelVersion refModelVersion, Logger logger)
+        private static string migrateModelJson(ref string modelJson, ModelVersion modelVersion, ModelVersion refModelVersion, Logger logger)
         {
             for (var methodIndex = modelVersion.MajorVersion - 1; methodIndex <= refModelVersion.MajorVersion - 2; methodIndex++)
                 modelJson = _migrationMethods[methodIndex](modelJson, logger);
