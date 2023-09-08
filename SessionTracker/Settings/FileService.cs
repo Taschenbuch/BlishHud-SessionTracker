@@ -56,14 +56,20 @@ namespace SessionTracker.Settings
                 {
                     // fix for sentry null reference exception.
                     // Because JsonConvert.DeserializeObject returns null instead of throwing an exception when json file is empty string. no idea why file is empty sometimes
-                    logger.Error("Error: Failed to load model from file in module folder in Module.LoadAsync(). File is empty :(");
+                    logger.Warn("Error: Failed to load model from file in module folder in Module.LoadAsync(). File is empty :(");
                     return new Model();
                 }
 
+                modelJson = MigrationService.RenamePropertyMajorVersionToVersion(logger, modelJson);
                 var modelVersion = JsonConvert.DeserializeObject<ModelVersion>(modelJson);
                 modelJson = MigrationService.MigrateModelIfIsOldVersion(modelJson, modelVersion, refModelVersion, logger);
                 var model = JsonConvert.DeserializeObject<Model>(modelJson);
                 return model;
+            }
+            catch (MigrationException e)
+            {
+                logger.Warn(e.Message);
+                return new Model();
             }
             catch (Exception e)
             {
