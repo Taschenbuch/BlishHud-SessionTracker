@@ -36,8 +36,8 @@ namespace SessionTracker.Settings
         {
             var refFolderModel = await LoadModelFromRefFolder(_contentsManager, _logger);
 
-            var noModuleFolderModelExists = File.Exists(_modelFilePath) == false;
-            if (noModuleFolderModelExists)
+            var isFirstModuleStart = File.Exists(_modelFilePath) == false;
+            if (isFirstModuleStart)
                 return refFolderModel;
 
             var moduleFolderModel = await LoadModelFromModuleFolder(_modelFilePath, refFolderModel, _logger);
