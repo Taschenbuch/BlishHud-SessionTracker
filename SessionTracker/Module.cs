@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework;
 using SessionTracker.Controls;
 using SessionTracker.Models;
 using SessionTracker.Services;
+using SessionTracker.Services.RemoteFiles;
 using SessionTracker.Settings;
 using SessionTracker.Settings.SettingEntries;
 using SessionTracker.Settings.Window;
@@ -44,8 +45,21 @@ namespace SessionTracker
 
         protected override async Task LoadAsync()
         {
-            _fileService = new FileService(DirectoriesManager, ContentsManager, Logger);
             RunShiftBlishCornerIconsWorkaroundBecauseOfNewWizardVaultIcon();
+
+            var localAndRemoteFileLocations = new LocalAndRemoteFileLocations(new FileConstants(), DirectoriesManager);
+            var isModuleVersionDeprecated = await RemoteFilesService.IsModuleVersionDeprecated(localAndRemoteFileLocations.DeprecatedTextUrl);
+
+            if (isModuleVersionDeprecated) // todo x handeln
+            {
+
+            }
+            else
+            {
+                await RemoteFilesService.UpdateLocalWithRemoteFilesIfNecessary(localAndRemoteFileLocations, Logger);
+            }
+
+            _fileService = new FileService(localAndRemoteFileLocations, Logger);
             var model                 = await _fileService.LoadModelFromFile();
             var textureService        = new TextureService(model, ContentsManager, Logger);
             var settingsWindowService = new SettingsWindowService(model, _settingService, textureService);

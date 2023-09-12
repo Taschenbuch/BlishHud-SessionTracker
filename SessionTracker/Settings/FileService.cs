@@ -2,20 +2,19 @@
 using System.IO;
 using System.Threading.Tasks;
 using Blish_HUD;
-using Blish_HUD.Modules.Managers;
 using Newtonsoft.Json;
 using SessionTracker.Models;
+using SessionTracker.Services.RemoteFiles;
 
 namespace SessionTracker.Settings
 {
     public class FileService
     {
-        public FileService(DirectoriesManager directoriesManager, ContentsManager contentsManager, Logger logger)
+        public FileService(LocalAndRemoteFileLocations localAndRemoteFileLocations, Logger logger)
         {
-            _contentsManager = contentsManager;
-            _logger          = logger;
-            var moduleFolderPath = directoriesManager.GetFullDirectoryPath(MODULE_FOLDER_NAME);
-            _modelFilePath = Path.Combine(moduleFolderPath, MODEL_FILE_NAME);
+            _logger              = logger;
+            _localModelFilePath  = Path.Combine(localAndRemoteFileLocations.LocalRootFolderPath, FileConstants.ModelFileName);
+            _remoteModelFilePath = localAndRemoteFileLocations.GetLocalFilePath(FileConstants.ModelFileName);
         }
 
         public void SaveModelToFile(Model model)
@@ -24,7 +23,7 @@ namespace SessionTracker.Settings
             {
                 // not async because Modul.Unload() is not async
                 var modelJson = JsonService.SerializeModelToJson(model);
-                File.WriteAllText(_modelFilePath, modelJson);
+                File.WriteAllText(_localModelFilePath, modelJson);
             }
             catch (Exception e)
             {
@@ -34,24 +33,23 @@ namespace SessionTracker.Settings
 
         public async Task<Model> LoadModelFromFile()
         {
-            var refFolderModel = await LoadModelFromRefFolder(_contentsManager, _logger);
+            var remoteFolderModel = await LoadModelFromRemoteFolder(_remoteModelFilePath, _logger);
 
-            var isFirstModuleStart = File.Exists(_modelFilePath) == false;
+            var isFirstModuleStart = File.Exists(_localModelFilePath) == false;
             if (isFirstModuleStart)
-                return refFolderModel;
+                return remoteFolderModel;
 
-            var moduleFolderModel = await LoadModelFromModuleFolder(_modelFilePath, refFolderModel, _logger);
-            refFolderModel = RefModelService.UpdateStatIsVisibleInRefModel(moduleFolderModel, refFolderModel);
-            refFolderModel = RefModelService.UpdateStatsOrderInRefModel(moduleFolderModel, refFolderModel);
-            return refFolderModel;
+            var moduleFolderModel = await LoadModelFromModuleFolder(_localModelFilePath, remoteFolderModel, _logger);
+            remoteFolderModel = RemoteModelService.UpdateStatIsVisibleInRemoteModel(moduleFolderModel, remoteFolderModel);
+            remoteFolderModel = RemoteModelService.UpdateStatsOrderInRemoteModel(moduleFolderModel, remoteFolderModel);
+            return remoteFolderModel;
         }
 
-        private static async Task<Model> LoadModelFromModuleFolder(string modelFilePath, ModelVersion refModelVersion, Logger logger)
+        private static async Task<Model> LoadModelFromRemoteFolder(string modelFilePath, Logger logger)
         {
             try
             {
-                var modelJson = await ReadModuleFolderFile(modelFilePath);
-
+                var modelJson = await ReadFile(modelFilePath);
                 if (string.IsNullOrWhiteSpace(modelJson))
                 {
                     // fix for sentry null reference exception.
@@ -60,11 +58,7 @@ namespace SessionTracker.Settings
                     return new Model();
                 }
 
-                modelJson = MigrationService.RenamePropertyMajorVersionToVersion(logger, modelJson);
-                var modelVersion = JsonConvert.DeserializeObject<ModelVersion>(modelJson);
-                modelJson = MigrationService.MigrateModelIfIsOldVersion(modelJson, modelVersion, refModelVersion, logger);
-                var model = JsonConvert.DeserializeObject<Model>(modelJson);
-                return model;
+                return JsonConvert.DeserializeObject<Model>(modelJson);
             }
             catch (MigrationException e)
             {
@@ -78,35 +72,47 @@ namespace SessionTracker.Settings
             }
         }
 
-        private static async Task<string> ReadModuleFolderFile(string modelFilePath)
-        {
-            using (var fileStream = File.OpenRead(modelFilePath))
-            using (var streamReader = new StreamReader(fileStream))
-                return await streamReader.ReadToEndAsync();
-        }
 
-        private static async Task<Model> LoadModelFromRefFolder(ContentsManager contentsManager, Logger logger)
+        private static async Task<Model> LoadModelFromModuleFolder(string modelFilePath, ModelVersion remoteModelVersion, Logger logger)
         {
             try
             {
-                using (var fileStream = contentsManager.GetFileStream(MODEL_FILE_NAME))
-                using (var streamReader = new StreamReader(fileStream))
+                var modelJson = await ReadFile(modelFilePath);
+
+                if (string.IsNullOrWhiteSpace(modelJson))
                 {
-                    var modelJson = await streamReader.ReadToEndAsync();
-                    return JsonConvert.DeserializeObject<Model>(modelJson);
+                    // fix for sentry null reference exception.
+                    // Because JsonConvert.DeserializeObject returns null instead of throwing an exception when json file is empty string. no idea why file is empty sometimes
+                    logger.Warn("Error: Failed to load model from file in module folder in Module.LoadAsync(). File is empty :(");
+                    return new Model();
                 }
+
+                modelJson = MigrationService.RenamePropertyMajorVersionToVersion(logger, modelJson);
+                var localModelVersion = JsonConvert.DeserializeObject<ModelVersion>(modelJson);
+                modelJson = MigrationService.MigrateModelJsonIfIsOldVersion(modelJson, localModelVersion, remoteModelVersion, logger);
+                return JsonConvert.DeserializeObject<Model>(modelJson);
+            }
+            catch (MigrationException e)
+            {
+                logger.Warn(e.Message);
+                return new Model();
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error: Failed to load model from file in ref folder in Module.LoadAsync(). :(");
+                logger.Error(e, "Error: Failed to load model from file in module folder in Module.LoadAsync(). :(");
                 return new Model();
             }
         }
 
-        private readonly string _modelFilePath;
-        private const string MODEL_FILE_NAME = "model.json";
-        private const string MODULE_FOLDER_NAME = "session-tracker";
-        private readonly ContentsManager _contentsManager;
+        private static async Task<string> ReadFile(string filePath)
+        {
+            using (var fileStream = File.OpenRead(filePath))
+            using (var streamReader = new StreamReader(fileStream))
+                return await streamReader.ReadToEndAsync();
+        }
+
+        private readonly string _localModelFilePath;
+        private readonly string _remoteModelFilePath;
         private readonly Logger _logger;
     }
 }
