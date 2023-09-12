@@ -46,7 +46,7 @@ namespace SessionTracker.Settings
         {
             var isMigrationMethodMissing = remoteModelVersion.Version - 1 > _migrationMethods.Count;
             if (isMigrationMethodMissing)
-                throw new MigrationException($"Migration method missing. {_migrationMethods.Count} migration methods exist. {versionSummaryText} {settingsWillBeResetedText}");
+                throw new Exception($"Migration method missing. {_migrationMethods.Count} migration methods exist. {versionSummaryText} {settingsWillBeResetedText}");
         }
 
         private static void ThrowIfModelVersionIsTooNew(ModelVersion localModelVersion, ModelVersion remoteModelVersion, Logger logger, string versionSummaryText, string settingsWillBeResetedText)
@@ -59,7 +59,7 @@ namespace SessionTracker.Settings
                             $"Because of that it will use the remote model instead. " +
                             $"{settingsWillBeResetedText} {versionSummaryText} :(");
 
-                throw new MigrationException($"remote Version < local Version. {versionSummaryText} {settingsWillBeResetedText}");
+                throw new LogWarnException($"remote Version < local Version. {versionSummaryText} {settingsWillBeResetedText}");
             }
         }
 

@@ -49,25 +49,12 @@ namespace SessionTracker.Settings
         {
             try
             {
-                var modelJson = await ReadFile(modelFilePath);
-                if (string.IsNullOrWhiteSpace(modelJson))
-                {
-                    // fix for sentry null reference exception.
-                    // Because JsonConvert.DeserializeObject returns null instead of throwing an exception when json file is empty string. no idea why file is empty sometimes
-                    logger.Warn("Error: Failed to load model from file in module folder in Module.LoadAsync(). File is empty :(");
-                    return new Model();
-                }
-
+                var modelJson = await GetFileContentAndThrowIfFileEmpty(modelFilePath);
                 return JsonConvert.DeserializeObject<Model>(modelJson);
-            }
-            catch (MigrationException e)
-            {
-                logger.Warn(e.Message);
-                return new Model();
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error: Failed to load model from file in module folder in Module.LoadAsync(). :(");
+                logger.Error(e, "Error: Failed to load remote model from file in Module.LoadAsync(). :(");
                 return new Model();
             }
         }
@@ -77,38 +64,37 @@ namespace SessionTracker.Settings
         {
             try
             {
-                var modelJson = await ReadFile(modelFilePath);
-
-                if (string.IsNullOrWhiteSpace(modelJson))
-                {
-                    // fix for sentry null reference exception.
-                    // Because JsonConvert.DeserializeObject returns null instead of throwing an exception when json file is empty string. no idea why file is empty sometimes
-                    logger.Warn("Error: Failed to load model from file in module folder in Module.LoadAsync(). File is empty :(");
-                    return new Model();
-                }
-
+                var modelJson = await GetFileContentAndThrowIfFileEmpty(modelFilePath);
                 modelJson = MigrationService.RenamePropertyMajorVersionToVersion(logger, modelJson);
                 var localModelVersion = JsonConvert.DeserializeObject<ModelVersion>(modelJson);
                 modelJson = MigrationService.MigrateModelJsonIfIsOldVersion(modelJson, localModelVersion, remoteModelVersion, logger);
                 return JsonConvert.DeserializeObject<Model>(modelJson);
             }
-            catch (MigrationException e)
+            catch (LogWarnException e)
             {
                 logger.Warn(e.Message);
                 return new Model();
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error: Failed to load model from file in module folder in Module.LoadAsync(). :(");
+                logger.Error(e, "Error: Failed to load local model from file in Module.LoadAsync(). :(");
                 return new Model();
             }
         }
 
-        private static async Task<string> ReadFile(string filePath)
+        private static async Task<string> GetFileContentAndThrowIfFileEmpty(string filePath)
         {
             using (var fileStream = File.OpenRead(filePath))
             using (var streamReader = new StreamReader(fileStream))
-                return await streamReader.ReadToEndAsync();
+            {
+                var fileContent = await streamReader.ReadToEndAsync();
+
+                // Because JsonConvert.DeserializeObject returns null for empty string. no idea why file is empty sometimes (was reported in sentry)
+                if (string.IsNullOrWhiteSpace(fileContent)) 
+                    throw new Exception("file is empty!");
+
+                return fileContent;
+            }
         }
 
         private readonly string _localModelFilePath;
