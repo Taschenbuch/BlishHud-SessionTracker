@@ -44,8 +44,8 @@ namespace SessionTracker
 
         protected override async Task LoadAsync()
         {
-            runShiftBlishCornerIconsWorkaroundBecauseOfNewWizardVaultIcon();
             _fileService = new FileService(DirectoriesManager, ContentsManager, Logger);
+            RunShiftBlishCornerIconsWorkaroundBecauseOfNewWizardVaultIcon();
             var model                 = await _fileService.LoadModelFromFile();
             var textureService        = new TextureService(model, ContentsManager, Logger);
             var settingsWindowService = new SettingsWindowService(model, _settingService, textureService);
@@ -94,7 +94,7 @@ namespace SessionTracker
             _statsContainer.Update2(gameTime);
         }
 
-        private static void runShiftBlishCornerIconsWorkaroundBecauseOfNewWizardVaultIcon()
+        private static void RunShiftBlishCornerIconsWorkaroundBecauseOfNewWizardVaultIcon()
         {
             if (Program.OverlayVersion < new SemVer.Version(1, 1, 0))
             {
