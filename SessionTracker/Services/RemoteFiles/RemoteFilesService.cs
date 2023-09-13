@@ -23,6 +23,21 @@ namespace SessionTracker.Services.RemoteFiles
             }
         }
 
+        public static async Task<string> GetDeprecatedText(string deprecatedUrl)
+        {
+            try
+            {
+                var deprecatedText = await GetTextFromUrl(deprecatedUrl);
+                return string.IsNullOrWhiteSpace(deprecatedText)
+                    ? DEFAULT_DEPRECATED_TEXT 
+                    : deprecatedText;
+            }
+            catch (Exception)
+            {
+                return DEFAULT_DEPRECATED_TEXT;
+            }
+        }
+
         public static async Task UpdateLocalWithRemoteFilesIfNecessary(LocalAndRemoteFileLocations localAndRemoteFileLocations, Logger logger)
         {
             try
@@ -93,5 +108,9 @@ namespace SessionTracker.Services.RemoteFiles
         {
             return dataFilePaths.Any(d => !File.Exists(d.LocalFilePath));
         }
+
+        private const string DEFAULT_DEPRECATED_TEXT = "This module version is deprecated. :-(\n" +
+                                                       "Please update to the newest module version.\n" +
+                                                       "To have access to the newest module version, make sure you are also using the newest Blish HUD version. :-)";
     }
 }

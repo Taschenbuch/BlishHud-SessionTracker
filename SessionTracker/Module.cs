@@ -40,26 +40,28 @@ namespace SessionTracker
 
         public override IView GetSettingsView()
         {
-            return new ModuleSettingsView(_settingsWindowService);
+            if (_isModuleVersionDeprecated)
+                return new DeprecatedModuleVersionSettingsView(_deprecatedText);
+            else
+                return new ModuleSettingsView(_settingsWindowService);
         }
 
         protected override async Task LoadAsync()
         {
             RunShiftBlishCornerIconsWorkaroundBecauseOfNewWizardVaultIcon();
-
             var localAndRemoteFileLocations = new LocalAndRemoteFileLocations(new FileConstants(), DirectoriesManager);
-            var isModuleVersionDeprecated = await RemoteFilesService.IsModuleVersionDeprecated(localAndRemoteFileLocations.DeprecatedTextUrl);
-
-            if (isModuleVersionDeprecated) // todo x handeln
+            
+            _isModuleVersionDeprecated = await RemoteFilesService.IsModuleVersionDeprecated(localAndRemoteFileLocations.DeprecatedTextUrl);
+            if (_isModuleVersionDeprecated)
             {
-
+                _deprecatedText = await RemoteFilesService.GetDeprecatedText(localAndRemoteFileLocations.DeprecatedTextUrl);
+                _moduleVersionDeprecatedWindow = new DeprecatedModuleVersionWindow(Name, _deprecatedText);
+                return;
             }
-            else
-            {
-                await RemoteFilesService.UpdateLocalWithRemoteFilesIfNecessary(localAndRemoteFileLocations, Logger);
-            }
+        
+            await RemoteFilesService.UpdateLocalWithRemoteFilesIfNecessary(localAndRemoteFileLocations, Logger);
 
-            _fileService = new FileService(localAndRemoteFileLocations, Logger);
+            _fileService              = new FileService(localAndRemoteFileLocations, Logger);
             var model                 = await _fileService.LoadModelFromFile();
             var textureService        = new TextureService(model, ContentsManager, Logger);
             var settingsWindowService = new SettingsWindowService(model, _settingService, textureService);
@@ -94,9 +96,13 @@ namespace SessionTracker
             if (_model != null)
                 _fileService.SaveModelToFile(_model);
 
-            _settingService.UiVisibilityKeyBindingSetting.Value.Enabled   = false; // workaround to fix keybinding memory leak
-            _settingService.UiVisibilityKeyBindingSetting.Value.Activated -= OnUiVisibilityKeyBindingActivated;
+            if (_settingService != null)
+            {
+                _settingService.UiVisibilityKeyBindingSetting.Value.Enabled = false; // workaround to fix keybinding memory leak
+                _settingService.UiVisibilityKeyBindingSetting.Value.Activated -= OnUiVisibilityKeyBindingActivated;
+            }
 
+            _moduleVersionDeprecatedWindow?.Dispose();
             _settingsWindowService?.Dispose();
             _cornerIconService?.Dispose();
             _textureService?.Dispose();
@@ -105,6 +111,9 @@ namespace SessionTracker
 
         protected override void Update(GameTime gameTime)
         {
+            if (_isModuleVersionDeprecated)
+                return;
+
             _statsContainer.Update2(gameTime);
         }
 
@@ -129,5 +138,8 @@ namespace SessionTracker
         private TextureService _textureService;
         private CornerIconService _cornerIconService;
         private SettingsWindowService _settingsWindowService;
+        private bool _isModuleVersionDeprecated;
+        private string _deprecatedText;
+        private DeprecatedModuleVersionWindow _moduleVersionDeprecatedWindow;
     }
 }
