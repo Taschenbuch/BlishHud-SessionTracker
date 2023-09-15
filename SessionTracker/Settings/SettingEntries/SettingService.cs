@@ -38,6 +38,12 @@ namespace SessionTracker.Settings.SettingEntries
                 () => "value color",
                 () => "Change color of the stats value. e.g. for '0 | 10'");
 
+            BackgroundColorSetting = settings.DefineSetting(
+                "window background color",
+                ColorType.Black,
+                () => "window background color",
+                () => "Change window background color");
+
             SessionValuesAreVisibleSetting = settings.DefineSetting(
                 "show session values",
                 true,
@@ -201,6 +207,7 @@ namespace SessionTracker.Settings.SettingEntries
         public SettingEntry<bool> UiHeightIsFixedSetting { get; }
         public SettingEntry<ColorType> ValueLabelColorSetting { get; }
         public SettingEntry<ColorType> TitleLabelColorSetting { get; }
+        public SettingEntry<ColorType> BackgroundColorSetting { get; }
         public SettingEntry<float> XMainWindowRelativeLocationSetting { get; }
         public SettingEntry<float> YMainWindowRelativeLocationSetting { get; }
         public SettingEntry<bool> UiIsVisibleSetting { get; }

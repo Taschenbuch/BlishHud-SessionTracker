@@ -76,7 +76,7 @@ namespace SessionTracker
             {
                 HeightSizingMode = SizingMode.AutoSize,
                 WidthSizingMode  = SizingMode.AutoSize,
-                BackgroundColor  = new Color(Color.Black, _settingService.BackgroundOpacitySetting.Value),
+                BackgroundColor  = ColorService.CreateBackgroundColor(_settingService),
                 Visible          = _settingService.UiIsVisibleSetting.Value,
                 Parent           = GameService.Graphics.SpriteScreen
             };

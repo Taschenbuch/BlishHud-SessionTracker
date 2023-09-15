@@ -45,10 +45,11 @@ namespace SessionTracker.Controls
             settingService.HideStatsWithValueZeroSetting.SettingChanged  += OnHideStatsWithValueZeroSettingChanged;
             settingService.FontSizeIndexSetting.SettingChanged           += OnFontSizeIndexSettingChanged;
             settingService.BackgroundOpacitySetting.SettingChanged       += OnBackgroundOpacitySettingChanged;
+            settingService.BackgroundColorSetting.SettingChanged         += OnBackgroundColorSettingChanged;
             settingService.ValueLabelColorSetting.SettingChanged         += OnValueLabelColorSettingChanged;
             GameService.Overlay.UserLocaleChanged                        += OnUserChangedLanguageInBlishSettings;
         }
-        
+
         protected override void DisposeControl()
         {
             _updateState.Dispose();
@@ -56,6 +57,7 @@ namespace SessionTracker.Controls
             _settingService.HideStatsWithValueZeroSetting.SettingChanged  -= OnHideStatsWithValueZeroSettingChanged;
             _settingService.FontSizeIndexSetting.SettingChanged           -= OnFontSizeIndexSettingChanged;
             _settingService.BackgroundOpacitySetting.SettingChanged       -= OnBackgroundOpacitySettingChanged;
+            _settingService.BackgroundColorSetting.SettingChanged         -= OnBackgroundColorSettingChanged;
             _settingService.ValueLabelColorSetting.SettingChanged         -= OnValueLabelColorSettingChanged;
             GameService.Overlay.UserLocaleChanged                         -= OnUserChangedLanguageInBlishSettings;
 
@@ -329,7 +331,12 @@ namespace SessionTracker.Controls
         
         private void OnBackgroundOpacitySettingChanged(object sender, ValueChangedEventArgs<int> valueChangedEventArgs)
         {
-            BackgroundColor = new Color(Color.Black, _settingService.BackgroundOpacitySetting.Value);
+            BackgroundColor = ColorService.CreateBackgroundColor(_settingService);
+        }
+
+        private void OnBackgroundColorSettingChanged(object sender, ValueChangedEventArgs<ColorType> e)
+        {
+            BackgroundColor = ColorService.CreateBackgroundColor(_settingService);
         }
 
         private void OnHideStatsWithValueZeroSettingChanged(object sender, ValueChangedEventArgs<bool> e)

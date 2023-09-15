@@ -29,6 +29,7 @@ namespace SessionTracker.Settings.SettingEntries
             [ColorType.LightYellow] = Color.LightYellow,
             [ColorType.Yellow] = Color.Yellow,
             [ColorType.LightGoldenrodYellow] = Color.LightGoldenrodYellow,
+            [ColorType.Black] = Color.Black,
         };
     }
 }
