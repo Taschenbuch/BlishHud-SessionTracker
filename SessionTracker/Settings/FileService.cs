@@ -84,17 +84,15 @@ namespace SessionTracker.Settings
 
         private static async Task<string> GetFileContentAndThrowIfFileEmpty(string filePath)
         {
-            using (var fileStream = File.OpenRead(filePath))
-            using (var streamReader = new StreamReader(fileStream))
-            {
-                var fileContent = await streamReader.ReadToEndAsync();
+            using var fileStream = File.OpenRead(filePath);
+            using var streamReader = new StreamReader(fileStream);
+            var fileContent = await streamReader.ReadToEndAsync();
 
-                // Because JsonConvert.DeserializeObject returns null for empty string. no idea why file is empty sometimes (was reported in sentry)
-                if (string.IsNullOrWhiteSpace(fileContent)) 
-                    throw new Exception("file is empty!");
+            // Because JsonConvert.DeserializeObject returns null for empty string. no idea why file is empty sometimes (was reported in sentry)
+            if (string.IsNullOrWhiteSpace(fileContent))
+                throw new Exception("file is empty!");
 
-                return fileContent;
-            }
+            return fileContent;
         }
 
         private readonly string _localModelFilePath;
