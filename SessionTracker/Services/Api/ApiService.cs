@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Blish_HUD.Modules.Managers;
-using Gw2Sharp.WebApi.V2;
 using Gw2Sharp.WebApi.V2.Models;
 using SessionTracker.Models;
 using SessionTracker.Models.Constants;
+using SessionTracker.Settings;
 
 namespace SessionTracker.Services.Api
 {
@@ -45,7 +46,14 @@ namespace SessionTracker.Services.Api
                 materialStorageTask
             };
 
-            await Task.WhenAll(apiResponseTasks);
+            try
+            {
+                await Task.WhenAll(apiResponseTasks);
+            }
+            catch (Exception e)
+            {
+                throw new LogWarnException("API error", e);
+            }
 
             model.GetStat(StatId.WVW_RANK).Value.Total = accountTask.Result.WvwRank ?? 0;
             OtherTotalValueService.SetDeathsTotalValue(model, charactersTask);

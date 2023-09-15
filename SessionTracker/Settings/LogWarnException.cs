@@ -7,5 +7,8 @@ namespace SessionTracker.Settings
     {
         public LogWarnException(string message) 
             : base(message) { }
+
+        public LogWarnException(string message, Exception innerException)
+            : base(message, innerException) { }
     }
 }

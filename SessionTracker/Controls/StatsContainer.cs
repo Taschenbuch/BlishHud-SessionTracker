@@ -11,6 +11,7 @@ using SessionTracker.Controls.Hint;
 using SessionTracker.Models;
 using SessionTracker.Services;
 using SessionTracker.Services.Api;
+using SessionTracker.Settings;
 using SessionTracker.Settings.SettingEntries;
 using SessionTracker.Settings.Window;
 using SessionTracker.Value.Text;
@@ -169,12 +170,19 @@ namespace SessionTracker.Controls
                 _statTooltipService.ResetSummaryTooltip(_model);
                 _updateState.State = State.UpdateStats;
             }
+            catch (LogWarnException e)
+            {
+                var tooltip = $"Error: API call failed. :-( \n{RETRY_IN_X_SECONDS_MESSAGE}";
+                SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
+                _logger.Warn(e, "Error when initializing values: API failed to respond.");
+                _updateState.State = State.WaitBeforeResetAndInitStats;
+            }
             catch (Exception e)
             {
-                var tooltip = $"Error: API call failed or bug in module code. :( \n{RETRY_IN_X_SECONDS_MESSAGE}";
+                var tooltip = $"Error: Bug in module code. :-( \n{RETRY_IN_X_SECONDS_MESSAGE}";
                 SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
-                _logger.Warn(e, "Error when initializing values: API failed to respond or bug in module code.");
-                _updateState.State = State.WaitBeforeResetAndInitStats;
+                _logger.Error(e, "Error when initializing values: bug in module code.");
+                _updateState.State = State.WaitBeforeResetAndInitStats; // todo module error = module should stop? error updateState einbauen?
             }
         }
 
@@ -194,13 +202,17 @@ namespace SessionTracker.Controls
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _statTooltipService.UpdateSummaryTooltip(_model);
             }
-            catch (Exception e)
+            catch (LogWarnException e)
             {
                 // intentionally no error handling!
                 // when api server does not respond (error code 500, 502) or times out (RequestCanceledException)
                 // the app will just return the previous stat values and hope that on the end of the next interval
                 // the api server will answer correctly again.
-                _logger.Warn(e, "Error when updating values: API failed to respond or bug in module code.");
+                _logger.Warn(e, "Error when updating values: API failed to respond"); 
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, "Error when updating values: bug in module code.");  // todo module error = module should stop? error updateState einbauen?
             }
             finally
             {
