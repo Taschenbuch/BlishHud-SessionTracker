@@ -38,7 +38,7 @@ namespace SessionTracker.Services.RemoteFiles
             }
         }
 
-        public static async Task UpdateLocalWithRemoteFilesIfNecessary(LocalAndRemoteFileLocations localAndRemoteFileLocations, Logger logger)
+        public static async Task<bool> TryUpdateLocalWithRemoteFilesIfNecessary(LocalAndRemoteFileLocations localAndRemoteFileLocations, Logger logger)
         {
             try
             {
@@ -46,17 +46,20 @@ namespace SessionTracker.Services.RemoteFiles
                 if (areLocalFilesMissing)
                 {
                     await DownloadFilesFromRemote(localAndRemoteFileLocations.DataFileLocations);
-                    return;
+                    return true;
                 }
 
                 var areNewerRemoteFilesAvailable = await AreNewerRemoteFilesAvailable(localAndRemoteFileLocations.ContentVersionFilePath);
                 if (areNewerRemoteFilesAvailable)
                     await DownloadFilesFromRemote(localAndRemoteFileLocations.DataFileLocations);
+
+                return true;
             }
             catch (Exception e)
             {
                 // error because there is no fallback data in ref folder. Module may stop working completely without this data
-                logger.Error(e, "Failed to update module data from online host. :("); 
+                logger.Error(e, "Failed to update module data from remote. :(");
+                return false;
             }
         }
 

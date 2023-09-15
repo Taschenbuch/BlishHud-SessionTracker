@@ -40,8 +40,8 @@ namespace SessionTracker
 
         public override IView GetSettingsView()
         {
-            if (_isModuleVersionDeprecated)
-                return new DeprecatedModuleVersionSettingsView(_deprecatedText);
+            if (_moduleLoadError.HasModuleLoadFailed)
+                return _moduleLoadError.CreateErrorSettingsView();
             else
                 return new ModuleSettingsView(_settingsWindowService);
         }
@@ -51,15 +51,21 @@ namespace SessionTracker
             RunShiftBlishCornerIconsWorkaroundBecauseOfNewWizardVaultIcon();
             var localAndRemoteFileLocations = new LocalAndRemoteFileLocations(new FileConstants(), DirectoriesManager);
             
-            _isModuleVersionDeprecated = await RemoteFilesService.IsModuleVersionDeprecated(localAndRemoteFileLocations.DeprecatedTextUrl);
-            if (_isModuleVersionDeprecated)
+            _moduleLoadError.HasModuleLoadFailed = await RemoteFilesService.IsModuleVersionDeprecated(localAndRemoteFileLocations.DeprecatedTextUrl);
+            if (_moduleLoadError.HasModuleLoadFailed)
             {
-                _deprecatedText = await RemoteFilesService.GetDeprecatedText(localAndRemoteFileLocations.DeprecatedTextUrl);
-                _moduleVersionDeprecatedWindow = new DeprecatedModuleVersionWindow(Name, _deprecatedText);
+                _moduleLoadError.InfoText = await RemoteFilesService.GetDeprecatedText(localAndRemoteFileLocations.DeprecatedTextUrl);
+                _moduleLoadError.ShowErrorWindow($"{Name}: Update module version :-)");               
                 return;
             }
-        
-            await RemoteFilesService.UpdateLocalWithRemoteFilesIfNecessary(localAndRemoteFileLocations, Logger);
+
+            _moduleLoadError.HasModuleLoadFailed = !await RemoteFilesService.TryUpdateLocalWithRemoteFilesIfNecessary(localAndRemoteFileLocations, Logger);
+            if (_moduleLoadError.HasModuleLoadFailed)
+            {
+                _moduleLoadError.InitForFailedDownload(Name);
+                _moduleLoadError.ShowErrorWindow($"{Name}: Download failed :-(");
+                return;
+            }
 
             _fileService              = new FileService(localAndRemoteFileLocations, Logger);
             var model                 = await _fileService.LoadModelFromFile();
@@ -102,7 +108,7 @@ namespace SessionTracker
                 _settingService.UiVisibilityKeyBindingSetting.Value.Activated -= OnUiVisibilityKeyBindingActivated;
             }
 
-            _moduleVersionDeprecatedWindow?.Dispose();
+            _moduleLoadError?.Dispose();
             _settingsWindowService?.Dispose();
             _cornerIconService?.Dispose();
             _textureService?.Dispose();
@@ -111,7 +117,7 @@ namespace SessionTracker
 
         protected override void Update(GameTime gameTime)
         {
-            if (_isModuleVersionDeprecated)
+            if (_moduleLoadError.HasModuleLoadFailed)
                 return;
 
             _statsContainer.Update2(gameTime);
@@ -138,8 +144,6 @@ namespace SessionTracker
         private TextureService _textureService;
         private CornerIconService _cornerIconService;
         private SettingsWindowService _settingsWindowService;
-        private bool _isModuleVersionDeprecated;
-        private string _deprecatedText;
-        private DeprecatedModuleVersionWindow _moduleVersionDeprecatedWindow;
+        private readonly ModuleLoadError _moduleLoadError = new ModuleLoadError();
     }
 }

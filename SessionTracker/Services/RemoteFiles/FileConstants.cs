@@ -10,7 +10,7 @@ namespace SessionTracker.Services.RemoteFiles
         public const string ModelFileName = "model.json"; // used for remote AND local model because they are in different folders
         public List<string> RemotelyUpdatableDataFileNames { get; } = new List<string>
         {
-            ModelFileName,
+            ModelFileName
         };
     }
 }
