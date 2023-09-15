@@ -36,7 +36,7 @@ namespace SessionTracker.Controls.Hint
 
             var hiddenByUserHintText = "No stats selected.\n" +
                                        "Select the stats you want to see\n" +
-                                       "in the session tracker module settings. :)";
+                                       "in the session tracker module settings. :-)";
 
             _hiddenByUserLabel = new Label()
             {

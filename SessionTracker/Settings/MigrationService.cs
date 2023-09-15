@@ -10,7 +10,7 @@ using System.Collections.Generic;
 // - MajorVersion -> Version (will be handled in special method)
 // 
 // 2.0:
-// - string IconUrl -> int IconAssetId (is handled automatically because currently ref model is used with updated order and isVisible property)
+// - string IconUrl -> int IconAssetId (is handled automatically because currently remote model is used with updated order and isVisible property)
 // - was never part of a release because 3.0 came earlier. 2.0 and 3.0 were still not merged into 2.0 because they were usefull to test migration logic.
 //
 // ======== Version definitions ======== 
@@ -21,33 +21,45 @@ namespace SessionTracker.Settings
 {
     public static class MigrationService
     {
-        public static string MigrateModelIfIsOldVersion(string modelJson, ModelVersion modelVersion, ModelVersion refModelVersion, Logger logger)
+        // dont call this with migrationMethod loop. It has to be called earlier 
+        public static string RenamePropertyMajorVersionToVersion(Logger logger, string modelJson)
         {
-            var versionSummaryText = $"persisted version: {modelVersion.Version}; ref folder version: {refModelVersion.Version}.";
+            var modelJObject = JObject.Parse(modelJson);
+            if (!modelJObject.ContainsKey(OLD_VERSION_PROPERTY_NAME))
+                return modelJson;
+
+            logger.Info($"migrate: rename '{OLD_VERSION_PROPERTY_NAME}' to '{NEW_VERSION_PROPERTY_NAME}'");
+            modelJObject.Property(OLD_VERSION_PROPERTY_NAME).Rename(NEW_VERSION_PROPERTY_NAME);
+            return modelJObject.ToString();
+        }
+
+        public static string MigrateModelJsonIfIsOldVersion(string modelJson, ModelVersion localModelVersion, ModelVersion remoteModelVersion, Logger logger)
+        {
+            var versionSummaryText = $"persisted version: {localModelVersion.Version}; remote folder version: {remoteModelVersion.Version}.";
             var settingsWillBeResetedText = "This may result in resetting settings changed by the user like stats visibility/order.";
-            ThrowIfMigrationMethodIsMissing(refModelVersion, versionSummaryText, settingsWillBeResetedText);
-            ThrowIfModelVersionIsTooNew(modelVersion, refModelVersion, logger, versionSummaryText, settingsWillBeResetedText);
-            return MigrateModelJson(ref modelJson, modelVersion, refModelVersion, logger);
+            ThrowIfMigrationMethodIsMissing(remoteModelVersion, versionSummaryText, settingsWillBeResetedText);
+            ThrowIfModelVersionIsTooNew(localModelVersion, remoteModelVersion, logger, versionSummaryText, settingsWillBeResetedText);
+            return MigrateModelJson(modelJson, localModelVersion, remoteModelVersion, logger);
         }
 
-        private static void ThrowIfMigrationMethodIsMissing(ModelVersion refModelVersion, string versionSummaryText, string settingsWillBeResetedText)
+        private static void ThrowIfMigrationMethodIsMissing(ModelVersion remoteModelVersion, string versionSummaryText, string settingsWillBeResetedText)
         {
-            var isMigrationMethodMissing = refModelVersion.Version - 1 > _migrationMethods.Count;
+            var isMigrationMethodMissing = remoteModelVersion.Version - 1 > _migrationMethods.Count;
             if (isMigrationMethodMissing)
-                throw new MigrationException($"Migration method missing. {_migrationMethods.Count} migration methods exist. {versionSummaryText} {settingsWillBeResetedText}");
+                throw new Exception($"Migration method missing. {_migrationMethods.Count} migration methods exist. {versionSummaryText} {settingsWillBeResetedText}");
         }
 
-        private static void ThrowIfModelVersionIsTooNew(ModelVersion modelVersion, ModelVersion refModelVersion, Logger logger, string versionSummaryText, string settingsWillBeResetedText)
+        private static void ThrowIfModelVersionIsTooNew(ModelVersion localModelVersion, ModelVersion remoteModelVersion, Logger logger, string versionSummaryText, string settingsWillBeResetedText)
         {
-            if (refModelVersion.Version < modelVersion.Version)
+            if (remoteModelVersion.Version < localModelVersion.Version)
             {
-                logger.Warn($"ref Version < persisted Version. " +
+                logger.Warn($"remote Version < local Version. " +
                             $"This can happen when previously a newer module version was installed. " +
                             $"This module version will not be able to handle the new data format. " +
-                            $"Because of that it will use a fresh model from the ref folder instead. " +
+                            $"Because of that it will use the remote model instead. " +
                             $"{settingsWillBeResetedText} {versionSummaryText} :(");
 
-                throw new MigrationException($"ref Version < persisted Version. {versionSummaryText} {settingsWillBeResetedText}");
+                throw new LogWarnException($"remote Version < local Version. {versionSummaryText} {settingsWillBeResetedText}");
             }
         }
 
@@ -55,9 +67,9 @@ namespace SessionTracker.Settings
         // e.g. migration from 1 to 3 has to call method1to2 [0], method2to3 [1]
         // e.g. migration from 2 to 5 has to call method2to3 [1], method3to4 [2], method4to5 [3]
         // e.g. migration from 4 to 5 has to call method4to5 [3]
-        private static string MigrateModelJson(ref string modelJson, ModelVersion modelVersion, ModelVersion refModelVersion, Logger logger)
+        private static string MigrateModelJson(string modelJson, ModelVersion localModelVersion, ModelVersion remoteModelVersion, Logger logger)
         {
-            for (var methodIndex = modelVersion.Version - 1; methodIndex <= refModelVersion.Version - 2; methodIndex++)
+            for (var methodIndex = localModelVersion.Version - 1; methodIndex <= remoteModelVersion.Version - 2; methodIndex++)
                 modelJson = _migrationMethods[methodIndex](modelJson, logger);
 
             return modelJson;
@@ -65,34 +77,22 @@ namespace SessionTracker.Settings
 
         private static List<Func<string, Logger, string>> _migrationMethods = new List<Func<string, Logger, string>>()
         {
-            (modelJson, logger) => MigrateModelVersion1to2(modelJson, logger),
-            (modelJson, logger) => MigrateModelVersion2To3(modelJson, logger),
+            (modelJson, logger) => MigrateModelFromVersion1to2(modelJson, logger),
+            (modelJson, logger) => MigrateModelFromVersion2To3(modelJson, logger),
         };
 
         // no migration required for 1 -> 2
-        private static string MigrateModelVersion1to2(string modelJson, Logger logger)
+        private static string MigrateModelFromVersion1to2(string modelJson, Logger logger)
         {
             logger.Info("migrate model from version 1 to 2");
             return modelJson;
         }
 
-        private static string MigrateModelVersion2To3(string modelJson, Logger logger)
+        private static string MigrateModelFromVersion2To3(string modelJson, Logger logger)
         {
             logger.Info("migrate model from version 2 to 3: rename 'Entries' to 'Stats'");
             var modelJObject = JObject.Parse(modelJson);
             modelJObject.Property("Entries").Rename("Stats");
-            return modelJObject.ToString();
-        }
-
-        // dont call this with migrationMethod loop. It has to be called earlier 
-        public static string RenamePropertyMajorVersionToVersion(Logger logger, string modelJson)
-        {
-            var modelJObject = JObject.Parse(modelJson);
-            if (!modelJObject.ContainsKey(OLD_VERSION_PROPERTY_NAME))
-                return modelJson;
-         
-            logger.Info($"migrate: rename '{OLD_VERSION_PROPERTY_NAME}' to '{NEW_VERSION_PROPERTY_NAME}'");
-            modelJObject.Property(OLD_VERSION_PROPERTY_NAME).Rename(NEW_VERSION_PROPERTY_NAME);
             return modelJObject.ToString();
         }
 

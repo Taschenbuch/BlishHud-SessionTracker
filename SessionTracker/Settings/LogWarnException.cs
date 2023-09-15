@@ -3,9 +3,9 @@
 namespace SessionTracker.Settings
 {
     [Serializable]
-    public class MigrationException : Exception
+    public class LogWarnException : Exception
     {
-        public MigrationException(string message) 
+        public LogWarnException(string message) 
             : base(message) { }
     }
 }
