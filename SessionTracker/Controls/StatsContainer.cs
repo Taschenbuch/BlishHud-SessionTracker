@@ -95,7 +95,7 @@ namespace SessionTracker.Controls
                 _model.UiHasToBeUpdated = false;
                 ShowOrHideStats();
                 _rootFlowPanel.HideScrollbarIfExists();
-                _hintFlowPanel.ShowHintWhenAllStatsAreHidden();
+                _hintFlowPanel.ShowHintWhenAllStatsAreHidden(_updateState.State);
             }
 
             _updateState.AddToElapsedTime(gameTime.ElapsedGameTime.TotalMilliseconds);
@@ -268,7 +268,7 @@ namespace SessionTracker.Controls
                 HeightSizingMode = SizingMode.AutoSize,
             };
 
-            _hintFlowPanel.ShowHintWhenAllStatsAreHidden();
+            _hintFlowPanel.ShowHintWhenAllStatsAreHidden(_updateState.State);
 
             _rootFlowPanel = new RootFlowPanel(this, _settingService);
 

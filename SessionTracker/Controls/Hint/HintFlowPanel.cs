@@ -62,14 +62,14 @@ namespace SessionTracker.Controls.Hint
             base.DisposeControl();
         }
 
-        public void ShowHintWhenAllStatsAreHidden()
+        public void ShowHintWhenAllStatsAreHidden(State updateState)
         {
             // remove all from parent to prevent messing up their order
             _hiddenByZeroSessionValuesImage.Parent = null;
             _hiddenByUserLabel.Parent              = null;
             _openSettingsButton.Parent             = null;
 
-            var hintType = DetermineWhichHintToShow(_stats, _settingService.HideStatsWithValueZeroSetting.Value);
+            var hintType = DetermineWhichHintToShow(_stats, updateState, _settingService.HideStatsWithValueZeroSetting.Value);
 
             switch (hintType)
             {
@@ -114,8 +114,11 @@ namespace SessionTracker.Controls.Hint
             _hiddenByZeroSessionValuesImage.Size = new Point(font.LineHeight);
         }
 
-        private static HintType DetermineWhichHintToShow(List<Stat> stats, bool hideStatsWithValueZero)
+        private static HintType DetermineWhichHintToShow(List<Stat> stats, State updateState, bool hideStatsWithValueZero)
         {
+            if(updateState == State.WaitForApiTokenAfterModuleStart)
+                return HintType.None;
+
             var allHiddenByUser = stats.Any(e => e.IsVisible) == false;
             if (allHiddenByUser)
                 return HintType.AllStatsHiddenByUser;
