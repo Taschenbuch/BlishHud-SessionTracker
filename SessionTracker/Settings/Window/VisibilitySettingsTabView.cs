@@ -16,7 +16,7 @@ namespace SessionTracker.Settings.Window
         {
             _rootFlowPanel = ControlFactory.CreateSettingsRootFlowPanel(buildPanel);
 
-            var visibilitySectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("UI Visibility", _rootFlowPanel);
+            var visibilitySectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Window Visibility", _rootFlowPanel);
             ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.UiVisibilityKeyBindingSetting);
             ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.UiIsVisibleSetting);
             ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOutsideOfWvwAndSpvpSetting);

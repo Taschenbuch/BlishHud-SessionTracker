@@ -11,7 +11,7 @@ namespace SessionTracker.Settings.SettingEntries
             BackgroundOpacitySetting = settings.DefineSetting(
                 "window background opacity",
                 125,
-                () => "window background opacity",
+                () => "background opacity",
                 () => "Change window background opacity");
 
             BackgroundOpacitySetting.SetRange(0, 255);
@@ -41,7 +41,7 @@ namespace SessionTracker.Settings.SettingEntries
             BackgroundColorSetting = settings.DefineSetting(
                 "window background color",
                 ColorType.Black,
-                () => "window background color",
+                () => "background color",
                 () => "Change window background color");
 
             SessionValuesAreVisibleSetting = settings.DefineSetting(
@@ -74,7 +74,7 @@ namespace SessionTracker.Settings.SettingEntries
                 () => "show window on world map.");
 
             WindowIsVisibleOutsideOfWvwAndSpvpSetting = settings.DefineSetting(
-                "show window outside of wvw and spvp",
+                "show UI outside of wvw and spvp",
                 true,
                 () => "outside of WvW and sPvP",
                 () => "show window outside of wvw and spvp. e.g. on open world maps");
@@ -127,26 +127,26 @@ namespace SessionTracker.Settings.SettingEntries
             UiVisibilityKeyBindingSetting = settings.DefineSetting(
                 "ui visibility key binding",
                 new KeyBinding(Keys.None),
-                () => "show/hide UI",
-                () => "Double-click to change the key binding. Will show or hide the session-tracker UI. " +
-                      "Whether UI is really shown depends on other visibility settings. " +
-                      "e.g. when 'on world map' is unchecked, using the key binding will still not show the UI on the world map.");
+                () => "show/hide window",
+                () => "Double-click to change the key binding. Will show or hide the session-tracker window. " +
+                      "Whether window is really shown depends on other visibility settings. " +
+                      "e.g. when 'on world map' is unchecked, using the key binding will still not show the window on the world map.");
 
             UiHeightIsFixedSetting = settings.DefineSetting(
                 "ui height is fixed",
                 false,
                 () => "fixed height",
-                () => "CHECKED: height is fixed and can be adjusted with the ui height slider.\n" +
-                      "Stats can be scrolled in the UI via mouse wheel or by dragging the scrollbar. Dragging the scrollbar only works when 'drag with mouse' setting is disabled.\n" +
+                () => "CHECKED: height is fixed and can be adjusted with the window height slider.\n" +
+                      "Stats can be scrolled in the window via mouse wheel or by dragging the scrollbar. Dragging the scrollbar only works when 'drag with mouse' setting is disabled.\n" +
                       "UNCHECKED: height adjusts automatically to the number of stats shown.\n" +
                       "BUG: There is a not fixable bug, that the scrollbar is visible when the mouse is not " +
-                      "over the UI after adding/removing stats or loading the module. Just move the mouse one time over the UI to hide the scrollbar again.");
+                      "over the window after adding/removing stats or loading the module. Just move the mouse one time over the window to hide the scrollbar again.");
 
             UiHeightSetting = settings.DefineSetting(
                 "ui height",
                 200,
                 () => "height",
-                () => "UI height when fixed height setting is checked.");
+                () => "window height when fixed height setting is checked.");
 
             UiHeightSetting.SetRange(5, 2000);
 
@@ -180,16 +180,16 @@ namespace SessionTracker.Settings.SettingEntries
             UiIsVisibleSetting = settings.DefineSetting(
                 "ui is visible",
                 true,
-                () => "ui visible (read tooltip)",
+                () => "window visible (read tooltip)",
                 () => $"Show or hide sessions tracker UI. Has the same effect as clicking the menu icon or using the key binding. " +
-                      $"Whether the UI is really shown depends on further settings like '{ON_WORLD_MAP_SETTING_DISPLAY_NAME}'.");
+                      $"Whether the window is really shown depends on further settings like '{ON_WORLD_MAP_SETTING_DISPLAY_NAME}'.");
 
             HideStatsWithValueZeroSetting = settings.DefineSetting(
                 "hide stats with value zero",
                 false,
                 () => "hide stats with value = 0",
                 () => "Stats with a session value of 0 are hidden until the session value changes to a non-zero value. " +
-                      "At the start of a session all values will be 0 so the whole UI is hidden.");
+                      "At the start of a session all values will be 0 so the whole window is hidden.");
 
             var internalSettings = settings.AddSubCollection("internal settings (not visible in UI)");
             SettingsVersionSetting = internalSettings.DefineSetting("settings version", 1);

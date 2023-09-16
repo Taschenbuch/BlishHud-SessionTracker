@@ -28,7 +28,7 @@ namespace SessionTracker.Settings.Window
             _statsTab = new Tab(textureService.StatsTabTexture, () => new StatsSettingsTabView(model, settingService, textureService), "Tracked Stats");
             _settingsWindow.Tabs.Add(_statsTab);
             _settingsWindow.Tabs.Add(new Tab(textureService.GeneralTabTexture, () => new GeneralSettingsTabView(settingService), "General"));
-            _settingsWindow.Tabs.Add(new Tab(textureService.VisibilityTabTexture, () => new VisibilitySettingsTabView(settingService), "UI Visibility"));
+            _settingsWindow.Tabs.Add(new Tab(textureService.VisibilityTabTexture, () => new VisibilitySettingsTabView(settingService), "Window Visibility"));
 #if DEBUG
             _settingsWindow.Tabs.Add(new Tab(textureService.DebugTabTexture, () => new DebugSettingsTabView(settingService), "Debug"));
 #endif
