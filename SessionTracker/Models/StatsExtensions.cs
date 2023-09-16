@@ -13,7 +13,7 @@ namespace SessionTracker.Models
 
         public static List<Stat> WhereSessionValueIsNonZero(this IEnumerable<Stat> stats)
         {
-            return stats.Where(e => e.Value.Session != 0)
+            return stats.Where(e => e.HasNonZeroSessionValue)
                         .ToList();
         }
     }

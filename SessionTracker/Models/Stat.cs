@@ -13,6 +13,7 @@ namespace SessionTracker.Models
         public int IconAssetId { get; set; }
         public string IconFileName { get; set; }
         public bool IsVisible { get; set; }
+        [JsonIgnore] public bool HasNonZeroSessionValue { get; set; } // required for coins and wvw/pvp kdr because their Value displayText is different from their SessionValue
         [JsonIgnore] public Value Value { get; } = new Value();
         [JsonIgnore] public List<string> SessionHistory { get; } = new List<string>();
         [JsonIgnore] public bool IsAchievement => ApiIdType == ApiIdType.Achievement;

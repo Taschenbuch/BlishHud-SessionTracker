@@ -118,12 +118,10 @@ namespace SessionTracker.Controls.Hint
         private static HintType DetermineWhichHintToShow(List<Stat> stats, bool hideStatsWithValueZero)
         {
             var allHiddenByUser = stats.Any(e => e.IsVisible) == false;
-
             if (allHiddenByUser)
                 return HintType.AllStatsHiddenByUser;
 
-            var allHiddenBecauseOfZeroValue = stats.Any(e => e.IsVisible && e.Value.Session != 0) == false;
-
+            var allHiddenBecauseOfZeroValue = stats.Any(e => e.IsVisible && e.HasNonZeroSessionValue) == false;
             if (hideStatsWithValueZero && allHiddenBecauseOfZeroValue)
                 return HintType.AllStatsHiddenBecauseOfZeroValue;
 

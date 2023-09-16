@@ -4,6 +4,7 @@ using Blish_HUD;
 using Blish_HUD.Controls;
 using SessionTracker.Models;
 using SessionTracker.Models.Constants;
+using SessionTracker.Services;
 using SessionTracker.Settings.SettingEntries;
 
 namespace SessionTracker.Value.Text
@@ -39,13 +40,15 @@ namespace SessionTracker.Value.Text
                 if (stat.ApiId == CurrencyIds.COIN_IN_COPPER)
                 {
                     var sessionCoinText = ValueTextService.CreateCoinValueText(stat.Value.Session, _settingService.CoinDisplayFormatSetting.Value);
-                    var totalCoinText   = ValueTextService.CreateCoinValueText(stat.Value.Total, _settingService.CoinDisplayFormatSetting.Value);
+                    var totalCoinText = ValueTextService.CreateCoinValueText(stat.Value.Total, _settingService.CoinDisplayFormatSetting.Value);
 
                     _valueLabelByStatId[stat.Id].Text = ValueTextService.CreateSessionAndTotalValueText(
                         sessionCoinText,
                         totalCoinText,
                         _settingService.SessionValuesAreVisibleSetting.Value,
                         _settingService.TotalValuesAreVisibleSetting.Value);
+
+                    stat.HasNonZeroSessionValue = HasNonZeroSessionValueService.DetermineForCoin(stat.Value.Session, _settingService.CoinDisplayFormatSetting.Value, _logger);
                 }
                 else if (stat.Id == StatId.WVW_KDR)
                 {
@@ -53,7 +56,7 @@ namespace SessionTracker.Value.Text
                     var kills = _model.GetStat(StatId.WVW_KILLS).Value.Session;
                     var deaths = _model.GetStat(StatId.DEATHS).Value.Session;
                     _valueLabelByStatId[StatId.WVW_KDR].Text = ValueTextService.CreateKillsDeathsRatioText(kills, deaths);
-                    PreventKdrStatFromAlwaysBeingHiddenByHideZeroValuesSetting(stat, kills, deaths);
+                    stat.HasNonZeroSessionValue = HasNonZeroSessionValueService.DetermineForKdr(kills, deaths);
                 }
                 else if (stat.Id == StatId.PVP_KDR)
                 {
@@ -61,7 +64,7 @@ namespace SessionTracker.Value.Text
                     var kills = _model.GetStat(StatId.PVP_KILLS).Value.Session;
                     var deaths = _model.GetStat(StatId.DEATHS).Value.Session;
                     _valueLabelByStatId[StatId.PVP_KDR].Text = ValueTextService.CreateKillsDeathsRatioText(kills, deaths);
-                    PreventKdrStatFromAlwaysBeingHiddenByHideZeroValuesSetting(stat, kills, deaths);
+                    stat.HasNonZeroSessionValue = HasNonZeroSessionValueService.DetermineForKdr(kills, deaths);
                 }
                 else
                 {
@@ -73,17 +76,11 @@ namespace SessionTracker.Value.Text
                         totalValueText,
                         _settingService.SessionValuesAreVisibleSetting.Value,
                         _settingService.TotalValuesAreVisibleSetting.Value);
+
+                    stat.HasNonZeroSessionValue = stat.Value.Session != 0;
                 }
             }
-        }
-
-        // factor 200 because 1/200 would be 0.005 which is rounded to 0.01 in UI. So it has to be 200 * kills for integer division to result in "0" for "0.00"
-        private static void PreventKdrStatFromAlwaysBeingHiddenByHideZeroValuesSetting(Stat kdrStat, int kills, int deaths)
-        {
-            kdrStat.Value.Total = deaths == 0 || kills == 0
-                ? 0
-                : (200 * kills) / deaths;
-        }
+        }        
 
         private void OnTotalValueVisibilitySettingChanged(object sender, ValueChangedEventArgs<bool> valueChangedEventArgs)
         {
@@ -104,6 +101,7 @@ namespace SessionTracker.Value.Text
         private void OnCoinDisplayFormatSettingChanged(object sender, ValueChangedEventArgs<CoinDisplayFormat> e)
         {
             UpdateValueLabelTexts();
+            _model.UiHasToBeUpdated = true; // because depending on the coin format value has to be hidden by hideZeroValueSetting
         }
 
         private readonly Dictionary<string, Label> _valueLabelByStatId;
