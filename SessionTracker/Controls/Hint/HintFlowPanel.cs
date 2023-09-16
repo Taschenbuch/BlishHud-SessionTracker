@@ -56,7 +56,6 @@ namespace SessionTracker.Controls.Hint
         protected override void DisposeControl()
         {
             _settingService.FontSizeIndexSetting.SettingChanged -= OnFontSizeIndexSettingChanged;
-
             _hiddenByZeroSessionValuesImage?.Dispose();
             _hiddenByUserLabel?.Dispose();
             _openSettingsButton?.Dispose();
@@ -80,7 +79,7 @@ namespace SessionTracker.Controls.Hint
                     _openSettingsButton.Parent             = this;
                     Show();
                     break;
-                case HintType.AllStatsHiddenBecauseOfZeroValue:
+                case HintType.AllStatsHiddenByHideZeroValuesSetting:
                     _hiddenByZeroSessionValuesImage.Parent = this;
                     _hiddenByUserLabel.Parent              = null;
                     _openSettingsButton.Parent             = null;
@@ -123,7 +122,7 @@ namespace SessionTracker.Controls.Hint
 
             var allHiddenBecauseOfZeroValue = stats.Any(e => e.IsVisible && e.HasNonZeroSessionValue) == false;
             if (hideStatsWithValueZero && allHiddenBecauseOfZeroValue)
-                return HintType.AllStatsHiddenBecauseOfZeroValue;
+                return HintType.AllStatsHiddenByHideZeroValuesSetting;
 
             return HintType.None;
         }
