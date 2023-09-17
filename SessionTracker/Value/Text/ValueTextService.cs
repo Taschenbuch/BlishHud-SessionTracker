@@ -45,28 +45,22 @@ namespace SessionTracker.Value.Text
             var silver2DigitText = silver.ToString("00", CultureInfo.CurrentUICulture);
             var allInCopperText = unsignedValueInCopper.To0DecimalPlacesCulturedString();
 
-            switch (coinDisplayFormat)
+            return coinDisplayFormat switch
             {
-                case CoinDisplayFormat.Xc:
-                    return $"{sign}{allInCopperText}c";
-                case CoinDisplayFormat.Xg:
-                    return gold == 0
-                        ? "0g"
-                        : $"{sign}{goldText}g";
-                case CoinDisplayFormat.XgX:
-                    return gold == 0 && silverInTens == 0
-                        ? "0g"
-                        : $"{sign}{goldText}g{silverInTens}";
-                case CoinDisplayFormat.XgXX:
-                    return gold == 0 && silver == 0
-                        ? "0g"
-                        : $"{sign}{goldText}g{silver2DigitText}";
-                case CoinDisplayFormat.XgXsXc:
-                default:
-                    return gold == 0 && silver == 0 && copper == 0
-                        ? "0g\u20090s\u20090c"
-                        : $"{sign}{goldText}g\u2009{silver}s\u2009{copper}c";
-            }
+                CoinDisplayFormat.Xc => $"{sign}{allInCopperText}c",
+                CoinDisplayFormat.Xg => gold == 0
+                                        ? "0g"
+                                        : $"{sign}{goldText}g",
+                CoinDisplayFormat.XgX => gold == 0 && silverInTens == 0
+                                        ? "0g"
+                                        : $"{sign}{goldText}g{silverInTens}",
+                CoinDisplayFormat.XgXX => gold == 0 && silver == 0
+                                        ? "0g"
+                                        : $"{sign}{goldText}g{silver2DigitText}",
+                _ => gold == 0 && silver == 0 && copper == 0
+                                        ? "0g\u20090s\u20090c"
+                                        : $"{sign}{goldText}g\u2009{silver}s\u2009{copper}c",
+            };
         }
     }
 }

@@ -88,8 +88,7 @@ namespace SessionTracker.Controls
         // Update2() because Update() already exists in base class. Update() is not always called but Update2() is!
         public void Update2(GameTime gameTime)
         {
-            if(_visibilityService == null)
-                _visibilityService = new VisibilityService(this, _settingService);  // this cannot be done in StatsContainer ctor because hiding window on startup would not work.
+            _visibilityService ??= new VisibilityService(this, _settingService);  // this cannot be done in StatsContainer ctor because hiding window on startup would not work.
 
             if (_model.UiHasToBeUpdated)
             {

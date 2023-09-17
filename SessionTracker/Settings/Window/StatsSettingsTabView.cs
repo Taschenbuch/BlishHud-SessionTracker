@@ -39,7 +39,7 @@ namespace SessionTracker.Settings.Window
 
             ShowHideAndShowAllButtons(_visibilityCheckBoxByStatId, trackedStatsSectionFlowPanel);
             ShowCategoryButtons(_visibilityCheckBoxByStatId, trackedStatsSectionFlowPanel);
-            ShowMoveVisibleToTopButton(_visibilityCheckBoxByStatId, trackedStatsSectionFlowPanel);
+            ShowMoveVisibleToTopButton(trackedStatsSectionFlowPanel);
 
             _statRowsFlowPanel = new FlowPanel
             {
@@ -90,7 +90,7 @@ namespace SessionTracker.Settings.Window
             };
         }
 
-        private void ShowMoveVisibleToTopButton(Dictionary<string, Checkbox> visibilityCheckBoxByStatId, FlowPanel statsFlowPanel)
+        private void ShowMoveVisibleToTopButton(FlowPanel statsFlowPanel)
         {
             var moveVisibleStatRowsToTopButton = new StandardButton
             {
