@@ -2,6 +2,7 @@
 using Blish_HUD.Graphics.UI;
 using SessionTracker.Controls;
 using SessionTracker.Settings.SettingEntries;
+using System;
 
 namespace SessionTracker.Settings.Window
 {
@@ -17,13 +18,13 @@ namespace SessionTracker.Settings.Window
             _rootFlowPanel = ControlFactory.CreateSettingsRootFlowPanel(buildPanel);
 
             var visibilitySectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Window Visibility", _rootFlowPanel);
-            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.UiVisibilityKeyBindingSetting);
-            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.UiIsVisibleSetting);
-            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOutsideOfWvwAndSpvpSetting);
-            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleInSpvpSetting);
-            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleInWvwSetting);
-            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOnWorldMapSetting);
-            ControlFactory.CreateSetting(visibilitySectionFlowPanel, buildPanel.Width, _settingService.WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting);
+            ControlFactory.CreateSetting(visibilitySectionFlowPanel, _settingService.UiVisibilityKeyBindingSetting);
+            ControlFactory.CreateSetting(visibilitySectionFlowPanel, _settingService.UiIsVisibleSetting);
+            ControlFactory.CreateSetting(visibilitySectionFlowPanel, _settingService.WindowIsVisibleOutsideOfWvwAndSpvpSetting);
+            ControlFactory.CreateSetting(visibilitySectionFlowPanel, _settingService.WindowIsVisibleInSpvpSetting);
+            ControlFactory.CreateSetting(visibilitySectionFlowPanel, _settingService.WindowIsVisibleInWvwSetting);
+            ControlFactory.CreateSetting(visibilitySectionFlowPanel, _settingService.WindowIsVisibleOnWorldMapSetting);
+            ControlFactory.CreateSetting(visibilitySectionFlowPanel, _settingService.WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting);
         }
         
         private readonly SettingService _settingService;

@@ -16,26 +16,26 @@ namespace SessionTracker.Settings.Window
         protected override void Build(Container buildPanel)
         {
             _rootFlowPanel = ControlFactory.CreateSettingsRootFlowPanel(buildPanel);
-
             var generalSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("General", _rootFlowPanel);
+
             CreatePatchNotesButton(generalSectionFlowPanel);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.LabelTypeSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.UiHeightIsFixedSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.UiHeightSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.FontSizeIndexSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.StatTitlePaddingSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.TitleLabelColorSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.ValueLabelColorSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.BackgroundColorSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.BackgroundOpacitySetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.SessionValuesAreVisibleSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.TotalValuesAreVisibleSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.DragWindowWithMouseIsEnabledSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.WindowCanBeClickedThroughSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.CornerIconIsVisibleSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.CoinDisplayFormatSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.HideStatsWithValueZeroSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, buildPanel.Width, _settingService.ScrollbarFixDelay);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.LabelTypeSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.UiHeightIsFixedSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.UiHeightSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.FontSizeIndexSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.StatTitlePaddingSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.TitleLabelColorSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.ValueLabelColorSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.BackgroundColorSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.BackgroundOpacitySetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.SessionValuesAreVisibleSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.TotalValuesAreVisibleSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.DragWindowWithMouseIsEnabledSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.WindowCanBeClickedThroughSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.CornerIconIsVisibleSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.CoinDisplayFormatSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.HideStatsWithValueZeroSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.ScrollbarFixDelay);
         }
 
         private static void CreatePatchNotesButton(Container parent)

@@ -23,8 +23,8 @@ namespace SessionTracker.Settings.Window
                 "Do not change those settings. They will not speed up stat updates or improve\n" +
                 "your user experience. This tab just helps the developer to speed up testing this module. :)\n");
 
-            ControlFactory.CreateSetting(debugSectionFlowPanel, buildPanel.Width, _settingService.DebugApiIntervalEnabledSetting);
-            ControlFactory.CreateSetting(debugSectionFlowPanel, buildPanel.Width, _settingService.DebugApiIntervalValueSetting);
+            ControlFactory.CreateSetting(debugSectionFlowPanel, _settingService.DebugApiIntervalEnabledSetting);
+            ControlFactory.CreateSetting(debugSectionFlowPanel, _settingService.DebugApiIntervalValueSetting);
 
             _apiIntervalInMillisecondsLabel = new Label()
             {
