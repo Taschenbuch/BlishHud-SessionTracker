@@ -44,19 +44,11 @@ namespace SessionTracker.Settings.SettingEntries
                 () => "background color",
                 () => "Change window background color");
 
-            SessionValuesAreVisibleSetting = settings.DefineSetting(
-                "show session values",
-                true,
-                () => "SESSION values",
-                () => "Show values of the current session. " +
-                      "Total or session values can not be both hidden.");
-
-            TotalValuesAreVisibleSetting = settings.DefineSetting(
-                "show total values",
-                false,
-                () => "TOTAL values",
-                () => "Show total values for the whole account. " +
-                      "Total or session values can not be both hidden.");
+            ValueDisplayFormatSetting = settings.DefineSetting(
+               "value display format",
+               ValueDisplayFormat.SessionValue,
+               () => "value display format",
+               () => "Show values of the current session and/or total values for the whole account.");
 
             WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting = settings.DefineSetting(
                 "show window on cutScenes and characterSelection and loadingScreens",
@@ -192,9 +184,10 @@ namespace SessionTracker.Settings.SettingEntries
                       "At the start of a session all values will be 0 so the whole window is hidden.");
 
             var internalSettings = settings.AddSubCollection("internal settings (not visible in UI)");
-            SettingsVersionSetting = internalSettings.DefineSetting("settings version", 1);
+            SettingsVersionSetting = internalSettings.DefineSetting("settings version", 2);
             XMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location x", 0.2f);
             YMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location y", 0.2f);
+            MigrateBlishSettingsService.MigrateSettings(settings, SettingsVersionSetting, ValueDisplayFormatSetting);
         }
 
         public SettingEntry<int> DebugApiIntervalValueSetting { get; }
@@ -213,8 +206,7 @@ namespace SessionTracker.Settings.SettingEntries
         public SettingEntry<bool> UiIsVisibleSetting { get; }
         public SettingEntry<int> BackgroundOpacitySetting { get; }
         public SettingEntry<int> FontSizeIndexSetting { get; }
-        public SettingEntry<bool> SessionValuesAreVisibleSetting { get; }
-        public SettingEntry<bool> TotalValuesAreVisibleSetting { get; }
+        public SettingEntry<ValueDisplayFormat> ValueDisplayFormatSetting { get; }
         public SettingEntry<bool> WindowCanBeClickedThroughSetting { get; }
         public SettingEntry<bool> WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting { get; }
         public SettingEntry<bool> WindowIsVisibleOnWorldMapSetting { get; }

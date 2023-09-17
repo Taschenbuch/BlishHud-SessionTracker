@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Blish_HUD;
 using SessionTracker.Settings.SettingEntries;
 
 namespace SessionTracker.Value.Text
@@ -15,20 +16,20 @@ namespace SessionTracker.Value.Text
             return killsDeathsRatio.To2DecimalPlacesCulturedString();
         }
 
-        public static string CreateSessionAndTotalValueText(string sessionValueText, string totalValueText, bool sessionValuesAreVisible, bool totalValuesAreVisible)
+        public static string CreateSessionAndTotalValueText(string sessionValueText, string totalValueText, ValueDisplayFormat valueDisplayFormat, Logger logger)
         {
-            var text = string.Empty;
-
-            if (sessionValuesAreVisible)
-                text += sessionValueText;
-
-            if (sessionValuesAreVisible && totalValuesAreVisible)
-                text += " | ";
-
-            if (totalValuesAreVisible)
-                text += totalValueText;
-
-            return text;
+            switch (valueDisplayFormat)
+            {
+                case ValueDisplayFormat.SessionValue:
+                    return sessionValueText;
+                case ValueDisplayFormat.TotalValue:
+                    return totalValueText;
+                case ValueDisplayFormat.SessionAndTotalValue:
+                    return $"{sessionValueText} | {totalValueText}";
+                default:
+                    logger.Error($"Missing ValueDisplayFormat case for {valueDisplayFormat}");
+                    return sessionValueText;
+            }
         }
 
         public static string CreateCoinValueText(int valueInCopper, CoinDisplayFormat coinDisplayFormat)

@@ -21,16 +21,14 @@ namespace SessionTracker.Value.Text
             _settingService      = settingService;
             _logger              = logger;
 
-            settingService.SessionValuesAreVisibleSetting.SettingChanged += OnSessionValueVisibilitySettingChanged;
-            settingService.TotalValuesAreVisibleSetting.SettingChanged   += OnTotalValueVisibilitySettingChanged;
-            settingService.CoinDisplayFormatSetting.SettingChanged       += OnCoinDisplayFormatSettingChanged;
+            settingService.ValueDisplayFormatSetting.SettingChanged += ValueDisplayFormatSetting_SettingChanged;
+            settingService.CoinDisplayFormatSetting.SettingChanged  += OnCoinDisplayFormatSettingChanged;
         }
 
         public void Dispose()
         {
-            _settingService.SessionValuesAreVisibleSetting.SettingChanged -= OnSessionValueVisibilitySettingChanged;
-            _settingService.TotalValuesAreVisibleSetting.SettingChanged   -= OnTotalValueVisibilitySettingChanged;
-            _settingService.CoinDisplayFormatSetting.SettingChanged       -= OnCoinDisplayFormatSettingChanged;
+            _settingService.ValueDisplayFormatSetting.SettingChanged -= ValueDisplayFormatSetting_SettingChanged;
+            _settingService.CoinDisplayFormatSetting.SettingChanged -= OnCoinDisplayFormatSettingChanged;
         }
 
         public void UpdateValueLabelTexts()
@@ -45,8 +43,8 @@ namespace SessionTracker.Value.Text
                     _valueLabelByStatId[stat.Id].Text = ValueTextService.CreateSessionAndTotalValueText(
                         sessionCoinText,
                         totalCoinText,
-                        _settingService.SessionValuesAreVisibleSetting.Value,
-                        _settingService.TotalValuesAreVisibleSetting.Value);
+                        _settingService.ValueDisplayFormatSetting.Value,
+                        _logger);
 
                     stat.HasNonZeroSessionValue = HasNonZeroSessionValueService.DetermineForCoin(stat.Value.Session, _settingService.CoinDisplayFormatSetting.Value, _logger);
                 }
@@ -74,27 +72,16 @@ namespace SessionTracker.Value.Text
                     _valueLabelByStatId[stat.Id].Text = ValueTextService.CreateSessionAndTotalValueText(
                         sessionValueText,
                         totalValueText,
-                        _settingService.SessionValuesAreVisibleSetting.Value,
-                        _settingService.TotalValuesAreVisibleSetting.Value);
+                        _settingService.ValueDisplayFormatSetting.Value,
+                        _logger);
 
                     stat.HasNonZeroSessionValue = stat.Value.Session != 0;
                 }
             }
-        }        
-
-        private void OnTotalValueVisibilitySettingChanged(object sender, ValueChangedEventArgs<bool> valueChangedEventArgs)
-        {
-            if (_settingService.SessionValuesAreVisibleSetting.Value == false && _settingService.TotalValuesAreVisibleSetting.Value == false)
-                _settingService.SessionValuesAreVisibleSetting.Value = true;
-
-            UpdateValueLabelTexts();
         }
 
-        private void OnSessionValueVisibilitySettingChanged(object sender, ValueChangedEventArgs<bool> valueChangedEventArgs)
+        private void ValueDisplayFormatSetting_SettingChanged(object sender, ValueChangedEventArgs<ValueDisplayFormat> e)
         {
-            if (_settingService.SessionValuesAreVisibleSetting.Value == false && _settingService.TotalValuesAreVisibleSetting.Value == false)
-                _settingService.TotalValuesAreVisibleSetting.Value = true;
-
             UpdateValueLabelTexts();
         }
 

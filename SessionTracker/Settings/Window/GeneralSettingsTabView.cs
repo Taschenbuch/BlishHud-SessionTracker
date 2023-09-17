@@ -19,6 +19,7 @@ namespace SessionTracker.Settings.Window
             var generalSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("General", _rootFlowPanel);
 
             CreatePatchNotesButton(generalSectionFlowPanel);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.ValueDisplayFormatSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.LabelTypeSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.UiHeightIsFixedSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.UiHeightSetting);
@@ -28,8 +29,6 @@ namespace SessionTracker.Settings.Window
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.ValueLabelColorSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.BackgroundColorSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.BackgroundOpacitySetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.SessionValuesAreVisibleSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.TotalValuesAreVisibleSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.DragWindowWithMouseIsEnabledSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.WindowCanBeClickedThroughSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.CornerIconIsVisibleSetting);
