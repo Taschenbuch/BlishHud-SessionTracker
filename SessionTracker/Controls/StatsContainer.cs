@@ -43,8 +43,8 @@ namespace SessionTracker.Controls
 
             settingService.HideStatsWithValueZeroSetting.SettingChanged  += OnHideStatsWithValueZeroSettingChanged;
             settingService.FontSizeIndexSetting.SettingChanged           += OnFontSizeIndexSettingChanged;
-            settingService.BackgroundOpacitySetting.SettingChanged       += OnBackgroundOpacitySettingChanged;
-            settingService.BackgroundColorSetting.SettingChanged         += OnBackgroundColorSettingChanged;
+            settingService.BackgroundOpacitySetting.SettingChanged       += OnBackgroundSettingChanged;
+            settingService.BackgroundColorSetting.SettingChanged         += OnBackgroundSettingChanged;
             settingService.ValueLabelColorSetting.SettingChanged         += OnValueLabelColorSettingChanged;
             GameService.Overlay.UserLocaleChanged                        += OnUserChangedLanguageInBlishSettings;
         }
@@ -53,8 +53,8 @@ namespace SessionTracker.Controls
         {
             _settingService.HideStatsWithValueZeroSetting.SettingChanged -= OnHideStatsWithValueZeroSettingChanged;
             _settingService.FontSizeIndexSetting.SettingChanged          -= OnFontSizeIndexSettingChanged;
-            _settingService.BackgroundOpacitySetting.SettingChanged      -= OnBackgroundOpacitySettingChanged;
-            _settingService.BackgroundColorSetting.SettingChanged        -= OnBackgroundColorSettingChanged;
+            _settingService.BackgroundOpacitySetting.SettingChanged      -= OnBackgroundSettingChanged;
+            _settingService.BackgroundColorSetting.SettingChanged        -= OnBackgroundSettingChanged;
             _settingService.ValueLabelColorSetting.SettingChanged        -= OnValueLabelColorSettingChanged;
             GameService.Overlay.UserLocaleChanged                        -= OnUserChangedLanguageInBlishSettings;
 
@@ -329,12 +329,7 @@ namespace SessionTracker.Controls
                 label.Font = font;
         }
         
-        private void OnBackgroundOpacitySettingChanged(object sender, ValueChangedEventArgs<int> valueChangedEventArgs)
-        {
-            BackgroundColor = ColorService.CreateBackgroundColor(_settingService);
-        }
-
-        private void OnBackgroundColorSettingChanged(object sender, ValueChangedEventArgs<ColorType> e)
+        private void OnBackgroundSettingChanged(object sender, EventArgs e)
         {
             BackgroundColor = ColorService.CreateBackgroundColor(_settingService);
         }
