@@ -16,7 +16,6 @@ using SessionTracker.Settings.SettingEntries;
 using SessionTracker.Settings.Window;
 using SessionTracker.Value.Text;
 using SessionTracker.Value.Tooltip;
-using Color = Microsoft.Xna.Framework.Color;
 
 namespace SessionTracker.Controls
 {
@@ -52,15 +51,16 @@ namespace SessionTracker.Controls
 
         protected override void DisposeControl()
         {
+            _settingService.HideStatsWithValueZeroSetting.SettingChanged -= OnHideStatsWithValueZeroSettingChanged;
+            _settingService.FontSizeIndexSetting.SettingChanged          -= OnFontSizeIndexSettingChanged;
+            _settingService.BackgroundOpacitySetting.SettingChanged      -= OnBackgroundOpacitySettingChanged;
+            _settingService.BackgroundColorSetting.SettingChanged        -= OnBackgroundColorSettingChanged;
+            _settingService.ValueLabelColorSetting.SettingChanged        -= OnValueLabelColorSettingChanged;
+            GameService.Overlay.UserLocaleChanged                        -= OnUserChangedLanguageInBlishSettings;
+
+            _visibilityService?.Dispose();
             _updateState.Dispose();
             _valueLabelTextService.Dispose();
-            _settingService.HideStatsWithValueZeroSetting.SettingChanged  -= OnHideStatsWithValueZeroSettingChanged;
-            _settingService.FontSizeIndexSetting.SettingChanged           -= OnFontSizeIndexSettingChanged;
-            _settingService.BackgroundOpacitySetting.SettingChanged       -= OnBackgroundOpacitySettingChanged;
-            _settingService.BackgroundColorSetting.SettingChanged         -= OnBackgroundColorSettingChanged;
-            _settingService.ValueLabelColorSetting.SettingChanged         -= OnValueLabelColorSettingChanged;
-            GameService.Overlay.UserLocaleChanged                         -= OnUserChangedLanguageInBlishSettings;
-
             base.DisposeControl();
         }
 
@@ -88,7 +88,8 @@ namespace SessionTracker.Controls
         // Update2() because Update() already exists in base class. Update() is not always called but Update2() is!
         public void Update2(GameTime gameTime)
         {
-            Visible = VisibilityService.WindowIsVisible(_settingService);
+            if(_visibilityService == null)
+                _visibilityService = new VisibilityService(this, _settingService);  // this cannot be done in StatsContainer ctor because hiding window on startup would not work.
 
             if (_model.UiHasToBeUpdated)
             {
@@ -346,6 +347,7 @@ namespace SessionTracker.Controls
 
         private readonly Gw2ApiManager _gw2ApiManager;
         private readonly TextureService _textureService;
+        private VisibilityService _visibilityService;
         private readonly Logger _logger;
         private readonly Model _model;
         private readonly SettingService _settingService;
