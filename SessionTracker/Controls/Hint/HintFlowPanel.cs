@@ -116,15 +116,13 @@ namespace SessionTracker.Controls.Hint
 
         private static HintType DetermineWhichHintToShow(List<Stat> stats, State updateState, bool hideStatsWithValueZero)
         {
-            if(updateState == State.WaitForApiTokenAfterModuleStart)
-                return HintType.None;
-
             var allHiddenByUser = stats.Any(e => e.IsVisible) == false;
             if (allHiddenByUser)
                 return HintType.AllStatsHiddenByUser;
 
             var allHiddenBecauseOfZeroValue = stats.Any(e => e.IsVisible && e.HasNonZeroSessionValue) == false;
-            if (hideStatsWithValueZero && allHiddenBecauseOfZeroValue)
+            var hasModuleInitializedStatValues = updateState != State.WaitForApiTokenAfterModuleStart;
+            if (hideStatsWithValueZero && allHiddenBecauseOfZeroValue && hasModuleInitializedStatValues)
                 return HintType.AllStatsHiddenByHideZeroValuesSetting;
 
             return HintType.None;
