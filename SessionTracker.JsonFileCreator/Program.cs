@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using SessionTracker.JsonFileCreator.StatServices;
 using SessionTracker.Models;
+using SessionTracker.Settings;
 
 namespace SessionTracker.JsonFileCreator
 {
@@ -10,15 +10,20 @@ namespace SessionTracker.JsonFileCreator
     {
         static async Task Main()
         {
-            var currencyEntries      = await CurrencyService.CreateCurrencyStats();
-            var manuallyCreatedStats = ManuallyCreatedStatsService.CreateManuallyCreatedStats();
-
             var model = new Model();
-            model.Entries.AddRange(manuallyCreatedStats);
-            model.Entries.AddRange(currencyEntries);
+            await AddStatsToModel(model);
+            var jsonModel = JsonService.SerializeModelToJson(model);
+            File.WriteAllText(@"C:\Dev\blish\model.json", jsonModel);
+        }
 
-            var json = JsonConvert.SerializeObject(model, Formatting.Indented, new StringEnumConverter());
-            File.WriteAllText(@"C:\gw2\session\model.json", json);
+        private static async Task AddStatsToModel(Model model)
+        {
+            var itemStats     = await ItemService.CreateItemStats();
+            var currencyStats = await CurrencyStatService.CreateCurrencyStats();
+
+            model.Stats.AddRange(itemStats);
+            model.Stats.AddRange(CustomStatService.CustomStats);
+            model.Stats.AddRange(currencyStats);
         }
     }
 }

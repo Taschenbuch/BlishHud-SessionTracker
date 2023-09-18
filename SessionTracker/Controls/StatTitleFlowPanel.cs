@@ -7,35 +7,33 @@ using SessionTracker.Settings.SettingEntries;
 
 namespace SessionTracker.Controls
 {
-    public class EntryTitleFlowPanel : FlowPanel
+    public class StatTitleFlowPanel : FlowPanel
     {
-        public EntryTitleFlowPanel(Entry entry, BitmapFont font, Container parent, TextureService textureService, SettingService settingService)
+        public StatTitleFlowPanel(Stat stat, BitmapFont font, Container parent, TextureService textureService, SettingService settingService)
         {
-            _entry          = entry;
+            _stat          = stat;
             _parent         = parent;
             _settingService = settingService;
 
             FlowDirection    = ControlFlowDirection.SingleLeftToRight;
             WidthSizingMode  = SizingMode.AutoSize;
             HeightSizingMode = SizingMode.AutoSize;
-            Parent           = entry.IsVisible ? parent : null;
+            Parent           = stat.IsVisible ? parent : null;
 
             var titleLabel = new Label()
             {
-                Text             = entry.LabelText.Localized,
-                TextColor        = settingService.TitleLabelColorSetting.Value.GetColor(),
-                Font             = font,
-                BasicTooltipText = entry.LabelTooltip.Localized,
-                ShowShadow       = true,
-                AutoSizeHeight   = true,
-                AutoSizeWidth    = true,
+                Text           = stat.Name.Localized,
+                TextColor      = settingService.TitleLabelColorSetting.Value.GetColor(),
+                Font           = font,
+                ShowShadow     = true,
+                AutoSizeHeight = true,
+                AutoSizeWidth  = true,
             };
 
-            var asyncTexture2D = textureService.EntryTextureByEntryId[entry.Id];
-            _iconImage = new Image(asyncTexture2D)
+            var asyncTexture2D = textureService.StatTextureByStatId[stat.Id];
+            _titleImage = new Image(asyncTexture2D)
             {
-                BasicTooltipText = entry.LabelTooltip.Localized,
-                Size             = new Point(titleLabel.Height),
+                Size = new Point(titleLabel.Height),
             };
 
             _titleLabel                     = titleLabel;
@@ -50,6 +48,13 @@ namespace SessionTracker.Controls
             settingService.TitleLabelColorSetting.SettingChanged  += OnTitleLabelColorSettingChanged;
         }
 
+        public void SetTooltip(string tooltipText)
+        {
+            _titleLabel.BasicTooltipText = tooltipText;
+            _titleImage.BasicTooltipText = tooltipText;
+            BasicTooltipText             = tooltipText; // does not work for the flowPanel. Probably because it is transparent or because label and image are above it.
+        }
+
         protected override void DisposeControl()
         {
             _settingService.StatTitlePaddingSetting.SettingChanged -= OnStatTitlePaddingSettingChanged;
@@ -61,9 +66,9 @@ namespace SessionTracker.Controls
 
         public void UpdateLabelText()
         {
-            _titleLabel.Text             = _entry.LabelText.Localized;
-            _titleLabel.BasicTooltipText = _entry.LabelTooltip.Localized;
-            _iconImage.BasicTooltipText  = _entry.LabelTooltip.Localized;
+            _titleLabel.Text             = _stat.Name.Localized;
+            _titleLabel.BasicTooltipText = _stat.Description.Localized;
+            _titleImage.BasicTooltipText = _stat.Description.Localized;
         }
 
         public override void Show()
@@ -83,7 +88,7 @@ namespace SessionTracker.Controls
             _titleLabel.Font                     = font;
             _paddingLabelBetweenIconAndText.Font = font;
             _paddingLabelBeforeValue.Font        = font;
-            _iconImage.Size                      = new Point(_titleLabel.Height);
+            _titleImage.Size                      = new Point(_titleLabel.Height);
         }
 
         private void OnStatTitlePaddingSettingChanged(object sender, Blish_HUD.ValueChangedEventArgs<int> e)
@@ -113,7 +118,7 @@ namespace SessionTracker.Controls
         private void ShowOrHideTextAndIcon(LabelType labelType)
         {
             // without reset the icon may end up left or right of the text because container is a flowPanel
-            _iconImage.Parent                      = null;
+            _titleImage.Parent                      = null;
             _paddingLabelBetweenIconAndText.Parent = null;
             _titleLabel.Parent                     = null;
             _paddingLabelBeforeValue.Parent        = null;
@@ -121,7 +126,7 @@ namespace SessionTracker.Controls
             switch (labelType)
             {
                 case LabelType.Icon:
-                    _iconImage.Parent               = this;
+                    _titleImage.Parent               = this;
                     _paddingLabelBeforeValue.Parent = this;
                     break;
                 case LabelType.Text:
@@ -129,7 +134,7 @@ namespace SessionTracker.Controls
                     _paddingLabelBeforeValue.Parent = this;
                     break;
                 case LabelType.IconAndText:
-                    _iconImage.Parent                      = this;
+                    _titleImage.Parent                      = this;
                     _paddingLabelBetweenIconAndText.Parent = this;
                     _titleLabel.Parent                     = this;
                     _paddingLabelBeforeValue.Parent        = this;
@@ -137,9 +142,9 @@ namespace SessionTracker.Controls
             }
         }
 
-        private readonly Image _iconImage;
+        private readonly Image _titleImage;
         private readonly Label _titleLabel;
-        private readonly Entry _entry;
+        private readonly Stat _stat;
         private readonly Container _parent;
         private readonly SettingService _settingService;
         private readonly Label _paddingLabelBetweenIconAndText;

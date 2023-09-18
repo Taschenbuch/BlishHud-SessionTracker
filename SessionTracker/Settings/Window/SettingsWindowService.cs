@@ -12,30 +12,26 @@ namespace SessionTracker.Settings.Window
     {
         public SettingsWindowService(Model model, SettingService settingService, TextureService textureService)
         {
-            _statsSettingsTabView      = new StatsSettingsTabView(model, settingService, textureService);
-            _generalSettingsTabView    = new GeneralSettingsTabView(settingService);
-            _visibilitySettingsTabView = new VisibilitySettingsTabView(settingService);
-
             _settingsWindow = new TabbedWindow2(
-                textureService.WindowBackgroundTexture,
+                textureService.SettingsWindowBackgroundTexture,
                 new Rectangle(40, 30, 720, 700),
                 new Rectangle(80, 30, 680, 630))
             {
-                Title         = "Session Tracker",
-                Emblem        = textureService.SettingsWindowEmblemTexture,
-                Location      = new Point(300, 300),
+                Title = "Session Tracker",
+                Emblem = textureService.SettingsWindowEmblemTexture,
+                Location = new Point(300, 300),
                 SavesPosition = true,
-                Id            = "SessionTracker settings window",
-                Parent        = GameService.Graphics.SpriteScreen,
+                Id = "SessionTracker settings window",
+                Parent = GameService.Graphics.SpriteScreen,
             };
 
-            _statsTab      = new Tab(textureService.StatsTabTexture, () => _statsSettingsTabView, "Tracked Stats");
-            _generalTab    = new Tab(textureService.GeneralTabTexture, () => _generalSettingsTabView, "General");
-            _visibilityTab = new Tab(textureService.VisibilityTabTexture, () => _visibilitySettingsTabView, "UI Visibility");
-
+            _statsTab = new Tab(textureService.StatsTabTexture, () => new StatsSettingsTabView(model, settingService, textureService), "Tracked Stats");
             _settingsWindow.Tabs.Add(_statsTab);
-            _settingsWindow.Tabs.Add(_generalTab);
-            _settingsWindow.Tabs.Add(_visibilityTab);
+            _settingsWindow.Tabs.Add(new Tab(textureService.GeneralTabTexture, () => new GeneralSettingsTabView(settingService), "General"));
+            _settingsWindow.Tabs.Add(new Tab(textureService.VisibilityTabTexture, () => new VisibilitySettingsTabView(settingService), "Window Visibility"));
+#if DEBUG
+            _settingsWindow.Tabs.Add(new Tab(textureService.DebugTabTexture, () => new DebugSettingsTabView(settingService), "Debug"));
+#endif
         }
 
         public void Dispose()
@@ -55,11 +51,6 @@ namespace SessionTracker.Settings.Window
         }
 
         private readonly TabbedWindow2 _settingsWindow;
-        private readonly StatsSettingsTabView _statsSettingsTabView;
-        private readonly GeneralSettingsTabView _generalSettingsTabView;
-        private readonly VisibilitySettingsTabView _visibilitySettingsTabView;
         private readonly Tab _statsTab;
-        private readonly Tab _generalTab;
-        private readonly Tab _visibilityTab;
     }
 }

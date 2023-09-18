@@ -5,26 +5,23 @@ using Newtonsoft.Json;
 
 namespace SessionTracker.Models
 {
-    public class Model
+    public class Model : ModelVersion
     {
-        public int MajorVersion { get; set; } = 1;
-        public int MinorVersion { get; set; } = 0;
-        public List<Entry> Entries { get; } = new List<Entry>();
+        public List<Stat> Stats { get; } = new List<Stat>();
         [JsonIgnore] public bool UiHasToBeUpdated { get; set; } // i hate it... but using an event would suck too
-        [JsonIgnore] public string Version => $"{MajorVersion}.{MinorVersion}";
-        [JsonIgnore] public TimeSpan SessionDuration => DateTime.Now - _sessionStartTime; 
+        [JsonIgnore] public TimeSpan SessionDuration => DateTime.Now - _sessionStartTime;
 
         public void StartSession()
         {
             _sessionStartTime = DateTime.Now;
 
-            foreach (var entry in Entries)
-                entry.Value.TotalAtSessionStart = entry.Value.Total;
+            foreach (var stat in Stats)
+                stat.Value.TotalAtSessionStart = stat.Value.Total;
         }
 
-        public Entry GetEntry(string entryId)
+        public Stat GetStat(string statId)
         {
-            return Entries.Single(e => e.Id == entryId);
+            return Stats.Single(e => e.Id == statId);
         }
 
         private DateTime _sessionStartTime; 

@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework;
 using SessionTracker.Controls;
 using SessionTracker.Models;
 using SessionTracker.Services;
+using SessionTracker.Services.RemoteFiles;
 using SessionTracker.Settings;
 using SessionTracker.Settings.SettingEntries;
 using SessionTracker.Settings.Window;
@@ -39,61 +40,90 @@ namespace SessionTracker
 
         public override IView GetSettingsView()
         {
-            return new ModuleSettingsView(_settingsWindowService);
+            if (_moduleLoadError.HasModuleLoadFailed)
+                return _moduleLoadError.CreateErrorSettingsView();
+            else
+                return new ModuleSettingsView(_settingsWindowService);
         }
 
         protected override async Task LoadAsync()
         {
-            runShiftBlishCornerIconsWorkaroundBecauseOfNewWizardVaultIcon();
-            _fileService = new FileService(DirectoriesManager, ContentsManager, Logger);
+            RunShiftBlishCornerIconsWorkaroundBecauseOfNewWizardVaultIcon();
+            var localAndRemoteFileLocations = new LocalAndRemoteFileLocations(new FileConstants(), DirectoriesManager);
+            
+            _moduleLoadError.HasModuleLoadFailed = await RemoteFilesService.IsModuleVersionDeprecated(localAndRemoteFileLocations.DeprecatedTextUrl);
+            if (_moduleLoadError.HasModuleLoadFailed)
+            {
+                _moduleLoadError.InfoText = await RemoteFilesService.GetDeprecatedText(localAndRemoteFileLocations.DeprecatedTextUrl);
+                _moduleLoadError.ShowErrorWindow($"{Name}: Update module version :-)");               
+                return;
+            }
+
+            _moduleLoadError.HasModuleLoadFailed = !await RemoteFilesService.TryUpdateLocalWithRemoteFilesIfNecessary(localAndRemoteFileLocations, Logger);
+            if (_moduleLoadError.HasModuleLoadFailed)
+            {
+                _moduleLoadError.InitForFailedDownload(Name);
+                _moduleLoadError.ShowErrorWindow($"{Name}: Download failed :-(");
+                return;
+            }
+
+            _fileService              = new FileService(localAndRemoteFileLocations, Logger);
             var model                 = await _fileService.LoadModelFromFile();
             var textureService        = new TextureService(model, ContentsManager, Logger);
             var settingsWindowService = new SettingsWindowService(model, _settingService, textureService);
 
-            var entriesContainer = new EntriesContainer(model, Gw2ApiManager, textureService, settingsWindowService, _settingService, Logger)
+            var statsContainer = new StatsContainer(model, Gw2ApiManager, textureService, settingsWindowService, _settingService, Logger)
             {
                 HeightSizingMode = SizingMode.AutoSize,
                 WidthSizingMode  = SizingMode.AutoSize,
-                BackgroundColor  = new Color(Color.Black, _settingService.BackgroundOpacitySetting.Value),
+                BackgroundColor  = ColorService.CreateBackgroundColor(_settingService),
                 Visible          = _settingService.UiIsVisibleSetting.Value,
                 Parent           = GameService.Graphics.SpriteScreen
             };
 
-            _cornerIconService = new CornerIconService(_settingService.CornerIconIsVisibleSetting, entriesContainer, settingsWindowService, CornerIconClickEventHandler, textureService);
+            _cornerIconService = new CornerIconService(_settingService.CornerIconIsVisibleSetting, statsContainer, settingsWindowService, CornerIconClickEventHandler, textureService);
 
-            // set at the end to prevents that one of the ctors accidently gets a null reference because of creating the objects above in the wrong order.
+            // set at the end to prevent that one of the ctors accidently gets a null reference because of creating the objects above in the wrong order.
             // e.g. creating model after textureService, though model needs the reference of model.
             _model                 = model;
             _textureService        = textureService;
-            _entriesContainer      = entriesContainer;
+            _statsContainer        = statsContainer;
             _settingsWindowService = settingsWindowService;
 
             _settingService.UiVisibilityKeyBindingSetting.Value.Activated += OnUiVisibilityKeyBindingActivated;
             _settingService.UiVisibilityKeyBindingSetting.Value.Enabled   =  true;
         }
 
-        private void CornerIconClickEventHandler(object s, MouseEventArgs e) => _entriesContainer.ToggleVisibility();
-        private void OnUiVisibilityKeyBindingActivated(object s, EventArgs e) => _entriesContainer.ToggleVisibility();
+        private void CornerIconClickEventHandler(object s, MouseEventArgs e) => _statsContainer.ToggleVisibility();
+        private void OnUiVisibilityKeyBindingActivated(object s, EventArgs e) => _statsContainer.ToggleVisibility();
 
         protected override void Unload()
         {
             if (_model != null)
                 _fileService.SaveModelToFile(_model);
 
-            _settingService.UiVisibilityKeyBindingSetting.Value.Activated -= OnUiVisibilityKeyBindingActivated;
+            if (_settingService != null)
+            {
+                _settingService.UiVisibilityKeyBindingSetting.Value.Enabled = false; // workaround to fix keybinding memory leak
+                _settingService.UiVisibilityKeyBindingSetting.Value.Activated -= OnUiVisibilityKeyBindingActivated;
+            }
 
+            _moduleLoadError?.Dispose();
             _settingsWindowService?.Dispose();
             _cornerIconService?.Dispose();
             _textureService?.Dispose();
-            _entriesContainer?.Dispose();
+            _statsContainer?.Dispose();
         }
 
         protected override void Update(GameTime gameTime)
         {
-            _entriesContainer.Update2(gameTime);
+            if (_moduleLoadError.HasModuleLoadFailed)
+                return;
+
+            _statsContainer.Update2(gameTime);
         }
 
-        private static void runShiftBlishCornerIconsWorkaroundBecauseOfNewWizardVaultIcon()
+        private static void RunShiftBlishCornerIconsWorkaroundBecauseOfNewWizardVaultIcon()
         {
             if (Program.OverlayVersion < new SemVer.Version(1, 1, 0))
             {
@@ -108,11 +138,12 @@ namespace SessionTracker
 
         private SettingService _settingService;
         private static readonly Logger Logger = Logger.GetLogger<Module>();
-        private EntriesContainer _entriesContainer;
+        private StatsContainer _statsContainer;
         private FileService _fileService;
         private Model _model;
         private TextureService _textureService;
         private CornerIconService _cornerIconService;
         private SettingsWindowService _settingsWindowService;
+        private readonly ModuleLoadError _moduleLoadError = new ModuleLoadError();
     }
 }

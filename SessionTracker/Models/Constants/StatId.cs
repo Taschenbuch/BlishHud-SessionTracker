@@ -1,6 +1,6 @@
-﻿namespace SessionTracker.Models
+﻿namespace SessionTracker.Models.Constants
 {
-    public class EntryId
+    public class StatId
     {
         public const string PVP_KILLS = "pvp kills";
         public const string PVP_KDR = "pvp kdr";
@@ -19,6 +19,6 @@
         public const string WVW_RANK = "wvw rank";
         public const string WVW_SUPPLY_REPAIR = "wvw supply spent on repairs";
         public const string DEATHS = "deaths";
-        public const string COPPER = "currency1"; // 
+        public const string LUCK = "luck";
     }
 }

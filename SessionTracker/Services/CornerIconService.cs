@@ -12,14 +12,14 @@ namespace SessionTracker.Services
     public class CornerIconService : IDisposable
     {
         public CornerIconService(SettingEntry<bool> cornerIconIsVisibleSetting,
-                                 EntriesContainer entriesContainer,
+                                 StatsContainer statsContainer,
                                  SettingsWindowService settingsWindowService,
                                  EventHandler<MouseEventArgs> cornerIconClickEventHandler,
                                  TextureService textureService)
         {
             _settingsWindowService       = settingsWindowService;
             _cornerIconIsVisibleSetting  = cornerIconIsVisibleSetting;
-            _entriesContainer            = entriesContainer;
+            _statsContainer            = statsContainer;
             _cornerIconClickEventHandler = cornerIconClickEventHandler;
             _cornerIconTexture           = textureService.CornerIconTexture;
             _cornerIconHoverTexture      = textureService.CornerIconHoverTexture;
@@ -67,7 +67,7 @@ namespace SessionTracker.Services
 
         private void OnResetContextMenuStripItemClick(object sender, MouseEventArgs e)
         {
-            _entriesContainer.ResetSession();
+            _statsContainer.ResetSession();
         }
 
         private void OnSettingsContextMenuStripItemClick(object sender, MouseEventArgs e)
@@ -101,7 +101,7 @@ namespace SessionTracker.Services
         private readonly Texture2D _cornerIconTexture;
         private readonly Texture2D _cornerIconHoverTexture;
         private readonly SettingEntry<bool> _cornerIconIsVisibleSetting;
-        private readonly EntriesContainer _entriesContainer;
+        private readonly StatsContainer _statsContainer;
         private readonly EventHandler<MouseEventArgs> _cornerIconClickEventHandler;
         private readonly SettingsWindowService _settingsWindowService;
         private CornerIcon _cornerIcon;

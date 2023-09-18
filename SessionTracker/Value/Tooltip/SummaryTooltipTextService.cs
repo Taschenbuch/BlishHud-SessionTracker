@@ -2,47 +2,48 @@
 using System.Collections.Generic;
 using System.Linq;
 using SessionTracker.Models;
+using SessionTracker.Models.Constants;
 using SessionTracker.Properties;
 using SessionTracker.Settings.SettingEntries;
 using SessionTracker.Value.Text;
 
 namespace SessionTracker.Value.Tooltip
 {
-    public class ValueTooltipService
+    public class SummaryTooltipTextService
     {
-        public ValueTooltipService(Model model, SettingService settingService)
+        public SummaryTooltipTextService(Model model, SettingService settingService)
         {
             _model          = model;
             _settingService = settingService;
         }
 
-        public string ResetAndReturnSummaryText(Entry entry)
+        public string ResetAndReturnSummaryText(Stat stat)
         {
-            entry.SessionHistory.Clear();
-            InsertNewHistoryEntryAtBeginning(entry);
+            stat.SessionHistory.Clear();
+            InsertNewHistoryEntryAtBeginning(stat);
 
-            return CreateSummaryText(entry);
+            return CreateSummaryText(stat);
         }
 
-        public string UpdateAndReturnSummaryText(Entry entry)
+        public string UpdateAndReturnSummaryText(Stat stat)
         {
-            InsertNewHistoryEntryAtBeginning(entry);
+            InsertNewHistoryEntryAtBeginning(stat);
 
-            if (HistoryIsTooLong(entry.SessionHistory.Count))
-                RemoveOldestHistoryEntry(entry.SessionHistory);
+            if (HistoryIsTooLong(stat.SessionHistory.Count))
+                RemoveOldestHistoryEntry(stat.SessionHistory);
 
-            return CreateSummaryText(entry);
+            return CreateSummaryText(stat);
         }
 
-        private void InsertNewHistoryEntryAtBeginning(Entry entry)
+        private void InsertNewHistoryEntryAtBeginning(Stat stat)
         {
-            var sessionValueText = CreateValueText(entry.Value.Session, entry.CurrencyId);
-            entry.SessionHistory.Insert(0, $"{DateTime.Now:HH:mm} | {sessionValueText}");
+            var sessionValueText = CreateValueText(stat.Value.Session, stat.ApiId);
+            stat.SessionHistory.Insert(0, $"{DateTime.Now:HH:mm} | {sessionValueText}");
         }
 
         private static bool HistoryIsTooLong(int entriesCount)
         {
-            return entriesCount > MAX_NUMBER_OF_ENTRIES;
+            return entriesCount > MAX_NUMBER_OF_HISTORY_ENTRIES;
         }
 
         private static void RemoveOldestHistoryEntry(List<string> historyEntries)
@@ -50,20 +51,26 @@ namespace SessionTracker.Value.Tooltip
             historyEntries.Remove(historyEntries.Last());
         }
 
-        private string CreateSummaryText(Entry entry)
+        private string CreateSummaryText(Stat stat)
         {
-            var sessionValuePerHour     = GetValuePerHourAsInteger(entry.Value.Session);
-            var sessionValuePerHourText = CreateValueText(sessionValuePerHour, entry.CurrencyId);
-            var totalValueText          = CreateValueText(entry.Value.Total, entry.CurrencyId);
+            // summary tooltip makes no sense for KDRs. Thus they get a shorter tooltip.
+            if (stat.Id == StatId.WVW_KDR || stat.Id == StatId.PVP_KDR)
+                return stat.GetTextWithNameAndDescription();
 
-            return $"== TOTAL ==\n" +
-                   $"{totalValueText} {entry.LabelText.Localized}\n" +
+            var sessionValuePerHour     = GetValuePerHourAsInteger(stat.Value.Session);
+            var sessionValuePerHourText = CreateValueText(sessionValuePerHour, stat.ApiId);
+            var totalValueText          = CreateValueText(stat.Value.Total, stat.ApiId);
+
+            return $"{stat.GetTextWithNameAndDescription()}\n" +
+                   $"\n" +
+                   $"== TOTAL ==\n" +
+                   $"{totalValueText} {stat.Name.Localized}\n" +
                    $"\n== {Localization.SummaryTooltip_HeaderCurrentSession} ==\n" +
-                   $"{sessionValuePerHourText} {entry.LabelText.Localized} / {Localization.SummaryTooltip_Hour}\n" +
+                   $"{sessionValuePerHourText} {stat.Name.Localized} / {Localization.SummaryTooltip_Hour}\n" +
                    $"{_model.SessionDuration:hh':'mm} {Localization.SummaryTooltip_HoursMinutes}\n" +
                    $"\n" +
-                   $"{Localization.SummaryTooltip_historyTimeColumnTitle} | {entry.LabelText.Localized}\n" +
-                   $"{string.Join("\n", entry.SessionHistory)}";
+                   $"{Localization.SummaryTooltip_historyTimeColumnTitle} | {stat.Name.Localized}\n" +
+                   $"{string.Join("\n", stat.SessionHistory)}";
         }
 
         private int GetValuePerHourAsInteger(int value)
@@ -82,16 +89,16 @@ namespace SessionTracker.Value.Tooltip
             return (int) (value / _model.SessionDuration.TotalHours);
         }
 
-        private string CreateValueText(int value, int entryCurrencyId)
+        private string CreateValueText(int value, int statCurrencyId)
         {
-            return entryCurrencyId == CurrencyIds.COIN_IN_COPPER
+            return statCurrencyId == CurrencyIds.COIN_IN_COPPER
                 ? ValueTextService.CreateCoinValueText(value, _settingService.CoinDisplayFormatSetting.Value)
                 : value.To0DecimalPlacesCulturedString();
         }
 
         private readonly Model _model;
         private readonly SettingService _settingService;
-        private const int MAX_NUMBER_OF_ENTRIES = 12;
+        private const int MAX_NUMBER_OF_HISTORY_ENTRIES = 12;
         private const double ONE_MINUTE_IN_HOURS = 0.017;
     }
 }

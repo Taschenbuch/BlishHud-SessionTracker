@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Blish_HUD;
 using SessionTracker.Settings.SettingEntries;
 
 namespace SessionTracker.Value.Text
@@ -15,20 +16,20 @@ namespace SessionTracker.Value.Text
             return killsDeathsRatio.To2DecimalPlacesCulturedString();
         }
 
-        public static string CreateSessionAndTotalValueText(string sessionValueText, string totalValueText, bool sessionValuesAreVisible, bool totalValuesAreVisible)
+        public static string CreateSessionAndTotalValueText(string sessionValueText, string totalValueText, ValueDisplayFormat valueDisplayFormat, Logger logger)
         {
-            var text = string.Empty;
-
-            if (sessionValuesAreVisible)
-                text += sessionValueText;
-
-            if (sessionValuesAreVisible && totalValuesAreVisible)
-                text += " | ";
-
-            if (totalValuesAreVisible)
-                text += totalValueText;
-
-            return text;
+            switch (valueDisplayFormat)
+            {
+                case ValueDisplayFormat.SessionValue:
+                    return sessionValueText;
+                case ValueDisplayFormat.TotalValue:
+                    return totalValueText;
+                case ValueDisplayFormat.SessionAndTotalValue:
+                    return $"{sessionValueText} | {totalValueText}";
+                default:
+                    logger.Error($"Missing ValueDisplayFormat case for {valueDisplayFormat}");
+                    return sessionValueText;
+            }
         }
 
         public static string CreateCoinValueText(int valueInCopper, CoinDisplayFormat coinDisplayFormat)
@@ -45,32 +46,22 @@ namespace SessionTracker.Value.Text
             var silver2DigitText = silver.ToString("00", CultureInfo.CurrentUICulture);
             var allInCopperText = unsignedValueInCopper.To0DecimalPlacesCulturedString();
 
-            switch (coinDisplayFormat)
+            return coinDisplayFormat switch
             {
-                case CoinDisplayFormat.Xg:
-                    return gold == 0
-                        ? "0g"
-                        : $"{sign}{goldText}g";
-                case CoinDisplayFormat.XgX:
-                    return gold == 0 && silverInTens == 0
-                        ? "0g"
-                        : $"{sign}{goldText}g{silverInTens}";
-                case CoinDisplayFormat.XgXX:
-                    return gold == 0 && silver == 0
-                        ? "0g"
-                        : $"{sign}{goldText}g{silver2DigitText}";
-                case CoinDisplayFormat.XgXsXc:
-                    return gold == 0 && silver == 0 && copper == 0
-                        ? "0g\u20090s\u20090c"
-                        : $"{sign}{goldText}g\u2009{silver}s\u2009{copper}c";
-                case CoinDisplayFormat.Xc:
-                    return $"{sign}{allInCopperText}c";
-                default:
-                    //logger.Error($"Error: unknown coinDisplayFormat: {coinDisplayFormat}. Use XgXsXc format as fallback");
-                    return gold == 0 && silver == 0 && copper == 0
-                        ? "0g\u20090s\u20090c"
-                        : $"{sign}{goldText}g\u2009{silver}s\u2009{copper}c";
-            }
+                CoinDisplayFormat.Xc => $"{sign}{allInCopperText}c",
+                CoinDisplayFormat.Xg => gold == 0
+                                        ? "0g"
+                                        : $"{sign}{goldText}g",
+                CoinDisplayFormat.XgX => gold == 0 && silverInTens == 0
+                                        ? "0g"
+                                        : $"{sign}{goldText}g{silverInTens}",
+                CoinDisplayFormat.XgXX => gold == 0 && silver == 0
+                                        ? "0g"
+                                        : $"{sign}{goldText}g{silver2DigitText}",
+                _ => gold == 0 && silver == 0 && copper == 0
+                                        ? "0g\u20090s\u20090c"
+                                        : $"{sign}{goldText}g\u2009{silver}s\u2009{copper}c",
+            };
         }
     }
 }

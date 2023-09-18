@@ -4,6 +4,6 @@
     {
         None,
         AllStatsHiddenByUser,
-        AllStatsHiddenBecauseOfZeroValue
+        AllStatsHiddenByHideZeroValuesSetting
     }
 }

@@ -11,7 +11,7 @@ namespace SessionTracker.Settings.SettingEntries
             BackgroundOpacitySetting = settings.DefineSetting(
                 "window background opacity",
                 125,
-                () => "window background opacity",
+                () => "background opacity",
                 () => "Change window background opacity");
 
             BackgroundOpacitySetting.SetRange(0, 255);
@@ -38,19 +38,17 @@ namespace SessionTracker.Settings.SettingEntries
                 () => "value color",
                 () => "Change color of the stats value. e.g. for '0 | 10'");
 
-            SessionValuesAreVisibleSetting = settings.DefineSetting(
-                "show session values",
-                true,
-                () => "SESSION values",
-                () => "Show values of the current session. " +
-                      "Total or session values can not be both hidden.");
+            BackgroundColorSetting = settings.DefineSetting(
+                "window background color",
+                ColorType.Black,
+                () => "background color",
+                () => "Change window background color");
 
-            TotalValuesAreVisibleSetting = settings.DefineSetting(
-                "show total values",
-                false,
-                () => "TOTAL values",
-                () => "Show total values for the whole account. " +
-                      "Total or session values can not be both hidden.");
+            ValueDisplayFormatSetting = settings.DefineSetting(
+               "value display format",
+               ValueDisplayFormat.SessionValue,
+               () => "value display format",
+               () => "Show values of the current session and/or total values for the whole account.");
 
             WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting = settings.DefineSetting(
                 "show window on cutScenes and characterSelection and loadingScreens",
@@ -68,7 +66,7 @@ namespace SessionTracker.Settings.SettingEntries
                 () => "show window on world map.");
 
             WindowIsVisibleOutsideOfWvwAndSpvpSetting = settings.DefineSetting(
-                "show window outside of wvw and spvp",
+                "show UI outside of wvw and spvp",
                 true,
                 () => "outside of WvW and sPvP",
                 () => "show window outside of wvw and spvp. e.g. on open world maps");
@@ -97,7 +95,7 @@ namespace SessionTracker.Settings.SettingEntries
                 () => "mouse clickthrough (read tooltip)",
                 () => "This allows clicking with the mouse through the window to interact with Guild Wars 2 behind the window. " +
                       "Mouse clicks while ALT key is held down, will disable this feature temporarily. E.g. for scrolling the stats window etc. " +
-                     $"WARNING: feature is disabled when '{DRAG_WITH_MOUSE_LABEL_TEXT}' is checked.");
+                     $"WARNING: Feature is disabled when '{DRAG_WITH_MOUSE_LABEL_TEXT}' is checked. Feature makes scrolling impossible when fixed height setting is set.");
 
             CornerIconIsVisibleSetting = settings.DefineSetting(
                 "cornerIcon is visible",
@@ -121,26 +119,26 @@ namespace SessionTracker.Settings.SettingEntries
             UiVisibilityKeyBindingSetting = settings.DefineSetting(
                 "ui visibility key binding",
                 new KeyBinding(Keys.None),
-                () => "show/hide UI",
-                () => "Double-click to change the key binding. Will show or hide the session-tracker UI. " +
-                      "Whether UI is really shown depends on other visibility settings. " +
-                      "e.g. when 'on world map' is unchecked, using the key binding will still not show the UI on the world map.");
+                () => "show/hide window",
+                () => "Double-click to change the key binding. Will show or hide the session-tracker window. " +
+                      "Whether window is really shown depends on other visibility settings. " +
+                      "e.g. when 'on world map' is unchecked, using the key binding will still not show the window on the world map.");
 
             UiHeightIsFixedSetting = settings.DefineSetting(
                 "ui height is fixed",
                 false,
                 () => "fixed height",
-                () => "CHECKED: height is fixed and can be adjusted with the ui height slider.\n" +
-                      "Stats can be scrolled in the UI via mouse wheel or by dragging the scrollbar. Dragging the scrollbar only works when 'drag with mouse' setting is disabled.\n" +
+                () => "CHECKED: height is fixed and can be adjusted with the window height slider.\n" +
+                      "Stats can be scrolled in the window via mouse wheel or by dragging the scrollbar. Dragging the scrollbar only works when 'drag with mouse' setting is disabled.\n" +
                       "UNCHECKED: height adjusts automatically to the number of stats shown.\n" +
                       "BUG: There is a not fixable bug, that the scrollbar is visible when the mouse is not " +
-                      "over the UI after adding/removing stats or loading the module. Just move the mouse one time over the UI to hide the scrollbar again.");
+                      "over the window after adding/removing stats or loading the module. Just move the mouse one time over the window to hide the scrollbar again.");
 
             UiHeightSetting = settings.DefineSetting(
                 "ui height",
                 200,
                 () => "height",
-                () => "UI height when fixed height setting is checked.");
+                () => "window height when fixed height setting is checked.");
 
             UiHeightSetting.SetRange(5, 2000);
 
@@ -157,50 +155,58 @@ namespace SessionTracker.Settings.SettingEntries
 
             ScrollbarFixDelay.SetRange(50, 500);
 
-            DebugModeIsEnabledSetting = settings.DefineSetting(
+            DebugApiIntervalEnabledSetting = settings.DefineSetting(
                 "debug mode",
                 false,
-                () => "debug mode",
-                () => "Increases polling rate beyond api cache time limit (polls every 5 seconds instead of every 5 minutes) and it may have other effects, too. " +
-                      "This won't update stats faster! " +
-                      "It is only useful for debugging purposes for the module developer. So better don't enable this checkbox. Seriously! Don't touch it!");
+                () => "use debug api interval",
+                () => "Use debug api interval instead of normal api interval.");
+
+            DebugApiIntervalValueSetting = settings.DefineSetting(
+                "debug api interval",
+                5 * 1000,
+                () => "debug api interval",
+                () => "Increases polling rate beyond api cache time limit.");
+
+            DebugApiIntervalValueSetting.SetRange(1000, 20 * 1000);
 
             UiIsVisibleSetting = settings.DefineSetting(
                 "ui is visible",
                 true,
-                () => "ui visible (read tooltip)",
+                () => "window visible (read tooltip)",
                 () => $"Show or hide sessions tracker UI. Has the same effect as clicking the menu icon or using the key binding. " +
-                      $"Whether the UI is really shown depends on further settings like '{ON_WORLD_MAP_SETTING_DISPLAY_NAME}'.");
+                      $"Whether the window is really shown depends on further settings like '{ON_WORLD_MAP_SETTING_DISPLAY_NAME}'.");
 
             HideStatsWithValueZeroSetting = settings.DefineSetting(
                 "hide stats with value zero",
                 false,
                 () => "hide stats with value = 0",
                 () => "Stats with a session value of 0 are hidden until the session value changes to a non-zero value. " +
-                      "At the start of a session all values will be 0 so the whole UI is hidden.");
+                      "At the start of a session all values will be 0 so the whole window is hidden.");
 
             var internalSettings = settings.AddSubCollection("internal settings (not visible in UI)");
-            SettingsVersionSetting = internalSettings.DefineSetting("settings version", 1);
+            SettingsVersionSetting = internalSettings.DefineSetting("settings version", 2);
             XMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location x", 0.2f);
             YMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location y", 0.2f);
+            MigrateBlishSettingsService.MigrateSettings(settings, SettingsVersionSetting, ValueDisplayFormatSetting);
         }
 
+        public SettingEntry<int> DebugApiIntervalValueSetting { get; }
         public SettingEntry<bool> HideStatsWithValueZeroSetting { get; }
         public SettingEntry<int> ScrollbarFixDelay { get; }
         public SettingEntry<CoinDisplayFormat> CoinDisplayFormatSetting { get; }
-        public SettingEntry<bool> DebugModeIsEnabledSetting { get; }
+        public SettingEntry<bool> DebugApiIntervalEnabledSetting { get; }
         public SettingEntry<int> StatTitlePaddingSetting { get; }
         public SettingEntry<int> UiHeightSetting { get; }
         public SettingEntry<bool> UiHeightIsFixedSetting { get; }
         public SettingEntry<ColorType> ValueLabelColorSetting { get; }
         public SettingEntry<ColorType> TitleLabelColorSetting { get; }
+        public SettingEntry<ColorType> BackgroundColorSetting { get; }
         public SettingEntry<float> XMainWindowRelativeLocationSetting { get; }
         public SettingEntry<float> YMainWindowRelativeLocationSetting { get; }
         public SettingEntry<bool> UiIsVisibleSetting { get; }
         public SettingEntry<int> BackgroundOpacitySetting { get; }
         public SettingEntry<int> FontSizeIndexSetting { get; }
-        public SettingEntry<bool> SessionValuesAreVisibleSetting { get; }
-        public SettingEntry<bool> TotalValuesAreVisibleSetting { get; }
+        public SettingEntry<ValueDisplayFormat> ValueDisplayFormatSetting { get; }
         public SettingEntry<bool> WindowCanBeClickedThroughSetting { get; }
         public SettingEntry<bool> WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting { get; }
         public SettingEntry<bool> WindowIsVisibleOnWorldMapSetting { get; }

@@ -1,22 +1,64 @@
 ﻿using Blish_HUD;
 using Gw2Sharp.Models;
+using SessionTracker.Controls;
 using SessionTracker.Settings.SettingEntries;
+using System;
 
 namespace SessionTracker.Services
 {
-    public class VisibilityService
+    public class VisibilityService: IDisposable
     {
-        public static bool WindowIsVisible(SettingService settingsService)
+        public VisibilityService(StatsContainer statsContainer, SettingService settingService)
         {
-            var show                                   = settingsService.UiIsVisibleSetting.Value;
-            var showOnMap                              = settingsService.WindowIsVisibleOnWorldMapSetting.Value;
-            var showOnCharSelectLoadingScreenCutScenes = settingsService.WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting.Value;
-            var showOutsideOfWvwAndSpvp                = settingsService.WindowIsVisibleOutsideOfWvwAndSpvpSetting.Value;
-            var showInWvw                              = settingsService.WindowIsVisibleInWvwSetting.Value;
-            var showInSpvp                             = settingsService.WindowIsVisibleInSpvpSetting.Value;
+            _statsContainer = statsContainer;
+            _settingService = settingService;
 
-            var mapType = GameService.Gw2Mumble.CurrentMap.Type;
+            GameService.Gw2Mumble.UI.IsMapOpenChanged                      += OnWindowVisibilityUpdateRequired;
+            GameService.GameIntegration.Gw2Instance.IsInGameChanged        += OnWindowVisibilityUpdateRequired;
+            GameService.Gw2Mumble.CurrentMap.MapChanged                    += OnWindowVisibilityUpdateRequired;
+            settingService.UiIsVisibleSetting.SettingChanged               += OnWindowVisibilityUpdateRequired;
+            settingService.WindowIsVisibleOnWorldMapSetting.SettingChanged += OnWindowVisibilityUpdateRequired;
+            settingService.WindowIsVisibleInWvwSetting.SettingChanged      += OnWindowVisibilityUpdateRequired;
+            settingService.WindowIsVisibleInSpvpSetting.SettingChanged     += OnWindowVisibilityUpdateRequired;
+            settingService.WindowIsVisibleOutsideOfWvwAndSpvpSetting.SettingChanged += OnWindowVisibilityUpdateRequired;
+            settingService.WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting.SettingChanged += OnWindowVisibilityUpdateRequired;
 
+            UpdateWindowVisibility();
+        }
+
+        public void Dispose()
+        {
+            GameService.Gw2Mumble.UI.IsMapOpenChanged                       -= OnWindowVisibilityUpdateRequired;
+            GameService.GameIntegration.Gw2Instance.IsInGameChanged         -= OnWindowVisibilityUpdateRequired;
+            GameService.Gw2Mumble.CurrentMap.MapChanged                     -= OnWindowVisibilityUpdateRequired;
+            _settingService.UiIsVisibleSetting.SettingChanged               -= OnWindowVisibilityUpdateRequired;
+            _settingService.WindowIsVisibleOnWorldMapSetting.SettingChanged -= OnWindowVisibilityUpdateRequired;
+            _settingService.WindowIsVisibleInWvwSetting.SettingChanged      -= OnWindowVisibilityUpdateRequired;
+            _settingService.WindowIsVisibleInSpvpSetting.SettingChanged     -= OnWindowVisibilityUpdateRequired;
+            _settingService.WindowIsVisibleOutsideOfWvwAndSpvpSetting.SettingChanged -= OnWindowVisibilityUpdateRequired;
+            _settingService.WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting.SettingChanged -= OnWindowVisibilityUpdateRequired;
+        }
+
+        public void UpdateWindowVisibility()
+        {
+            _statsContainer.Visible = IsWindowVisible(_settingService);
+        }
+
+        private void OnWindowVisibilityUpdateRequired(object sender, EventArgs e)
+        {
+            UpdateWindowVisibility();
+        }
+
+        private static bool IsWindowVisible(SettingService settingService)
+        {
+            var show                                   = settingService.UiIsVisibleSetting.Value;
+            var showOnMap                              = settingService.WindowIsVisibleOnWorldMapSetting.Value;
+            var showOnCharSelectLoadingScreenCutScenes = settingService.WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting.Value;
+            var showOutsideOfWvwAndSpvp                = settingService.WindowIsVisibleOutsideOfWvwAndSpvpSetting.Value;
+            var showInWvw                              = settingService.WindowIsVisibleInWvwSetting.Value;
+            var showInSpvp                             = settingService.WindowIsVisibleInSpvpSetting.Value;
+
+            var mapType               = GameService.Gw2Mumble.CurrentMap.Type;
             var mapIsClosed           = GameService.Gw2Mumble.UI.IsMapOpen == false;
             var isInGame              = GameService.GameIntegration.Gw2Instance.IsInGame;
             var isWvwMap              = IsWorldVsWorldMap(mapType);
@@ -80,5 +122,7 @@ namespace SessionTracker.Services
         }
 
         private const int PVP_LOBBY_MAP_ID = 350;
+        private readonly StatsContainer _statsContainer;
+        private readonly SettingService _settingService;
     }
 }

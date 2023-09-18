@@ -14,13 +14,13 @@ namespace SessionTracker.Controls.Hint
 {
     public class HintFlowPanel : FlowPanel
     {
-        public HintFlowPanel(List<Entry> entries,
+        public HintFlowPanel(List<Stat> stats,
                              SettingsWindowService settingsWindowService,
                              TextureService textureService,
                              SettingService settingService,
                              Container parent)
         {
-            _entries        = entries;
+            _stats        = stats;
             _parent         = parent;
             _settingService = settingService;
 
@@ -36,7 +36,7 @@ namespace SessionTracker.Controls.Hint
 
             var hiddenByUserHintText = "No stats selected.\n" +
                                        "Select the stats you want to see\n" +
-                                       "in the session tracker module settings. :)";
+                                       "in the session tracker module settings. :-)";
 
             _hiddenByUserLabel = new Label()
             {
@@ -56,41 +56,40 @@ namespace SessionTracker.Controls.Hint
         protected override void DisposeControl()
         {
             _settingService.FontSizeIndexSetting.SettingChanged -= OnFontSizeIndexSettingChanged;
-
             _hiddenByZeroSessionValuesImage?.Dispose();
             _hiddenByUserLabel?.Dispose();
             _openSettingsButton?.Dispose();
             base.DisposeControl();
         }
 
-        public void ShowHintWhenAllEntriesAreHidden()
+        public void ShowHintWhenAllStatsAreHidden(State updateState)
         {
             // remove all from parent to prevent messing up their order
             _hiddenByZeroSessionValuesImage.Parent = null;
             _hiddenByUserLabel.Parent              = null;
-            _openSettingsButton.Parent                 = null;
+            _openSettingsButton.Parent             = null;
 
-            var hintType = DetermineWhichHintToShow(_entries, _settingService.HideStatsWithValueZeroSetting.Value);
+            var hintType = DetermineWhichHintToShow(_stats, updateState, _settingService.HideStatsWithValueZeroSetting.Value);
 
             switch (hintType)
             {
                 case HintType.AllStatsHiddenByUser:
                     _hiddenByZeroSessionValuesImage.Parent = null;
                     _hiddenByUserLabel.Parent              = this;
-                    _openSettingsButton.Parent                 = this;
+                    _openSettingsButton.Parent             = this;
                     Show();
                     break;
-                case HintType.AllStatsHiddenBecauseOfZeroValue:
+                case HintType.AllStatsHiddenByHideZeroValuesSetting:
                     _hiddenByZeroSessionValuesImage.Parent = this;
                     _hiddenByUserLabel.Parent              = null;
-                    _openSettingsButton.Parent                 = null;
+                    _openSettingsButton.Parent             = null;
                     Show();
                     break;
                 case HintType.None:
                 default:
                     _hiddenByZeroSessionValuesImage.Parent = null;
                     _hiddenByUserLabel.Parent              = null;
-                    _openSettingsButton.Parent                 = null;
+                    _openSettingsButton.Parent             = null;
                     Hide();
                     break;
             }
@@ -110,28 +109,27 @@ namespace SessionTracker.Controls.Hint
 
         private void OnFontSizeIndexSettingChanged(object sender, ValueChangedEventArgs<int> e)
         {
-            var fontSizeIndex = _settingService.FontSizeIndexSetting.Value;
-            _hiddenByUserLabel.Font              = FontService.Fonts[fontSizeIndex];
-            _hiddenByZeroSessionValuesImage.Size = new Point(5 * fontSizeIndex);
+            var font = FontService.Fonts[_settingService.FontSizeIndexSetting.Value];
+            _hiddenByUserLabel.Font = font; 
+            _hiddenByZeroSessionValuesImage.Size = new Point(font.LineHeight);
         }
 
-        private static HintType DetermineWhichHintToShow(List<Entry> entries, bool hideStatsWithValueZero)
+        private static HintType DetermineWhichHintToShow(List<Stat> stats, State updateState, bool hideStatsWithValueZero)
         {
-            var allHiddenByUser = entries.Any(e => e.IsVisible) == false;
-
+            var allHiddenByUser = stats.Any(e => e.IsVisible) == false;
             if (allHiddenByUser)
                 return HintType.AllStatsHiddenByUser;
 
-            var allHiddenBecauseOfZeroValue = entries.Any(e => e.IsVisible && e.Value.Session != 0) == false;
-
-            if (hideStatsWithValueZero && allHiddenBecauseOfZeroValue)
-                return HintType.AllStatsHiddenBecauseOfZeroValue;
+            var allHiddenBecauseOfZeroValue = stats.Any(e => e.IsVisible && e.HasNonZeroSessionValue) == false;
+            var hasModuleInitializedStatValues = updateState != State.WaitForApiTokenAfterModuleStart;
+            if (hideStatsWithValueZero && allHiddenBecauseOfZeroValue && hasModuleInitializedStatValues)
+                return HintType.AllStatsHiddenByHideZeroValuesSetting;
 
             return HintType.None;
         }
 
         private readonly SettingService _settingService;
-        private readonly List<Entry> _entries;
+        private readonly List<Stat> _stats;
         private readonly Container _parent;
         private readonly Label _hiddenByUserLabel;
         private readonly Image _hiddenByZeroSessionValuesImage;
