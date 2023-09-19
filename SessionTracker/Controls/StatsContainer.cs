@@ -228,6 +228,7 @@ namespace SessionTracker.Controls
         {
             var tooltip = "Error: Not logged into a character or API key is missing or missing permissions. :(\n" +
                           $"Required permissions: {string.Join(", ", ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE)}\n" +
+                          $"If that does not fix the issue try disabling the module and then enabling it again\n" +
                           RETRY_IN_X_SECONDS_MESSAGE;
 
             SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
