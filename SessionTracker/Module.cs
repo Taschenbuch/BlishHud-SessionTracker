@@ -51,9 +51,9 @@ namespace SessionTracker
         {
             RunShiftBlishCornerIconsWorkaroundBecauseOfNewWizardVaultIcon();
 
-            _moduleLoadError.HasModuleLoadFailed = await ApiService.IsApiTokenGeneratedWithoutRequiredPermissions(Logger);
-            if (_moduleLoadError.HasModuleLoadFailed)
+            if (await ApiService.IsApiTokenGeneratedWithoutRequiredPermissions(Logger)) // WARNING: will fail when custom settings path is used "--settings <path>" (returns false then)
             {
+                _moduleLoadError.HasModuleLoadFailed = true;
                 _moduleLoadError.InfoText = $"DISABLE {Name} module, wait 5-10 seconds, after that ENABLE the module again here: " +
                     $"click Blish icon to open settings -> Manage Modules -> Session Tracker.\n" +
                     $"Reason: You recently updated this module. There is a bug in blish that prevents a module from getting api access after a module update with new " +
@@ -64,17 +64,17 @@ namespace SessionTracker
 
             var localAndRemoteFileLocations = new LocalAndRemoteFileLocations(new FileConstants(), DirectoriesManager);
             
-            _moduleLoadError.HasModuleLoadFailed = await RemoteFilesService.IsModuleVersionDeprecated(localAndRemoteFileLocations.DeprecatedTextUrl);
-            if (_moduleLoadError.HasModuleLoadFailed)
+            if (await RemoteFilesService.IsModuleVersionDeprecated(localAndRemoteFileLocations.DeprecatedTextUrl))
             {
+                _moduleLoadError.HasModuleLoadFailed = true;
                 _moduleLoadError.InfoText = await RemoteFilesService.GetDeprecatedText(localAndRemoteFileLocations.DeprecatedTextUrl);
                 _moduleLoadError.ShowErrorWindow($"{Name}: Update module version :-)");               
                 return;
             }
 
-            _moduleLoadError.HasModuleLoadFailed = !await RemoteFilesService.TryUpdateLocalWithRemoteFilesIfNecessary(localAndRemoteFileLocations, Logger);
-            if (_moduleLoadError.HasModuleLoadFailed)
+            if (!await RemoteFilesService.TryUpdateLocalWithRemoteFilesIfNecessary(localAndRemoteFileLocations, Logger))
             {
+                _moduleLoadError.HasModuleLoadFailed = true;
                 _moduleLoadError.InitForFailedDownload(Name);
                 _moduleLoadError.ShowErrorWindow($"{Name}: Download failed :-(");
                 return;
