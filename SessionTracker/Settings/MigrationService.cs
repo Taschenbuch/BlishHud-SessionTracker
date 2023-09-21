@@ -75,7 +75,7 @@ namespace SessionTracker.Settings
             return modelJson;
         }
 
-        private static List<Func<string, Logger, string>> _migrationMethods = new List<Func<string, Logger, string>>()
+        private static readonly List<Func<string, Logger, string>> _migrationMethods = new List<Func<string, Logger, string>>()
         {
             (modelJson, logger) => MigrateModelFromVersion1to2(modelJson, logger),
             (modelJson, logger) => MigrateModelFromVersion2To3(modelJson, logger),
