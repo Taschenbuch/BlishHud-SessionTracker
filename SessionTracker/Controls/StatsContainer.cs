@@ -109,8 +109,9 @@ namespace SessionTracker.Controls
                         return;
 
                     _updateState.ResetElapsedTime();
-                    
-                    if (ApiService.ModuleHasApiToken(_gw2ApiManager))
+
+                    var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _gw2ApiManager);
+                    if (apiTokenService.CanAccessApi)
                     {
                         _updateState.State = State.ResetAndInitStats;
                         return;
@@ -122,8 +123,12 @@ namespace SessionTracker.Controls
                         _updateState.State = State.ResetAndInitStats; 
                         return;
                     }
-                    
-                    SetValueTextAndTooltip("Loading...", "Waiting for user to log into a character or API token from blish.", _valueLabelByStatId.Values);
+
+                    var title = apiTokenService.ApiTokenState == ApiTokenState.hasNotLoggedIntoCharacterSinceStartingGw2
+                        ? "Error: Log into a character!"
+                        : "Loading...";
+
+                    SetValueTextAndTooltip(title, "Waiting for user to log into a character or API token from blish.", _valueLabelByStatId.Values);
                     return;
                 case State.WaitBeforeResetAndInitStats:
                     if (!_updateState.IsTimeForNextTryToInitStats())
@@ -159,9 +164,10 @@ namespace SessionTracker.Controls
         {
             try
             {
-                if (ApiService.ApiKeyIsMissingPermissions(_gw2ApiManager))
+                var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _gw2ApiManager);
+                if (!apiTokenService.CanAccessApi)
                 {
-                    SetValuesToApiKeyErrorTextAndTooltip();
+                    SetValuesToApiKeyErrorTextAndTooltip(apiTokenService);
                     _updateState.State = State.WaitBeforeResetAndInitStats;
                     return;
                 }
@@ -192,9 +198,10 @@ namespace SessionTracker.Controls
         {
             try
             {
-                if (ApiService.ApiKeyIsMissingPermissions(_gw2ApiManager))
+                var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _gw2ApiManager);
+                if (!apiTokenService.CanAccessApi)
                 {
-                    SetValuesToApiKeyErrorTextAndTooltip();
+                    SetValuesToApiKeyErrorTextAndTooltip(apiTokenService);
                     _logger.Warn("Error when updating values: api token is missing permissions. " +
                                  "Possible reasons: api key got removed or new api key is missing permissions.");
                     return;
@@ -224,13 +231,10 @@ namespace SessionTracker.Controls
             }
         }
 
-        private void SetValuesToApiKeyErrorTextAndTooltip()
+        private void SetValuesToApiKeyErrorTextAndTooltip(ApiTokenService apiTokenService)
         {
-            var tooltip = "Error: Not logged into a character or API key is missing or missing permissions. :(\n" +
-                          $"Required permissions: {string.Join(", ", ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE)}\n" +
-                          $"If that does not fix the issue try disabling the module and then enabling it again\n" +
-                          RETRY_IN_X_SECONDS_MESSAGE;
-
+            var apiErrorText = apiTokenService.CreateApiErrorText();
+            var tooltip = $"{apiErrorText}\n{RETRY_IN_X_SECONDS_MESSAGE}";
             SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
         }
 

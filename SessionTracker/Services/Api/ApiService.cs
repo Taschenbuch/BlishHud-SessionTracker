@@ -39,16 +39,6 @@ namespace SessionTracker.Services.Api
             }
         }
 
-        public static bool ModuleHasApiToken(Gw2ApiManager gw2ApiManager)
-        {
-            return gw2ApiManager.HasPermissions(API_TOKEN_PERMISSIONS_EVERY_API_KEY_HAS_BY_DEFAULT);
-        }
-
-        public static bool ApiKeyIsMissingPermissions(Gw2ApiManager gw2ApiManager)
-        {
-            return !gw2ApiManager.HasPermissions(API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE);
-        }
-
         public static async Task UpdateTotalValuesInModel(Model model, Gw2ApiManager gw2ApiManager)
         {
             var charactersTask      = gw2ApiManager.Gw2ApiClient.V2.Characters.AllAsync();
@@ -103,11 +93,6 @@ namespace SessionTracker.Services.Api
             TokenPermission.Unlocks,
             TokenPermission.Pvp,
             TokenPermission.Inventories,
-        };
-
-        private static IReadOnlyList<TokenPermission> API_TOKEN_PERMISSIONS_EVERY_API_KEY_HAS_BY_DEFAULT => new List<TokenPermission>
-        {
-            TokenPermission.Account
         };
     }
 }
