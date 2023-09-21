@@ -34,7 +34,8 @@ namespace SessionTracker.Services.Api
             }
             catch (Exception e)
             {
-                logger.Warn(e, "failed to read permissions from settings.json for blish permissions bug workaround");
+                logger.Warn(e, "failed to read permissions from settings.json for blish permissions bug workaround. " +
+                    "This can happen when a custom settings path is used '--settings <path>'");
                 return false;
             }
         }
