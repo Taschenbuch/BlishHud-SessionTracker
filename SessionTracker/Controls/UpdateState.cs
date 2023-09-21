@@ -9,7 +9,7 @@ namespace SessionTracker.Controls
         {
             _settingService = settingService;
 
-            UpdateApiInterval(null, null);
+            UpdateApiInterval();
             settingService.DebugApiIntervalValueSetting.SettingChanged   += UpdateApiInterval;
             settingService.DebugApiIntervalEnabledSetting.SettingChanged += UpdateApiInterval;
         }
@@ -57,7 +57,7 @@ namespace SessionTracker.Controls
             return _elapsedTimeTotalInMilliseconds >= _updateStatsIntervalInMilliseconds;
         }
 
-        private void UpdateApiInterval(object sender, EventArgs e)
+        private void UpdateApiInterval(object sender = null, EventArgs e = null)
         {
             _updateStatsIntervalInMilliseconds = _settingService.DebugApiIntervalEnabledSetting.Value
                 ? _settingService.DebugApiIntervalValueSetting.Value

@@ -40,7 +40,7 @@ namespace SessionTracker.Controls
             _paddingLabelBetweenIconAndText = CreatePaddingLabel(font);
             _paddingLabelBeforeValue        = CreatePaddingLabel(font);
 
-            OnStatTitlePaddingSettingChanged(null, null);
+            OnStatTitlePaddingSettingChanged();
             ShowOrHideTextAndIcon(settingService.LabelTypeSetting.Value);
             settingService.StatTitlePaddingSetting.SettingChanged += OnStatTitlePaddingSettingChanged;
             settingService.LabelTypeSetting.SettingChanged        += OnLabelTypeSettingChanged;
@@ -91,7 +91,7 @@ namespace SessionTracker.Controls
             _titleImage.Size                      = new Point(_titleLabel.Height);
         }
 
-        private void OnStatTitlePaddingSettingChanged(object sender, Blish_HUD.ValueChangedEventArgs<int> e)
+        private void OnStatTitlePaddingSettingChanged(object sender = null, Blish_HUD.ValueChangedEventArgs<int> e = null)
         {
             var numberOfBlanks = _settingService.StatTitlePaddingSetting.Value;
             var paddingBlanks  = new string(' ', numberOfBlanks);

@@ -49,7 +49,7 @@ namespace SessionTracker.Controls.Hint
 
             _openSettingsButton = new OpenSettingsButton(settingsWindowService);
 
-            OnFontSizeIndexSettingChanged(null, null);
+            OnFontSizeIndexSettingChanged();
             settingService.FontSizeIndexSetting.SettingChanged += OnFontSizeIndexSettingChanged;
         }
 
@@ -107,7 +107,7 @@ namespace SessionTracker.Controls.Hint
             base.Hide();
         }
 
-        private void OnFontSizeIndexSettingChanged(object sender, ValueChangedEventArgs<int> e)
+        private void OnFontSizeIndexSettingChanged(object sender = null, ValueChangedEventArgs<int> e = null)
         {
             var font = FontService.Fonts[_settingService.FontSizeIndexSetting.Value];
             _hiddenByUserLabel.Font = font; 

@@ -33,11 +33,11 @@ namespace SessionTracker.Settings.Window
                 Parent = debugSectionFlowPanel
             };
 
-            OnDebugApiIntervalValueSettingChanged(null, null);
+            OnDebugApiIntervalValueSettingChanged();
             _settingService.DebugApiIntervalValueSetting.SettingChanged += OnDebugApiIntervalValueSettingChanged;
         }
 
-        private void OnDebugApiIntervalValueSettingChanged(object sender, Blish_HUD.ValueChangedEventArgs<int> e)
+        private void OnDebugApiIntervalValueSettingChanged(object sender = null, Blish_HUD.ValueChangedEventArgs<int> e = null)
         {
             _apiIntervalInMillisecondsLabel.Text = $"api interval: {_settingService.DebugApiIntervalValueSetting.Value} ms";
         }
