@@ -12,7 +12,7 @@
     },
     "gw2_apimock": {
       "commandName": "Executable",
-      "executablePath": "C:\\Dev\\blish\\Blish.HUD_localhost\\Blish HUD.exe",
+      "executablePath": "C:\\Dev\\blish\\Blish.HUD_1.1.1_localhost\\Blish HUD.exe",
       "commandLineArgs": "--debug --module \"$(ProjectDir)\\$(BaseOutputPath)\\$(Configuration)/$(TargetFramework)\\$(TargetName).bhm\" --settings \"..\\Settings_$(TargetName)\""
     },
     "prerelease_test": {
