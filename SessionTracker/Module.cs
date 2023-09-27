@@ -80,12 +80,12 @@ namespace SessionTracker
                 return;
             }
 
-            _fileService              = new FileService(localAndRemoteFileLocations, Logger);
-            var model                 = await _fileService.LoadModelFromFile();
+            var fileService           = new FileService(localAndRemoteFileLocations, Logger);
+            var model                 = await fileService.LoadModelFromFile();
             var textureService        = new TextureService(model, ContentsManager, Logger);
             var settingsWindowService = new SettingsWindowService(model, _settingService, textureService);
 
-            var statsContainer = new StatsContainer(model, Gw2ApiManager, textureService, settingsWindowService, _settingService, Logger)
+            var statsContainer = new StatsContainer(model, Gw2ApiManager, textureService, fileService, settingsWindowService, _settingService, Logger)
             {
                 HeightSizingMode = SizingMode.AutoSize,
                 WidthSizingMode  = SizingMode.AutoSize,
@@ -100,6 +100,7 @@ namespace SessionTracker
             // e.g. creating model after textureService, though model needs the reference of model.
             _model                 = model;
             _textureService        = textureService;
+            _fileService           = fileService;
             _statsContainer        = statsContainer;
             _settingsWindowService = settingsWindowService;
 

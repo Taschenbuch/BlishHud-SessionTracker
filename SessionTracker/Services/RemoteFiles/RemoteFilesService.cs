@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Blish_HUD;
+using SessionTracker.Settings;
 
 namespace SessionTracker.Services.RemoteFiles
 {
@@ -68,19 +69,9 @@ namespace SessionTracker.Services.RemoteFiles
             foreach (var dataFilePath in dataFilePaths)
             {
                 var remoteFileContent = await GetTextFromUrl(dataFilePath.RemoteUrl); // could be optimized by awaiting multiple at once
-                await WriteFileAsync(remoteFileContent, dataFilePath.LocalFilePath);
+                await FileService.WriteFileAsync(remoteFileContent, dataFilePath.LocalFilePath);
             }
         }
-
-        private static async Task WriteFileAsync(string fileContent, string filePath)
-        {
-            var folderPath = Path.GetDirectoryName(filePath);
-            Directory.CreateDirectory(folderPath);
-            using var streamWriter = new StreamWriter(filePath);
-            await streamWriter.WriteAsync(fileContent);
-            await streamWriter.FlushAsync();
-        }
-
         private static async Task<bool> AreNewerRemoteFilesAvailable(FileLocation contentVersionFilePath)
         {
             var onlineDataVersion = await GetRemoteVersion(contentVersionFilePath.RemoteUrl);

@@ -31,6 +31,29 @@ namespace SessionTracker.Settings
             }
         }
 
+        // dont use this in Module.Unload. We want it to be sync in .Unload()
+        public async Task SaveModelToFileAsync(Model model)
+        {
+            try
+            {
+                var modelJson = JsonService.SerializeModelToJson(model);
+                await WriteFileAsync(modelJson, _localModelFilePath);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, "Error: Failed to save model to file. :(");
+            }
+        }
+
+        public static async Task WriteFileAsync(string fileContent, string filePath)
+        {
+            var folderPath = Path.GetDirectoryName(filePath);
+            Directory.CreateDirectory(folderPath);
+            using var streamWriter = new StreamWriter(filePath);
+            await streamWriter.WriteAsync(fileContent);
+            await streamWriter.FlushAsync();
+        }
+
         public async Task<Model> LoadModelFromFile()
         {
             var remoteFolderModel = await LoadModelFromRemoteFolder(_remoteModelFilePath, _logger);

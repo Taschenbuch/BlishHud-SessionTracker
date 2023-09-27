@@ -24,6 +24,7 @@ namespace SessionTracker.Controls
         public StatsContainer(Model model,
                               Gw2ApiManager gw2ApiManager,
                               TextureService textureService,
+                              FileService fileService,
                               SettingsWindowService settingsWindowService,
                               SettingService settingService,
                               Logger logger)
@@ -32,6 +33,7 @@ namespace SessionTracker.Controls
             _model          = model;
             _gw2ApiManager  = gw2ApiManager;
             _textureService = textureService;
+            _fileService    = fileService;
             _settingService = settingService;
             _logger         = logger;
 
@@ -220,6 +222,7 @@ namespace SessionTracker.Controls
                 _statTooltipService.UpdateSummaryTooltip(_model);
                 _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit = false;
                 _updateState.UseRegularUpdateStatsInterval();
+                await _fileService.SaveModelToFileAsync(_model);
             }
             catch (LogWarnException e)
             {
@@ -363,6 +366,7 @@ namespace SessionTracker.Controls
 
         private readonly Gw2ApiManager _gw2ApiManager;
         private readonly TextureService _textureService;
+        private readonly FileService _fileService;
         private VisibilityService _visibilityService;
         private readonly Logger _logger;
         private readonly Model _model;
