@@ -19,6 +19,7 @@ namespace SessionTracker.Settings.Window
             var generalSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("General", _rootFlowPanel);
 
             CreatePatchNotesButton(generalSectionFlowPanel);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.AutomaticSessionResetSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.ValueDisplayFormatSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.LabelTypeSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.UiHeightIsFixedSetting);

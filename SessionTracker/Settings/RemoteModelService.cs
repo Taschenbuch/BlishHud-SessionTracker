@@ -1,4 +1,5 @@
 ﻿using SessionTracker.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,6 +31,18 @@ namespace SessionTracker.Settings
 
             remoteModel.Stats.Clear();
             remoteModel.Stats.AddRange(orderedRefStats);
+            return remoteModel;
+        }
+
+        public static Model UpdateTotalAtSessionStartInRemoteModel(Model localModel, Model remoteModel)
+        {
+            foreach (var remoteStat in remoteModel.Stats)
+            {
+                var localStat = localModel.Stats.Find(e => e.Id == remoteStat.Id);
+                if(localStat != null)
+                    remoteStat.Value.TotalAtSessionStart = localStat.Value.TotalAtSessionStart;
+            }
+
             return remoteModel;
         }
     }

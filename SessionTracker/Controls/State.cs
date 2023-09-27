@@ -5,6 +5,7 @@
         WaitForApiTokenAfterModuleStart,
         WaitBeforeResetAndInitStats,
         ResetAndInitStats,
+        WaitBeforeUpdateStats,
         UpdateStats,
         WaitForApiResponse,
     }

@@ -109,18 +109,22 @@ namespace SessionTracker.Controls
                         return;
 
                     _updateState.ResetElapsedTime();
+                    _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit = _settingService.AutomaticSessionResetSetting.Value == AutomaticSessionReset.Never;
+                    var firstStateAfterWaitingForApiToken = _settingService.AutomaticSessionResetSetting.Value == AutomaticSessionReset.Never
+                        ? State.UpdateStats
+                        : State.ResetAndInitStats;
 
                     var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _gw2ApiManager);
                     if (apiTokenService.CanAccessApi)
                     {
-                        _updateState.State = State.ResetAndInitStats;
+                        _updateState.State = firstStateAfterWaitingForApiToken;
                         return;
                     }
 
                     if (_updateState.WaitedLongEnoughForApiTokenEitherApiKeyIsMissingOrUserHasNotLoggedIntoACharacter())
                     {
                         // to provoke api key error message for user even in character select.
-                        _updateState.State = State.ResetAndInitStats; 
+                        _updateState.State = firstStateAfterWaitingForApiToken; 
                         return;
                     }
 
@@ -142,10 +146,14 @@ namespace SessionTracker.Controls
                     _updateState.State = State.WaitForApiResponse;
                     Task.Run(ResetAndInitStatValues);
                     return;
-                case State.UpdateStats:
+                case State.WaitBeforeUpdateStats:
                     if (!_updateState.IsTimeForNextStatsUpdate())
                         return;
 
+                    _updateState.ResetElapsedTime();
+                    _updateState.State = State.UpdateStats;
+                    return;
+                case State.UpdateStats:
                     _updateState.ResetElapsedTime();
                     _updateState.State = State.WaitForApiResponse;
                     Task.Run(UpdateStatValues);
@@ -176,11 +184,11 @@ namespace SessionTracker.Controls
                 _model.StartSession();
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _statTooltipService.ResetSummaryTooltip(_model);
-                _updateState.State = State.UpdateStats;
+                _updateState.State = State.WaitBeforeUpdateStats;
             }
             catch (LogWarnException e)
             {
-                var tooltip = $"Error: API call failed. :-( \n{RETRY_IN_X_SECONDS_MESSAGE}";
+                var tooltip = $"Error: API call failed while initializing. :-( \n{RETRY_IN_X_SECONDS_MESSAGE}";
                 SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
                 _logger.Warn(e, "Error when initializing values: API failed to respond.");
                 _updateState.State = State.WaitBeforeResetAndInitStats;
@@ -210,14 +218,23 @@ namespace SessionTracker.Controls
                 await ApiService.UpdateTotalValuesInModel(_model, _gw2ApiManager);
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _statTooltipService.UpdateSummaryTooltip(_model);
+                _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit = false;
+                _updateState.UseRegularUpdateStatsInterval();
             }
             catch (LogWarnException e)
             {
-                // intentionally no error handling!
+                _updateState.UseShortRetryUpdateStatsInterval();
+                _logger.Warn(e, "Error when updating values: API failed to respond");
+
+                if (_hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit)
+                {
+                    var tooltip = $"Error: API call failed while updating. :-( \n{RETRY_IN_X_SECONDS_MESSAGE}";
+                    SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
+                }
+                // intentionally no error handling on regular updates!
                 // when api server does not respond (error code 500, 502) or times out (RequestCanceledException)
                 // the app will just return the previous stat values and hope that on the end of the next interval
                 // the api server will answer correctly again.
-                _logger.Warn(e, "Error when updating values: API failed to respond"); 
             }
             catch (Exception e)
             {
@@ -227,7 +244,7 @@ namespace SessionTracker.Controls
             {
                 // even in error case an init makes no sense. It is better to wait for the user to fix the api key to continue to update the old values.
                 // this can only cause issues if in the future blish supports swapping gw2 accounts without doing an unload+load of a module.
-                _updateState.State = State.UpdateStats;
+                _updateState.State = State.WaitBeforeUpdateStats;
             }
         }
 
@@ -359,6 +376,7 @@ namespace SessionTracker.Controls
         private FlowPanel _valuesFlowPanel;
         private HintFlowPanel _hintFlowPanel;
         private RootFlowPanel _rootFlowPanel;
-        private static readonly string RETRY_IN_X_SECONDS_MESSAGE = $"Retry in {UpdateState.RETRY_INIT_STATS_INTERVAL_IN_SECONDS}s…";
+        private static readonly string RETRY_IN_X_SECONDS_MESSAGE = $"Retry in {UpdateState.RETRY_INTERVAL_IN_SECONDS}s…";
+        private bool _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit;
     }
 }

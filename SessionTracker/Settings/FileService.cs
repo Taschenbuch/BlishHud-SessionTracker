@@ -42,6 +42,7 @@ namespace SessionTracker.Settings
             var moduleFolderModel = await LoadModelFromModuleFolder(_localModelFilePath, remoteFolderModel, _logger);
             remoteFolderModel = RemoteModelService.UpdateStatIsVisibleInRemoteModel(moduleFolderModel, remoteFolderModel);
             remoteFolderModel = RemoteModelService.UpdateStatsOrderInRemoteModel(moduleFolderModel, remoteFolderModel);
+            remoteFolderModel = RemoteModelService.UpdateTotalAtSessionStartInRemoteModel(moduleFolderModel, remoteFolderModel);
             return remoteFolderModel;
         }
 
@@ -58,7 +59,6 @@ namespace SessionTracker.Settings
                 return new Model();
             }
         }
-
 
         private static async Task<Model> LoadModelFromModuleFolder(string modelFilePath, ModelVersion remoteModelVersion, Logger logger)
         {

@@ -8,6 +8,12 @@ namespace SessionTracker.Settings.SettingEntries
     {
         public SettingService(SettingCollection settings)
         {
+            AutomaticSessionResetSetting = settings.DefineSetting(
+                "automatic session reset",
+                AutomaticSessionReset.Never,
+                () => "automatic session reset",
+                () => "Change when all session values are automatically reset to 0");
+
             BackgroundOpacitySetting = settings.DefineSetting(
                 "window background opacity",
                 125,
@@ -204,6 +210,7 @@ namespace SessionTracker.Settings.SettingEntries
         public SettingEntry<float> XMainWindowRelativeLocationSetting { get; }
         public SettingEntry<float> YMainWindowRelativeLocationSetting { get; }
         public SettingEntry<bool> UiIsVisibleSetting { get; }
+        public SettingEntry<AutomaticSessionReset> AutomaticSessionResetSetting { get; }
         public SettingEntry<int> BackgroundOpacitySetting { get; }
         public SettingEntry<int> FontSizeIndexSetting { get; }
         public SettingEntry<ValueDisplayFormat> ValueDisplayFormatSetting { get; }
