@@ -56,17 +56,18 @@ namespace SessionTracker.Settings
 
         public async Task<Model> LoadModelFromFile()
         {
-            var remoteFolderModel = await LoadModelFromRemoteFolder(_remoteModelFilePath, _logger);
+            var remoteModel = await LoadModelFromRemoteFolder(_remoteModelFilePath, _logger);
 
             var isFirstModuleStart = File.Exists(_localModelFilePath) == false;
             if (isFirstModuleStart)
-                return remoteFolderModel;
+                return remoteModel;
 
-            var moduleFolderModel = await LoadModelFromModuleFolder(_localModelFilePath, remoteFolderModel, _logger);
-            remoteFolderModel = RemoteModelService.UpdateStatIsVisibleInRemoteModel(moduleFolderModel, remoteFolderModel);
-            remoteFolderModel = RemoteModelService.UpdateStatsOrderInRemoteModel(moduleFolderModel, remoteFolderModel);
-            remoteFolderModel = RemoteModelService.UpdateTotalAtSessionStartInRemoteModel(moduleFolderModel, remoteFolderModel);
-            return remoteFolderModel;
+            var localModel = await LoadModelFromModuleFolder(_localModelFilePath, remoteModel, _logger);
+            remoteModel = RemoteModelService.UpdateStatIsVisibleInRemoteModel(localModel, remoteModel);
+            remoteModel = RemoteModelService.UpdateStatsOrderInRemoteModel(localModel, remoteModel);
+            remoteModel = RemoteModelService.UpdateTotalAtSessionStartInRemoteModel(localModel, remoteModel);
+            remoteModel = RemoteModelService.UpdateSessionDurationInRemoteModel(localModel, remoteModel);
+            return remoteModel;
         }
 
         private static async Task<Model> LoadModelFromRemoteFolder(string modelFilePath, Logger logger)

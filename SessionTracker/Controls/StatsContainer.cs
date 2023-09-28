@@ -183,7 +183,7 @@ namespace SessionTracker.Controls
                 }
 
                 await ApiService.UpdateTotalValuesInModel(_model, _gw2ApiManager);
-                _model.StartSession();
+                _model.ResetAndStartSession();
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _statTooltipService.ResetSummaryTooltip(_model);
                 _updateState.State = State.WaitBeforeUpdateStats;
@@ -218,6 +218,7 @@ namespace SessionTracker.Controls
                 }
 
                 await ApiService.UpdateTotalValuesInModel(_model, _gw2ApiManager);
+                _model.UpdateSessionDuration();
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _statTooltipService.UpdateSummaryTooltip(_model);
                 _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit = false;

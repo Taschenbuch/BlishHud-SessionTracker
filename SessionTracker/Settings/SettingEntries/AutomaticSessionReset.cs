@@ -5,7 +5,7 @@ namespace SessionTracker.Settings.SettingEntries
     public enum AutomaticSessionReset
     {
         // WARNING: only add to bottom. DO NOT REORDER. Enums are stored in settings.json as NUMBER and not as STRING!
-        [Description("Never")]
+        [Description("never")]
         Never,
         [Description("module start")]
         OnModuleStart
@@ -21,7 +21,7 @@ namespace SessionTracker.Settings.SettingEntries
         //OnWeeklyEuWvwReset,
         //[Description("weekly Map bonus rewards reset (Thursday 22:00 UTC+2 )")]
         //OnWeeklyMapBonusRewardsReset
-        //OnWeekly_welche_noch? // https://wiki.guildwars2.com/wiki/Server_reset#Weekly_reset
+        //[Description("xxxxxxxxx")]
         //Custom // at which time and after how many days
     }
 }

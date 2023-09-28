@@ -45,5 +45,11 @@ namespace SessionTracker.Settings
 
             return remoteModel;
         }
+
+        public static Model UpdateSessionDurationInRemoteModel(Model localModel, Model remoteModel)
+        {
+            remoteModel.SessionDuration = localModel.SessionDuration;
+            return remoteModel;
+        }
     }
 }
