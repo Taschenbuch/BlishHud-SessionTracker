@@ -27,7 +27,7 @@ namespace SessionTracker.Settings
             }
             catch (Exception e)
             {
-                _logger.Error(e, "Error: Failed to save model to file in Module.Unload(). :(");
+                _logger.Error(e, "Error: Failed to save model to file. :(");
             }
         }
 
@@ -79,7 +79,7 @@ namespace SessionTracker.Settings
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error: Failed to load remote model from file in Module.LoadAsync(). :(");
+                logger.Error(e, "Error: Failed to load remote model from file. :(");
                 return new Model();
             }
         }
@@ -101,7 +101,7 @@ namespace SessionTracker.Settings
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error: Failed to load local model from file in Module.LoadAsync(). :(");
+                logger.Error(e, "Error: Failed to load local model from file. :(");
                 return new Model();
             }
         }
