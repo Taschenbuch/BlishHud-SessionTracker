@@ -95,6 +95,7 @@ namespace SessionTracker
             };
 
             _cornerIconService = new CornerIconService(_settingService.CornerIconIsVisibleSetting, statsContainer, settingsWindowService, CornerIconClickEventHandler, textureService);
+            _dateTimeService   = new DateTimeService(_settingService.DebugDateTimeEnabledSetting);
 
             // set at the end to prevent that one of the ctors accidently gets a null reference because of creating the objects above in the wrong order.
             // e.g. creating model after textureService, though model needs the reference of model.
@@ -127,6 +128,7 @@ namespace SessionTracker
             _cornerIconService?.Dispose();
             _textureService?.Dispose();
             _statsContainer?.Dispose();
+            _dateTimeService?.Dispose();
         }
 
         protected override void Update(GameTime gameTime)
@@ -151,12 +153,13 @@ namespace SessionTracker
         }
 
         private SettingService _settingService;
-        private static readonly Logger Logger = Logger.GetLogger<Module>();
+        public static readonly Logger Logger = Logger.GetLogger<Module>();
         private StatsContainer _statsContainer;
         private FileService _fileService;
         private Model _model;
         private TextureService _textureService;
         private CornerIconService _cornerIconService;
+        private DateTimeService _dateTimeService;
         private SettingsWindowService _settingsWindowService;
         private readonly ModuleLoadError _moduleLoadError = new ModuleLoadError();
     }

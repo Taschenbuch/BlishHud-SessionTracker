@@ -1,6 +1,7 @@
 ﻿using Blish_HUD.Input;
 using Blish_HUD.Settings;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace SessionTracker.Settings.SettingEntries
 {
@@ -10,7 +11,7 @@ namespace SessionTracker.Settings.SettingEntries
         {
             AutomaticSessionResetSetting = settings.DefineSetting(
                 "automatic session reset",
-                AutomaticSessionReset.Never,
+                AutomaticSessionReset.OnModuleStart,
                 () => "automatic session reset",
                 () => "Change when all session values are automatically reset to 0");
 
@@ -162,18 +163,30 @@ namespace SessionTracker.Settings.SettingEntries
             ScrollbarFixDelay.SetRange(50, 500);
 
             DebugApiIntervalEnabledSetting = settings.DefineSetting(
-                "debug mode",
+                "debug api interval enabled",
                 false,
                 () => "use debug api interval",
                 () => "Use debug api interval instead of normal api interval.");
 
             DebugApiIntervalValueSetting = settings.DefineSetting(
-                "debug api interval",
+                "debug api interval value",
                 5 * 1000,
                 () => "debug api interval",
                 () => "Increases polling rate beyond api cache time limit.");
 
             DebugApiIntervalValueSetting.SetRange(1000, 20 * 1000);
+
+            DebugDateTimeEnabledSetting = settings.DefineSetting(
+                "debug date time enabled",
+                false,
+                () => "use debug dateTime",
+                () => "Use debug dateTime instead of system time.");
+
+            DebugDateTimeValueSetting = settings.DefineSetting(
+                "debug date time value",
+                DateTime.UtcNow.ToString(),
+                () => "use debug dateTime",
+                () => "Use debug dateTime instead of system time.");
 
             UiIsVisibleSetting = settings.DefineSetting(
                 "ui is visible",
@@ -209,6 +222,8 @@ namespace SessionTracker.Settings.SettingEntries
         public SettingEntry<ColorType> BackgroundColorSetting { get; }
         public SettingEntry<float> XMainWindowRelativeLocationSetting { get; }
         public SettingEntry<float> YMainWindowRelativeLocationSetting { get; }
+        public SettingEntry<bool> DebugDateTimeEnabledSetting { get; }
+        public SettingEntry<string> DebugDateTimeValueSetting { get; }
         public SettingEntry<bool> UiIsVisibleSetting { get; }
         public SettingEntry<AutomaticSessionReset> AutomaticSessionResetSetting { get; }
         public SettingEntry<int> BackgroundOpacitySetting { get; }

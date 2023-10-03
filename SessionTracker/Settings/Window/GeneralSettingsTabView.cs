@@ -1,7 +1,10 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using Blish_HUD.Controls;
 using Blish_HUD.Graphics.UI;
+using Blish_HUD.Settings;
 using SessionTracker.Controls;
+using SessionTracker.Services;
 using SessionTracker.Settings.SettingEntries;
 
 namespace SessionTracker.Settings.Window
@@ -19,7 +22,7 @@ namespace SessionTracker.Settings.Window
             var generalSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("General", _rootFlowPanel);
 
             CreatePatchNotesButton(generalSectionFlowPanel);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.AutomaticSessionResetSetting);
+            CreateAutomaticSessionResetSetting(generalSectionFlowPanel, _settingService.AutomaticSessionResetSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.ValueDisplayFormatSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.LabelTypeSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.UiHeightIsFixedSetting);
@@ -36,6 +39,46 @@ namespace SessionTracker.Settings.Window
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.CoinDisplayFormatSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.HideStatsWithValueZeroSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.ScrollbarFixDelay);
+        }
+
+        // Warning: this will not update the selectedItem when the setting Value is changed. Not sure if that could cause an infinite loop
+        private void CreateAutomaticSessionResetSetting(FlowPanel parent, SettingEntry<AutomaticSessionReset> automaticSessionResetSetting)
+        {
+            var settingFlowPanel = new FlowPanel()
+            {
+                FlowDirection = ControlFlowDirection.SingleLeftToRight,
+                BasicTooltipText = automaticSessionResetSetting.GetDescriptionFunc(),
+                HeightSizingMode = SizingMode.AutoSize,
+                WidthSizingMode = SizingMode.AutoSize,
+                Parent = parent
+            };
+
+            new Label // settingLabel
+            {
+                Text = automaticSessionResetSetting.GetDisplayNameFunc(),
+                BasicTooltipText = automaticSessionResetSetting.GetDescriptionFunc(),
+                AutoSizeHeight = true,
+                AutoSizeWidth = true,
+                Parent = settingFlowPanel
+            };
+
+            var settingDropDown = new Dropdown()
+            {
+                BasicTooltipText = automaticSessionResetSetting.GetDescriptionFunc(),
+                Width = 400,
+                Parent = settingFlowPanel,
+            };
+
+            var dropDownTextDict = ResetDropDownService.GetDropDownTextsForAutomaticSessionResetSetting();
+
+            foreach (var dropDownText in dropDownTextDict.Values)
+                settingDropDown.Items.Add(dropDownText);
+
+            settingDropDown.SelectedItem = dropDownTextDict[_settingService.AutomaticSessionResetSetting.Value];
+            settingDropDown.ValueChanged += (s, e) => 
+            {
+                _settingService.AutomaticSessionResetSetting.Value = dropDownTextDict.First(d => d.Value == e.CurrentValue).Key;
+            };
         }
 
         private static void CreatePatchNotesButton(Container parent)
