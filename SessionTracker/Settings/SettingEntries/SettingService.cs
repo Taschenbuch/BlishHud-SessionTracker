@@ -2,7 +2,6 @@
 using Blish_HUD.Settings;
 using Microsoft.Xna.Framework.Input;
 using SessionTracker.AutomaticReset;
-using System;
 
 namespace SessionTracker.Settings.SettingEntries
 {
@@ -177,17 +176,7 @@ namespace SessionTracker.Settings.SettingEntries
 
             DebugApiIntervalValueSetting.SetRange(1000, 20 * 1000);
 
-            DebugDateTimeEnabledSetting = settings.DefineSetting(
-                "debug date time enabled",
-                false,
-                () => "use debug dateTime",
-                () => "Use debug dateTime instead of system time.");
-
-            DebugDateTimeValueSetting = settings.DefineSetting(
-                "debug date time value",
-                DateTime.UtcNow.ToString(),
-                () => "use debug dateTime",
-                () => "Use debug dateTime instead of system time.");
+            
 
             UiIsVisibleSetting = settings.DefineSetting(
                 "ui is visible",
@@ -223,8 +212,6 @@ namespace SessionTracker.Settings.SettingEntries
         public SettingEntry<ColorType> BackgroundColorSetting { get; }
         public SettingEntry<float> XMainWindowRelativeLocationSetting { get; }
         public SettingEntry<float> YMainWindowRelativeLocationSetting { get; }
-        public SettingEntry<bool> DebugDateTimeEnabledSetting { get; }
-        public SettingEntry<string> DebugDateTimeValueSetting { get; }
         public SettingEntry<bool> UiIsVisibleSetting { get; }
         public SettingEntry<AutomaticSessionReset> AutomaticSessionResetSetting { get; }
         public SettingEntry<int> BackgroundOpacitySetting { get; }

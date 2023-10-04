@@ -1,23 +1,17 @@
 ﻿using Blish_HUD.Controls;
 using Blish_HUD.Graphics.UI;
-using Blish_HUD.Settings;
-using SessionTracker.AutomaticReset;
 using SessionTracker.Controls;
-using SessionTracker.Reset;
-using SessionTracker.Services;
+using SessionTracker.DateTimeUtcNow;
 using SessionTracker.Settings.SettingEntries;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using static Blish_HUD.ContentService;
 
 namespace SessionTracker.Settings.Window
 {
     public class DebugSettingsTabView : View
     {
-        public DebugSettingsTabView(SettingService settingService)
+        public DebugSettingsTabView(SettingService settingService, DateTimeService dateTimeService)
         {
             _settingService = settingService;
+            _dateTimeService = dateTimeService;
         }
 
         protected override void Build(Container buildPanel)
@@ -35,90 +29,7 @@ namespace SessionTracker.Settings.Window
             ControlFactory.CreateSetting(debugApiIntervalSectionFlowPanel, _settingService.DebugApiIntervalValueSetting);
             CreateApiIntervallValueLabel(debugApiIntervalSectionFlowPanel);
 
-            var debugDateTimeSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Debug DateTime", _rootFlowPanel);
-            ControlFactory.CreateSetting(debugDateTimeSectionFlowPanel, _settingService.DebugDateTimeEnabledSetting);
-            CreateDateTimeTextBoxAndButton(debugDateTimeSectionFlowPanel, _settingService.DebugDateTimeEnabledSetting);
-        }
-
-        private void CreateDateTimeTextBoxAndButton(Container parent, SettingEntry<bool> debugDateTimeEnabledSetting)
-        {
-            var debugDateTimeFlowPanel = new FlowPanel()
-            {
-                FlowDirection = ControlFlowDirection.SingleTopToBottom,
-                HeightSizingMode = SizingMode.AutoSize,
-                WidthSizingMode = SizingMode.AutoSize,
-                Parent = parent
-            };
-
-            var dateTimeTextBox = new TextBox()
-            {
-                Text = _settingService.DebugDateTimeValueSetting.Value,
-                BasicTooltipText = "new debug UTC for date time mocking. mainly for reset",
-                Width = 200,
-                Parent = debugDateTimeFlowPanel
-            };
-
-            var updateDateTimeButton = new StandardButton
-            {
-                BasicTooltipText = "click to apply as new debug UTC",
-                Width = 210,
-                Parent = debugDateTimeFlowPanel
-            };
-
-            updateDateTimeButton.Click += (s, e) =>
-            {
-                if (DateTime.TryParse(dateTimeTextBox.Text, out DateTime mockedDateTimeUtc))
-                    DateTimeService.UtcNow = mockedDateTimeUtc;
-            };
-
-            debugDateTimeEnabledSetting.SettingChanged += (s, o) => updateDateTimeButton.Enabled = debugDateTimeEnabledSetting.Value;
-            updateDateTimeButton.Enabled = debugDateTimeEnabledSetting.Value;
-
-            var resetDateTimelabelDict = new Dictionary<AutomaticSessionReset, Label>();
-            var automaticSessionResetsWithDateTime = Enum.GetValues(typeof(AutomaticSessionReset))
-                .Cast<AutomaticSessionReset>()
-                .Where(a => a != AutomaticSessionReset.Never && a != AutomaticSessionReset.OnModuleStart)
-                .ToList();
-
-            foreach (var automaticSessionReset in automaticSessionResetsWithDateTime)
-                resetDateTimelabelDict[automaticSessionReset] = new Label
-                {
-                    Text = automaticSessionReset.ToString(),
-                    AutoSizeHeight = true,
-                    AutoSizeWidth = true,
-                    Parent = debugDateTimeFlowPanel
-                };
-
-            dateTimeTextBox.TextChanged += (s, o) =>
-            {
-                _settingService.DebugDateTimeValueSetting.Value = dateTimeTextBox.Text;
-                UpdateDateTimeButtonText(updateDateTimeButton, dateTimeTextBox.Text); // parameter to prevent that method is moved above label creation -> crash
-                UpdateResetDateTimeLabels(resetDateTimelabelDict, automaticSessionResetsWithDateTime, dateTimeTextBox.Text);
-            };
-
-            UpdateDateTimeButtonText(updateDateTimeButton, dateTimeTextBox.Text);
-            UpdateResetDateTimeLabels(resetDateTimelabelDict, automaticSessionResetsWithDateTime, dateTimeTextBox.Text);
-        }
-
-        private static void UpdateResetDateTimeLabels(
-            Dictionary<AutomaticSessionReset, Label> resetDateTimelabelDict, 
-            List<AutomaticSessionReset> automaticSessionResetsWithDateTime, 
-            string dateTimeTextBoxText)
-        {
-            if (!DateTime.TryParse(dateTimeTextBoxText, out var dateTimeUtc))
-                return;
-
-            foreach (var automaticSessionReset in automaticSessionResetsWithDateTime)
-            {
-                var dateTimeText = ResetService.GetNextResetDateTimeUtc(automaticSessionReset, dateTimeUtc).ToString(_debugDateFormat);
-                resetDateTimelabelDict[automaticSessionReset].Text = $"{dateTimeText} {automaticSessionReset}";
-            }
-        }
-
-        private void UpdateDateTimeButtonText(StandardButton button, string dateTimeText)
-        {
-            if (DateTime.TryParse(dateTimeText, out DateTime mockedDateTimeUtc))
-                button.Text = $"{mockedDateTimeUtc.ToString(_debugDateFormat)}";
+            _dateTimeService.CreateDateTimeDebugPanel(_rootFlowPanel);
         }
 
         private void CreateApiIntervallValueLabel(FlowPanel debugSectionFlowPanel)
@@ -140,8 +51,8 @@ namespace SessionTracker.Settings.Window
         }
 
         private readonly SettingService _settingService;
+        private readonly DateTimeService _dateTimeService;
         private FlowPanel _rootFlowPanel;
         private Label _apiIntervalInMillisecondsLabel;
-        private const string _debugDateFormat = "ddd dd:MM:yyyy HH:mm:ss";
     }
 }

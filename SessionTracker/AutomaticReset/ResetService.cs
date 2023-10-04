@@ -1,8 +1,8 @@
 ﻿using Blish_HUD;
 using Blish_HUD.Settings;
 using SessionTracker.AutomaticReset;
+using SessionTracker.DateTimeUtcNow;
 using SessionTracker.Models;
-using SessionTracker.Services;
 using System;
 
 namespace SessionTracker.Reset

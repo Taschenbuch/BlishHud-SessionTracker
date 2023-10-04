@@ -11,6 +11,7 @@ using Blish_HUD.Modules.Managers;
 using Blish_HUD.Settings;
 using Microsoft.Xna.Framework;
 using SessionTracker.Controls;
+using SessionTracker.DateTimeUtcNow;
 using SessionTracker.Models;
 using SessionTracker.Services;
 using SessionTracker.Services.Api;
@@ -37,6 +38,7 @@ namespace SessionTracker
         protected override void DefineSettings(SettingCollection settings)
         {
             _settingService = new SettingService(settings);
+            _dateTimeService.DefineSettings(settings);
         }
 
         public override IView GetSettingsView()
@@ -83,7 +85,7 @@ namespace SessionTracker
             var fileService           = new FileService(localAndRemoteFileLocations, Logger);
             var model                 = await fileService.LoadModelFromFile();
             var textureService        = new TextureService(model, ContentsManager, Logger);
-            var settingsWindowService = new SettingsWindowService(model, _settingService, textureService);
+            var settingsWindowService = new SettingsWindowService(model, _settingService, _dateTimeService, textureService);
 
             var statsContainer = new StatsContainer(model, Gw2ApiManager, textureService, fileService, settingsWindowService, _settingService, Logger)
             {
@@ -95,7 +97,6 @@ namespace SessionTracker
             };
 
             _cornerIconService = new CornerIconService(_settingService.CornerIconIsVisibleSetting, statsContainer, settingsWindowService, CornerIconClickEventHandler, textureService);
-            _dateTimeService   = new DateTimeService(_settingService.DebugDateTimeEnabledSetting);
 
             // set at the end to prevent that one of the ctors accidently gets a null reference because of creating the objects above in the wrong order.
             // e.g. creating model after textureService, though model needs the reference of model.
@@ -159,8 +160,8 @@ namespace SessionTracker
         private Model _model;
         private TextureService _textureService;
         private CornerIconService _cornerIconService;
-        private DateTimeService _dateTimeService;
         private SettingsWindowService _settingsWindowService;
+        private readonly DateTimeService _dateTimeService = new DateTimeService();
         private readonly ModuleLoadError _moduleLoadError = new ModuleLoadError();
     }
 }

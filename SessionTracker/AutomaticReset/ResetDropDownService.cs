@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
-using SessionTracker.Services;
 using SessionTracker.AutomaticReset;
+using SessionTracker.DateTimeUtcNow;
 
 namespace SessionTracker.Reset
 {
