@@ -9,12 +9,15 @@ namespace SessionTracker.Models
     {
         public List<Stat> Stats { get; } = new List<Stat>();
         public TimeSpan SessionDuration { get; set; }
+        public DateTime NextResetDateTimeUtc { get; set; } = UNDEFINED_RESET_DATE_TIME;
+        [JsonIgnore] public static readonly DateTime UNDEFINED_RESET_DATE_TIME = new DateTime(0L, DateTimeKind.Utc); // UTC DateTime.Min
+        [JsonIgnore] public static readonly DateTime NEVER_OR_ON_MODULE_START_RESET_DATE_TIME = new DateTime(3155378975999999999L, DateTimeKind.Utc); // UTC DateTime.Max
         [JsonIgnore] public bool UiHasToBeUpdated { get; set; }
-
+        
         public void ResetAndStartSession()
         {
             SessionDuration = new TimeSpan();
-            _lastUpdateTime = DateTime.Now;
+            _lastUpdateDateTimeUtc = DateTime.UtcNow;
 
             foreach (var stat in Stats)
                 stat.Value.TotalAtSessionStart = stat.Value.Total;
@@ -22,15 +25,15 @@ namespace SessionTracker.Models
 
         public void UpdateSessionDuration()
         {
-            SessionDuration += DateTime.Now - _lastUpdateTime;
-            _lastUpdateTime = DateTime.Now;
+            SessionDuration += DateTime.UtcNow - _lastUpdateDateTimeUtc;
+            _lastUpdateDateTimeUtc = DateTime.UtcNow;
         }
 
         public Stat GetStat(string statId)
         {
             return Stats.Single(e => e.Id == statId);
-        }
+        }        
 
-        private DateTime _lastUpdateTime = DateTime.Now;
+        private DateTime _lastUpdateDateTimeUtc = DateTime.UtcNow;
     }
 }

@@ -66,7 +66,7 @@ namespace SessionTracker.Settings
             remoteModel = RemoteModelService.UpdateStatIsVisibleInRemoteModel(localModel, remoteModel);
             remoteModel = RemoteModelService.UpdateStatsOrderInRemoteModel(localModel, remoteModel);
             remoteModel = RemoteModelService.UpdateTotalAtSessionStartInRemoteModel(localModel, remoteModel);
-            remoteModel = RemoteModelService.UpdateSessionDurationInRemoteModel(localModel, remoteModel);
+            remoteModel = RemoteModelService.UpdateSessionDurationAndResetTimeInRemoteModel(localModel, remoteModel);
             return remoteModel;
         }
 

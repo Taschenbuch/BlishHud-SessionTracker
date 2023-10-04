@@ -3,8 +3,9 @@ using System.Linq;
 using Blish_HUD.Controls;
 using Blish_HUD.Graphics.UI;
 using Blish_HUD.Settings;
+using SessionTracker.AutomaticReset;
 using SessionTracker.Controls;
-using SessionTracker.Services;
+using SessionTracker.Reset;
 using SessionTracker.Settings.SettingEntries;
 
 namespace SessionTracker.Settings.Window

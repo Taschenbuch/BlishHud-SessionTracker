@@ -1,6 +1,7 @@
 ﻿using Blish_HUD.Input;
 using Blish_HUD.Settings;
 using Microsoft.Xna.Framework.Input;
+using SessionTracker.AutomaticReset;
 using System;
 
 namespace SessionTracker.Settings.SettingEntries

@@ -14,7 +14,7 @@ namespace SessionTracker.Services
             _stopWatch.Start();
             debugDateTimeEnabledSetting.SettingChanged += DebugApiIntervalEnabledSettingChanged;
             DebugApiIntervalEnabledSettingChanged();
-            debugEnabled = debugDateTimeEnabledSetting.Value;
+            DebugEnabled = debugDateTimeEnabledSetting.Value;
         }
 
         public void Dispose()
@@ -22,13 +22,13 @@ namespace SessionTracker.Services
             _debugDateTimeEnabledSetting.SettingChanged -= DebugApiIntervalEnabledSettingChanged;
         }
 
-        public static bool debugEnabled { get; set; }
+        public static bool DebugEnabled { get; set; }
 
         public static DateTime UtcNow
         {
             get
             {
-                return debugEnabled
+                return DebugEnabled
                     ? _utcNowDebug + _stopWatch.Elapsed
                     : DateTime.UtcNow;
             }
@@ -41,11 +41,11 @@ namespace SessionTracker.Services
 
         private void DebugApiIntervalEnabledSettingChanged(object sender = null, ValueChangedEventArgs<bool> e = null)
         {
-            debugEnabled = _debugDateTimeEnabledSetting.Value;
+            DebugEnabled = _debugDateTimeEnabledSetting.Value;
         }
 
         private static DateTime _utcNowDebug;
-        private static Stopwatch _stopWatch = new Stopwatch(); // does not require IDisposeable
-        private SettingEntry<bool> _debugDateTimeEnabledSetting;
+        private static readonly Stopwatch _stopWatch = new Stopwatch(); // does not require IDisposeable
+        private readonly SettingEntry<bool> _debugDateTimeEnabledSetting;
     }
 }

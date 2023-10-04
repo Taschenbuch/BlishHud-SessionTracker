@@ -1,10 +1,11 @@
 ﻿using Blish_HUD;
 using Blish_HUD.Settings;
+using SessionTracker.AutomaticReset;
 using SessionTracker.Models;
-using SessionTracker.Settings.SettingEntries;
+using SessionTracker.Services;
 using System;
 
-namespace SessionTracker.Services
+namespace SessionTracker.Reset
 {
     public class ResetService : IDisposable
     {
@@ -22,24 +23,22 @@ namespace SessionTracker.Services
             _automaticSessionResetSetting.SettingChanged -= AutomaticSessionResetSettingChanged;
         }
 
-        public bool HasToAutomaticallyResetSessionOnModuleStartup()
+        public bool HasToAutomaticallyResetSession(ResetWhere resetWhere)
         {
-            return _automaticSessionResetSetting.Value switch
+            var hasToReset = _automaticSessionResetSetting.Value switch
             {
                 AutomaticSessionReset.Never => false,
-                AutomaticSessionReset.OnModuleStart => true,
+                AutomaticSessionReset.OnModuleStart => resetWhere == ResetWhere.ModuleStartup,
                 _ => _model.NextResetDateTimeUtc < DateTimeService.UtcNow,
             };
-        }
 
-        public bool HasToAutomaticallyResetSessionOnUpdate()
-        {
-            return _automaticSessionResetSetting.Value switch
-            {
-                AutomaticSessionReset.Never => false,
-                AutomaticSessionReset.OnModuleStart => false,
-                _ => _model.NextResetDateTimeUtc < DateTimeService.UtcNow,
-            };
+            if (hasToReset)
+                Module.Logger.Info($"Automatic reset required because past rest DateTime. " +
+                                   $"ResetWhere: {resetWhere}; " +
+                                   $"AutomaticSessionResetSetting: {_automaticSessionResetSetting.Value}; " +
+                                   $"ResetDateTimeUtc {_model.NextResetDateTimeUtc}");
+
+            return hasToReset;
         }
 
         public void UpdateNextResetDateTimetInModel()
@@ -65,10 +64,10 @@ namespace SessionTracker.Services
                 case AutomaticSessionReset.OnWeeklyMapBonusRewardsReset:
                     return GetNextWeeklyResetDateTimeUtc(dateTimeUtc, DayOfWeek.Thursday, 20);
                 default:
-                {
-                    Module.Logger.Error($"Fallback: never reset. Because switch case missing or should not be be handled here: {nameof(AutomaticSessionReset)}.{automaticSessionReset}.");
-                    return Model.NEVER_OR_ON_MODULE_START_RESET_DATE_TIME;
-                }
+                    {
+                        Module.Logger.Error($"Fallback: never reset. Because switch case missing or should not be be handled here: {nameof(AutomaticSessionReset)}.{automaticSessionReset}.");
+                        return Model.NEVER_OR_ON_MODULE_START_RESET_DATE_TIME;
+                    }
             }
         }
 
@@ -100,6 +99,6 @@ namespace SessionTracker.Services
         }
 
         private readonly Model _model;
-        private SettingEntry<AutomaticSessionReset> _automaticSessionResetSetting;
+        private readonly SettingEntry<AutomaticSessionReset> _automaticSessionResetSetting;
     }
 }

@@ -47,33 +47,31 @@ namespace SessionTracker.Controls
             return _elapsedTimeTotalInMilliseconds >= 200;
         }
 
-        public bool IsTimeForNextTryToInitStats()
+        public bool IsTimeForNextTryToStartSession()
         {
             return _elapsedTimeTotalInMilliseconds >= GetRetryIntervalInMilliseconds();
         }
 
-
-
-        public bool IsTimeForNextStatsUpdate()
+        public bool IsTimeForSessionUpdate()
         {
-            return _elapsedTimeTotalInMilliseconds >= _updateStatsIntervalInMilliseconds;
+            return _elapsedTimeTotalInMilliseconds >= _updateSessionIntervalInMilliseconds;
         }
 
-        public void UseShortRetryUpdateStatsInterval()
+        public void UseShortRetryUpdateSessionInterval()
         {
-            _updateStatsIntervalInMilliseconds = GetRetryIntervalInMilliseconds();
+            _updateSessionIntervalInMilliseconds = GetRetryIntervalInMilliseconds();
         }
 
-        public void UseRegularUpdateStatsInterval()
+        public void UseRegularUpdateSessionInterval()
         {
             OnDebugApiIntervalSettingsChanged();
         }
 
         private void OnDebugApiIntervalSettingsChanged(object sender = null, EventArgs e = null)
         {
-            _updateStatsIntervalInMilliseconds = _settingService.DebugApiIntervalEnabledSetting.Value
+            _updateSessionIntervalInMilliseconds = _settingService.DebugApiIntervalEnabledSetting.Value
                 ? _settingService.DebugApiIntervalValueSetting.Value
-                : REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS;
+                : REGULAR_UPDATE_SESSION_INTERVAL_IN_MILLISECONDS;
         }
 
         private static int GetRetryIntervalInMilliseconds()
@@ -82,8 +80,8 @@ namespace SessionTracker.Controls
         }
 
         public const int RETRY_INTERVAL_IN_SECONDS = 5; // seconds instead of milliseconds because value is displayed in UI
-        private const double REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS = 5 * 60 * 1000; // 5 minutes
-        private double _updateStatsIntervalInMilliseconds = REGULAR_UPDATE_INTERVAL_IN_MILLISECONDS;
+        private const double REGULAR_UPDATE_SESSION_INTERVAL_IN_MILLISECONDS = 5 * 60 * 1000; // 5 minutes  
+        private double _updateSessionIntervalInMilliseconds = REGULAR_UPDATE_SESSION_INTERVAL_IN_MILLISECONDS;
         private double _elapsedTimeTotalInMilliseconds;
         private double _timeWaitedForApiTokenInMilliseconds;
         private readonly SettingService _settingService;

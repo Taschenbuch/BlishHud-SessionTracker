@@ -1,7 +1,9 @@
 ﻿using Blish_HUD.Controls;
 using Blish_HUD.Graphics.UI;
 using Blish_HUD.Settings;
+using SessionTracker.AutomaticReset;
 using SessionTracker.Controls;
+using SessionTracker.Reset;
 using SessionTracker.Services;
 using SessionTracker.Settings.SettingEntries;
 using System;
@@ -103,8 +105,7 @@ namespace SessionTracker.Settings.Window
             List<AutomaticSessionReset> automaticSessionResetsWithDateTime, 
             string dateTimeTextBoxText)
         {
-            DateTime dateTimeUtc;
-            if (!DateTime.TryParse(dateTimeTextBoxText, out dateTimeUtc))
+            if (!DateTime.TryParse(dateTimeTextBoxText, out var dateTimeUtc))
                 return;
 
             foreach (var automaticSessionReset in automaticSessionResetsWithDateTime)

@@ -3,10 +3,10 @@
     public enum State
     {
         WaitForApiTokenAfterModuleStart,
-        WaitBeforeResetAndInitStats,
-        ResetAndInitStats,
-        WaitBeforeUpdateStats,
-        UpdateStats,
+        WaitBeforeStartSession,
+        WaitBeforeUpdateSession,
         WaitForApiResponse,
+        StartSession,
+        UpdateSession,
     }
 }

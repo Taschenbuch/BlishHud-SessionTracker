@@ -7,8 +7,10 @@ using Blish_HUD.Input;
 using Blish_HUD.Modules.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using SessionTracker.AutomaticReset;
 using SessionTracker.Controls.Hint;
 using SessionTracker.Models;
+using SessionTracker.Reset;
 using SessionTracker.Services;
 using SessionTracker.Services.Api;
 using SessionTracker.Settings;
@@ -38,8 +40,9 @@ namespace SessionTracker.Controls
             _logger         = logger;
 
             _updateState = new UpdateState(settingService);
+            _resetService = new ResetService(model, settingService.AutomaticSessionResetSetting);
             CreateUi(settingsWindowService);
-
+            
             _valueLabelTextService = new ValueLabelTextService(_valueLabelByStatId, _model, settingService, logger);
             _statTooltipService    = new StatTooltipService(_titleFlowPanelByStatId, _valueLabelByStatId, model, _settingService);
 
@@ -62,6 +65,7 @@ namespace SessionTracker.Controls
 
             _visibilityService?.Dispose();
             _updateState.Dispose();
+            _resetService.Dispose();
             _valueLabelTextService.Dispose();
             base.DisposeControl();
         }
@@ -84,7 +88,7 @@ namespace SessionTracker.Controls
 
         public void ResetSession()
         {
-            _updateState.State = State.ResetAndInitStats;
+            _updateState.State = State.StartSession;
         }
 
         // Update2() because Update() already exists in base class. Update() is not always called but Update2() is!
@@ -111,54 +115,61 @@ namespace SessionTracker.Controls
                         return;
 
                     _updateState.ResetElapsedTime();
-                    _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit = _settingService.AutomaticSessionResetSetting.Value == AutomaticSessionReset.Never;
-                    var firstStateAfterWaitingForApiToken = _settingService.AutomaticSessionResetSetting.Value == AutomaticSessionReset.Never
-                        ? State.UpdateStats
-                        : State.ResetAndInitStats;
 
                     var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _gw2ApiManager);
-                    if (apiTokenService.CanAccessApi)
+                    var canStartOrUpdateSession = apiTokenService.CanAccessApi || _updateState.WaitedLongEnoughForApiTokenEitherApiKeyIsMissingOrUserHasNotLoggedIntoACharacter();
+                    if(!canStartOrUpdateSession)
                     {
-                        _updateState.State = firstStateAfterWaitingForApiToken;
+                        var title = apiTokenService.ApiTokenState == ApiTokenState.hasNotLoggedIntoCharacterSinceStartingGw2
+                            ? "Error: Log into a character!"
+                            : "Loading...";
+
+                        SetValueTextAndTooltip(title, "Waiting for user to log into a character or API token from blish.", _valueLabelByStatId.Values);
                         return;
                     }
 
-                    if (_updateState.WaitedLongEnoughForApiTokenEitherApiKeyIsMissingOrUserHasNotLoggedIntoACharacter())
-                    {
-                        // to provoke api key error message for user even in character select.
-                        _updateState.State = firstStateAfterWaitingForApiToken; 
-                        return;
-                    }
+                    // waited too long: provokes api key error message for user even in character select when waited long enough
+                    var hasToReset = _resetService.HasToAutomaticallyResetSession(ResetWhere.ModuleStartup);
 
-                    var title = apiTokenService.ApiTokenState == ApiTokenState.hasNotLoggedIntoCharacterSinceStartingGw2
-                        ? "Error: Log into a character!"
-                        : "Loading...";
+                    _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit = !hasToReset;
 
-                    SetValueTextAndTooltip(title, "Waiting for user to log into a character or API token from blish.", _valueLabelByStatId.Values);
+                    _updateState.State = hasToReset
+                        ? State.StartSession
+                        : State.UpdateSession;
+
                     return;
-                case State.WaitBeforeResetAndInitStats:
-                    if (!_updateState.IsTimeForNextTryToInitStats())
+                case State.WaitBeforeStartSession:
+                    if (!_updateState.IsTimeForNextTryToStartSession())
                         return;
                     
                     _updateState.ResetElapsedTime(); 
-                    _updateState.State = State.ResetAndInitStats;
+                    _updateState.State = State.StartSession;
                     return;
-                case State.ResetAndInitStats:
-                    _updateState.ResetElapsedTime();
-                    _updateState.State = State.WaitForApiResponse;
-                    Task.Run(ResetAndInitStatValues);
-                    return;
-                case State.WaitBeforeUpdateStats:
-                    if (!_updateState.IsTimeForNextStatsUpdate())
+
+                case State.WaitBeforeUpdateSession:
+                    if (!_updateState.IsTimeForSessionUpdate())
                         return;
 
                     _updateState.ResetElapsedTime();
-                    _updateState.State = State.UpdateStats;
+
+                    // automatic reset doesnt have to be instant, it is okay if it is delayed by up to 5 minutes. better than spamming the check in the update loop
+                    if (_resetService.HasToAutomaticallyResetSession(ResetWhere.BeforeSessionUpdate))
+                    {
+                        _updateState.State = State.StartSession;
+                        return;
+                    }
+
+                    _updateState.State = State.UpdateSession;
                     return;
-                case State.UpdateStats:
+                case State.StartSession:
                     _updateState.ResetElapsedTime();
                     _updateState.State = State.WaitForApiResponse;
-                    Task.Run(UpdateStatValues);
+                    Task.Run(StartSession);
+                    return;
+                case State.UpdateSession:
+                    _updateState.ResetElapsedTime();
+                    _updateState.State = State.WaitForApiResponse;
+                    Task.Run(UpdateSession);
                     return;
                 case State.WaitForApiResponse:
                     // this case is used to wait for the Task.Run(..) to finish. They will update the state to leave this state, too.
@@ -170,7 +181,7 @@ namespace SessionTracker.Controls
             }
         }
 
-        private async void ResetAndInitStatValues()
+        private async void StartSession()
         {
             try
             {
@@ -178,33 +189,34 @@ namespace SessionTracker.Controls
                 if (!apiTokenService.CanAccessApi)
                 {
                     SetValuesToApiKeyErrorTextAndTooltip(apiTokenService);
-                    _updateState.State = State.WaitBeforeResetAndInitStats;
+                    _updateState.State = State.WaitBeforeStartSession;
                     return;
                 }
 
                 await ApiService.UpdateTotalValuesInModel(_model, _gw2ApiManager);
+                _resetService.UpdateNextResetDateTimetInModel();
                 _model.ResetAndStartSession();
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _statTooltipService.ResetSummaryTooltip(_model);
-                _updateState.State = State.WaitBeforeUpdateStats;
+                _updateState.State = State.WaitBeforeUpdateSession;
             }
             catch (LogWarnException e)
             {
                 var tooltip = $"Error: API call failed while initializing. :-( \n{RETRY_IN_X_SECONDS_MESSAGE}";
                 SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
                 _logger.Warn(e, "Error when initializing values: API failed to respond.");
-                _updateState.State = State.WaitBeforeResetAndInitStats;
+                _updateState.State = State.WaitBeforeStartSession;
             }
             catch (Exception e)
             {
                 var tooltip = $"Error: Bug in module code. :-( \n{RETRY_IN_X_SECONDS_MESSAGE}";
                 SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
                 _logger.Error(e, "Error when initializing values: bug in module code.");
-                _updateState.State = State.WaitBeforeResetAndInitStats; // todo module error = module should stop? error updateState einbauen?
+                _updateState.State = State.WaitBeforeStartSession; // todo module error = module should stop? error updateState einbauen?
             }
         }
 
-        private async void UpdateStatValues()
+        private async void UpdateSession()
         {
             try
             {
@@ -222,12 +234,12 @@ namespace SessionTracker.Controls
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _statTooltipService.UpdateSummaryTooltip(_model);
                 _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit = false;
-                _updateState.UseRegularUpdateStatsInterval();
+                _updateState.UseRegularUpdateSessionInterval();
                 await _fileService.SaveModelToFileAsync(_model);
             }
             catch (LogWarnException e)
             {
-                _updateState.UseShortRetryUpdateStatsInterval();
+                _updateState.UseShortRetryUpdateSessionInterval();
                 _logger.Warn(e, "Error when updating values: API failed to respond");
 
                 if (_hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit)
@@ -248,9 +260,10 @@ namespace SessionTracker.Controls
             {
                 // even in error case an init makes no sense. It is better to wait for the user to fix the api key to continue to update the old values.
                 // this can only cause issues if in the future blish supports swapping gw2 accounts without doing an unload+load of a module.
-                _updateState.State = State.WaitBeforeUpdateStats;
+                _updateState.State = State.WaitBeforeUpdateSession;
             }
         }
+
 
         private void SetValuesToApiKeyErrorTextAndTooltip(ApiTokenService apiTokenService)
         {
@@ -377,6 +390,7 @@ namespace SessionTracker.Controls
         private readonly Dictionary<string, StatTitleFlowPanel> _titleFlowPanelByStatId = new Dictionary<string, StatTitleFlowPanel>();
         private readonly Dictionary<string, Label> _valueLabelByStatId = new Dictionary<string, Label>();
         private readonly UpdateState _updateState;
+        private readonly ResetService _resetService;
         private FlowPanel _titlesFlowPanel;
         private FlowPanel _valuesFlowPanel;
         private HintFlowPanel _hintFlowPanel;

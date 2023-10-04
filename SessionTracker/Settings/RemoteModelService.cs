@@ -1,5 +1,4 @@
 ﻿using SessionTracker.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -46,8 +45,9 @@ namespace SessionTracker.Settings
             return remoteModel;
         }
 
-        public static Model UpdateSessionDurationInRemoteModel(Model localModel, Model remoteModel)
+        public static Model UpdateSessionDurationAndResetTimeInRemoteModel(Model localModel, Model remoteModel)
         {
+            remoteModel.NextResetDateTimeUtc   = localModel.NextResetDateTimeUtc;
             remoteModel.SessionDuration = localModel.SessionDuration;
             return remoteModel;
         }

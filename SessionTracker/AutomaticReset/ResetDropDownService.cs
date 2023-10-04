@@ -1,8 +1,9 @@
-﻿using SessionTracker.Settings.SettingEntries;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
+using SessionTracker.Services;
+using SessionTracker.AutomaticReset;
 
-namespace SessionTracker.Services
+namespace SessionTracker.Reset
 {
     public class ResetDropDownService
     {
@@ -10,12 +11,12 @@ namespace SessionTracker.Services
         {
             return new Dictionary<AutomaticSessionReset, string>
             {
-                [AutomaticSessionReset.Never]               = "Never (right click menu icon for manual reset)",
-                [AutomaticSessionReset.OnModuleStart]       = "On module start",
-                [AutomaticSessionReset.OnDailyReset]        = $"On daily reset ({GetNextDailyResetLocalTime()})",
-                [AutomaticSessionReset.OnWeeklyReset]       = $"On weekly reset ({GetNextWeeklyResetInLocalTime(AutomaticSessionReset.OnWeeklyReset)})",
-                [AutomaticSessionReset.OnWeeklyNaWvwReset]  = $"On weekly NA WvW reset ({GetNextWeeklyResetInLocalTime(AutomaticSessionReset.OnWeeklyNaWvwReset)})",
-                [AutomaticSessionReset.OnWeeklyEuWvwReset]  = $"On weekly EU WvW reset ({GetNextWeeklyResetInLocalTime(AutomaticSessionReset.OnWeeklyEuWvwReset)})",
+                [AutomaticSessionReset.Never] = "Never (right click menu icon for manual reset)",
+                [AutomaticSessionReset.OnModuleStart] = "On module start",
+                [AutomaticSessionReset.OnDailyReset] = $"On daily reset ({GetNextDailyResetLocalTime()})",
+                [AutomaticSessionReset.OnWeeklyReset] = $"On weekly reset ({GetNextWeeklyResetInLocalTime(AutomaticSessionReset.OnWeeklyReset)})",
+                [AutomaticSessionReset.OnWeeklyNaWvwReset] = $"On weekly NA WvW reset ({GetNextWeeklyResetInLocalTime(AutomaticSessionReset.OnWeeklyNaWvwReset)})",
+                [AutomaticSessionReset.OnWeeklyEuWvwReset] = $"On weekly EU WvW reset ({GetNextWeeklyResetInLocalTime(AutomaticSessionReset.OnWeeklyEuWvwReset)})",
                 [AutomaticSessionReset.OnWeeklyMapBonusRewardsReset] = $"On weekly map bonus rewards reset ({GetNextWeeklyResetInLocalTime(AutomaticSessionReset.OnWeeklyMapBonusRewardsReset)})"
             };
         }
