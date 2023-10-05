@@ -31,6 +31,19 @@ namespace SessionTracker.DateTimeUtcNow
                 Parent = debugDateTimeFlowPanel
             };
 
+            var setToRealDateTimeButton = new StandardButton
+            {
+                Text = "update textbox with real UTC",
+                BasicTooltipText = "This just replaces the text in the textbox with the real current UTC. it does NOT start mocking with this time. press other buttonf or that",
+                Width = 210,
+                Parent = debugDateTimeFlowPanel
+            };
+
+            setToRealDateTimeButton.Click += (s, e) =>
+            {
+                dateTimeTextBox.Text = DateTime.UtcNow.ToString();
+            };
+
             updateDateTimeButton.Click += (s, e) =>
             {
                 if (DateTime.TryParse(dateTimeTextBox.Text, out DateTime mockedDateTimeUtc))
@@ -76,7 +89,7 @@ namespace SessionTracker.DateTimeUtcNow
 
             foreach (var automaticSessionReset in automaticSessionResetsWithDateTime)
             {
-                var dateTimeText = ResetService.GetNextResetDateTimeUtc(automaticSessionReset, dateTimeUtc).ToString(DEBUG_DATE_FORMAT);
+                var dateTimeText = ResetService.GetNextResetDateTimeUtc(automaticSessionReset, dateTimeUtc, DOES_NOT_MATTER).ToString(DEBUG_DATE_FORMAT);
                 resetDateTimelabelDict[automaticSessionReset].Text = $"{dateTimeText} {automaticSessionReset}";
             }
         }
@@ -88,5 +101,6 @@ namespace SessionTracker.DateTimeUtcNow
         }
 
         private const string DEBUG_DATE_FORMAT = "ddd dd:MM:yyyy HH:mm:ss";
+        private const int DOES_NOT_MATTER = 60;
     }
 }
