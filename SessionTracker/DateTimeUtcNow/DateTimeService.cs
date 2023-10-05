@@ -8,11 +8,7 @@ namespace SessionTracker.DateTimeUtcNow
 {
     public class DateTimeService : IDisposable
     {
-        public DateTimeService()
-        {
-            _stopWatch.Start();
-        }
-
+        // static part
         public static DateTime UtcNow
         {
             get
@@ -26,6 +22,17 @@ namespace SessionTracker.DateTimeUtcNow
                 _utcNowDebug = value;
                 _stopWatch.Restart();
             }
+        }
+
+        private static DateTime _utcNowDebug = DateTime.UtcNow;
+        private static bool _debugEnabled;
+        private static readonly Stopwatch _stopWatch = new Stopwatch(); // no disposing necessary
+
+        // non static part (but updating static props
+        public DateTimeService()
+        {
+            _stopWatch.Start();
+            _utcNowDebug = DateTime.UtcNow; // because it is static. It would userwise survive module unload/load with old value
         }
 
         // must be called AFTER DefineSettings()
@@ -63,9 +70,6 @@ namespace SessionTracker.DateTimeUtcNow
             _debugEnabled = _debugDateTimeEnabledSetting.Value;
         }
 
-        private static DateTime _utcNowDebug = DateTime.UtcNow;
-        private static bool _debugEnabled;
-        private static readonly Stopwatch _stopWatch = new Stopwatch(); // no disposing necessary
         private SettingEntry<bool> _debugDateTimeEnabledSetting;
         private SettingEntry<string> _debugDateTimeValueSetting;
     }
