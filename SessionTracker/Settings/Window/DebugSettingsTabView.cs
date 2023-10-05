@@ -32,14 +32,26 @@ namespace SessionTracker.Settings.Window
             _dateTimeService.CreateDateTimeDebugPanel(_rootFlowPanel);
         }
 
-        private void CreateApiIntervallValueLabel(FlowPanel debugSectionFlowPanel)
+        protected override void Unload()
         {
+            _settingService.DebugApiIntervalValueSetting.SettingChanged -= OnDebugApiIntervalValueSettingChanged;
+        }
+
+        private void CreateApiIntervallValueLabel(Container parent)
+        {
+
             _apiIntervalInMillisecondsLabel = new Label()
             {
+                Left = 300,
                 AutoSizeHeight = true,
                 AutoSizeWidth = true,
-                Parent = debugSectionFlowPanel
-            };
+                Parent = new Panel()
+                {
+                    WidthSizingMode = SizingMode.AutoSize,
+                    HeightSizingMode = SizingMode.AutoSize,
+                    Parent = parent,
+                }
+        };
 
             OnDebugApiIntervalValueSettingChanged();
             _settingService.DebugApiIntervalValueSetting.SettingChanged += OnDebugApiIntervalValueSettingChanged;
@@ -47,7 +59,7 @@ namespace SessionTracker.Settings.Window
 
         private void OnDebugApiIntervalValueSettingChanged(object sender = null, Blish_HUD.ValueChangedEventArgs<int> e = null)
         {
-            _apiIntervalInMillisecondsLabel.Text = $"api interval: {_settingService.DebugApiIntervalValueSetting.Value} ms";
+            _apiIntervalInMillisecondsLabel.Text = $"{_settingService.DebugApiIntervalValueSetting.Value} ms";
         }
 
         private readonly SettingService _settingService;
