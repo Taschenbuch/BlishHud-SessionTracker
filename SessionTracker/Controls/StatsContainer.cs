@@ -27,6 +27,7 @@ namespace SessionTracker.Controls
                               Gw2ApiManager gw2ApiManager,
                               TextureService textureService,
                               FileService fileService,
+                              UpdateState updateLoop,
                               SettingsWindowService settingsWindowService,
                               SettingService settingService,
                               Logger logger)
@@ -36,10 +37,10 @@ namespace SessionTracker.Controls
             _gw2ApiManager  = gw2ApiManager;
             _textureService = textureService;
             _fileService    = fileService;
+            _updateState    = updateLoop;
             _settingService = settingService;
             _logger         = logger;
 
-            _updateState = new UpdateState(settingService);
             _resetService = new ResetService(model, settingService.AutomaticSessionResetSetting);
             CreateUi(settingsWindowService);
             

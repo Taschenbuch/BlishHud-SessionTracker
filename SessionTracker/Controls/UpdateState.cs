@@ -19,8 +19,21 @@ namespace SessionTracker.Controls
             _settingService.DebugApiIntervalEnabledSetting.SettingChanged -= OnDebugApiIntervalSettingsChanged;
             _settingService.DebugApiIntervalValueSetting.SettingChanged   -= OnDebugApiIntervalSettingsChanged;
         }
-        
-        public State State { get; set; } = State.WaitForApiTokenAfterModuleStart;
+
+        public State State 
+        {
+            get => _state; 
+            set
+            {
+                if (_state == value)
+                    return;
+
+                _state = value;
+                StateChanged?.Invoke(null, null);
+            }
+        }
+
+        public event EventHandler StateChanged;
 
         public void AddToElapsedTime(double elapsedTimeSinceLastUpdateInMilliseconds)
         {
@@ -84,6 +97,7 @@ namespace SessionTracker.Controls
         private double _updateSessionIntervalInMilliseconds = REGULAR_UPDATE_SESSION_INTERVAL_IN_MILLISECONDS;
         private double _elapsedTimeTotalInMilliseconds;
         private double _timeWaitedForApiTokenInMilliseconds;
+        private State _state = State.WaitForApiTokenAfterModuleStart;
         private readonly SettingService _settingService;
     }
 }

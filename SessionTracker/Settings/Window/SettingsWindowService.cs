@@ -2,6 +2,7 @@
 using Blish_HUD;
 using Blish_HUD.Controls;
 using Microsoft.Xna.Framework;
+using SessionTracker.Controls;
 using SessionTracker.DateTimeUtcNow;
 using SessionTracker.Models;
 using SessionTracker.Services;
@@ -11,7 +12,7 @@ namespace SessionTracker.Settings.Window
 {
     public class SettingsWindowService : IDisposable
     {
-        public SettingsWindowService(Model model, SettingService settingService, DateTimeService dateTimeService, TextureService textureService)
+        public SettingsWindowService(Model model, SettingService settingService, DateTimeService dateTimeService, TextureService textureService, UpdateState updateLoop)
         {
             _settingsWindow = new TabbedWindow2(
                 textureService.SettingsWindowBackgroundTexture,
@@ -31,7 +32,7 @@ namespace SessionTracker.Settings.Window
             _settingsWindow.Tabs.Add(new Tab(textureService.GeneralTabTexture, () => new GeneralSettingsTabView(settingService), "General"));
             _settingsWindow.Tabs.Add(new Tab(textureService.VisibilityTabTexture, () => new VisibilitySettingsTabView(settingService), "Window Visibility"));
 #if DEBUG
-            _settingsWindow.Tabs.Add(new Tab(textureService.DebugTabTexture, () => new DebugSettingsTabView(settingService, dateTimeService), "Debug"));
+            _settingsWindow.Tabs.Add(new Tab(textureService.DebugTabTexture, () => new DebugSettingsTabView(settingService, dateTimeService, updateLoop), "Debug"));
 #endif
         }
 

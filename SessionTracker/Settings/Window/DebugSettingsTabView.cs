@@ -8,10 +8,11 @@ namespace SessionTracker.Settings.Window
 {
     public class DebugSettingsTabView : View
     {
-        public DebugSettingsTabView(SettingService settingService, DateTimeService dateTimeService)
+        public DebugSettingsTabView(SettingService settingService, DateTimeService dateTimeService, UpdateState updateLoop)
         {
-            _settingService = settingService;
+            _settingService  = settingService;
             _dateTimeService = dateTimeService;
+            _updateLoop      = updateLoop;
         }
 
         protected override void Build(Container buildPanel)
@@ -23,18 +24,48 @@ namespace SessionTracker.Settings.Window
                "You are running a beta version of this module if you can see this tab.\n" +
                "Do not change those settings. They will not speed up stat updates or improve\n" +
                "your user experience. This tab just helps the developer to speed up testing this module. :-)\n");
-
-            var debugApiIntervalSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Debug API interval", _rootFlowPanel);
-            ControlFactory.CreateSetting(debugApiIntervalSectionFlowPanel, _settingService.DebugApiIntervalEnabledSetting);
-            ControlFactory.CreateSetting(debugApiIntervalSectionFlowPanel, _settingService.DebugApiIntervalValueSetting);
-            CreateApiIntervallValueLabel(debugApiIntervalSectionFlowPanel);
-
+            CreateApiIntervalDebugPanel();
+            CreateUpdateLoopStateDebugPanel();
             _dateTimeService.CreateDateTimeDebugPanel(_rootFlowPanel);
         }
 
         protected override void Unload()
         {
             _settingService.DebugApiIntervalValueSetting.SettingChanged -= OnDebugApiIntervalValueSettingChanged;
+            _updateLoop.StateChanged -= UpdateLoopStateChanged;
+        }
+
+        private void CreateUpdateLoopStateDebugPanel()
+        {
+            var updateStateFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Debug update loop state", _rootFlowPanel);
+            _updateLoopStateLabel = new Label()
+            {
+                Text = _updateLoop.State.ToString(),
+                Left = 5,
+                AutoSizeHeight = true,
+                AutoSizeWidth = true,
+                Parent = new Panel()
+                {
+                    WidthSizingMode = SizingMode.AutoSize,
+                    HeightSizingMode = SizingMode.AutoSize,
+                    Parent = updateStateFlowPanel,
+                }
+            };
+
+            _updateLoop.StateChanged += UpdateLoopStateChanged;
+        }
+
+        private void UpdateLoopStateChanged(object sender, System.EventArgs e)
+        {
+            _updateLoopStateLabel.Text = _updateLoop.State.ToString();
+        }
+
+        private void CreateApiIntervalDebugPanel()
+        {
+            var debugApiIntervalSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Debug API interval", _rootFlowPanel);
+            ControlFactory.CreateSetting(debugApiIntervalSectionFlowPanel, _settingService.DebugApiIntervalEnabledSetting);
+            ControlFactory.CreateSetting(debugApiIntervalSectionFlowPanel, _settingService.DebugApiIntervalValueSetting);
+            CreateApiIntervallValueLabel(debugApiIntervalSectionFlowPanel);
         }
 
         private void CreateApiIntervallValueLabel(Container parent)
@@ -51,7 +82,7 @@ namespace SessionTracker.Settings.Window
                     HeightSizingMode = SizingMode.AutoSize,
                     Parent = parent,
                 }
-        };
+            };
 
             OnDebugApiIntervalValueSettingChanged();
             _settingService.DebugApiIntervalValueSetting.SettingChanged += OnDebugApiIntervalValueSettingChanged;
@@ -64,7 +95,9 @@ namespace SessionTracker.Settings.Window
 
         private readonly SettingService _settingService;
         private readonly DateTimeService _dateTimeService;
+        private readonly UpdateState _updateLoop;
         private FlowPanel _rootFlowPanel;
         private Label _apiIntervalInMillisecondsLabel;
+        private Label _updateLoopStateLabel;
     }
 }
