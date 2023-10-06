@@ -132,7 +132,7 @@ namespace SessionTracker.Controls
 
                     // waited too long: provokes api key error message for user even in character select when waited long enough
                     _resetService.InitializeNextResetDateTimeIfNecessary();
-                    var hasToReset = _resetService.HasToAutomaticallyResetSession(ResetWhere.ModuleStartup);
+                    var hasToReset = _resetService.HasToAutomaticallyResetSession(ResetCheckLocation.ModuleStartup);
                     _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit = !hasToReset;
 
                     _updateState.State = hasToReset
@@ -155,7 +155,7 @@ namespace SessionTracker.Controls
                     _updateState.ResetElapsedTime();
 
                     // automatic reset doesnt have to be instant, it is okay if it is delayed by up to 5 minutes. better than spamming the check in the update loop
-                    if (_resetService.HasToAutomaticallyResetSession(ResetWhere.BeforeSessionUpdate))
+                    if (_resetService.HasToAutomaticallyResetSession(ResetCheckLocation.BeforeSessionUpdate))
                     {
                         _updateState.State = State.StartSession;
                         return;

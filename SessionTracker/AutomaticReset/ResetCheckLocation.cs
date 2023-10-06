@@ -1,7 +1,7 @@
 ﻿
 namespace SessionTracker.AutomaticReset
 {
-    public enum ResetWhere
+    public enum ResetCheckLocation
     {
         ModuleStartup,
         BeforeSessionUpdate

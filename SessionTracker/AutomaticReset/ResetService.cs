@@ -30,23 +30,23 @@ namespace SessionTracker.Reset
                 _model.NextResetDateTimeUtc = GetNextResetDateTimeUtc(_automaticSessionResetSetting.Value, DateTimeService.UtcNow, _minutesUntilResetAfterModuleShutdownSetting.Value);
         }
 
-        public bool HasToAutomaticallyResetSession(ResetWhere resetWhere)
+        public bool HasToAutomaticallyResetSession(ResetCheckLocation resetCheckLocation)
         {
-            if (_isInitalisationRequiredForNextResetDateTime && resetWhere == ResetWhere.ModuleStartup)
+            if (_isInitalisationRequiredForNextResetDateTime && resetCheckLocation == ResetCheckLocation.ModuleStartup)
                 return true;
 
             var isPastResetDate = _model.NextResetDateTimeUtc < DateTimeService.UtcNow;
             var hasToReset = _automaticSessionResetSetting.Value switch
             {
                 AutomaticSessionReset.Never => false,
-                AutomaticSessionReset.OnModuleStart => resetWhere == ResetWhere.ModuleStartup,
-                AutomaticSessionReset.MinutesAfterModuleShutdown => resetWhere == ResetWhere.ModuleStartup && isPastResetDate,
+                AutomaticSessionReset.OnModuleStart => resetCheckLocation == ResetCheckLocation.ModuleStartup,
+                AutomaticSessionReset.MinutesAfterModuleShutdown => resetCheckLocation == ResetCheckLocation.ModuleStartup && isPastResetDate,
                 _ => isPastResetDate,
             };
 
             if (hasToReset)
                 Module.Logger.Info($"Automatic reset required because past rest DateTime. " +
-                                   $"ResetWhere: {resetWhere}; " +
+                                   $"ResetWhere: {resetCheckLocation}; " +
                                    $"AutomaticSessionResetSetting: {_automaticSessionResetSetting.Value}; " +
                                    $"ResetDateTimeUtc {_model.NextResetDateTimeUtc}");
 
