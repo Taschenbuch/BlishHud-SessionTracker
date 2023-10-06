@@ -1,4 +1,4 @@
-﻿namespace SessionTracker.Services.Api
+﻿namespace SessionTracker.Api
 {
     public enum ApiTokenState
     {

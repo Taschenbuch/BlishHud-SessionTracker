@@ -11,7 +11,7 @@ using SessionTracker.Models;
 using SessionTracker.Models.Constants;
 using SessionTracker.Settings;
 
-namespace SessionTracker.Services.Api
+namespace SessionTracker.Api
 {
     public class ApiService
     {

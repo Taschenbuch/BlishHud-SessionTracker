@@ -4,7 +4,7 @@ using Gw2Sharp.WebApi.V2.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SessionTracker.Services.Api
+namespace SessionTracker.Api
 {
     public class ApiTokenService
     {

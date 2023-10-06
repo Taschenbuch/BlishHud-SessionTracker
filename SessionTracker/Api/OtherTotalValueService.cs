@@ -6,7 +6,7 @@ using Gw2Sharp.WebApi.V2.Models;
 using SessionTracker.Models;
 using SessionTracker.Models.Constants;
 
-namespace SessionTracker.Services.Api
+namespace SessionTracker.Api
 {
     public class OtherTotalValueService
     {

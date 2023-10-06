@@ -4,7 +4,7 @@ using Gw2Sharp.WebApi.V2;
 using Gw2Sharp.WebApi.V2.Models;
 using SessionTracker.Models;
 
-namespace SessionTracker.Services.Api
+namespace SessionTracker.Api
 {
     public class AchievementTotalValueService
     {
