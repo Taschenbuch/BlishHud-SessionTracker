@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SessionTracker.Constants;
 using SessionTracker.Models;
-using SessionTracker.Models.Constants;
 using SessionTracker.Properties;
 using SessionTracker.SettingEntries;
 using SessionTracker.Value.Text;

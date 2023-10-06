@@ -7,8 +7,8 @@ using Blish_HUD;
 using Blish_HUD.Modules.Managers;
 using Gw2Sharp.WebApi.V2.Models;
 using Newtonsoft.Json.Linq;
+using SessionTracker.Constants;
 using SessionTracker.Models;
-using SessionTracker.Models.Constants;
 using SessionTracker.Settings;
 
 namespace SessionTracker.Api

@@ -3,8 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Gw2Sharp.WebApi.V2;
 using Gw2Sharp.WebApi.V2.Models;
+using SessionTracker.Constants;
 using SessionTracker.Models;
-using SessionTracker.Models.Constants;
 
 namespace SessionTracker.Api
 {

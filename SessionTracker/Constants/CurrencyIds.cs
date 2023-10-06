@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace SessionTracker.Models.Constants
+namespace SessionTracker.Constants
 {
     public class CurrencyIds
     {

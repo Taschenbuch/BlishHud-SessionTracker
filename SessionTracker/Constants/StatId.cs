@@ -1,4 +1,4 @@
-﻿namespace SessionTracker.Models.Constants
+﻿namespace SessionTracker.Constants
 {
     public class StatId
     {

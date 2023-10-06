@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Blish_HUD.Controls;
 using Blish_HUD.Graphics.UI;
 using Microsoft.Xna.Framework;
+using SessionTracker.Constants;
 using SessionTracker.Controls;
 using SessionTracker.Models;
-using SessionTracker.Models.Constants;
 using SessionTracker.Services;
 using SessionTracker.SettingEntries;
 

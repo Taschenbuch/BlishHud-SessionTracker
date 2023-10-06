@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Blish_HUD;
 using Blish_HUD.Controls;
+using SessionTracker.Constants;
 using SessionTracker.Models;
-using SessionTracker.Models.Constants;
 using SessionTracker.Services;
 using SessionTracker.SettingEntries;
 
