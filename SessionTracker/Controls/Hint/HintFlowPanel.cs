@@ -62,14 +62,14 @@ namespace SessionTracker.Controls.Hint
             base.DisposeControl();
         }
 
-        public void ShowHintWhenAllStatsAreHidden(State updateState)
+        public void ShowHintWhenAllStatsAreHidden(UpdateLoopState updateLoopState)
         {
             // remove all from parent to prevent messing up their order
             _hiddenByZeroSessionValuesImage.Parent = null;
             _hiddenByUserLabel.Parent              = null;
             _openSettingsButton.Parent             = null;
 
-            var hintType = DetermineWhichHintToShow(_stats, updateState, _settingService.HideStatsWithValueZeroSetting.Value);
+            var hintType = DetermineWhichHintToShow(_stats, updateLoopState, _settingService.HideStatsWithValueZeroSetting.Value);
 
             switch (hintType)
             {
@@ -114,14 +114,14 @@ namespace SessionTracker.Controls.Hint
             _hiddenByZeroSessionValuesImage.Size = new Point(font.LineHeight);
         }
 
-        private static HintType DetermineWhichHintToShow(List<Stat> stats, State updateState, bool hideStatsWithValueZero)
+        private static HintType DetermineWhichHintToShow(List<Stat> stats, UpdateLoopState updateLoopState, bool hideStatsWithValueZero)
         {
             var allHiddenByUser = stats.Any(e => e.IsVisible) == false;
             if (allHiddenByUser)
                 return HintType.AllStatsHiddenByUser;
 
             var allHiddenBecauseOfZeroValue = stats.Any(e => e.IsVisible && e.HasNonZeroSessionValue) == false;
-            var hasModuleInitializedStatValues = updateState != State.WaitForApiTokenAfterModuleStart;
+            var hasModuleInitializedStatValues = updateLoopState != UpdateLoopState.WaitForApiTokenAfterModuleStart;
             if (hideStatsWithValueZero && allHiddenBecauseOfZeroValue && hasModuleInitializedStatValues)
                 return HintType.AllStatsHiddenByHideZeroValuesSetting;
 

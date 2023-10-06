@@ -1,6 +1,6 @@
 ﻿namespace SessionTracker.Controls
 {
-    public enum State
+    public enum UpdateLoopState
     {
         WaitForApiTokenAfterModuleStart,
         WaitBeforeStartSession,

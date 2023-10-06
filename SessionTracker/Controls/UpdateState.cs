@@ -20,7 +20,7 @@ namespace SessionTracker.Controls
             _settingService.DebugApiIntervalValueSetting.SettingChanged   -= OnDebugApiIntervalSettingsChanged;
         }
 
-        public State State 
+        public UpdateLoopState State 
         {
             get => _state; 
             set
@@ -97,7 +97,7 @@ namespace SessionTracker.Controls
         private double _updateSessionIntervalInMilliseconds = REGULAR_UPDATE_SESSION_INTERVAL_IN_MILLISECONDS;
         private double _elapsedTimeTotalInMilliseconds;
         private double _timeWaitedForApiTokenInMilliseconds;
-        private State _state = State.WaitForApiTokenAfterModuleStart;
+        private UpdateLoopState _state = UpdateLoopState.WaitForApiTokenAfterModuleStart;
         private readonly SettingService _settingService;
     }
 }
