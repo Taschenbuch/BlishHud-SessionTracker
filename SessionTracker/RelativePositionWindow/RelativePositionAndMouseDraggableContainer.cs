@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using SessionTracker.SettingEntries;
 using Container = Blish_HUD.Controls.Container;
 
-namespace SessionTracker.StatsWindow
+namespace SessionTracker.RelativePositionWindow
 {
     public class RelativePositionAndMouseDraggableContainer : Container
     {
