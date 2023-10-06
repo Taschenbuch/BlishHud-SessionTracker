@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using SessionTracker.Files;
 using SessionTracker.Models;
+using SessionTracker.Settings;
 using System;
 using System.Collections.Generic;
 
@@ -18,7 +19,7 @@ using System.Collections.Generic;
 // - model format has changed
 // - OR statIds of existing stats have been modified.
 
-namespace SessionTracker.Settings
+namespace SessionTracker.FilesAndMigration
 {
     public static class MigrationService
     {

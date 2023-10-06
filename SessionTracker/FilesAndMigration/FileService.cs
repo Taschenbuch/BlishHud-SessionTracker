@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Blish_HUD;
 using Newtonsoft.Json;
 using SessionTracker.Files.RemoteFiles;
+using SessionTracker.FilesAndMigration;
 using SessionTracker.Models;
 using SessionTracker.Settings;
 
