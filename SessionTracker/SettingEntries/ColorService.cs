@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace SessionTracker.Settings.SettingEntries
+namespace SessionTracker.SettingEntries
 {
     public class ColorService
     {

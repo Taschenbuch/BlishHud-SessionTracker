@@ -1,5 +1,5 @@
 ﻿using System;
-using SessionTracker.Settings.SettingEntries;
+using SessionTracker.SettingEntries;
 
 namespace SessionTracker.Controls
 {

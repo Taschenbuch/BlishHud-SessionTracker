@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Blish_HUD;
 using Blish_HUD.Controls;
 using Blish_HUD.Input;
-using SessionTracker.Settings.SettingEntries;
+using SessionTracker.SettingEntries;
 
 namespace SessionTracker.Controls
 {

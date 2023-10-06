@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace SessionTracker.Settings.SettingEntries
+namespace SessionTracker.SettingEntries
 {
     public enum ValueDisplayFormat
     {

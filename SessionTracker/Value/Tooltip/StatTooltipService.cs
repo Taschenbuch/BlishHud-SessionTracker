@@ -2,7 +2,7 @@
 using Blish_HUD.Controls;
 using SessionTracker.Controls;
 using SessionTracker.Models;
-using SessionTracker.Settings.SettingEntries;
+using SessionTracker.SettingEntries;
 
 namespace SessionTracker.Value.Tooltip
 {

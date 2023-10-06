@@ -6,7 +6,7 @@ using SessionTracker.Controls;
 using SessionTracker.DateTimeUtcNow;
 using SessionTracker.Models;
 using SessionTracker.Services;
-using SessionTracker.Settings.SettingEntries;
+using SessionTracker.SettingEntries;
 
 namespace SessionTracker.Settings.Window
 {

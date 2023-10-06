@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 using SessionTracker.AutomaticReset;
 using SessionTracker.Controls;
 using SessionTracker.Reset;
-using SessionTracker.Settings.SettingEntries;
+using SessionTracker.SettingEntries;
 
 namespace SessionTracker.Settings.Window
 {

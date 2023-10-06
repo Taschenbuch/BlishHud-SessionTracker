@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace SessionTracker.Settings.SettingEntries
+namespace SessionTracker.SettingEntries
 {
     public static class ColorTypeExtensions
     {

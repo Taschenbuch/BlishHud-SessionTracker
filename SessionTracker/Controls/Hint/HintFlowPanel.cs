@@ -6,8 +6,8 @@ using Blish_HUD.Controls;
 using Microsoft.Xna.Framework;
 using SessionTracker.Models;
 using SessionTracker.Services;
+using SessionTracker.SettingEntries;
 using SessionTracker.Settings;
-using SessionTracker.Settings.SettingEntries;
 using SessionTracker.Settings.Window;
 
 namespace SessionTracker.Controls.Hint

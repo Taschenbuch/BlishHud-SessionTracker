@@ -1,7 +1,7 @@
 ﻿using Blish_HUD.Controls;
 using Blish_HUD.Graphics.UI;
 using SessionTracker.Controls;
-using SessionTracker.Settings.SettingEntries;
+using SessionTracker.SettingEntries;
 using System;
 
 namespace SessionTracker.Settings.Window

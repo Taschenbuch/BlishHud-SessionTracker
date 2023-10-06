@@ -1,4 +1,4 @@
-﻿namespace SessionTracker.Settings.SettingEntries
+﻿namespace SessionTracker.SettingEntries
 {
     public enum LabelType
     {

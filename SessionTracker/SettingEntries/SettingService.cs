@@ -3,7 +3,7 @@ using Blish_HUD.Settings;
 using Microsoft.Xna.Framework.Input;
 using SessionTracker.AutomaticReset;
 
-namespace SessionTracker.Settings.SettingEntries
+namespace SessionTracker.SettingEntries
 {
     public class SettingService // do not mix up with blish setting"S"service 
     {

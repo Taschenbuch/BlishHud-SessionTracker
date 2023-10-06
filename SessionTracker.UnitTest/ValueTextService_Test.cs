@@ -2,7 +2,7 @@
 using System.Threading;
 using FluentAssertions;
 using NUnit.Framework;
-using SessionTracker.Settings.SettingEntries;
+using SessionTracker.SettingEntries;
 using SessionTracker.Value.Text;
 
 namespace SessionTracker.UnitTest

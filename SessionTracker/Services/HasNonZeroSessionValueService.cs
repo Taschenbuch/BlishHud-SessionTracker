@@ -1,5 +1,5 @@
 ﻿using Blish_HUD;
-using SessionTracker.Settings.SettingEntries;
+using SessionTracker.SettingEntries;
 
 namespace SessionTracker.Services
 {

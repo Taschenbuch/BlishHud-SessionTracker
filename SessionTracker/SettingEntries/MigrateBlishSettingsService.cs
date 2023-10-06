@@ -1,6 +1,6 @@
 ﻿using Blish_HUD.Settings;
 
-namespace SessionTracker.Settings.SettingEntries
+namespace SessionTracker.SettingEntries
 {
     public class MigrateBlishSettingsService
     {

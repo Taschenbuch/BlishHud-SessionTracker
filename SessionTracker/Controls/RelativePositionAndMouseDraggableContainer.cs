@@ -3,7 +3,7 @@ using Blish_HUD.Controls;
 using Blish_HUD.Input;
 using Microsoft.Xna.Framework;
 using SessionTracker.Services;
-using SessionTracker.Settings.SettingEntries;
+using SessionTracker.SettingEntries;
 using Container = Blish_HUD.Controls.Container;
 
 namespace SessionTracker.Controls

@@ -16,8 +16,8 @@ using SessionTracker.DateTimeUtcNow;
 using SessionTracker.Models;
 using SessionTracker.Services;
 using SessionTracker.Services.RemoteFiles;
+using SessionTracker.SettingEntries;
 using SessionTracker.Settings;
-using SessionTracker.Settings.SettingEntries;
 using SessionTracker.Settings.Window;
 
 namespace SessionTracker
