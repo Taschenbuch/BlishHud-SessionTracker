@@ -119,8 +119,8 @@ namespace SessionTracker.Controls
                     _updateLoop.ResetElapsedTime();
 
                     var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _gw2ApiManager);
-                    var canStartOrUpdateSession = apiTokenService.CanAccessApi || _updateLoop.WaitedLongEnoughForApiTokenEitherApiKeyIsMissingOrUserHasNotLoggedIntoACharacter();
-                    if(!canStartOrUpdateSession)
+                    var canUpdateOrStartNewSession = apiTokenService.CanAccessApi || _updateLoop.WaitedLongEnoughForApiTokenEitherApiKeyIsMissingOrUserHasNotLoggedIntoACharacter();
+                    if(!canUpdateOrStartNewSession)
                     {
                         var title = apiTokenService.ApiTokenState == ApiTokenState.hasNotLoggedIntoCharacterSinceStartingGw2
                             ? "Error: Log into a character!"
@@ -141,7 +141,7 @@ namespace SessionTracker.Controls
 
                     return;
                 case UpdateLoopState.PauseBetweenStartNewSessionRetries:
-                    if (!_updateLoop.IsTimeForNextTryToStartSession())
+                    if (!_updateLoop.IsTimeForNextStartNewSessionRetry())
                         return;
                     
                     _updateLoop.ResetElapsedTime(); 
@@ -166,7 +166,7 @@ namespace SessionTracker.Controls
                 case UpdateLoopState.StartingNewSession:
                     _updateLoop.ResetElapsedTime();
                     _updateLoop.State = UpdateLoopState.WaitingForApiResponse;
-                    Task.Run(StartSession);
+                    Task.Run(StartNewSession);
                     return;
                 case UpdateLoopState.UpdatingSession:
                     _updateLoop.ResetElapsedTime();
@@ -183,7 +183,7 @@ namespace SessionTracker.Controls
             }
         }
 
-        private async void StartSession()
+        private async void StartNewSession()
         {
             try
             {
@@ -197,7 +197,7 @@ namespace SessionTracker.Controls
 
                 await ApiService.UpdateTotalValuesInModel(_model, _gw2ApiManager);
                 _resetService.UpdateNextResetDateTime();
-                _model.ResetAndStartSession();
+                _model.StartNewSession();
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _statTooltipService.ResetSummaryTooltip(_model);
                 _updateLoop.State = UpdateLoopState.PauseBeforeUpdatingSession;

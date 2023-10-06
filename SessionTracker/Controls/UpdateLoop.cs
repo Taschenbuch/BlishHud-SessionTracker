@@ -60,7 +60,7 @@ namespace SessionTracker.Controls
             return _elapsedTimeTotalInMilliseconds >= 200;
         }
 
-        public bool IsTimeForNextTryToStartSession()
+        public bool IsTimeForNextStartNewSessionRetry()
         {
             return _elapsedTimeTotalInMilliseconds >= GetRetryIntervalInMilliseconds();
         }
