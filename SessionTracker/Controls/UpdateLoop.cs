@@ -3,9 +3,9 @@ using SessionTracker.Settings.SettingEntries;
 
 namespace SessionTracker.Controls
 {
-    public class UpdateState : IDisposable
+    public class UpdateLoop : IDisposable
     {
-        public UpdateState(SettingService settingService)
+        public UpdateLoop(SettingService settingService)
         {
             _settingService = settingService;
 

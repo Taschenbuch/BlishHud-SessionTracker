@@ -12,7 +12,7 @@ namespace SessionTracker.Settings.Window
 {
     public class SettingsWindowService : IDisposable
     {
-        public SettingsWindowService(Model model, SettingService settingService, DateTimeService dateTimeService, TextureService textureService, UpdateState updateLoop)
+        public SettingsWindowService(Model model, SettingService settingService, DateTimeService dateTimeService, TextureService textureService, UpdateLoop updateLoop)
         {
             _settingsWindow = new TabbedWindow2(
                 textureService.SettingsWindowBackgroundTexture,

@@ -85,7 +85,7 @@ namespace SessionTracker
             var fileService           = new FileService(localAndRemoteFileLocations, Logger);
             var model                 = await fileService.LoadModelFromFile();
             var textureService        = new TextureService(model, ContentsManager, Logger);
-            var updateLoop            = new UpdateState(_settingService);
+            var updateLoop            = new UpdateLoop(_settingService);
             var settingsWindowService = new SettingsWindowService(model, _settingService, _dateTimeService, textureService, updateLoop);
 
             var statsContainer = new StatsContainer(model, Gw2ApiManager, textureService, fileService, updateLoop, settingsWindowService, _settingService, Logger)

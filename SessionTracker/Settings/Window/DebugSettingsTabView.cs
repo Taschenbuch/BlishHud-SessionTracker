@@ -8,7 +8,7 @@ namespace SessionTracker.Settings.Window
 {
     public class DebugSettingsTabView : View
     {
-        public DebugSettingsTabView(SettingService settingService, DateTimeService dateTimeService, UpdateState updateLoop)
+        public DebugSettingsTabView(SettingService settingService, DateTimeService dateTimeService, UpdateLoop updateLoop)
         {
             _settingService  = settingService;
             _dateTimeService = dateTimeService;
@@ -37,7 +37,7 @@ namespace SessionTracker.Settings.Window
 
         private void CreateUpdateLoopStateDebugPanel()
         {
-            var updateStateFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Debug update loop state", _rootFlowPanel);
+            var updateLoopStateFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Debug update loop state", _rootFlowPanel);
             _updateLoopStateLabel = new Label()
             {
                 Text = _updateLoop.State.ToString(),
@@ -48,7 +48,7 @@ namespace SessionTracker.Settings.Window
                 {
                     WidthSizingMode = SizingMode.AutoSize,
                     HeightSizingMode = SizingMode.AutoSize,
-                    Parent = updateStateFlowPanel,
+                    Parent = updateLoopStateFlowPanel,
                 }
             };
 
@@ -95,7 +95,7 @@ namespace SessionTracker.Settings.Window
 
         private readonly SettingService _settingService;
         private readonly DateTimeService _dateTimeService;
-        private readonly UpdateState _updateLoop;
+        private readonly UpdateLoop _updateLoop;
         private FlowPanel _rootFlowPanel;
         private Label _apiIntervalInMillisecondsLabel;
         private Label _updateLoopStateLabel;
