@@ -1,6 +1,7 @@
 ﻿using Blish_HUD.Input;
 using Blish_HUD.Settings;
 using Microsoft.Xna.Framework.Input;
+using SessionTracker.AutomaticReset;
 
 namespace SessionTracker.Settings.SettingEntries
 {
@@ -8,6 +9,20 @@ namespace SessionTracker.Settings.SettingEntries
     {
         public SettingService(SettingCollection settings)
         {
+            AutomaticSessionResetSetting = settings.DefineSetting(
+                "automatic session reset",
+                AutomaticSessionReset.OnModuleStart,
+                () => "automatic session reset",
+                () => "Change when all session values are automatically reset to 0");
+
+            MinutesUntilResetAfterModuleShutdownSetting = settings.DefineSetting(
+                "number of minutes until reset after module shutdown",
+                30,
+                () => "minutes until session values reset after module shutdown",
+                () => "Change number of minutes the module will wait after module shutdown before resetting all session values to 0. " +
+                      "This setting can be usefull to not lose session values due to PC / gw2 / blish crashes, " +
+                      $"but still have automatic resets similar to 'On module start' option. Or if you prefer to play in short sessions spread throughout the day");
+
             BackgroundOpacitySetting = settings.DefineSetting(
                 "window background opacity",
                 125,
@@ -156,13 +171,13 @@ namespace SessionTracker.Settings.SettingEntries
             ScrollbarFixDelay.SetRange(50, 500);
 
             DebugApiIntervalEnabledSetting = settings.DefineSetting(
-                "debug mode",
+                "debug api interval enabled",
                 false,
                 () => "use debug api interval",
                 () => "Use debug api interval instead of normal api interval.");
 
             DebugApiIntervalValueSetting = settings.DefineSetting(
-                "debug api interval",
+                "debug api interval value",
                 5 * 1000,
                 () => "debug api interval",
                 () => "Increases polling rate beyond api cache time limit.");
@@ -204,6 +219,8 @@ namespace SessionTracker.Settings.SettingEntries
         public SettingEntry<float> XMainWindowRelativeLocationSetting { get; }
         public SettingEntry<float> YMainWindowRelativeLocationSetting { get; }
         public SettingEntry<bool> UiIsVisibleSetting { get; }
+        public SettingEntry<AutomaticSessionReset> AutomaticSessionResetSetting { get; }
+        public SettingEntry<int> MinutesUntilResetAfterModuleShutdownSetting { get; }
         public SettingEntry<int> BackgroundOpacitySetting { get; }
         public SettingEntry<int> FontSizeIndexSetting { get; }
         public SettingEntry<ValueDisplayFormat> ValueDisplayFormatSetting { get; }

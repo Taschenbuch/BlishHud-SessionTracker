@@ -32,5 +32,24 @@ namespace SessionTracker.Settings
             remoteModel.Stats.AddRange(orderedRefStats);
             return remoteModel;
         }
+
+        public static Model UpdateTotalAtSessionStartInRemoteModel(Model localModel, Model remoteModel)
+        {
+            foreach (var remoteStat in remoteModel.Stats)
+            {
+                var localStat = localModel.Stats.Find(e => e.Id == remoteStat.Id);
+                if(localStat != null)
+                    remoteStat.Value.TotalAtSessionStart = localStat.Value.TotalAtSessionStart;
+            }
+
+            return remoteModel;
+        }
+
+        public static Model UpdateSessionDurationAndResetTimeInRemoteModel(Model localModel, Model remoteModel)
+        {
+            remoteModel.NextResetDateTimeUtc   = localModel.NextResetDateTimeUtc;
+            remoteModel.SessionDuration.Value = localModel.SessionDuration.Value;
+            return remoteModel;
+        }
     }
 }

@@ -11,6 +11,7 @@ using Blish_HUD.Modules.Managers;
 using Blish_HUD.Settings;
 using Microsoft.Xna.Framework;
 using SessionTracker.Controls;
+using SessionTracker.DateTimeUtcNow;
 using SessionTracker.Models;
 using SessionTracker.Services;
 using SessionTracker.Services.Api;
@@ -37,6 +38,7 @@ namespace SessionTracker
         protected override void DefineSettings(SettingCollection settings)
         {
             _settingService = new SettingService(settings);
+            _dateTimeService.DefineSettings(settings);
         }
 
         public override IView GetSettingsView()
@@ -80,12 +82,13 @@ namespace SessionTracker
                 return;
             }
 
-            _fileService              = new FileService(localAndRemoteFileLocations, Logger);
-            var model                 = await _fileService.LoadModelFromFile();
+            var fileService           = new FileService(localAndRemoteFileLocations, Logger);
+            var model                 = await fileService.LoadModelFromFile();
             var textureService        = new TextureService(model, ContentsManager, Logger);
-            var settingsWindowService = new SettingsWindowService(model, _settingService, textureService);
+            var updateLoop            = new UpdateState(_settingService);
+            var settingsWindowService = new SettingsWindowService(model, _settingService, _dateTimeService, textureService, updateLoop);
 
-            var statsContainer = new StatsContainer(model, Gw2ApiManager, textureService, settingsWindowService, _settingService, Logger)
+            var statsContainer = new StatsContainer(model, Gw2ApiManager, textureService, fileService, updateLoop, settingsWindowService, _settingService, Logger)
             {
                 HeightSizingMode = SizingMode.AutoSize,
                 WidthSizingMode  = SizingMode.AutoSize,
@@ -100,6 +103,7 @@ namespace SessionTracker
             // e.g. creating model after textureService, though model needs the reference of model.
             _model                 = model;
             _textureService        = textureService;
+            _fileService           = fileService;
             _statsContainer        = statsContainer;
             _settingsWindowService = settingsWindowService;
 
@@ -126,6 +130,7 @@ namespace SessionTracker
             _cornerIconService?.Dispose();
             _textureService?.Dispose();
             _statsContainer?.Dispose();
+            _dateTimeService?.Dispose();
         }
 
         protected override void Update(GameTime gameTime)
@@ -150,13 +155,14 @@ namespace SessionTracker
         }
 
         private SettingService _settingService;
-        private static readonly Logger Logger = Logger.GetLogger<Module>();
+        public static readonly Logger Logger = Logger.GetLogger<Module>();
         private StatsContainer _statsContainer;
         private FileService _fileService;
         private Model _model;
         private TextureService _textureService;
         private CornerIconService _cornerIconService;
         private SettingsWindowService _settingsWindowService;
+        private readonly DateTimeService _dateTimeService = new DateTimeService();
         private readonly ModuleLoadError _moduleLoadError = new ModuleLoadError();
     }
 }

@@ -48,7 +48,8 @@ namespace SessionTracker.Services
                 HoverIcon        = _cornerIconHoverTexture,
                 BasicTooltipText = TOOLTIP_TEXT,
                 Parent           = GameService.Graphics.SpriteScreen,
-                Priority         = RANDOM_INTEGER_FOR_PRIORITY
+                Priority         = RANDOM_INTEGER_FOR_PRIORITY,
+                Menu             = CreateContextMenu()
             };
 
             _cornerIcon.Menu  =  CreateContextMenu();
@@ -67,6 +68,7 @@ namespace SessionTracker.Services
 
         private void OnResetContextMenuStripItemClick(object sender, MouseEventArgs e)
         {
+            Module.Logger.Info("Manual reset triggered with corner icon context menu by user");
             _statsContainer.ResetSession();
         }
 

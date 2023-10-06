@@ -27,22 +27,47 @@ namespace SessionTracker.Settings
             }
             catch (Exception e)
             {
-                _logger.Error(e, "Error: Failed to save model to file in Module.Unload(). :(");
+                _logger.Error(e, "Error: Failed to save model to file. :(");
             }
+        }
+
+        // dont use this in Module.Unload. We want it to be sync in .Unload()
+        public async Task SaveModelToFileAsync(Model model)
+        {
+            try
+            {
+                var modelJson = JsonService.SerializeModelToJson(model);
+                await WriteFileAsync(modelJson, _localModelFilePath);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e, "Error: Failed to save model to file. :(");
+            }
+        }
+
+        public static async Task WriteFileAsync(string fileContent, string filePath)
+        {
+            var folderPath = Path.GetDirectoryName(filePath);
+            Directory.CreateDirectory(folderPath);
+            using var streamWriter = new StreamWriter(filePath);
+            await streamWriter.WriteAsync(fileContent);
+            await streamWriter.FlushAsync();
         }
 
         public async Task<Model> LoadModelFromFile()
         {
-            var remoteFolderModel = await LoadModelFromRemoteFolder(_remoteModelFilePath, _logger);
+            var remoteModel = await LoadModelFromRemoteFolder(_remoteModelFilePath, _logger);
 
             var isFirstModuleStart = File.Exists(_localModelFilePath) == false;
             if (isFirstModuleStart)
-                return remoteFolderModel;
+                return remoteModel;
 
-            var moduleFolderModel = await LoadModelFromModuleFolder(_localModelFilePath, remoteFolderModel, _logger);
-            remoteFolderModel = RemoteModelService.UpdateStatIsVisibleInRemoteModel(moduleFolderModel, remoteFolderModel);
-            remoteFolderModel = RemoteModelService.UpdateStatsOrderInRemoteModel(moduleFolderModel, remoteFolderModel);
-            return remoteFolderModel;
+            var localModel = await LoadModelFromModuleFolder(_localModelFilePath, remoteModel, _logger);
+            remoteModel = RemoteModelService.UpdateStatIsVisibleInRemoteModel(localModel, remoteModel);
+            remoteModel = RemoteModelService.UpdateStatsOrderInRemoteModel(localModel, remoteModel);
+            remoteModel = RemoteModelService.UpdateTotalAtSessionStartInRemoteModel(localModel, remoteModel);
+            remoteModel = RemoteModelService.UpdateSessionDurationAndResetTimeInRemoteModel(localModel, remoteModel);
+            return remoteModel;
         }
 
         private static async Task<Model> LoadModelFromRemoteFolder(string modelFilePath, Logger logger)
@@ -54,11 +79,10 @@ namespace SessionTracker.Settings
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error: Failed to load remote model from file in Module.LoadAsync(). :(");
+                logger.Error(e, "Error: Failed to load remote model from file. :(");
                 return new Model();
             }
         }
-
 
         private static async Task<Model> LoadModelFromModuleFolder(string modelFilePath, ModelVersion remoteModelVersion, Logger logger)
         {
@@ -77,7 +101,7 @@ namespace SessionTracker.Settings
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error: Failed to load local model from file in Module.LoadAsync(). :(");
+                logger.Error(e, "Error: Failed to load local model from file. :(");
                 return new Model();
             }
         }
