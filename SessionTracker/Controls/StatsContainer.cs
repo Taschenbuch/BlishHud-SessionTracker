@@ -90,7 +90,7 @@ namespace SessionTracker.Controls
 
         public void ResetSession()
         {
-            _updateLoop.State = UpdateLoopState.StartSession;
+            _updateLoop.State = UpdateLoopState.StartingNewSession;
         }
 
         // Update2() because Update() already exists in base class. Update() is not always called but Update2() is!
@@ -110,7 +110,7 @@ namespace SessionTracker.Controls
 
             switch (_updateLoop.State)
             {
-                case UpdateLoopState.WaitForApiTokenAfterModuleStart: // prevent showing an api key error message right after the module started
+                case UpdateLoopState.WaitingForApiTokenAfterModuleStart: // prevent showing an api key error message right after the module started
                     _updateLoop.AddToTimeWaitedForApiToken(gameTime.ElapsedGameTime.TotalMilliseconds);
 
                     if (!_updateLoop.IsTimeForNextApiTokenCheck())
@@ -136,19 +136,19 @@ namespace SessionTracker.Controls
                     _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit = !hasToStartNewSession;
 
                     _updateLoop.State = hasToStartNewSession
-                        ? UpdateLoopState.StartSession
-                        : UpdateLoopState.UpdateSession;
+                        ? UpdateLoopState.StartingNewSession
+                        : UpdateLoopState.UpdatingSession;
 
                     return;
-                case UpdateLoopState.WaitBeforeStartSession:
+                case UpdateLoopState.PauseBetweenStartNewSessionRetries:
                     if (!_updateLoop.IsTimeForNextTryToStartSession())
                         return;
                     
                     _updateLoop.ResetElapsedTime(); 
-                    _updateLoop.State = UpdateLoopState.StartSession;
+                    _updateLoop.State = UpdateLoopState.StartingNewSession;
                     return;
 
-                case UpdateLoopState.WaitBeforeUpdateSession:
+                case UpdateLoopState.PauseBeforeUpdatingSession:
                     if (!_updateLoop.IsTimeForSessionUpdate())
                         return;
 
@@ -157,23 +157,23 @@ namespace SessionTracker.Controls
                     // automatic reset doesnt have to be instant, it is okay if it is delayed by up to 5 minutes. better than spamming the check in the update loop
                     if (_resetService.HasToAutomaticallyResetSession(ResetCheckLocation.BeforeSessionUpdate))
                     {
-                        _updateLoop.State = UpdateLoopState.StartSession;
+                        _updateLoop.State = UpdateLoopState.StartingNewSession;
                         return;
                     }
 
-                    _updateLoop.State = UpdateLoopState.UpdateSession;
+                    _updateLoop.State = UpdateLoopState.UpdatingSession;
                     return;
-                case UpdateLoopState.StartSession:
+                case UpdateLoopState.StartingNewSession:
                     _updateLoop.ResetElapsedTime();
-                    _updateLoop.State = UpdateLoopState.WaitForApiResponse;
+                    _updateLoop.State = UpdateLoopState.WaitingForApiResponse;
                     Task.Run(StartSession);
                     return;
-                case UpdateLoopState.UpdateSession:
+                case UpdateLoopState.UpdatingSession:
                     _updateLoop.ResetElapsedTime();
-                    _updateLoop.State = UpdateLoopState.WaitForApiResponse;
+                    _updateLoop.State = UpdateLoopState.WaitingForApiResponse;
                     Task.Run(UpdateSession);
                     return;
-                case UpdateLoopState.WaitForApiResponse:
+                case UpdateLoopState.WaitingForApiResponse:
                     // this case is used to wait for the Task.Run(..) to finish. They will update the state to leave this state, too.
                     // Because of that the state must not be set here directly. It would cause state update racing conditions with the Task.Runs
                     _updateLoop.ResetElapsedTime();
@@ -191,7 +191,7 @@ namespace SessionTracker.Controls
                 if (!apiTokenService.CanAccessApi)
                 {
                     SetValuesToApiKeyErrorTextAndTooltip(apiTokenService);
-                    _updateLoop.State = UpdateLoopState.WaitBeforeStartSession;
+                    _updateLoop.State = UpdateLoopState.PauseBetweenStartNewSessionRetries;
                     return;
                 }
 
@@ -200,21 +200,21 @@ namespace SessionTracker.Controls
                 _model.ResetAndStartSession();
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _statTooltipService.ResetSummaryTooltip(_model);
-                _updateLoop.State = UpdateLoopState.WaitBeforeUpdateSession;
+                _updateLoop.State = UpdateLoopState.PauseBeforeUpdatingSession;
             }
             catch (LogWarnException e)
             {
                 var tooltip = $"Error: API call failed while initializing. :-( \n{RETRY_IN_X_SECONDS_MESSAGE}";
                 SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
                 _logger.Warn(e, "Error when initializing values: API failed to respond.");
-                _updateLoop.State = UpdateLoopState.WaitBeforeStartSession;
+                _updateLoop.State = UpdateLoopState.PauseBetweenStartNewSessionRetries;
             }
             catch (Exception e)
             {
                 var tooltip = $"Error: Bug in module code. :-( \n{RETRY_IN_X_SECONDS_MESSAGE}";
                 SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
                 _logger.Error(e, "Error when initializing values: bug in module code.");
-                _updateLoop.State = UpdateLoopState.WaitBeforeStartSession; // todo module error = module should stop? error updateState einbauen?
+                _updateLoop.State = UpdateLoopState.PauseBetweenStartNewSessionRetries; // todo module error = module should stop? error updateState einbauen?
             }
         }
 
@@ -263,7 +263,7 @@ namespace SessionTracker.Controls
             {
                 // even in error case an init makes no sense. It is better to wait for the user to fix the api key to continue to update the old values.
                 // this can only cause issues if in the future blish supports swapping gw2 accounts without doing an unload+load of a module.
-                _updateLoop.State = UpdateLoopState.WaitBeforeUpdateSession;
+                _updateLoop.State = UpdateLoopState.PauseBeforeUpdatingSession;
             }
         }
 

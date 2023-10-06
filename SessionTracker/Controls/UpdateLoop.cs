@@ -97,7 +97,7 @@ namespace SessionTracker.Controls
         private double _updateSessionIntervalInMilliseconds = REGULAR_UPDATE_SESSION_INTERVAL_IN_MILLISECONDS;
         private double _elapsedTimeTotalInMilliseconds;
         private double _timeWaitedForApiTokenInMilliseconds;
-        private UpdateLoopState _state = UpdateLoopState.WaitForApiTokenAfterModuleStart;
+        private UpdateLoopState _state = UpdateLoopState.WaitingForApiTokenAfterModuleStart;
         private readonly SettingService _settingService;
     }
 }

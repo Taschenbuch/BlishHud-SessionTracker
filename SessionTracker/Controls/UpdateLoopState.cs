@@ -2,11 +2,11 @@
 {
     public enum UpdateLoopState
     {
-        WaitForApiTokenAfterModuleStart,
-        WaitBeforeStartSession,
-        WaitBeforeUpdateSession,
-        WaitForApiResponse,
-        StartSession,
-        UpdateSession,
+        WaitingForApiTokenAfterModuleStart,
+        PauseBetweenStartNewSessionRetries,
+        PauseBeforeUpdatingSession,
+        WaitingForApiResponse,
+        StartingNewSession,
+        UpdatingSession,
     }
 }

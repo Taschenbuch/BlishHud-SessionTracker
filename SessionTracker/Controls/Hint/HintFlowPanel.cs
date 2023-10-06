@@ -121,7 +121,7 @@ namespace SessionTracker.Controls.Hint
                 return HintType.AllStatsHiddenByUser;
 
             var allHiddenBecauseOfZeroValue = stats.Any(e => e.IsVisible && e.HasNonZeroSessionValue) == false;
-            var hasModuleInitializedStatValues = updateLoopState != UpdateLoopState.WaitForApiTokenAfterModuleStart;
+            var hasModuleInitializedStatValues = updateLoopState != UpdateLoopState.WaitingForApiTokenAfterModuleStart;
             if (hideStatsWithValueZero && allHiddenBecauseOfZeroValue && hasModuleInitializedStatValues)
                 return HintType.AllStatsHiddenByHideZeroValuesSetting;
 
