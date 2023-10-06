@@ -42,8 +42,9 @@ namespace SessionTracker.Controls
             _logger         = logger;
 
             _resetService = new ResetService(model, settingService.AutomaticSessionResetSetting, settingService.MinutesUntilResetAfterModuleShutdownSetting);
+            _model.SessionDuration.StartMeasuring();
             CreateUi(settingsWindowService);
-            
+
             _valueLabelTextService = new ValueLabelTextService(_valueLabelByStatId, _model, settingService, logger);
             _statTooltipService    = new StatTooltipService(_titleFlowPanelByStatId, _valueLabelByStatId, model, _settingService);
 
@@ -233,7 +234,6 @@ namespace SessionTracker.Controls
                 }
 
                 await ApiService.UpdateTotalValuesInModel(_model, _gw2ApiManager);
-                _model.UpdateSessionDuration();
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _statTooltipService.UpdateSummaryTooltip(_model);
                 _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit = false;

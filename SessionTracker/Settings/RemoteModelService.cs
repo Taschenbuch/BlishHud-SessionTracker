@@ -48,7 +48,7 @@ namespace SessionTracker.Settings
         public static Model UpdateSessionDurationAndResetTimeInRemoteModel(Model localModel, Model remoteModel)
         {
             remoteModel.NextResetDateTimeUtc   = localModel.NextResetDateTimeUtc;
-            remoteModel.SessionDuration = localModel.SessionDuration;
+            remoteModel.SessionDuration.Value = localModel.SessionDuration.Value;
             return remoteModel;
         }
     }
