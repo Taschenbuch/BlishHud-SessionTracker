@@ -10,7 +10,7 @@ using SessionTracker.SettingEntries;
 using SessionTracker.Settings;
 using SessionTracker.Settings.Window;
 
-namespace SessionTracker.Controls.Hint
+namespace SessionTracker.StatsWindow
 {
     public class HintFlowPanel : FlowPanel
     {

@@ -1,4 +1,4 @@
-﻿namespace SessionTracker.Controls.Hint
+﻿namespace SessionTracker.StatsWindow
 {
     public enum HintType
     {

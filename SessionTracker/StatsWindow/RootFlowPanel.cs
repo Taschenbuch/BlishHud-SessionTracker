@@ -6,7 +6,7 @@ using Blish_HUD.Controls;
 using Blish_HUD.Input;
 using SessionTracker.SettingEntries;
 
-namespace SessionTracker.Controls
+namespace SessionTracker.StatsWindow
 {
     public class RootFlowPanel : FlowPanel
     {

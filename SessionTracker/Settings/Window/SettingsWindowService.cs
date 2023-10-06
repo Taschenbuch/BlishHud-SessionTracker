@@ -2,11 +2,11 @@
 using Blish_HUD;
 using Blish_HUD.Controls;
 using Microsoft.Xna.Framework;
-using SessionTracker.Controls;
 using SessionTracker.DateTimeUtcNow;
 using SessionTracker.Models;
 using SessionTracker.Services;
 using SessionTracker.SettingEntries;
+using SessionTracker.StatsWindow;
 
 namespace SessionTracker.Settings.Window
 {

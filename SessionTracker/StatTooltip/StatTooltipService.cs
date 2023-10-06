@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Blish_HUD.Controls;
-using SessionTracker.Controls;
 using SessionTracker.Models;
 using SessionTracker.SettingEntries;
+using SessionTracker.StatsWindow;
 
 namespace SessionTracker.Tooltip
 {

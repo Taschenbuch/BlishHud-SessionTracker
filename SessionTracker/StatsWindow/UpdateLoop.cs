@@ -1,7 +1,7 @@
 ﻿using System;
 using SessionTracker.SettingEntries;
 
-namespace SessionTracker.Controls
+namespace SessionTracker.StatsWindow
 {
     public class UpdateLoop : IDisposable
     {

@@ -5,7 +5,7 @@ using SessionTracker.Models;
 using SessionTracker.Services;
 using SessionTracker.SettingEntries;
 
-namespace SessionTracker.Controls
+namespace SessionTracker.StatsWindow
 {
     public class StatTitleFlowPanel : FlowPanel
     {

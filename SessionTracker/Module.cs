@@ -20,6 +20,7 @@ using SessionTracker.Services;
 using SessionTracker.SettingEntries;
 using SessionTracker.Settings;
 using SessionTracker.Settings.Window;
+using SessionTracker.StatsWindow;
 
 namespace SessionTracker
 {

@@ -1,4 +1,4 @@
-﻿namespace SessionTracker.Controls
+﻿namespace SessionTracker.StatsWindow
 {
     public enum UpdateLoopState
     {

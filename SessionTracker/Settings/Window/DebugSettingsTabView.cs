@@ -3,6 +3,7 @@ using Blish_HUD.Graphics.UI;
 using SessionTracker.Controls;
 using SessionTracker.DateTimeUtcNow;
 using SessionTracker.SettingEntries;
+using SessionTracker.StatsWindow;
 
 namespace SessionTracker.Settings.Window
 {

@@ -6,7 +6,7 @@ using SessionTracker.Services;
 using SessionTracker.SettingEntries;
 using Container = Blish_HUD.Controls.Container;
 
-namespace SessionTracker.Controls
+namespace SessionTracker.StatsWindow
 {
     public class RelativePositionAndMouseDraggableContainer : Container
     {

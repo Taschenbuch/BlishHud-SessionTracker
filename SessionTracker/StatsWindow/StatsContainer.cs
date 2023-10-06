@@ -9,7 +9,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using SessionTracker.Api;
 using SessionTracker.AutomaticReset;
-using SessionTracker.Controls.Hint;
 using SessionTracker.Files;
 using SessionTracker.Models;
 using SessionTracker.Other;
@@ -20,7 +19,7 @@ using SessionTracker.Settings.Window;
 using SessionTracker.Text;
 using SessionTracker.Tooltip;
 
-namespace SessionTracker.Controls
+namespace SessionTracker.StatsWindow
 {
     public class StatsContainer : RelativePositionAndMouseDraggableContainer
     {
