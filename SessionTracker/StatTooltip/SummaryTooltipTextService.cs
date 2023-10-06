@@ -5,9 +5,10 @@ using SessionTracker.Constants;
 using SessionTracker.Models;
 using SessionTracker.Properties;
 using SessionTracker.SettingEntries;
-using SessionTracker.Value.Text;
+using SessionTracker.Text;
+using SessionTracker.Value;
 
-namespace SessionTracker.Value.Tooltip
+namespace SessionTracker.Tooltip
 {
     public class SummaryTooltipTextService
     {

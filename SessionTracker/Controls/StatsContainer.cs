@@ -17,8 +17,8 @@ using SessionTracker.Services;
 using SessionTracker.SettingEntries;
 using SessionTracker.Settings;
 using SessionTracker.Settings.Window;
-using SessionTracker.Value.Text;
-using SessionTracker.Value.Tooltip;
+using SessionTracker.Text;
+using SessionTracker.Tooltip;
 
 namespace SessionTracker.Controls
 {

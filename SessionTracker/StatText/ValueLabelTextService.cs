@@ -6,8 +6,9 @@ using SessionTracker.Constants;
 using SessionTracker.Models;
 using SessionTracker.Services;
 using SessionTracker.SettingEntries;
+using SessionTracker.Value;
 
-namespace SessionTracker.Value.Text
+namespace SessionTracker.Text
 {
     public class ValueLabelTextService : IDisposable
     {

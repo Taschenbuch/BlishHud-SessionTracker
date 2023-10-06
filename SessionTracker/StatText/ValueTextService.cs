@@ -2,8 +2,9 @@
 using System.Globalization;
 using Blish_HUD;
 using SessionTracker.SettingEntries;
+using SessionTracker.Value;
 
-namespace SessionTracker.Value.Text
+namespace SessionTracker.Text
 {
     public class ValueTextService
     {

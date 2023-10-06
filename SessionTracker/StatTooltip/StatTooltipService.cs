@@ -4,7 +4,7 @@ using SessionTracker.Controls;
 using SessionTracker.Models;
 using SessionTracker.SettingEntries;
 
-namespace SessionTracker.Value.Tooltip
+namespace SessionTracker.Tooltip
 {
     public class StatTooltipService
     {
