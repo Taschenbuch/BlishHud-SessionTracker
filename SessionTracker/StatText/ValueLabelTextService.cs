@@ -4,8 +4,8 @@ using Blish_HUD;
 using Blish_HUD.Controls;
 using SessionTracker.Constants;
 using SessionTracker.Models;
-using SessionTracker.Services;
 using SessionTracker.SettingEntries;
+using SessionTracker.StatValue;
 using SessionTracker.Value;
 
 namespace SessionTracker.Text

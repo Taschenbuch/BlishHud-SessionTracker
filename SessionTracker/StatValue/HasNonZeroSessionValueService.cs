@@ -1,7 +1,7 @@
 ﻿using Blish_HUD;
 using SessionTracker.SettingEntries;
 
-namespace SessionTracker.Services
+namespace SessionTracker.StatValue
 {
     public class HasNonZeroSessionValueService
     {

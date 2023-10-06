@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
-using SessionTracker.Services;
+using SessionTracker.StatsWindow.RelativePositionWindow;
 
 namespace SessionTracker.UnitTest
 {

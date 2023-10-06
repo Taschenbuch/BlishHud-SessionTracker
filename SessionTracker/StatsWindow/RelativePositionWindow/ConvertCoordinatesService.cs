@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace SessionTracker.Services
+namespace SessionTracker.StatsWindow
 {
     public class ConvertCoordinatesService
     {
