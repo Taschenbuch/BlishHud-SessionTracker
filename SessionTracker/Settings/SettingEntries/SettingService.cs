@@ -15,6 +15,14 @@ namespace SessionTracker.Settings.SettingEntries
                 () => "automatic session reset",
                 () => "Change when all session values are automatically reset to 0");
 
+            MinutesUntilResetAfterModuleShutdownSetting = settings.DefineSetting(
+                "number of minutes until reset after module shutdown",
+                30,
+                () => "minutes until session values reset after module shutdown",
+                () => "Change number of minutes the module will wait after module shutdown before resetting all session values to 0. " +
+                      "This setting can be usefull to not lose session values due to PC / gw2 / blish crashes, " +
+                      $"but still have automatic resets similar to 'On module start' option. Or if you prefer to play in short sessions spread throughout the day");
+
             BackgroundOpacitySetting = settings.DefineSetting(
                 "window background opacity",
                 125,
@@ -176,8 +184,6 @@ namespace SessionTracker.Settings.SettingEntries
 
             DebugApiIntervalValueSetting.SetRange(1000, 20 * 1000);
 
-            
-
             UiIsVisibleSetting = settings.DefineSetting(
                 "ui is visible",
                 true,
@@ -214,6 +220,7 @@ namespace SessionTracker.Settings.SettingEntries
         public SettingEntry<float> YMainWindowRelativeLocationSetting { get; }
         public SettingEntry<bool> UiIsVisibleSetting { get; }
         public SettingEntry<AutomaticSessionReset> AutomaticSessionResetSetting { get; }
+        public SettingEntry<int> MinutesUntilResetAfterModuleShutdownSetting { get; }
         public SettingEntry<int> BackgroundOpacitySetting { get; }
         public SettingEntry<int> FontSizeIndexSetting { get; }
         public SettingEntry<ValueDisplayFormat> ValueDisplayFormatSetting { get; }

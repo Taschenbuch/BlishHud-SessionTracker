@@ -9,13 +9,13 @@ namespace SessionTracker.Reset
 {
     public class ResetService : IDisposable
     {
-        public ResetService(Model model, SettingEntry<AutomaticSessionReset> automaticSessionResetSetting)
+        public ResetService(Model model, SettingEntry<AutomaticSessionReset> automaticSessionResetSetting, SettingEntry<int> minutesUntilResetAfterModuleShutdownSetting)
         {
             _model = model;
             _automaticSessionResetSetting = automaticSessionResetSetting;
-
+            _minutesUntilResetAfterModuleShutdownSetting = minutesUntilResetAfterModuleShutdownSetting;
             automaticSessionResetSetting.SettingChanged += AutomaticSessionResetSettingChanged;
-            model.NextResetDateTimeUtc = InitializeNextResetDateTime(automaticSessionResetSetting.Value, model.NextResetDateTimeUtc);
+            model.NextResetDateTimeUtc = InitializeNextResetDateTime(automaticSessionResetSetting.Value, minutesUntilResetAfterModuleShutdownSetting.Value, model.NextResetDateTimeUtc);
         }
 
         public void Dispose()
@@ -25,11 +25,13 @@ namespace SessionTracker.Reset
 
         public bool HasToAutomaticallyResetSession(ResetWhere resetWhere)
         {
+            var isPastResetDate = _model.NextResetDateTimeUtc < DateTimeService.UtcNow;
             var hasToReset = _automaticSessionResetSetting.Value switch
             {
                 AutomaticSessionReset.Never => false,
                 AutomaticSessionReset.OnModuleStart => resetWhere == ResetWhere.ModuleStartup,
-                _ => _model.NextResetDateTimeUtc < DateTimeService.UtcNow,
+                AutomaticSessionReset.MinutesAfterModuleShutdown => resetWhere == ResetWhere.ModuleStartup && isPastResetDate,
+                _ => isPastResetDate,
             };
 
             if (hasToReset)
@@ -41,18 +43,26 @@ namespace SessionTracker.Reset
             return hasToReset;
         }
 
-        public void UpdateNextResetDateTimetInModel()
+        public void UpdateNextResetDateTimeForMinutesAfterShutdownReset()
         {
-            _model.NextResetDateTimeUtc = GetNextResetDateTimeUtc(_automaticSessionResetSetting.Value, DateTimeService.UtcNow);
+            if (_automaticSessionResetSetting.Value == AutomaticSessionReset.MinutesAfterModuleShutdown)
+                UpdateNextResetDateTime();
         }
 
-        public static DateTime GetNextResetDateTimeUtc(AutomaticSessionReset automaticSessionReset, DateTime dateTimeUtc)
+        public void UpdateNextResetDateTime()
+        {
+           _model.NextResetDateTimeUtc = GetNextResetDateTimeUtc(_automaticSessionResetSetting.Value, DateTimeService.UtcNow, _minutesUntilResetAfterModuleShutdownSetting.Value);
+        }
+
+        public static DateTime GetNextResetDateTimeUtc(AutomaticSessionReset automaticSessionReset, DateTime dateTimeUtc, int minutesUntilResetAfterModuleShutdown)
         {
             switch (automaticSessionReset)
             {
                 case AutomaticSessionReset.OnModuleStart:
                 case AutomaticSessionReset.Never:
                     return Model.NEVER_OR_ON_MODULE_START_RESET_DATE_TIME;
+                case AutomaticSessionReset.MinutesAfterModuleShutdown:
+                    return dateTimeUtc + TimeSpan.FromMinutes(minutesUntilResetAfterModuleShutdown);
                 case AutomaticSessionReset.OnDailyReset:
                     return GetNextDailyResetDateTimeUtc(dateTimeUtc);
                 case AutomaticSessionReset.OnWeeklyReset:
@@ -64,10 +74,8 @@ namespace SessionTracker.Reset
                 case AutomaticSessionReset.OnWeeklyMapBonusRewardsReset:
                     return GetNextWeeklyResetDateTimeUtc(dateTimeUtc, DayOfWeek.Thursday, 20);
                 default:
-                    {
-                        Module.Logger.Error($"Fallback: never reset. Because switch case missing or should not be be handled here: {nameof(AutomaticSessionReset)}.{automaticSessionReset}.");
-                        return Model.NEVER_OR_ON_MODULE_START_RESET_DATE_TIME;
-                    }
+                    Module.Logger.Error($"Fallback: never reset. Because switch case missing or should not be be handled here: {nameof(AutomaticSessionReset)}.{automaticSessionReset}.");
+                    return Model.NEVER_OR_ON_MODULE_START_RESET_DATE_TIME;
             }
         }
 
@@ -85,20 +93,21 @@ namespace SessionTracker.Reset
             return dateTimeUtc.Date.AddDays(1); // daily reset is at 00:00 UTC
         }
 
-        private static DateTime InitializeNextResetDateTime(AutomaticSessionReset automaticSessionReset, DateTime nextResetDateTimeUtc)
+        private static DateTime InitializeNextResetDateTime(AutomaticSessionReset automaticSessionReset, int minutesAfterModuleShutdownUntilResetSetting, DateTime nextResetDateTimeUtc)
         {
             var initializeRequired = nextResetDateTimeUtc == Model.UNDEFINED_RESET_DATE_TIME;
             return initializeRequired
-                ? GetNextResetDateTimeUtc(automaticSessionReset, DateTimeService.UtcNow)
+                ? GetNextResetDateTimeUtc(automaticSessionReset, DateTimeService.UtcNow, minutesAfterModuleShutdownUntilResetSetting)
                 : nextResetDateTimeUtc;
         }
 
         private void AutomaticSessionResetSettingChanged(object sender, ValueChangedEventArgs<AutomaticSessionReset> e)
         {
-            UpdateNextResetDateTimetInModel();
+            UpdateNextResetDateTime();
         }
 
         private readonly Model _model;
         private readonly SettingEntry<AutomaticSessionReset> _automaticSessionResetSetting;
+        private readonly SettingEntry<int> _minutesUntilResetAfterModuleShutdownSetting;
     }
 }

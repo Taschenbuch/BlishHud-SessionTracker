@@ -41,7 +41,7 @@ namespace SessionTracker.Controls
             _settingService = settingService;
             _logger         = logger;
 
-            _resetService = new ResetService(model, settingService.AutomaticSessionResetSetting);
+            _resetService = new ResetService(model, settingService.AutomaticSessionResetSetting, settingService.MinutesUntilResetAfterModuleShutdownSetting);
             CreateUi(settingsWindowService);
             
             _valueLabelTextService = new ValueLabelTextService(_valueLabelByStatId, _model, settingService, logger);
@@ -131,7 +131,6 @@ namespace SessionTracker.Controls
 
                     // waited too long: provokes api key error message for user even in character select when waited long enough
                     var hasToReset = _resetService.HasToAutomaticallyResetSession(ResetWhere.ModuleStartup);
-
                     _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit = !hasToReset;
 
                     _updateState.State = hasToReset
@@ -195,7 +194,7 @@ namespace SessionTracker.Controls
                 }
 
                 await ApiService.UpdateTotalValuesInModel(_model, _gw2ApiManager);
-                _resetService.UpdateNextResetDateTimetInModel();
+                _resetService.UpdateNextResetDateTime();
                 _model.ResetAndStartSession();
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _statTooltipService.ResetSummaryTooltip(_model);
@@ -221,6 +220,8 @@ namespace SessionTracker.Controls
         {
             try
             {
+                _resetService.UpdateNextResetDateTimeForMinutesAfterShutdownReset();
+
                 var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _gw2ApiManager);
                 if (!apiTokenService.CanAccessApi)
                 {
@@ -264,7 +265,6 @@ namespace SessionTracker.Controls
                 _updateState.State = State.WaitBeforeUpdateSession;
             }
         }
-
 
         private void SetValuesToApiKeyErrorTextAndTooltip(ApiTokenService apiTokenService)
         {

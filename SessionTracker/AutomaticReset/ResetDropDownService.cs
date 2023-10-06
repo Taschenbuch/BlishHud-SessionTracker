@@ -17,22 +17,25 @@ namespace SessionTracker.Reset
                 [AutomaticSessionReset.OnWeeklyReset] = $"On weekly reset ({GetNextWeeklyResetInLocalTime(AutomaticSessionReset.OnWeeklyReset)})",
                 [AutomaticSessionReset.OnWeeklyNaWvwReset] = $"On weekly NA WvW reset ({GetNextWeeklyResetInLocalTime(AutomaticSessionReset.OnWeeklyNaWvwReset)})",
                 [AutomaticSessionReset.OnWeeklyEuWvwReset] = $"On weekly EU WvW reset ({GetNextWeeklyResetInLocalTime(AutomaticSessionReset.OnWeeklyEuWvwReset)})",
-                [AutomaticSessionReset.OnWeeklyMapBonusRewardsReset] = $"On weekly map bonus rewards reset ({GetNextWeeklyResetInLocalTime(AutomaticSessionReset.OnWeeklyMapBonusRewardsReset)})"
+                [AutomaticSessionReset.OnWeeklyMapBonusRewardsReset] = $"On weekly map bonus rewards reset ({GetNextWeeklyResetInLocalTime(AutomaticSessionReset.OnWeeklyMapBonusRewardsReset)})",
+                [AutomaticSessionReset.MinutesAfterModuleShutdown] = $"Minutes after module shutdown (change amount of minutes below) "
             };
         }
 
         private static string GetNextWeeklyResetInLocalTime(AutomaticSessionReset automaticSessionReset)
         {
-            return ResetService.GetNextResetDateTimeUtc(automaticSessionReset, DateTimeService.UtcNow)
+            return ResetService.GetNextResetDateTimeUtc(automaticSessionReset, DateTimeService.UtcNow, DOES_NOT_MATTER)
                 .ToLocalTime()
                 .ToString("dddd HH:mm");
         }
 
         private static string GetNextDailyResetLocalTime()
         {
-            return ResetService.GetNextResetDateTimeUtc(AutomaticSessionReset.OnDailyReset, DateTimeService.UtcNow)
+            return ResetService.GetNextResetDateTimeUtc(AutomaticSessionReset.OnDailyReset, DateTimeService.UtcNow, DOES_NOT_MATTER)
                 .ToLocalTime()
                 .ToString("HH:mm");
         }
+
+        private const int DOES_NOT_MATTER = 60;
     }
 }
