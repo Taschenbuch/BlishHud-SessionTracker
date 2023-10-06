@@ -2,7 +2,7 @@
 using Blish_HUD;
 using Microsoft.Xna.Framework;
 
-namespace SessionTracker.Services.RemoteFiles
+namespace SessionTracker.Files.RemoteFiles
 {
     public class ErrorWindow : StandardWindow
     {

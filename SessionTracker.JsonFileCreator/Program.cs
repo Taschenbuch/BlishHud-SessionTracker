@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
+using SessionTracker.Files;
 using SessionTracker.JsonFileCreator.StatServices;
 using SessionTracker.Models;
-using SessionTracker.Settings;
 
 namespace SessionTracker.JsonFileCreator
 {

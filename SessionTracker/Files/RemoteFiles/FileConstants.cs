@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SessionTracker.Services.RemoteFiles
+namespace SessionTracker.Files.RemoteFiles
 {
     public class FileConstants
     {

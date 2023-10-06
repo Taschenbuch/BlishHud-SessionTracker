@@ -1,7 +1,7 @@
 ﻿using Blish_HUD.Modules.Managers;
 using System.Collections.Generic;
 
-namespace SessionTracker.Services.RemoteFiles
+namespace SessionTracker.Files.RemoteFiles
 {
     public class LocalAndRemoteFileLocations
     {
@@ -11,7 +11,7 @@ namespace SessionTracker.Services.RemoteFiles
             LocalRootFolderPath = directoriesManager.GetFullDirectoryPath(fileConstants.ModuleFolderName);
             CreateFileLocations();
         }
-        
+
         public string DeprecatedTextUrl => GetRemoteFilePath("deprecated.txt");
         public string LocalRootFolderPath { get; }
         public List<FileLocation> DataFileLocations { get; } = new List<FileLocation>();

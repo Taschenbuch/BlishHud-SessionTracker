@@ -3,17 +3,18 @@ using System.IO;
 using System.Threading.Tasks;
 using Blish_HUD;
 using Newtonsoft.Json;
+using SessionTracker.Files.RemoteFiles;
 using SessionTracker.Models;
-using SessionTracker.Services.RemoteFiles;
+using SessionTracker.Settings;
 
-namespace SessionTracker.Settings
+namespace SessionTracker.Files
 {
     public class FileService
     {
         public FileService(LocalAndRemoteFileLocations localAndRemoteFileLocations, Logger logger)
         {
-            _logger              = logger;
-            _localModelFilePath  = Path.Combine(localAndRemoteFileLocations.LocalRootFolderPath, FileConstants.ModelFileName);
+            _logger = logger;
+            _localModelFilePath = Path.Combine(localAndRemoteFileLocations.LocalRootFolderPath, FileConstants.ModelFileName);
             _remoteModelFilePath = localAndRemoteFileLocations.GetLocalFilePath(FileConstants.ModelFileName);
         }
 

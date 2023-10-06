@@ -5,9 +5,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Blish_HUD;
-using SessionTracker.Settings;
+using SessionTracker.Files;
 
-namespace SessionTracker.Services.RemoteFiles
+namespace SessionTracker.Files.RemoteFiles
 {
     public class RemoteFilesService
     {
@@ -30,7 +30,7 @@ namespace SessionTracker.Services.RemoteFiles
             {
                 var deprecatedText = await GetTextFromUrl(deprecatedUrl);
                 return string.IsNullOrWhiteSpace(deprecatedText)
-                    ? DEFAULT_DEPRECATED_TEXT 
+                    ? DEFAULT_DEPRECATED_TEXT
                     : deprecatedText;
             }
             catch (Exception)

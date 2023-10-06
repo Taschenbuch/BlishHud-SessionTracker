@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using SessionTracker.Models;
 using Newtonsoft.Json.Linq;
 
-namespace SessionTracker.Settings
+namespace SessionTracker.Files
 {
     public static class JsonService
     {

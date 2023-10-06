@@ -2,7 +2,7 @@
 using Blish_HUD.Controls;
 using Blish_HUD.Graphics.UI;
 
-namespace SessionTracker.Services.RemoteFiles
+namespace SessionTracker.Files.RemoteFiles
 {
     public class ErrorSettingsView : View
     {

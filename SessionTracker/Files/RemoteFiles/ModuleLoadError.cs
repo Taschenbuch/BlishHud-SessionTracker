@@ -1,7 +1,7 @@
 ﻿using Blish_HUD.Graphics.UI;
 using System;
 
-namespace SessionTracker.Services.RemoteFiles
+namespace SessionTracker.Files.RemoteFiles
 {
     public class ModuleLoadError : IDisposable
     {

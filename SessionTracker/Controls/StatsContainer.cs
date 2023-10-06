@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using SessionTracker.Api;
 using SessionTracker.AutomaticReset;
 using SessionTracker.Controls.Hint;
+using SessionTracker.Files;
 using SessionTracker.Models;
 using SessionTracker.Reset;
 using SessionTracker.Services;

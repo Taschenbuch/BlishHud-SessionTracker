@@ -1,4 +1,4 @@
-﻿namespace SessionTracker.Services.RemoteFiles
+﻿namespace SessionTracker.Files.RemoteFiles
 {
     public class FileLocation
     {
