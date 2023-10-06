@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SessionTracker.Settings
+namespace SessionTracker.Other
 {
     [Serializable]
     public class LogWarnException : Exception

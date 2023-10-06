@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using SessionTracker.Files.RemoteFiles;
 using SessionTracker.FilesAndMigration;
 using SessionTracker.Models;
-using SessionTracker.Settings;
+using SessionTracker.Other;
 
 namespace SessionTracker.Files
 {
