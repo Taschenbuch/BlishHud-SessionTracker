@@ -11,7 +11,7 @@ using SessionTracker.Controls;
 using SessionTracker.Reset;
 using SessionTracker.SettingEntries;
 
-namespace SessionTracker.Settings.Window
+namespace SessionTracker.SettingsWindow
 {
     public class GeneralSettingsTabView : View
     {

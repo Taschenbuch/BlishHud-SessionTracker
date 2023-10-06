@@ -1,5 +1,5 @@
 ﻿using Blish_HUD.Controls;
-using SessionTracker.Settings.Window;
+using SessionTracker.SettingsWindow;
 
 namespace SessionTracker.Settings
 {

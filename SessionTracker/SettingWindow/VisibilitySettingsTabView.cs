@@ -4,7 +4,7 @@ using SessionTracker.Controls;
 using SessionTracker.SettingEntries;
 using System;
 
-namespace SessionTracker.Settings.Window
+namespace SessionTracker.SettingsWindow
 {
     public class VisibilitySettingsTabView : View
     {
@@ -26,7 +26,7 @@ namespace SessionTracker.Settings.Window
             ControlFactory.CreateSetting(visibilitySectionFlowPanel, _settingService.WindowIsVisibleOnWorldMapSetting);
             ControlFactory.CreateSetting(visibilitySectionFlowPanel, _settingService.WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting);
         }
-        
+
         private readonly SettingService _settingService;
         private FlowPanel _rootFlowPanel;
     }

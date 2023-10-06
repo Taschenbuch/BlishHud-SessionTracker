@@ -8,7 +8,7 @@ using SessionTracker.Models;
 using SessionTracker.Services;
 using SessionTracker.SettingEntries;
 using SessionTracker.Settings;
-using SessionTracker.Settings.Window;
+using SessionTracker.SettingsWindow;
 using SessionTracker.StatsWindow;
 
 namespace SessionTracker.StatsHint

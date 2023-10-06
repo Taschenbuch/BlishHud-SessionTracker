@@ -6,9 +6,10 @@ using SessionTracker.DateTimeUtcNow;
 using SessionTracker.Models;
 using SessionTracker.Services;
 using SessionTracker.SettingEntries;
+using SessionTracker.Settings.Window;
 using SessionTracker.StatsWindow;
 
-namespace SessionTracker.Settings.Window
+namespace SessionTracker.SettingsWindow
 {
     public class SettingsWindowService : IDisposable
     {

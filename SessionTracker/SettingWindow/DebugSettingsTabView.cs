@@ -5,7 +5,7 @@ using SessionTracker.DateTimeUtcNow;
 using SessionTracker.SettingEntries;
 using SessionTracker.StatsWindow;
 
-namespace SessionTracker.Settings.Window
+namespace SessionTracker.SettingsWindow
 {
     public class DebugSettingsTabView : View
     {

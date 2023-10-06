@@ -12,7 +12,7 @@ using SessionTracker.Models;
 using SessionTracker.Services;
 using SessionTracker.SettingEntries;
 
-namespace SessionTracker.Settings.Window
+namespace SessionTracker.SettingsWindow
 {
     public class StatsSettingsTabView : View
     {

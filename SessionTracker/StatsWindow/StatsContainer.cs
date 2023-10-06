@@ -16,7 +16,7 @@ using SessionTracker.RelativePositionWindow;
 using SessionTracker.Reset;
 using SessionTracker.Services;
 using SessionTracker.SettingEntries;
-using SessionTracker.Settings.Window;
+using SessionTracker.SettingsWindow;
 using SessionTracker.StatsHint;
 using SessionTracker.Text;
 using SessionTracker.Tooltip;
