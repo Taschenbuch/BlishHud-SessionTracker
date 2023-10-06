@@ -130,6 +130,7 @@ namespace SessionTracker.Controls
                     }
 
                     // waited too long: provokes api key error message for user even in character select when waited long enough
+                    _resetService.InitializeNextResetDateTimeIfNecessary();
                     var hasToReset = _resetService.HasToAutomaticallyResetSession(ResetWhere.ModuleStartup);
                     _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit = !hasToReset;
 

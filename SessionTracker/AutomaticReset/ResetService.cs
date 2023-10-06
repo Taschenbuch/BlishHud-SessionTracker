@@ -15,7 +15,6 @@ namespace SessionTracker.Reset
             _automaticSessionResetSetting = automaticSessionResetSetting;
             _minutesUntilResetAfterModuleShutdownSetting = minutesUntilResetAfterModuleShutdownSetting;
             automaticSessionResetSetting.SettingChanged += AutomaticSessionResetSettingChanged;
-            model.NextResetDateTimeUtc = InitializeNextResetDateTime(automaticSessionResetSetting.Value, minutesUntilResetAfterModuleShutdownSetting.Value, model.NextResetDateTimeUtc);
         }
 
         public void Dispose()
@@ -23,8 +22,19 @@ namespace SessionTracker.Reset
             _automaticSessionResetSetting.SettingChanged -= AutomaticSessionResetSettingChanged;
         }
 
+        // init requried when lastResetTime hasnt existed in model.json before (module update) or model.json is freshly created (new module installation or file was deleted)
+        public void InitializeNextResetDateTimeIfNecessary()
+        {
+            _isInitalisationRequiredForNextResetDateTime = _model.NextResetDateTimeUtc == Model.UNDEFINED_RESET_DATE_TIME;
+            if (_isInitalisationRequiredForNextResetDateTime)
+                _model.NextResetDateTimeUtc = GetNextResetDateTimeUtc(_automaticSessionResetSetting.Value, DateTimeService.UtcNow, _minutesUntilResetAfterModuleShutdownSetting.Value);
+        }
+
         public bool HasToAutomaticallyResetSession(ResetWhere resetWhere)
         {
+            if (_isInitalisationRequiredForNextResetDateTime && resetWhere == ResetWhere.ModuleStartup)
+                return true;
+
             var isPastResetDate = _model.NextResetDateTimeUtc < DateTimeService.UtcNow;
             var hasToReset = _automaticSessionResetSetting.Value switch
             {
@@ -93,14 +103,6 @@ namespace SessionTracker.Reset
             return dateTimeUtc.Date.AddDays(1); // daily reset is at 00:00 UTC
         }
 
-        private static DateTime InitializeNextResetDateTime(AutomaticSessionReset automaticSessionReset, int minutesAfterModuleShutdownUntilResetSetting, DateTime nextResetDateTimeUtc)
-        {
-            var initializeRequired = nextResetDateTimeUtc == Model.UNDEFINED_RESET_DATE_TIME;
-            return initializeRequired
-                ? GetNextResetDateTimeUtc(automaticSessionReset, DateTimeService.UtcNow, minutesAfterModuleShutdownUntilResetSetting)
-                : nextResetDateTimeUtc;
-        }
-
         private void AutomaticSessionResetSettingChanged(object sender, ValueChangedEventArgs<AutomaticSessionReset> e)
         {
             UpdateNextResetDateTime();
@@ -109,5 +111,6 @@ namespace SessionTracker.Reset
         private readonly Model _model;
         private readonly SettingEntry<AutomaticSessionReset> _automaticSessionResetSetting;
         private readonly SettingEntry<int> _minutesUntilResetAfterModuleShutdownSetting;
+        private bool _isInitalisationRequiredForNextResetDateTime; 
     }
 }
