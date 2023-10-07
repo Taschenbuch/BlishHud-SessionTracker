@@ -45,21 +45,6 @@ namespace SessionTracker.StatsWindow
             _elapsedTimeInMilliseconds = 0;
         }
 
-        public void AddToTimeWaitedForApiToken(double elapsedTimeSinceLastUpdateInMilliseconds)
-        {
-            _timeWaitedForApiTokenInMilliseconds += elapsedTimeSinceLastUpdateInMilliseconds;
-        }
-
-        public bool WaitedLongEnoughForApiTokenEitherApiKeyIsMissingOrUserHasNotLoggedIntoACharacter()
-        {
-            return _timeWaitedForApiTokenInMilliseconds >= 20 * 1000;
-        }
-
-        public bool IsTimeForNextApiTokenCheck()
-        {
-            return _elapsedTimeInMilliseconds >= 200;
-        }
-
         public bool IsTimeForNextStartNewSessionRetry()
         {
             return _elapsedTimeInMilliseconds >= GetRetryIntervalInMilliseconds();
@@ -96,7 +81,6 @@ namespace SessionTracker.StatsWindow
         private const double REGULAR_UPDATE_SESSION_INTERVAL_IN_MILLISECONDS = 5 * 60 * 1000; // 5 minutes  
         private double _updateSessionIntervalInMilliseconds = REGULAR_UPDATE_SESSION_INTERVAL_IN_MILLISECONDS;
         private double _elapsedTimeInMilliseconds;
-        private double _timeWaitedForApiTokenInMilliseconds;
         private UpdateLoopState _state = UpdateLoopState.WaitingForApiTokenAfterModuleStart;
         private readonly SettingService _settingService;
     }

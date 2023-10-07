@@ -113,15 +113,13 @@ namespace SessionTracker.StatsWindow
             switch (_updateLoop.State)
             {
                 case UpdateLoopState.WaitingForApiTokenAfterModuleStart: // prevent showing an api key error message right after the module started
-                    _updateLoop.AddToTimeWaitedForApiToken(gameTime.ElapsedGameTime.TotalMilliseconds);
+                    _updateLoop.ResetElapsedTime(); // reset because not used here, but for other states it should start at 0
 
-                    if (!_updateLoop.IsTimeForNextApiTokenCheck())
+                    if (!_apiTokenAvailableCheckInterval.HasEnded())
                         return;
 
-                    _updateLoop.ResetElapsedTime();
-
                     var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _gw2ApiManager);
-                    var canUpdateOrStartNewSession = apiTokenService.CanAccessApi || _updateLoop.WaitedLongEnoughForApiTokenEitherApiKeyIsMissingOrUserHasNotLoggedIntoACharacter();
+                    var canUpdateOrStartNewSession = apiTokenService.CanAccessApi || _waitedLongEnoughForApiTokenInterval.HasEnded();
                     if(!canUpdateOrStartNewSession)
                     {
                         var title = apiTokenService.ApiTokenState == ApiTokenState.hasNotLoggedIntoCharacterSinceStartingGw2
@@ -387,6 +385,8 @@ namespace SessionTracker.StatsWindow
         private readonly FileService _fileService;
         private VisibilityService _visibilityService;
         private readonly Logger _logger;
+        private readonly Interval _apiTokenAvailableCheckInterval = new Interval(TimeSpan.FromMilliseconds(200));
+        private readonly Interval _waitedLongEnoughForApiTokenInterval = new Interval(TimeSpan.FromSeconds(20));
         private readonly Model _model;
         private readonly SettingService _settingService;
         private readonly StatTooltipService _statTooltipService;
