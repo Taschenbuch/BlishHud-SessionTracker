@@ -11,7 +11,6 @@ using Blish_HUD.Modules.Managers;
 using Blish_HUD.Settings;
 using Microsoft.Xna.Framework;
 using SessionTracker.Api;
-using SessionTracker.Controls;
 using SessionTracker.DateTimeUtcNow;
 using SessionTracker.Files;
 using SessionTracker.Files.RemoteFiles;

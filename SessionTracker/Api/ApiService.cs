@@ -9,7 +9,7 @@ using Gw2Sharp.WebApi.V2.Models;
 using Newtonsoft.Json.Linq;
 using SessionTracker.Constants;
 using SessionTracker.Models;
-using SessionTracker.Settings;
+using SessionTracker.Other;
 
 namespace SessionTracker.Api
 {

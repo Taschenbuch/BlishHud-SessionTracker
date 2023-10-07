@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Linq;
 using SessionTracker.Files;
 using SessionTracker.Models;
-using SessionTracker.Settings;
+using SessionTracker.Other;
 using System;
 using System.Collections.Generic;
 
