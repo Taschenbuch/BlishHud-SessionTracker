@@ -11,10 +11,9 @@ namespace SessionTracker.Services
 {
     public class TextureService : IDisposable
     {
-        public TextureService(Model model, ContentsManager contentsManager, Logger logger)
+        public TextureService(Model model, ContentsManager contentsManager)
         {
             _contentsManager = contentsManager;
-            _logger          = logger;
             _model           = model;
 
             DebugTabTexture = contentsManager.GetTexture(@"settingsWindow\debugTab_440025.png");
@@ -79,12 +78,12 @@ namespace SessionTracker.Services
                 try
                 {
                     if (stat.HasIconAssetId)
-                        StatTextureByStatId[stat.Id] = GetStatTexture(stat.Id, stat.IconAssetId, StatIconPlaceholderTexture, _logger);
+                        StatTextureByStatId[stat.Id] = GetStatTexture(stat.Id, stat.IconAssetId, StatIconPlaceholderTexture);
                     else if (stat.HasIconFile)
                         StatTextureByStatId[stat.Id] = _contentsManager.GetTexture($@"stats\{stat.IconFileName}");
                     else
                     {
-                        _logger.Error($"Error: Icon texture missing for statId: {stat.Id}. Use placeholder icon as fallback.");
+                        Module.Logger.Error($"Error: Icon texture missing for statId: {stat.Id}. Use placeholder icon as fallback.");
                         StatTextureByStatId[stat.Id] = StatIconPlaceholderTexture;
                     }
                 }
@@ -97,17 +96,17 @@ namespace SessionTracker.Services
             }
 
             if (notFoundTextures.Any())
-                _logger.Error(exception, $"Could not get stat texture for: {string.Join(", ", notFoundTextures)}. :(");
+                Module.Logger.Error(exception, $"Could not get stat texture for: {string.Join(", ", notFoundTextures)}. :(");
         }
 
-        private static AsyncTexture2D GetStatTexture(string statId, int statIconAssetId, Texture2D statIconPlaceholderTexture, Logger logger)
+        private static AsyncTexture2D GetStatTexture(string statId, int statIconAssetId, Texture2D statIconPlaceholderTexture)
         {
             if (GameService.Content.DatAssetCache.TryGetTextureFromAssetId(statIconAssetId, out AsyncTexture2D statTexture))
                 return statTexture;
             else
             {
                 // blish will only show info message for that instead of a warning. That is why this was added here to make it more obvious
-                logger.Warn($"DatAssetCache is missing texture for '{statId}', iconAssetId: {statIconAssetId}");
+                Module.Logger.Warn($"DatAssetCache is missing texture for '{statId}', iconAssetId: {statIconAssetId}");
                 return new AsyncTexture2D(statIconPlaceholderTexture);
             }
         }
@@ -126,7 +125,6 @@ namespace SessionTracker.Services
         }
 
         private readonly ContentsManager _contentsManager;
-        private readonly Logger _logger;
         private readonly Model _model;
     }
 }

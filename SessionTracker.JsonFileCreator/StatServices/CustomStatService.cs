@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Gw2Sharp.WebApi;
+using SessionTracker.Constants;
 using SessionTracker.Models;
-using SessionTracker.Models.Constants;
 
 namespace SessionTracker.JsonFileCreator.StatServices
 {
