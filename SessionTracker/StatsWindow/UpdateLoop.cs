@@ -37,12 +37,12 @@ namespace SessionTracker.StatsWindow
 
         public void AddToElapsedTime(double elapsedTimeSinceLastUpdateInMilliseconds)
         {
-            _elapsedTimeTotalInMilliseconds += elapsedTimeSinceLastUpdateInMilliseconds;
+            _elapsedTimeInMilliseconds += elapsedTimeSinceLastUpdateInMilliseconds;
         }
 
         public void ResetElapsedTime()
         {
-            _elapsedTimeTotalInMilliseconds = 0;
+            _elapsedTimeInMilliseconds = 0;
         }
 
         public void AddToTimeWaitedForApiToken(double elapsedTimeSinceLastUpdateInMilliseconds)
@@ -57,17 +57,17 @@ namespace SessionTracker.StatsWindow
 
         public bool IsTimeForNextApiTokenCheck()
         {
-            return _elapsedTimeTotalInMilliseconds >= 200;
+            return _elapsedTimeInMilliseconds >= 200;
         }
 
         public bool IsTimeForNextStartNewSessionRetry()
         {
-            return _elapsedTimeTotalInMilliseconds >= GetRetryIntervalInMilliseconds();
+            return _elapsedTimeInMilliseconds >= GetRetryIntervalInMilliseconds();
         }
 
         public bool IsTimeForSessionUpdate()
         {
-            return _elapsedTimeTotalInMilliseconds >= _updateSessionIntervalInMilliseconds;
+            return _elapsedTimeInMilliseconds >= _updateSessionIntervalInMilliseconds;
         }
 
         public void UseShortRetryUpdateSessionInterval()
@@ -95,7 +95,7 @@ namespace SessionTracker.StatsWindow
         public const int RETRY_INTERVAL_IN_SECONDS = 5; // seconds instead of milliseconds because value is displayed in UI
         private const double REGULAR_UPDATE_SESSION_INTERVAL_IN_MILLISECONDS = 5 * 60 * 1000; // 5 minutes  
         private double _updateSessionIntervalInMilliseconds = REGULAR_UPDATE_SESSION_INTERVAL_IN_MILLISECONDS;
-        private double _elapsedTimeTotalInMilliseconds;
+        private double _elapsedTimeInMilliseconds;
         private double _timeWaitedForApiTokenInMilliseconds;
         private UpdateLoopState _state = UpdateLoopState.WaitingForApiTokenAfterModuleStart;
         private readonly SettingService _settingService;
