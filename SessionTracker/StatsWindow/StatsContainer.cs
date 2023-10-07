@@ -17,6 +17,7 @@ using SessionTracker.Reset;
 using SessionTracker.Services;
 using SessionTracker.SettingEntries;
 using SessionTracker.SettingsWindow;
+using SessionTracker.StatError;
 using SessionTracker.StatsHint;
 using SessionTracker.Text;
 using SessionTracker.Tooltip;
@@ -122,15 +123,10 @@ namespace SessionTracker.StatsWindow
                     var canUpdateOrStartNewSession = apiTokenService.CanAccessApi || _waitedLongEnoughForApiTokenInterval.HasEnded();
                     if(!canUpdateOrStartNewSession)
                     {
-                        var title = apiTokenService.ApiTokenState == ApiTokenState.hasNotLoggedIntoCharacterSinceStartingGw2
-                            ? "Error: Log into a character!"
-                            : "Loading...";
-
-                        SetValueTextAndTooltip(title, "Waiting for user to log into a character or API token from blish.", _valueLabelByStatId.Values);
+                        StatValueTextAndTooltipService.SetToLoadingOrError(apiTokenService, _valueLabelByStatId.Values);
                         return;
                     }
 
-                    // waited too long: provokes api key error message for user even in character select when waited long enough
                     _resetService.InitializeNextResetDateTimeIfNecessary();
                     var hasToStartNewSession = _resetService.HasToAutomaticallyResetSession(ResetCheckLocation.ModuleStartup);
                     _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit = !hasToStartNewSession;
@@ -190,7 +186,7 @@ namespace SessionTracker.StatsWindow
                 var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _gw2ApiManager);
                 if (!apiTokenService.CanAccessApi)
                 {
-                    SetValuesToApiKeyErrorTextAndTooltip(apiTokenService);
+                    StatValueTextAndTooltipService.SetToApiError(apiTokenService, _valueLabelByStatId.Values, RETRY_IN_X_SECONDS_MESSAGE);
                     _updateLoop.State = UpdateLoopState.PauseBetweenStartNewSessionRetries;
                     return;
                 }
@@ -205,14 +201,14 @@ namespace SessionTracker.StatsWindow
             catch (LogWarnException e)
             {
                 var tooltip = $"Error: API call failed while initializing. :-( \n{RETRY_IN_X_SECONDS_MESSAGE}";
-                SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
+                StatValueTextAndTooltipService.Set("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
                 _logger.Warn(e, "Error when initializing values: API failed to respond.");
                 _updateLoop.State = UpdateLoopState.PauseBetweenStartNewSessionRetries;
             }
             catch (Exception e)
             {
                 var tooltip = $"Error: Bug in module code. :-( \n{RETRY_IN_X_SECONDS_MESSAGE}";
-                SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
+                StatValueTextAndTooltipService.Set("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
                 _logger.Error(e, "Error when initializing values: bug in module code.");
                 _updateLoop.State = UpdateLoopState.PauseBetweenStartNewSessionRetries; // todo module error = module should stop? error updateState einbauen?
             }
@@ -227,7 +223,7 @@ namespace SessionTracker.StatsWindow
                 var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _gw2ApiManager);
                 if (!apiTokenService.CanAccessApi)
                 {
-                    SetValuesToApiKeyErrorTextAndTooltip(apiTokenService);
+                    StatValueTextAndTooltipService.SetToApiError(apiTokenService, _valueLabelByStatId.Values, RETRY_IN_X_SECONDS_MESSAGE);
                     _logger.Warn("Error when updating values: api token is missing permissions. " +
                                  "Possible reasons: api key got removed or new api key is missing permissions.");
                     return;
@@ -248,7 +244,7 @@ namespace SessionTracker.StatsWindow
                 if (_hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit)
                 {
                     var tooltip = $"Error: API call failed while updating. :-( \n{RETRY_IN_X_SECONDS_MESSAGE}";
-                    SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
+                    StatValueTextAndTooltipService.Set("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
                 }
                 // intentionally no error handling on regular updates!
                 // when api server does not respond (error code 500, 502) or times out (RequestCanceledException)
@@ -264,22 +260,6 @@ namespace SessionTracker.StatsWindow
                 // even in error case an init makes no sense. It is better to wait for the user to fix the api key to continue to update the old values.
                 // this can only cause issues if in the future blish supports swapping gw2 accounts without doing an unload+load of a module.
                 _updateLoop.State = UpdateLoopState.PauseBeforeUpdatingSession;
-            }
-        }
-
-        private void SetValuesToApiKeyErrorTextAndTooltip(ApiTokenService apiTokenService)
-        {
-            var apiErrorText = apiTokenService.CreateApiErrorText();
-            var tooltip = $"{apiErrorText}\n{RETRY_IN_X_SECONDS_MESSAGE}";
-            SetValueTextAndTooltip("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
-        }
-
-        private static void SetValueTextAndTooltip(string text, string tooltip, Dictionary<string, Label>.ValueCollection valueLabelByStatId)
-        {
-            foreach (var valueLabel in valueLabelByStatId)
-            {
-                valueLabel.Text             = text;
-                valueLabel.BasicTooltipText = tooltip;
             }
         }
 
