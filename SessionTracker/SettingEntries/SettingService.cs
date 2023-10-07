@@ -63,7 +63,7 @@ namespace SessionTracker.SettingEntries
                "value display format",
                ValueDisplayFormat.SessionValue,
                () => "value display format",
-               () => "Show values of the current session and/or total values for the whole account.");
+               () => "Show current session values and/or total values for the whole account.");
 
             WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting = settings.DefineSetting(
                 "show window on cutScenes and characterSelection and loadingScreens",
