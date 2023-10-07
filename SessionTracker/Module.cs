@@ -26,15 +26,15 @@ namespace SessionTracker
     [Export(typeof(Blish_HUD.Modules.Module))]
     public class Module : Blish_HUD.Modules.Module
     {
-        internal SettingsManager SettingsManager => ModuleParameters.SettingsManager;
-        internal ContentsManager ContentsManager => ModuleParameters.ContentsManager;
-        internal DirectoriesManager DirectoriesManager => ModuleParameters.DirectoriesManager;
-        internal Gw2ApiManager Gw2ApiManager => ModuleParameters.Gw2ApiManager;
-
         [ImportingConstructor]
         public Module([Import("ModuleParameters")] ModuleParameters moduleParameters) : base(moduleParameters)
         {
         }
+
+        internal SettingsManager SettingsManager => ModuleParameters.SettingsManager;
+        internal ContentsManager ContentsManager => ModuleParameters.ContentsManager;
+        internal DirectoriesManager DirectoriesManager => ModuleParameters.DirectoriesManager;
+        internal Gw2ApiManager Gw2ApiManager => ModuleParameters.Gw2ApiManager;
 
         protected override void DefineSettings(SettingCollection settings)
         {
