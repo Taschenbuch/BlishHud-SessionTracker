@@ -8,12 +8,15 @@ namespace SessionTracker.Models
     public class Model : ModelVersion
     {
         public List<Stat> Stats { get; } = new List<Stat>();
-        [JsonIgnore] public bool UiHasToBeUpdated { get; set; } // i hate it... but using an event would suck too
-        [JsonIgnore] public TimeSpan SessionDuration => DateTime.Now - _sessionStartTime;
-
-        public void StartSession()
+        public SessionDuration SessionDuration { get; } = new SessionDuration();
+        public DateTime NextResetDateTimeUtc { get; set; } = UNDEFINED_RESET_DATE_TIME;
+        [JsonIgnore] public static readonly DateTime UNDEFINED_RESET_DATE_TIME = new DateTime(0L, DateTimeKind.Utc); // UTC DateTime.Min
+        [JsonIgnore] public static readonly DateTime NEVER_OR_ON_MODULE_START_RESET_DATE_TIME = new DateTime(3155378975999999999L, DateTimeKind.Utc); // UTC DateTime.Max
+        [JsonIgnore] public bool UiHasToBeUpdated { get; set; }
+        
+        public void ResetDurationAndStats()
         {
-            _sessionStartTime = DateTime.Now;
+            SessionDuration.ResetDuration();
 
             foreach (var stat in Stats)
                 stat.Value.TotalAtSessionStart = stat.Value.Total;
@@ -22,8 +25,6 @@ namespace SessionTracker.Models
         public Stat GetStat(string statId)
         {
             return Stats.Single(e => e.Id == statId);
-        }
-
-        private DateTime _sessionStartTime; 
+        }        
     }
 }

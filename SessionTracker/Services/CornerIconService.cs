@@ -4,8 +4,8 @@ using Blish_HUD.Controls;
 using Blish_HUD.Input;
 using Blish_HUD.Settings;
 using Microsoft.Xna.Framework.Graphics;
-using SessionTracker.Controls;
-using SessionTracker.Settings.Window;
+using SessionTracker.SettingsWindow;
+using SessionTracker.StatsWindow;
 
 namespace SessionTracker.Services
 {
@@ -48,7 +48,8 @@ namespace SessionTracker.Services
                 HoverIcon        = _cornerIconHoverTexture,
                 BasicTooltipText = TOOLTIP_TEXT,
                 Parent           = GameService.Graphics.SpriteScreen,
-                Priority         = RANDOM_INTEGER_FOR_PRIORITY
+                Priority         = RANDOM_INTEGER_FOR_PRIORITY,
+                Menu             = CreateContextMenu()
             };
 
             _cornerIcon.Menu  =  CreateContextMenu();
@@ -67,6 +68,7 @@ namespace SessionTracker.Services
 
         private void OnResetContextMenuStripItemClick(object sender, MouseEventArgs e)
         {
+            Module.Logger.Info("Manual reset triggered with corner icon context menu by user");
             _statsContainer.ResetSession();
         }
 

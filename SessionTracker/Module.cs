@@ -10,33 +10,36 @@ using Blish_HUD.Modules;
 using Blish_HUD.Modules.Managers;
 using Blish_HUD.Settings;
 using Microsoft.Xna.Framework;
-using SessionTracker.Controls;
+using SessionTracker.Api;
+using SessionTracker.DateTimeUtcNow;
+using SessionTracker.Files;
+using SessionTracker.Files.RemoteFiles;
 using SessionTracker.Models;
 using SessionTracker.Services;
-using SessionTracker.Services.Api;
-using SessionTracker.Services.RemoteFiles;
+using SessionTracker.SettingEntries;
 using SessionTracker.Settings;
-using SessionTracker.Settings.SettingEntries;
-using SessionTracker.Settings.Window;
+using SessionTracker.SettingsWindow;
+using SessionTracker.StatsWindow;
 
 namespace SessionTracker
 {
     [Export(typeof(Blish_HUD.Modules.Module))]
     public class Module : Blish_HUD.Modules.Module
     {
-        internal SettingsManager SettingsManager => ModuleParameters.SettingsManager;
-        internal ContentsManager ContentsManager => ModuleParameters.ContentsManager;
-        internal DirectoriesManager DirectoriesManager => ModuleParameters.DirectoriesManager;
-        internal Gw2ApiManager Gw2ApiManager => ModuleParameters.Gw2ApiManager;
-
         [ImportingConstructor]
         public Module([Import("ModuleParameters")] ModuleParameters moduleParameters) : base(moduleParameters)
         {
         }
 
+        internal SettingsManager SettingsManager => ModuleParameters.SettingsManager;
+        internal ContentsManager ContentsManager => ModuleParameters.ContentsManager;
+        internal DirectoriesManager DirectoriesManager => ModuleParameters.DirectoriesManager;
+        internal Gw2ApiManager Gw2ApiManager => ModuleParameters.Gw2ApiManager;
+
         protected override void DefineSettings(SettingCollection settings)
         {
             _settingService = new SettingService(settings);
+            _dateTimeService.DefineSettings(settings);
         }
 
         public override IView GetSettingsView()
@@ -51,7 +54,7 @@ namespace SessionTracker
         {
             RunShiftBlishCornerIconsWorkaroundBecauseOfNewWizardVaultIcon();
 
-            if (await ApiService.IsApiTokenGeneratedWithoutRequiredPermissions(Logger)) // WARNING: will fail when custom settings path is used "--settings <path>" (returns false then)
+            if (await ApiService.IsApiTokenGeneratedWithoutRequiredPermissions())
             {
                 _moduleLoadError.HasModuleLoadFailed = true;
                 _moduleLoadError.InfoText = $"DISABLE {Name} module, wait 5-10 seconds, after that ENABLE the module again here: " +
@@ -72,7 +75,7 @@ namespace SessionTracker
                 return;
             }
 
-            if (!await RemoteFilesService.TryUpdateLocalWithRemoteFilesIfNecessary(localAndRemoteFileLocations, Logger))
+            if (!await RemoteFilesService.TryUpdateLocalWithRemoteFilesIfNecessary(localAndRemoteFileLocations))
             {
                 _moduleLoadError.HasModuleLoadFailed = true;
                 _moduleLoadError.InitForFailedDownload(Name);
@@ -80,12 +83,13 @@ namespace SessionTracker
                 return;
             }
 
-            _fileService              = new FileService(localAndRemoteFileLocations, Logger);
-            var model                 = await _fileService.LoadModelFromFile();
-            var textureService        = new TextureService(model, ContentsManager, Logger);
-            var settingsWindowService = new SettingsWindowService(model, _settingService, textureService);
+            var fileService           = new FileService(localAndRemoteFileLocations);
+            var model                 = await fileService.LoadModelFromFile();
+            var textureService        = new TextureService(model, ContentsManager);
+            var updateLoop            = new UpdateLoop(_settingService);
+            var settingsWindowService = new SettingsWindowService(model, _settingService, _dateTimeService, textureService, updateLoop);
 
-            var statsContainer = new StatsContainer(model, Gw2ApiManager, textureService, settingsWindowService, _settingService, Logger)
+            var statsContainer = new StatsContainer(model, Gw2ApiManager, textureService, fileService, updateLoop, settingsWindowService, _settingService)
             {
                 HeightSizingMode = SizingMode.AutoSize,
                 WidthSizingMode  = SizingMode.AutoSize,
@@ -100,6 +104,7 @@ namespace SessionTracker
             // e.g. creating model after textureService, though model needs the reference of model.
             _model                 = model;
             _textureService        = textureService;
+            _fileService           = fileService;
             _statsContainer        = statsContainer;
             _settingsWindowService = settingsWindowService;
 
@@ -126,6 +131,7 @@ namespace SessionTracker
             _cornerIconService?.Dispose();
             _textureService?.Dispose();
             _statsContainer?.Dispose();
+            _dateTimeService?.Dispose();
         }
 
         protected override void Update(GameTime gameTime)
@@ -150,13 +156,14 @@ namespace SessionTracker
         }
 
         private SettingService _settingService;
-        private static readonly Logger Logger = Logger.GetLogger<Module>();
+        public static readonly Logger Logger = Logger.GetLogger<Module>();
         private StatsContainer _statsContainer;
         private FileService _fileService;
         private Model _model;
         private TextureService _textureService;
         private CornerIconService _cornerIconService;
         private SettingsWindowService _settingsWindowService;
+        private readonly DateTimeService _dateTimeService = new DateTimeService();
         private readonly ModuleLoadError _moduleLoadError = new ModuleLoadError();
     }
 }

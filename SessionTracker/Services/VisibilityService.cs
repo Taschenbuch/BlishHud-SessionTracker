@@ -1,7 +1,7 @@
 ﻿using Blish_HUD;
 using Gw2Sharp.Models;
-using SessionTracker.Controls;
-using SessionTracker.Settings.SettingEntries;
+using SessionTracker.SettingEntries;
+using SessionTracker.StatsWindow;
 using System;
 
 namespace SessionTracker.Services
