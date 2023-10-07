@@ -143,21 +143,15 @@ namespace SessionTracker.StatsWindow
                     _updateLoop.ResetElapsedTime(); 
                     _updateLoop.State = UpdateLoopState.StartingNewSession;
                     return;
-
                 case UpdateLoopState.PauseBeforeUpdatingSession:
                     if (!_updateLoop.IsTimeForSessionUpdate())
                         return;
 
                     _updateLoop.ResetElapsedTime();
-
                     // automatic reset doesnt have to be instant, it is okay if it is delayed by up to 5 minutes. better than spamming the check in the update loop
-                    if (_resetService.HasToAutomaticallyResetSession(ResetCheckLocation.BeforeSessionUpdate))
-                    {
-                        _updateLoop.State = UpdateLoopState.StartingNewSession;
-                        return;
-                    }
-
-                    _updateLoop.State = UpdateLoopState.UpdatingSession;
+                    _updateLoop.State = _resetService.HasToAutomaticallyResetSession(ResetCheckLocation.BeforeSessionUpdate)
+                        ? UpdateLoopState.StartingNewSession
+                        : UpdateLoopState.UpdatingSession;
                     return;
                 case UpdateLoopState.StartingNewSession:
                     _updateLoop.ResetElapsedTime();
