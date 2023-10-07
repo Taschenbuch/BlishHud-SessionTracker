@@ -19,7 +19,7 @@ namespace SessionTracker.Api
         /// This is a workaround until this bug in blish is fixed: when a new module version requires additional api permissions, it will not get those until the
         /// module is disabled and enabled again. Blish restarts or module reinstalls do not fix this issue.
         /// </summary>
-        public static async Task<bool> IsApiTokenGeneratedWithoutRequiredPermissions(Logger logger)
+        public static async Task<bool> IsApiTokenGeneratedWithoutRequiredPermissions()
         {
             try
             {
@@ -34,7 +34,7 @@ namespace SessionTracker.Api
             }
             catch (Exception e)
             {
-                logger.Warn(e, "failed to read permissions from settings.json for blish permissions bug workaround. " +
+                Module.Logger.Warn(e, "failed to read permissions from settings.json for blish permissions bug workaround. " +
                     "This can happen when a custom settings path is used '--settings <path>'");
                 return false;
             }

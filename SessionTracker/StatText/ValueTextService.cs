@@ -17,7 +17,7 @@ namespace SessionTracker.Text
             return killsDeathsRatio.To2DecimalPlacesCulturedString();
         }
 
-        public static string CreateSessionAndTotalValueText(string sessionValueText, string totalValueText, ValueDisplayFormat valueDisplayFormat, Logger logger)
+        public static string CreateSessionAndTotalValueText(string sessionValueText, string totalValueText, ValueDisplayFormat valueDisplayFormat)
         {
             switch (valueDisplayFormat)
             {
@@ -28,7 +28,7 @@ namespace SessionTracker.Text
                 case ValueDisplayFormat.SessionAndTotalValue:
                     return $"{sessionValueText} | {totalValueText}";
                 default:
-                    logger.Error($"Missing ValueDisplayFormat case for {valueDisplayFormat}");
+                    Module.Logger.Error($"Missing ValueDisplayFormat case for {valueDisplayFormat}");
                     return sessionValueText;
             }
         }

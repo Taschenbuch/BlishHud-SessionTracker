@@ -14,13 +14,11 @@ namespace SessionTracker.Text
     {
         public ValueLabelTextService(Dictionary<string, Label> valueLabelByStatId,
                                      Model model,
-                                     SettingService settingService,
-                                     Logger logger)
+                                     SettingService settingService)
         {
             _valueLabelByStatId = valueLabelByStatId;
             _model               = model;
             _settingService      = settingService;
-            _logger              = logger;
 
             settingService.ValueDisplayFormatSetting.SettingChanged += ValueDisplayFormatSetting_SettingChanged;
             settingService.CoinDisplayFormatSetting.SettingChanged  += OnCoinDisplayFormatSettingChanged;
@@ -44,10 +42,9 @@ namespace SessionTracker.Text
                     _valueLabelByStatId[stat.Id].Text = ValueTextService.CreateSessionAndTotalValueText(
                         sessionCoinText,
                         totalCoinText,
-                        _settingService.ValueDisplayFormatSetting.Value,
-                        _logger);
+                        _settingService.ValueDisplayFormatSetting.Value);
 
-                    stat.HasNonZeroSessionValue = HasNonZeroSessionValueService.DetermineForCoin(stat.Value.Session, _settingService.CoinDisplayFormatSetting.Value, _logger);
+                    stat.HasNonZeroSessionValue = HasNonZeroSessionValueService.DetermineForCoin(stat.Value.Session, _settingService.CoinDisplayFormatSetting.Value);
                 }
                 else if (stat.Id == StatId.WVW_KDR)
                 {
@@ -73,8 +70,7 @@ namespace SessionTracker.Text
                     _valueLabelByStatId[stat.Id].Text = ValueTextService.CreateSessionAndTotalValueText(
                         sessionValueText,
                         totalValueText,
-                        _settingService.ValueDisplayFormatSetting.Value,
-                        _logger);
+                        _settingService.ValueDisplayFormatSetting.Value);
 
                     stat.HasNonZeroSessionValue = stat.Value.Session != 0;
                 }
@@ -95,6 +91,5 @@ namespace SessionTracker.Text
         private readonly Dictionary<string, Label> _valueLabelByStatId;
         private readonly Model _model;
         private readonly SettingService _settingService;
-        private readonly Logger _logger;
     }
 }

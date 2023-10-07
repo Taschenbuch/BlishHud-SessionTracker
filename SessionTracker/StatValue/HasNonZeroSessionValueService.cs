@@ -16,13 +16,13 @@ namespace SessionTracker.StatValue
             return kdrAsInteger != 0;
         }
 
-        public static bool DetermineForCoin(int sessionValue, CoinDisplayFormat coinDisplayFormat, Logger logger)
+        public static bool DetermineForCoin(int sessionValue, CoinDisplayFormat coinDisplayFormat)
         {
-            var divisor = GetCoinDivisor(coinDisplayFormat, logger);
+            var divisor = GetCoinDivisor(coinDisplayFormat);
             return (sessionValue / divisor) != 0;
         }
 
-        private static int GetCoinDivisor(CoinDisplayFormat coinDisplayFormat, Logger logger)
+        private static int GetCoinDivisor(CoinDisplayFormat coinDisplayFormat)
         {
             switch (coinDisplayFormat)
             {
@@ -36,7 +36,7 @@ namespace SessionTracker.StatValue
                 case CoinDisplayFormat.Xc:
                     return 1;
                 default:
-                    logger.Error($"Missing CoinDisplayFormat case for {coinDisplayFormat}");
+                    Module.Logger.Error($"Missing CoinDisplayFormat case for {coinDisplayFormat}");
                     return 1;
             }
         }

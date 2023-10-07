@@ -14,7 +14,7 @@ namespace SessionTracker.Models
         [JsonIgnore] public static readonly DateTime NEVER_OR_ON_MODULE_START_RESET_DATE_TIME = new DateTime(3155378975999999999L, DateTimeKind.Utc); // UTC DateTime.Max
         [JsonIgnore] public bool UiHasToBeUpdated { get; set; }
         
-        public void StartNewSession()
+        public void ResetDurationAndStats()
         {
             SessionDuration.ResetDuration();
 

@@ -32,8 +32,7 @@ namespace SessionTracker.StatsWindow
                               FileService fileService,
                               UpdateLoop updateLoop,
                               SettingsWindowService settingsWindowService,
-                              SettingService settingService,
-                              Logger logger)
+                              SettingService settingService)
             : base(settingService)
         {
             _model          = model;
@@ -42,13 +41,12 @@ namespace SessionTracker.StatsWindow
             _fileService    = fileService;
             _updateLoop    = updateLoop;
             _settingService = settingService;
-            _logger         = logger;
 
             _resetService = new ResetService(model, settingService.AutomaticSessionResetSetting, settingService.MinutesUntilResetAfterModuleShutdownSetting);
             _model.SessionDuration.StartMeasuring();
             CreateUi(settingsWindowService);
 
-            _valueLabelTextService = new ValueLabelTextService(_valueLabelByStatId, _model, settingService, logger);
+            _valueLabelTextService = new ValueLabelTextService(_valueLabelByStatId, _model, settingService);
             _statTooltipService    = new StatTooltipService(_titleFlowPanelByStatId, _valueLabelByStatId, model, _settingService);
 
             settingService.HideStatsWithValueZeroSetting.SettingChanged  += OnHideStatsWithValueZeroSettingChanged;
@@ -187,7 +185,7 @@ namespace SessionTracker.StatsWindow
 
                 await ApiService.UpdateTotalValuesInModel(_model, _gw2ApiManager);
                 _resetService.UpdateNextResetDateTime();
-                _model.StartNewSession();
+                _model.ResetDurationAndStats();
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _statTooltipService.ResetSummaryTooltip(_model);
                 _updateLoop.State = UpdateLoopState.PauseBeforeUpdatingSession;
@@ -196,14 +194,14 @@ namespace SessionTracker.StatsWindow
             {
                 var tooltip = $"Error: API call failed while initializing. :-( \n{RETRY_IN_X_SECONDS_MESSAGE}";
                 StatValueTextAndTooltipService.Set("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
-                _logger.Warn(e, "Error when initializing values: API failed to respond.");
+                Module.Logger.Warn(e, "Error when initializing values: API failed to respond.");
                 _updateLoop.State = UpdateLoopState.PauseBetweenStartNewSessionRetries;
             }
             catch (Exception e)
             {
                 var tooltip = $"Error: Bug in module code. :-( \n{RETRY_IN_X_SECONDS_MESSAGE}";
                 StatValueTextAndTooltipService.Set("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
-                _logger.Error(e, "Error when initializing values: bug in module code.");
+                Module.Logger.Error(e, "Error when initializing values: bug in module code.");
                 _updateLoop.State = UpdateLoopState.PauseBetweenStartNewSessionRetries; // todo module error = module should stop? error updateState einbauen?
             }
         }
@@ -218,8 +216,8 @@ namespace SessionTracker.StatsWindow
                 if (!apiTokenService.CanAccessApi)
                 {
                     StatValueTextAndTooltipService.SetToApiError(apiTokenService, _valueLabelByStatId.Values, RETRY_IN_X_SECONDS_MESSAGE);
-                    _logger.Warn("Error when updating values: api token is missing permissions. " +
-                                 "Possible reasons: api key got removed or new api key is missing permissions.");
+                    Module.Logger.Warn("Error when updating values: api token is missing permissions. " +
+                                       "Possible reasons: api key got removed or new api key is missing permissions.");
                     return;
                 }
 
@@ -233,7 +231,7 @@ namespace SessionTracker.StatsWindow
             catch (LogWarnException e)
             {
                 _updateLoop.UseShortRetryUpdateSessionInterval();
-                _logger.Warn(e, "Error when updating values: API failed to respond");
+                Module.Logger.Warn(e, "Error when updating values: API failed to respond");
 
                 if (_hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit)
                 {
@@ -247,7 +245,7 @@ namespace SessionTracker.StatsWindow
             }
             catch (Exception e)
             {
-                _logger.Error(e, "Error when updating values: bug in module code.");  // todo module error = module should stop? error updateState einbauen?
+                Module.Logger.Error(e, "Error when updating values: bug in module code.");  // todo module error = module should stop? error updateState einbauen?
             }
             finally
             {
@@ -358,7 +356,6 @@ namespace SessionTracker.StatsWindow
         private readonly TextureService _textureService;
         private readonly FileService _fileService;
         private VisibilityService _visibilityService;
-        private readonly Logger _logger;
         private readonly Interval _apiTokenAvailableCheckInterval = new Interval(TimeSpan.FromMilliseconds(200));
         private readonly Interval _waitedLongEnoughForApiTokenInterval = new Interval(TimeSpan.FromSeconds(20));
         private readonly Model _model;

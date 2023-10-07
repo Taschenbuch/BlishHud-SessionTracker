@@ -12,9 +12,8 @@ namespace SessionTracker.Files
 {
     public class FileService
     {
-        public FileService(LocalAndRemoteFileLocations localAndRemoteFileLocations, Logger logger)
+        public FileService(LocalAndRemoteFileLocations localAndRemoteFileLocations)
         {
-            _logger = logger;
             _localModelFilePath = Path.Combine(localAndRemoteFileLocations.LocalRootFolderPath, FileConstants.ModelFileName);
             _remoteModelFilePath = localAndRemoteFileLocations.GetLocalFilePath(FileConstants.ModelFileName);
         }
@@ -29,7 +28,7 @@ namespace SessionTracker.Files
             }
             catch (Exception e)
             {
-                _logger.Error(e, "Error: Failed to save model to file. :(");
+                Module.Logger.Error(e, "Error: Failed to save model to file. :(");
             }
         }
 
@@ -43,7 +42,7 @@ namespace SessionTracker.Files
             }
             catch (Exception e)
             {
-                _logger.Error(e, "Error: Failed to save model to file. :(");
+                Module.Logger.Error(e, "Error: Failed to save model to file. :(");
             }
         }
 
@@ -58,13 +57,13 @@ namespace SessionTracker.Files
 
         public async Task<Model> LoadModelFromFile()
         {
-            var remoteModel = await LoadModelFromRemoteFolder(_remoteModelFilePath, _logger);
+            var remoteModel = await LoadModelFromRemoteFolder(_remoteModelFilePath);
 
             var isFirstModuleStart = File.Exists(_localModelFilePath) == false;
             if (isFirstModuleStart)
                 return remoteModel;
 
-            var localModel = await LoadModelFromModuleFolder(_localModelFilePath, remoteModel, _logger);
+            var localModel = await LoadModelFromModuleFolder(_localModelFilePath, remoteModel);
             remoteModel = RemoteModelService.UpdateStatIsVisibleInRemoteModel(localModel, remoteModel);
             remoteModel = RemoteModelService.UpdateStatsOrderInRemoteModel(localModel, remoteModel);
             remoteModel = RemoteModelService.UpdateTotalAtSessionStartInRemoteModel(localModel, remoteModel);
@@ -72,7 +71,7 @@ namespace SessionTracker.Files
             return remoteModel;
         }
 
-        private static async Task<Model> LoadModelFromRemoteFolder(string modelFilePath, Logger logger)
+        private static async Task<Model> LoadModelFromRemoteFolder(string modelFilePath)
         {
             try
             {
@@ -81,29 +80,29 @@ namespace SessionTracker.Files
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error: Failed to load remote model from file. :(");
+                Module.Logger.Error(e, "Error: Failed to load remote model from file. :(");
                 return new Model();
             }
         }
 
-        private static async Task<Model> LoadModelFromModuleFolder(string modelFilePath, ModelVersion remoteModelVersion, Logger logger)
+        private static async Task<Model> LoadModelFromModuleFolder(string modelFilePath, ModelVersion remoteModelVersion)
         {
             try
             {
                 var modelJson = await GetFileContentAndThrowIfFileEmpty(modelFilePath);
-                modelJson = MigrationService.RenamePropertyMajorVersionToVersion(logger, modelJson);
+                modelJson = MigrationService.RenamePropertyMajorVersionToVersion(modelJson);
                 var localModelVersion = JsonConvert.DeserializeObject<ModelVersion>(modelJson);
-                modelJson = MigrationService.MigrateModelJsonIfIsOldVersion(modelJson, localModelVersion, remoteModelVersion, logger);
+                modelJson = MigrationService.MigrateModelJsonIfIsOldVersion(modelJson, localModelVersion, remoteModelVersion);
                 return JsonConvert.DeserializeObject<Model>(modelJson);
             }
             catch (LogWarnException e)
             {
-                logger.Warn(e.Message);
+                Module.Logger.Warn(e.Message);
                 return new Model();
             }
             catch (Exception e)
             {
-                logger.Error(e, "Error: Failed to load local model from file. :(");
+                Module.Logger.Error(e, "Error: Failed to load local model from file. :(");
                 return new Model();
             }
         }
@@ -123,6 +122,5 @@ namespace SessionTracker.Files
 
         private readonly string _localModelFilePath;
         private readonly string _remoteModelFilePath;
-        private readonly Logger _logger;
     }
 }

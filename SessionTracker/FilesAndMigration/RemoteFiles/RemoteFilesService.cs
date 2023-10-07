@@ -39,7 +39,7 @@ namespace SessionTracker.Files.RemoteFiles
             }
         }
 
-        public static async Task<bool> TryUpdateLocalWithRemoteFilesIfNecessary(LocalAndRemoteFileLocations localAndRemoteFileLocations, Logger logger)
+        public static async Task<bool> TryUpdateLocalWithRemoteFilesIfNecessary(LocalAndRemoteFileLocations localAndRemoteFileLocations)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace SessionTracker.Files.RemoteFiles
             catch (Exception e)
             {
                 // error because there is no fallback data in ref folder. Module may stop working completely without this data
-                logger.Error(e, "Failed to update module data from remote. :(");
+                Module.Logger.Error(e, "Failed to update module data from remote. :(");
                 return false;
             }
         }
