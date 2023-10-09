@@ -9,6 +9,14 @@ namespace SessionTracker.SettingEntries
     {
         public SettingService(SettingCollection settings)
         {
+            WindowAnchorSetting = settings.DefineSetting(
+               "window anchor",
+               WindowAnchor.TopLeft,
+               () => "window anchor",
+               () => "The window anchor is the part of the window that will not move when the stats list grow, while the rest of the window will. " +
+               "For example for 'Top..,' the window top will stay in position while the window bottom expands when the stats list grows. " +
+               "And for 'Bottom..,' the window bottom will stay in position while the window top expands when the stats list grows.");
+
             AutomaticSessionResetSetting = settings.DefineSetting(
                 "automatic session reset",
                 AutomaticSessionReset.OnModuleStart,
@@ -219,6 +227,7 @@ namespace SessionTracker.SettingEntries
         public SettingEntry<float> XMainWindowRelativeLocationSetting { get; }
         public SettingEntry<float> YMainWindowRelativeLocationSetting { get; }
         public SettingEntry<bool> UiIsVisibleSetting { get; }
+        public SettingEntry<WindowAnchor> WindowAnchorSetting { get; }
         public SettingEntry<AutomaticSessionReset> AutomaticSessionResetSetting { get; }
         public SettingEntry<int> MinutesUntilResetAfterModuleShutdownSetting { get; }
         public SettingEntry<int> BackgroundOpacitySetting { get; }

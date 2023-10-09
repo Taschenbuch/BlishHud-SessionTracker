@@ -12,15 +12,32 @@ namespace SessionTracker.RelativePositionWindow
         {
             _settingService = settingService;
             SetLocationFromSettings();
-            GameService.Input.Mouse.LeftMouseButtonReleased += OnLeftMouseButtonReleased;
-            GameService.Graphics.SpriteScreen.Resized       += OnSpriteScreenResized;
+            GameService.Input.Mouse.LeftMouseButtonReleased   += OnLeftMouseButtonReleased;
+            GameService.Graphics.SpriteScreen.Resized         += OnSpriteScreenResized;
+            settingService.WindowAnchorSetting.SettingChanged += WindowAnchorSettingChanged;
         }
 
         protected override void DisposeControl()
         {
-            GameService.Input.Mouse.LeftMouseButtonReleased -= OnLeftMouseButtonReleased;
-            GameService.Graphics.SpriteScreen.Resized -= OnSpriteScreenResized;
+            GameService.Input.Mouse.LeftMouseButtonReleased    -= OnLeftMouseButtonReleased;
+            GameService.Graphics.SpriteScreen.Resized          -= OnSpriteScreenResized;
+            _settingService.WindowAnchorSetting.SettingChanged -= WindowAnchorSettingChanged;
             base.DisposeControl();
+        }
+
+        public override void RecalculateLayout()
+        {
+            base.RecalculateLayout(); // not required because Control and Container dot not implement them. But maybe in a future blish version they do.
+
+            var windowAnchorLocation = ConvertCoordinatesService.ConvertRelativeToAbsoluteCoordinates(
+                _settingService.XMainWindowRelativeLocationSetting.Value,
+                _settingService.YMainWindowRelativeLocationSetting.Value,
+                GameService.Graphics.SpriteScreen.Size);
+
+            var location = ConvertBetweenControlAndWindowAnchorLocation(windowAnchorLocation, ConvertLocation.ToControlLocation);
+            var adjustedLocation = ScreenBoundariesService.AdjustCoordinatesToKeepContainerInsideScreenBoundaries(location, Size, GameService.Graphics.SpriteScreen.Size);
+            SaveLocationInSettings(adjustedLocation);
+            Location = adjustedLocation;
         }
 
         public override void UpdateContainer(GameTime gameTime)
@@ -28,7 +45,9 @@ namespace SessionTracker.RelativePositionWindow
             if (_settingService.DragWindowWithMouseIsEnabledSetting.Value && _containerIsDraggedByMouse)
             {
                 var newLocation = Input.Mouse.Position - _mousePressedLocationInsideContainer;
-                Location = ScreenBoundariesService.AdjustCoordinatesToKeepContainerInsideScreenBoundaries(newLocation, Size, GameService.Graphics.SpriteScreen.Size);
+                var adjustedLocation = ScreenBoundariesService.AdjustCoordinatesToKeepContainerInsideScreenBoundaries(newLocation, Size, GameService.Graphics.SpriteScreen.Size);
+                SaveLocationInSettings(adjustedLocation);
+                Location = adjustedLocation;
             }
         }
 
@@ -49,14 +68,13 @@ namespace SessionTracker.RelativePositionWindow
             if (_settingService.DragWindowWithMouseIsEnabledSetting.Value)
             {
                 _containerIsDraggedByMouse = false;
-
-                (_settingService.XMainWindowRelativeLocationSetting.Value, _settingService.YMainWindowRelativeLocationSetting.Value)
-                    = ConvertCoordinatesService.ConvertAbsoluteToRelativeCoordinates(
-                        Location.X,
-                        Location.Y,
-                        GameService.Graphics.SpriteScreen.Size.X,
-                        GameService.Graphics.SpriteScreen.Size.Y);
+                SaveLocationInSettings(Location);
             }
+        }
+
+        private void WindowAnchorSettingChanged(object sender, ValueChangedEventArgs<WindowAnchor> e)
+        {
+            SaveLocationInSettings(Location);
         }
 
         private void OnSpriteScreenResized(object sender, ResizedEventArgs resizedEventArgs)
@@ -64,13 +82,41 @@ namespace SessionTracker.RelativePositionWindow
             SetLocationFromSettings();
         }
 
+        // do not use AdjustCoordinates here, because it is called by OnSpriteScreenResized -> can cause unwanted adjusting because of multiple SpriteScreen resizing on module start up
         private void SetLocationFromSettings()
         {
-            Location = ConvertCoordinatesService.ConvertRelativeToAbsoluteCoordinates(
+            var windowAnchorLocation = ConvertCoordinatesService.ConvertRelativeToAbsoluteCoordinates(
                 _settingService.XMainWindowRelativeLocationSetting.Value,
                 _settingService.YMainWindowRelativeLocationSetting.Value,
-                GameService.Graphics.SpriteScreen.Size.X,
-                GameService.Graphics.SpriteScreen.Size.Y);
+                GameService.Graphics.SpriteScreen.Size);
+
+            Location = ConvertBetweenControlAndWindowAnchorLocation(windowAnchorLocation, ConvertLocation.ToControlLocation);
+        }
+
+        private void SaveLocationInSettings(Point location)
+        {
+            var windowAnchorLocation = ConvertBetweenControlAndWindowAnchorLocation(location, ConvertLocation.ToWindowAnchorLocation);
+            (_settingService.XMainWindowRelativeLocationSetting.Value, _settingService.YMainWindowRelativeLocationSetting.Value)
+                = ConvertCoordinatesService.ConvertAbsoluteToRelativeCoordinates(windowAnchorLocation, GameService.Graphics.SpriteScreen.Size);
+        }
+
+        private Point ConvertBetweenControlAndWindowAnchorLocation(Point location, ConvertLocation convertLocation)
+        {
+            var xIsControlLocation = _settingService.WindowAnchorSetting.Value == WindowAnchor.TopLeft || _settingService.WindowAnchorSetting.Value == WindowAnchor.BottomLeft;
+            var yIsControlLocation = _settingService.WindowAnchorSetting.Value == WindowAnchor.TopLeft || _settingService.WindowAnchorSetting.Value == WindowAnchor.TopRight;
+            var x = ConvertCoordinate(location.X, xIsControlLocation, Width, convertLocation);
+            var y = ConvertCoordinate(location.Y, yIsControlLocation, Height, convertLocation);
+            return new Point(x, y);
+        }
+
+        private int ConvertCoordinate(int coordinate, bool isControlLocation, int widthOrHeight, ConvertLocation convertLocation)
+        {
+            if(isControlLocation)
+                return coordinate;
+
+            return convertLocation == ConvertLocation.ToWindowAnchorLocation
+                ? coordinate + widthOrHeight
+                : coordinate - widthOrHeight;
         }
 
         private Point _mousePressedLocationInsideContainer = Point.Zero;
