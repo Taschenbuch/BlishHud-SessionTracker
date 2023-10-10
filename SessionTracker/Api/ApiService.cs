@@ -8,6 +8,7 @@ using Blish_HUD.Modules.Managers;
 using Gw2Sharp.WebApi.V2.Models;
 using Newtonsoft.Json.Linq;
 using SessionTracker.Constants;
+using SessionTracker.Files.RemoteFiles;
 using SessionTracker.Models;
 using SessionTracker.Other;
 
@@ -19,12 +20,12 @@ namespace SessionTracker.Api
         /// This is a workaround until this bug in blish is fixed: when a new module version requires additional api permissions, it will not get those until the
         /// module is disabled and enabled again. Blish restarts or module reinstalls do not fix this issue.
         /// </summary>
-        public static async Task<bool> IsApiTokenGeneratedWithoutRequiredPermissions()
+        public static async Task<bool> IsApiTokenGeneratedWithoutRequiredPermissions(DirectoriesManager directoriesManager)
         {
             try
             {
-                var documentsFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments, Environment.SpecialFolderOption.DoNotVerify);
-                var blishSettingsFilePath = Path.Combine(documentsFolderPath, @"Guild Wars 2\addons\blishhud\settings.json");
+                var moduleFolderPath = directoriesManager.GetFullDirectoryPath(FileConstants.MODULE_FOLDER_NAME);
+                var blishSettingsFilePath = Path.Combine(moduleFolderPath, "..", "settings.json");
                 using var fileStream = System.IO.File.OpenRead(blishSettingsFilePath);
                 using var streamReader = new StreamReader(fileStream);
                 var settingsFileContent = await streamReader.ReadToEndAsync();
@@ -34,8 +35,7 @@ namespace SessionTracker.Api
             }
             catch (Exception e)
             {
-                Module.Logger.Warn(e, "failed to read permissions from settings.json for blish permissions bug workaround. " +
-                    "This can happen when a custom settings path is used '--settings <path>'");
+                Module.Logger.Warn(e, "failed to read permissions from settings.json for blish permissions bug workaround.");
                 return false;
             }
         }
