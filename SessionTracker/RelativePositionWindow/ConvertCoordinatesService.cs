@@ -4,9 +4,9 @@ namespace SessionTracker.RelativePositionWindow
 {
     public class ConvertCoordinatesService
     {
-        public static Point ConvertRelativeToAbsoluteCoordinates(float xRelative, float yRelative, Point screenSize)
+        public static Point ConvertRelativeToAbsoluteCoordinates(FloatPoint relative, Point screenSize)
         {
-            return ConvertRelativeToAbsoluteCoordinates(xRelative, yRelative, screenSize.X, screenSize.Y);
+            return ConvertRelativeToAbsoluteCoordinates(relative.X, relative.Y, screenSize.X, screenSize.Y);
         }
 
         public static Point ConvertRelativeToAbsoluteCoordinates(float xRelative, float yRelative, int screenWidth, int screenHeight)
@@ -17,9 +17,10 @@ namespace SessionTracker.RelativePositionWindow
             return new Point(xAbsolute, yAbsolute);
         }
 
-        public static (float xRelative, float yRelative) ConvertAbsoluteToRelativeCoordinates(Point absolute, Point screenSize)
+        public static FloatPoint ConvertAbsoluteToRelativeCoordinates(Point absolute, Point screenSize)
         {
-            return ConvertAbsoluteToRelativeCoordinates(absolute.X, absolute.Y, screenSize.X, screenSize.Y);
+            var relative = ConvertAbsoluteToRelativeCoordinates(absolute.X, absolute.Y, screenSize.X, screenSize.Y);
+            return new FloatPoint(relative.xRelative, relative.yRelative);
         }
 
         public static (float xRelative, float yRelative) ConvertAbsoluteToRelativeCoordinates(int xAbsolute, int yAbsolute, int screenWidth, int screenHeight)

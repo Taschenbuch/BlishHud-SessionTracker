@@ -29,10 +29,8 @@ namespace SessionTracker.RelativePositionWindow
         {
             base.RecalculateLayout(); // not required because Control and Container dot not implement them. But maybe in a future blish version they do.
 
-            var windowAnchorLocation = ConvertCoordinatesService.ConvertRelativeToAbsoluteCoordinates(
-                _settingService.XMainWindowRelativeLocationSetting.Value,
-                _settingService.YMainWindowRelativeLocationSetting.Value,
-                GameService.Graphics.SpriteScreen.Size);
+            var windowAnchorLocation 
+                = ConvertCoordinatesService.ConvertRelativeToAbsoluteCoordinates(_settingService.WindowRelativeLocationSetting.Value, GameService.Graphics.SpriteScreen.Size);
 
             var location = ConvertBetweenControlAndWindowAnchorLocation(windowAnchorLocation, ConvertLocation.ToControlLocation);
             var adjustedLocation = ScreenBoundariesService.AdjustCoordinatesToKeepContainerInsideScreenBoundaries(location, Size, GameService.Graphics.SpriteScreen.Size);
@@ -85,19 +83,16 @@ namespace SessionTracker.RelativePositionWindow
         // do not use AdjustCoordinates here, because it is called by OnSpriteScreenResized -> can cause unwanted adjusting because of multiple SpriteScreen resizing on module start up
         private void SetLocationFromSettings()
         {
-            var windowAnchorLocation = ConvertCoordinatesService.ConvertRelativeToAbsoluteCoordinates(
-                _settingService.XMainWindowRelativeLocationSetting.Value,
-                _settingService.YMainWindowRelativeLocationSetting.Value,
-                GameService.Graphics.SpriteScreen.Size);
-
+            var windowAnchorLocation 
+                = ConvertCoordinatesService.ConvertRelativeToAbsoluteCoordinates(_settingService.WindowRelativeLocationSetting.Value, GameService.Graphics.SpriteScreen.Size);
+            
             Location = ConvertBetweenControlAndWindowAnchorLocation(windowAnchorLocation, ConvertLocation.ToControlLocation);
         }
 
         private void SaveLocationInSettings(Point location)
         {
             var windowAnchorLocation = ConvertBetweenControlAndWindowAnchorLocation(location, ConvertLocation.ToWindowAnchorLocation);
-            (_settingService.XMainWindowRelativeLocationSetting.Value, _settingService.YMainWindowRelativeLocationSetting.Value)
-                = ConvertCoordinatesService.ConvertAbsoluteToRelativeCoordinates(windowAnchorLocation, GameService.Graphics.SpriteScreen.Size);
+            _settingService.WindowRelativeLocationSetting.Value = ConvertCoordinatesService.ConvertAbsoluteToRelativeCoordinates(windowAnchorLocation, GameService.Graphics.SpriteScreen.Size);
         }
 
         private Point ConvertBetweenControlAndWindowAnchorLocation(Point location, ConvertLocation convertLocation)
