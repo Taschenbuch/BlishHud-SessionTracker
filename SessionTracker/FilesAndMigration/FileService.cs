@@ -14,8 +14,8 @@ namespace SessionTracker.Files
     {
         public FileService(LocalAndRemoteFileLocations localAndRemoteFileLocations)
         {
-            _localModelFilePath = Path.Combine(localAndRemoteFileLocations.LocalRootFolderPath, FileConstants.ModelFileName);
-            _remoteModelFilePath = localAndRemoteFileLocations.GetLocalFilePath(FileConstants.ModelFileName);
+            _localModelFilePath = Path.Combine(localAndRemoteFileLocations.LocalRootFolderPath, FileConstants.MODEL_FILE_NAME);
+            _remoteModelFilePath = localAndRemoteFileLocations.GetLocalFilePath(FileConstants.MODEL_FILE_NAME);
         }
 
         public void SaveModelToFile(Model model)
