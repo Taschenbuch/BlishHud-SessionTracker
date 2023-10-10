@@ -1,6 +1,6 @@
 {
   "name": "Session Tracker",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "namespace": "ecksofa.sessiontracker",
   "package": "SessionTracker.dll",
   "manifest_version": 1,
