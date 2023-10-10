@@ -22,13 +22,13 @@ namespace SessionTracker.SettingEntries
         private static ValueDisplayFormat GetValueDisplayFormat(SettingCollection settings)
         {
             var sessionValuesAreVisibleSetting = settings[SESSION_VALUES_ARE_VISIBLE_SETTING_KEY] as SettingEntry<bool>;
-            var totalValuesAreVisibleSettings = settings[TOTAL_VALUES_ARE_VISIBLE_SETTING_KEY] as SettingEntry<bool>;
+            var totalValuesAreVisibleSetting = settings[TOTAL_VALUES_ARE_VISIBLE_SETTING_KEY] as SettingEntry<bool>;
 
-            if (sessionValuesAreVisibleSetting == null || totalValuesAreVisibleSettings == null) // should not happen
+            if (sessionValuesAreVisibleSetting == null || totalValuesAreVisibleSetting == null) // should not happen
                 return ValueDisplayFormat.SessionValue;
 
             var sessionValuesAreVisible = sessionValuesAreVisibleSetting.Value;
-            var totalValuesAreVisible = totalValuesAreVisibleSettings.Value;
+            var totalValuesAreVisible = totalValuesAreVisibleSetting.Value;
 
             if (sessionValuesAreVisible && totalValuesAreVisible)
                 return ValueDisplayFormat.SessionAndTotalValue;
