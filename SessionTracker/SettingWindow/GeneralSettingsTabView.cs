@@ -30,6 +30,7 @@ namespace SessionTracker.SettingsWindow
             CreateMinutesAfterModuleShutDownSetting(generalSectionFlowPanel, _settingService.MinutesUntilResetAfterModuleShutdownSetting, _settingService.AutomaticSessionResetSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.ValueDisplayFormatSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.LabelTypeSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.WindowAnchorSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.UiHeightIsFixedSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.UiHeightSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.FontSizeIndexSetting);

@@ -2,6 +2,8 @@
 using Blish_HUD.Settings;
 using Microsoft.Xna.Framework.Input;
 using SessionTracker.AutomaticReset;
+using SessionTracker.RelativePositionWindow;
+using System;
 
 namespace SessionTracker.SettingEntries
 {
@@ -9,6 +11,14 @@ namespace SessionTracker.SettingEntries
     {
         public SettingService(SettingCollection settings)
         {
+            WindowAnchorSetting = settings.DefineSetting(
+               "window anchor",
+               WindowAnchor.TopLeft,
+               () => "window anchor",
+               () => "The window anchor is the part of the window that will not move when the stats list grow, while the rest of the window will. " +
+               "For example for 'Top..,' the window top will stay in position while the window bottom expands when the stats list grows. " +
+               "And for 'Bottom..,' the window bottom will stay in position while the window top expands when the stats list grows.");
+
             AutomaticSessionResetSetting = settings.DefineSetting(
                 "automatic session reset",
                 AutomaticSessionReset.OnModuleStart,
@@ -199,10 +209,17 @@ namespace SessionTracker.SettingEntries
                       "At the start of a session all values will be 0 so the whole window is hidden.");
 
             var internalSettings = settings.AddSubCollection("internal settings (not visible in UI)");
-            SettingsVersionSetting = internalSettings.DefineSetting("settings version", 2);
-            XMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location x", 0.2f);
-            YMainWindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location y", 0.2f);
-            MigrateBlishSettingsService.MigrateSettings(settings, SettingsVersionSetting, ValueDisplayFormatSetting);
+            SettingsVersionSetting = internalSettings.DefineSetting("settings version", 3);
+            WindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location", new FloatPoint(0.2f, 0.2f));
+
+            try
+            {
+                MigrateBlishSettingsService.MigrateSettings(settings, internalSettings, SettingsVersionSetting, ValueDisplayFormatSetting, WindowRelativeLocationSetting);
+            }
+            catch (Exception e)
+            {
+                Module.Logger.Error(e, $"Failed to migrate settings. SettingsVersionSetting.Value = {SettingsVersionSetting.Value}");
+            }
         }
 
         public SettingEntry<int> DebugApiIntervalValueSetting { get; }
@@ -216,9 +233,9 @@ namespace SessionTracker.SettingEntries
         public SettingEntry<ColorType> ValueLabelColorSetting { get; }
         public SettingEntry<ColorType> TitleLabelColorSetting { get; }
         public SettingEntry<ColorType> BackgroundColorSetting { get; }
-        public SettingEntry<float> XMainWindowRelativeLocationSetting { get; }
-        public SettingEntry<float> YMainWindowRelativeLocationSetting { get; }
+        public SettingEntry<FloatPoint> WindowRelativeLocationSetting { get; }
         public SettingEntry<bool> UiIsVisibleSetting { get; }
+        public SettingEntry<WindowAnchor> WindowAnchorSetting { get; }
         public SettingEntry<AutomaticSessionReset> AutomaticSessionResetSetting { get; }
         public SettingEntry<int> MinutesUntilResetAfterModuleShutdownSetting { get; }
         public SettingEntry<int> BackgroundOpacitySetting { get; }
