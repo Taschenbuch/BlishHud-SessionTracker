@@ -314,6 +314,8 @@ namespace SessionTracker.StatsWindow
                     AutoSizeHeight = true,
                     AutoSizeWidth  = true,
                     Parent         = stat.IsVisible ? _valuesFlowPanel : null
+                    // must not show all stats when initialized, because on startup that would automatically move the stats container to the bottom
+                    // because of AdjustCoordinatesToKeepContainerInsideScreenBoundaries()
                 };
 
                 _titleFlowPanelByStatId[stat.Id] = new StatTitleFlowPanel(stat, font, _titlesFlowPanel, _textureService, _settingService);

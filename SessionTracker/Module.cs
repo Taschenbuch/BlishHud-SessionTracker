@@ -54,7 +54,7 @@ namespace SessionTracker
         {
             RunShiftBlishCornerIconsWorkaroundBecauseOfNewWizardVaultIcon();
 
-            if (await ApiService.IsApiTokenGeneratedWithoutRequiredPermissions())
+            if (await ApiService.IsApiTokenGeneratedWithoutRequiredPermissions(DirectoriesManager))
             {
                 _moduleLoadError.HasModuleLoadFailed = true;
                 _moduleLoadError.InfoText = $"DISABLE {Name} module, wait 5-10 seconds, after that ENABLE the module again here: " +
