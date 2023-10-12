@@ -33,7 +33,7 @@ namespace SessionTracker.RelativePositionWindow
                 = ConvertCoordinatesService.ConvertRelativeToAbsoluteCoordinates(_settingService.WindowRelativeLocationSetting.Value, GameService.Graphics.SpriteScreen.Size);
 
             var location = ConvertBetweenControlAndWindowAnchorLocation(windowAnchorLocation, ConvertLocation.ToControlLocation);
-            var adjustedLocation = ScreenBoundariesService.AdjustCoordinatesToKeepContainerInsideScreenBoundaries(location, Size, GameService.Graphics.SpriteScreen.Size);
+            var adjustedLocation = ScreenBoundariesService.AdjustLocationToKeepContainerInsideScreenBoundaries(location, Size, GameService.Graphics.SpriteScreen.Size);
             SaveLocationInSettings(adjustedLocation);
             Location = adjustedLocation;
         }
@@ -43,7 +43,7 @@ namespace SessionTracker.RelativePositionWindow
             if (_settingService.DragWindowWithMouseIsEnabledSetting.Value && _containerIsDraggedByMouse)
             {
                 var newLocation = Input.Mouse.Position - _mousePressedLocationInsideContainer;
-                var adjustedLocation = ScreenBoundariesService.AdjustCoordinatesToKeepContainerInsideScreenBoundaries(newLocation, Size, GameService.Graphics.SpriteScreen.Size);
+                var adjustedLocation = ScreenBoundariesService.AdjustLocationToKeepContainerInsideScreenBoundaries(newLocation, Size, GameService.Graphics.SpriteScreen.Size);
                 SaveLocationInSettings(adjustedLocation);
                 Location = adjustedLocation;
             }
