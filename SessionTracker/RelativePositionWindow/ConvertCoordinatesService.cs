@@ -13,7 +13,6 @@ namespace SessionTracker.RelativePositionWindow
         {
             var xAbsolute = (int)(screenWidth * xRelative);
             var yAbsolute = (int)(screenHeight * yRelative);
-
             return new Point(xAbsolute, yAbsolute);
         }
 
@@ -27,25 +26,15 @@ namespace SessionTracker.RelativePositionWindow
         {
             var xRelative = ConvertAbsoluteToRelativeCoordinate(xAbsolute, screenWidth);
             var yRelative = ConvertAbsoluteToRelativeCoordinate(yAbsolute, screenHeight);
-
             return (xRelative, yRelative);
         }
 
         private static float ConvertAbsoluteToRelativeCoordinate(int absolute, int screenWidthOrHeight)
         {
-            var screenHasMessedUpDimensions = screenWidthOrHeight == 0;
-            if (screenHasMessedUpDimensions)
-                return 0;
-
-            var absoluteIsOutSideOfLeftOrTopScreenBoundary = absolute < 0;
-            if (absoluteIsOutSideOfLeftOrTopScreenBoundary)
-                return 0;
-
-            var absoluteIsOutsideOfRightOrBottomScreenBoundary = absolute > screenWidthOrHeight;
-            if (absoluteIsOutsideOfRightOrBottomScreenBoundary)
-                return screenWidthOrHeight;
-
-            return (float)absolute / screenWidthOrHeight;
+            var hasRealisticScreenDimensions = screenWidthOrHeight > 0; 
+            return hasRealisticScreenDimensions
+                ? (float)absolute / screenWidthOrHeight
+                : 0; // this probably messes up coordinates though. it resets them to left and/or top. may happen when SpriteScreen is initalized to x: 0, y: 0 at first.
         }
     }
 }
