@@ -3,6 +3,7 @@ using Blish_HUD.Settings;
 using SessionTracker.AutomaticReset;
 using SessionTracker.DateTimeUtcNow;
 using SessionTracker.Models;
+using SessionTracker.Other;
 using System;
 
 namespace SessionTracker.Reset
@@ -105,6 +106,7 @@ namespace SessionTracker.Reset
 
         private void AutomaticSessionResetSettingChanged(object sender, ValueChangedEventArgs<AutomaticSessionReset> e)
         {
+            DebugLogService.LogSettingChange(sender, e);
             UpdateNextResetDateTime();
         }
 
