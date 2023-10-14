@@ -216,8 +216,7 @@ namespace SessionTracker.StatsWindow
                 if (!apiTokenService.CanAccessApi)
                 {
                     StatValueTextAndTooltipService.SetToApiError(apiTokenService, _valueLabelByStatId.Values, RETRY_IN_X_SECONDS_MESSAGE);
-                    Module.Logger.Warn("Error when updating values: api token is missing permissions. " +
-                                       "Possible reasons: api key got removed or new api key is missing permissions.");
+                    Module.Logger.Warn($"Error when updating values: {apiTokenService.CreateApiErrorText()}");
                     return;
                 }
 
