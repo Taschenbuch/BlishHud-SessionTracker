@@ -1,39 +1,46 @@
 ﻿using Microsoft.Xna.Framework;
+using SessionTracker.SettingEntries;
 
 namespace SessionTracker.RelativePositionWindow
 {
     public class ScreenBoundariesService
     {
-        public static Point AdjustCoordinatesToKeepContainerInsideScreenBoundaries(Point coordinates, Point containerSize, Point screenSize)
+        public static Point AdjustLocationToKeepControlInsideScreenBoundaries(Point windowAnchorCoordinates, Point controlSize, Point screenSize, WindowAnchor windowAnchor)
         {
-            var x = AdjustCoordinateToKeepContainerInsideScreenBoundaries(
-                coordinates.X,
-                containerSize.X,
-                screenSize.X);
-
-            var y = AdjustCoordinateToKeepContainerInsideScreenBoundaries(
-                coordinates.Y,
-                containerSize.Y,
-                screenSize.Y);
-
+            var xIsControlLocation = windowAnchor == WindowAnchor.TopLeft || windowAnchor == WindowAnchor.BottomLeft;
+            var yIsControlLocation = windowAnchor == WindowAnchor.TopLeft || windowAnchor == WindowAnchor.TopRight;
+            var x = AdjustCoordinateToKeepControlInsideScreenBoundaries(windowAnchorCoordinates.X, controlSize.X, screenSize.X, xIsControlLocation);
+            var y = AdjustCoordinateToKeepControlInsideScreenBoundaries(windowAnchorCoordinates.Y, controlSize.Y, screenSize.Y, yIsControlLocation);
             return new Point(x, y);
         }
 
-        private static int AdjustCoordinateToKeepContainerInsideScreenBoundaries(int coordinate, int containerWidthOrHeight, int screenWidthOrHeight)
+        private static int AdjustCoordinateToKeepControlInsideScreenBoundaries(int windowAnchorCoordinate, int controlHeightOrWidth, int screenHeightOrWidth, bool isControlLocation)
         {
-            var containerIsTooBigForScreenDimension = containerWidthOrHeight >= screenWidthOrHeight;
-            if (containerIsTooBigForScreenDimension)
-                return 0;
+            var controlTopOrLeftCoordinate = isControlLocation
+                ? windowAnchorCoordinate
+                : windowAnchorCoordinate - controlHeightOrWidth;
 
-            var containerIsOutsideOfLeftOrTopScreenBoundary = coordinate <= 0;
-            if (containerIsOutsideOfLeftOrTopScreenBoundary)
-                return 0;
+            var controlBottomOrRight = controlTopOrLeftCoordinate + controlHeightOrWidth;
 
-            var containerIsOutsideOfRightOrBottomScreenBoundary = containerWidthOrHeight + coordinate > screenWidthOrHeight;
-            if (containerIsOutsideOfRightOrBottomScreenBoundary)
-                return screenWidthOrHeight - containerWidthOrHeight;
+            var controlIsTooBigForScreenDimension = controlHeightOrWidth >= screenHeightOrWidth;
+            if (controlIsTooBigForScreenDimension)
+                return isControlLocation 
+                    ? 0
+                    : screenHeightOrWidth;
 
-            return coordinate;
+            var controlIsOutsideOfTopOrLeftScreenBoundary = controlTopOrLeftCoordinate <= 0;
+            if (controlIsOutsideOfTopOrLeftScreenBoundary)
+                return isControlLocation
+                    ? 0
+                    : controlHeightOrWidth;
+
+            var controlIsOutsideOfBottomOrRightScreenBoundary = controlBottomOrRight > screenHeightOrWidth;
+            if (controlIsOutsideOfBottomOrRightScreenBoundary)
+                return isControlLocation
+                    ? screenHeightOrWidth - controlHeightOrWidth
+                    : screenHeightOrWidth;
+
+            return windowAnchorCoordinate;
         }
     }
 }

@@ -15,6 +15,7 @@ using SessionTracker.DateTimeUtcNow;
 using SessionTracker.Files;
 using SessionTracker.Files.RemoteFiles;
 using SessionTracker.Models;
+using SessionTracker.Other;
 using SessionTracker.Services;
 using SessionTracker.SettingEntries;
 using SessionTracker.Settings;
@@ -38,6 +39,7 @@ namespace SessionTracker
 
         protected override void DefineSettings(SettingCollection settings)
         {
+            DebugLogService.LogVersionAndSettings(Version, settings);
             _settingService = new SettingService(settings);
             _dateTimeService.DefineSettings(settings);
         }

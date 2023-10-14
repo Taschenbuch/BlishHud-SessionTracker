@@ -2,6 +2,7 @@
 using Blish_HUD.Controls;
 using Blish_HUD.Input;
 using Microsoft.Xna.Framework;
+using SessionTracker.Other;
 using SessionTracker.SettingEntries;
 
 namespace SessionTracker.RelativePositionWindow
@@ -11,7 +12,7 @@ namespace SessionTracker.RelativePositionWindow
         public RelativePositionAndMouseDraggableContainer(SettingService settingService)
         {
             _settingService = settingService;
-            SetLocationFromSettings();
+            SetLocationFromWindowAnchorLocationSettings();
             GameService.Input.Mouse.LeftMouseButtonReleased   += OnLeftMouseButtonReleased;
             GameService.Graphics.SpriteScreen.Resized         += OnSpriteScreenResized;
             settingService.WindowAnchorSetting.SettingChanged += WindowAnchorSettingChanged;
@@ -25,17 +26,14 @@ namespace SessionTracker.RelativePositionWindow
             base.DisposeControl();
         }
 
+        // Size changes not only when stats become visible/hidden, but also on blish startup when stats window is constructed.
+        // DO NOT force stat window to be within gw2 screen borders here. This will shift the stats window to left/right/top/bottom screen border depending on windowAnchor setting because
+        // SpriteScreen.Size will resize multiple times, starting at 40x20, during blish startup.
         public override void RecalculateLayout()
         {
             base.RecalculateLayout(); // not required because Control and Container dot not implement them. But maybe in a future blish version they do.
+            SetLocationFromWindowAnchorLocationSettings();
 
-            var windowAnchorLocation 
-                = ConvertCoordinatesService.ConvertRelativeToAbsoluteCoordinates(_settingService.WindowRelativeLocationSetting.Value, GameService.Graphics.SpriteScreen.Size);
-
-            var location = ConvertBetweenControlAndWindowAnchorLocation(windowAnchorLocation, ConvertLocation.ToControlLocation);
-            var adjustedLocation = ScreenBoundariesService.AdjustCoordinatesToKeepContainerInsideScreenBoundaries(location, Size, GameService.Graphics.SpriteScreen.Size);
-            SaveLocationInSettings(adjustedLocation);
-            Location = adjustedLocation;
         }
 
         public override void UpdateContainer(GameTime gameTime)
@@ -43,9 +41,7 @@ namespace SessionTracker.RelativePositionWindow
             if (_settingService.DragWindowWithMouseIsEnabledSetting.Value && _containerIsDraggedByMouse)
             {
                 var newLocation = Input.Mouse.Position - _mousePressedLocationInsideContainer;
-                var adjustedLocation = ScreenBoundariesService.AdjustCoordinatesToKeepContainerInsideScreenBoundaries(newLocation, Size, GameService.Graphics.SpriteScreen.Size);
-                SaveLocationInSettings(adjustedLocation);
-                Location = adjustedLocation;
+                AdjustAndSetLocationToKeepWindowAnchorInsideScreenBoundaries(newLocation);
             }
         }
 
@@ -63,55 +59,54 @@ namespace SessionTracker.RelativePositionWindow
         // not using the override on purpose because it does not register the release when clicking fast (workaround suggested by freesnow)
         private void OnLeftMouseButtonReleased(object sender, MouseEventArgs e)
         {
+            _containerIsDraggedByMouse = false;
+
             if (_settingService.DragWindowWithMouseIsEnabledSetting.Value)
-            {
-                _containerIsDraggedByMouse = false;
-                SaveLocationInSettings(Location);
-            }
+                SaveWindowAnchorLocationInSettings(Location);
         }
 
         private void WindowAnchorSettingChanged(object sender, ValueChangedEventArgs<WindowAnchor> e)
         {
-            SaveLocationInSettings(Location);
+            DebugLogService.LogSettingChange(sender, e);
+            AdjustAndSetLocationToKeepWindowAnchorInsideScreenBoundaries(Location);
         }
 
         private void OnSpriteScreenResized(object sender, ResizedEventArgs resizedEventArgs)
         {
-            SetLocationFromSettings();
+            SetLocationFromWindowAnchorLocationSettings();
         }
 
-        // do not use AdjustCoordinates here, because it is called by OnSpriteScreenResized -> can cause unwanted adjusting because of multiple SpriteScreen resizing on module start up
-        private void SetLocationFromSettings()
+        private void AdjustAndSetLocationToKeepWindowAnchorInsideScreenBoundaries(Point location)
+        {
+            var windowAnchorLocation
+                = WindowAnchorService.ConvertBetweenControlAndWindowAnchorLocation(location, Size, ConvertLocation.ToWindowAnchorLocation, _settingService.WindowAnchorSetting.Value);
+
+            var adjustedWindowAnchorLocation = ScreenBoundariesService.AdjustLocationToKeepControlInsideScreenBoundaries(
+                windowAnchorLocation, Size, GameService.Graphics.SpriteScreen.Size, _settingService.WindowAnchorSetting.Value);
+
+            var adjustedLocation = WindowAnchorService.ConvertBetweenControlAndWindowAnchorLocation(
+                adjustedWindowAnchorLocation, Size, ConvertLocation.ToControlLocation, _settingService.WindowAnchorSetting.Value);
+
+            SaveWindowAnchorLocationInSettings(adjustedLocation);
+            Location = adjustedLocation;
+        }
+
+        // do not use AdjustCoordinates in this method,
+        // because it is called by OnSpriteScreenResized -> would cause unwanted adjusting because of multiple SpriteScreen resizing on module start up (was a user reported bug)
+        private void SetLocationFromWindowAnchorLocationSettings()
         {
             var windowAnchorLocation 
                 = ConvertCoordinatesService.ConvertRelativeToAbsoluteCoordinates(_settingService.WindowRelativeLocationSetting.Value, GameService.Graphics.SpriteScreen.Size);
+            Location 
+                = WindowAnchorService.ConvertBetweenControlAndWindowAnchorLocation(windowAnchorLocation, Size, ConvertLocation.ToControlLocation, _settingService.WindowAnchorSetting.Value);
+        }
+
+        private void SaveWindowAnchorLocationInSettings(Point location)
+        {
+            var windowAnchorLocation 
+                = WindowAnchorService.ConvertBetweenControlAndWindowAnchorLocation(location, Size, ConvertLocation.ToWindowAnchorLocation, _settingService.WindowAnchorSetting.Value);
             
-            Location = ConvertBetweenControlAndWindowAnchorLocation(windowAnchorLocation, ConvertLocation.ToControlLocation);
-        }
-
-        private void SaveLocationInSettings(Point location)
-        {
-            var windowAnchorLocation = ConvertBetweenControlAndWindowAnchorLocation(location, ConvertLocation.ToWindowAnchorLocation);
             _settingService.WindowRelativeLocationSetting.Value = ConvertCoordinatesService.ConvertAbsoluteToRelativeCoordinates(windowAnchorLocation, GameService.Graphics.SpriteScreen.Size);
-        }
-
-        private Point ConvertBetweenControlAndWindowAnchorLocation(Point location, ConvertLocation convertLocation)
-        {
-            var xIsControlLocation = _settingService.WindowAnchorSetting.Value == WindowAnchor.TopLeft || _settingService.WindowAnchorSetting.Value == WindowAnchor.BottomLeft;
-            var yIsControlLocation = _settingService.WindowAnchorSetting.Value == WindowAnchor.TopLeft || _settingService.WindowAnchorSetting.Value == WindowAnchor.TopRight;
-            var x = ConvertCoordinate(location.X, xIsControlLocation, Width, convertLocation);
-            var y = ConvertCoordinate(location.Y, yIsControlLocation, Height, convertLocation);
-            return new Point(x, y);
-        }
-
-        private int ConvertCoordinate(int coordinate, bool isControlLocation, int widthOrHeight, ConvertLocation convertLocation)
-        {
-            if(isControlLocation)
-                return coordinate;
-
-            return convertLocation == ConvertLocation.ToWindowAnchorLocation
-                ? coordinate + widthOrHeight
-                : coordinate - widthOrHeight;
         }
 
         private Point _mousePressedLocationInsideContainer = Point.Zero;
