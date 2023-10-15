@@ -1,0 +1,56 @@
+﻿using System.Collections.Generic;
+using Gw2Sharp.WebApi;
+using SessionTracker.Constants;
+using SessionTracker.Models;
+
+namespace SessionTracker.JsonFileCreator.StatCreators
+{
+    public class PvpStatsCreator
+    {
+        public static List<Stat> CreatePvpStats()
+        {
+            var pvpStats = SetCategory(_pvpStats);
+            pvpStats = StatsCreatorCommon.SetOrder(pvpStats);
+            return pvpStats;
+        }
+
+        private static List<Stat> SetCategory(List<Stat> stats)
+        {
+            foreach (var stat in stats)
+            {
+                stat.Category.Name.LocalizedTextByLocale = new Dictionary<Locale, string>()
+                {
+                    { Locale.English, "PvP" },
+                    { Locale.French, "JvJ" },
+                    { Locale.German, "PvP" },
+                    { Locale.Spanish, "PvP" },
+                };
+                stat.Category.Type = StatCategoryType.Pvp;
+            }
+
+            return stats;
+        }
+
+        private static readonly List<Stat> _pvpStats = new List<Stat>
+        {
+            new Stat { Id = StatId.PVP_KILLS, Category = { Type = StatCategoryType.Pvp },  Name = { LocalizedTextByLocale = { [Locale.English] = "PvP kills", [Locale.German] = "PvP Feinde besiegt", [Locale.French] = "Victimes JcJ", [Locale.Spanish] = "PvP bajas" } }, IconFileName = "kill.png", ApiId = 239, ApiIdType = ApiIdType.Achievement },
+            new Stat
+            {
+                Id           = StatId.PVP_KDR,
+                IconFileName = "kdr.png",
+                Name         = { LocalizedTextByLocale = { [Locale.English] = "PvP KDR", [Locale.German]                = "PvP KDR", [Locale.French]                             = "KDR JcJ", [Locale.Spanish]                  = "PvP B/M" } },
+                Description  = { LocalizedTextByLocale = { [Locale.English] = "PvP kills/deaths ratio", [Locale.German] = "PvP Verhältnis besiegte Feinde/Tode", [Locale.French] = "Ratio Victimes/Morts JcJ", [Locale.Spanish] = "PvP Ratio de Bajas/Muertes" } }
+            },
+            new Stat { Id = StatId.PVP_TOTAL_WINS,  Name     = { LocalizedTextByLocale = { [Locale.English] = "PvP total wins", [Locale.German]      = "PvP gesamt gewonnen", [Locale.French]           = "Victoires JcJ", [Locale.Spanish]              = "PvP Victorias totales" } }, IconFileName            = "pvpWins.png" },
+            new Stat { Id = StatId.PVP_TOTAL_LOSSES, Name    = { LocalizedTextByLocale = { [Locale.English] = "PvP total losses", [Locale.German]    = "PvP gesamt verloren", [Locale.French]           = "Défaites JcJ", [Locale.Spanish]               = "PvP Derrotas totales" } }, IconFileName             = "pvpLosses.png" },
+            new Stat { Id = StatId.PVP_RANKED_WINS, Name     = { LocalizedTextByLocale = { [Locale.English] = "PvP ranked wins", [Locale.German]     = "PvP mit Rangwertung gewonnen", [Locale.French]  = "Victoires JcJ classées", [Locale.Spanish]     = "PvP Victorias en clasificatorias" } }, IconFileName = "pvpWins.png" },
+            new Stat { Id = StatId.PVP_RANKED_LOSSES, Name   = { LocalizedTextByLocale = { [Locale.English] = "PvP ranked losses", [Locale.German]   = "PvP mit Rangwertung verloren", [Locale.French]  = "Défaites JcJ classées", [Locale.Spanish]      = "PvP Derrotas en clasificatorias" } }, IconFileName  = "pvpLosses.png" },
+            new Stat { Id = StatId.PVP_UNRANKED_WINS, Name   = { LocalizedTextByLocale = { [Locale.English] = "PvP unranked wins", [Locale.German]   = "PvP ohne Rangwertung gewonnen", [Locale.French] = "Victoires JcJ non classées", [Locale.Spanish] = "PvP Victorias en libres" } }, IconFileName          = "pvpWins.png" },
+            new Stat { Id = StatId.PVP_UNRANKED_LOSSES, Name = { LocalizedTextByLocale = { [Locale.English] = "PvP unranked losses", [Locale.German] = "PvP ohne Rangwertung verloren", [Locale.French] = "Défaites JcJ non classées", [Locale.Spanish]  = "PvP Derrotas en libres" } }, IconFileName           = "pvpLosses.png" },
+            new Stat { Id = StatId.PVP_CUSTOM_WINS, Name     = { LocalizedTextByLocale = { [Locale.English] = "PvP custom wins", [Locale.German]     = "Pvp selbsterstellt gewonnen", [Locale.French]   = "Victoires JcJ personnalisé", [Locale.Spanish] = "PvP Victorias en personalidadas" } }, IconFileName  = "pvpWins.png" },
+            new Stat { Id = StatId.PVP_CUSTOM_LOSSES, Name   = { LocalizedTextByLocale = { [Locale.English] = "PvP custom losses", [Locale.German]   = "PvP selbsterstellt verloren", [Locale.French]   = "Défaites JcJ personnalisé", [Locale.Spanish]  = "PvP Derrotas en personalidadas" } }, IconFileName   = "pvpLosses.png" },
+            new Stat { Id = StatId.PVP_RANK, Name            = { LocalizedTextByLocale = { [Locale.English] = "PvP rank", [Locale.German]            = "PvP Rang", [Locale.French]                      = "Rang JcJ", [Locale.Spanish]                   = "PvP Rango" } }, IconFileName                        = "pvpRank.png" },
+            new Stat { Id = StatId.PVP_RANKING_POINTS, Name  = { LocalizedTextByLocale = { [Locale.English] = "PvP ranking points", [Locale.German]  = "PvP Rangpunkte", [Locale.French]                = "Points de classement JcJ", [Locale.Spanish]   = "PvP Puntos de clasificación" } }, IconFileName      = "pvpRankingPoints.png" },
+          };
+    }
+}

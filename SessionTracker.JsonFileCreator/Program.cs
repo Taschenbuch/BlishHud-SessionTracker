@@ -1,9 +1,10 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using SessionTracker.Files;
-using SessionTracker.JsonFileCreator.StatServices;
 using SessionTracker.Models;
 using System;
+using System.Collections.Generic;
+using SessionTracker.JsonFileCreator.StatCreators;
 
 namespace SessionTracker.JsonFileCreator
 {
@@ -23,12 +24,19 @@ namespace SessionTracker.JsonFileCreator
 
         private static async Task AddStatsToModel(Model model)
         {
-            var itemStats     = await ItemStatService.CreateItemStats();
-            var currencyStats = await CurrencyStatService.CreateCurrencyStats();
+            model.Stats.AddRange(MiscStatCreator.CreateMiscStats());
+            model.Stats.AddRange(WvwStatsCreator.CreateWvwStats());
+            model.Stats.AddRange(PvpStatsCreator.CreatePvpStats());
+            model.Stats.AddRange(await CurrencyStatsCreator.CreateCurrencyStats());
+            model.Stats.AddRange(await ItemStatsCreator.CreateItemStats());
+            ThrowIfStatOrderIsZero(model.Stats);
+        }
 
-            model.Stats.AddRange(itemStats);
-            model.Stats.AddRange(CustomStatService.CustomStats);
-            model.Stats.AddRange(currencyStats);
+        private static void ThrowIfStatOrderIsZero(List<Stat> stats)
+        {
+            foreach (Stat stat in stats)
+                if(stat.Position == 0)
+                    throw new Exception($"Error: Order must be >0. stat: {stat.Name.English} (id: {stat.Id}, apiId: {stat.ApiId})");
         }
     }
 }

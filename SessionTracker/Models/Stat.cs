@@ -9,8 +9,10 @@ namespace SessionTracker.Models
         public string Id { get; set; } = string.Empty;
         public LocalizedText Name { get; } = new LocalizedText();
         public LocalizedText Description { get; } = new LocalizedText();
+        public StatCategory Category { get; } = new StatCategory();
         public int ApiId { get; set; }
         public ApiIdType ApiIdType{ get; set; } = ApiIdType.None;
+        public int Position { get; set; }
         public int IconAssetId { get; set; }
         public string IconFileName { get; set; }
         public bool IsVisible { get; set; }
