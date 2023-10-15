@@ -1,5 +1,4 @@
-﻿using Blish_HUD;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using SessionTracker.Files;
 using SessionTracker.Models;
 using SessionTracker.Other;

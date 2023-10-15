@@ -39,9 +39,9 @@ namespace SessionTracker
 
         protected override void DefineSettings(SettingCollection settings)
         {
-            DebugLogService.LogVersionAndSettings(Version, settings);
             _settingService = new SettingService(settings);
             _dateTimeService.DefineSettings(settings);
+            _debugLogService = new DebugLogService(Version, settings);
         }
 
         public override IView GetSettingsView()
@@ -128,6 +128,7 @@ namespace SessionTracker
                 _settingService.UiVisibilityKeyBindingSetting.Value.Activated -= OnUiVisibilityKeyBindingActivated;
             }
 
+            _debugLogService?.Dispose();
             _moduleLoadError?.Dispose();
             _settingsWindowService?.Dispose();
             _cornerIconService?.Dispose();
@@ -165,6 +166,7 @@ namespace SessionTracker
         private TextureService _textureService;
         private CornerIconService _cornerIconService;
         private SettingsWindowService _settingsWindowService;
+        private DebugLogService _debugLogService;
         private readonly DateTimeService _dateTimeService = new DateTimeService();
         private readonly ModuleLoadError _moduleLoadError = new ModuleLoadError();
     }
