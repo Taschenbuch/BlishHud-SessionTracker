@@ -19,24 +19,21 @@ namespace SessionTracker.JsonFileCreator.StatServices
         private static async Task<List<Stat>> CreateStats()
         {
             var stats = new List<Stat>();
+            using var client = new Gw2Client(new Connection(Locale.English));
+            var currencies = await client.WebApi.V2.Currencies.AllAsync();
 
-            using (var client = new Gw2Client(new Connection(Locale.English)))
+            foreach (var currency in currencies)
             {
-                var currencies = await client.WebApi.V2.Currencies.AllAsync();
-
-                foreach (var currency in currencies)
+                var stat = new Stat
                 {
-                    var stat = new Stat
-                    {
-                        Id          = $"currency{currency.Id}",
-                        ApiId       = currency.Id,
-                        ApiIdType   = ApiIdType.Currency,
-                        IconAssetId = AssetService.GetIconAssetIdFromIconUrl(currency.Icon.Url.ToString()),
-                        IsVisible   = false
-                    };
+                    Id          = $"currency{currency.Id}",
+                    ApiId       = currency.Id,
+                    ApiIdType   = ApiIdType.Currency,
+                    IconAssetId = AssetService.GetIconAssetIdFromIconUrl(currency.Icon.Url.ToString()),
+                    IsVisible   = false
+                };
 
-                    stats.Add(stat);
-                }
+                stats.Add(stat);
             }
 
             return stats;
@@ -48,13 +45,11 @@ namespace SessionTracker.JsonFileCreator.StatServices
 
             foreach (var local in locales)
             {
-                using (var client = new Gw2Client(new Connection(local)))
-                {
-                    var currencies = await client.WebApi.V2.Currencies.AllAsync();
+                using var client = new Gw2Client(new Connection(local));
+                var currencies = await client.WebApi.V2.Currencies.AllAsync();
 
-                    foreach (var currency in currencies)
-                        UpdateTexts(currency, stats, local);
-                }
+                foreach (var currency in currencies)
+                    UpdateTexts(currency, stats, local);
             }
 
             return stats;
