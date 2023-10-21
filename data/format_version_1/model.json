@@ -25,7 +25,8 @@
       },
       "ApiId": 71581,
       "ApiIdType": "Item",
-      "IconAssetId": 1206833
+      "IconAssetId": 1206833,
+      "Value": {}
     },
     {
       "Id": "item8920",
@@ -51,7 +52,116 @@
       },
       "ApiId": 8920,
       "ApiIdType": "Item",
-      "IconAssetId": 63171
+      "IconAssetId": 63171,
+      "Value": {}
+    },
+    {
+      "Id": "item36038",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Trick-or-Treat Bag",
+          "French": "Sac de bonbons",
+          "German": "\"Süßes oder Saures\"-Tasche",
+          "Spanish": "Saco de Halloween",
+          "Chinese": "捣蛋包",
+          "Korean": "Trick-or-Treat Bag"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Double-click to open.",
+          "French": "Double-cliquez pour ouvrir.",
+          "German": "Zum Öffnen doppelklicken.",
+          "Spanish": "Haz doble clic para abrir.",
+          "Chinese": "双击后打开。",
+          "Korean": "Double-click to open."
+        }
+      },
+      "ApiId": 36038,
+      "ApiIdType": "Item",
+      "IconAssetId": 499375,
+      "Value": {}
+    },
+    {
+      "Id": "item36041",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Piece of Candy Corn",
+          "French": "Morceau de bonbon",
+          "German": "Stück Candy-Corn",
+          "Spanish": "Trozo de caramelo",
+          "Chinese": "玉米糖块",
+          "Korean": "Piece of Candy Corn"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "A sugary, delicious, versatile treat.",
+          "French": "Une friandise délicieuse, sucrée et variée.",
+          "German": "Eine zuckersüße, leckere und vielseitige Süßigkeit.",
+          "Spanish": "Un dulce empalagoso, delicioso y versátil.",
+          "Chinese": "甜美、可口的通用食材。",
+          "Korean": "A sugary, delicious, versatile treat."
+        }
+      },
+      "ApiId": 36041,
+      "ApiIdType": "Item",
+      "IconAssetId": 499376,
+      "Value": {}
+    },
+    {
+      "Id": "item19976",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Mystic Coin",
+          "French": "Pièce mystique",
+          "German": "Mystische Münze",
+          "Spanish": "Moneda mística",
+          "Chinese": "神秘硬币",
+          "Korean": "Mystic Coin"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Coins are used to create high-level weapons at the Mystic Forge in Lion's Arch. \nPart of Zommoros's favorite trades.",
+          "French": "Les pièces servent à créer des armes de haut niveau à la forge mystique de l'Arche du Lion.\nElles font partie des devises préférées de Zommoros.",
+          "German": "Münzen werden zur Herstellung hochstufiger Waffen in der Mystischen Schmiede von Löwenstein verwendet. \nEine von Zommoros' bevorzugten Transaktionen.",
+          "Spanish": "Las monedas se utilizan para crear armas de alto nivel en la Forja Mística de Arco del León. \nUno de los trueques favoritos de Zommoros.",
+          "Chinese": "硬币用来在狮子拱门的神秘熔炉中合成高级武器。\n虫师最喜欢的交易之一。",
+          "Korean": "Coins are used to create high-level weapons at the Mystic Forge in Lion's Arch. \nPart of Zommoros's favorite trades."
+        }
+      },
+      "ApiId": 19976,
+      "ApiIdType": "Item",
+      "IconAssetId": 62864,
+      "Value": {}
+    },
+    {
+      "Id": "item75919",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Fractal Encryption",
+          "French": "Encodage fractal",
+          "German": "Fraktal-Chiffrierung",
+          "Spanish": "Encriptación fractal",
+          "Chinese": "碎层密码宝箱",
+          "Korean": "Fractal Encryption"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "This mysterious symbol-covered object contains valuable loot. It will require a Fractal Encryption Key to open.\n\nFractal Encryption Keys can be purchased inside Dessa's lab in the Mistlock Observatory.",
+          "French": "Ce mystérieux objet recouvert de symboles contient un butin précieux. Vous devez vous procurer une clé d'encodage fractal pour l'ouvrir.\n\nVous pouvez acheter ces clés au laboratoire de Dessa dans l'Observatoire de Gardebrume.",
+          "German": "Dieses geheimnisvolle, mit Symbolen übersäte Objekt enthält wertvolle Beute. Zum Öffnen braucht Ihr einen Fraktal-Chiffrierungsschlüssel.\n\nFraktal-Chiffrierungsschlüssel könnt Ihr in Dessas Labor im Observatorium Nebelsperre kaufen.",
+          "Spanish": "Este misterioso objeto cubierto de símbolos contiene un valioso botín. Para abrirlo se necesita una clave de encriptación fractal.\n\nLas claves de encriptación fractal se compran en el laboratorio de Dessa, en el Observatorio del Bloqueo de la Niebla.",
+          "Chinese": "这个物体表面覆盖着神秘的符号，内含珍贵的物品，需要一把碎层密码钥匙才可开启。\n\n碎层密码钥匙可在雾锁观测台黛萨的实验室中购买。",
+          "Korean": "This mysterious symbol-covered object contains valuable loot. It will require a Fractal Encryption Key to open.\n\nFractal Encryption Keys can be purchased inside Dessa's lab in the Mistlock Observatory."
+        }
+      },
+      "ApiId": 75919,
+      "ApiIdType": "Item",
+      "IconAssetId": 1200196,
+      "Value": {}
     },
     {
       "Id": "luck",
@@ -66,7 +176,8 @@
       "Description": {
         "LocalizedTextByLocale": {}
       },
-      "IconFileName": "luck.png"
+      "IconFileName": "luck.png",
+      "Value": {}
     },
     {
       "Id": "deaths",
@@ -86,7 +197,8 @@
           "Spanish": "Número total de muertes de todas las fuentes (McM, JcJ, JcE)"
         }
       },
-      "IconFileName": "death.png"
+      "IconFileName": "death.png",
+      "Value": {}
     },
     {
       "Id": "pvp kills",
@@ -103,7 +215,8 @@
       },
       "ApiId": 239,
       "ApiIdType": "Achievement",
-      "IconFileName": "kill.png"
+      "IconFileName": "kill.png",
+      "Value": {}
     },
     {
       "Id": "pvp kdr",
@@ -123,7 +236,8 @@
           "Spanish": "PvP Ratio de Bajas/Muertes"
         }
       },
-      "IconFileName": "kdr.png"
+      "IconFileName": "kdr.png",
+      "Value": {}
     },
     {
       "Id": "pvp total wins",
@@ -138,7 +252,8 @@
       "Description": {
         "LocalizedTextByLocale": {}
       },
-      "IconFileName": "pvpWins.png"
+      "IconFileName": "pvpWins.png",
+      "Value": {}
     },
     {
       "Id": "pvp total losses",
@@ -153,7 +268,8 @@
       "Description": {
         "LocalizedTextByLocale": {}
       },
-      "IconFileName": "pvpLosses.png"
+      "IconFileName": "pvpLosses.png",
+      "Value": {}
     },
     {
       "Id": "pvp ranked wins",
@@ -168,7 +284,8 @@
       "Description": {
         "LocalizedTextByLocale": {}
       },
-      "IconFileName": "pvpWins.png"
+      "IconFileName": "pvpWins.png",
+      "Value": {}
     },
     {
       "Id": "pvp ranked losses",
@@ -183,7 +300,8 @@
       "Description": {
         "LocalizedTextByLocale": {}
       },
-      "IconFileName": "pvpLosses.png"
+      "IconFileName": "pvpLosses.png",
+      "Value": {}
     },
     {
       "Id": "pvp unranked wins",
@@ -198,7 +316,8 @@
       "Description": {
         "LocalizedTextByLocale": {}
       },
-      "IconFileName": "pvpWins.png"
+      "IconFileName": "pvpWins.png",
+      "Value": {}
     },
     {
       "Id": "pvp unranked losses",
@@ -213,7 +332,8 @@
       "Description": {
         "LocalizedTextByLocale": {}
       },
-      "IconFileName": "pvpLosses.png"
+      "IconFileName": "pvpLosses.png",
+      "Value": {}
     },
     {
       "Id": "pvp custom wins",
@@ -228,7 +348,8 @@
       "Description": {
         "LocalizedTextByLocale": {}
       },
-      "IconFileName": "pvpWins.png"
+      "IconFileName": "pvpWins.png",
+      "Value": {}
     },
     {
       "Id": "pvp custom losses",
@@ -243,7 +364,8 @@
       "Description": {
         "LocalizedTextByLocale": {}
       },
-      "IconFileName": "pvpLosses.png"
+      "IconFileName": "pvpLosses.png",
+      "Value": {}
     },
     {
       "Id": "pvp rank",
@@ -258,7 +380,8 @@
       "Description": {
         "LocalizedTextByLocale": {}
       },
-      "IconFileName": "pvpRank.png"
+      "IconFileName": "pvpRank.png",
+      "Value": {}
     },
     {
       "Id": "pvp ranking points",
@@ -273,7 +396,8 @@
       "Description": {
         "LocalizedTextByLocale": {}
       },
-      "IconFileName": "pvpRankingPoints.png"
+      "IconFileName": "pvpRankingPoints.png",
+      "Value": {}
     },
     {
       "Id": "wvw kills",
@@ -290,7 +414,8 @@
       },
       "ApiId": 283,
       "ApiIdType": "Achievement",
-      "IconFileName": "kill.png"
+      "IconFileName": "kill.png",
+      "Value": {}
     },
     {
       "Id": "wvw kdr",
@@ -310,7 +435,8 @@
           "Spanish": "McM Ratio de Bajas/Muertes"
         }
       },
-      "IconFileName": "kdr.png"
+      "IconFileName": "kdr.png",
+      "Value": {}
     },
     {
       "Id": "wvw rank",
@@ -325,7 +451,8 @@
       "Description": {
         "LocalizedTextByLocale": {}
       },
-      "IconFileName": "wvwRank.png"
+      "IconFileName": "wvwRank.png",
+      "Value": {}
     },
     {
       "Id": "wvw supply spent on repairs",
@@ -347,7 +474,8 @@
       },
       "ApiId": 306,
       "ApiIdType": "Achievement",
-      "IconFileName": "supplySpend.png"
+      "IconFileName": "supplySpend.png",
+      "Value": {}
     },
     {
       "Id": "wvw dolyaks killed",
@@ -364,7 +492,8 @@
       },
       "ApiId": 288,
       "ApiIdType": "Achievement",
-      "IconFileName": "dolyak.png"
+      "IconFileName": "dolyak.png",
+      "Value": {}
     },
     {
       "Id": "wvw dolyaks escorted",
@@ -381,7 +510,8 @@
       },
       "ApiId": 285,
       "ApiIdType": "Achievement",
-      "IconFileName": "dolyakDefended.png"
+      "IconFileName": "dolyakDefended.png",
+      "Value": {}
     },
     {
       "Id": "wvw camps captured",
@@ -398,7 +528,8 @@
       },
       "ApiId": 291,
       "ApiIdType": "Achievement",
-      "IconFileName": "camp.png"
+      "IconFileName": "camp.png",
+      "Value": {}
     },
     {
       "Id": "wvw camps defended",
@@ -415,7 +546,8 @@
       },
       "ApiId": 310,
       "ApiIdType": "Achievement",
-      "IconFileName": "campDefended.png"
+      "IconFileName": "campDefended.png",
+      "Value": {}
     },
     {
       "Id": "wvw towers captured",
@@ -432,7 +564,8 @@
       },
       "ApiId": 297,
       "ApiIdType": "Achievement",
-      "IconFileName": "tower.png"
+      "IconFileName": "tower.png",
+      "Value": {}
     },
     {
       "Id": "wvw towers defended",
@@ -449,7 +582,8 @@
       },
       "ApiId": 322,
       "ApiIdType": "Achievement",
-      "IconFileName": "towerDefended.png"
+      "IconFileName": "towerDefended.png",
+      "Value": {}
     },
     {
       "Id": "wvw keeps captured",
@@ -466,7 +600,8 @@
       },
       "ApiId": 300,
       "ApiIdType": "Achievement",
-      "IconFileName": "keep.png"
+      "IconFileName": "keep.png",
+      "Value": {}
     },
     {
       "Id": "wvw keeps defended",
@@ -483,7 +618,8 @@
       },
       "ApiId": 316,
       "ApiIdType": "Achievement",
-      "IconFileName": "keepDefended.png"
+      "IconFileName": "keepDefended.png",
+      "Value": {}
     },
     {
       "Id": "wvw castles captured",
@@ -500,7 +636,8 @@
       },
       "ApiId": 294,
       "ApiIdType": "Achievement",
-      "IconFileName": "castle.png"
+      "IconFileName": "castle.png",
+      "Value": {}
     },
     {
       "Id": "wvw castles defended",
@@ -517,7 +654,8 @@
       },
       "ApiId": 313,
       "ApiIdType": "Achievement",
-      "IconFileName": "castleDefended.png"
+      "IconFileName": "castleDefended.png",
+      "Value": {}
     },
     {
       "Id": "wvw objectives captured",
@@ -534,7 +672,8 @@
       },
       "ApiId": 303,
       "ApiIdType": "Achievement",
-      "IconFileName": "objective.png"
+      "IconFileName": "objective.png",
+      "Value": {}
     },
     {
       "Id": "wvw objectives defended",
@@ -551,7 +690,8 @@
       },
       "ApiId": 319,
       "ApiIdType": "Achievement",
-      "IconFileName": "objectiveDefended.png"
+      "IconFileName": "objectiveDefended.png",
+      "Value": {}
     },
     {
       "Id": "currency1",
@@ -577,7 +717,8 @@
       },
       "ApiId": 1,
       "ApiIdType": "Currency",
-      "IconAssetId": 619316
+      "IconAssetId": 619316,
+      "Value": {}
     },
     {
       "Id": "currency2",
@@ -603,7 +744,8 @@
       },
       "ApiId": 2,
       "ApiIdType": "Currency",
-      "IconAssetId": 155026
+      "IconAssetId": 155026,
+      "Value": {}
     },
     {
       "Id": "currency3",
@@ -629,7 +771,8 @@
       },
       "ApiId": 3,
       "ApiIdType": "Currency",
-      "IconAssetId": 619317
+      "IconAssetId": 619317,
+      "Value": {}
     },
     {
       "Id": "currency4",
@@ -655,7 +798,8 @@
       },
       "ApiId": 4,
       "ApiIdType": "Currency",
-      "IconAssetId": 502065
+      "IconAssetId": 502065,
+      "Value": {}
     },
     {
       "Id": "currency5",
@@ -681,7 +825,8 @@
       },
       "ApiId": 5,
       "ApiIdType": "Currency",
-      "IconAssetId": 619318
+      "IconAssetId": 619318,
+      "Value": {}
     },
     {
       "Id": "currency6",
@@ -707,7 +852,8 @@
       },
       "ApiId": 6,
       "ApiIdType": "Currency",
-      "IconAssetId": 619319
+      "IconAssetId": 619319,
+      "Value": {}
     },
     {
       "Id": "currency7",
@@ -733,7 +879,8 @@
       },
       "ApiId": 7,
       "ApiIdType": "Currency",
-      "IconAssetId": 619320
+      "IconAssetId": 619320,
+      "Value": {}
     },
     {
       "Id": "currency9",
@@ -759,7 +906,8 @@
       },
       "ApiId": 9,
       "ApiIdType": "Currency",
-      "IconAssetId": 619322
+      "IconAssetId": 619322,
+      "Value": {}
     },
     {
       "Id": "currency10",
@@ -785,7 +933,8 @@
       },
       "ApiId": 10,
       "ApiIdType": "Currency",
-      "IconAssetId": 619323
+      "IconAssetId": 619323,
+      "Value": {}
     },
     {
       "Id": "currency11",
@@ -811,7 +960,8 @@
       },
       "ApiId": 11,
       "ApiIdType": "Currency",
-      "IconAssetId": 619324
+      "IconAssetId": 619324,
+      "Value": {}
     },
     {
       "Id": "currency12",
@@ -837,7 +987,8 @@
       },
       "ApiId": 12,
       "ApiIdType": "Currency",
-      "IconAssetId": 619325
+      "IconAssetId": 619325,
+      "Value": {}
     },
     {
       "Id": "currency13",
@@ -863,7 +1014,8 @@
       },
       "ApiId": 13,
       "ApiIdType": "Currency",
-      "IconAssetId": 619326
+      "IconAssetId": 619326,
+      "Value": {}
     },
     {
       "Id": "currency14",
@@ -889,7 +1041,8 @@
       },
       "ApiId": 14,
       "ApiIdType": "Currency",
-      "IconAssetId": 619327
+      "IconAssetId": 619327,
+      "Value": {}
     },
     {
       "Id": "currency15",
@@ -915,7 +1068,8 @@
       },
       "ApiId": 15,
       "ApiIdType": "Currency",
-      "IconAssetId": 699004
+      "IconAssetId": 699004,
+      "Value": {}
     },
     {
       "Id": "currency16",
@@ -941,7 +1095,8 @@
       },
       "ApiId": 16,
       "ApiIdType": "Currency",
-      "IconAssetId": 699005
+      "IconAssetId": 699005,
+      "Value": {}
     },
     {
       "Id": "currency18",
@@ -967,7 +1122,8 @@
       },
       "ApiId": 18,
       "ApiIdType": "Currency",
-      "IconAssetId": 779571
+      "IconAssetId": 779571,
+      "Value": {}
     },
     {
       "Id": "currency19",
@@ -993,7 +1149,8 @@
       },
       "ApiId": 19,
       "ApiIdType": "Currency",
-      "IconAssetId": 1029833
+      "IconAssetId": 1029833,
+      "Value": {}
     },
     {
       "Id": "currency20",
@@ -1019,7 +1176,8 @@
       },
       "ApiId": 20,
       "ApiIdType": "Currency",
-      "IconAssetId": 1206837
+      "IconAssetId": 1206837,
+      "Value": {}
     },
     {
       "Id": "currency22",
@@ -1045,7 +1203,8 @@
       },
       "ApiId": 22,
       "ApiIdType": "Currency",
-      "IconAssetId": 1206836
+      "IconAssetId": 1206836,
+      "Value": {}
     },
     {
       "Id": "currency23",
@@ -1071,7 +1230,8 @@
       },
       "ApiId": 23,
       "ApiIdType": "Currency",
-      "IconAssetId": 1010701
+      "IconAssetId": 1010701,
+      "Value": {}
     },
     {
       "Id": "currency24",
@@ -1097,7 +1257,8 @@
       },
       "ApiId": 24,
       "ApiIdType": "Currency",
-      "IconAssetId": 619321
+      "IconAssetId": 619321,
+      "Value": {}
     },
     {
       "Id": "currency25",
@@ -1123,7 +1284,8 @@
       },
       "ApiId": 25,
       "ApiIdType": "Currency",
-      "IconAssetId": 1010699
+      "IconAssetId": 1010699,
+      "Value": {}
     },
     {
       "Id": "currency26",
@@ -1149,7 +1311,8 @@
       },
       "ApiId": 26,
       "ApiIdType": "Currency",
-      "IconAssetId": 1010702
+      "IconAssetId": 1010702,
+      "Value": {}
     },
     {
       "Id": "currency27",
@@ -1175,7 +1338,8 @@
       },
       "ApiId": 27,
       "ApiIdType": "Currency",
-      "IconAssetId": 1010697
+      "IconAssetId": 1010697,
+      "Value": {}
     },
     {
       "Id": "currency28",
@@ -1201,7 +1365,8 @@
       },
       "ApiId": 28,
       "ApiIdType": "Currency",
-      "IconAssetId": 1302741
+      "IconAssetId": 1302741,
+      "Value": {}
     },
     {
       "Id": "currency29",
@@ -1227,7 +1392,8 @@
       },
       "ApiId": 29,
       "ApiIdType": "Currency",
-      "IconAssetId": 1302745
+      "IconAssetId": 1302745,
+      "Value": {}
     },
     {
       "Id": "currency30",
@@ -1253,7 +1419,8 @@
       },
       "ApiId": 30,
       "ApiIdType": "Currency",
-      "IconAssetId": 1313248
+      "IconAssetId": 1313248,
+      "Value": {}
     },
     {
       "Id": "currency31",
@@ -1279,7 +1446,8 @@
       },
       "ApiId": 31,
       "ApiIdType": "Currency",
-      "IconAssetId": 1207142
+      "IconAssetId": 1207142,
+      "Value": {}
     },
     {
       "Id": "currency32",
@@ -1305,7 +1473,8 @@
       },
       "ApiId": 32,
       "ApiIdType": "Currency",
-      "IconAssetId": 1465799
+      "IconAssetId": 1465799,
+      "Value": {}
     },
     {
       "Id": "currency33",
@@ -1331,7 +1500,8 @@
       },
       "ApiId": 33,
       "ApiIdType": "Currency",
-      "IconAssetId": 1614710
+      "IconAssetId": 1614710,
+      "Value": {}
     },
     {
       "Id": "currency34",
@@ -1357,7 +1527,8 @@
       },
       "ApiId": 34,
       "ApiIdType": "Currency",
-      "IconAssetId": 1767459
+      "IconAssetId": 1767459,
+      "Value": {}
     },
     {
       "Id": "currency35",
@@ -1383,7 +1554,8 @@
       },
       "ApiId": 35,
       "ApiIdType": "Currency",
-      "IconAssetId": 1766338
+      "IconAssetId": 1766338,
+      "Value": {}
     },
     {
       "Id": "currency36",
@@ -1409,7 +1581,8 @@
       },
       "ApiId": 36,
       "ApiIdType": "Currency",
-      "IconAssetId": 1822313
+      "IconAssetId": 1822313,
+      "Value": {}
     },
     {
       "Id": "currency37",
@@ -1435,7 +1608,8 @@
       },
       "ApiId": 37,
       "ApiIdType": "Currency",
-      "IconAssetId": 1203022
+      "IconAssetId": 1203022,
+      "Value": {}
     },
     {
       "Id": "currency38",
@@ -1461,7 +1635,8 @@
       },
       "ApiId": 38,
       "ApiIdType": "Currency",
-      "IconAssetId": 1203080
+      "IconAssetId": 1203080,
+      "Value": {}
     },
     {
       "Id": "currency39",
@@ -1487,7 +1662,8 @@
       },
       "ApiId": 39,
       "ApiIdType": "Currency",
-      "IconAssetId": 1896039
+      "IconAssetId": 1896039,
+      "Value": {}
     },
     {
       "Id": "currency40",
@@ -1513,7 +1689,8 @@
       },
       "ApiId": 40,
       "ApiIdType": "Currency",
-      "IconAssetId": 65724
+      "IconAssetId": 65724,
+      "Value": {}
     },
     {
       "Id": "currency41",
@@ -1539,7 +1716,8 @@
       },
       "ApiId": 41,
       "ApiIdType": "Currency",
-      "IconAssetId": 1203099
+      "IconAssetId": 1203099,
+      "Value": {}
     },
     {
       "Id": "currency42",
@@ -1565,7 +1743,8 @@
       },
       "ApiId": 42,
       "ApiIdType": "Currency",
-      "IconAssetId": 1203046
+      "IconAssetId": 1203046,
+      "Value": {}
     },
     {
       "Id": "currency43",
@@ -1591,7 +1770,8 @@
       },
       "ApiId": 43,
       "ApiIdType": "Currency",
-      "IconAssetId": 831466
+      "IconAssetId": 831466,
+      "Value": {}
     },
     {
       "Id": "currency44",
@@ -1617,7 +1797,8 @@
       },
       "ApiId": 44,
       "ApiIdType": "Currency",
-      "IconAssetId": 69116
+      "IconAssetId": 69116,
+      "Value": {}
     },
     {
       "Id": "currency45",
@@ -1643,7 +1824,8 @@
       },
       "ApiId": 45,
       "ApiIdType": "Currency",
-      "IconAssetId": 1894697
+      "IconAssetId": 1894697,
+      "Value": {}
     },
     {
       "Id": "currency46",
@@ -1669,7 +1851,8 @@
       },
       "ApiId": 46,
       "ApiIdType": "Currency",
-      "IconAssetId": 2010217
+      "IconAssetId": 2010217,
+      "Value": {}
     },
     {
       "Id": "currency47",
@@ -1695,7 +1878,8 @@
       },
       "ApiId": 47,
       "ApiIdType": "Currency",
-      "IconAssetId": 2069367
+      "IconAssetId": 2069367,
+      "Value": {}
     },
     {
       "Id": "currency49",
@@ -1721,7 +1905,8 @@
       },
       "ApiId": 49,
       "ApiIdType": "Currency",
-      "IconAssetId": 2140520
+      "IconAssetId": 2140520,
+      "Value": {}
     },
     {
       "Id": "currency50",
@@ -1747,7 +1932,8 @@
       },
       "ApiId": 50,
       "ApiIdType": "Currency",
-      "IconAssetId": 797790
+      "IconAssetId": 797790,
+      "Value": {}
     },
     {
       "Id": "currency51",
@@ -1773,7 +1959,8 @@
       },
       "ApiId": 51,
       "ApiIdType": "Currency",
-      "IconAssetId": 2292743
+      "IconAssetId": 2292743,
+      "Value": {}
     },
     {
       "Id": "currency52",
@@ -1799,7 +1986,8 @@
       },
       "ApiId": 52,
       "ApiIdType": "Currency",
-      "IconAssetId": 2270835
+      "IconAssetId": 2270835,
+      "Value": {}
     },
     {
       "Id": "currency53",
@@ -1825,7 +2013,8 @@
       },
       "ApiId": 53,
       "ApiIdType": "Currency",
-      "IconAssetId": 2270834
+      "IconAssetId": 2270834,
+      "Value": {}
     },
     {
       "Id": "currency54",
@@ -1851,7 +2040,8 @@
       },
       "ApiId": 54,
       "ApiIdType": "Currency",
-      "IconAssetId": 2270830
+      "IconAssetId": 2270830,
+      "Value": {}
     },
     {
       "Id": "currency55",
@@ -1877,7 +2067,8 @@
       },
       "ApiId": 55,
       "ApiIdType": "Currency",
-      "IconAssetId": 2270831
+      "IconAssetId": 2270831,
+      "Value": {}
     },
     {
       "Id": "currency56",
@@ -1903,7 +2094,8 @@
       },
       "ApiId": 56,
       "ApiIdType": "Currency",
-      "IconAssetId": 2270832
+      "IconAssetId": 2270832,
+      "Value": {}
     },
     {
       "Id": "currency57",
@@ -1929,7 +2121,8 @@
       },
       "ApiId": 57,
       "ApiIdType": "Currency",
-      "IconAssetId": 2270833
+      "IconAssetId": 2270833,
+      "Value": {}
     },
     {
       "Id": "currency58",
@@ -1955,7 +2148,8 @@
       },
       "ApiId": 58,
       "ApiIdType": "Currency",
-      "IconAssetId": 2293273
+      "IconAssetId": 2293273,
+      "Value": {}
     },
     {
       "Id": "currency59",
@@ -1981,7 +2175,8 @@
       },
       "ApiId": 59,
       "ApiIdType": "Currency",
-      "IconAssetId": 1202328
+      "IconAssetId": 1202328,
+      "Value": {}
     },
     {
       "Id": "currency60",
@@ -2007,7 +2202,8 @@
       },
       "ApiId": 60,
       "ApiIdType": "Currency",
-      "IconAssetId": 2351816
+      "IconAssetId": 2351816,
+      "Value": {}
     },
     {
       "Id": "currency61",
@@ -2033,7 +2229,8 @@
       },
       "ApiId": 61,
       "ApiIdType": "Currency",
-      "IconAssetId": 2596976
+      "IconAssetId": 2596976,
+      "Value": {}
     },
     {
       "Id": "currency62",
@@ -2059,7 +2256,8 @@
       },
       "ApiId": 62,
       "ApiIdType": "Currency",
-      "IconAssetId": 2596977
+      "IconAssetId": 2596977,
+      "Value": {}
     },
     {
       "Id": "currency63",
@@ -2085,7 +2283,8 @@
       },
       "ApiId": 63,
       "ApiIdType": "Currency",
-      "IconAssetId": 3124964
+      "IconAssetId": 3124964,
+      "Value": {}
     },
     {
       "Id": "currency64",
@@ -2111,7 +2310,8 @@
       },
       "ApiId": 64,
       "ApiIdType": "Currency",
-      "IconAssetId": 2596975
+      "IconAssetId": 2596975,
+      "Value": {}
     },
     {
       "Id": "currency65",
@@ -2137,7 +2337,8 @@
       },
       "ApiId": 65,
       "ApiIdType": "Currency",
-      "IconAssetId": 2597023
+      "IconAssetId": 2597023,
+      "Value": {}
     },
     {
       "Id": "currency66",
@@ -2163,7 +2364,8 @@
       },
       "ApiId": 66,
       "ApiIdType": "Currency",
-      "IconAssetId": 3123700
+      "IconAssetId": 3123700,
+      "Value": {}
     },
     {
       "Id": "currency67",
@@ -2189,7 +2391,8 @@
       },
       "ApiId": 67,
       "ApiIdType": "Currency",
-      "IconAssetId": 2596973
+      "IconAssetId": 2596973,
+      "Value": {}
     },
     {
       "Id": "currency68",
@@ -2215,7 +2418,8 @@
       },
       "ApiId": 68,
       "ApiIdType": "Currency",
-      "IconAssetId": 2596974
+      "IconAssetId": 2596974,
+      "Value": {}
     },
     {
       "Id": "currency69",
@@ -2241,7 +2445,8 @@
       },
       "ApiId": 69,
       "ApiIdType": "Currency",
-      "IconAssetId": 619327
+      "IconAssetId": 619327,
+      "Value": {}
     },
     {
       "Id": "currency70",
@@ -2267,7 +2472,8 @@
       },
       "ApiId": 70,
       "ApiIdType": "Currency",
-      "IconAssetId": 1302744
+      "IconAssetId": 1302744,
+      "Value": {}
     },
     {
       "Id": "currency71",
@@ -2293,7 +2499,8 @@
       },
       "ApiId": 71,
       "ApiIdType": "Currency",
-      "IconAssetId": 3004443
+      "IconAssetId": 3004443,
+      "Value": {}
     },
     {
       "Id": "currency72",
@@ -2319,7 +2526,8 @@
       },
       "ApiId": 72,
       "ApiIdType": "Currency",
-      "IconAssetId": 3123702
+      "IconAssetId": 3123702,
+      "Value": {}
     },
     {
       "Id": "currency73",
@@ -2345,7 +2553,9 @@
       },
       "ApiId": 73,
       "ApiIdType": "Currency",
-      "IconAssetId": 3123701
+      "IconAssetId": 3123701,
+      "Value": {}
     }
-  ]
+  ],
+  "SessionDuration": {}
 }
