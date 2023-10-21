@@ -71,6 +71,10 @@ namespace SessionTracker.JsonFileCreator.StatServices
         {
             ItemIds.MEMORY_OF_BATTLE,
             ItemIds.HEAVY_LOOT_BAG,
+            ItemIds.TRICK_OR_TREAT_BAG,
+            ItemIds.PIECE_OF_CANDY_CORN, // remove when material storage is added!
+            ItemIds.MYSTIC_COIN, // remove when material storage is added!
+            ItemIds.FRACTAL_ENCRYPTION, // remove when material storage is added!
         };
     }
 }
