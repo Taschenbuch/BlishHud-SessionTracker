@@ -80,8 +80,6 @@ namespace SessionTracker.Api
             CurrencyTotalValueService.SetCurrencyTotalValues(model, walletTask);
             AchievementTotalValueService.SetAchievementTotalValues(model, achievementsTask);
             ItemSearchService.SetItemTotalValues(model, charactersTask, bankTask, sharedInventoryTask, materialStorageTask);
-
-            model.UiHasToBeUpdated = true;
         }
 
         public static IReadOnlyList<TokenPermission> API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE => new List<TokenPermission>

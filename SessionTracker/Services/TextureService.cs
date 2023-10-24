@@ -29,7 +29,7 @@ namespace SessionTracker.Services
             StatIconPlaceholderTexture = contentsManager.GetTexture(@"stats\statIconPlaceholder_1444524.png");
             CornerIconTexture = contentsManager.GetTexture(@"cornerIcon.png");
             CornerIconHoverTexture = contentsManager.GetTexture(@"cornerIconHover.png");
-            HiddenStatsTexture = contentsManager.GetTexture(@"hiddenStats.png");
+            AllStatsHiddenByZeroValuesSettingTexture = contentsManager.GetTexture(@"hiddenStats.png");
             CreateStatTextures(model);
         }
 
@@ -48,12 +48,12 @@ namespace SessionTracker.Services
             StatIconPlaceholderTexture?.Dispose();
             CornerIconTexture?.Dispose();
             CornerIconHoverTexture?.Dispose();
-            HiddenStatsTexture?.Dispose();
+            AllStatsHiddenByZeroValuesSettingTexture?.Dispose();
             DisposeStatTextures();
         }
 
         public Texture2D DebugTabTexture { get; }
-        public Texture2D HiddenStatsTexture { get; }
+        public Texture2D AllStatsHiddenByZeroValuesSettingTexture { get; }
         public Texture2D SettingsWindowEmblemTexture { get; }
         public Texture2D StatsTabTexture { get; }
         public Texture2D GeneralTabTexture { get; }

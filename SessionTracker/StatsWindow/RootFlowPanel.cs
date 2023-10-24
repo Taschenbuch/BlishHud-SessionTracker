@@ -17,7 +17,6 @@ namespace SessionTracker.StatsWindow
             FlowDirection   = ControlFlowDirection.SingleLeftToRight;
             Height          = 200;
             WidthSizingMode = SizingMode.AutoSize;
-            Parent          = parent;
 
             SetFixedOrAutoHeight();
 

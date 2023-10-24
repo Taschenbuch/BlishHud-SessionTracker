@@ -43,7 +43,7 @@ namespace SessionTracker.SettingsWindow
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.WindowCanBeClickedThroughSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.CornerIconIsVisibleSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.CoinDisplayFormatSetting);
-            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.HideStatsWithValueZeroSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.StatsWithZeroValueAreHiddenSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.ScrollbarFixDelay);
         }
 
