@@ -802,60 +802,6 @@
       "Value": {}
     },
     {
-      "Id": "currency5",
-      "Name": {
-        "LocalizedTextByLocale": {
-          "English": "Ascalonian Tear",
-          "French": "Larme ascalonienne",
-          "German": "Ascalonische Träne",
-          "Spanish": "Lágrima ascaloniana",
-          "Chinese": "阿斯卡隆之泪",
-          "Korean": "Ascalonian Tear"
-        }
-      },
-      "Description": {
-        "LocalizedTextByLocale": {
-          "English": "Earned in Ascalonian Catacombs. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Ascalon\" component used in creating legendary weapons.",
-          "French": "À gagner dans les Catacombes d'Ascalon. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don d'Ascalon\" permettant de créer des armes légendaires.",
-          "German": "Können in den Katakomben von Ascalon verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe Ascalons\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
-          "Spanish": "Se pueden conseguir en las Catacumbas Ascalonianas. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo de Ascalon\", que sirve para fabricar armas legendarias.",
-          "Chinese": "从阿斯卡隆墓穴获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"阿斯卡隆礼赠\"。",
-          "Korean": "Earned in Ascalonian Catacombs. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Ascalon\" component used in creating legendary weapons."
-        }
-      },
-      "ApiId": 5,
-      "ApiIdType": "Currency",
-      "IconAssetId": 619318,
-      "Value": {}
-    },
-    {
-      "Id": "currency6",
-      "Name": {
-        "LocalizedTextByLocale": {
-          "English": "Shard of Zhaitan",
-          "French": "Éclat de Zhaïtan",
-          "German": "Scherbe des Zhaitan",
-          "Spanish": "Esquirla de Zhaitan",
-          "Chinese": "泽坦碎片",
-          "Korean": "Shard of Zhaitan"
-        }
-      },
-      "Description": {
-        "LocalizedTextByLocale": {
-          "English": "Earned in the Ruined City of Arah. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Zhaitan\" component used in creating legendary weapons.",
-          "French": "À gagner dans la Cité en ruine d'Arah. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don de Zhaïtan\" permettant de créer des armes légendaires.",
-          "German": "Können in der Ruinenstadt Arah verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe Zhaitans\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
-          "Spanish": "Se pueden conseguir en la ciudad en ruinas de Arah. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo de Zhaitan\", que sirve para fabricar armas legendarias.",
-          "Chinese": "从亚拉城废墟获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"泽坦礼赠\"。",
-          "Korean": "Earned in the Ruined City of Arah. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Zhaitan\" component used in creating legendary weapons."
-        }
-      },
-      "ApiId": 6,
-      "ApiIdType": "Currency",
-      "IconAssetId": 619319,
-      "Value": {}
-    },
-    {
       "Id": "currency7",
       "Name": {
         "LocalizedTextByLocale": {
@@ -880,168 +826,6 @@
       "ApiId": 7,
       "ApiIdType": "Currency",
       "IconAssetId": 619320,
-      "Value": {}
-    },
-    {
-      "Id": "currency9",
-      "Name": {
-        "LocalizedTextByLocale": {
-          "English": "Seal of Beetletun",
-          "French": "Sceau de Beetletun",
-          "German": "Beetletuns Siegel",
-          "Spanish": "Sello de Beetletun",
-          "Chinese": "甲虫郡封印",
-          "Korean": "Seal of Beetletun"
-        }
-      },
-      "Description": {
-        "LocalizedTextByLocale": {
-          "English": "Earned in Caudecus's Manor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Nobleman\" component used in creating legendary weapons.",
-          "French": "À gagner dans le Manoir de Caudecus. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don du noble\" permettant de créer des armes légendaires.",
-          "German": "Können in Caudecus' Anwesen verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe des Edelmanns\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
-          "Spanish": "Se pueden conseguir en la mansión de Caudecus. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo del noble\", que sirve para fabricar armas legendarias.",
-          "Chinese": "从考迪克斯庄园获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"贵族礼赠\"。",
-          "Korean": "Earned in Caudecus's Manor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Nobleman\" component used in creating legendary weapons."
-        }
-      },
-      "ApiId": 9,
-      "ApiIdType": "Currency",
-      "IconAssetId": 619322,
-      "Value": {}
-    },
-    {
-      "Id": "currency10",
-      "Name": {
-        "LocalizedTextByLocale": {
-          "English": "Manifesto of the Moletariate",
-          "French": "Manifeste du taupinariat",
-          "German": "Manifest des Maulwetariats",
-          "Spanish": "Manifiesto del topotariado",
-          "Chinese": "掘洞宣言",
-          "Korean": "Manifesto of the Moletariate"
-        }
-      },
-      "Description": {
-        "LocalizedTextByLocale": {
-          "English": "Earned in Sorrow's Embrace. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Forgeman\" component used in creating legendary weapons.",
-          "French": "À gagner dans l'Étreinte des lamentations. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don du forgeron\" permettant de créer des armes légendaires.",
-          "German": "Können in der Umarmung der Betrübnis verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe des Schmieds\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
-          "Spanish": "Se pueden conseguir en Abrazo del Pesar. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo del herrador\", que sirve para fabricar armas legendarias.",
-          "Chinese": "从悲伤之拥获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"铸匠礼赠\"。",
-          "Korean": "Earned in Sorrow's Embrace. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Forgeman\" component used in creating legendary weapons."
-        }
-      },
-      "ApiId": 10,
-      "ApiIdType": "Currency",
-      "IconAssetId": 619323,
-      "Value": {}
-    },
-    {
-      "Id": "currency11",
-      "Name": {
-        "LocalizedTextByLocale": {
-          "English": "Deadly Bloom",
-          "French": "Pousse mortelle",
-          "German": "Tödliche Blüte",
-          "Spanish": "Flor mortal",
-          "Chinese": "死亡之花",
-          "Korean": "Deadly Bloom"
-        }
-      },
-      "Description": {
-        "LocalizedTextByLocale": {
-          "English": "Earned in Twilight Arbor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Thorns\" component used in creating legendary weapons.",
-          "French": "À gagner dans la Tonnelle du crépuscule. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don des épines\" permettant de créer des armes légendaires.",
-          "German": "Können im Zwielichtgarten verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe der Dornen\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
-          "Spanish": "Se pueden conseguir en la Pérgola del Crepúsculo. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo de espinas\", que sirve para fabricar armas legendarias.",
-          "Chinese": "从暮光之根获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"荆棘礼赠\"。",
-          "Korean": "Earned in Twilight Arbor. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Thorns\" component used in creating legendary weapons."
-        }
-      },
-      "ApiId": 11,
-      "ApiIdType": "Currency",
-      "IconAssetId": 619324,
-      "Value": {}
-    },
-    {
-      "Id": "currency12",
-      "Name": {
-        "LocalizedTextByLocale": {
-          "English": "Symbol of Koda",
-          "French": "Symbole de Koda",
-          "German": "Symbol Kodas",
-          "Spanish": "Símbolo de Koda",
-          "Chinese": "克达之符",
-          "Korean": "Symbol of Koda"
-        }
-      },
-      "Description": {
-        "LocalizedTextByLocale": {
-          "English": "Earned in Honor of the Waves. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Sanctuary\" component used in creating legendary weapons.",
-          "French": "À gagner dans l'Honneur des vagues. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don du sanctuaire\" permettant de créer des armes légendaires.",
-          "German": "Können in der Zierde der Wogen verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe der Zuflucht\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
-          "Spanish": "Se pueden conseguir en el Honor de las Olas. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo del santuario\", que sirve para fabricar armas legendarias.",
-          "Chinese": "从海浪之誉获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"圣船礼赠\"。",
-          "Korean": "Earned in Honor of the Waves. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of the Sanctuary\" component used in creating legendary weapons."
-        }
-      },
-      "ApiId": 12,
-      "ApiIdType": "Currency",
-      "IconAssetId": 619325,
-      "Value": {}
-    },
-    {
-      "Id": "currency13",
-      "Name": {
-        "LocalizedTextByLocale": {
-          "English": "Flame Legion Charr Carving",
-          "French": "Gravure de Charr de la Légion de la Flamme",
-          "German": "Flammen-Legion-Charr-Schnitzerei",
-          "Spanish": "Talla de charr de la Legión de la Llama",
-          "Chinese": "烈焰军团夏尔雕像",
-          "Korean": "Flame Legion Charr Carving"
-        }
-      },
-      "Description": {
-        "LocalizedTextByLocale": {
-          "English": "Earned in Citadel of Flame. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Baelfire\" component used in creating legendary weapons.",
-          "French": "À gagner dans la Citadelle de la Flamme. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don de Feu-de-Bael\" permettant de créer des armes légendaires.",
-          "German": "Können in der Flammenzitadelle verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gaben des Baelfeuers\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
-          "Spanish": "Se pueden conseguir en la Ciudadela de la Llama. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo de Fuegobael\", que sirve para fabricar armas legendarias.",
-          "Chinese": "从烈焰壁垒获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"巴火礼赠\"。",
-          "Korean": "Earned in Citadel of Flame. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Baelfire\" component used in creating legendary weapons."
-        }
-      },
-      "ApiId": 13,
-      "ApiIdType": "Currency",
-      "IconAssetId": 619326,
-      "Value": {}
-    },
-    {
-      "Id": "currency14",
-      "Name": {
-        "LocalizedTextByLocale": {
-          "English": "Knowledge Crystal",
-          "French": "Cristal de connaissance",
-          "German": "Wissenskristall",
-          "Spanish": "Cristal del conocimiento",
-          "Chinese": "知识水晶",
-          "Korean": "Knowledge Crystal"
-        }
-      },
-      "Description": {
-        "LocalizedTextByLocale": {
-          "English": "Earned in Crucible of Eternity. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Knowledge\" component used in creating legendary weapons.",
-          "French": "À gagner dans le Creuset de l'éternité. À dépenser à l'Arche du Lion pour acheter des équipements rares et exotiques, des runes et des cachets, des matériaux d'artisanat et le composant \"Don de savoir\" permettant de créer des armes légendaires.",
-          "German": "Können im Schmelztiegel der Ewigkeit verdient werden. Können in Löwenstein ausgegeben werden, um seltene und exotische Ausrüstung, Runen und Sigille, Handwerksmaterialien und \"Gabe des Wissens\"-Komponenten zu kaufen, die zur Herstellung legendärer Waffen verwendet werden.",
-          "Spanish": "Se pueden conseguir en el Crisol de la Eternidad. Se pueden gastar en Arco del León para comprar equipos excepcionales y exóticos, runas y sellos, materiales de artesanía y el componente \"Regalo de conocimiento\", que sirve para fabricar armas legendarias.",
-          "Chinese": "从永恒熔炉获得。可在狮子拱门购买稀有或特异护甲、符文、法印、制作材料以及用于制作传奇武器的\"知识礼赠\"。",
-          "Korean": "Earned in Crucible of Eternity. Spent in Lion's Arch to purchase rare and exotic gear, runes and sigils, crafting materials, and the \"Gift of Knowledge\" component used in creating legendary weapons."
-        }
-      },
-      "ApiId": 14,
-      "ApiIdType": "Currency",
-      "IconAssetId": 619327,
       "Value": {}
     },
     {
@@ -1639,33 +1423,6 @@
       "Value": {}
     },
     {
-      "Id": "currency39",
-      "Name": {
-        "LocalizedTextByLocale": {
-          "English": "Gaeting Crystal",
-          "French": "Cristal de Gaets",
-          "German": "Gaets-Kristall",
-          "Spanish": "Cristal de Gaets",
-          "Chinese": "盖廷水晶",
-          "Korean": "Gaeting Crystal"
-        }
-      },
-      "Description": {
-        "LocalizedTextByLocale": {
-          "English": "Earned from bosses and events inside Path of Fire raids.",
-          "French": "À obtenir sur les boss et dans les événements de raid de Path of Fire.",
-          "German": "Kann bei Bossen und Events während \"Path of Fire\"-Schlachtzügen verdient werden.",
-          "Spanish": "Se obtiene de jefes y eventos en incursiones de Path of Fire.",
-          "Chinese": "可从烈焰征途资料片大型地下城的头目和事件中获得。",
-          "Korean": "Earned from bosses and events inside Path of Fire raids."
-        }
-      },
-      "ApiId": 39,
-      "ApiIdType": "Currency",
-      "IconAssetId": 1896039,
-      "Value": {}
-    },
-    {
       "Id": "currency40",
       "Name": {
         "LocalizedTextByLocale": {
@@ -1963,33 +1720,6 @@
       "Value": {}
     },
     {
-      "Id": "currency52",
-      "Name": {
-        "LocalizedTextByLocale": {
-          "English": "Red Prophet Shard",
-          "French": "Éclat rouge du prophète",
-          "German": "Rote Propheten-Scherbe",
-          "Spanish": "Esquirla de profecía roja",
-          "Chinese": "红色先知水晶碎片",
-          "Korean": "Red Prophet Shard"
-        }
-      },
-      "Description": {
-        "LocalizedTextByLocale": {
-          "English": "Crystalline shards of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these.",
-          "French": "Des éclats cristallins de magie draconique, parcourus de veinures rouges.\n\nLes émissaires de l'Œil du Nord leur portent un grand intérêt.",
-          "German": "Kristalline Scherben der Drachenmagie, rot geädert.\n\nGesandte im Auge des Nordens haben Interesse daran.",
-          "Spanish": "Esquirlas cristalinas de magia dracónica con vetas rojas.\n\nLes interesan a los emisarios del Ojo del Norte.",
-          "Chinese": "水晶形态的巨龙魔法，带有红色纹理。\n北方之眼的密使对此感兴趣。",
-          "Korean": "Crystalline shards of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these."
-        }
-      },
-      "ApiId": 52,
-      "ApiIdType": "Currency",
-      "IconAssetId": 2270835,
-      "Value": {}
-    },
-    {
       "Id": "currency53",
       "Name": {
         "LocalizedTextByLocale": {
@@ -2068,33 +1798,6 @@
       "ApiId": 55,
       "ApiIdType": "Currency",
       "IconAssetId": 2270831,
-      "Value": {}
-    },
-    {
-      "Id": "currency56",
-      "Name": {
-        "LocalizedTextByLocale": {
-          "English": "Red Prophet Crystal",
-          "French": "Cristal rouge du prophète",
-          "German": "Roter Propheten-Kristall",
-          "Spanish": "Cristal de profecía rojo",
-          "Chinese": "红色先知水晶",
-          "Korean": "Red Prophet Crystal"
-        }
-      },
-      "Description": {
-        "LocalizedTextByLocale": {
-          "English": "Crystalline formations of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these.\nObtained from Priority Strikes or by combining shards.",
-          "French": "Des concrétions cristallines de magie draconique, parcourues de veinures rouges.\nLes émissaires de l'Œil du Nord leur portent un grand intérêt.\nÀ récupérer au cours des priorités d'attaque ou en combinant des éclats.",
-          "German": "Kristalline Formationen der Drachenmagie, rot geädert.\nGesandte im Auge des Nordens haben Interesse daran.\nErhaltet Ihr bei Prioritätsangriffen oder durch die Kombination von Scherben.",
-          "Spanish": "Formaciones cristalinas de magia dracónica con vetas rojas.\nLes interesan a los emisarios del Ojo del Norte.\nSe consiguen en ataques prioritarios o combinando esquirlas.",
-          "Chinese": "水晶形态的巨龙魔法，带有红色纹理。\n北方之眼的密使对此感兴趣。\n通过优先进攻任务或者组合碎片获得。",
-          "Korean": "Crystalline formations of dragon magic, veined with red.\nEmissaries in the Eye of the North have interest in these.\nObtained from Priority Strikes or by combining shards."
-        }
-      },
-      "ApiId": 56,
-      "ApiIdType": "Currency",
-      "IconAssetId": 2270832,
       "Value": {}
     },
     {
