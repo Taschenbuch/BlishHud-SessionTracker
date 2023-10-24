@@ -20,13 +20,13 @@ namespace SessionTracker.Text
             _model               = model;
             _settingService      = settingService;
 
-            settingService.ValueDisplayFormatSetting.SettingChanged += ValueDisplayFormatSetting_SettingChanged;
+            settingService.ValueDisplayFormatSetting.SettingChanged += ValueDisplayFormatSettingChanged;
             settingService.CoinDisplayFormatSetting.SettingChanged  += OnCoinDisplayFormatSettingChanged;
         }
 
         public void Dispose()
         {
-            _settingService.ValueDisplayFormatSetting.SettingChanged -= ValueDisplayFormatSetting_SettingChanged;
+            _settingService.ValueDisplayFormatSetting.SettingChanged -= ValueDisplayFormatSettingChanged;
             _settingService.CoinDisplayFormatSetting.SettingChanged -= OnCoinDisplayFormatSettingChanged;
         }
 
@@ -77,7 +77,7 @@ namespace SessionTracker.Text
             }
         }
 
-        private void ValueDisplayFormatSetting_SettingChanged(object sender, ValueChangedEventArgs<ValueDisplayFormat> e)
+        private void ValueDisplayFormatSettingChanged(object sender, ValueChangedEventArgs<ValueDisplayFormat> e)
         {
             UpdateValueLabelTexts();
         }
@@ -85,7 +85,7 @@ namespace SessionTracker.Text
         private void OnCoinDisplayFormatSettingChanged(object sender, ValueChangedEventArgs<CoinDisplayFormat> e)
         {
             UpdateValueLabelTexts();
-            _model.UiHasToBeUpdated = true; // because depending on the coin format value has to be hidden by hideZeroValueSetting
+            _model.UiHasToBeUpdated = true; // because depending on the coin format value the coin stat has to be hidden by StatsWithZeroValueAreHiddenSetting
         }
 
         private readonly Dictionary<string, Label> _valueLabelByStatId;

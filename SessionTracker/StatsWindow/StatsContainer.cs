@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Blish_HUD;
 using Blish_HUD.Controls;
@@ -17,7 +18,6 @@ using SessionTracker.Reset;
 using SessionTracker.Services;
 using SessionTracker.SettingEntries;
 using SessionTracker.SettingsWindow;
-using SessionTracker.StatError;
 using SessionTracker.StatsHint;
 using SessionTracker.Text;
 using SessionTracker.Tooltip;
@@ -39,37 +39,53 @@ namespace SessionTracker.StatsWindow
             _gw2ApiManager  = gw2ApiManager;
             _textureService = textureService;
             _fileService    = fileService;
-            _updateLoop    = updateLoop;
+            _updateLoop     = updateLoop;
             _settingService = settingService;
 
             _resetService = new ResetService(model, settingService.AutomaticSessionResetSetting, settingService.MinutesUntilResetAfterModuleShutdownSetting);
             _model.SessionDuration.StartMeasuring();
-            CreateUi(settingsWindowService);
+            CreateUi(model, settingsWindowService, textureService, settingService);
+            // todo x START
+            _statsWindowDisplayStateService = new StatsWindowDisplayStateService(
+                _userHasToSelectStatsFlowPanel,
+                _errorLabel,
+                _allStatsHiddenByZeroValuesSettingImage,
+                _statsRootFlowPanel,
+                _updateLoop,
+                model,
+                settingService.StatsWithZeroValueAreHiddenSetting,
+                this);
+
+            _statsWindowDisplayStateService.ShowUpdatedDisplayState();
+            // todo x END
 
             _valueLabelTextService = new ValueLabelTextService(_valueLabelByStatId, _model, settingService);
             _statTooltipService    = new StatTooltipService(_titleFlowPanelByStatId, _valueLabelByStatId, model, _settingService);
 
-            settingService.HideStatsWithValueZeroSetting.SettingChanged  += OnHideStatsWithValueZeroSettingChanged;
-            settingService.FontSizeIndexSetting.SettingChanged           += OnFontSizeIndexSettingChanged;
-            settingService.BackgroundOpacitySetting.SettingChanged       += OnBackgroundSettingChanged;
-            settingService.BackgroundColorSetting.SettingChanged         += OnBackgroundSettingChanged;
-            settingService.ValueLabelColorSetting.SettingChanged         += OnValueLabelColorSettingChanged;
-            GameService.Overlay.UserLocaleChanged                        += OnUserChangedLanguageInBlishSettings;
+            settingService.StatsWithZeroValueAreHiddenSetting.SettingChanged  += OnStatsWithZeroValueAreHiddenSettingChanged;
+            settingService.FontSizeIndexSetting.SettingChanged                += OnFontSizeIndexSettingChanged;
+            settingService.BackgroundOpacitySetting.SettingChanged            += OnBackgroundSettingChanged;
+            settingService.BackgroundColorSetting.SettingChanged              += OnBackgroundSettingChanged;
+            settingService.ValueLabelColorSetting.SettingChanged              += OnValueLabelColorSettingChanged;
+            GameService.Overlay.UserLocaleChanged                             += OnUserChangedLanguageInBlishSettings;
+
+            OnFontSizeIndexSettingChanged();
         }
 
         protected override void DisposeControl()
         {
-            _settingService.HideStatsWithValueZeroSetting.SettingChanged -= OnHideStatsWithValueZeroSettingChanged;
-            _settingService.FontSizeIndexSetting.SettingChanged          -= OnFontSizeIndexSettingChanged;
-            _settingService.BackgroundOpacitySetting.SettingChanged      -= OnBackgroundSettingChanged;
-            _settingService.BackgroundColorSetting.SettingChanged        -= OnBackgroundSettingChanged;
-            _settingService.ValueLabelColorSetting.SettingChanged        -= OnValueLabelColorSettingChanged;
-            GameService.Overlay.UserLocaleChanged                        -= OnUserChangedLanguageInBlishSettings;
+            _settingService.StatsWithZeroValueAreHiddenSetting.SettingChanged -= OnStatsWithZeroValueAreHiddenSettingChanged;
+            _settingService.FontSizeIndexSetting.SettingChanged               -= OnFontSizeIndexSettingChanged;
+            _settingService.BackgroundOpacitySetting.SettingChanged           -= OnBackgroundSettingChanged;
+            _settingService.BackgroundColorSetting.SettingChanged             -= OnBackgroundSettingChanged;
+            _settingService.ValueLabelColorSetting.SettingChanged             -= OnValueLabelColorSettingChanged;
+            GameService.Overlay.UserLocaleChanged                             -= OnUserChangedLanguageInBlishSettings;
 
             _visibilityService?.Dispose();
             _updateLoop.Dispose();
             _resetService.Dispose();
             _valueLabelTextService.Dispose();
+            _statsWindowDisplayStateService.Dispose();
             base.DisposeControl();
         }
 
@@ -103,8 +119,7 @@ namespace SessionTracker.StatsWindow
             {
                 _model.UiHasToBeUpdated = false;
                 ShowOrHideStats();
-                _rootFlowPanel.HideScrollbarIfExists();
-                _hintFlowPanel.ShowHintWhenAllStatsAreHidden(_updateLoop.State);
+                _statsWindowDisplayStateService.ShowUpdatedDisplayState();
             }
 
             _updateLoop.AddToElapsedTime(gameTime.ElapsedGameTime.TotalMilliseconds);
@@ -121,7 +136,7 @@ namespace SessionTracker.StatsWindow
                     var canUpdateOrStartNewSession = apiTokenService.CanAccessApi || _waitedLongEnoughForApiTokenInterval.HasEnded();
                     if(!canUpdateOrStartNewSession)
                     {
-                        StatValueTextAndTooltipService.SetToLoadingOrError(apiTokenService, _valueLabelByStatId.Values);
+                        _statsWindowDisplayStateService.ShowLoadingOrApiTokenIssue(apiTokenService);
                         return;
                     }
 
@@ -178,7 +193,7 @@ namespace SessionTracker.StatsWindow
                 var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _gw2ApiManager);
                 if (!apiTokenService.CanAccessApi)
                 {
-                    StatValueTextAndTooltipService.SetToApiError(apiTokenService, _valueLabelByStatId.Values, RETRY_IN_X_SECONDS_MESSAGE);
+                    _statsWindowDisplayStateService.ShowApiTokenIssue(apiTokenService);
                     _updateLoop.State = UpdateLoopState.PauseBetweenStartNewSessionRetries;
                     return;
                 }
@@ -188,19 +203,19 @@ namespace SessionTracker.StatsWindow
                 _model.ResetDurationAndStats();
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _statTooltipService.ResetSummaryTooltip(_model);
+                ShowOrHideStats();
+                _statsWindowDisplayStateService.RemoveErrorAndShowUpdatedDisplayState();
                 _updateLoop.State = UpdateLoopState.PauseBeforeUpdatingSession;
             }
             catch (LogWarnException e)
             {
-                var tooltip = $"Error: API call failed while initializing. :-( \n{RETRY_IN_X_SECONDS_MESSAGE}";
-                StatValueTextAndTooltipService.Set("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
+                _statsWindowDisplayStateService.ShowReadTooltipErrorWithRetryInfo($"Error: API call failed while starting new session. :-(");
                 Module.Logger.Warn(e, "Error when initializing values: API failed to respond.");
                 _updateLoop.State = UpdateLoopState.PauseBetweenStartNewSessionRetries;
             }
             catch (Exception e)
             {
-                var tooltip = $"Error: Bug in module code. :-( \n{RETRY_IN_X_SECONDS_MESSAGE}";
-                StatValueTextAndTooltipService.Set("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
+                _statsWindowDisplayStateService.ShowReadTooltipErrorWithRetryInfo($"Error: Bug in module code. :-(");
                 Module.Logger.Error(e, "Error when initializing values: bug in module code.");
                 _updateLoop.State = UpdateLoopState.PauseBetweenStartNewSessionRetries; // todo module error = module should stop? error updateState einbauen?
             }
@@ -215,16 +230,18 @@ namespace SessionTracker.StatsWindow
                 var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _gw2ApiManager);
                 if (!apiTokenService.CanAccessApi)
                 {
-                    StatValueTextAndTooltipService.SetToApiError(apiTokenService, _valueLabelByStatId.Values, RETRY_IN_X_SECONDS_MESSAGE);
+                    _statsWindowDisplayStateService.ShowApiTokenIssue(apiTokenService);
                     Module.Logger.Warn($"Error when updating values: {apiTokenService.CreateApiErrorText()}");
                     return;
                 }
 
                 await ApiService.UpdateTotalValuesInModel(_model, _gw2ApiManager);
+                _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit = false;
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _statTooltipService.UpdateSummaryTooltip(_model);
-                _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit = false;
                 _updateLoop.UseRegularUpdateSessionInterval();
+                ShowOrHideStats();
+                _statsWindowDisplayStateService.RemoveErrorAndShowUpdatedDisplayState();
                 await _fileService.SaveModelToFileAsync(_model);
             }
             catch (LogWarnException e)
@@ -233,10 +250,7 @@ namespace SessionTracker.StatsWindow
                 Module.Logger.Warn(e, "Error when updating values: API failed to respond");
 
                 if (_hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit)
-                {
-                    var tooltip = $"Error: API call failed while updating. :-( \n{RETRY_IN_X_SECONDS_MESSAGE}";
-                    StatValueTextAndTooltipService.Set("Error: read tooltip.", tooltip, _valueLabelByStatId.Values);
-                }
+                    _statsWindowDisplayStateService.ShowReadTooltipErrorWithRetryInfo($"Error: API call failed while updating session. :-(");
                 // intentionally no error handling on regular updates!
                 // when api server does not respond (error code 500, 502) or times out (RequestCanceledException)
                 // the app will just return the previous stat values and hope that on the end of the next interval
@@ -254,73 +268,66 @@ namespace SessionTracker.StatsWindow
             }
         }
 
-        private void ShowOrHideStats()
+        private void ShowOrHideStats() 
         {
-            _titlesFlowPanel.ClearChildren();
-            _valuesFlowPanel.ClearChildren();
-            var visibleStats = _model.Stats.WhereUserSetToBeVisible();
+            _statTitlesFlowPanel.ClearChildren();
+            _statValuesFlowPanel.ClearChildren();
+            var visibleStats = _model.Stats.Where(e => e.IsVisible);
 
-            if (_settingService.HideStatsWithValueZeroSetting.Value)
-                visibleStats = visibleStats.WhereSessionValueIsNonZero();
+            if (_settingService.StatsWithZeroValueAreHiddenSetting.Value)
+                visibleStats = visibleStats.Where(e => e.HasNonZeroSessionValue);
 
             foreach (var stat in visibleStats)
             {
-                _titleFlowPanelByStatId[stat.Id].Show();
-                _valueLabelByStatId[stat.Id].Parent = _valuesFlowPanel;
+                _titleFlowPanelByStatId[stat.Id].Parent = _statTitlesFlowPanel;
+                _valueLabelByStatId[stat.Id].Parent = _statValuesFlowPanel;
             }
         }
 
-        private void CreateUi(SettingsWindowService settingsWindowService)
+        private void CreateUi(Model model, SettingsWindowService settingsWindowService, TextureService textureService, SettingService settingService)
         {
-
-            _hintFlowPanel = new HintFlowPanel(_model.Stats, settingsWindowService, _textureService, _settingService, this)
+            _errorLabel = new ErrorLabel();
+            _userHasToSelectStatsFlowPanel = new UserHasToSelectStatsFlowPanel(settingsWindowService);            
+            _allStatsHiddenByZeroValuesSettingImage = new Image(textureService.AllStatsHiddenByZeroValuesSettingTexture)
             {
-                FlowDirection    = ControlFlowDirection.SingleTopToBottom,
-                WidthSizingMode  = SizingMode.AutoSize,
-                HeightSizingMode = SizingMode.AutoSize,
+                Size = new Point(30),
+                BasicTooltipText = "All stats are hidden because their current session values are 0.\n" +
+                                   "Stats will be visible again when their session value is not 0 anymore.\n" +
+                                   "This hide-zero-value-stats-feature can be turned off in the session tracker module settings."
             };
 
-            _hintFlowPanel.ShowHintWhenAllStatsAreHidden(_updateLoop.State);
+            _statsRootFlowPanel = new RootFlowPanel(this, settingService);
 
-            _rootFlowPanel = new RootFlowPanel(this, _settingService);
-
-            _titlesFlowPanel = new FlowPanel()
-            {
-                FlowDirection    = ControlFlowDirection.SingleTopToBottom,
-                HeightSizingMode = SizingMode.AutoSize,
-                WidthSizingMode  = SizingMode.AutoSize,
-                Parent           = _rootFlowPanel
-            };
-
-            _valuesFlowPanel = new FlowPanel()
+            _statTitlesFlowPanel = new FlowPanel()
             {
                 FlowDirection    = ControlFlowDirection.SingleTopToBottom,
                 HeightSizingMode = SizingMode.AutoSize,
                 WidthSizingMode  = SizingMode.AutoSize,
-                Parent           = _rootFlowPanel
+                Parent           = _statsRootFlowPanel
             };
 
-            var font = FontService.Fonts[_settingService.FontSizeIndexSetting.Value];
+            _statValuesFlowPanel = new FlowPanel()
+            {
+                FlowDirection    = ControlFlowDirection.SingleTopToBottom,
+                HeightSizingMode = SizingMode.AutoSize,
+                WidthSizingMode  = SizingMode.AutoSize,
+                Parent           = _statsRootFlowPanel
+            };
 
-            foreach (var stat in _model.Stats)
+            foreach (var stat in model.Stats)
             {
                 _valueLabelByStatId[stat.Id] = new Label()
                 {
                     Text           = "-",
-                    TextColor      = _settingService.ValueLabelColorSetting.Value.GetColor(),
-                    Font           = font,
+                    TextColor      = settingService.ValueLabelColorSetting.Value.GetColor(),
                     ShowShadow     = true,
                     AutoSizeHeight = true,
                     AutoSizeWidth  = true,
-                    Parent         = stat.IsVisible ? _valuesFlowPanel : null
-                    // must not show all stats when initialized, because on startup that would automatically move the stats container to the bottom
-                    // because of AdjustCoordinatesToKeepContainerInsideScreenBoundaries()
+                    Parent         = null
                 };
 
-                _titleFlowPanelByStatId[stat.Id] = new StatTitleFlowPanel(stat, font, _titlesFlowPanel, _textureService, _settingService);
+                _titleFlowPanelByStatId[stat.Id] = new StatTitleFlowPanel(stat, _statTitlesFlowPanel, textureService, settingService);
             }
-
-            _rootFlowPanel.HideScrollbarIfExists();
         }
 
         private void OnUserChangedLanguageInBlishSettings(object sender, ValueEventArgs<System.Globalization.CultureInfo> e)
@@ -335,9 +342,14 @@ namespace SessionTracker.StatsWindow
                 valueLabel.TextColor = e.NewValue.GetColor();
         }
 
-        private void OnFontSizeIndexSettingChanged(object sender, ValueChangedEventArgs<int> valueChangedEventArgs)
+        private void OnFontSizeIndexSettingChanged(object sender = null, ValueChangedEventArgs<int> valueChangedEventArgs = null)
         {
             var font = FontService.Fonts[_settingService.FontSizeIndexSetting.Value];
+            _userHasToSelectStatsFlowPanel.SetFont(font);
+            _errorLabel.Font = font;
+
+            foreach (var titleFlowPanel in _titleFlowPanelByStatId)
+                titleFlowPanel.Value.SetFont(font);
 
             foreach (var label in _valueLabelByStatId.Values)
                 label.Font = font;
@@ -348,7 +360,7 @@ namespace SessionTracker.StatsWindow
             BackgroundColor = ColorService.CreateBackgroundColor(_settingService);
         }
 
-        private void OnHideStatsWithValueZeroSettingChanged(object sender, ValueChangedEventArgs<bool> e)
+        private void OnStatsWithZeroValueAreHiddenSettingChanged(object sender, ValueChangedEventArgs<bool> e)
         {
             _model.UiHasToBeUpdated = true;
         }
@@ -367,11 +379,13 @@ namespace SessionTracker.StatsWindow
         private readonly Dictionary<string, Label> _valueLabelByStatId = new Dictionary<string, Label>();
         private readonly UpdateLoop _updateLoop;
         private readonly ResetService _resetService;
-        private FlowPanel _titlesFlowPanel;
-        private FlowPanel _valuesFlowPanel;
-        private HintFlowPanel _hintFlowPanel;
-        private RootFlowPanel _rootFlowPanel;
-        private static readonly string RETRY_IN_X_SECONDS_MESSAGE = $"Retry in {UpdateLoop.RETRY_INTERVAL_IN_SECONDS}s…";
+        private FlowPanel _statTitlesFlowPanel;
+        private FlowPanel _statValuesFlowPanel;
+        private UserHasToSelectStatsFlowPanel _userHasToSelectStatsFlowPanel;
+        private RootFlowPanel _statsRootFlowPanel;
+        private ErrorLabel _errorLabel;
+        private Image _allStatsHiddenByZeroValuesSettingImage;
+        private readonly StatsWindowDisplayStateService _statsWindowDisplayStateService;
         private bool _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit;
     }
 }

@@ -155,47 +155,13 @@ namespace SessionTracker.SettingsWindow
                     visibilityCheckBox.Checked = true;
             };
 
-            pvpButton.Click += (s, e) =>
-            {
-                ShowOrHideByStatIdStartingWith("pvp", visibilityCheckBoxByStatId, true);
-                ShowOrHideByCurrencyId(CurrencyIds.Pvp, visibilityCheckBoxByStatId, true);
-                visibilityCheckBoxByStatId[StatId.DEATHS].Checked = true;
-                MoveVisibleStatsToTop();
-            };
-
-            wvwButton.Click += (s, e) =>
-            {
-                ShowOrHideByStatIdStartingWith("wvw", visibilityCheckBoxByStatId, true);
-                ShowOrHideByCurrencyId(CurrencyIds.Wvw, visibilityCheckBoxByStatId, true);
-                ShowOrHideByItemId(ItemIds.Wvw, visibilityCheckBoxByStatId, true);
-                visibilityCheckBoxByStatId[StatId.DEATHS].Checked = true;
-                MoveVisibleStatsToTop();
-            };
-
-            fractalsButton.Click += (s, e) =>
-            {
-                ShowOrHideByCurrencyId(CurrencyIds.Fractal, visibilityCheckBoxByStatId, true);
-                MoveVisibleStatsToTop();
-            };
-
-            strikesButton.Click += (s, e) =>
-            {
-                ShowOrHideByCurrencyId(CurrencyIds.Strike, visibilityCheckBoxByStatId, true);
-                MoveVisibleStatsToTop();
-            };
-
-            raidsButton.Click += (s, e) =>
-            {
-                ShowOrHideByCurrencyId(CurrencyIds.Raid, visibilityCheckBoxByStatId, true);
-                MoveVisibleStatsToTop();
-            };
-
-            openWorldButton.Click += (s, e) =>
-            {
-                ShowOrHideByCurrencyId(CurrencyIds.OpenWorld, visibilityCheckBoxByStatId, true);
-                MoveVisibleStatsToTop();
-            };
-        }
+            pvpButton.Click       += (s, e) => ShowOrHidePvpStats(visibilityCheckBoxByStatId, true);
+            wvwButton.Click       += (s, e) => ShowOrHideWvwStats(visibilityCheckBoxByStatId, true);
+            fractalsButton.Click  += (s, e) => ShowOrHideFractalStats(visibilityCheckBoxByStatId, true);
+            strikesButton.Click   += (s, e) => ShowOrHideStrikeStats(visibilityCheckBoxByStatId, true);
+            raidsButton.Click     += (s, e) => ShowOrHideRaidStats(visibilityCheckBoxByStatId, true);
+            openWorldButton.Click += (s, e) => ShowOrHideOpenWorldStats(visibilityCheckBoxByStatId, true);
+        }      
 
         private void HideCategoryButtons(Dictionary<string, Checkbox> visibilityCheckBoxByStatId, FlowPanel statsFlowPanel)
         {
@@ -226,7 +192,7 @@ namespace SessionTracker.SettingsWindow
             var pvpButton = new StandardButton
             {
                 Text = "PvP",
-                BasicTooltipText = "Click to show pvp related stats.",
+                BasicTooltipText = "Click to hide pvp related stats.",
                 Width = 80,
                 Parent = buttonsFlowPanel
             };
@@ -234,7 +200,7 @@ namespace SessionTracker.SettingsWindow
             var wvwButton = new StandardButton
             {
                 Text = "WvW",
-                BasicTooltipText = "Click to show wvw related stats.",
+                BasicTooltipText = "Click to hide wvw related stats.",
                 Width = 80,
                 Parent = buttonsFlowPanel
             };
@@ -242,7 +208,7 @@ namespace SessionTracker.SettingsWindow
             var fractalsButton = new StandardButton
             {
                 Text = "Fractals",
-                BasicTooltipText = "Click to show fractal related stats.",
+                BasicTooltipText = "Click to hide fractal related stats.",
                 Width = 80,
                 Parent = buttonsFlowPanel
             };
@@ -250,7 +216,7 @@ namespace SessionTracker.SettingsWindow
             var strikesButton = new StandardButton
             {
                 Text = "Strikes",
-                BasicTooltipText = "Click to show strike related stats.",
+                BasicTooltipText = "Click to hide strike related stats.",
                 Width = 80,
                 Parent = buttonsFlowPanel
             };
@@ -258,7 +224,7 @@ namespace SessionTracker.SettingsWindow
             var raidsButton = new StandardButton
             {
                 Text = "Raids",
-                BasicTooltipText = "Click to show raid related stats.",
+                BasicTooltipText = "Click to hide raid related stats.",
                 Width = 80,
                 Parent = buttonsFlowPanel
             };
@@ -266,7 +232,7 @@ namespace SessionTracker.SettingsWindow
             var openWorldButton = new StandardButton
             {
                 Text = "Open World",
-                BasicTooltipText = "Click to show some open world related stats.",
+                BasicTooltipText = "Click to hide some open world related stats.",
                 Width = 100,
                 Parent = buttonsFlowPanel
             };
@@ -277,48 +243,56 @@ namespace SessionTracker.SettingsWindow
                     visibilityCheckBox.Checked = false;
             };
 
-            pvpButton.Click += (s, e) =>
-            {
-                ShowOrHideByStatIdStartingWith("pvp", visibilityCheckBoxByStatId, false);
-                ShowOrHideByCurrencyId(CurrencyIds.Pvp, visibilityCheckBoxByStatId, false);
-                visibilityCheckBoxByStatId[StatId.DEATHS].Checked = false;
-                MoveVisibleStatsToTop();
-            };
-
-            wvwButton.Click += (s, e) =>
-            {
-                ShowOrHideByStatIdStartingWith("wvw", visibilityCheckBoxByStatId, false);
-                ShowOrHideByCurrencyId(CurrencyIds.Wvw, visibilityCheckBoxByStatId, false);
-                ShowOrHideByItemId(ItemIds.Wvw, visibilityCheckBoxByStatId, false);
-                visibilityCheckBoxByStatId[StatId.DEATHS].Checked = false;
-                MoveVisibleStatsToTop();
-            };
-
-            fractalsButton.Click += (s, e) =>
-            {
-                ShowOrHideByCurrencyId(CurrencyIds.Fractal, visibilityCheckBoxByStatId, false);
-                MoveVisibleStatsToTop();
-            };
-
-            strikesButton.Click += (s, e) =>
-            {
-                ShowOrHideByCurrencyId(CurrencyIds.Strike, visibilityCheckBoxByStatId, false);
-                MoveVisibleStatsToTop();
-            };
-
-            raidsButton.Click += (s, e) =>
-            {
-                ShowOrHideByCurrencyId(CurrencyIds.Raid, visibilityCheckBoxByStatId, false);
-                MoveVisibleStatsToTop();
-            };
-
-            openWorldButton.Click += (s, e) =>
-            {
-                ShowOrHideByCurrencyId(CurrencyIds.OpenWorld, visibilityCheckBoxByStatId, false);
-                MoveVisibleStatsToTop();
-            };
+            pvpButton.Click       += (s, e) => ShowOrHidePvpStats(visibilityCheckBoxByStatId, false);
+            wvwButton.Click       += (s, e) => ShowOrHideWvwStats(visibilityCheckBoxByStatId, false);
+            fractalsButton.Click  += (s, e) => ShowOrHideFractalStats(visibilityCheckBoxByStatId, false);
+            strikesButton.Click   += (s, e) => ShowOrHideStrikeStats(visibilityCheckBoxByStatId, false);
+            raidsButton.Click     += (s, e) => ShowOrHideRaidStats(visibilityCheckBoxByStatId, false);
+            openWorldButton.Click += (s, e) => ShowOrHideOpenWorldStats(visibilityCheckBoxByStatId, false);
         }
 
+        private void ShowOrHideOpenWorldStats(Dictionary<string, Checkbox> visibilityCheckBoxByStatId, bool isShown)
+        {
+            ShowOrHideByCurrencyId(CurrencyIds.OpenWorld, visibilityCheckBoxByStatId, isShown);
+            MoveVisibleStatsToTop();
+        }
+
+        private void ShowOrHideRaidStats(Dictionary<string, Checkbox> visibilityCheckBoxByStatId, bool isShown)
+        {
+            ShowOrHideByItemId(ItemIds.Raid, visibilityCheckBoxByStatId, isShown);
+            ShowOrHideByCurrencyId(CurrencyIds.Raid, visibilityCheckBoxByStatId, isShown);
+            MoveVisibleStatsToTop();
+        }
+
+        private void ShowOrHideFractalStats(Dictionary<string, Checkbox> visibilityCheckBoxByStatId, bool isShown)
+        {
+            ShowOrHideByItemId(ItemIds.Fractal, visibilityCheckBoxByStatId, isShown);
+            ShowOrHideByCurrencyId(CurrencyIds.Fractal, visibilityCheckBoxByStatId, isShown);
+            MoveVisibleStatsToTop();
+        }
+
+        private void ShowOrHidePvpStats(Dictionary<string, Checkbox> visibilityCheckBoxByStatId, bool isShown)
+        {
+            ShowOrHideByStatIdStartingWith("pvp", visibilityCheckBoxByStatId, isShown);
+            ShowOrHideByCurrencyId(CurrencyIds.Pvp, visibilityCheckBoxByStatId, isShown);
+            visibilityCheckBoxByStatId[StatId.DEATHS].Checked = isShown;
+            MoveVisibleStatsToTop();
+        }
+
+        private void ShowOrHideWvwStats(Dictionary<string, Checkbox> visibilityCheckBoxByStatId, bool isShown)
+        {
+            ShowOrHideByStatIdStartingWith("wvw", visibilityCheckBoxByStatId, isShown);
+            ShowOrHideByCurrencyId(CurrencyIds.Wvw, visibilityCheckBoxByStatId, isShown);
+            ShowOrHideByItemId(ItemIds.Wvw, visibilityCheckBoxByStatId, isShown);
+            visibilityCheckBoxByStatId[StatId.DEATHS].Checked = isShown;
+            MoveVisibleStatsToTop();
+        }
+
+        private void ShowOrHideStrikeStats(Dictionary<string, Checkbox> visibilityCheckBoxByStatId, bool isShown)
+        {
+            ShowOrHideByCurrencyId(CurrencyIds.Strike, visibilityCheckBoxByStatId, isShown);
+            MoveVisibleStatsToTop();
+        }
 
         private static void ShowOrHideByStatIdStartingWith(string searchTerm, Dictionary<string, Checkbox> visibilityCheckBoxByStatId, bool isShown)
         {

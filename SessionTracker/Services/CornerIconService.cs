@@ -4,7 +4,6 @@ using Blish_HUD.Controls;
 using Blish_HUD.Input;
 using Blish_HUD.Settings;
 using Microsoft.Xna.Framework.Graphics;
-using SessionTracker.Other;
 using SessionTracker.SettingsWindow;
 using SessionTracker.StatsWindow;
 
@@ -95,7 +94,6 @@ namespace SessionTracker.Services
 
         private void OnCornerIconIsVisibleSettingChanged(object sender, ValueChangedEventArgs<bool> e)
         {
-            DebugLogService.LogSettingChange(sender, e);
             if (e.NewValue)
                 CreateCornerIcon();
             else

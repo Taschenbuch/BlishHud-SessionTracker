@@ -20,9 +20,9 @@ namespace SessionTracker.Files.RemoteFiles
             InfoText = $"Failed to download required files. {moduleName} module cannot start. :-(\n" +
                        $"Retry later by restarting blish or by disable and then enable {moduleName} module again.\n\n" +
                        $"Possible reasons:\n" +
-                       $"- You are offline or your internet connection has problems connecting to blish web server.\n" +
-                       $"- the blish web server is offline or certain files on the server are not accessable.\n";
-            HyperLinkDisplayText = "!! Click here to test in your web browser if you can access the blish hud server !!";
+                       $"- You are offline or your internet connection has problems connecting to Blish web server.\n" +
+                       $"- the Blish web server is offline or certain files on the server are not accessable.\n";
+            HyperLinkDisplayText = "!! Click here to test in your web browser if you can access the Blish hud server !!";
             HyperLink = @"https://bhm.blishhud.com/ecksofa.sessiontracker/online.html";
         }
 

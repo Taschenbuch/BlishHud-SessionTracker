@@ -5,13 +5,14 @@ namespace SessionTracker.Settings
 {
     public class OpenSettingsButton : StandardButton
     {
-        public OpenSettingsButton(SettingsWindowService settingsWindowService)
+        public OpenSettingsButton(SettingsWindowService settingsWindowService, Container parent)
         {
             _settingsWindowService = settingsWindowService;
 
             Text             = "Open Settings";
             BasicTooltipText = "Open session tracker module settings.";
             Width            = 150;
+            Parent           = parent;
 
             Click += OnSettingsButtonClick;
         }

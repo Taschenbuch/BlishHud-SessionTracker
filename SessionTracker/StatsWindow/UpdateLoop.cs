@@ -77,6 +77,7 @@ namespace SessionTracker.StatsWindow
             return RETRY_INTERVAL_IN_SECONDS * 1000;
         }
 
+        public static readonly string RETRY_IN_X_SECONDS_MESSAGE = $"Retry in {RETRY_INTERVAL_IN_SECONDS}s…";
         public const int RETRY_INTERVAL_IN_SECONDS = 5; // seconds instead of milliseconds because value is displayed in UI
         private const double REGULAR_UPDATE_SESSION_INTERVAL_IN_MILLISECONDS = 5 * 60 * 1000; // 5 minutes  
         private double _updateSessionIntervalInMilliseconds = REGULAR_UPDATE_SESSION_INTERVAL_IN_MILLISECONDS;

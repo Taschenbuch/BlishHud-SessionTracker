@@ -39,9 +39,9 @@ namespace SessionTracker
 
         protected override void DefineSettings(SettingCollection settings)
         {
-            DebugLogService.LogVersionAndSettings(Version, settings);
             _settingService = new SettingService(settings);
             _dateTimeService.DefineSettings(settings);
+            _debugLogService = new DebugLogService(Version, settings);
         }
 
         public override IView GetSettingsView()
@@ -62,7 +62,7 @@ namespace SessionTracker
                 _moduleLoadError.InfoText = $"DISABLE {Name} module, wait 5-10 seconds, after that ENABLE the module again here: " +
                     $"click Blish icon to open settings -> Manage Modules -> Session Tracker.\n" +
                     $"Reason: You recently updated this module. There is a bug in blish that prevents a module from getting api access after a module update with new " +
-                    $"api permissions. A blish restart or module reinstall may not fix this. Disable and then enable works more reliable until the bug is fixed.";
+                    $"api permissions. A Blish restart or module reinstall may not fix this. Disable and then enable works more reliable until the bug is fixed.";
                 _moduleLoadError.ShowErrorWindow($"{Name}: !! READ THIS !!!");
                 return;
             }
@@ -128,6 +128,7 @@ namespace SessionTracker
                 _settingService.UiVisibilityKeyBindingSetting.Value.Activated -= OnUiVisibilityKeyBindingActivated;
             }
 
+            _debugLogService?.Dispose();
             _moduleLoadError?.Dispose();
             _settingsWindowService?.Dispose();
             _cornerIconService?.Dispose();
@@ -165,6 +166,7 @@ namespace SessionTracker
         private TextureService _textureService;
         private CornerIconService _cornerIconService;
         private SettingsWindowService _settingsWindowService;
+        private DebugLogService _debugLogService;
         private readonly DateTimeService _dateTimeService = new DateTimeService();
         private readonly ModuleLoadError _moduleLoadError = new ModuleLoadError();
     }

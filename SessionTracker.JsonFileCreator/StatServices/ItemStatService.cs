@@ -9,7 +9,7 @@ using SessionTracker.Models;
 
 namespace SessionTracker.JsonFileCreator.StatServices
 {
-    public class ItemService
+    public class ItemStatService
     {
         public static async Task<List<Stat>> CreateItemStats()
         {
@@ -20,24 +20,21 @@ namespace SessionTracker.JsonFileCreator.StatServices
         private static async Task<List<Stat>> CreateStats()
         {
             var stats = new List<Stat>();
+            using var client = new Gw2Client(new Connection(Locale.English));
+            var items = await client.WebApi.V2.Items.ManyAsync(ITEM_IDS);
 
-            using (var client = new Gw2Client(new Connection(Locale.English)))
+            foreach (var item in items)
             {
-                var items = await client.WebApi.V2.Items.ManyAsync(ITEM_IDS);
-
-                foreach (var item in items)
+                var stat = new Stat
                 {
-                    var stat = new Stat
-                    {
-                        Id          = $"item{item.Id}",
-                        ApiId       = item.Id,
-                        ApiIdType   = ApiIdType.Item,
-                        IconAssetId = AssetService.GetIconAssetIdFromIconUrl(item.Icon.Url.ToString()),
-                        IsVisible   = false
-                    };
+                    Id          = $"item{item.Id}",
+                    ApiId       = item.Id,
+                    ApiIdType   = ApiIdType.Item,
+                    IconAssetId = AssetService.GetIconAssetIdFromIconUrl(item.Icon.Url.ToString()),
+                    IsVisible   = false
+                };
 
-                    stats.Add(stat);
-                }
+                stats.Add(stat);
             }
 
             return stats;
@@ -49,13 +46,11 @@ namespace SessionTracker.JsonFileCreator.StatServices
 
             foreach (var local in locales)
             {
-                using (var client = new Gw2Client(new Connection(local)))
-                {
-                    var items = await client.WebApi.V2.Items.ManyAsync(ITEM_IDS);
+                using var client = new Gw2Client(new Connection(local));
+                var items = await client.WebApi.V2.Items.ManyAsync(ITEM_IDS);
 
-                    foreach (var item in items)
-                        UpdateTexts(item, stats, local);
-                }
+                foreach (var item in items)
+                    UpdateTexts(item, stats, local);
             }
 
             return stats;
@@ -76,6 +71,10 @@ namespace SessionTracker.JsonFileCreator.StatServices
         {
             ItemIds.MEMORY_OF_BATTLE,
             ItemIds.HEAVY_LOOT_BAG,
+            ItemIds.TRICK_OR_TREAT_BAG,
+            ItemIds.PIECE_OF_CANDY_CORN, // remove when material storage is added!
+            ItemIds.MYSTIC_COIN, // remove when material storage is added!
+            ItemIds.FRACTAL_ENCRYPTION, // remove when material storage is added!
         };
     }
 }

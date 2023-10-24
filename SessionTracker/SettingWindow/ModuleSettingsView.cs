@@ -15,9 +15,7 @@ namespace SessionTracker.Settings
 
         protected override void Build(Container buildPanel)
         {
-            _openSettingsButton        = new OpenSettingsButton(_settingsWindowService);
-            _openSettingsButton.Parent = buildPanel;
-
+            _openSettingsButton = new OpenSettingsButton(_settingsWindowService, buildPanel);
             var x = Math.Max(buildPanel.Width / 2 - _openSettingsButton.Width / 2, 20);
             var y = Math.Max(buildPanel.Height / 2 - _openSettingsButton.Height / 2, 20);
             _openSettingsButton.Location = new Point(x, y);

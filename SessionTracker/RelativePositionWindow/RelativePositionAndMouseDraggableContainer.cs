@@ -2,7 +2,6 @@
 using Blish_HUD.Controls;
 using Blish_HUD.Input;
 using Microsoft.Xna.Framework;
-using SessionTracker.Other;
 using SessionTracker.SettingEntries;
 
 namespace SessionTracker.RelativePositionWindow
@@ -33,7 +32,6 @@ namespace SessionTracker.RelativePositionWindow
         {
             base.RecalculateLayout(); // not required because Control and Container dot not implement them. But maybe in a future blish version they do.
             SetLocationFromWindowAnchorLocationSettings();
-
         }
 
         public override void UpdateContainer(GameTime gameTime)
@@ -67,7 +65,6 @@ namespace SessionTracker.RelativePositionWindow
 
         private void WindowAnchorSettingChanged(object sender, ValueChangedEventArgs<WindowAnchor> e)
         {
-            DebugLogService.LogSettingChange(sender, e);
             AdjustAndSetLocationToKeepWindowAnchorInsideScreenBoundaries(Location);
         }
 

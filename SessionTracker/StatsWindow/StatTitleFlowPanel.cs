@@ -9,7 +9,7 @@ namespace SessionTracker.StatsWindow
 {
     public class StatTitleFlowPanel : FlowPanel
     {
-        public StatTitleFlowPanel(Stat stat, BitmapFont font, Container parent, TextureService textureService, SettingService settingService)
+        public StatTitleFlowPanel(Stat stat, Container parent, TextureService textureService, SettingService settingService)
         {
             _stat          = stat;
             _parent         = parent;
@@ -24,7 +24,6 @@ namespace SessionTracker.StatsWindow
             {
                 Text           = stat.Name.Localized,
                 TextColor      = settingService.TitleLabelColorSetting.Value.GetColor(),
-                Font           = font,
                 ShowShadow     = true,
                 AutoSizeHeight = true,
                 AutoSizeWidth  = true,
@@ -37,14 +36,13 @@ namespace SessionTracker.StatsWindow
             };
 
             _titleLabel                     = titleLabel;
-            _paddingLabelBetweenIconAndText = CreatePaddingLabel(font);
-            _paddingLabelBeforeValue        = CreatePaddingLabel(font);
+            _paddingLabelBetweenIconAndText = CreatePaddingLabel();
+            _paddingLabelBeforeValue        = CreatePaddingLabel();
 
             OnStatTitlePaddingSettingChanged();
             ShowOrHideTextAndIcon(settingService.LabelTypeSetting.Value);
             settingService.StatTitlePaddingSetting.SettingChanged += OnStatTitlePaddingSettingChanged;
             settingService.LabelTypeSetting.SettingChanged        += OnLabelTypeSettingChanged;
-            settingService.FontSizeIndexSetting.SettingChanged    += OnFontSizeIndexSettingChanged;
             settingService.TitleLabelColorSetting.SettingChanged  += OnTitleLabelColorSettingChanged;
         }
 
@@ -59,7 +57,6 @@ namespace SessionTracker.StatsWindow
         {
             _settingService.StatTitlePaddingSetting.SettingChanged -= OnStatTitlePaddingSettingChanged;
             _settingService.LabelTypeSetting.SettingChanged        -= OnLabelTypeSettingChanged;
-            _settingService.FontSizeIndexSetting.SettingChanged    -= OnFontSizeIndexSettingChanged;
             _settingService.TitleLabelColorSetting.SettingChanged  -= OnTitleLabelColorSettingChanged;
             base.DisposeControl();
         }
@@ -71,24 +68,17 @@ namespace SessionTracker.StatsWindow
             _titleImage.BasicTooltipText = _stat.Description.Localized;
         }
 
-        public override void Show()
+        public void SetFont(BitmapFont font)
         {
-            Parent = _parent;
-            base.Show();
+            _titleLabel.Font = font;
+            _paddingLabelBetweenIconAndText.Font = font;
+            _paddingLabelBeforeValue.Font = font;
+            _titleImage.Size = new Point(_titleLabel.Height);
         }
 
         private void OnTitleLabelColorSettingChanged(object sender, Blish_HUD.ValueChangedEventArgs<ColorType> e)
         {
             _titleLabel.TextColor = e.NewValue.GetColor();
-        }
-
-        private void OnFontSizeIndexSettingChanged(object sender, Blish_HUD.ValueChangedEventArgs<int> e)
-        {
-            var font = FontService.Fonts[_settingService.FontSizeIndexSetting.Value];
-            _titleLabel.Font                     = font;
-            _paddingLabelBetweenIconAndText.Font = font;
-            _paddingLabelBeforeValue.Font        = font;
-            _titleImage.Size                      = new Point(_titleLabel.Height);
         }
 
         private void OnStatTitlePaddingSettingChanged(object sender = null, Blish_HUD.ValueChangedEventArgs<int> e = null)
@@ -104,12 +94,11 @@ namespace SessionTracker.StatsWindow
             ShowOrHideTextAndIcon(e.NewValue);
         }
 
-        private static Label CreatePaddingLabel(BitmapFont font)
+        private static Label CreatePaddingLabel()
         {
             return new Label
             {
                 Text           = "  ",
-                Font           = font,
                 AutoSizeHeight = true,
                 AutoSizeWidth  = true
             };
