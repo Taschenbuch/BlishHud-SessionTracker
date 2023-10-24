@@ -17,5 +17,17 @@ namespace SessionTracker.Constants
             HEAVY_LOOT_BAG,
             MEMORY_OF_BATTLE,
         }.AsReadOnly();
+
+        public static readonly ReadOnlyCollection<int> Fractal = new List<int>
+        {
+            MYSTIC_COIN,
+            FRACTAL_ENCRYPTION,
+        }.AsReadOnly();
+
+        public static readonly ReadOnlyCollection<int> Raid = new List<int>
+        {
+            MYSTIC_COIN,
+            FRACTAL_ENCRYPTION,
+        }.AsReadOnly();
     }
 }

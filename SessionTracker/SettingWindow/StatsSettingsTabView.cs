@@ -174,6 +174,7 @@ namespace SessionTracker.SettingsWindow
 
             fractalsButton.Click += (s, e) =>
             {
+                ShowOrHideByItemId(ItemIds.Fractal, visibilityCheckBoxByStatId, true);
                 ShowOrHideByCurrencyId(CurrencyIds.Fractal, visibilityCheckBoxByStatId, true);
                 MoveVisibleStatsToTop();
             };
@@ -186,6 +187,7 @@ namespace SessionTracker.SettingsWindow
 
             raidsButton.Click += (s, e) =>
             {
+                ShowOrHideByItemId(ItemIds.Raid, visibilityCheckBoxByStatId, true);
                 ShowOrHideByCurrencyId(CurrencyIds.Raid, visibilityCheckBoxByStatId, true);
                 MoveVisibleStatsToTop();
             };
@@ -296,6 +298,7 @@ namespace SessionTracker.SettingsWindow
 
             fractalsButton.Click += (s, e) =>
             {
+                ShowOrHideByItemId(ItemIds.Fractal, visibilityCheckBoxByStatId, false);
                 ShowOrHideByCurrencyId(CurrencyIds.Fractal, visibilityCheckBoxByStatId, false);
                 MoveVisibleStatsToTop();
             };
@@ -308,6 +311,7 @@ namespace SessionTracker.SettingsWindow
 
             raidsButton.Click += (s, e) =>
             {
+                ShowOrHideByItemId(ItemIds.Raid, visibilityCheckBoxByStatId, false);
                 ShowOrHideByCurrencyId(CurrencyIds.Raid, visibilityCheckBoxByStatId, false);
                 MoveVisibleStatsToTop();
             };
