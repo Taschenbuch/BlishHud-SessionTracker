@@ -347,6 +347,7 @@ namespace SessionTracker.StatsWindow
             var font = FontService.Fonts[_settingService.FontSizeIndexSetting.Value];
             _userHasToSelectStatsFlowPanel.SetFont(font);
             _errorLabel.Font = font;
+            _allStatsHiddenByZeroValuesSettingImage.Size = new Point(font.LineHeight);
 
             foreach (var titleFlowPanel in _titleFlowPanelByStatId)
                 titleFlowPanel.Value.SetFont(font);
