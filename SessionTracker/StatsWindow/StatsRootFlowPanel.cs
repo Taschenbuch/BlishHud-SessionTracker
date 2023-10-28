@@ -8,9 +8,9 @@ using SessionTracker.SettingEntries;
 
 namespace SessionTracker.StatsWindow
 {
-    public class RootFlowPanel : FlowPanel
+    public class StatsRootFlowPanel : FlowPanel
     {
-        public RootFlowPanel(Container parent, SettingService settingService)
+        public StatsRootFlowPanel(Container parent, SettingService settingService)
         {
             _parent         = parent;
             _settingService = settingService;

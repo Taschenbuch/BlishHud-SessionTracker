@@ -15,7 +15,7 @@ namespace SessionTracker.StatsHint
             UserHasToSelectStatsFlowPanel userHasToSelectStatsFlowPanel,
             ErrorLabel errorLabel,
             Image allStatsHiddenByZeroValuesSettingImage,
-            RootFlowPanel statsRootFlowPanel, 
+            StatsRootFlowPanel statsRootFlowPanel, 
             UpdateLoop updateLoop, 
             Model model, 
             SettingEntry<bool> statsWithZeroValueAreHiddenSetting, 
@@ -108,7 +108,7 @@ namespace SessionTracker.StatsHint
 
         private readonly Container _parent;
         private readonly ErrorLabel _errorLabel;
-        private readonly RootFlowPanel _statsRootFlowPanel;
+        private readonly StatsRootFlowPanel _statsRootFlowPanel;
         private readonly Image _allStatsHiddenByZeroValuesSettingImage;
         private readonly UserHasToSelectStatsFlowPanel _userHasToSelectStatsFlowPanel;
         private readonly UpdateLoop _updateLoop;
