@@ -78,14 +78,11 @@ namespace SessionTracker.StatsHint
             
             _userHasToSelectStatsFlowPanel.Parent 
                 = statsWindowDisplayState == StatsWindowDisplayState.UserHasToSelectStatsHint ? _parent : null;
-            
-            _statsRootFlowPanel.Parent 
-                = statsWindowDisplayState == StatsWindowDisplayState.Stats ? _parent : null;
+
+            _statsRootFlowPanel.SetParentAndHandleScrollbar(statsWindowDisplayState == StatsWindowDisplayState.Stats ? _parent : null);
             
             _errorLabel.Parent 
                 = statsWindowDisplayState == StatsWindowDisplayState.Error ? _parent : null;
-            
-            _statsRootFlowPanel.HideScrollbarIfExists();
         }
 
         private static StatsWindowDisplayState DetermineStatsWindowDisplayState(List<Stat> stats, UpdateLoopState updateLoopState, bool statsWithZeroValueAreHidden, string errorText)
