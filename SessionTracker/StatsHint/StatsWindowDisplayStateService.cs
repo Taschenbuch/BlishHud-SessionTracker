@@ -15,7 +15,7 @@ namespace SessionTracker.StatsHint
             UserHasToSelectStatsFlowPanel userHasToSelectStatsFlowPanel,
             ErrorLabel errorLabel,
             Image allStatsHiddenByZeroValuesSettingImage,
-            RootFlowPanel statsRootFlowPanel, 
+            StatsRootFlowPanel statsRootFlowPanel, 
             UpdateLoop updateLoop, 
             Model model, 
             SettingEntry<bool> statsWithZeroValueAreHiddenSetting, 
@@ -78,14 +78,11 @@ namespace SessionTracker.StatsHint
             
             _userHasToSelectStatsFlowPanel.Parent 
                 = statsWindowDisplayState == StatsWindowDisplayState.UserHasToSelectStatsHint ? _parent : null;
-            
-            _statsRootFlowPanel.Parent 
-                = statsWindowDisplayState == StatsWindowDisplayState.Stats ? _parent : null;
+
+            _statsRootFlowPanel.SetParentAndHandleScrollbar(statsWindowDisplayState == StatsWindowDisplayState.Stats ? _parent : null);
             
             _errorLabel.Parent 
                 = statsWindowDisplayState == StatsWindowDisplayState.Error ? _parent : null;
-            
-            _statsRootFlowPanel.HideScrollbarIfExists();
         }
 
         private static StatsWindowDisplayState DetermineStatsWindowDisplayState(List<Stat> stats, UpdateLoopState updateLoopState, bool statsWithZeroValueAreHidden, string errorText)
@@ -108,7 +105,7 @@ namespace SessionTracker.StatsHint
 
         private readonly Container _parent;
         private readonly ErrorLabel _errorLabel;
-        private readonly RootFlowPanel _statsRootFlowPanel;
+        private readonly StatsRootFlowPanel _statsRootFlowPanel;
         private readonly Image _allStatsHiddenByZeroValuesSettingImage;
         private readonly UserHasToSelectStatsFlowPanel _userHasToSelectStatsFlowPanel;
         private readonly UpdateLoop _updateLoop;

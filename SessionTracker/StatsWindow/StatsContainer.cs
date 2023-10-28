@@ -296,7 +296,7 @@ namespace SessionTracker.StatsWindow
                                    "This hide-zero-value-stats-feature can be turned off in the session tracker module settings."
             };
 
-            _statsRootFlowPanel = new RootFlowPanel(this, settingService);
+            _statsRootFlowPanel = new StatsRootFlowPanel(settingService);
 
             _statTitlesFlowPanel = new FlowPanel()
             {
@@ -383,7 +383,7 @@ namespace SessionTracker.StatsWindow
         private FlowPanel _statTitlesFlowPanel;
         private FlowPanel _statValuesFlowPanel;
         private UserHasToSelectStatsFlowPanel _userHasToSelectStatsFlowPanel;
-        private RootFlowPanel _statsRootFlowPanel;
+        private StatsRootFlowPanel _statsRootFlowPanel;
         private ErrorLabel _errorLabel;
         private Image _allStatsHiddenByZeroValuesSettingImage;
         private readonly StatsWindowDisplayStateService _statsWindowDisplayStateService;
