@@ -37,7 +37,6 @@ namespace SessionTracker.StatsWindow
         {
             _model          = model;
             _gw2ApiManager  = gw2ApiManager;
-            _textureService = textureService;
             _fileService    = fileService;
             _updateLoop     = updateLoop;
             _settingService = settingService;
@@ -370,7 +369,6 @@ namespace SessionTracker.StatsWindow
         }
 
         private readonly Gw2ApiManager _gw2ApiManager;
-        private readonly TextureService _textureService;
         private readonly FileService _fileService;
         private VisibilityService _visibilityService;
         private readonly Interval _apiTokenAvailableCheckInterval = new Interval(TimeSpan.FromMilliseconds(200));
