@@ -58,10 +58,15 @@ namespace SessionTracker.StatsHint
             ShowUpdatedDisplayState();
         }
 
-        // todo x retry ding überdenken siehe method oben
         public void ShowReadTooltipErrorWithRetryInfo(string tooltip)
         {
             _errorLabel.SetTextAndTooltip("Error: read tooltip!", $"{tooltip}\n{UpdateLoop.RETRY_IN_X_SECONDS_MESSAGE}");
+            ShowUpdatedDisplayState();
+        }
+
+        public void ShowModuleError()
+        {
+            _errorLabel.SetTextAndTooltip("session-tracker had an unexpected error :-(. Please report in Blish HUD Discord");
             ShowUpdatedDisplayState();
         }
 

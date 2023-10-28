@@ -37,6 +37,11 @@ namespace SessionTracker.StatsHint
             }
         }
 
+        public void SetTextAndTooltip(string textAndTooltip)
+        {
+            SetTextAndTooltip(textAndTooltip, textAndTooltip);
+        }
+
         public void SetTextAndTooltip(string text, string tooltip)
         {
             Text = text;

@@ -181,6 +181,9 @@ namespace SessionTracker.StatsWindow
                     // Because of that the state must not be set here directly. It would cause state update racing conditions with the Task.Runs
                     _updateLoop.ResetElapsedTime();
                     return;
+                case UpdateLoopState.Error:
+                    // NOOP
+                    return;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -215,9 +218,9 @@ namespace SessionTracker.StatsWindow
             }
             catch (Exception e)
             {
-                _statsWindowDisplayStateService.ShowReadTooltipErrorWithRetryInfo($"Error: Bug in module code. :-(");
                 Module.Logger.Error(e, "Error when initializing values: bug in module code.");
-                _updateLoop.State = UpdateLoopState.PauseBetweenStartNewSessionRetries; // todo module error = module should stop? error updateState einbauen?
+                _statsWindowDisplayStateService.ShowModuleError();
+                _updateLoop.State = UpdateLoopState.Error;
             }
         }
 
@@ -232,6 +235,7 @@ namespace SessionTracker.StatsWindow
                 {
                     _statsWindowDisplayStateService.ShowApiTokenIssue(apiTokenService);
                     Module.Logger.Warn($"Error when updating values: {apiTokenService.CreateApiErrorText()}");
+                    _updateLoop.State = UpdateLoopState.PauseBeforeUpdatingSession;
                     return;
                 }
 
@@ -243,6 +247,7 @@ namespace SessionTracker.StatsWindow
                 ShowOrHideStats();
                 _statsWindowDisplayStateService.RemoveErrorAndShowUpdatedDisplayState();
                 await _fileService.SaveModelToFileAsync(_model);
+                _updateLoop.State = UpdateLoopState.PauseBeforeUpdatingSession;
             }
             catch (LogWarnException e)
             {
@@ -251,6 +256,8 @@ namespace SessionTracker.StatsWindow
 
                 if (_hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit)
                     _statsWindowDisplayStateService.ShowReadTooltipErrorWithRetryInfo($"Error: API call failed while updating session. :-(");
+
+                _updateLoop.State = UpdateLoopState.PauseBeforeUpdatingSession;
                 // intentionally no error handling on regular updates!
                 // when api server does not respond (error code 500, 502) or times out (RequestCanceledException)
                 // the app will just return the previous stat values and hope that on the end of the next interval
@@ -258,13 +265,9 @@ namespace SessionTracker.StatsWindow
             }
             catch (Exception e)
             {
-                Module.Logger.Error(e, "Error when updating values: bug in module code.");  // todo module error = module should stop? error updateState einbauen?
-            }
-            finally
-            {
-                // even in error case an init makes no sense. It is better to wait for the user to fix the api key to continue to update the old values.
-                // this can only cause issues if in the future blish supports swapping gw2 accounts without doing an unload+load of a module.
-                _updateLoop.State = UpdateLoopState.PauseBeforeUpdatingSession;
+                Module.Logger.Error(e, "Error when updating values: bug in module code.");
+                _statsWindowDisplayStateService.ShowModuleError();
+                _updateLoop.State = UpdateLoopState.Error;
             }
         }
 
