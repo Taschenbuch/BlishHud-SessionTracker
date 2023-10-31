@@ -69,17 +69,26 @@ namespace SessionTracker.SettingEntries
                 () => "background color",
                 () => "Change window background color");
 
+            ValuesSeparatorSetting = settings.DefineSetting(
+              "values separator",
+              " | ",
+              () => "separator",
+              () => "Change the separator between values e.g. session value and total value. There will be at least a single space between the values. " +
+                    "You have to click somewhere outside of this text input to see your change.");
+
             ValueDisplayFormatSetting = settings.DefineSetting(
                "value display format",
                ValueDisplayFormat.SessionValue,
                () => "value",
                () => "Change which kind of value to display. e.g. current session value, session value per hour, total value for the whole account.");
 
-            PerHourFormatSetting = settings.DefineSetting(
+            PerHourUnitText = settings.DefineSetting(
                "per hour format",
-               PerHourFormat.XPerHour,
+               "/hour",
                () => "per hour",
-               () => "Change how session value per hour is displayed. This is only relevant when you picked session value per hour as part of the value format.");
+               () => "Change how the unit of session value per hour is displayed. You have to click somewhere outside of this text input to see your change. " +
+                     "This will not affect the value itself. " +
+                     "This is only relevant when you picked session value per hour as part of the value format.");
 
             WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting = settings.DefineSetting(
                 "show window on cutScenes and characterSelection and loadingScreens",
@@ -239,6 +248,7 @@ namespace SessionTracker.SettingEntries
         public SettingEntry<ColorType> ValueLabelColorSetting { get; }
         public SettingEntry<ColorType> TitleLabelColorSetting { get; }
         public SettingEntry<ColorType> BackgroundColorSetting { get; }
+        public SettingEntry<string> ValuesSeparatorSetting { get; }
         public SettingEntry<FloatPoint> WindowRelativeLocationSetting { get; }
         public SettingEntry<bool> UiIsVisibleSetting { get; }
         public SettingEntry<WindowAnchor> WindowAnchorSetting { get; }
@@ -247,7 +257,7 @@ namespace SessionTracker.SettingEntries
         public SettingEntry<int> BackgroundOpacitySetting { get; }
         public SettingEntry<int> FontSizeIndexSetting { get; }
         public SettingEntry<ValueDisplayFormat> ValueDisplayFormatSetting { get; }
-        public SettingEntry<PerHourFormat> PerHourFormatSetting { get; }
+        public SettingEntry<string> PerHourUnitText { get; }
         public SettingEntry<bool> WindowCanBeClickedThroughSetting { get; }
         public SettingEntry<bool> WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting { get; }
         public SettingEntry<bool> WindowIsVisibleOnWorldMapSetting { get; }

@@ -23,10 +23,13 @@ namespace SessionTracker.Text
             string sessionValuePerHourText,
             string totalValueText, 
             ValueDisplayFormat valueDisplayFormat,
-            PerHourFormat perHourFormat)
+            string perHourUnitText,
+            string separator)
         {
-            var perHourText = GetPerHourText(perHourFormat);
-            var sessionValuePerHourTextWithUnit = $"{sessionValuePerHourText}{perHourText}";
+            var sessionValuePerHourTextWithUnit = $"{sessionValuePerHourText}{perHourUnitText}";
+            separator = string.IsNullOrEmpty(separator)
+                ? " " // prevents that there is no space between values
+                : separator;
 
             switch (valueDisplayFormat)
             {
@@ -37,34 +40,16 @@ namespace SessionTracker.Text
                 case ValueDisplayFormat.SessionValuePerHour:
                     return sessionValuePerHourTextWithUnit;
                 case ValueDisplayFormat.SessionValue_TotalValue:
-                    return $"{sessionValueText} | {totalValueText}";
+                    return sessionValueText + separator + totalValueText;
                 case ValueDisplayFormat.SessionValue_SessionValuePerHour:
-                    return $"{sessionValueText} | {sessionValuePerHourTextWithUnit}";
+                    return sessionValueText + separator + sessionValuePerHourTextWithUnit;
                 case ValueDisplayFormat.SessionValue_SessionValuePerHour_TotalValue:
-                    return $"{sessionValueText} | {sessionValuePerHourTextWithUnit} | {totalValueText}";
+                    return sessionValueText + separator + sessionValuePerHourTextWithUnit + separator + totalValueText;
                 case ValueDisplayFormat.SessionValuePerHour_TotalValue:
-                    return $"{sessionValuePerHourTextWithUnit} | {totalValueText}";
+                    return sessionValuePerHourTextWithUnit + separator + totalValueText;
                 default:
                     Module.Logger.Error($"Switch case missing or should not be be handled here: {nameof(ValueDisplayFormat)}.{valueDisplayFormat}.");
                     return sessionValueText;
-            }
-        }
-
-        private static string GetPerHourText(PerHourFormat perHourFormat)
-        {
-            switch (perHourFormat)
-            {
-                case PerHourFormat.XPerHour:
-                    return "/hour";
-                case PerHourFormat.XPerH:
-                    return "/h";
-                case PerHourFormat.XH:
-                    return "h";
-                case PerHourFormat.X:
-                    return "";
-                default:
-                    Module.Logger.Error($"Switch case missing or should not be be handled here: {nameof(PerHourFormat)}.{perHourFormat}.");
-                    return "/hour";
             }
         }
 

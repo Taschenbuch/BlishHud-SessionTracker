@@ -20,14 +20,16 @@ namespace SessionTracker.Text
             _model               = model;
             _settingService      = settingService;
 
-            settingService.PerHourFormatSetting.SettingChanged      += DoUpdateValueLabelTexts;
+            settingService.ValuesSeparatorSetting.SettingChanged    += DoUpdateValueLabelTexts;
+            settingService.PerHourUnitText.SettingChanged           += DoUpdateValueLabelTexts;
             settingService.ValueDisplayFormatSetting.SettingChanged += DoUpdateValueLabelTexts;
             settingService.CoinDisplayFormatSetting.SettingChanged  += OnCoinDisplayFormatSettingChanged;
         }
 
         public void Dispose()
         {
-            _settingService.PerHourFormatSetting.SettingChanged      -= DoUpdateValueLabelTexts;
+            _settingService.ValuesSeparatorSetting.SettingChanged    -= DoUpdateValueLabelTexts;
+            _settingService.PerHourUnitText.SettingChanged           -= DoUpdateValueLabelTexts;
             _settingService.ValueDisplayFormatSetting.SettingChanged -= DoUpdateValueLabelTexts;
             _settingService.CoinDisplayFormatSetting.SettingChanged  -= OnCoinDisplayFormatSettingChanged;
         }
@@ -47,7 +49,8 @@ namespace SessionTracker.Text
                         sessionValuePerHourText,
                         totalCoinText,
                         _settingService.ValueDisplayFormatSetting.Value,
-                        _settingService.PerHourFormatSetting.Value);
+                        _settingService.PerHourUnitText.Value,
+                        _settingService.ValuesSeparatorSetting.Value);
 
                     stat.HasNonZeroSessionValue = HasNonZeroSessionValueService.DetermineForCoin(stat.Value.Session, _settingService.CoinDisplayFormatSetting.Value);
                 }
@@ -78,7 +81,8 @@ namespace SessionTracker.Text
                         sessionValuePerHourText,
                         totalValueText,
                         _settingService.ValueDisplayFormatSetting.Value,
-                        _settingService.PerHourFormatSetting.Value);
+                        _settingService.PerHourUnitText.Value,
+                        _settingService.ValuesSeparatorSetting.Value);
 
                     stat.HasNonZeroSessionValue = stat.Value.Session != 0;
                 }
