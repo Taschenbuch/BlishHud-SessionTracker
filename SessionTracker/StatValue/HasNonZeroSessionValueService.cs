@@ -36,7 +36,7 @@ namespace SessionTracker.StatValue
                 case CoinDisplayFormat.Xc:
                     return 1;
                 default:
-                    Module.Logger.Error($"Missing CoinDisplayFormat case for {coinDisplayFormat}");
+                    Module.Logger.Error($"Switch case missing or should not be be handled here: {nameof(CoinDisplayFormat)}.{coinDisplayFormat}.");
                     return 1;
             }
         }

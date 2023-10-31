@@ -64,7 +64,7 @@ namespace SessionTracker.SettingEntries
             var totalValuesAreVisible = totalValuesAreVisibleSetting.Value;
 
             if (sessionValuesAreVisible && totalValuesAreVisible)
-                return ValueDisplayFormat.SessionAndTotalValue;
+                return ValueDisplayFormat.SessionValue_TotalValue;
             else if (!sessionValuesAreVisible && totalValuesAreVisible)
                 return ValueDisplayFormat.TotalValue;
             else if (sessionValuesAreVisible && !totalValuesAreVisible)

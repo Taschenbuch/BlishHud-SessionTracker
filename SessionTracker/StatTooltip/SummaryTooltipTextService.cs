@@ -38,7 +38,7 @@ namespace SessionTracker.Tooltip
 
         private void InsertNewHistoryEntryAtBeginning(Stat stat)
         {
-            var sessionValueText = CreateValueText(stat.Value.Session, stat.ApiId);
+            var sessionValueText = StatValueTextService.CreateValueText(stat.Value.Session, stat, _settingService.CoinDisplayFormatSetting.Value);
             stat.SessionHistory.Insert(0, $"{DateTime.Now:HH:mm} | {sessionValueText}");
         }
 
@@ -58,9 +58,8 @@ namespace SessionTracker.Tooltip
             if (stat.Id == StatId.WVW_KDR || stat.Id == StatId.PVP_KDR)
                 return stat.GetTextWithNameAndDescription();
 
-            var sessionValuePerHour     = GetValuePerHourAsInteger(stat.Value.Session);
-            var sessionValuePerHourText = CreateValueText(sessionValuePerHour, stat.ApiId);
-            var totalValueText          = CreateValueText(stat.Value.Total, stat.ApiId);
+            var sessionValuePerHourText = StatValueTextService.CreateValuePerHourText(stat, _model.SessionDuration.Value, _settingService.CoinDisplayFormatSetting.Value);
+            var totalValueText          = StatValueTextService.CreateValueText(stat.Value.Total, stat, _settingService.CoinDisplayFormatSetting.Value);
 
             return $"{stat.GetTextWithNameAndDescription()}\n" +
                    $"\n" +
@@ -74,32 +73,8 @@ namespace SessionTracker.Tooltip
                    $"{string.Join("\n", stat.SessionHistory)}";
         }
 
-        private int GetValuePerHourAsInteger(int value)
-        {
-            if (value == 0)
-                return 0;
-
-            // - the value == 0 guard should be actually enough to catch the session start/reset case. Because on session start all values are 0.
-            // - this prevents division by 0 and cases where a value is divided by a very small session duration which would create unrealistic high values
-            var sessionJustStarted = _model.SessionDuration.Value.TotalHours < ONE_MINUTE_IN_HOURS; 
-            if (sessionJustStarted) 
-                return 0;
-
-            // int: because everything that has less than 1/h is not interesting to track anyway.
-            // showing decimals would make the more common >>1/h values harder to read. (e.g. 12345 vs 12345.67)
-            return (int) (value / _model.SessionDuration.Value.TotalHours);
-        }
-
-        private string CreateValueText(int value, int statCurrencyId)
-        {
-            return statCurrencyId == CurrencyIds.COIN_IN_COPPER
-                ? ValueTextService.CreateCoinValueText(value, _settingService.CoinDisplayFormatSetting.Value)
-                : value.To0DecimalPlacesCulturedString();
-        }
-
         private readonly Model _model;
         private readonly SettingService _settingService;
         private const int MAX_NUMBER_OF_HISTORY_ENTRIES = 12;
-        private const double ONE_MINUTE_IN_HOURS = 0.017;
     }
 }

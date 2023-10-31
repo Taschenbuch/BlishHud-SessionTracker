@@ -72,8 +72,14 @@ namespace SessionTracker.SettingEntries
             ValueDisplayFormatSetting = settings.DefineSetting(
                "value display format",
                ValueDisplayFormat.SessionValue,
-               () => "value display format",
-               () => "Show current session values and/or total values for the whole account.");
+               () => "value",
+               () => "Change which kind of value to display. e.g. current session value, session value per hour, total value for the whole account.");
+
+            PerHourFormatSetting = settings.DefineSetting(
+               "per hour format",
+               PerHourFormat.XPerHour,
+               () => "per hour",
+               () => "Change how session value per hour is displayed. This is only relevant when you picked session value per hour as part of the value format.");
 
             WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting = settings.DefineSetting(
                 "show window on cutScenes and characterSelection and loadingScreens",
@@ -132,7 +138,7 @@ namespace SessionTracker.SettingEntries
             LabelTypeSetting = settings.DefineSetting(
                 "label type",
                 LabelType.IconAndText,
-                () => "label type",
+                () => "label",
                 () => "The label in front of the value in the UI can be text or icon");
 
             CoinDisplayFormatSetting = settings.DefineSetting(
@@ -241,6 +247,7 @@ namespace SessionTracker.SettingEntries
         public SettingEntry<int> BackgroundOpacitySetting { get; }
         public SettingEntry<int> FontSizeIndexSetting { get; }
         public SettingEntry<ValueDisplayFormat> ValueDisplayFormatSetting { get; }
+        public SettingEntry<PerHourFormat> PerHourFormatSetting { get; }
         public SettingEntry<bool> WindowCanBeClickedThroughSetting { get; }
         public SettingEntry<bool> WindowIsVisibleOnCharacterSelectAndLoadingScreensAndCutScenesSetting { get; }
         public SettingEntry<bool> WindowIsVisibleOnWorldMapSetting { get; }
