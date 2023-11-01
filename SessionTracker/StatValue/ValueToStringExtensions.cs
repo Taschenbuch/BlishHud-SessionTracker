@@ -9,11 +9,6 @@ namespace SessionTracker.Value
             return value.ToString("N0", CultureInfo.CurrentUICulture);
         }
 
-        public static string To0DecimalPlacesCulturedString(this double value)
-        {
-            return value.ToString("N0", CultureInfo.CurrentUICulture);
-        }
-
         public static string To2DecimalPlacesCulturedString(this double value)
         {
             return value.ToString("N2", CultureInfo.CurrentUICulture);

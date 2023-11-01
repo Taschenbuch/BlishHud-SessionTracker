@@ -16,68 +16,62 @@ namespace SessionTracker.Text
                                      Model model,
                                      SettingService settingService)
         {
-            _valueLabelByStatId = valueLabelByStatId;
+            _valueLabelByStatId  = valueLabelByStatId;
             _model               = model;
             _settingService      = settingService;
 
-            settingService.ValueDisplayFormatSetting.SettingChanged += ValueDisplayFormatSettingChanged;
+            settingService.ValuesSeparatorSetting.SettingChanged    += DoUpdateValueLabelTexts;
+            settingService.PerHourUnitText.SettingChanged           += DoUpdateValueLabelTexts;
+            settingService.ValueDisplayFormatSetting.SettingChanged += DoUpdateValueLabelTexts;
             settingService.CoinDisplayFormatSetting.SettingChanged  += OnCoinDisplayFormatSettingChanged;
         }
 
         public void Dispose()
         {
-            _settingService.ValueDisplayFormatSetting.SettingChanged -= ValueDisplayFormatSettingChanged;
-            _settingService.CoinDisplayFormatSetting.SettingChanged -= OnCoinDisplayFormatSettingChanged;
+            _settingService.ValuesSeparatorSetting.SettingChanged    -= DoUpdateValueLabelTexts;
+            _settingService.PerHourUnitText.SettingChanged           -= DoUpdateValueLabelTexts;
+            _settingService.ValueDisplayFormatSetting.SettingChanged -= DoUpdateValueLabelTexts;
+            _settingService.CoinDisplayFormatSetting.SettingChanged  -= OnCoinDisplayFormatSettingChanged;
         }
 
         public void UpdateValueLabelTexts()
         {
             foreach (var stat in _model.Stats)
             {
-                if (stat.ApiId == CurrencyIds.COIN_IN_COPPER)
-                {
-                    var sessionCoinText = ValueTextService.CreateCoinValueText(stat.Value.Session, _settingService.CoinDisplayFormatSetting.Value);
-                    var totalCoinText = ValueTextService.CreateCoinValueText(stat.Value.Total, _settingService.CoinDisplayFormatSetting.Value);
-
-                    _valueLabelByStatId[stat.Id].Text = ValueTextService.CreateSessionAndTotalValueText(
-                        sessionCoinText,
-                        totalCoinText,
-                        _settingService.ValueDisplayFormatSetting.Value);
-
-                    stat.HasNonZeroSessionValue = HasNonZeroSessionValueService.DetermineForCoin(stat.Value.Session, _settingService.CoinDisplayFormatSetting.Value);
-                }
-                else if (stat.Id == StatId.WVW_KDR)
+                if (stat.IsKdr)
                 {
                     // only calculate session ratio. total ratio would be very incorrect because total deaths come from all game modes over the account life time.
-                    var kills = _model.GetStat(StatId.WVW_KILLS).Value.Session;
+                    var killsStatId = stat.Id == StatId.PVP_KDR 
+                        ? StatId.PVP_KILLS 
+                        : StatId.WVW_KILLS;
+
+                    var kills  = _model.GetStat(killsStatId).Value.Session;
                     var deaths = _model.GetStat(StatId.DEATHS).Value.Session;
-                    _valueLabelByStatId[StatId.WVW_KDR].Text = ValueTextService.CreateKillsDeathsRatioText(kills, deaths);
                     stat.HasNonZeroSessionValue = HasNonZeroSessionValueService.DetermineForKdr(kills, deaths);
-                }
-                else if (stat.Id == StatId.PVP_KDR)
-                {
-                    // only calculate session ratio. total ratio would be very incorrect because total deaths come from all game modes over the account life time.
-                    var kills = _model.GetStat(StatId.PVP_KILLS).Value.Session;
-                    var deaths = _model.GetStat(StatId.DEATHS).Value.Session;
-                    _valueLabelByStatId[StatId.PVP_KDR].Text = ValueTextService.CreateKillsDeathsRatioText(kills, deaths);
-                    stat.HasNonZeroSessionValue = HasNonZeroSessionValueService.DetermineForKdr(kills, deaths);
+                    _valueLabelByStatId[stat.Id].Text = StatValueTextService.CreateKillsDeathsRatioText(kills, deaths);
                 }
                 else
                 {
-                    var sessionValueText = stat.Value.Session.To0DecimalPlacesCulturedString();
-                    var totalValueText   = stat.Value.Total.To0DecimalPlacesCulturedString();
+                    var sessionValueText        = StatValueTextService.CreateValueText(stat.Value.Session, stat, _settingService.CoinDisplayFormatSetting.Value);
+                    var totalValueText          = StatValueTextService.CreateValueText(stat.Value.Total, stat, _settingService.CoinDisplayFormatSetting.Value);
+                    var sessionValuePerHourText = StatValueTextService.CreateValuePerHourText(stat, _model.SessionDuration.Value, _settingService.CoinDisplayFormatSetting.Value);
 
-                    _valueLabelByStatId[stat.Id].Text = ValueTextService.CreateSessionAndTotalValueText(
+                    stat.HasNonZeroSessionValue = stat.IsCoin
+                        ? HasNonZeroSessionValueService.DetermineForCoin(stat.Value.Session, _settingService.CoinDisplayFormatSetting.Value)
+                        : stat.Value.Session != 0;
+
+                    _valueLabelByStatId[stat.Id].Text = StatValueTextService.CreateValueTextForDisplayFormat(
                         sessionValueText,
+                        sessionValuePerHourText,
                         totalValueText,
-                        _settingService.ValueDisplayFormatSetting.Value);
-
-                    stat.HasNonZeroSessionValue = stat.Value.Session != 0;
+                        _settingService.ValueDisplayFormatSetting.Value,
+                        _settingService.PerHourUnitText.Value,
+                        _settingService.ValuesSeparatorSetting.Value);
                 }
             }
         }
 
-        private void ValueDisplayFormatSettingChanged(object sender, ValueChangedEventArgs<ValueDisplayFormat> e)
+        private void DoUpdateValueLabelTexts<T>(object sender, ValueChangedEventArgs<T> e)
         {
             UpdateValueLabelTexts();
         }

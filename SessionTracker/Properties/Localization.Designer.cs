@@ -61,7 +61,7 @@ namespace SessionTracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CURRENT SESSION.
+        ///   Looks up a localized string similar to SESSION.
         /// </summary>
         internal static string SummaryTooltip_HeaderCurrentSession {
             get {

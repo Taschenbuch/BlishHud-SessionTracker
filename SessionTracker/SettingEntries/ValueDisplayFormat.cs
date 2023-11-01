@@ -4,11 +4,19 @@ namespace SessionTracker.SettingEntries
 {
     public enum ValueDisplayFormat
     {
-        [Description("Session value")]
+        [Description("session")]
         SessionValue,
-        [Description("Total value")]
+        [Description("total")]
         TotalValue,
-        [Description("Session and total value")]
-        SessionAndTotalValue,
+        [Description("session | total")]
+        SessionValue_TotalValue,
+        [Description("session | session/hour")]
+        SessionValue_SessionValuePerHour,
+        [Description("session | session/hour | total")]
+        SessionValue_SessionValuePerHour_TotalValue,
+        [Description("session/hour | total")]
+        SessionValuePerHour_TotalValue,
+        [Description("session/hour")]
+        SessionValuePerHour,
     }
 }

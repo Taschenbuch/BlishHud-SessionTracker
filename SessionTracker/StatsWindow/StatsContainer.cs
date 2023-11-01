@@ -19,8 +19,8 @@ using SessionTracker.Services;
 using SessionTracker.SettingEntries;
 using SessionTracker.SettingsWindow;
 using SessionTracker.StatsHint;
+using SessionTracker.StatTooltip;
 using SessionTracker.Text;
-using SessionTracker.Tooltip;
 
 namespace SessionTracker.StatsWindow
 {
@@ -37,30 +37,27 @@ namespace SessionTracker.StatsWindow
         {
             _model          = model;
             _gw2ApiManager  = gw2ApiManager;
-            _textureService = textureService;
             _fileService    = fileService;
             _updateLoop     = updateLoop;
             _settingService = settingService;
 
             _resetService = new ResetService(model, settingService.AutomaticSessionResetSetting, settingService.MinutesUntilResetAfterModuleShutdownSetting);
-            _model.SessionDuration.StartMeasuring();
+            model.SessionDuration.StartMeasuring();
             CreateUi(model, settingsWindowService, textureService, settingService);
-            // todo x START
+            _valueLabelTextService = new ValueLabelTextService(_valueLabelByStatId, model, settingService);
+            _summaryTooltipService = new SummaryTooltipService(_titleFlowPanelByStatId, _valueLabelByStatId, model, settingService, textureService);
+
             _statsWindowDisplayStateService = new StatsWindowDisplayStateService(
                 _userHasToSelectStatsFlowPanel,
                 _errorLabel,
                 _allStatsHiddenByZeroValuesSettingImage,
                 _statsRootFlowPanel,
-                _updateLoop,
+                updateLoop,
                 model,
                 settingService.StatsWithZeroValueAreHiddenSetting,
                 this);
 
             _statsWindowDisplayStateService.ShowUpdatedDisplayState();
-            // todo x END
-
-            _valueLabelTextService = new ValueLabelTextService(_valueLabelByStatId, _model, settingService);
-            _statTooltipService    = new StatTooltipService(_titleFlowPanelByStatId, _valueLabelByStatId, model, _settingService);
 
             settingService.StatsWithZeroValueAreHiddenSetting.SettingChanged  += OnStatsWithZeroValueAreHiddenSettingChanged;
             settingService.FontSizeIndexSetting.SettingChanged                += OnFontSizeIndexSettingChanged;
@@ -181,6 +178,9 @@ namespace SessionTracker.StatsWindow
                     // Because of that the state must not be set here directly. It would cause state update racing conditions with the Task.Runs
                     _updateLoop.ResetElapsedTime();
                     return;
+                case UpdateLoopState.Error:
+                    // NOOP
+                    return;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -202,7 +202,7 @@ namespace SessionTracker.StatsWindow
                 _resetService.UpdateNextResetDateTime();
                 _model.ResetDurationAndStats();
                 _valueLabelTextService.UpdateValueLabelTexts();
-                _statTooltipService.ResetSummaryTooltip(_model);
+                _summaryTooltipService.ResetSummaryTooltip();
                 ShowOrHideStats();
                 _statsWindowDisplayStateService.RemoveErrorAndShowUpdatedDisplayState();
                 _updateLoop.State = UpdateLoopState.PauseBeforeUpdatingSession;
@@ -215,9 +215,9 @@ namespace SessionTracker.StatsWindow
             }
             catch (Exception e)
             {
-                _statsWindowDisplayStateService.ShowReadTooltipErrorWithRetryInfo($"Error: Bug in module code. :-(");
                 Module.Logger.Error(e, "Error when initializing values: bug in module code.");
-                _updateLoop.State = UpdateLoopState.PauseBetweenStartNewSessionRetries; // todo module error = module should stop? error updateState einbauen?
+                _statsWindowDisplayStateService.ShowModuleError();
+                _updateLoop.State = UpdateLoopState.Error;
             }
         }
 
@@ -232,17 +232,19 @@ namespace SessionTracker.StatsWindow
                 {
                     _statsWindowDisplayStateService.ShowApiTokenIssue(apiTokenService);
                     Module.Logger.Warn($"Error when updating values: {apiTokenService.CreateApiErrorText()}");
+                    _updateLoop.State = UpdateLoopState.PauseBeforeUpdatingSession;
                     return;
                 }
 
                 await ApiService.UpdateTotalValuesInModel(_model, _gw2ApiManager);
                 _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit = false;
                 _valueLabelTextService.UpdateValueLabelTexts();
-                _statTooltipService.UpdateSummaryTooltip(_model);
+                _summaryTooltipService.UpdateSummaryTooltip();
                 _updateLoop.UseRegularUpdateSessionInterval();
                 ShowOrHideStats();
                 _statsWindowDisplayStateService.RemoveErrorAndShowUpdatedDisplayState();
                 await _fileService.SaveModelToFileAsync(_model);
+                _updateLoop.State = UpdateLoopState.PauseBeforeUpdatingSession;
             }
             catch (LogWarnException e)
             {
@@ -251,6 +253,8 @@ namespace SessionTracker.StatsWindow
 
                 if (_hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit)
                     _statsWindowDisplayStateService.ShowReadTooltipErrorWithRetryInfo($"Error: API call failed while updating session. :-(");
+
+                _updateLoop.State = UpdateLoopState.PauseBeforeUpdatingSession;
                 // intentionally no error handling on regular updates!
                 // when api server does not respond (error code 500, 502) or times out (RequestCanceledException)
                 // the app will just return the previous stat values and hope that on the end of the next interval
@@ -258,13 +262,9 @@ namespace SessionTracker.StatsWindow
             }
             catch (Exception e)
             {
-                Module.Logger.Error(e, "Error when updating values: bug in module code.");  // todo module error = module should stop? error updateState einbauen?
-            }
-            finally
-            {
-                // even in error case an init makes no sense. It is better to wait for the user to fix the api key to continue to update the old values.
-                // this can only cause issues if in the future blish supports swapping gw2 accounts without doing an unload+load of a module.
-                _updateLoop.State = UpdateLoopState.PauseBeforeUpdatingSession;
+                Module.Logger.Error(e, "Error when updating values: bug in module code.");
+                _statsWindowDisplayStateService.ShowModuleError();
+                _updateLoop.State = UpdateLoopState.Error;
             }
         }
 
@@ -323,6 +323,7 @@ namespace SessionTracker.StatsWindow
                     ShowShadow     = true,
                     AutoSizeHeight = true,
                     AutoSizeWidth  = true,
+                    Tooltip        = new SummaryTooltip(),
                     Parent         = null
                 };
 
@@ -367,14 +368,13 @@ namespace SessionTracker.StatsWindow
         }
 
         private readonly Gw2ApiManager _gw2ApiManager;
-        private readonly TextureService _textureService;
         private readonly FileService _fileService;
         private VisibilityService _visibilityService;
         private readonly Interval _apiTokenAvailableCheckInterval = new Interval(TimeSpan.FromMilliseconds(200));
         private readonly Interval _waitedLongEnoughForApiTokenInterval = new Interval(TimeSpan.FromSeconds(20));
         private readonly Model _model;
         private readonly SettingService _settingService;
-        private readonly StatTooltipService _statTooltipService;
+        private readonly SummaryTooltipService _summaryTooltipService;
         private readonly ValueLabelTextService _valueLabelTextService;
         private readonly Dictionary<string, StatTitleFlowPanel> _titleFlowPanelByStatId = new Dictionary<string, StatTitleFlowPanel>();
         private readonly Dictionary<string, Label> _valueLabelByStatId = new Dictionary<string, Label>();

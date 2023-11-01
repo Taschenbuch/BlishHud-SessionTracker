@@ -82,7 +82,7 @@ namespace SessionTracker.UnitTest
         {
             Remove1000SeparatorForThisTest();
 
-            var result = ValueTextService.CreateCoinValueText(valueInCopper, coinDisplayFormat);
+            var result = StatValueTextService.CreateCoinValueText(valueInCopper, coinDisplayFormat);
             
             result.Should().Be(expectedText);
         }

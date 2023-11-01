@@ -8,5 +8,6 @@
         WaitingForApiResponse,
         StartingNewSession,
         UpdatingSession,
+        Error
     }
 }

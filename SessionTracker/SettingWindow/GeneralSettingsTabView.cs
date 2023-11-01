@@ -29,6 +29,8 @@ namespace SessionTracker.SettingsWindow
             CreateAutomaticSessionResetSetting(generalSectionFlowPanel, _settingService.AutomaticSessionResetSetting);
             CreateMinutesAfterModuleShutDownSetting(generalSectionFlowPanel, _settingService.MinutesUntilResetAfterModuleShutdownSetting, _settingService.AutomaticSessionResetSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.ValueDisplayFormatSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.ValuesSeparatorSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.PerHourUnitText);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.LabelTypeSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.WindowAnchorSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.UiHeightIsFixedSetting);
