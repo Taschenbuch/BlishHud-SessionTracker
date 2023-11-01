@@ -20,16 +20,11 @@ namespace SessionTracker.Models
 
         private string GetLocalizedText(Locale locale)
         {
-            var localizationExists = LocalizedTextByLocale.ContainsKey(locale)
-                                     && string.IsNullOrWhiteSpace(LocalizedTextByLocale[locale]) == false;
-
+            var localizationExists = LocalizedTextByLocale.ContainsKey(locale) && !string.IsNullOrWhiteSpace(LocalizedTextByLocale[locale]);
             if (localizationExists)
                 return LocalizedTextByLocale[locale];
 
-
-            var englishLocalizationCanBeUsedAsFallback = LocalizedTextByLocale.ContainsKey(Locale.English)
-                                                         && string.IsNullOrWhiteSpace(LocalizedTextByLocale[Locale.English]) == false;
-
+            var englishLocalizationCanBeUsedAsFallback = LocalizedTextByLocale.ContainsKey(Locale.English) && !string.IsNullOrWhiteSpace(LocalizedTextByLocale[Locale.English]);
             return englishLocalizationCanBeUsedAsFallback
                 ? LocalizedTextByLocale[Locale.English]
                 : string.Empty;

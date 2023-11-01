@@ -19,8 +19,8 @@ using SessionTracker.Services;
 using SessionTracker.SettingEntries;
 using SessionTracker.SettingsWindow;
 using SessionTracker.StatsHint;
+using SessionTracker.StatTooltip;
 using SessionTracker.Text;
-using SessionTracker.Tooltip;
 
 namespace SessionTracker.StatsWindow
 {
@@ -59,7 +59,7 @@ namespace SessionTracker.StatsWindow
             // todo x END
 
             _valueLabelTextService = new ValueLabelTextService(_valueLabelByStatId, _model, settingService);
-            _statTooltipService    = new StatTooltipService(_titleFlowPanelByStatId, _valueLabelByStatId, model, _settingService);
+            _summaryTooltipService = new SummaryTooltipService(_titleFlowPanelByStatId, _valueLabelByStatId, model, _settingService, textureService);
 
             settingService.StatsWithZeroValueAreHiddenSetting.SettingChanged  += OnStatsWithZeroValueAreHiddenSettingChanged;
             settingService.FontSizeIndexSetting.SettingChanged                += OnFontSizeIndexSettingChanged;
@@ -204,7 +204,7 @@ namespace SessionTracker.StatsWindow
                 _resetService.UpdateNextResetDateTime();
                 _model.ResetDurationAndStats();
                 _valueLabelTextService.UpdateValueLabelTexts();
-                _statTooltipService.ResetSummaryTooltip(_model);
+                _summaryTooltipService.ResetSummaryTooltip(_model);
                 ShowOrHideStats();
                 _statsWindowDisplayStateService.RemoveErrorAndShowUpdatedDisplayState();
                 _updateLoop.State = UpdateLoopState.PauseBeforeUpdatingSession;
@@ -241,7 +241,7 @@ namespace SessionTracker.StatsWindow
                 await ApiService.UpdateTotalValuesInModel(_model, _gw2ApiManager);
                 _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit = false;
                 _valueLabelTextService.UpdateValueLabelTexts();
-                _statTooltipService.UpdateSummaryTooltip(_model);
+                _summaryTooltipService.UpdateSummaryTooltip(_model);
                 _updateLoop.UseRegularUpdateSessionInterval();
                 ShowOrHideStats();
                 _statsWindowDisplayStateService.RemoveErrorAndShowUpdatedDisplayState();
@@ -325,6 +325,7 @@ namespace SessionTracker.StatsWindow
                     ShowShadow     = true,
                     AutoSizeHeight = true,
                     AutoSizeWidth  = true,
+                    Tooltip        = new SummaryTooltip(),
                     Parent         = null
                 };
 
@@ -375,7 +376,7 @@ namespace SessionTracker.StatsWindow
         private readonly Interval _waitedLongEnoughForApiTokenInterval = new Interval(TimeSpan.FromSeconds(20));
         private readonly Model _model;
         private readonly SettingService _settingService;
-        private readonly StatTooltipService _statTooltipService;
+        private readonly SummaryTooltipService _summaryTooltipService;
         private readonly ValueLabelTextService _valueLabelTextService;
         private readonly Dictionary<string, StatTitleFlowPanel> _titleFlowPanelByStatId = new Dictionary<string, StatTitleFlowPanel>();
         private readonly Dictionary<string, Label> _valueLabelByStatId = new Dictionary<string, Label>();

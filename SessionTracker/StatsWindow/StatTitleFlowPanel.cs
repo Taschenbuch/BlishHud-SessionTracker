@@ -1,9 +1,11 @@
 ﻿using Blish_HUD.Controls;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended.BitmapFonts;
+using SessionTracker.Constants;
 using SessionTracker.Models;
 using SessionTracker.Services;
 using SessionTracker.SettingEntries;
+using SessionTracker.StatTooltip;
 
 namespace SessionTracker.StatsWindow
 {
@@ -11,8 +13,7 @@ namespace SessionTracker.StatsWindow
     {
         public StatTitleFlowPanel(Stat stat, Container parent, TextureService textureService, SettingService settingService)
         {
-            _stat          = stat;
-            _parent         = parent;
+            _stat           = stat;
             _settingService = settingService;
 
             FlowDirection    = ControlFlowDirection.SingleLeftToRight;
@@ -27,12 +28,14 @@ namespace SessionTracker.StatsWindow
                 ShowShadow     = true,
                 AutoSizeHeight = true,
                 AutoSizeWidth  = true,
+                Tooltip        = new SummaryTooltip()
             };
 
             var asyncTexture2D = textureService.StatTextureByStatId[stat.Id];
             _titleImage = new Image(asyncTexture2D)
             {
-                Size = new Point(titleLabel.Height),
+                Size    = new Point(titleLabel.Height),
+                Tooltip = new SummaryTooltip()
             };
 
             _titleLabel                     = titleLabel;
@@ -46,11 +49,10 @@ namespace SessionTracker.StatsWindow
             settingService.TitleLabelColorSetting.SettingChanged  += OnTitleLabelColorSettingChanged;
         }
 
-        public void SetTooltip(string tooltipText)
+        public void UpdateTooltips(SummaryTooltipContent summaryTooltipContent)
         {
-            _titleLabel.BasicTooltipText = tooltipText;
-            _titleImage.BasicTooltipText = tooltipText;
-            BasicTooltipText             = tooltipText; // does not work for the flowPanel. Probably because it is transparent or because label and image are above it.
+            ((SummaryTooltip)_titleLabel.Tooltip).UpdateTooltip(summaryTooltipContent);
+            ((SummaryTooltip)_titleImage.Tooltip).UpdateTooltip(summaryTooltipContent);
         }
 
         protected override void DisposeControl()
@@ -134,7 +136,6 @@ namespace SessionTracker.StatsWindow
         private readonly Image _titleImage;
         private readonly Label _titleLabel;
         private readonly Stat _stat;
-        private readonly Container _parent;
         private readonly SettingService _settingService;
         private readonly Label _paddingLabelBetweenIconAndText;
         private readonly Label _paddingLabelBeforeValue;

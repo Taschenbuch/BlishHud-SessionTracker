@@ -16,7 +16,7 @@ namespace SessionTracker.Text
                                      Model model,
                                      SettingService settingService)
         {
-            _valueLabelByStatId = valueLabelByStatId;
+            _valueLabelByStatId  = valueLabelByStatId;
             _model               = model;
             _settingService      = settingService;
 

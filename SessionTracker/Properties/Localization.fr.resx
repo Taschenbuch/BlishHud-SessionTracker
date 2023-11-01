@@ -121,7 +121,7 @@
     <value>Heure</value>
   </data>
   <data name="SummaryTooltip_HeaderCurrentSession" xml:space="preserve">
-    <value>SESSION EN COURS</value>
+    <value>SESSION</value>
   </data>
   <data name="SummaryTooltip_HoursMinutes" xml:space="preserve">
     <value>Heures : Minutes</value>
