@@ -20,8 +20,7 @@ namespace SessionTracker.StatTooltip
 
         public SummaryTooltipContent CreateSummaryToolTipContent(Stat stat)
         {
-            var isKdr = stat.Id == StatId.WVW_KDR || stat.Id == StatId.PVP_KDR;
-            if (isKdr)
+            if (stat.IsKdr)
             {
                 // summary tooltip makes no sense for KDRs. Thus they get a reduced tooltip.
                 return new SummaryTooltipContent

@@ -18,13 +18,13 @@ namespace SessionTracker.StatTooltip
         {
             _titleFlowPanelByStatId    = titleFlowPanelByStatId;
             _valueLabelByStatId        = valueLabelByStatId;
-            _textureService            = textureService;
+            _model                     = model;
             _summaryTooltipTextService = new SummaryTooltipContentService(model, settingService, textureService);
         }
 
-        public void UpdateSummaryTooltip(Model model)
+        public void UpdateSummaryTooltip()
         {
-            foreach (var stat in model.Stats)
+            foreach (var stat in _model.Stats)
             {
                 _summaryTooltipTextService.UpdateSessionHistory(stat);
                 var summaryTooltipContent = _summaryTooltipTextService.CreateSummaryToolTipContent(stat);
@@ -32,9 +32,9 @@ namespace SessionTracker.StatTooltip
             }
         }
 
-        public void ResetSummaryTooltip(Model model)
+        public void ResetSummaryTooltip()
         {
-            foreach (var stat in model.Stats)
+            foreach (var stat in _model.Stats)
             {
                 _summaryTooltipTextService.ResetSessionHistory(stat);
                 var summaryTooltipContent = _summaryTooltipTextService.CreateSummaryToolTipContent(stat);
@@ -51,6 +51,6 @@ namespace SessionTracker.StatTooltip
         private readonly SummaryTooltipContentService _summaryTooltipTextService;
         private readonly Dictionary<string, StatTitleFlowPanel> _titleFlowPanelByStatId;
         private readonly Dictionary<string, Label> _valueLabelByStatId;
-        private readonly TextureService _textureService;
+        private readonly Model _model;
     }
 }

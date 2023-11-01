@@ -93,7 +93,7 @@ namespace SessionTracker.Text
 
         public static string CreateValueText(int value, Stat stat, CoinDisplayFormat coinDisplayFormat)
         {
-            return stat.IsCurrency && stat.ApiId == CurrencyIds.COIN_IN_COPPER
+            return stat.IsCoin
                 ? CreateCoinValueText(value, coinDisplayFormat)
                 : value.To0DecimalPlacesCulturedString();
         }

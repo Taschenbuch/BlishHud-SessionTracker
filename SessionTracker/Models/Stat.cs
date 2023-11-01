@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using SessionTracker.Constants;
 
 namespace SessionTracker.Models
 {
@@ -21,6 +22,8 @@ namespace SessionTracker.Models
         [JsonIgnore] public bool IsItem => ApiIdType == ApiIdType.Item;
         [JsonIgnore] public bool HasIconFile => IconFileName != null;
         [JsonIgnore] public bool HasIconAssetId => IconAssetId != 0;
+        [JsonIgnore] public bool IsCoin => IsCurrency && ApiId == CurrencyIds.COIN_IN_COPPER;
+        [JsonIgnore] public bool IsKdr => Id == StatId.PVP_KDR || Id == StatId.WVW_KDR;
 
         public string GetTextWithNameAndDescription()
         {
