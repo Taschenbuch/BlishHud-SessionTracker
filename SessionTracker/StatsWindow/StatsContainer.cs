@@ -314,6 +314,8 @@ namespace SessionTracker.StatsWindow
                 Parent           = _statsRootFlowPanel
             };
 
+            new RightWindowMarginForScrollbar(_statsRootFlowPanel, settingService); // is automatically disposed with _statsRootFlowPanel
+
             foreach (var stat in model.Stats)
             {
                 _valueLabelByStatId[stat.Id] = new Label()

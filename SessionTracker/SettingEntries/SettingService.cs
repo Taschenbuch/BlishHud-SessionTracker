@@ -51,6 +51,15 @@ namespace SessionTracker.SettingEntries
 
             StatTitlePaddingSetting.SetRange(0, 5);
 
+            RightMarginForScrollbarSetting = settings.DefineSetting(
+                "window right margin",
+                0,
+                () => "window right margin",
+                () => "Add a right margin to the window. " +
+                      "This can be useful when you use fixed height setting and dont want the scrollbar to overlap with the stats.");
+
+            RightMarginForScrollbarSetting.SetRange(0, 30);
+
             TitleLabelColorSetting = settings.DefineSetting(
                 "title label color",
                 ColorType.White,
@@ -243,6 +252,7 @@ namespace SessionTracker.SettingEntries
         public SettingEntry<CoinDisplayFormat> CoinDisplayFormatSetting { get; }
         public SettingEntry<bool> DebugApiIntervalEnabledSetting { get; }
         public SettingEntry<int> StatTitlePaddingSetting { get; }
+        public SettingEntry<int> RightMarginForScrollbarSetting { get; }
         public SettingEntry<int> UiHeightSetting { get; }
         public SettingEntry<bool> UiHeightIsFixedSetting { get; }
         public SettingEntry<ColorType> ValueLabelColorSetting { get; }
