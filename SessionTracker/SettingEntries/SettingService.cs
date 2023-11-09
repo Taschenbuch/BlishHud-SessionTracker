@@ -47,9 +47,23 @@ namespace SessionTracker.SettingEntries
                 "stat title padding",
                 2,
                 () => "padding",
-                () => "Change padding between icon, title and value of a stat");
+                () => "Change padding between stat icon, name and value.");
 
             StatTitlePaddingSetting.SetRange(0, 5);
+
+            StatTitleWidthIsFixedSetting = settings.DefineSetting(
+               "stat title width is fixed",
+               false,
+               () => "fix label width",
+               () => "Set stat label width to be fixed instead of dynamic. The width can be adjusted with the label width setting.");
+
+            StatTitleWidthSetting = settings.DefineSetting(
+               "stat title width",
+               500,
+               () => "label width",
+               () => "Change label width. Only works when fixed label width setting is enabled.");
+
+            StatTitleWidthSetting.SetRange(0, 1000);
 
             RightMarginForScrollbarSetting = settings.DefineSetting(
                 "window right margin",
@@ -279,6 +293,8 @@ namespace SessionTracker.SettingEntries
         public SettingEntry<KeyBinding> UiVisibilityKeyBindingSetting { get; }
         public SettingEntry<LabelType> LabelTypeSetting { get; }
         public SettingEntry<int> SettingsVersionSetting { get; }
+        public SettingEntry<int> StatTitleWidthSetting { get; }
+        public SettingEntry<bool> StatTitleWidthIsFixedSetting { get; }
 
         private const string ON_WORLD_MAP_SETTING_DISPLAY_NAME = "on world map";
         private const string DRAG_WITH_MOUSE_LABEL_TEXT = "drag with mouse";

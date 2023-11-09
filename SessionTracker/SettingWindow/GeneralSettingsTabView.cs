@@ -38,6 +38,8 @@ namespace SessionTracker.SettingsWindow
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.RightMarginForScrollbarSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.FontSizeIndexSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.StatTitlePaddingSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.StatTitleWidthIsFixedSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.StatTitleWidthSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.TitleLabelColorSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.ValueLabelColorSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.BackgroundColorSetting);
