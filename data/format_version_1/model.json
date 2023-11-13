@@ -164,6 +164,168 @@
       "Value": {}
     },
     {
+      "Id": "item100078",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Essence of Despair",
+          "French": "Essence de désespoir",
+          "German": "Essenz der Verzweiflung",
+          "Spanish": "Esencia de desesperación",
+          "Chinese": "绝望精华",
+          "Korean": "Essence of Despair"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Found in Kryptis rifts.",
+          "French": "À trouver dans les brèches des Kryptis.",
+          "German": "Gefunden in Kryptis-Rissen.",
+          "Spanish": "Se encuentra en fisuras kryptis.",
+          "Chinese": "在氪族裂隙中找到。",
+          "Korean": "Found in Kryptis rifts."
+        }
+      },
+      "ApiId": 100078,
+      "ApiIdType": "Item",
+      "IconAssetId": 3123731,
+      "Value": {}
+    },
+    {
+      "Id": "item100414",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Essence of Greed",
+          "French": "Essence d'avidité",
+          "German": "Essenz der Gier",
+          "Spanish": "Esencia de avaricia",
+          "Chinese": "贪婪精华",
+          "Korean": "Essence of Greed"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Found in tier 2 Kryptis rifts.",
+          "French": "À trouver dans les brèches des Kryptis de niveau 2.",
+          "German": "Gefunden in Kryptis-Rissen von Rang 2.",
+          "Spanish": "Se encuentra en fisuras kryptis de rango 2.",
+          "Chinese": "在2级氪族裂隙中找到。",
+          "Korean": "Found in tier 2 Kryptis rifts."
+        }
+      },
+      "ApiId": 100414,
+      "ApiIdType": "Item",
+      "IconAssetId": 3123732,
+      "Value": {}
+    },
+    {
+      "Id": "item100055",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Essence of Triumph",
+          "French": "Essence de triomphe",
+          "German": "Essenz des Triumphs",
+          "Spanish": "Esencia de triunfo",
+          "Chinese": "凯旋精华",
+          "Korean": "Essence of Triumph"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Found in tier 3 Kryptis rifts.",
+          "French": "À trouver dans les brèches des Kryptis de niveau 3.",
+          "German": "Gefunden in Kryptis-Rissen von Rang 3.",
+          "Spanish": "Se encuentra en fisuras kryptis de rango 3.",
+          "Chinese": "在3级氪族裂隙中找到。",
+          "Korean": "Found in tier 3 Kryptis rifts."
+        }
+      },
+      "ApiId": 100055,
+      "ApiIdType": "Item",
+      "IconAssetId": 3123734,
+      "Value": {}
+    },
+    {
+      "Id": "item100267",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Case of Captured Lightning",
+          "French": "Boîte de foudre capturée",
+          "German": "Behälter mit eingefangenem Blitz",
+          "Spanish": "Caja de relámpagos capturados",
+          "Chinese": "盒装捕捉闪电",
+          "Korean": "Case of Captured Lightning"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "",
+          "French": "",
+          "German": "",
+          "Spanish": "",
+          "Chinese": "",
+          "Korean": ""
+        }
+      },
+      "ApiId": 100267,
+      "ApiIdType": "Item",
+      "IconAssetId": 3123706,
+      "Value": {}
+    },
+    {
+      "Id": "item99964",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Pouch of Stardust",
+          "French": "Sacoche de poussière d'étoile",
+          "German": "Beutel Sternenstaub",
+          "Spanish": "Morral de polvo de estrellas",
+          "Chinese": "囊装星尘",
+          "Korean": "Pouch of Stardust"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "",
+          "French": "",
+          "German": "",
+          "Spanish": "",
+          "Chinese": "",
+          "Korean": ""
+        }
+      },
+      "ApiId": 99964,
+      "ApiIdType": "Item",
+      "IconAssetId": 3123704,
+      "Value": {}
+    },
+    {
+      "Id": "item100098",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Clot of Congealed Screams",
+          "French": "Caillot de cris coagulés",
+          "German": "Klumpen von geronnenen Schreien",
+          "Spanish": "Coágulo de gritos congelados",
+          "Chinese": "团状冷凝尖叫",
+          "Korean": "Clot of Congealed Screams"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "",
+          "French": "",
+          "German": "",
+          "Spanish": "",
+          "Chinese": "",
+          "Korean": ""
+        }
+      },
+      "ApiId": 100098,
+      "ApiIdType": "Item",
+      "IconAssetId": 3188139,
+      "Value": {}
+    },
+    {
       "Id": "luck",
       "Name": {
         "LocalizedTextByLocale": {
@@ -1976,12 +2138,12 @@
       },
       "Description": {
         "LocalizedTextByLocale": {
-          "English": "",
-          "French": "",
-          "German": "",
-          "Spanish": "",
-          "Chinese": "",
-          "Korean": ""
+          "English": "Earned by completing objectives in the Wizard's Vault. Spend to purchase rewards from the Astral Rewards section of the Wizard's Vault.",
+          "French": "À obtenir en terminant des objectifs de la chambre forte du sorcier. À dépenser pour acheter des récompenses dans la section Récompenses astrales de la chambre forte du sorcier.",
+          "German": "Wird durch die Erfüllung von Zielen im Gewölbe des Zauberers verdient. Kann ausgegeben werden, um Belohnungen im Sektor \"Astrale Belohnungen\" des Zauberer-Gewölbes zu erwerben.",
+          "Spanish": "Se consigue completando objetivos en la Cámara del Brujo. Invierte esta divisa en comprar recompensas de la sección Recompensas astrales de la Cámara del Brujo.",
+          "Chinese": "通过完成巫师宝库的目标获得。用于在巫师宝库的星界奖励区购买奖励。",
+          "Korean": "Earned by completing objectives in the Wizard's Vault. Spend to purchase rewards from the Astral Rewards section of the Wizard's Vault."
         }
       },
       "ApiId": 63,
@@ -2257,6 +2419,60 @@
       "ApiId": 73,
       "ApiIdType": "Currency",
       "IconAssetId": 3123701,
+      "Value": {}
+    },
+    {
+      "Id": "currency74",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "a-currency-has-no-name",
+          "French": "a-currency-has-no-name",
+          "German": "a-currency-has-no-name",
+          "Spanish": "a-currency-has-no-name",
+          "Chinese": "a-currency-has-no-name",
+          "Korean": "a-currency-has-no-name"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "placeholder until anet named it",
+          "French": "placeholder until anet named it",
+          "German": "placeholder until anet named it",
+          "Spanish": "placeholder until anet named it",
+          "Chinese": "placeholder until anet named it",
+          "Korean": "placeholder until anet named it"
+        }
+      },
+      "ApiId": 74,
+      "ApiIdType": "Currency",
+      "IconAssetId": 3124964,
+      "Value": {}
+    },
+    {
+      "Id": "currency75",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Calcified Gasp",
+          "French": "Halètement calcifié",
+          "German": "Verkalktes Keuchen",
+          "Spanish": "Bocanada calcificada",
+          "Chinese": "钙化喘息",
+          "Korean": "Calcified Gasp"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Earned in Inner Nayos.",
+          "French": "À recevoir en Nayos intérieur.",
+          "German": "Im Inneren Nayos verdient.",
+          "Spanish": "Se consigue en la zona interior de Nayos.",
+          "Chinese": "在纳约斯内层获得。",
+          "Korean": "Earned in Inner Nayos."
+        }
+      },
+      "ApiId": 75,
+      "ApiIdType": "Currency",
+      "IconAssetId": 3188140,
       "Value": {}
     }
   ],
