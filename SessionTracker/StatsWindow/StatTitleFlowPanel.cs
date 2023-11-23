@@ -54,12 +54,6 @@ namespace SessionTracker.StatsWindow
             settingService.TitleLabelColorSetting.SettingChanged       += OnTitleLabelColorSettingChanged;
         }
 
-        public void UpdateTooltips(SummaryTooltipContent summaryTooltipContent)
-        {
-            ((SummaryTooltip)_titleLabel.Tooltip).UpdateTooltip(summaryTooltipContent);
-            ((SummaryTooltip)_titleImage.Tooltip).UpdateTooltip(summaryTooltipContent);
-        }
-
         protected override void DisposeControl()
         {
             _settingService.StatTitleWidthIsFixedSetting.SettingChanged -= OnStatTitleWidthOrIsFixedSettingChanged;
@@ -70,11 +64,15 @@ namespace SessionTracker.StatsWindow
             base.DisposeControl();
         }
 
+        public void UpdateTooltips(SummaryTooltipContent summaryTooltipContent)
+        {
+            ((SummaryTooltip)_titleLabel.Tooltip).UpdateTooltip(summaryTooltipContent);
+            ((SummaryTooltip)_titleImage.Tooltip).UpdateTooltip(summaryTooltipContent);
+        }
+
         public void UpdateLabelText()
         {
-            _titleLabel.Text             = _stat.Name.Localized;
-            _titleLabel.BasicTooltipText = _stat.Description.Localized;
-            _titleImage.BasicTooltipText = _stat.Description.Localized;
+            _titleLabel.Text = _stat.Name.Localized;
         }
 
         public void SetFont(BitmapFont font)

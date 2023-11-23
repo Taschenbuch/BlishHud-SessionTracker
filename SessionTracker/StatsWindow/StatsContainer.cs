@@ -335,6 +335,7 @@ namespace SessionTracker.StatsWindow
 
         private void OnUserChangedLanguageInBlishSettings(object sender, ValueEventArgs<System.Globalization.CultureInfo> e)
         {
+            _summaryTooltipService.UpdateSummaryTooltip();
             foreach (var titleFlowPanel in _titleFlowPanelByStatId)
                 titleFlowPanel.Value.UpdateLabelText();
         }
