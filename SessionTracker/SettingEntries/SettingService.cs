@@ -47,9 +47,32 @@ namespace SessionTracker.SettingEntries
                 "stat title padding",
                 2,
                 () => "padding",
-                () => "Change padding between icon, title and value of a stat");
+                () => "Change padding between stat icon, name and value.");
 
             StatTitlePaddingSetting.SetRange(0, 5);
+
+            StatTitleWidthIsFixedSetting = settings.DefineSetting(
+               "stat title width is fixed",
+               false,
+               () => "fix label width",
+               () => "Set stat label width to be fixed instead of dynamic. The width can be adjusted with the label width setting.");
+
+            StatTitleWidthSetting = settings.DefineSetting(
+               "stat title width",
+               500,
+               () => "label width",
+               () => "Change label width. Only works when fixed label width setting is enabled.");
+
+            StatTitleWidthSetting.SetRange(0, 1000);
+
+            RightMarginForScrollbarSetting = settings.DefineSetting(
+                "window right margin",
+                0,
+                () => "window right margin",
+                () => "Add a right margin to the window. " +
+                      "This can be useful when you use fixed height setting and dont want the scrollbar to overlap with the stats.");
+
+            RightMarginForScrollbarSetting.SetRange(0, 30);
 
             TitleLabelColorSetting = settings.DefineSetting(
                 "title label color",
@@ -167,7 +190,7 @@ namespace SessionTracker.SettingEntries
             UiHeightIsFixedSetting = settings.DefineSetting(
                 "ui height is fixed",
                 false,
-                () => "fixed height",
+                () => "fixed window height",
                 () => "CHECKED: height is fixed and can be adjusted with the window height slider.\n" +
                       "Stats can be scrolled in the window via mouse wheel or by dragging the scrollbar. Dragging the scrollbar only works when 'drag with mouse' setting is disabled.\n" +
                       "UNCHECKED: height adjusts automatically to the number of stats shown.\n" +
@@ -177,7 +200,7 @@ namespace SessionTracker.SettingEntries
             UiHeightSetting = settings.DefineSetting(
                 "ui height",
                 200,
-                () => "height",
+                () => "window height",
                 () => "window height when fixed height setting is checked.");
 
             UiHeightSetting.SetRange(5, 2000);
@@ -243,6 +266,7 @@ namespace SessionTracker.SettingEntries
         public SettingEntry<CoinDisplayFormat> CoinDisplayFormatSetting { get; }
         public SettingEntry<bool> DebugApiIntervalEnabledSetting { get; }
         public SettingEntry<int> StatTitlePaddingSetting { get; }
+        public SettingEntry<int> RightMarginForScrollbarSetting { get; }
         public SettingEntry<int> UiHeightSetting { get; }
         public SettingEntry<bool> UiHeightIsFixedSetting { get; }
         public SettingEntry<ColorType> ValueLabelColorSetting { get; }
@@ -269,6 +293,8 @@ namespace SessionTracker.SettingEntries
         public SettingEntry<KeyBinding> UiVisibilityKeyBindingSetting { get; }
         public SettingEntry<LabelType> LabelTypeSetting { get; }
         public SettingEntry<int> SettingsVersionSetting { get; }
+        public SettingEntry<int> StatTitleWidthSetting { get; }
+        public SettingEntry<bool> StatTitleWidthIsFixedSetting { get; }
 
         private const string ON_WORLD_MAP_SETTING_DISPLAY_NAME = "on world map";
         private const string DRAG_WITH_MOUSE_LABEL_TEXT = "drag with mouse";

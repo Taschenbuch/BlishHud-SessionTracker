@@ -30,7 +30,8 @@ namespace SessionTracker.Api
                 var settingsFileContent = await streamReader.ReadToEndAsync();
                 var userPermissionsJToken = JObject.Parse(settingsFileContent).SelectToken("$..['ecksofa.sessiontracker'].UserEnabledPermissions");
                 var storedTokenPermissions = userPermissionsJToken?.ToObject<List<TokenPermission>>();
-                return API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE.Any(t => !storedTokenPermissions.Contains(t));
+                // NullReferenceException exception when fresh blish start and not settings.json exists yet. But that is fine.
+                return API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE.Any(t => !storedTokenPermissions.Contains(t)); 
             }
             catch (Exception e)
             {

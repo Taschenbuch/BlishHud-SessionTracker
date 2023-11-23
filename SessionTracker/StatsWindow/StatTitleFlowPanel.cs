@@ -1,4 +1,5 @@
-﻿using Blish_HUD.Controls;
+﻿using Blish_HUD;
+using Blish_HUD.Controls;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended.BitmapFonts;
 using SessionTracker.Constants;
@@ -6,6 +7,7 @@ using SessionTracker.Models;
 using SessionTracker.Services;
 using SessionTracker.SettingEntries;
 using SessionTracker.StatTooltip;
+using System;
 
 namespace SessionTracker.StatsWindow
 {
@@ -43,10 +45,23 @@ namespace SessionTracker.StatsWindow
             _paddingLabelBeforeValue        = CreatePaddingLabel();
 
             OnStatTitlePaddingSettingChanged();
+            OnStatTitleWidthOrIsFixedSettingChanged();
             ShowOrHideTextAndIcon(settingService.LabelTypeSetting.Value);
-            settingService.StatTitlePaddingSetting.SettingChanged += OnStatTitlePaddingSettingChanged;
-            settingService.LabelTypeSetting.SettingChanged        += OnLabelTypeSettingChanged;
-            settingService.TitleLabelColorSetting.SettingChanged  += OnTitleLabelColorSettingChanged;
+            settingService.StatTitleWidthIsFixedSetting.SettingChanged += OnStatTitleWidthOrIsFixedSettingChanged;
+            settingService.StatTitleWidthSetting.SettingChanged        += OnStatTitleWidthOrIsFixedSettingChanged;
+            settingService.StatTitlePaddingSetting.SettingChanged      += OnStatTitlePaddingSettingChanged;
+            settingService.LabelTypeSetting.SettingChanged             += OnLabelTypeSettingChanged;
+            settingService.TitleLabelColorSetting.SettingChanged       += OnTitleLabelColorSettingChanged;
+        }
+
+        protected override void DisposeControl()
+        {
+            _settingService.StatTitleWidthIsFixedSetting.SettingChanged -= OnStatTitleWidthOrIsFixedSettingChanged;
+            _settingService.StatTitleWidthSetting.SettingChanged        -= OnStatTitleWidthOrIsFixedSettingChanged;
+            _settingService.StatTitlePaddingSetting.SettingChanged      -= OnStatTitlePaddingSettingChanged;
+            _settingService.LabelTypeSetting.SettingChanged             -= OnLabelTypeSettingChanged;
+            _settingService.TitleLabelColorSetting.SettingChanged       -= OnTitleLabelColorSettingChanged;
+            base.DisposeControl();
         }
 
         public void UpdateTooltips(SummaryTooltipContent summaryTooltipContent)
@@ -55,19 +70,9 @@ namespace SessionTracker.StatsWindow
             ((SummaryTooltip)_titleImage.Tooltip).UpdateTooltip(summaryTooltipContent);
         }
 
-        protected override void DisposeControl()
-        {
-            _settingService.StatTitlePaddingSetting.SettingChanged -= OnStatTitlePaddingSettingChanged;
-            _settingService.LabelTypeSetting.SettingChanged        -= OnLabelTypeSettingChanged;
-            _settingService.TitleLabelColorSetting.SettingChanged  -= OnTitleLabelColorSettingChanged;
-            base.DisposeControl();
-        }
-
         public void UpdateLabelText()
         {
-            _titleLabel.Text             = _stat.Name.Localized;
-            _titleLabel.BasicTooltipText = _stat.Description.Localized;
-            _titleImage.BasicTooltipText = _stat.Description.Localized;
+            _titleLabel.Text = _stat.Name.Localized;
         }
 
         public void SetFont(BitmapFont font)
@@ -78,12 +83,12 @@ namespace SessionTracker.StatsWindow
             _titleImage.Size = new Point(_titleLabel.Height);
         }
 
-        private void OnTitleLabelColorSettingChanged(object sender, Blish_HUD.ValueChangedEventArgs<ColorType> e)
+        private void OnTitleLabelColorSettingChanged(object sender, ValueChangedEventArgs<ColorType> e)
         {
             _titleLabel.TextColor = e.NewValue.GetColor();
         }
 
-        private void OnStatTitlePaddingSettingChanged(object sender = null, Blish_HUD.ValueChangedEventArgs<int> e = null)
+        private void OnStatTitlePaddingSettingChanged(object sender = null, ValueChangedEventArgs<int> e = null)
         {
             var numberOfBlanks = _settingService.StatTitlePaddingSetting.Value;
             var paddingBlanks  = new string(' ', numberOfBlanks);
@@ -91,9 +96,17 @@ namespace SessionTracker.StatsWindow
             _paddingLabelBetweenIconAndText.Text = paddingBlanks;
         }
 
-        private void OnLabelTypeSettingChanged(object sender, Blish_HUD.ValueChangedEventArgs<LabelType> e)
+        private void OnLabelTypeSettingChanged(object sender, ValueChangedEventArgs<LabelType> e)
         {
             ShowOrHideTextAndIcon(e.NewValue);
+        }
+
+        private void OnStatTitleWidthOrIsFixedSettingChanged(object sender = null, EventArgs e = null)
+        {
+            Width = _settingService.StatTitleWidthSetting.Value;
+            WidthSizingMode = _settingService.StatTitleWidthIsFixedSetting.Value
+                ? SizingMode.Standard
+                : SizingMode.AutoSize;
         }
 
         private static Label CreatePaddingLabel()

@@ -314,6 +314,8 @@ namespace SessionTracker.StatsWindow
                 Parent           = _statsRootFlowPanel
             };
 
+            new RightWindowMarginForScrollbar(_statsRootFlowPanel, settingService); // is automatically disposed with _statsRootFlowPanel
+
             foreach (var stat in model.Stats)
             {
                 _valueLabelByStatId[stat.Id] = new Label()
@@ -333,6 +335,7 @@ namespace SessionTracker.StatsWindow
 
         private void OnUserChangedLanguageInBlishSettings(object sender, ValueEventArgs<System.Globalization.CultureInfo> e)
         {
+            _summaryTooltipService.UpdateSummaryTooltip();
             foreach (var titleFlowPanel in _titleFlowPanelByStatId)
                 titleFlowPanel.Value.UpdateLabelText();
         }

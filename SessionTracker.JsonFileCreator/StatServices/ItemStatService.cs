@@ -74,7 +74,13 @@ namespace SessionTracker.JsonFileCreator.StatServices
             ItemIds.TRICK_OR_TREAT_BAG,
             ItemIds.PIECE_OF_CANDY_CORN, // remove when material storage is added!
             ItemIds.MYSTIC_COIN, // remove when material storage is added!
-            ItemIds.FRACTAL_ENCRYPTION, // remove when material storage is added!
+            ItemIds.FRACTAL_ENCRYPTION,
+            100078, // Essence of Despair // remove when material storage is added!
+            100414, // Essence of Greed // remove when material storage is added!
+            100055, // Essence of Triumph // remove when material storage is added!
+            100267, // Case of Captured Lightning // remove when material storage is added!
+            99964, // Pouch of Stardust // remove when material storage is added!
+            100098, // Clot of Congealed Screams // remove when material storage is added!
         };
     }
 }
