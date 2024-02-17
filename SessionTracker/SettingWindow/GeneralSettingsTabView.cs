@@ -49,6 +49,7 @@ namespace SessionTracker.SettingsWindow
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.CornerIconIsVisibleSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.CoinDisplayFormatSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.StatsWithZeroValueAreHiddenSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.ScrollbarIsHiddenSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.ScrollbarFixDelay);
         }
 

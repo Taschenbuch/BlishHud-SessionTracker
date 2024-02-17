@@ -95,7 +95,10 @@ namespace SessionTracker.StatsWindow
         private void OnMouseEntered(object s, MouseEventArgs ev)
         {
             if (_scrollbar != null)
+            {
                 _scrollbar.Visible = true;
+                _scrollbar.Opacity = _settingService.ScrollbarIsHiddenSetting.Value ? 0f : 1f; // Opacity because .Visible = false disables scrolling
+            } 
         }
 
         private void OnMouseLeft(object s, MouseEventArgs ev)

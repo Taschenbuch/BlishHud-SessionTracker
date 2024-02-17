@@ -218,6 +218,12 @@ namespace SessionTracker.SettingEntries
 
             ScrollbarFixDelay.SetRange(50, 500);
 
+            ScrollbarIsHiddenSetting = settings.DefineSetting(
+              "scrollbar is hidden",
+              false,
+              () => "hide scrollbar for fixed window height",
+              () => "ON: Never show scrollbar in fixed height mode.\nOFF: scrollbar is only visible on mouse over in fixed height mode.");
+
             DebugApiIntervalEnabledSetting = settings.DefineSetting(
                 "debug api interval enabled",
                 false,
@@ -263,6 +269,7 @@ namespace SessionTracker.SettingEntries
         public SettingEntry<int> DebugApiIntervalValueSetting { get; }
         public SettingEntry<bool> StatsWithZeroValueAreHiddenSetting { get; }
         public SettingEntry<int> ScrollbarFixDelay { get; }
+        public SettingEntry<bool> ScrollbarIsHiddenSetting { get; }
         public SettingEntry<CoinDisplayFormat> CoinDisplayFormatSetting { get; }
         public SettingEntry<bool> DebugApiIntervalEnabledSetting { get; }
         public SettingEntry<int> StatTitlePaddingSetting { get; }
