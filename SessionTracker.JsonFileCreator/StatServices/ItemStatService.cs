@@ -30,7 +30,7 @@ namespace SessionTracker.JsonFileCreator.StatServices
                     Id          = $"item{item.Id}",
                     ApiId       = item.Id,
                     ApiIdType   = ApiIdType.Item,
-                    IconAssetId = AssetService.GetIconAssetIdFromIconUrl(item.Icon.Url.ToString()),
+                    IconAssetId = AssetService.GetIconAssetIdFromIconUrl(item.Icon.Url.AbsoluteUri),
                     IsVisible   = false
                 };
 
