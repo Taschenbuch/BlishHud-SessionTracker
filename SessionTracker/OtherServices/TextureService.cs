@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using Blish_HUD;
 using Blish_HUD.Content;
 using Blish_HUD.Modules.Managers;
 using Microsoft.Xna.Framework.Graphics;
+using SessionTracker.Models;
 using Model = SessionTracker.Models.Model;
 
 namespace SessionTracker.OtherServices
@@ -16,6 +18,9 @@ namespace SessionTracker.OtherServices
             _contentsManager = contentsManager;
             _model           = model;
 
+            var missingTextures = new List<string>();
+
+            FallbackTexture = new AsyncTexture2D(contentsManager.GetTexture(@"stats\statIconPlaceholder_1444524.png"));
             DebugTabTexture = contentsManager.GetTexture(@"settingsWindow\debugTab_440025.png");
             VisibilityTabTexture = contentsManager.GetTexture(@"settingsWindow\visibilityTab.png");
             StatsTabTexture = contentsManager.GetTexture(@"settingsWindow\statsTab_156909.png");
@@ -26,11 +31,16 @@ namespace SessionTracker.OtherServices
             MoveDownActiveTexture = contentsManager.GetTexture(@"settingsWindow\moveDownActive_155953.png");
             MoveUpTexture = contentsManager.GetTexture(@"settingsWindow\moveUp_155953.png");
             MoveUpActiveTexture = contentsManager.GetTexture(@"settingsWindow\moveUpActive_155953.png");
-            StatIconPlaceholderTexture = contentsManager.GetTexture(@"stats\statIconPlaceholder_1444524.png");
             CornerIconTexture = contentsManager.GetTexture(@"cornerIcon.png");
             CornerIconHoverTexture = contentsManager.GetTexture(@"cornerIconHover.png");
             AllStatsHiddenByZeroValuesSettingTexture = contentsManager.GetTexture(@"hiddenStats.png");
-            CreateStatTextures(model);
+            SelectStatsWindowBackgroundTexture = GetTextureFromAssetCache(155979, FallbackTexture, missingTextures); 
+
+            foreach (var stat in model.Stats)
+                StatTextureByStatId[stat.Id] = CreateStatTexture(stat, missingTextures);
+
+            if (missingTextures.Any())
+                Module.Logger.Error($"Using fallbacks because could not get texture for: {string.Join(", ", missingTextures)}. :(");
         }
 
         public void Dispose()
@@ -45,7 +55,7 @@ namespace SessionTracker.OtherServices
             MoveDownActiveTexture?.Dispose();
             MoveUpTexture?.Dispose();
             MoveUpActiveTexture?.Dispose();
-            StatIconPlaceholderTexture?.Dispose();
+            FallbackTexture?.Dispose();
             CornerIconTexture?.Dispose();
             CornerIconHoverTexture?.Dispose();
             AllStatsHiddenByZeroValuesSettingTexture?.Dispose();
@@ -59,67 +69,55 @@ namespace SessionTracker.OtherServices
         public Texture2D GeneralTabTexture { get; }
         public Texture2D VisibilityTabTexture { get; }
         public Texture2D SettingsWindowBackgroundTexture { get; }
+        public AsyncTexture2D SelectStatsWindowBackgroundTexture { get; }
         public Texture2D MoveDownTexture { get; }
         public Texture2D MoveDownActiveTexture { get; }
         public Texture2D MoveUpTexture { get; }
         public Texture2D MoveUpActiveTexture { get; }
-        public Texture2D StatIconPlaceholderTexture { get; }
+        public AsyncTexture2D FallbackTexture { get; }
         public Texture2D CornerIconTexture { get; }
         public Texture2D CornerIconHoverTexture { get; }
         public Dictionary<string, AsyncTexture2D> StatTextureByStatId { get; } = new Dictionary<string, AsyncTexture2D>();
 
-        private void CreateStatTextures(Model model)
+        private AsyncTexture2D CreateStatTexture(Stat stat, List<string> missingTextures)
         {
-            var notFoundTextures = new List<string>();
-            var exception        = new Exception("i am a dummy. ignore me");
-
-            foreach (var stat in model.Stats)
+            try
             {
-                try
+                if (stat.HasIconAssetId)
+                    return GetTextureFromAssetCache(stat.IconAssetId, FallbackTexture, missingTextures);
+                else if (stat.HasIconFile)
+                    return _contentsManager.GetTexture($@"stats\{stat.IconFileName}");
+                else
                 {
-                    if (stat.HasIconAssetId)
-                        StatTextureByStatId[stat.Id] = GetStatTexture(stat.Id, stat.IconAssetId, StatIconPlaceholderTexture);
-                    else if (stat.HasIconFile)
-                        StatTextureByStatId[stat.Id] = _contentsManager.GetTexture($@"stats\{stat.IconFileName}");
-                    else
-                    {
-                        Module.Logger.Error($"Error: Icon texture missing for statId: {stat.Id}. Use placeholder icon as fallback.");
-                        StatTextureByStatId[stat.Id] = StatIconPlaceholderTexture;
-                    }
-                }
-                catch (Exception e)
-                {
-                    StatTextureByStatId[stat.Id] = new AsyncTexture2D(StatIconPlaceholderTexture);
-                    notFoundTextures.Add(stat.Name.English);
-                    exception = e;
+                    missingTextures.Add($"{stat.Name.English} (stat without AssetId or IconFile)");
+                    return FallbackTexture;
                 }
             }
-
-            if (notFoundTextures.Any())
-                Module.Logger.Error(exception, $"Could not get stat texture for: {string.Join(", ", notFoundTextures)}. :(");
+            catch (Exception e)
+            {
+                missingTextures.Add($"{stat.Name.English} (Exception: {e.Message})");
+                return FallbackTexture;
+            }
         }
 
-        private static AsyncTexture2D GetStatTexture(string statId, int statIconAssetId, Texture2D statIconPlaceholderTexture)
+        private static AsyncTexture2D GetTextureFromAssetCache(int assetId, AsyncTexture2D fallbackTexture, List<string> missingTextures)
         {
-            if (GameService.Content.DatAssetCache.TryGetTextureFromAssetId(statIconAssetId, out AsyncTexture2D statTexture))
-                return statTexture;
+            if (GameService.Content.DatAssetCache.TryGetTextureFromAssetId(assetId, out AsyncTexture2D texture))
+                return texture;
             else
             {
-                // blish will only show info message for that instead of a warning. That is why this was added here to make it more obvious
-                Module.Logger.Warn($"DatAssetCache is missing texture for '{statId}', iconAssetId: {statIconAssetId}");
-                return new AsyncTexture2D(statIconPlaceholderTexture);
+                missingTextures.Add($"{assetId} (asset id missing in DatAssetCache)");
+                return fallbackTexture;
             }
         }
 
         private void DisposeStatTextures()
         {
-            foreach (var statTextureAndIdPair in StatTextureByStatId)
+            foreach (var (statId, statTexture) in StatTextureByStatId.Select(s => (s.Key, s.Value)))
             {
-                var statId = statTextureAndIdPair.Key;
-                var statTexture = statTextureAndIdPair.Value;
-                var isNotErrorIcon = statTexture.Texture != StatIconPlaceholderTexture;
+                var isNotFallbackIcon = statTexture.Texture != FallbackTexture.Texture;
                 var isNotFromAssetCache = !_model.GetStat(statId).HasIconAssetId;
-                if (isNotErrorIcon && isNotFromAssetCache)
+                if (isNotFallbackIcon && isNotFromAssetCache)
                     statTexture?.Dispose();
             }
         }
