@@ -7,7 +7,7 @@ using Blish_HUD.Modules.Managers;
 using Microsoft.Xna.Framework.Graphics;
 using Model = SessionTracker.Models.Model;
 
-namespace SessionTracker.Services
+namespace SessionTracker.OtherServices
 {
     public class TextureService : IDisposable
     {

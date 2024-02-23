@@ -4,26 +4,24 @@ using Blish_HUD;
 using Blish_HUD.Controls;
 using SessionTracker.Constants;
 using SessionTracker.Models;
+using SessionTracker.OtherServices;
 using SessionTracker.SettingEntries;
 using SessionTracker.StatValue;
-using SessionTracker.Value;
 
 namespace SessionTracker.Text
 {
     public class ValueLabelTextService : IDisposable
     {
-        public ValueLabelTextService(Dictionary<string, Label> valueLabelByStatId,
-                                     Model model,
-                                     SettingService settingService)
+        public ValueLabelTextService(Dictionary<string, Label> valueLabelByStatId, Services services)
         {
             _valueLabelByStatId  = valueLabelByStatId;
-            _model               = model;
-            _settingService      = settingService;
+            _model = services.Model;
+            _settingService = services.SettingService;
 
-            settingService.ValuesSeparatorSetting.SettingChanged    += DoUpdateValueLabelTexts;
-            settingService.PerHourUnitText.SettingChanged           += DoUpdateValueLabelTexts;
-            settingService.ValueDisplayFormatSetting.SettingChanged += DoUpdateValueLabelTexts;
-            settingService.CoinDisplayFormatSetting.SettingChanged  += OnCoinDisplayFormatSettingChanged;
+            services.SettingService.ValuesSeparatorSetting.SettingChanged    += DoUpdateValueLabelTexts;
+            services.SettingService.PerHourUnitText.SettingChanged           += DoUpdateValueLabelTexts;
+            services.SettingService.ValueDisplayFormatSetting.SettingChanged += DoUpdateValueLabelTexts;
+            services.SettingService.CoinDisplayFormatSetting.SettingChanged  += OnCoinDisplayFormatSettingChanged;
         }
 
         public void Dispose()
@@ -82,8 +80,8 @@ namespace SessionTracker.Text
             _model.UiHasToBeUpdated = true; // because depending on the coin format value the coin stat has to be hidden by StatsWithZeroValueAreHiddenSetting
         }
 
-        private readonly Dictionary<string, Label> _valueLabelByStatId;
         private readonly Model _model;
         private readonly SettingService _settingService;
+        private readonly Dictionary<string, Label> _valueLabelByStatId;
     }
 }

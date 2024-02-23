@@ -9,18 +9,15 @@ using Microsoft.Xna.Framework;
 using SessionTracker.Constants;
 using SessionTracker.Controls;
 using SessionTracker.Models;
-using SessionTracker.Services;
-using SessionTracker.SettingEntries;
+using SessionTracker.OtherServices;
 
 namespace SessionTracker.SettingsWindow
 {
     public class StatsSettingsTabView : View
     {
-        public StatsSettingsTabView(Model model, SettingService settingService, TextureService textureService)
+        public StatsSettingsTabView(Services services)
         {
-            _model = model;
-            _settingService = settingService;
-            _textureService = textureService;
+            _service = services;
         }
 
         protected override void Build(Container buildPanel)
@@ -51,7 +48,7 @@ namespace SessionTracker.SettingsWindow
                 Parent = trackedStatsSectionFlowPanel
             };
 
-            ShowStatRows(_model.Stats, _statRowsFlowPanel);
+            ShowStatRows(_service.Model.Stats, _statRowsFlowPanel);
         }
 
         private void ShowMoveVisibleToTopButton(FlowPanel statsFlowPanel)
@@ -69,9 +66,9 @@ namespace SessionTracker.SettingsWindow
 
         private void MoveVisibleStatsToTop()
         {
-            var sortedStats = _model.Stats.OrderByDescending(stat => stat.IsVisible).ToList();
-            _model.Stats.Clear();
-            _model.Stats.AddRange(sortedStats);
+            var sortedStats = _service.Model.Stats.OrderByDescending(stat => stat.IsVisible).ToList();
+            _service.Model.Stats.Clear();
+            _service.Model.Stats.AddRange(sortedStats);
             UpdateStatRows();
         }
 
@@ -302,13 +299,13 @@ namespace SessionTracker.SettingsWindow
 
         private void ShowOrHideByCurrencyId(ReadOnlyCollection<int> currencyIds, Dictionary<string, Checkbox> visibilityCheckBoxByStatId, bool isShown)
         {
-            foreach (var stat in _model.Stats.Where(stat => currencyIds.Contains(stat.ApiId)))
+            foreach (var stat in _service.Model.Stats.Where(stat => currencyIds.Contains(stat.ApiId)))
                 visibilityCheckBoxByStatId[stat.Id].Checked = isShown;
         }
 
         private void ShowOrHideByItemId(ReadOnlyCollection<int> itemIds, Dictionary<string, Checkbox> visibilityCheckBoxByStatId, bool isShown)
         {
-            foreach (var stat in _model.Stats.Where(stat => itemIds.Contains(stat.ApiId)))
+            foreach (var stat in _service.Model.Stats.Where(stat => itemIds.Contains(stat.ApiId)))
                 visibilityCheckBoxByStatId[stat.Id].Checked = isShown;
         }
 
@@ -344,8 +341,8 @@ namespace SessionTracker.SettingsWindow
 
             var moveStatUpwardsButton = new GlowButton
             {
-                Icon = _textureService.MoveUpTexture,
-                ActiveIcon = _textureService.MoveUpActiveTexture,
+                Icon = _service.TextureService.MoveUpTexture,
+                ActiveIcon = _service.TextureService.MoveUpActiveTexture,
                 BasicTooltipText = "Move up",
                 Size = new Point(25, 25),
                 Parent = statFlowPanel
@@ -353,8 +350,8 @@ namespace SessionTracker.SettingsWindow
 
             var moveStatDownwardsButton = new GlowButton()
             {
-                Icon = _textureService.MoveDownTexture,
-                ActiveIcon = _textureService.MoveDownActiveTexture,
+                Icon = _service.TextureService.MoveDownTexture,
+                ActiveIcon = _service.TextureService.MoveDownActiveTexture,
                 BasicTooltipText = "Move down",
                 Size = new Point(25, 25),
                 Parent = statFlowPanel
@@ -370,7 +367,7 @@ namespace SessionTracker.SettingsWindow
             };
 
             var iconContainer = ControlFactory.CreateAdjustableChildLocationContainer(clickFlowPanel);
-            var asyncTexture2D = _textureService.StatTextureByStatId[stat.Id];
+            var asyncTexture2D = _service.TextureService.StatTextureByStatId[stat.Id];
 
             new Image(asyncTexture2D)
             {
@@ -398,31 +395,31 @@ namespace SessionTracker.SettingsWindow
             {
                 stat.IsVisible = e.Checked;
                 statFlowPanel.BackgroundColor = DetermineBackgroundColor(e.Checked);
-                _model.UiHasToBeUpdated = true;
+                _service.Model.UiHasToBeUpdated = true;
             };
 
             moveStatUpwardsButton.Click += (s, e) =>
             {
-                var index = _model.Stats.IndexOf(stat);
+                var index = _service.Model.Stats.IndexOf(stat);
 
                 const int firstStatIndex = 0;
                 if (index > firstStatIndex)
                 {
-                    _model.Stats.Remove(stat);
-                    _model.Stats.Insert(index - 1, stat);
+                    _service.Model.Stats.Remove(stat);
+                    _service.Model.Stats.Insert(index - 1, stat);
                     UpdateStatRows();
                 }
             };
 
             moveStatDownwardsButton.Click += (s, e) =>
             {
-                var index = _model.Stats.IndexOf(stat);
+                var index = _service.Model.Stats.IndexOf(stat);
 
-                var lastStatIndex = _model.Stats.Count - 1;
+                var lastStatIndex = _service.Model.Stats.Count - 1;
                 if (index < lastStatIndex)
                 {
-                    _model.Stats.Remove(stat);
-                    _model.Stats.Insert(index + 1, stat);
+                    _service.Model.Stats.Remove(stat);
+                    _service.Model.Stats.Insert(index + 1, stat);
                     UpdateStatRows();
                 }
             };
@@ -439,22 +436,20 @@ namespace SessionTracker.SettingsWindow
         {
             var scrollDistance = _scrollbar.ScrollDistance;
             _statRowsFlowPanel.ClearChildren();
-            ShowStatRows(_model.Stats, _statRowsFlowPanel);
-            _model.UiHasToBeUpdated = true;
+            ShowStatRows(_service.Model.Stats, _statRowsFlowPanel);
+            _service.Model.UiHasToBeUpdated = true;
 
             Task.Run(async () =>
             {
-                await Task.Delay(_settingService.ScrollbarFixDelay.Value);
+                await Task.Delay(_service.SettingService.ScrollbarFixDelay.Value);
                 _scrollbar.ScrollDistance = scrollDistance;
             });
         }
 
-        private readonly Model _model;
-        private readonly SettingService _settingService;
-        private readonly TextureService _textureService;
         private Scrollbar _scrollbar;
         private FlowPanel _rootFlowPanel;
         private FlowPanel _statRowsFlowPanel;
+        private readonly Services _service;
         private readonly Dictionary<string, Checkbox> _visibilityCheckBoxByStatId = new Dictionary<string, Checkbox>();
         private static readonly Color VISIBLE_COLOR = new Color(17, 64, 9) * 0.9f;
         private static readonly Color NOT_VISIBLE_COLOR = new Color(Color.Black, 0.5f);

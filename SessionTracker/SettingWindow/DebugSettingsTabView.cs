@@ -1,19 +1,15 @@
 ﻿using Blish_HUD.Controls;
 using Blish_HUD.Graphics.UI;
 using SessionTracker.Controls;
-using SessionTracker.DateTimeUtcNow;
-using SessionTracker.SettingEntries;
-using SessionTracker.StatsWindow;
+using SessionTracker.OtherServices;
 
 namespace SessionTracker.SettingsWindow
 {
     public class DebugSettingsTabView : View
     {
-        public DebugSettingsTabView(SettingService settingService, DateTimeService dateTimeService, UpdateLoop updateLoop)
+        public DebugSettingsTabView(Services services)
         {
-            _settingService  = settingService;
-            _dateTimeService = dateTimeService;
-            _updateLoop      = updateLoop;
+            _services = services;
         }
 
         protected override void Build(Container buildPanel)
@@ -27,13 +23,13 @@ namespace SessionTracker.SettingsWindow
                "your user experience. This tab just helps the developer to speed up testing this module. :-)\n");
             CreateApiIntervalDebugPanel();
             CreateUpdateLoopStateDebugPanel();
-            _dateTimeService.CreateDateTimeDebugPanel(_rootFlowPanel);
+            _services.DateTimeService.CreateDateTimeDebugPanel(_rootFlowPanel);
         }
 
         protected override void Unload()
         {
-            _settingService.DebugApiIntervalValueSetting.SettingChanged -= OnDebugApiIntervalValueSettingChanged;
-            _updateLoop.StateChanged -= UpdateLoopStateChanged;
+            _services.SettingService.DebugApiIntervalValueSetting.SettingChanged -= OnDebugApiIntervalValueSettingChanged;
+            _services.UpdateLoop.StateChanged -= UpdateLoopStateChanged;
         }
 
         private void CreateUpdateLoopStateDebugPanel()
@@ -41,7 +37,7 @@ namespace SessionTracker.SettingsWindow
             var updateLoopStateFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Debug update loop state", _rootFlowPanel);
             _updateLoopStateLabel = new Label()
             {
-                Text = _updateLoop.State.ToString(),
+                Text = _services.UpdateLoop.State.ToString(),
                 Left = 5,
                 AutoSizeHeight = true,
                 AutoSizeWidth = true,
@@ -53,19 +49,19 @@ namespace SessionTracker.SettingsWindow
                 }
             };
 
-            _updateLoop.StateChanged += UpdateLoopStateChanged;
+            _services.UpdateLoop.StateChanged += UpdateLoopStateChanged;
         }
 
         private void UpdateLoopStateChanged(object sender, System.EventArgs e)
         {
-            _updateLoopStateLabel.Text = _updateLoop.State.ToString();
+            _updateLoopStateLabel.Text = _services.UpdateLoop.State.ToString();
         }
 
         private void CreateApiIntervalDebugPanel()
         {
             var debugApiIntervalSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Debug API interval", _rootFlowPanel);
-            ControlFactory.CreateSetting(debugApiIntervalSectionFlowPanel, _settingService.DebugApiIntervalEnabledSetting);
-            ControlFactory.CreateSetting(debugApiIntervalSectionFlowPanel, _settingService.DebugApiIntervalValueSetting);
+            ControlFactory.CreateSetting(debugApiIntervalSectionFlowPanel, _services.SettingService.DebugApiIntervalEnabledSetting);
+            ControlFactory.CreateSetting(debugApiIntervalSectionFlowPanel, _services.SettingService.DebugApiIntervalValueSetting);
             CreateApiIntervallValueLabel(debugApiIntervalSectionFlowPanel);
         }
 
@@ -86,17 +82,15 @@ namespace SessionTracker.SettingsWindow
             };
 
             OnDebugApiIntervalValueSettingChanged();
-            _settingService.DebugApiIntervalValueSetting.SettingChanged += OnDebugApiIntervalValueSettingChanged;
+            _services.SettingService.DebugApiIntervalValueSetting.SettingChanged += OnDebugApiIntervalValueSettingChanged;
         }
 
         private void OnDebugApiIntervalValueSettingChanged(object sender = null, Blish_HUD.ValueChangedEventArgs<int> e = null)
         {
-            _apiIntervalInMillisecondsLabel.Text = $"{_settingService.DebugApiIntervalValueSetting.Value} ms";
+            _apiIntervalInMillisecondsLabel.Text = $"{_services.SettingService.DebugApiIntervalValueSetting.Value} ms";
         }
 
-        private readonly SettingService _settingService;
-        private readonly DateTimeService _dateTimeService;
-        private readonly UpdateLoop _updateLoop;
+        private readonly Services _services;
         private FlowPanel _rootFlowPanel;
         private Label _apiIntervalInMillisecondsLabel;
         private Label _updateLoopStateLabel;
