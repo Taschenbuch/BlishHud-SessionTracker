@@ -35,6 +35,7 @@ namespace SessionTracker.OtherServices
             CornerIconHoverTexture = contentsManager.GetTexture(@"cornerIconHover.png");
             AllStatsHiddenByZeroValuesSettingTexture = contentsManager.GetTexture(@"hiddenStats.png");
             SelectStatsWindowBackgroundTexture = GetTextureFromAssetCache(155979, FallbackTexture, missingTextures); 
+            StatBackgroundTexture = GetTextureFromAssetCache(1318622, FallbackTexture, missingTextures);
 
             foreach (var stat in model.Stats)
                 StatTextureByStatId[stat.Id] = CreateStatTexture(stat, missingTextures);
@@ -59,6 +60,8 @@ namespace SessionTracker.OtherServices
             CornerIconTexture?.Dispose();
             CornerIconHoverTexture?.Dispose();
             AllStatsHiddenByZeroValuesSettingTexture?.Dispose();
+            SelectStatsWindowBackgroundTexture?.Dispose();
+            StatBackgroundTexture?.Dispose();
             DisposeStatTextures();
         }
 
@@ -70,6 +73,7 @@ namespace SessionTracker.OtherServices
         public Texture2D VisibilityTabTexture { get; }
         public Texture2D SettingsWindowBackgroundTexture { get; }
         public AsyncTexture2D SelectStatsWindowBackgroundTexture { get; }
+        public AsyncTexture2D StatBackgroundTexture { get; }
         public Texture2D MoveDownTexture { get; }
         public Texture2D MoveDownActiveTexture { get; }
         public Texture2D MoveUpTexture { get; }

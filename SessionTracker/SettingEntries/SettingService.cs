@@ -252,6 +252,12 @@ namespace SessionTracker.SettingEntries
                 () => "Stats with a session value of 0 are hidden until the session value changes to a non-zero value. " +
                       "At the start of a session all values will be 0 so the whole window is hidden.");
 
+            SelectStatsIconSizeSetting = settings.DefineSetting(
+                "select stats window icon size",
+                SelectStatsWindowIconSize.Medium,
+                () => "icon size",
+                () => "Change size of stat icon in this window.");
+
             var internalSettings = settings.AddSubCollection("internal settings (not visible in UI)");
             SettingsVersionSetting = internalSettings.DefineSetting("settings version", 3);
             WindowRelativeLocationSetting = internalSettings.DefineSetting("window relative location", new FloatPoint(0.2f, 0.2f));
@@ -268,6 +274,7 @@ namespace SessionTracker.SettingEntries
 
         public SettingEntry<int> DebugApiIntervalValueSetting { get; }
         public SettingEntry<bool> StatsWithZeroValueAreHiddenSetting { get; }
+        public SettingEntry<SelectStatsWindowIconSize> SelectStatsIconSizeSetting { get; }
         public SettingEntry<int> ScrollbarFixDelay { get; }
         public SettingEntry<bool> ScrollbarIsHiddenSetting { get; }
         public SettingEntry<CoinDisplayFormat> CoinDisplayFormatSetting { get; }

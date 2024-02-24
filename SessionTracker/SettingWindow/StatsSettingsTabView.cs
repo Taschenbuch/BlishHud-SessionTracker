@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Blish_HUD.Controls;
 using Blish_HUD.Graphics.UI;
 using Microsoft.Xna.Framework;
-using SessionTracker.Constants;
 using SessionTracker.Controls;
 using SessionTracker.Models;
 using SessionTracker.OtherServices;
+using SessionTracker.SelectStats;
 
 namespace SessionTracker.SettingsWindow
 {
@@ -29,14 +27,25 @@ namespace SessionTracker.SettingsWindow
 
             ControlFactory.CreateHintLabel(
                 trackedStatsSectionFlowPanel,
-                "Click the hide 'All'-button and then show or hide the stats you want to see by clicking on the\n" +
+                "Click the hide 'All'-button and then show or hide the stats you want to see by clicking on the\n" + // todo x text wird nicht mehr passen
                 "stats category buttons (e.g. 'PvP', 'Fractals') or by clicking on the individual stats below.\n" +
                 "After that click on the 'Move visible to top'-button to make hiding or reordering easier.\n" +
                 "You can reorder the stats with the up and down buttons.");
 
-            ShowCategoryButtons(_visibilityCheckBoxByStatId, trackedStatsSectionFlowPanel);
-            HideCategoryButtons(_visibilityCheckBoxByStatId, trackedStatsSectionFlowPanel);
-            ShowMoveVisibleToTopButton(trackedStatsSectionFlowPanel);
+            // todo x start
+            _selectStatsStandardWindow = new SelectStatsWindow(_service);
+            _selectStatsStandardWindow.Show();  // todo x temporary
+            var openSelectStatsWindowButton = new StandardButton()
+            {
+                Text = "Select Stats",
+                BasicTooltipText = "Select which stats are shown in the stats window.",
+                Width = 150,
+                Parent = trackedStatsSectionFlowPanel
+            };
+            openSelectStatsWindowButton.Click += (s, e) => _selectStatsStandardWindow.Show();
+            // todo x end
+
+            ShowMoveVisibleToTopButton(trackedStatsSectionFlowPanel); // todo x überflüssig
 
             _statRowsFlowPanel = new FlowPanel
             {
@@ -49,6 +58,11 @@ namespace SessionTracker.SettingsWindow
             };
 
             ShowStatRows(_service.Model.Stats, _statRowsFlowPanel);
+        }
+
+        protected override void Unload()
+        {
+            _selectStatsStandardWindow?.Dispose();
         }
 
         private void ShowMoveVisibleToTopButton(FlowPanel statsFlowPanel)
@@ -70,244 +84,7 @@ namespace SessionTracker.SettingsWindow
             _service.Model.Stats.Clear();
             _service.Model.Stats.AddRange(sortedStats);
             UpdateStatRows();
-        }
-
-        private void ShowCategoryButtons(Dictionary<string, Checkbox> visibilityCheckBoxByStatId, FlowPanel statsFlowPanel)
-        {
-            var buttonsFlowPanel = new FlowPanel
-            {
-                FlowDirection = ControlFlowDirection.SingleLeftToRight,
-                WidthSizingMode = SizingMode.AutoSize,
-                HeightSizingMode = SizingMode.AutoSize,
-                Parent = statsFlowPanel,
-            };
-
-            new Label
-            {
-                Text = "Show",
-                Location = new Point(5, 4),
-                Width = 50,
-                Parent = ControlFactory.CreateAdjustableChildLocationContainer(buttonsFlowPanel)
-            };
-
-            var showAllButton = new StandardButton
-            {
-                Text = "All",
-                BasicTooltipText = "Show all stats rows in UI.",
-                Width = 50,
-                Parent = buttonsFlowPanel
-            };
-
-            var pvpButton = new StandardButton
-            {
-                Text = "PvP",
-                BasicTooltipText = "Click to show pvp related stats.",
-                Width = 80,
-                Parent = buttonsFlowPanel
-            };
-
-            var wvwButton = new StandardButton
-            {
-                Text = "WvW",
-                BasicTooltipText = "Click to show wvw related stats.",
-                Width = 80,
-                Parent = buttonsFlowPanel
-            };
-
-            var fractalsButton = new StandardButton
-            {
-                Text = "Fractals",
-                BasicTooltipText = "Click to show fractal related stats.",
-                Width = 80,
-                Parent = buttonsFlowPanel
-            };
-
-            var strikesButton = new StandardButton
-            {
-                Text = "Strikes",
-                BasicTooltipText = "Click to show strike related stats.",
-                Width = 80,
-                Parent = buttonsFlowPanel
-            };
-
-            var raidsButton = new StandardButton
-            {
-                Text = "Raids",
-                BasicTooltipText = "Click to show raid related stats.",
-                Width = 80,
-                Parent = buttonsFlowPanel
-            };
-
-            var openWorldButton = new StandardButton
-            {
-                Text = "Open World",
-                BasicTooltipText = "Click to show some open world related stats.",
-                Width = 100,
-                Parent = buttonsFlowPanel
-            };
-
-            showAllButton.Click += (s, e) =>
-            {
-                foreach (var visibilityCheckBox in visibilityCheckBoxByStatId.Values)
-                    visibilityCheckBox.Checked = true;
-            };
-
-            pvpButton.Click       += (s, e) => ShowOrHidePvpStats(visibilityCheckBoxByStatId, true);
-            wvwButton.Click       += (s, e) => ShowOrHideWvwStats(visibilityCheckBoxByStatId, true);
-            fractalsButton.Click  += (s, e) => ShowOrHideFractalStats(visibilityCheckBoxByStatId, true);
-            strikesButton.Click   += (s, e) => ShowOrHideStrikeStats(visibilityCheckBoxByStatId, true);
-            raidsButton.Click     += (s, e) => ShowOrHideRaidStats(visibilityCheckBoxByStatId, true);
-            openWorldButton.Click += (s, e) => ShowOrHideOpenWorldStats(visibilityCheckBoxByStatId, true);
-        }      
-
-        private void HideCategoryButtons(Dictionary<string, Checkbox> visibilityCheckBoxByStatId, FlowPanel statsFlowPanel)
-        {
-            var buttonsFlowPanel = new FlowPanel
-            {
-                FlowDirection = ControlFlowDirection.SingleLeftToRight,
-                WidthSizingMode = SizingMode.AutoSize,
-                HeightSizingMode = SizingMode.AutoSize,
-                Parent = statsFlowPanel,
-            };
-
-            new Label
-            {
-                Text = "Hide",
-                Location = new Point(5, 4),
-                Width = 50,
-                Parent = ControlFactory.CreateAdjustableChildLocationContainer(buttonsFlowPanel)
-            };
-
-            var hideAllButton = new StandardButton
-            {
-                Text = "All",
-                BasicTooltipText = "Hide all stats rows in UI.",
-                Width = 50,
-                Parent = buttonsFlowPanel
-            };
-
-            var pvpButton = new StandardButton
-            {
-                Text = "PvP",
-                BasicTooltipText = "Click to hide pvp related stats.",
-                Width = 80,
-                Parent = buttonsFlowPanel
-            };
-
-            var wvwButton = new StandardButton
-            {
-                Text = "WvW",
-                BasicTooltipText = "Click to hide wvw related stats.",
-                Width = 80,
-                Parent = buttonsFlowPanel
-            };
-
-            var fractalsButton = new StandardButton
-            {
-                Text = "Fractals",
-                BasicTooltipText = "Click to hide fractal related stats.",
-                Width = 80,
-                Parent = buttonsFlowPanel
-            };
-
-            var strikesButton = new StandardButton
-            {
-                Text = "Strikes",
-                BasicTooltipText = "Click to hide strike related stats.",
-                Width = 80,
-                Parent = buttonsFlowPanel
-            };
-
-            var raidsButton = new StandardButton
-            {
-                Text = "Raids",
-                BasicTooltipText = "Click to hide raid related stats.",
-                Width = 80,
-                Parent = buttonsFlowPanel
-            };
-
-            var openWorldButton = new StandardButton
-            {
-                Text = "Open World",
-                BasicTooltipText = "Click to hide some open world related stats.",
-                Width = 100,
-                Parent = buttonsFlowPanel
-            };
-
-            hideAllButton.Click += (s, e) =>
-            {
-                foreach (var visibilityCheckBox in visibilityCheckBoxByStatId.Values)
-                    visibilityCheckBox.Checked = false;
-            };
-
-            pvpButton.Click       += (s, e) => ShowOrHidePvpStats(visibilityCheckBoxByStatId, false);
-            wvwButton.Click       += (s, e) => ShowOrHideWvwStats(visibilityCheckBoxByStatId, false);
-            fractalsButton.Click  += (s, e) => ShowOrHideFractalStats(visibilityCheckBoxByStatId, false);
-            strikesButton.Click   += (s, e) => ShowOrHideStrikeStats(visibilityCheckBoxByStatId, false);
-            raidsButton.Click     += (s, e) => ShowOrHideRaidStats(visibilityCheckBoxByStatId, false);
-            openWorldButton.Click += (s, e) => ShowOrHideOpenWorldStats(visibilityCheckBoxByStatId, false);
-        }
-
-        private void ShowOrHideOpenWorldStats(Dictionary<string, Checkbox> visibilityCheckBoxByStatId, bool isShown)
-        {
-            ShowOrHideByCurrencyId(CurrencyIds.OpenWorld, visibilityCheckBoxByStatId, isShown);
-            MoveVisibleStatsToTop();
-        }
-
-        private void ShowOrHideRaidStats(Dictionary<string, Checkbox> visibilityCheckBoxByStatId, bool isShown)
-        {
-            ShowOrHideByItemId(ItemIds.Raid, visibilityCheckBoxByStatId, isShown);
-            ShowOrHideByCurrencyId(CurrencyIds.Raid, visibilityCheckBoxByStatId, isShown);
-            MoveVisibleStatsToTop();
-        }
-
-        private void ShowOrHideFractalStats(Dictionary<string, Checkbox> visibilityCheckBoxByStatId, bool isShown)
-        {
-            ShowOrHideByItemId(ItemIds.Fractal, visibilityCheckBoxByStatId, isShown);
-            ShowOrHideByCurrencyId(CurrencyIds.Fractal, visibilityCheckBoxByStatId, isShown);
-            MoveVisibleStatsToTop();
-        }
-
-        private void ShowOrHidePvpStats(Dictionary<string, Checkbox> visibilityCheckBoxByStatId, bool isShown)
-        {
-            ShowOrHideByStatIdStartingWith("pvp", visibilityCheckBoxByStatId, isShown);
-            ShowOrHideByCurrencyId(CurrencyIds.Pvp, visibilityCheckBoxByStatId, isShown);
-            visibilityCheckBoxByStatId[StatId.DEATHS].Checked = isShown;
-            MoveVisibleStatsToTop();
-        }
-
-        private void ShowOrHideWvwStats(Dictionary<string, Checkbox> visibilityCheckBoxByStatId, bool isShown)
-        {
-            ShowOrHideByStatIdStartingWith("wvw", visibilityCheckBoxByStatId, isShown);
-            ShowOrHideByCurrencyId(CurrencyIds.Wvw, visibilityCheckBoxByStatId, isShown);
-            ShowOrHideByItemId(ItemIds.Wvw, visibilityCheckBoxByStatId, isShown);
-            visibilityCheckBoxByStatId[StatId.DEATHS].Checked = isShown;
-            MoveVisibleStatsToTop();
-        }
-
-        private void ShowOrHideStrikeStats(Dictionary<string, Checkbox> visibilityCheckBoxByStatId, bool isShown)
-        {
-            ShowOrHideByCurrencyId(CurrencyIds.Strike, visibilityCheckBoxByStatId, isShown);
-            MoveVisibleStatsToTop();
-        }
-
-        private static void ShowOrHideByStatIdStartingWith(string searchTerm, Dictionary<string, Checkbox> visibilityCheckBoxByStatId, bool isShown)
-        {
-            foreach (var checkBoxStringPair in visibilityCheckBoxByStatId.Where(i => i.Key.StartsWith(searchTerm, StringComparison.OrdinalIgnoreCase)))
-                checkBoxStringPair.Value.Checked = isShown;
-        }
-
-        private void ShowOrHideByCurrencyId(ReadOnlyCollection<int> currencyIds, Dictionary<string, Checkbox> visibilityCheckBoxByStatId, bool isShown)
-        {
-            foreach (var stat in _service.Model.Stats.Where(stat => currencyIds.Contains(stat.ApiId)))
-                visibilityCheckBoxByStatId[stat.Id].Checked = isShown;
-        }
-
-        private void ShowOrHideByItemId(ReadOnlyCollection<int> itemIds, Dictionary<string, Checkbox> visibilityCheckBoxByStatId, bool isShown)
-        {
-            foreach (var stat in _service.Model.Stats.Where(stat => itemIds.Contains(stat.ApiId)))
-                visibilityCheckBoxByStatId[stat.Id].Checked = isShown;
-        }
+        }       
 
         private void ShowStatRows(List<Stat> stats, FlowPanel statRowsFlowPanel)
         {
@@ -450,6 +227,7 @@ namespace SessionTracker.SettingsWindow
         private FlowPanel _rootFlowPanel;
         private FlowPanel _statRowsFlowPanel;
         private readonly Services _service;
+        private SelectStatsWindow _selectStatsStandardWindow;
         private readonly Dictionary<string, Checkbox> _visibilityCheckBoxByStatId = new Dictionary<string, Checkbox>();
         private static readonly Color VISIBLE_COLOR = new Color(17, 64, 9) * 0.9f;
         private static readonly Color NOT_VISIBLE_COLOR = new Color(Color.Black, 0.5f);
