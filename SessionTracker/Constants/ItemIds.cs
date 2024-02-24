@@ -25,8 +25,7 @@ namespace SessionTracker.Constants
 
         public static readonly ReadOnlyCollection<int> Raid = new List<int>
         {
-            MYSTIC_COIN,
-            FRACTAL_ENCRYPTION,
+            MYSTIC_COIN
         }.AsReadOnly();
     }
 }
