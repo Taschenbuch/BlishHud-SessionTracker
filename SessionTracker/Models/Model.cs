@@ -9,6 +9,7 @@ namespace SessionTracker.Models
     {
         public List<Stat> Stats { get; } = new List<Stat>();
         public SessionDuration SessionDuration { get; } = new SessionDuration();
+        public List<StatCategory> StatCategories { get; } = new List<StatCategory>();
         public DateTime NextResetDateTimeUtc { get; set; } = UNDEFINED_RESET_DATE_TIME;
         [JsonIgnore] public static readonly DateTime UNDEFINED_RESET_DATE_TIME = new DateTime(0L, DateTimeKind.Utc); // UTC DateTime.Min
         [JsonIgnore] public static readonly DateTime NEVER_OR_ON_MODULE_START_RESET_DATE_TIME = new DateTime(3155378975999999999L, DateTimeKind.Utc); // UTC DateTime.Max

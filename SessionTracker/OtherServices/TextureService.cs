@@ -83,10 +83,10 @@ namespace SessionTracker.OtherServices
         {
             try
             {
-                if (stat.HasIconAssetId)
-                    return GetTextureFromAssetCache(stat.IconAssetId, FallbackTexture, missingTextures);
-                else if (stat.HasIconFile)
-                    return _contentsManager.GetTexture($@"stats\{stat.IconFileName}");
+                if (stat.Icon.HasIconAssetId)
+                    return GetTextureFromAssetCache(stat.Icon.AssetId, FallbackTexture, missingTextures);
+                else if (stat.Icon.HasIconFile)
+                    return _contentsManager.GetTexture($@"stats\{stat.Icon.FileName}");
                 else
                 {
                     missingTextures.Add($"{stat.Name.English} (stat without AssetId or IconFile)");
@@ -116,7 +116,7 @@ namespace SessionTracker.OtherServices
             foreach (var (statId, statTexture) in StatTextureByStatId.Select(s => (s.Key, s.Value)))
             {
                 var isNotFallbackIcon = statTexture.Texture != FallbackTexture.Texture;
-                var isNotFromAssetCache = !_model.GetStat(statId).HasIconAssetId;
+                var isNotFromAssetCache = !_model.GetStat(statId).Icon.HasIconAssetId;
                 if (isNotFallbackIcon && isNotFromAssetCache)
                     statTexture?.Dispose();
             }

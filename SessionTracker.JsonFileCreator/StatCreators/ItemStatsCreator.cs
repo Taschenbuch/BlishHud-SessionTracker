@@ -5,32 +5,18 @@ using Gw2Sharp;
 using Gw2Sharp.WebApi;
 using Gw2Sharp.WebApi.V2.Models;
 using SessionTracker.Constants;
+using SessionTracker.JsonFileCreator.OtherCreators;
 using SessionTracker.Models;
 
 namespace SessionTracker.JsonFileCreator.StatCreators
 {
     public class ItemStatsCreator
     {
-        public static async Task<List<Stat>> CreateItemStats()
-        {
-            var miscItemStats = await CreateMiscItemStats();
-            var materialStorageItemStats = await CreateMaterialStorageItemStats();
-            await AddLocalizationForMaterialStorageCategoryNames(materialStorageItemStats);
-
-            var itemStats = new List<Stat>();
-            itemStats.AddRange(miscItemStats);
-            itemStats.AddRange(materialStorageItemStats);
-            itemStats = StatsCreatorCommon.SetOrder(itemStats);
-            await AddLocalizationForItemNameAndDescription(itemStats);
-            
-            return itemStats;
-        }
-
-        private static async Task<List<Stat>> CreateMiscItemStats()
+        public static async Task<List<Stat>> CreateMiscItemStats()
         {
             var stats = new List<Stat>();
-            using var client = new Gw2Client(new Connection(Locale.English));
-            var items = await client.WebApi.V2.Items.ManyAsync(MISC_ITEM_IDS);
+            using var gw2Client = new Gw2Client(new Connection(Locale.English));
+            var items = await gw2Client.WebApi.V2.Items.ManyAsync(MISC_ITEM_IDS);
 
             foreach (var item in items)
             {
@@ -39,43 +25,34 @@ namespace SessionTracker.JsonFileCreator.StatCreators
                     Id          = $"item{item.Id}",
                     ApiId       = item.Id,
                     ApiIdType   = ApiIdType.Item,
-                    IconAssetId = StatsCreatorCommon.GetIconAssetIdFromIconUrl(item.Icon.Url.AbsoluteUri),
-                    IsVisible   = false,
-                    Category =
+                    Icon        =
                     {
-                        Type = StatCategoryType.MiscItem,
-                        Name =
-                        {
-                            LocalizedTextByLocale =
-                            {
-                                { Locale.English, "Custom Items" }, // todo x wie category nennen? oder müssen die einzelnen items eigene categories kriegen?
-                                { Locale.French, "Custom Items" },
-                                { Locale.German, "Custom Items" },
-                                { Locale.Spanish, "Custom Items" },
-                                { Locale.Chinese, "Custom Items" },
-                                { Locale.Korean, "Custom Items" },
-                            }
-                        },
+                        AssetId = CreatorCommon.GetIconAssetIdFromIconUrl(item.Icon.Url.AbsoluteUri),
                     },
+                    IsVisible   = false,
                 };
 
                 stats.Add(stat);
             }
 
+            await AddLocalizationForItemNameAndDescription(stats);
+
             return stats;
         }
 
-        private static async Task<List<Stat>> CreateMaterialStorageItemStats()
+        public static async Task<List<Stat>> CreateMaterialStorageItemStats(List<StatCategory> categories)
         {
-            var stats = new List<Stat>();
-            using var client = new Gw2Client(new Connection(Locale.English));
-            var materialCategories = await client.WebApi.V2.Materials.AllAsync();
-            foreach (var materialCategory in materialCategories)
+            var allCategoriesStats = new List<Stat>();
+            using var gw2Client = new Gw2Client(new Connection(Locale.English));
+            var apiMaterialCategories = await gw2Client.WebApi.V2.Materials.AllAsync();
+
+            foreach (var apiMaterialCategory in apiMaterialCategories)
             {
-                var items = await client.WebApi.V2.Items.ManyAsync(materialCategory.Items);
+                var singleCategoryStats = new List<Stat>();
+                var items = await gw2Client.WebApi.V2.Items.ManyAsync(apiMaterialCategory.Items);
                 foreach (var item in items)
                 {
-                    var statExistsAlready = stats.Any(s => s.ApiId == item.Id);
+                    var statExistsAlready = allCategoriesStats.Any(s => s.ApiId == item.Id);
                     if (statExistsAlready) // because "Pile of Soybeans" (97105) exists in "Cooking Materials" and "Cooking Ingredients" Category
                         continue;
 
@@ -84,44 +61,34 @@ namespace SessionTracker.JsonFileCreator.StatCreators
                         Id = $"item{item.Id}",
                         ApiId = item.Id,
                         ApiIdType = ApiIdType.Item,
-                        IconAssetId = StatsCreatorCommon.GetIconAssetIdFromIconUrl(item.Icon.Url.AbsoluteUri),
+                        Icon = 
+                        { 
+                            AssetId = CreatorCommon.GetIconAssetIdFromIconUrl(item.Icon.Url.AbsoluteUri)
+                        },
                         IsVisible = false,
-                        Category =
-                        {
-                            Type     = StatCategoryType.MaterialStorage,
-                            ApiId    = materialCategory.Id,
-                            ApiPosition = materialCategory.Order,
-                        }
                     };
 
-                    stats.Add(stat);
+                    singleCategoryStats.Add(stat);
                 }
-            }
-            
-            return stats;
-        }
 
-        private static async Task AddLocalizationForMaterialStorageCategoryNames(List<Stat> stats)
-        {
-            foreach (var locale in StatsCreatorCommon.Locales)
-            {
-                using var client = new Gw2Client(new Connection(locale));
-                var localMaterialCategories = await client.WebApi.V2.Materials.AllAsync();
-
-                foreach (var localMaterialCategory in localMaterialCategories)
-                    foreach (var stat in stats.Where(s => s.Category.ApiId == localMaterialCategory.Id))
-                        stat.Category.Name.SetLocalizedText(localMaterialCategory.Name, locale);
+                var matchingCategory = categories.Single(c => c.Id == CreatorCommon.CreateMaterialStorageCategoryId(apiMaterialCategory.Id));
+                CreatorCommon.SetPositionInCategoryAndCategoryId(singleCategoryStats, matchingCategory.Id);
+                allCategoriesStats.AddRange(singleCategoryStats);
             }
+
+            await AddLocalizationForItemNameAndDescription(allCategoriesStats);
+
+            return allCategoriesStats;
         }
 
         private static async Task AddLocalizationForItemNameAndDescription(List<Stat> stats)
         {
             var itemIds = stats.Select(s => s.ApiId).ToList();
 
-            foreach (var local in StatsCreatorCommon.Locales)
+            foreach (var local in CreatorCommon.Locales)
             {
-                using var client = new Gw2Client(new Connection(local));
-                var localItems = await client.WebApi.V2.Items.ManyAsync(itemIds);
+                using var gw2Client = new Gw2Client(new Connection(local));
+                var localItems = await gw2Client.WebApi.V2.Items.ManyAsync(itemIds);
 
                 foreach (var localItem in localItems)
                     AddNameAndDescription(localItem, stats, local);
