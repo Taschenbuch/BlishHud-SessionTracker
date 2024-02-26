@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace SessionTracker.OtherServices
 
 {
-    public class Services : IDisposable // cannot be called Services because of Folder name
+    public class Services : IDisposable
     {
         // has to be called FIRST
         public void InitializeServicesAndDefineSettings(SettingCollection settings, SemVer.Version moduleVersion, Gw2ApiManager gw2ApiManager)

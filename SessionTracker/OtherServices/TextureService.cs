@@ -25,7 +25,6 @@ namespace SessionTracker.OtherServices
             VisibilityTabTexture = contentsManager.GetTexture(@"settingsWindow\visibilityTab.png");
             StatsTabTexture = contentsManager.GetTexture(@"settingsWindow\statsTab_156909.png");
             GeneralTabTexture = contentsManager.GetTexture(@"settingsWindow\generalTab_156736.png");
-            SettingsWindowBackgroundTexture = contentsManager.GetTexture(@"settingsWindow\windowBackground_155985.png");
             SettingsWindowEmblemTexture = contentsManager.GetTexture(@"settingsWindow\settingsWindowEmblem.png");
             MoveDownTexture = contentsManager.GetTexture(@"settingsWindow\moveDown_155953.png");
             MoveDownActiveTexture = contentsManager.GetTexture(@"settingsWindow\moveDownActive_155953.png");
@@ -51,7 +50,6 @@ namespace SessionTracker.OtherServices
             GeneralTabTexture?.Dispose();
             StatsTabTexture?.Dispose();
             SettingsWindowEmblemTexture?.Dispose();
-            SettingsWindowBackgroundTexture?.Dispose();
             MoveDownTexture?.Dispose();
             MoveDownActiveTexture?.Dispose();
             MoveUpTexture?.Dispose();
@@ -60,8 +58,6 @@ namespace SessionTracker.OtherServices
             CornerIconTexture?.Dispose();
             CornerIconHoverTexture?.Dispose();
             AllStatsHiddenByZeroValuesSettingTexture?.Dispose();
-            SelectStatsWindowBackgroundTexture?.Dispose();
-            StatBackgroundTexture?.Dispose();
             DisposeStatTextures();
         }
 
@@ -71,7 +67,6 @@ namespace SessionTracker.OtherServices
         public Texture2D StatsTabTexture { get; }
         public Texture2D GeneralTabTexture { get; }
         public Texture2D VisibilityTabTexture { get; }
-        public Texture2D SettingsWindowBackgroundTexture { get; }
         public AsyncTexture2D SelectStatsWindowBackgroundTexture { get; }
         public AsyncTexture2D StatBackgroundTexture { get; }
         public Texture2D MoveDownTexture { get; }

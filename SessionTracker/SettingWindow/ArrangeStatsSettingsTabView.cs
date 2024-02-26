@@ -7,13 +7,12 @@ using Microsoft.Xna.Framework;
 using SessionTracker.Controls;
 using SessionTracker.Models;
 using SessionTracker.OtherServices;
-using SessionTracker.SelectStats;
 
 namespace SessionTracker.SettingsWindow
 {
-    public class StatsSettingsTabView : View
+    public class ArrangeStatsSettingsTabView : View
     {
-        public StatsSettingsTabView(Services services)
+        public ArrangeStatsSettingsTabView(Services services)
         {
             _service = services;
         }
@@ -32,19 +31,6 @@ namespace SessionTracker.SettingsWindow
                 "After that click on the 'Move visible to top'-button to make hiding or reordering easier.\n" +
                 "You can reorder the stats with the up and down buttons.");
 
-            // todo x start
-            _selectStatsStandardWindow = new SelectStatsWindow(_service);
-            _selectStatsStandardWindow.Show();  // todo x temporary
-            var openSelectStatsWindowButton = new StandardButton()
-            {
-                Text = "Select Stats",
-                BasicTooltipText = "Select which stats are shown in the stats window.",
-                Width = 150,
-                Parent = trackedStatsSectionFlowPanel
-            };
-            openSelectStatsWindowButton.Click += (s, e) => _selectStatsStandardWindow.Show();
-            // todo x end
-
             ShowMoveVisibleToTopButton(trackedStatsSectionFlowPanel); // todo x überflüssig
 
             _statRowsFlowPanel = new FlowPanel
@@ -58,11 +44,6 @@ namespace SessionTracker.SettingsWindow
             };
 
             ShowStatRows(_service.Model.Stats, _statRowsFlowPanel);
-        }
-
-        protected override void Unload()
-        {
-            _selectStatsStandardWindow?.Dispose();
         }
 
         private void ShowMoveVisibleToTopButton(FlowPanel statsFlowPanel)
@@ -227,7 +208,6 @@ namespace SessionTracker.SettingsWindow
         private FlowPanel _rootFlowPanel;
         private FlowPanel _statRowsFlowPanel;
         private readonly Services _service;
-        private SelectStatsWindow _selectStatsStandardWindow;
         private readonly Dictionary<string, Checkbox> _visibilityCheckBoxByStatId = new Dictionary<string, Checkbox>();
         private static readonly Color VISIBLE_COLOR = new Color(17, 64, 9) * 0.9f;
         private static readonly Color NOT_VISIBLE_COLOR = new Color(Color.Black, 0.5f);

@@ -6,48 +6,52 @@ using System.Collections.Generic;
 using System.Linq;
 using SessionTracker.Controls;
 using SessionTracker.Models;
+using Blish_HUD.Graphics.UI;
 
 namespace SessionTracker.SelectStats
 {
-    public class SelectStatsWindow : StandardWindow
+    public class SelectStatsSettingsTabView : View
     {
-        public SelectStatsWindow(Services services)
-            : base(services.TextureService.SelectStatsWindowBackgroundTexture, new Rectangle(40, 30, 950, 950), new Rectangle(60, 40, 950, 930))
+        public SelectStatsSettingsTabView(Services services)
         {
             _services = services;
+        }
 
-            Emblem = services.TextureService.SettingsWindowEmblemTexture; // hack: has to be first to prevent bug of emblem not being visible
-            Title = "Select Stats";
-            Location = new Point(300, 300);
-            SavesPosition = true;
-            Id = "Ecksofa.SessionTracker: select stats window";
-            Parent = GameService.Graphics.SpriteScreen;
+        protected override void Unload()
+        {
+            _services.SettingService.SelectStatsIconSizeSetting.SettingChanged -= SelectStatsIconSizeSettingChanged;
+            // todo x fehlt da ein base.Unload() aufruf?
+        }
 
-            var rootFlowPanel = AddRootFlowPanel(this);
-            AddHint(rootFlowPanel);
-            var topControlsContainer = ControlFactory.CreateAdjustableChildLocationContainer(rootFlowPanel);
-            CategoryButtonsCreator.AddSelectStatsFromGroupButtons(_statContainersByStatId, services.Model.Stats, topControlsContainer);
-            CategoryButtonsCreator.AddUnselectStatsFromGroupButtons(_statContainersByStatId, services.Model.Stats, topControlsContainer);
+        protected override void Build(Container buildPanel)
+        {
+            var rootFlowPanel = ControlFactory.CreateSettingsRootFlowPanel(buildPanel);
+            var settingsFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Select Stats", rootFlowPanel);
+            settingsFlowPanel.ControlPadding = new Vector2(0, 10); // todo x besser selbst steuern für jeden Bereich?
+            AddHint(settingsFlowPanel);
+            var topControlsContainer = ControlFactory.CreateAdjustableChildLocationContainer(settingsFlowPanel);
+            CategoryButtonsCreator.AddSelectStatsFromGroupButtons(_statContainersByStatId, _services.Model.Stats, topControlsContainer);
+            CategoryButtonsCreator.AddUnselectStatsFromGroupButtons(_statContainersByStatId, _services.Model.Stats, topControlsContainer);
             var searchTextBox = new StatsSearchTextBox(
-                services,
+                _services,
                 _noSearchResultsHintLabel,
                 _statContainersByStatId,
                 _controlsByCategoryId,
-                rootFlowPanel, 
+                settingsFlowPanel, 
                 topControlsContainer);
 
-            AddIconSizeDropdown(services, topControlsContainer, searchTextBox);
+            AddIconSizeDropdown(_services, topControlsContainer, searchTextBox);
             AddButtonsToExpandCollapseAllCategories(_controlsByCategoryId, topControlsContainer);
 
             // todo x in class auslagern?
-            foreach (var statCategory in services.Model.StatCategories)
+            foreach (var statCategory in _services.Model.StatCategories)
             {
-                var categoryContainer = ControlFactory.CreateAdjustableChildLocationContainer(rootFlowPanel);
+                var categoryContainer = ControlFactory.CreateAdjustableChildLocationContainer(settingsFlowPanel);
                 var categoryFlowPanel = new FlowPanel()
                 {
                     Title = statCategory.Name.Localized,
                     FlowDirection = ControlFlowDirection.LeftToRight,
-                    Width = 890,
+                    Width = 845,
                     HeightSizingMode = SizingMode.AutoSize,
                     OuterControlPadding = new Vector2(2),
                     CanCollapse = true,
@@ -63,40 +67,26 @@ namespace SessionTracker.SelectStats
 
                 AddButtonsToSelectAndUnselectAllStatsOfSingleCategory(statCategory, _controlsByCategoryId, categoryContainer);
 
-                var statsInCategory = services.Model.Stats
+                var statsInCategory = _services.Model.Stats
                     .Where(s => s.CategoryId == statCategory.Id)
                     .OrderBy(s => s.PositionInsideCategory);
 
                 foreach (var stat in statsInCategory) // todo x man könnte getrennt categories und statContainer erzeugen. Danach erst statContainer Parents setzen.
                 {
-                    var statContainer = new SelectStatContainer(stat, services, categoryFlowPanel);
+                    var statContainer = new SelectStatContainer(stat, _services, categoryFlowPanel);
                     _controlsByCategoryId[statCategory.Id].StatContainers.Add(statContainer);
                     _statContainersByStatId[stat.Id] = statContainer;
                 }
             }
         }
 
-        private static FlowPanel AddRootFlowPanel(Container parent)
-        {
-            return new FlowPanel
-            {
-                FlowDirection = ControlFlowDirection.SingleTopToBottom,
-                CanScroll = true,
-                OuterControlPadding = new Vector2(10, 0),
-                ControlPadding = new Vector2(0, 10),
-                Width = 920, // fixed width to not cutoff scrollbar
-                HeightSizingMode = SizingMode.Fill,
-                Parent = parent,
-            };
-        }
-
-        private void AddIconSizeDropdown(Services services, Container parent, TextBox searchTextBox)
+        private void AddIconSizeDropdown(Services _services, Container parent, TextBox searchTextBox)
         {
             // todo x in class mit Dispose auslagern?
-            var iconSizeSettingView = ControlFactory.CreateSetting(parent, services.SettingService.SelectStatsIconSizeSetting);
+            var iconSizeSettingView = ControlFactory.CreateSetting(parent, _services.SettingService.SelectStatsIconSizeSetting);
             iconSizeSettingView.Top = searchTextBox.Top;
             iconSizeSettingView.Left = searchTextBox.Right + 10;
-            services.SettingService.SelectStatsIconSizeSetting.SettingChanged += SelectStatsIconSizeSettingChanged;
+            _services.SettingService.SelectStatsIconSizeSetting.SettingChanged += SelectStatsIconSizeSettingChanged;
         }
 
         private static void AddButtonsToExpandCollapseAllCategories(
@@ -108,7 +98,7 @@ namespace SessionTracker.SelectStats
                 Text = "Expand All",
                 Width = 100,
                 Top = 30,
-                Left = 790,
+                Left = 750,
                 Parent = parent,
             };
 
@@ -125,21 +115,14 @@ namespace SessionTracker.SelectStats
             collapseAllCategories.Click += (sender, e) => controlsByCategoryId.Values.ToList().ForEach(c => c.CategoryFlowPanel.Collapse());
         }
 
-        private static void AddHint(FlowPanel rootFlowPanel)
+        private static void AddHint(Container parent)
         {
-            var hintPanel = new LocationContainer
-            {
-                WidthSizingMode = SizingMode.AutoSize,
-                HeightSizingMode = SizingMode.AutoSize,
-                BackgroundColor = Color.Black * 0.6f,
-                Parent = rootFlowPanel,
-            };
-
             ControlFactory.CreateHintLabel(
-                hintPanel,
+                parent,
                 "- To select which stats are tracked click on the stat icons or use the buttons to (un)select multiple stats.\n" +
-                "ICON: colorful = selected stat | dark-transparent = unselected stat \n" +
-                "- It is recommended to enable 'hide stats with value = 0' setting and/or 'fixed window height' setting if you want to track many stats");
+                "- Not selected stats are displayed transparent\n" +
+                "- It is recommended to enable 'hide stats with value = 0' setting and/or 'fixed window height' setting if you want to track many stats.\n" +
+                "- After selecting the stats, you can rearrange them in the other settings tab");
         }
 
         private static void AddButtonsToSelectAndUnselectAllStatsOfSingleCategory(
@@ -151,7 +134,7 @@ namespace SessionTracker.SelectStats
             var selectSingleCategoryStatsButton = new StandardButton()
             {
                 Text = "Select",
-                Location = new Point(690, 5),
+                Location = new Point(655, 5),
                 Width = 80,
                 Parent = categoryContainer,
             };
@@ -172,12 +155,6 @@ namespace SessionTracker.SelectStats
         {
             foreach (var statContainer in _controlsByCategoryId.Values.SelectMany(s => s.StatContainers))
                 statContainer.SetIconSize((int)_services.SettingService.SelectStatsIconSizeSetting.Value);
-        }
-
-        protected override void DisposeControl()
-        {
-            _services.SettingService.SelectStatsIconSizeSetting.SettingChanged -= SelectStatsIconSizeSettingChanged;
-            base.DisposeControl();
         }
 
         private readonly Services _services;

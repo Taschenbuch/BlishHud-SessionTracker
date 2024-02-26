@@ -36,7 +36,7 @@ namespace SessionTracker.Controls
                 CanScroll           = true,
                 OuterControlPadding = new Vector2(10, 0),
                 ControlPadding      = new Vector2(0, 10),
-                Width               = 670, // fixed width to not cutoff scrollbar
+                Width               = 910, // fixed width to not cutoff scrollbar
                 HeightSizingMode    = SizingMode.Fill,
                 Parent              = parent
             };
@@ -48,9 +48,9 @@ namespace SessionTracker.Controls
             {
                 Title               = title,
                 FlowDirection       = ControlFlowDirection.SingleTopToBottom,
-                OuterControlPadding = new Vector2(10, 10),
+                OuterControlPadding = new Vector2(15, 10),
                 ShowBorder          = true,
-                Width               = 640,
+                Width               = parent.Width - 30,
                 HeightSizingMode    = SizingMode.AutoSize,
                 Parent              = parent
             };
