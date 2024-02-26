@@ -11,7 +11,7 @@ namespace SessionTracker.SelectStats
             Services services, 
             Label noSearchResultsHintLabel,
             Dictionary<string, SelectStatContainer> statContainersByStatId,
-            Dictionary<string, (Container CategoryContainer, FlowPanel CategoryFlowPanel, List<SelectStatContainer> StatContainers)> controlsByCatalogId, 
+            Dictionary<string, SelectStatsControls> controlsByCategoryId,
             FlowPanel rootFlowPanel, 
             Container parent)
         {
@@ -45,8 +45,8 @@ namespace SessionTracker.SelectStats
                 // clear all
                 foreach (var categoryId in categoryIds)
                 {
-                    controlsByCatalogId[categoryId].CategoryContainer.Parent = null;
-                    controlsByCatalogId[categoryId].CategoryFlowPanel.ClearChildren(); // die ganzen fields wieder in local variables umwandeln? 
+                    controlsByCategoryId[categoryId].CategoryContainer.Parent = null;
+                    controlsByCategoryId[categoryId].CategoryFlowPanel.ClearChildren(); // die ganzen fields wieder in local variables umwandeln? 
                 }
 
                 noSearchResultsHintLabel.Parent = null;
@@ -57,8 +57,8 @@ namespace SessionTracker.SelectStats
                 {
                     foreach (var categoryId in categoryIds)
                     {
-                        controlsByCatalogId[categoryId].StatContainers.ForEach(c => c.Parent = controlsByCatalogId[categoryId].CategoryFlowPanel);
-                        controlsByCatalogId[categoryId].CategoryContainer.Parent = rootFlowPanel;
+                        controlsByCategoryId[categoryId].StatContainers.ForEach(c => c.Parent = controlsByCategoryId[categoryId].CategoryFlowPanel);
+                        controlsByCategoryId[categoryId].CategoryContainer.Parent = rootFlowPanel;
                     }
                     return;
                 }
@@ -75,8 +75,8 @@ namespace SessionTracker.SelectStats
                 // stats found -> add found stats
                 foreach (var matchingStatContainer in matchingStatsContainers)
                 {
-                    matchingStatContainer.Parent = controlsByCatalogId[matchingStatContainer.Stat.CategoryId].CategoryFlowPanel;
-                    controlsByCatalogId[matchingStatContainer.Stat.CategoryId].CategoryContainer.Parent = rootFlowPanel;
+                    matchingStatContainer.Parent = controlsByCategoryId[matchingStatContainer.Stat.CategoryId].CategoryFlowPanel;
+                    controlsByCategoryId[matchingStatContainer.Stat.CategoryId].CategoryContainer.Parent = rootFlowPanel;
                 }
             };
         }

@@ -32,12 +32,12 @@ namespace SessionTracker.SelectStats
                 services,
                 _noSearchResultsHintLabel,
                 _statContainersByStatId,
-                _controlsByCatalogId,
+                _controlsByCategoryId,
                 rootFlowPanel, 
                 topControlsContainer);
 
             AddIconSizeDropdown(services, topControlsContainer, searchTextBox);
-            AddButtonsToExpandCollapseAllCategories(_controlsByCatalogId, topControlsContainer);
+            AddButtonsToExpandCollapseAllCategories(_controlsByCategoryId, topControlsContainer);
 
             // todo x in class auslagern?
             foreach (var statCategory in services.Model.StatCategories)
@@ -55,8 +55,13 @@ namespace SessionTracker.SelectStats
                     Parent = categoryContainer
                 };
 
-                _controlsByCatalogId[statCategory.Id] = (categoryContainer,  categoryFlowPanel, new List<SelectStatContainer>());
-                AddButtonsToSelectAndUnselectAllStatsOfSingleCategory(statCategory, _controlsByCatalogId, categoryContainer);
+                _controlsByCategoryId[statCategory.Id] = new SelectStatsControls
+                {
+                    CategoryContainer = categoryContainer,
+                    CategoryFlowPanel = categoryFlowPanel
+                };
+
+                AddButtonsToSelectAndUnselectAllStatsOfSingleCategory(statCategory, _controlsByCategoryId, categoryContainer);
 
                 var statsInCategory = services.Model.Stats
                     .Where(s => s.CategoryId == statCategory.Id)
@@ -65,7 +70,7 @@ namespace SessionTracker.SelectStats
                 foreach (var stat in statsInCategory) // todo x man könnte getrennt categories und statContainer erzeugen. Danach erst statContainer Parents setzen.
                 {
                     var statContainer = new SelectStatContainer(stat, services, categoryFlowPanel);
-                    _controlsByCatalogId[statCategory.Id].StatContainers.Add(statContainer);
+                    _controlsByCategoryId[statCategory.Id].StatContainers.Add(statContainer);
                     _statContainersByStatId[stat.Id] = statContainer;
                 }
             }
@@ -95,7 +100,7 @@ namespace SessionTracker.SelectStats
         }
 
         private static void AddButtonsToExpandCollapseAllCategories(
-            Dictionary<string, (Container CategoryContainer, FlowPanel CategoryFlowPanel, List<SelectStatContainer> StatContainers)> controlsByCatalogId, 
+            Dictionary<string, SelectStatsControls> controlsByCategoryId,
             Container parent)
         {
             var expandAllCategories = new StandardButton()
@@ -116,8 +121,8 @@ namespace SessionTracker.SelectStats
                 Parent = parent,
             };
 
-            expandAllCategories.Click += (sender, e) => controlsByCatalogId.Values.ToList().ForEach(c => c.CategoryFlowPanel.Expand());
-            collapseAllCategories.Click += (sender, e) => controlsByCatalogId.Values.ToList().ForEach(c => c.CategoryFlowPanel.Collapse());
+            expandAllCategories.Click += (sender, e) => controlsByCategoryId.Values.ToList().ForEach(c => c.CategoryFlowPanel.Expand());
+            collapseAllCategories.Click += (sender, e) => controlsByCategoryId.Values.ToList().ForEach(c => c.CategoryFlowPanel.Collapse());
         }
 
         private static void AddHint(FlowPanel rootFlowPanel)
@@ -139,7 +144,7 @@ namespace SessionTracker.SelectStats
 
         private static void AddButtonsToSelectAndUnselectAllStatsOfSingleCategory(
             StatCategory statCategory,
-            Dictionary<string, (Container CategoryContainer, FlowPanel CategoryFlowPanel, List<SelectStatContainer> StatContainers)> controlsByCatalogId,
+            Dictionary<string, SelectStatsControls> controlsByCategoryId,
             LocationContainer categoryContainer
             )
         {
@@ -159,13 +164,13 @@ namespace SessionTracker.SelectStats
                 Parent = categoryContainer,
             };
 
-            selectSingleCategoryStatsButton.Click += (sender, e) => controlsByCatalogId[statCategory.Id].StatContainers.ForEach(s => s.SelectStat());
-            unselectSingleCategoryStatsButton.Click += (sender, e) => controlsByCatalogId[statCategory.Id].StatContainers.ForEach(s => s.UnselectStat());
+            selectSingleCategoryStatsButton.Click += (sender, e) => controlsByCategoryId[statCategory.Id].StatContainers.ForEach(s => s.SelectStat());
+            unselectSingleCategoryStatsButton.Click += (sender, e) => controlsByCategoryId[statCategory.Id].StatContainers.ForEach(s => s.UnselectStat());
         }
 
         private void SelectStatsIconSizeSettingChanged(object sender, ValueChangedEventArgs<SettingEntries.SelectStatsWindowIconSize> e)
         {
-            foreach (var statContainer in _controlsByCatalogId.Values.SelectMany(s => s.StatContainers))
+            foreach (var statContainer in _controlsByCategoryId.Values.SelectMany(s => s.StatContainers))
                 statContainer.SetIconSize((int)_services.SettingService.SelectStatsIconSizeSetting.Value);
         }
 
@@ -178,7 +183,6 @@ namespace SessionTracker.SelectStats
         private readonly Services _services;
         private readonly Label _noSearchResultsHintLabel = ControlFactory.CreateHintLabel(null, "No stats match search term!");
         private readonly Dictionary<string, SelectStatContainer> _statContainersByStatId = new Dictionary<string, SelectStatContainer>();
-        private readonly Dictionary<string, (Container CategoryContainer, FlowPanel CategoryFlowPanel, List<SelectStatContainer> StatContainers)> _controlsByCatalogId
-            = new Dictionary<string, (Container CategoryContainer, FlowPanel CategoryFlowPanel, List<SelectStatContainer> StatContainers)>();
+        private readonly Dictionary<string, SelectStatsControls> _controlsByCategoryId = new Dictionary<string, SelectStatsControls>();
     }
 }
