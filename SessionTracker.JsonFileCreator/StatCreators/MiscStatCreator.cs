@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Gw2Sharp.WebApi;
 using SessionTracker.Constants;
-using SessionTracker.JsonFileCreator.OtherCreators;
 using SessionTracker.Models;
 
 namespace SessionTracker.JsonFileCreator.StatCreators
@@ -13,7 +12,6 @@ namespace SessionTracker.JsonFileCreator.StatCreators
         {
             var miscStats = CreateCustomMiscStats();
             miscStats.AddRange(await ItemStatsCreator.CreateMiscItemStats());
-            CreatorCommon.SetPositionInCategoryAndCategoryId(miscStats, CategoryId.MISC);
             return miscStats;
         }
 

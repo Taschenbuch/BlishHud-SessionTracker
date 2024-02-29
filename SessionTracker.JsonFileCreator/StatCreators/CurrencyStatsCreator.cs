@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Gw2Sharp;
 using Gw2Sharp.WebApi;
 using Gw2Sharp.WebApi.V2.Models;
-using SessionTracker.Constants;
 using SessionTracker.JsonFileCreator.OtherCreators;
 using SessionTracker.Models;
 
@@ -16,7 +15,6 @@ namespace SessionTracker.JsonFileCreator.StatCreators
         {
             var currencyStats = await CreateStats();
             await AddLocalizationForCurrencyNameAndDescription(currencyStats);
-            CreatorCommon.SetPositionInCategoryAndCategoryId(currencyStats, CategoryId.CURRENCY);
             return currencyStats;
         }
 
@@ -29,7 +27,7 @@ namespace SessionTracker.JsonFileCreator.StatCreators
             {
                 var stat = new Stat
                 {
-                    Id = $"currency{currency.Id}",
+                    Id = CreatorCommon.CreateCurrencyStatId(currency.Id),
                     ApiId = currency.Id,
                     ApiIdType = ApiIdType.Currency,
                     Icon = 

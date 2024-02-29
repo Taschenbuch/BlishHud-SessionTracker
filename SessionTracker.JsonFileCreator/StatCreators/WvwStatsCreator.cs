@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Gw2Sharp.WebApi;
 using SessionTracker.Constants;
-using SessionTracker.JsonFileCreator.OtherCreators;
 using SessionTracker.Models;
 
 namespace SessionTracker.JsonFileCreator.StatCreators
@@ -9,13 +8,6 @@ namespace SessionTracker.JsonFileCreator.StatCreators
     public class WvwStatsCreator
     {
         public static List<Stat> CreateWvwStats()
-        {
-            var wvwStats = CreateStats();
-            CreatorCommon.SetPositionInCategoryAndCategoryId(wvwStats, CategoryId.WVW);
-            return wvwStats;
-        }
-
-        private static List<Stat> CreateStats()
         {
             return new List<Stat>()
             {

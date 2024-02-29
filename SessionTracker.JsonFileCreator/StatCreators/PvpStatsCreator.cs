@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Gw2Sharp.WebApi;
 using SessionTracker.Constants;
-using SessionTracker.JsonFileCreator.OtherCreators;
 using SessionTracker.Models;
 
 namespace SessionTracker.JsonFileCreator.StatCreators
@@ -9,13 +8,6 @@ namespace SessionTracker.JsonFileCreator.StatCreators
     public class PvpStatsCreator
     {
         public static List<Stat> CreatePvpStats()
-        {
-            var pvpStats = CreateStats();
-            CreatorCommon.SetPositionInCategoryAndCategoryId(pvpStats, CategoryId.PVP);
-            return pvpStats;
-        }
-
-        private static List<Stat> CreateStats()
         {
             return new List<Stat>()
             {

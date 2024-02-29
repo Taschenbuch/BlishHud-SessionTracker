@@ -1,9 +1,11 @@
 ﻿using Gw2Sharp.WebApi;
+using Gw2Sharp.WebApi.V2.Models;
 using SessionTracker.Constants;
 using SessionTracker.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 
 namespace SessionTracker.JsonFileCreator.OtherCreators
 {
@@ -24,18 +26,28 @@ namespace SessionTracker.JsonFileCreator.OtherCreators
             return int.Parse(Path.GetFileNameWithoutExtension(iconUrl));
         }
 
-        public static void SetPositionInCategoryAndCategoryId(List<Stat> stats, string categoryId)
+        public static void AddStatIdsToCategory(string categoryId, List<StatCategory> categories, List<string> statIds)
         {
-            for (var i = 0; i < stats.Count; i++)
-            {
-                stats[i].PositionInsideCategory = i + 1; // Position starts at 1 to find stats where it was not set yet (Position = 0)
-                stats[i].CategoryId = categoryId;
-            }
+            categories.Single(c => c.Id == categoryId)
+                      .StatIds
+                      .AddRange(statIds);
         }
 
-        public static string CreateMaterialStorageCategoryId(int categoryApiId)
+        public static string CreateMaterialStorageSubCategoryId(int categoryApiId)
         {
-            return $"{CategoryId.MATERIAL_STORAGE_ID_PREFIX} {categoryApiId}";
+            return $"{CategoryId.SUPER_MATERIAL_STORAGE} {categoryApiId}";
+        }
+
+        // DO NOT modify this without implementing a migration for older module versions
+        public static string CreateCurrencyStatId(int currencyApiId)
+        {
+            return $"currency{currencyApiId}";
+        }
+
+        // DO NOT modify this without implementing a migration for older module versions
+        public static string CreateItemStatId(int itemApiId)
+        {
+            return $"item{itemApiId}";
         }
     };
 }

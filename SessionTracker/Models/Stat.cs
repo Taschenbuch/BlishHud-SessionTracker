@@ -9,8 +9,6 @@ namespace SessionTracker.Models
         public string Id { get; set; } = string.Empty;
         public LocalizedText Name { get; } = new LocalizedText();
         public LocalizedText Description { get; } = new LocalizedText();
-        public string CategoryId { get; set; } = string.Empty;
-        public int PositionInsideCategory { get; set; } // because user can change stats order but it has to be fixed in select stats window.
         public int ApiId { get; set; }
         public ApiIdType ApiIdType{ get; set; } = ApiIdType.None;
         public StatIcon Icon { get; } = new StatIcon();

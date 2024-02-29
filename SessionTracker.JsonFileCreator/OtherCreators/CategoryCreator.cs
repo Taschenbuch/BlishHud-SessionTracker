@@ -13,11 +13,11 @@ namespace SessionTracker.JsonFileCreator.OtherCreators
         public static async Task<List<StatCategory>> CreateCategories()
         {
             var customCategories = CreateCustomCategories();
-            var materialStorageCategories = await CreateMaterialStorageCategories();
+            var materialStorageSubCategories = await CreateMaterialStorageCategories();
 
             var categories = new List<StatCategory>();
             categories.AddRange(customCategories);
-            categories.AddRange(materialStorageCategories);
+            categories.AddRange(materialStorageSubCategories);
             return categories;
         }
 
@@ -25,15 +25,34 @@ namespace SessionTracker.JsonFileCreator.OtherCreators
         {
             using var gw2Client = new Gw2Client(new Connection(Locale.English));
             var apiMaterialCategories = await gw2Client.WebApi.V2.Materials.AllAsync();
-            var categories = new List<StatCategory>();
-            foreach (var apiMaterialCategory in apiMaterialCategories.OrderBy(c => c.Order).ToList())
+            var orderedApiMaterialCategories = apiMaterialCategories.OrderBy(c => c.Order).ToList();
+            var categories = new List<StatCategory>
             {
-                var category = new StatCategory()
+                new StatCategory() // this is the super category. The other material storage categories are sub categories of this one.
                 {
-                    Id = CreatorCommon.CreateMaterialStorageCategoryId(apiMaterialCategory.Id),
+                    Id = CategoryId.SUPER_MATERIAL_STORAGE,
+                    SubCategoryIds = orderedApiMaterialCategories.Select(c => CreatorCommon.CreateMaterialStorageSubCategoryId(c.Id)).ToList(),
+                    Name =
+                    {
+                        LocalizedTextByLocale =
+                        {
+                            [Locale.English] = "Material Storage",
+                            [Locale.French]  = "Collection de matériaux",
+                            [Locale.German]  = "Materialienlager",
+                            [Locale.Spanish] = "Almacenamiento de material",
+                        }
+                    }
+                }
+            };
+
+            foreach (var apiMaterialCategory in orderedApiMaterialCategories)
+            {
+                var subCategory = new StatCategory()
+                {
+                    Id = CreatorCommon.CreateMaterialStorageSubCategoryId(apiMaterialCategory.Id),
                 };
-                await SetLocalizationForMaterialStorageCategoryName(category, apiMaterialCategory.Id);
-                categories.Add(category);
+                await SetLocalizationForMaterialStorageCategoryName(subCategory, apiMaterialCategory.Id);
+                categories.Add(subCategory);
             }
 
             return categories;
@@ -53,6 +72,65 @@ namespace SessionTracker.JsonFileCreator.OtherCreators
         {
             return new List<StatCategory>()
             {
+                new StatCategory()
+                {
+                    Id   = CategoryId.SUPER_GENERAL,
+                    Name =
+                    {
+                        LocalizedTextByLocale =
+                        {
+                            [Locale.English] = "General",
+                            [Locale.French]  = "Général",
+                            [Locale.German]  = "Allgemein",
+                            [Locale.Spanish] = "General",
+                        }
+                    },
+                    SubCategoryIds =
+                    {
+                        CategoryId.MISC,
+                        CategoryId.CURRENCY,
+                    }
+                },
+                new StatCategory()
+                {
+                    Id   = CategoryId.SUPER_COMPETITIVE,
+                    Name =
+                    {
+                        LocalizedTextByLocale =
+                        {
+                            [Locale.English] = "Competitive",
+                            [Locale.French]  = "Compétitif",
+                            [Locale.German]  = "Kompetitiv",
+                            [Locale.Spanish] = "Competitivas",
+                        }
+                    },
+                    SubCategoryIds =
+                    {
+                        CategoryId.WVW,
+                        CategoryId.PVP,
+                    }
+                },
+                new StatCategory()
+                {
+                    Id   = CategoryId.SUPER_PVE,
+                    Name =
+                    {
+                        LocalizedTextByLocale =
+                        {
+                            [Locale.English] = "PvE",
+                            [Locale.French]  = "PvE",
+                            [Locale.German]  = "PvE",
+                            [Locale.Spanish] = "PvE",
+                        }
+                    },
+                    SubCategoryIds =
+                    {
+                        CategoryId.OPEN_WORLD,
+                        CategoryId.FRACTAL,
+                        CategoryId.RAID,
+                        CategoryId.STRIKE,
+                    }
+                },
                 new StatCategory()
                 {
                     Id   = CategoryId.MISC,
@@ -97,15 +175,71 @@ namespace SessionTracker.JsonFileCreator.OtherCreators
                 },
                 new StatCategory()
                 {
+                    Id   = CategoryId.OPEN_WORLD,
+                    Name =
+                    {
+                        LocalizedTextByLocale =
+                        {
+                            [Locale.English] = "Open World",
+                            [Locale.French]  = "Monde ouvert",
+                            [Locale.German]  = "Offene Welt",
+                            [Locale.Spanish] = "Mundo abierto",
+                        }
+                    }
+                },
+                new StatCategory()
+                {
+                    Id   = CategoryId.RAID,
+                    Name =
+                    {
+                        LocalizedTextByLocale =
+                        {
+                            [Locale.English] = "Raid",
+                            [Locale.French]  = "Raid",
+                            [Locale.German]  = "Schlachtzug",
+                            [Locale.Spanish] = "Incursión",
+                        }
+                    }
+                },
+                new StatCategory()
+                {
+                    Id   = CategoryId.STRIKE,
+                    Name =
+                    {
+                        LocalizedTextByLocale =
+                        {
+                            [Locale.English] = "Strike mission",
+                            [Locale.French]  = "Mission d'attaque",
+                            [Locale.German]  = "Angriffsmissionen",
+                            [Locale.Spanish] = "Misiones de ataque",
+                        }
+                    }
+                },
+                new StatCategory()
+                {
+                    Id   = CategoryId.FRACTAL,
+                    Name =
+                    {
+                        LocalizedTextByLocale =
+                        {
+                            [Locale.English] = "Fractal",
+                            [Locale.French]  = "Fractale",
+                            [Locale.German]  = "Fraktal",
+                            [Locale.Spanish] = "Fractal",
+                        }
+                    }
+                },
+                new StatCategory()
+                {
                     Id   = CategoryId.CURRENCY,
                     Name =
                     {
                         LocalizedTextByLocale =
                         {
                             [Locale.English] = "Currencies",
-                            [Locale.French]  = "monnaies",
+                            [Locale.French]  = "Monnaies",
                             [Locale.German]  = "Währungen",
-                            [Locale.Spanish] = "divisas",
+                            [Locale.Spanish] = "Divisas",
                         }
                     }
                 },

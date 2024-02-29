@@ -22,7 +22,7 @@ namespace SessionTracker.JsonFileCreator.StatCreators
             {
                 var stat = new Stat
                 {
-                    Id          = $"item{item.Id}",
+                    Id          = CreatorCommon.CreateItemStatId(item.Id),
                     ApiId       = item.Id,
                     ApiIdType   = ApiIdType.Item,
                     Icon        =
@@ -58,7 +58,7 @@ namespace SessionTracker.JsonFileCreator.StatCreators
 
                     var stat = new Stat
                     {
-                        Id = $"item{item.Id}",
+                        Id = CreatorCommon.CreateItemStatId(item.Id),
                         ApiId = item.Id,
                         ApiIdType = ApiIdType.Item,
                         Icon = 
@@ -71,8 +71,8 @@ namespace SessionTracker.JsonFileCreator.StatCreators
                     singleCategoryStats.Add(stat);
                 }
 
-                var matchingCategory = categories.Single(c => c.Id == CreatorCommon.CreateMaterialStorageCategoryId(apiMaterialCategory.Id));
-                CreatorCommon.SetPositionInCategoryAndCategoryId(singleCategoryStats, matchingCategory.Id);
+                var matchingCategory = categories.Single(c => c.Id == CreatorCommon.CreateMaterialStorageSubCategoryId(apiMaterialCategory.Id));
+                CreatorCommon.AddStatIdsToCategory(matchingCategory.Id, categories, singleCategoryStats.Select(s => s.Id).ToList());
                 allCategoriesStats.AddRange(singleCategoryStats);
             }
 

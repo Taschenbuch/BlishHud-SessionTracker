@@ -9,7 +9,6 @@ namespace SessionTracker.JsonFileCreator
     {
         public static void ThrowIfModelIsInvalid(Model model)
         {
-            ThrowIfStatPositionInCategoryIsZero(model.Stats);
             ThrowIfStatHasNoCategory(model.Stats); // todo x testen
             ThrowIfCategoryIdsAreNotUnique(model.StatCategories); // todo x testen
         }
@@ -27,16 +26,10 @@ namespace SessionTracker.JsonFileCreator
 
         private static void ThrowIfStatHasNoCategory(List<Stat> stats)
         {
-            foreach (var stat in stats)
-                if (string.IsNullOrWhiteSpace(stat.CategoryId))
-                    throw new Exception($"Error: CategoryId must be set. stat: {stat.Name.English} (id: {stat.Id}, apiId: {stat.ApiId})");
-        }
-
-        private static void ThrowIfStatPositionInCategoryIsZero(List<Stat> stats)
-        {
-            foreach (var stat in stats)
-                if (stat.PositionInsideCategory == 0)
-                    throw new Exception($"Error: PositionInCategory must be >0. stat: {stat.Name.English} (id: {stat.Id}, apiId: {stat.ApiId})");
+            // todo x fix: prüfen dass alle stats mindestens einer category zugeordnet sind
+            //    foreach (var stat in stats) // 
+            //        if (string.IsNullOrWhiteSpace(stat.CategoryId))
+            //            throw new Exception($"Error: CategoryId must be set. stat: {stat.Name.English} (id: {stat.Id}, apiId: {stat.ApiId})");
         }
     }
 }
