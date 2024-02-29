@@ -103,7 +103,13 @@ namespace SessionTracker.RelativePositionWindow
             var windowAnchorLocation 
                 = WindowAnchorService.ConvertBetweenControlAndWindowAnchorLocation(location, Size, ConvertLocation.ToWindowAnchorLocation, _settingService.WindowAnchorSetting.Value);
             
-            _settingService.WindowRelativeLocationSetting.Value = ConvertCoordinatesService.ConvertAbsoluteToRelativeCoordinates(windowAnchorLocation, GameService.Graphics.SpriteScreen.Size);
+            var newLocation = ConvertCoordinatesService.ConvertAbsoluteToRelativeCoordinates(windowAnchorLocation, GameService.Graphics.SpriteScreen.Size);
+            var oldLocation = _settingService.WindowRelativeLocationSetting.Value;
+            // this if prevents that every click in a window causes a settings update.
+            // No idea why this code is even triggered for StandardWindows that dont use this custom Container class.
+            var windowLocationChanged = newLocation.X != oldLocation.X || newLocation.Y != oldLocation.Y;
+            if (windowLocationChanged)
+                _settingService.WindowRelativeLocationSetting.Value = newLocation;
         }
 
         private Point _mousePressedLocationInsideContainer = Point.Zero;
