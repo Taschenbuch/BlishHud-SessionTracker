@@ -52,26 +52,34 @@ namespace SessionTracker.SelectStats
 
             foreach (var superCategory in _services.Model.StatCategories.Where(c => c.IsSuperCategory))
             {
+                var superStatViewModels = superCategory.SubCategoryIds
+                    .Select(categoryId => _services.Model.StatCategories.Single(c => c.Id == categoryId))
+                    .SelectMany(category => category.StatIds)
+                    .Distinct() // this way the super category counter does not count the same stat twice. May look a bit confusing because numbers wont add up.
+                    .Select(statId => selectStatViewModelByStatId[statId])
+                    .ToList();
+
                 var categoryContainer = ControlFactory.CreateAdjustableChildLocationContainer(rootCategoriesFlowPanel);
                 var categoryFlowPanel = CreateSuperCategoryFlowPanel(superCategory, categoryContainer);
                 _controlsByCategoryId[superCategory.Id].CategoryContainer = categoryContainer;
                 _controlsByCategoryId[superCategory.Id].CategoryFlowPanel = categoryFlowPanel;
-                AddButtonsToSelectAndUnselectAllStatsOfSingleCategory(_controlsByCategoryId[superCategory.Id].StatContainers, categoryContainer, 14);
+                AddButtonsToSelectAndUnselectAllStatsOfSingleCategory(_controlsByCategoryId[superCategory.Id].StatContainers, categoryContainer, SUPER_CATEGORY_LOCATION_RIGHT_SHIFT);
+                new SelectedCountLabel(superStatViewModels, categoryContainer, SUPER_CATEGORY_LOCATION_RIGHT_SHIFT);
 
                 foreach (var subCategoryId in superCategory.SubCategoryIds)
                 {
                     var subCategory = _services.Model.StatCategories.Single(c => c.Id == subCategoryId);
+                    var subStatViewModels = subCategory.StatIds.Select(statId => selectStatViewModelByStatId[statId]).ToList();
                     var subCategoryContainer = ControlFactory.CreateAdjustableChildLocationContainer(categoryFlowPanel);
                     var subCategoryFlowPanel = CreateSubCategoryFlowPanel(subCategory, subCategoryContainer);
+                    new SelectedCountLabel(subStatViewModels, subCategoryContainer, 0);
+                    AddButtonsToSelectAndUnselectAllStatsOfSingleCategory(_controlsByCategoryId[subCategoryId].StatContainers, subCategoryContainer, 0);
                     _controlsByCategoryId[subCategoryId].CategoryContainer = subCategoryContainer;
                     _controlsByCategoryId[subCategoryId].CategoryFlowPanel = subCategoryFlowPanel;
-                    var singleCategoryStatContainers = new List<SelectStatContainer>();
-                    AddButtonsToSelectAndUnselectAllStatsOfSingleCategory(_controlsByCategoryId[subCategoryId].StatContainers, subCategoryContainer, 0);
 
                     foreach (var statId in subCategory.StatIds)
                     {
                         var statContainer = new SelectStatContainer(selectStatViewModelByStatId[statId], superCategory.Id, subCategoryId, _services, subCategoryFlowPanel);
-                        singleCategoryStatContainers.Add(statContainer);
                         _controlsByCategoryId[subCategoryId].StatContainers.Add(statContainer);
                         _controlsByCategoryId[superCategory.Id].StatContainers.Add(statContainer);
                     }
@@ -98,7 +106,7 @@ namespace SessionTracker.SelectStats
                 FlowDirection = ControlFlowDirection.LeftToRight,
                 Width = 862,
                 HeightSizingMode = SizingMode.AutoSize,
-                OuterControlPadding = new Vector2(14, 0),
+                OuterControlPadding = new Vector2(SUPER_CATEGORY_LOCATION_RIGHT_SHIFT, 0),
                 CanCollapse = true,
                 Parent = parent
             };
@@ -172,6 +180,7 @@ namespace SessionTracker.SelectStats
                 "BUG: expand/collapse causes the scrollbar to jump to the top. At the moment i have no idea how to fix that.\n" +
                 "- Search input helps to find stats faster.\n" +
                 "- If you want to track many stats it is recommended to enable 'hide stats with value = 0' setting and/or 'fixed window height' setting.\n" +
+                "- Selected counter will count duplicated stats as 1. Because of that it may look like numbers dont add up.\n" +
                 "- Arrange stats: Not here. Rearrange stats in the other settings tab";
 
             new Label
@@ -332,5 +341,6 @@ namespace SessionTracker.SelectStats
         private const int EXPANDED_HELP_WIDTH = 850;
         private const string SHOW_HELP_BUTTON_TEXT = "Show Help";
         private const string HIDE_HELP_BUTTON_TEXT = "Hide Help";
+        private const int SUPER_CATEGORY_LOCATION_RIGHT_SHIFT = 14;
     }
 }
