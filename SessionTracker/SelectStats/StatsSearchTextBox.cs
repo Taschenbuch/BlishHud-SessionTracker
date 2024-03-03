@@ -1,4 +1,5 @@
 ﻿using Blish_HUD.Controls;
+using SessionTracker.Controls;
 using SessionTracker.OtherServices;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,6 @@ namespace SessionTracker.SelectStats
     {
         public StatsSearchTextBox(
             Services services, 
-            Label noSearchResultsHintLabel,
             Dictionary<string, SelectStatsControls> controlsByCategoryId,
             FlowPanel rootFlowPanel, 
             Container parent)
@@ -19,6 +19,8 @@ namespace SessionTracker.SelectStats
             Width = 300;
             BasicTooltipText = "Search for stats. Only stats that include the search term will be displayed";
             Parent = parent;
+
+            var noSearchResultsHintLabel = ControlFactory.CreateHintLabel(null, "No stats match search term!");
 
             var clearSearchButton = new StandardButton()
             {
@@ -41,9 +43,7 @@ namespace SessionTracker.SelectStats
                 var hasSearchTerm = !string.IsNullOrWhiteSpace(Text);
                 clearSearchButton.Visible = hasSearchTerm;
 
-                // todo x NEW
                 //// clear all
-
                 foreach (var categoryId in categoryIds)
                 {
                     controlsByCategoryId[categoryId].CategoryContainer.Parent = null;

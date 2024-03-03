@@ -17,9 +17,6 @@ namespace SessionTracker.SelectStats
         public SelectStatsSettingsTabView(Services services)
         {
             _services = services;
-
-            foreach (var category in services.Model.StatCategories)
-                _controlsByCategoryId.Add(category.Id, new SelectStatsControls()); 
         }
 
         protected override void Unload()
@@ -36,13 +33,7 @@ namespace SessionTracker.SelectStats
             AddHelp(settingsFlowPanel);
 
             var topControlsContainer = ControlFactory.CreateAdjustableChildLocationContainer(settingsFlowPanel);
-            var searchTextBox = new StatsSearchTextBox(
-                _services,
-                _noSearchResultsHintLabel,
-                _controlsByCategoryId,
-                settingsFlowPanel,
-                topControlsContainer);
-
+            var searchTextBox = new StatsSearchTextBox(_services, _controlsByCategoryId, settingsFlowPanel, topControlsContainer);
             var iconSizePanel = AddIconSizeDropdown(_services, topControlsContainer, searchTextBox.Right);
             AddButtonsToExpandCollapseAllCategories(_controlsByCategoryId, _services.Model.StatCategories, topControlsContainer);
             AddButtonsToSelectAndUnselectAllStats(_controlsByCategoryId, topControlsContainer);
@@ -61,8 +52,11 @@ namespace SessionTracker.SelectStats
 
                 var categoryContainer = ControlFactory.CreateAdjustableChildLocationContainer(rootCategoriesFlowPanel);
                 var categoryFlowPanel = CreateSuperCategoryFlowPanel(superCategory, categoryContainer);
-                _controlsByCategoryId[superCategory.Id].CategoryContainer = categoryContainer;
-                _controlsByCategoryId[superCategory.Id].CategoryFlowPanel = categoryFlowPanel;
+                _controlsByCategoryId[superCategory.Id] = new SelectStatsControls()
+                {
+                    CategoryContainer = categoryContainer,
+                    CategoryFlowPanel = categoryFlowPanel,
+                };
                 AddButtonsToSelectAndUnselectAllStatsOfSingleCategory(_controlsByCategoryId[superCategory.Id].StatContainers, categoryContainer, SUPER_CATEGORY_LOCATION_RIGHT_SHIFT);
                 new SelectedCountLabel(superStatViewModels, categoryContainer, SUPER_CATEGORY_LOCATION_RIGHT_SHIFT);
 
@@ -72,10 +66,13 @@ namespace SessionTracker.SelectStats
                     var subStatViewModels = subCategory.StatIds.Select(statId => selectStatViewModelByStatId[statId]).ToList();
                     var subCategoryContainer = ControlFactory.CreateAdjustableChildLocationContainer(categoryFlowPanel);
                     var subCategoryFlowPanel = CreateSubCategoryFlowPanel(subCategory, subCategoryContainer);
+                    _controlsByCategoryId[subCategoryId] = new SelectStatsControls()
+                    {
+                        CategoryContainer = subCategoryContainer,
+                        CategoryFlowPanel = subCategoryFlowPanel,
+                    };
                     new SelectedCountLabel(subStatViewModels, subCategoryContainer, 0);
                     AddButtonsToSelectAndUnselectAllStatsOfSingleCategory(_controlsByCategoryId[subCategoryId].StatContainers, subCategoryContainer, 0);
-                    _controlsByCategoryId[subCategoryId].CategoryContainer = subCategoryContainer;
-                    _controlsByCategoryId[subCategoryId].CategoryFlowPanel = subCategoryFlowPanel;
 
                     foreach (var statId in subCategory.StatIds)
                     {
@@ -334,7 +331,6 @@ namespace SessionTracker.SelectStats
         }
 
         private readonly Services _services;
-        private readonly Label _noSearchResultsHintLabel = ControlFactory.CreateHintLabel(null, "No stats match search term!");
         private readonly Dictionary<string, SelectStatsControls> _controlsByCategoryId = new Dictionary<string, SelectStatsControls>();
         private const int HELP_LABEL_BORDER_SIZE = 10;
         private const int EXPANDED_HELP_HEIGHT = 280;
