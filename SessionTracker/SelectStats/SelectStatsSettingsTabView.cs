@@ -40,7 +40,7 @@ namespace SessionTracker.SelectStats
                 _services,
                 _noSearchResultsHintLabel,
                 _controlsByCategoryId,
-                settingsFlowPanel, 
+                settingsFlowPanel,
                 topControlsContainer);
 
             var iconSizePanel = AddIconSizeDropdown(_services, topControlsContainer, searchTextBox.Right);
@@ -48,10 +48,11 @@ namespace SessionTracker.SelectStats
             AddButtonsToSelectAndUnselectAllStats(_controlsByCategoryId, topControlsContainer);
 
             var selectStatViewModelByStatId = _services.Model.Stats.ToDictionary(s => s.Id, s => new SelectStatViewModel(s, _services));
+            var rootCategoriesFlowPanel = CreateRootCategoriesFlowPanel(settingsFlowPanel);
 
             foreach (var superCategory in _services.Model.StatCategories.Where(c => c.IsSuperCategory))
             {
-                var categoryContainer = ControlFactory.CreateAdjustableChildLocationContainer(settingsFlowPanel);
+                var categoryContainer = ControlFactory.CreateAdjustableChildLocationContainer(rootCategoriesFlowPanel);
                 var categoryFlowPanel = CreateSuperCategoryFlowPanel(superCategory, categoryContainer);
                 _controlsByCategoryId[superCategory.Id].CategoryContainer = categoryContainer;
                 _controlsByCategoryId[superCategory.Id].CategoryFlowPanel = categoryFlowPanel;
@@ -78,6 +79,17 @@ namespace SessionTracker.SelectStats
             }
         }
 
+        private static FlowPanel CreateRootCategoriesFlowPanel(Container parent)
+        {
+            return new FlowPanel()
+            {
+                FlowDirection = ControlFlowDirection.SingleTopToBottom,
+                Width = 862,
+                HeightSizingMode = SizingMode.AutoSize,
+                Parent = parent
+            };
+        }
+
         private static FlowPanel CreateSuperCategoryFlowPanel(StatCategory category, Container parent)
         {
             return new FlowPanel()
@@ -86,10 +98,8 @@ namespace SessionTracker.SelectStats
                 FlowDirection = ControlFlowDirection.LeftToRight,
                 Width = 862,
                 HeightSizingMode = SizingMode.AutoSize,
-                OuterControlPadding = new Vector2(10, 5),
-                ControlPadding = new Vector2(5),
+                OuterControlPadding = new Vector2(14, 0),
                 CanCollapse = true,
-                ShowBorder = true,
                 Parent = parent
             };
         }
@@ -104,7 +114,6 @@ namespace SessionTracker.SelectStats
                 HeightSizingMode = SizingMode.AutoSize,
                 OuterControlPadding = new Vector2(2),
                 CanCollapse = true,
-                ShowBorder = true,
                 Parent = parent
             };
         }
