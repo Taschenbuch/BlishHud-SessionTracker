@@ -22,7 +22,7 @@ namespace SessionTracker.JsonFileCreator.StatCreators
                 new Stat
                 {
                     Id   = StatId.LUCK,
-                    Icon = { FileName = "luck.png" },
+                    Icon = { AssetId = 631150 },
                     Name =
                     {
                         LocalizedTextByLocale =

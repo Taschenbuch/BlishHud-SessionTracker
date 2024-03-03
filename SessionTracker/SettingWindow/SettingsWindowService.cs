@@ -24,9 +24,9 @@ namespace SessionTracker.SettingsWindow
                 Parent = GameService.Graphics.SpriteScreen,
             };
 
-            _selectStatsTab = new Tab(services.TextureService.StatsTabTexture, () => new SelectStatsSettingsTabView(services), "Select Stats");
+            _selectStatsTab = new Tab(services.TextureService.SelectStatsTabTexture, () => new SelectStatsSettingsTabView(services), "Select Stats");
             _settingsWindow.Tabs.Add(_selectStatsTab);
-            _settingsWindow.Tabs.Add(new Tab(services.TextureService.StatsTabTexture, () => new ArrangeStatsSettingsTabView(services), "Arrange Stats"));
+            _settingsWindow.Tabs.Add(new Tab(services.TextureService.ArrangeStatsTabTexture, () => new ArrangeStatsSettingsTabView(services), "Arrange Stats"));
             _settingsWindow.Tabs.Add(new Tab(services.TextureService.GeneralTabTexture, () => new GeneralSettingsTabView(services.SettingService), "General"));
             _settingsWindow.Tabs.Add(new Tab(services.TextureService.VisibilityTabTexture, () => new VisibilitySettingsTabView(services.SettingService), "Window Visibility"));
 #if DEBUG

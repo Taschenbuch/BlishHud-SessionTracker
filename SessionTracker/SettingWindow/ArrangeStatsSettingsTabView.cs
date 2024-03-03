@@ -22,7 +22,7 @@ namespace SessionTracker.SettingsWindow
             _rootFlowPanel = ControlFactory.CreateSettingsRootFlowPanel(buildPanel);
             _scrollbar = (Scrollbar)buildPanel.Children.FirstOrDefault(c => c is Scrollbar);
 
-            var trackedStatsSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Tracked Stats", _rootFlowPanel);
+            var trackedStatsSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Arrange Stats", _rootFlowPanel);
 
             ControlFactory.CreateHintLabel(
                 trackedStatsSectionFlowPanel,

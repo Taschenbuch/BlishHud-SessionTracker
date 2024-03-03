@@ -20,10 +20,6 @@ namespace SessionTracker.OtherServices
             var missingTextures = new List<string>();
 
             FallbackTexture = new AsyncTexture2D(contentsManager.GetTexture(@"stats\statIconPlaceholder_1444524.png"));
-            DebugTabTexture = contentsManager.GetTexture(@"settingsWindow\debugTab_440025.png");
-            VisibilityTabTexture = contentsManager.GetTexture(@"settingsWindow\visibilityTab.png");
-            StatsTabTexture = contentsManager.GetTexture(@"settingsWindow\statsTab_156909.png");
-            GeneralTabTexture = contentsManager.GetTexture(@"settingsWindow\generalTab_156736.png");
             SettingsWindowEmblemTexture = contentsManager.GetTexture(@"settingsWindow\settingsWindowEmblem.png");
             MoveDownTexture = contentsManager.GetTexture(@"settingsWindow\moveDown_155953.png");
             MoveDownActiveTexture = contentsManager.GetTexture(@"settingsWindow\moveDownActive_155953.png");
@@ -31,7 +27,12 @@ namespace SessionTracker.OtherServices
             MoveUpActiveTexture = contentsManager.GetTexture(@"settingsWindow\moveUpActive_155953.png");
             CornerIconTexture = contentsManager.GetTexture(@"cornerIcon.png");
             CornerIconHoverTexture = contentsManager.GetTexture(@"cornerIconHover.png");
-            AllStatsHiddenByZeroValuesSettingTexture = contentsManager.GetTexture(@"hiddenStats.png");
+            AllStatsHiddenByZeroValuesSettingTexture = GetTextureFromAssetCache(358463, FallbackTexture, missingTextures);
+            SelectStatsTabTexture = GetTextureFromAssetCache(156909, FallbackTexture, missingTextures);
+            ArrangeStatsTabTexture = GetTextureFromAssetCache(156756, FallbackTexture, missingTextures);
+            GeneralTabTexture = GetTextureFromAssetCache(156736, FallbackTexture, missingTextures); 
+            VisibilityTabTexture = GetTextureFromAssetCache(358463, FallbackTexture, missingTextures);
+            DebugTabTexture = GetTextureFromAssetCache(440025, FallbackTexture, missingTextures);
             SelectStatsWindowBackgroundTexture = GetTextureFromAssetCache(155979, FallbackTexture, missingTextures); 
             StatBackgroundTexture = GetTextureFromAssetCache(1318622, FallbackTexture, missingTextures);
 
@@ -44,10 +45,6 @@ namespace SessionTracker.OtherServices
 
         public void Dispose()
         {
-            DebugTabTexture?.Dispose();
-            VisibilityTabTexture?.Dispose();
-            GeneralTabTexture?.Dispose();
-            StatsTabTexture?.Dispose();
             SettingsWindowEmblemTexture?.Dispose();
             MoveDownTexture?.Dispose();
             MoveDownActiveTexture?.Dispose();
@@ -56,16 +53,16 @@ namespace SessionTracker.OtherServices
             FallbackTexture?.Dispose();
             CornerIconTexture?.Dispose();
             CornerIconHoverTexture?.Dispose();
-            AllStatsHiddenByZeroValuesSettingTexture?.Dispose();
             DisposeStatTextures();
         }
 
-        public Texture2D DebugTabTexture { get; }
-        public Texture2D AllStatsHiddenByZeroValuesSettingTexture { get; }
+        public AsyncTexture2D DebugTabTexture { get; }
+        public AsyncTexture2D AllStatsHiddenByZeroValuesSettingTexture { get; }
+        public AsyncTexture2D ArrangeStatsTabTexture { get; }
         public Texture2D SettingsWindowEmblemTexture { get; }
-        public Texture2D StatsTabTexture { get; }
-        public Texture2D GeneralTabTexture { get; }
-        public Texture2D VisibilityTabTexture { get; }
+        public AsyncTexture2D SelectStatsTabTexture { get; }
+        public AsyncTexture2D GeneralTabTexture { get; }
+        public AsyncTexture2D VisibilityTabTexture { get; }
         public AsyncTexture2D SelectStatsWindowBackgroundTexture { get; }
         public AsyncTexture2D StatBackgroundTexture { get; }
         public Texture2D MoveDownTexture { get; }
