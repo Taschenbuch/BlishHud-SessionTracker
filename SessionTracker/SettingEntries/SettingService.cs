@@ -254,9 +254,9 @@ namespace SessionTracker.SettingEntries
 
             SelectStatsIconSizeSetting = settings.DefineSetting(
                 "select stats window icon size",
-                SelectStatsWindowIconSize.Medium,
+                SelectStatsWindowIconSize.M,
                 () => "icon size",
-                () => "Change size of stat icon in this window.");
+                () => "Change size of stat icons in this window.");
 
             var internalSettings = settings.AddSubCollection("internal settings (not visible in UI)");
             SettingsVersionSetting = internalSettings.DefineSetting("settings version", 3);

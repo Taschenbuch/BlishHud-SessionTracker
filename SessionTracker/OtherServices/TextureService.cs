@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using Blish_HUD;
 using Blish_HUD.Content;
 using Blish_HUD.Modules.Managers;

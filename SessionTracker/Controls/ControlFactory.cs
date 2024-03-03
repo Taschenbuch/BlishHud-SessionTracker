@@ -48,7 +48,7 @@ namespace SessionTracker.Controls
             {
                 Title               = title,
                 FlowDirection       = ControlFlowDirection.SingleTopToBottom,
-                OuterControlPadding = new Vector2(15, 10),
+                OuterControlPadding = new Vector2(5, 5),
                 ShowBorder          = true,
                 Width               = parent.Width - 30,
                 HeightSizingMode    = SizingMode.AutoSize,

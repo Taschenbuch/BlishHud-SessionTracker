@@ -7,12 +7,11 @@ namespace SessionTracker.SelectStats
 {
     public class SelectStatContainer : Container
     {
-        public Stat Stat { get; }
-
-        public SelectStatContainer(Stat stat, Services services, Container parent)
+        public SelectStatContainer(SelectStatViewModel selectStatViewModel, string superCategoryId, string subCategoryId, Services services, Container parent)
         {
-            Stat = stat;
-            _service = services;
+            _selectStatViewModel = selectStatViewModel;
+            SuperCategoryId = superCategoryId;
+            SubCategoryId = subCategoryId;
 
             Parent = parent;
             Click += (sender, args) => ToggleSelectStat();
@@ -20,31 +19,35 @@ namespace SessionTracker.SelectStats
             _backgroundImage = new Image(services.TextureService.StatBackgroundTexture)
             {
                 Location = new Point(BACKGROUND_IMAGE_MARGIN),
-                BasicTooltipText = stat.GetTextWithNameAndDescription(),
+                BasicTooltipText = Stat.GetTextWithNameAndDescription(),
                 Parent = this,
             };
 
-            _icon = new Image(services.TextureService.StatTextureByStatId[stat.Id])
+            _icon = new Image(services.TextureService.StatTextureByStatId[Stat.Id])
             {
                 Location = new Point(BACKGROUND_IMAGE_MARGIN + ICON_MARGIN),
-                BasicTooltipText = stat.GetTextWithNameAndDescription(),
+                BasicTooltipText = Stat.GetTextWithNameAndDescription(),
+                Opacity = GetIconOpacity(_selectStatViewModel.IsSelected),
                 Parent = this,
             };
 
-            UpdateIconOpacity();
             SetIconSize((int)services.SettingService.SelectStatsIconSizeSetting.Value);
+
+            _selectStatViewModel.IsSelectedChanged += (s, e) =>
+            {
+                _icon.Opacity = GetIconOpacity(_selectStatViewModel.IsSelected);
+            };
         }
+
+        public Stat Stat => _selectStatViewModel.Stat;
+        public string SuperCategoryId { get; }
+        public string SubCategoryId { get; }
 
         public void SetIconSize(int statIconSize)
         {
             Size = new Point(statIconSize + 2 * ICON_MARGIN + 2 * BACKGROUND_IMAGE_MARGIN);
             _backgroundImage.Size = new Point(statIconSize + 2 * ICON_MARGIN);
             _icon.Size = new Point(statIconSize);
-        }
-
-        public void ToggleSelectStat()
-        {
-            SelectOrUnselectStat(!Stat.IsVisible);
         }
 
         public void SelectStat()
@@ -57,21 +60,24 @@ namespace SessionTracker.SelectStats
             SelectOrUnselectStat(false);
         }
 
-        public void SelectOrUnselectStat(bool isSelected)
+        private void ToggleSelectStat()
         {
-            Stat.IsVisible = isSelected;
-            UpdateIconOpacity();
-            _service.Model.UiHasToBeUpdated = true;
+            SelectOrUnselectStat(!_selectStatViewModel.IsSelected);
         }
 
-        private void UpdateIconOpacity()
+        private void SelectOrUnselectStat(bool isSelected)
         {
-            _icon.Opacity = Stat.IsVisible ? 1f : 0.3f;
+            _selectStatViewModel.IsSelected = isSelected;
+        }
+
+        private static float GetIconOpacity(bool isSelected)
+        {
+           return isSelected ? 1f : 0.3f;
         }
 
         private readonly Image _backgroundImage;
         private readonly Image _icon;
-        private readonly Services _service;
+        private readonly SelectStatViewModel _selectStatViewModel;
         private const int ICON_MARGIN = 1;
         private const int BACKGROUND_IMAGE_MARGIN = 1;
     }

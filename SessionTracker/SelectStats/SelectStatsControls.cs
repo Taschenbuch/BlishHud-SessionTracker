@@ -7,6 +7,6 @@ namespace SessionTracker.SelectStats
     {
         public Container CategoryContainer { get; set; }
         public FlowPanel CategoryFlowPanel { get; set; }
-        public List<SelectStatContainer> StatContainers { get; set; } = new List<SelectStatContainer>();
+        public List<SelectStatContainer> StatContainers { get; } = new List<SelectStatContainer>();
     }
 }

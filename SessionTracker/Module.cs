@@ -32,8 +32,8 @@ namespace SessionTracker
 
         protected override void DefineSettings(SettingCollection settings)
         {
-            _service.InitializeServicesAndDefineSettings(settings, Version, Gw2ApiManager);
-            _service.DateTimeService.DefineSettings(settings);
+            _services.InitializeServicesAndDefineSettings(settings, Version, Gw2ApiManager);
+            _services.DateTimeService.DefineSettings(settings);
         }
 
         public override IView GetSettingsView()
@@ -41,7 +41,7 @@ namespace SessionTracker
             if (_moduleLoadError.HasModuleLoadFailed)
                 return _moduleLoadError.CreateErrorSettingsView();
             else
-                return new ModuleSettingsView(_service.SettingsWindowService);
+                return new ModuleSettingsView(_services.SettingsWindowService);
         }
 
         protected override async Task LoadAsync()
@@ -77,13 +77,13 @@ namespace SessionTracker
                 return;
             }
 
-            await _service.InitializeServices(localAndRemoteFileLocations, ContentsManager);
-            var statsContainer = new StatsContainer(_service);
-            _cornerIconService = new CornerIconService(statsContainer, CornerIconClickEventHandler, _service);
+            await _services.InitializeServices(localAndRemoteFileLocations, ContentsManager);
+            var statsContainer = new StatsContainer(_services);
+            _cornerIconService = new CornerIconService(statsContainer, CornerIconClickEventHandler, _services);
             _statsContainer = statsContainer;
 
-            _service.SettingService.UiVisibilityKeyBindingSetting.Value.Activated += OnUiVisibilityKeyBindingActivated;
-            _service.SettingService.UiVisibilityKeyBindingSetting.Value.Enabled   =  true;
+            _services.SettingService.UiVisibilityKeyBindingSetting.Value.Activated += OnUiVisibilityKeyBindingActivated;
+            _services.SettingService.UiVisibilityKeyBindingSetting.Value.Enabled   =  true;
         }
 
         private void CornerIconClickEventHandler(object s, MouseEventArgs e) => _statsContainer.ToggleVisibility();
@@ -91,13 +91,13 @@ namespace SessionTracker
 
         protected override void Unload()
         {
-            if(_service != null )
+            if(_services != null )
             {
-                _service?.Dispose();
-                if (_service.SettingService != null)
+                _services?.Dispose();
+                if (_services.SettingService != null)
                 {
-                    _service.SettingService.UiVisibilityKeyBindingSetting.Value.Enabled = false; // workaround to fix keybinding memory leak
-                    _service.SettingService.UiVisibilityKeyBindingSetting.Value.Activated -= OnUiVisibilityKeyBindingActivated;
+                    _services.SettingService.UiVisibilityKeyBindingSetting.Value.Enabled = false; // workaround to fix keybinding memory leak
+                    _services.SettingService.UiVisibilityKeyBindingSetting.Value.Activated -= OnUiVisibilityKeyBindingActivated;
                 }
             }
 
@@ -131,7 +131,7 @@ namespace SessionTracker
         }
 
         public static readonly Logger Logger = Logger.GetLogger<Module>();
-        private readonly Services _service = new Services();
+        private readonly Services _services = new Services();
         private StatsContainer _statsContainer;
         private CornerIconService _cornerIconService;
         private readonly ModuleLoadError _moduleLoadError = new ModuleLoadError();

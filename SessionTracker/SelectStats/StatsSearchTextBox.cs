@@ -10,24 +10,20 @@ namespace SessionTracker.SelectStats
         public StatsSearchTextBox(
             Services services, 
             Label noSearchResultsHintLabel,
-            Dictionary<string, SelectStatContainer> statContainersByStatId,
             Dictionary<string, SelectStatsControls> controlsByCategoryId,
             FlowPanel rootFlowPanel, 
             Container parent)
         {
             PlaceholderText = "Search...";
-            Top = 60;
             Left = 4;
             Width = 300;
             BasicTooltipText = "Search for stats. Only stats that include the search term will be displayed";
             Parent = parent;
 
-            var categoryIds = services.Model.StatCategories.Select(c => c.Id).ToList();
-
             var clearSearchButton = new StandardButton()
             {
                 Text = "x",
-                Top = 60,
+                Top = Top,
                 Left = Right - 30,
                 Width = 30,
                 BasicTooltipText = "Clear search input",
@@ -37,16 +33,21 @@ namespace SessionTracker.SelectStats
 
             clearSearchButton.Click += (s, o) => Text = "";
 
+            var categoryIds = services.Model.StatCategories.Select(c => c.Id).ToList();
+            var superCategoryIds = services.Model.StatCategories.Select(c => c.Id).ToList();
+
             TextChanged += (s, o) =>
             {
                 var hasSearchTerm = !string.IsNullOrWhiteSpace(Text);
                 clearSearchButton.Visible = hasSearchTerm;
-    
-                // clear all
+
+                // todo x NEW
+                //// clear all
+
                 foreach (var categoryId in categoryIds)
                 {
                     controlsByCategoryId[categoryId].CategoryContainer.Parent = null;
-                    controlsByCategoryId[categoryId].CategoryFlowPanel.ClearChildren(); // die ganzen fields wieder in local variables umwandeln? 
+                    controlsByCategoryId[categoryId].CategoryFlowPanel.ClearChildren(); 
                 }
 
                 noSearchResultsHintLabel.Parent = null;
@@ -55,16 +56,30 @@ namespace SessionTracker.SelectStats
                 var hasNoSearchTerm = string.IsNullOrWhiteSpace(Text);
                 if (hasNoSearchTerm)
                 {
-                    foreach (var categoryId in categoryIds)
+                    // todo x viel einfacher per foreach(statContainer) ohne verschachtelte loops lösbar? 
+                    foreach (var superCategory in services.Model.StatCategories.Where(c => c.IsSuperCategory))
                     {
-                        controlsByCategoryId[categoryId].StatContainers.ForEach(c => c.Parent = controlsByCategoryId[categoryId].CategoryFlowPanel);
-                        controlsByCategoryId[categoryId].CategoryContainer.Parent = rootFlowPanel;
+                        controlsByCategoryId[superCategory.Id].CategoryContainer.Parent = rootFlowPanel;
+                        var superCategoryFlowPanel = controlsByCategoryId[superCategory.Id].CategoryFlowPanel;
+
+                        foreach (var subCategoryId in superCategory.SubCategoryIds)
+                        {
+                            controlsByCategoryId[subCategoryId].CategoryContainer.Parent = superCategoryFlowPanel;
+                            var subCategoryFlowPanel = controlsByCategoryId[subCategoryId].CategoryFlowPanel;
+
+                            foreach (var statContainer in controlsByCategoryId[subCategoryId].StatContainers)
+                                statContainer.Parent = subCategoryFlowPanel;
+                        }
                     }
                     return;
                 }
 
-                // no stats found -> show hint
-                var matchingStatsContainers = statContainersByStatId.Values.Where(c => c.Stat.Name.Localized.ToLower().Contains(Text.ToLower()));
+                // search term -> no stats found -> show hint
+                var matchingStatsContainers = controlsByCategoryId.Values
+                    .SelectMany(c => c.StatContainers)
+                    .Where(c => c.Stat.Name.Localized.ToLower().Contains(Text.ToLower()))
+                    .ToList();
+
                 var hasNotFoundStats = !matchingStatsContainers.Any();
                 if (hasNotFoundStats)
                 {
@@ -72,11 +87,19 @@ namespace SessionTracker.SelectStats
                     return;
                 }
 
-                // stats found -> add found stats
+                // stearch term -> stats found -> show found stats
                 foreach (var matchingStatContainer in matchingStatsContainers)
                 {
-                    matchingStatContainer.Parent = controlsByCategoryId[matchingStatContainer.Stat.CategoryId].CategoryFlowPanel;
-                    controlsByCategoryId[matchingStatContainer.Stat.CategoryId].CategoryContainer.Parent = rootFlowPanel;
+                    var subCategoryId = matchingStatContainer.SubCategoryId;
+                    var superCategoryId = matchingStatContainer.SuperCategoryId;
+                    var subCategoryFlowPanel = controlsByCategoryId[subCategoryId].CategoryFlowPanel;
+                    var superCategoryFlowPanel = controlsByCategoryId[superCategoryId].CategoryFlowPanel;
+
+                    matchingStatContainer.Parent = subCategoryFlowPanel;
+                    controlsByCategoryId[subCategoryId].CategoryContainer.Parent = superCategoryFlowPanel;
+                    controlsByCategoryId[superCategoryId].CategoryContainer.Parent = rootFlowPanel;
+                    subCategoryFlowPanel.Expand();
+                    superCategoryFlowPanel.Expand();
                 }
             };
         }

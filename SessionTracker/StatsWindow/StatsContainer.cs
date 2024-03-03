@@ -27,7 +27,7 @@ namespace SessionTracker.StatsWindow
         public StatsContainer(Services services)
             : base(services.SettingService)
         {
-            _service = services;
+            _services = services;
             _model = services.Model;
             _updateLoop = services.UpdateLoop;
 
@@ -65,11 +65,11 @@ namespace SessionTracker.StatsWindow
 
         protected override void DisposeControl()
         {
-            _service.SettingService.StatsWithZeroValueAreHiddenSetting.SettingChanged -= OnStatsWithZeroValueAreHiddenSettingChanged;
-            _service.SettingService.FontSizeIndexSetting.SettingChanged               -= OnFontSizeIndexSettingChanged;
-            _service.SettingService.BackgroundOpacitySetting.SettingChanged           -= OnBackgroundSettingChanged;
-            _service.SettingService.BackgroundColorSetting.SettingChanged             -= OnBackgroundSettingChanged;
-            _service.SettingService.ValueLabelColorSetting.SettingChanged             -= OnValueLabelColorSettingChanged;
+            _services.SettingService.StatsWithZeroValueAreHiddenSetting.SettingChanged -= OnStatsWithZeroValueAreHiddenSettingChanged;
+            _services.SettingService.FontSizeIndexSetting.SettingChanged               -= OnFontSizeIndexSettingChanged;
+            _services.SettingService.BackgroundOpacitySetting.SettingChanged           -= OnBackgroundSettingChanged;
+            _services.SettingService.BackgroundColorSetting.SettingChanged             -= OnBackgroundSettingChanged;
+            _services.SettingService.ValueLabelColorSetting.SettingChanged             -= OnValueLabelColorSettingChanged;
             GameService.Overlay.UserLocaleChanged                                     -= OnUserChangedLanguageInBlishSettings;
 
             _visibilityService?.Dispose();
@@ -82,8 +82,8 @@ namespace SessionTracker.StatsWindow
 
         public override Control TriggerMouseInput(MouseEventType mouseEventType, MouseState ms)
         {
-            var windowCanBeClickedThrough = !_service.SettingService.DragWindowWithMouseIsEnabledSetting.Value
-                                          && _service.SettingService.WindowCanBeClickedThroughSetting.Value
+            var windowCanBeClickedThrough = !_services.SettingService.DragWindowWithMouseIsEnabledSetting.Value
+                                          && _services.SettingService.WindowCanBeClickedThroughSetting.Value
                                           && GameService.Input.Keyboard.ActiveModifiers != ModifierKeys.Alt;
 
             return windowCanBeClickedThrough
@@ -93,7 +93,7 @@ namespace SessionTracker.StatsWindow
 
         public void ToggleVisibility()
         {
-            _service.SettingService.UiIsVisibleSetting.Value = !_service.SettingService.UiIsVisibleSetting.Value;
+            _services.SettingService.UiIsVisibleSetting.Value = !_services.SettingService.UiIsVisibleSetting.Value;
         }
 
         public void ResetSession()
@@ -104,7 +104,7 @@ namespace SessionTracker.StatsWindow
         // Update2() because Update() already exists in base class. Update() is not always called but Update2() is!
         public void Update2(GameTime gameTime)
         {
-            _visibilityService ??= new VisibilityService(this, _service.SettingService);  // this cannot be done in StatsContainer ctor because hiding window on startup would not work.
+            _visibilityService ??= new VisibilityService(this, _services.SettingService);  // this cannot be done in StatsContainer ctor because hiding window on startup would not work.
 
             if (_model.UiHasToBeUpdated)
             {
@@ -123,7 +123,7 @@ namespace SessionTracker.StatsWindow
                     if (!_apiTokenAvailableCheckInterval.HasEnded())
                         return;
 
-                    var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _service.Gw2ApiManager);
+                    var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _services.Gw2ApiManager);
                     var canUpdateOrStartNewSession = apiTokenService.CanAccessApi || _waitedLongEnoughForApiTokenInterval.HasEnded();
                     if(!canUpdateOrStartNewSession)
                     {
@@ -184,7 +184,7 @@ namespace SessionTracker.StatsWindow
         {
             try
             {
-                var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _service.Gw2ApiManager);
+                var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _services.Gw2ApiManager);
                 if (!apiTokenService.CanAccessApi)
                 {
                     _statsWindowDisplayStateService.ShowApiTokenIssue(apiTokenService);
@@ -192,7 +192,7 @@ namespace SessionTracker.StatsWindow
                     return;
                 }
 
-                await ApiService.UpdateTotalValuesInModel(_service);
+                await ApiService.UpdateTotalValuesInModel(_services);
                 _resetService.UpdateNextResetDateTime();
                 _model.ResetDurationAndStats();
                 _valueLabelTextService.UpdateValueLabelTexts();
@@ -221,7 +221,7 @@ namespace SessionTracker.StatsWindow
             {
                 _resetService.UpdateNextResetDateTimeForMinutesAfterShutdownReset();
 
-                var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _service.Gw2ApiManager);
+                var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _services.Gw2ApiManager);
                 if (!apiTokenService.CanAccessApi)
                 {
                     _statsWindowDisplayStateService.ShowApiTokenIssue(apiTokenService);
@@ -230,14 +230,14 @@ namespace SessionTracker.StatsWindow
                     return;
                 }
 
-                await ApiService.UpdateTotalValuesInModel(_service);
+                await ApiService.UpdateTotalValuesInModel(_services);
                 _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit = false;
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _summaryTooltipService.UpdateSummaryTooltip();
                 _updateLoop.UseRegularUpdateSessionInterval();
                 ShowOrHideStats();
                 _statsWindowDisplayStateService.RemoveErrorAndShowUpdatedDisplayState();
-                await _service.FileService.SaveModelToFileAsync(_model);
+                await _services.FileService.SaveModelToFileAsync(_model);
                 _updateLoop.State = UpdateLoopState.PauseBeforeUpdatingSession;
             }
             catch (LogWarnException e)
@@ -268,7 +268,7 @@ namespace SessionTracker.StatsWindow
             _statValuesFlowPanel.ClearChildren();
             var visibleStats = _model.Stats.Where(e => e.IsVisible);
 
-            if (_service.SettingService.StatsWithZeroValueAreHiddenSetting.Value)
+            if (_services.SettingService.StatsWithZeroValueAreHiddenSetting.Value)
                 visibleStats = visibleStats.Where(e => e.HasNonZeroSessionValue);
 
             foreach (var stat in visibleStats)
@@ -282,7 +282,7 @@ namespace SessionTracker.StatsWindow
         {
             _errorLabel = new ErrorLabel();
             _userHasToSelectStatsFlowPanel = new UserHasToSelectStatsFlowPanel(services.SettingsWindowService);            
-            _allStatsHiddenByZeroValuesSettingImage = new Image(_service.TextureService.AllStatsHiddenByZeroValuesSettingTexture)
+            _allStatsHiddenByZeroValuesSettingImage = new Image(_services.TextureService.AllStatsHiddenByZeroValuesSettingTexture)
             {
                 Size = new Point(30),
                 BasicTooltipText = "All stats are hidden because their current session values are 0.\n" +
@@ -290,7 +290,7 @@ namespace SessionTracker.StatsWindow
                                    "This hide-zero-value-stats-feature can be turned off in the session tracker module settings."
             };
 
-            _statsRootFlowPanel = new StatsRootFlowPanel(_service.SettingService);
+            _statsRootFlowPanel = new StatsRootFlowPanel(_services.SettingService);
 
             _statTitlesFlowPanel = new FlowPanel()
             {
@@ -308,14 +308,14 @@ namespace SessionTracker.StatsWindow
                 Parent           = _statsRootFlowPanel
             };
 
-            new RightWindowMarginForScrollbar(_statsRootFlowPanel, _service.SettingService); // is automatically disposed with _statsRootFlowPanel
+            new RightWindowMarginForScrollbar(_statsRootFlowPanel, _services.SettingService); // is automatically disposed with _statsRootFlowPanel
 
-            foreach (var stat in _service.Model.Stats)
+            foreach (var stat in _services.Model.Stats)
             {
                 _valueLabelByStatId[stat.Id] = new Label()
                 {
                     Text           = "-",
-                    TextColor      = _service.SettingService.ValueLabelColorSetting.Value.GetColor(),
+                    TextColor      = _services.SettingService.ValueLabelColorSetting.Value.GetColor(),
                     ShowShadow     = true,
                     AutoSizeHeight = true,
                     AutoSizeWidth  = true,
@@ -323,7 +323,7 @@ namespace SessionTracker.StatsWindow
                     Parent         = null
                 };
 
-                _titleFlowPanelByStatId[stat.Id] = new StatTitleFlowPanel(stat, _statTitlesFlowPanel, _service);
+                _titleFlowPanelByStatId[stat.Id] = new StatTitleFlowPanel(stat, _statTitlesFlowPanel, _services);
             }
         }
 
@@ -342,7 +342,7 @@ namespace SessionTracker.StatsWindow
 
         private void OnFontSizeIndexSettingChanged(object sender = null, ValueChangedEventArgs<int> valueChangedEventArgs = null)
         {
-            var font = FontService.Fonts[_service.SettingService.FontSizeIndexSetting.Value];
+            var font = FontService.Fonts[_services.SettingService.FontSizeIndexSetting.Value];
             _userHasToSelectStatsFlowPanel.SetFont(font);
             _errorLabel.Font = font;
             _allStatsHiddenByZeroValuesSettingImage.Size = new Point(font.LineHeight);
@@ -356,7 +356,7 @@ namespace SessionTracker.StatsWindow
         
         private void OnBackgroundSettingChanged(object sender, EventArgs e)
         {
-            BackgroundColor = ColorService.CreateBackgroundColor(_service.SettingService);
+            BackgroundColor = ColorService.CreateBackgroundColor(_services.SettingService);
         }
 
         private void OnStatsWithZeroValueAreHiddenSettingChanged(object sender, ValueChangedEventArgs<bool> e)
@@ -382,6 +382,6 @@ namespace SessionTracker.StatsWindow
         private Image _allStatsHiddenByZeroValuesSettingImage;
         private readonly StatsWindowDisplayStateService _statsWindowDisplayStateService;
         private bool _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit;
-        private readonly Services _service;
+        private readonly Services _services;
     }
 }

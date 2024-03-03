@@ -14,7 +14,7 @@ namespace SessionTracker.SettingsWindow
     {
         public ArrangeStatsSettingsTabView(Services services)
         {
-            _service = services;
+            _services = services;
         }
 
         protected override void Build(Container buildPanel)
@@ -43,7 +43,7 @@ namespace SessionTracker.SettingsWindow
                 Parent = trackedStatsSectionFlowPanel
             };
 
-            ShowStatRows(_service.Model.Stats, _statRowsFlowPanel);
+            ShowStatRows(_services.Model.Stats, _statRowsFlowPanel);
         }
 
         private void ShowMoveVisibleToTopButton(FlowPanel statsFlowPanel)
@@ -61,9 +61,9 @@ namespace SessionTracker.SettingsWindow
 
         private void MoveVisibleStatsToTop()
         {
-            var sortedStats = _service.Model.Stats.OrderByDescending(stat => stat.IsVisible).ToList();
-            _service.Model.Stats.Clear();
-            _service.Model.Stats.AddRange(sortedStats);
+            var sortedStats = _services.Model.Stats.OrderByDescending(stat => stat.IsVisible).ToList();
+            _services.Model.Stats.Clear();
+            _services.Model.Stats.AddRange(sortedStats);
             UpdateStatRows();
         }       
 
@@ -99,8 +99,8 @@ namespace SessionTracker.SettingsWindow
 
             var moveStatUpwardsButton = new GlowButton
             {
-                Icon = _service.TextureService.MoveUpTexture,
-                ActiveIcon = _service.TextureService.MoveUpActiveTexture,
+                Icon = _services.TextureService.MoveUpTexture,
+                ActiveIcon = _services.TextureService.MoveUpActiveTexture,
                 BasicTooltipText = "Move up",
                 Size = new Point(25, 25),
                 Parent = statFlowPanel
@@ -108,8 +108,8 @@ namespace SessionTracker.SettingsWindow
 
             var moveStatDownwardsButton = new GlowButton()
             {
-                Icon = _service.TextureService.MoveDownTexture,
-                ActiveIcon = _service.TextureService.MoveDownActiveTexture,
+                Icon = _services.TextureService.MoveDownTexture,
+                ActiveIcon = _services.TextureService.MoveDownActiveTexture,
                 BasicTooltipText = "Move down",
                 Size = new Point(25, 25),
                 Parent = statFlowPanel
@@ -125,7 +125,7 @@ namespace SessionTracker.SettingsWindow
             };
 
             var iconContainer = ControlFactory.CreateAdjustableChildLocationContainer(clickFlowPanel);
-            var asyncTexture2D = _service.TextureService.StatTextureByStatId[stat.Id];
+            var asyncTexture2D = _services.TextureService.StatTextureByStatId[stat.Id];
 
             new Image(asyncTexture2D)
             {
@@ -153,31 +153,31 @@ namespace SessionTracker.SettingsWindow
             {
                 stat.IsVisible = e.Checked;
                 statFlowPanel.BackgroundColor = DetermineBackgroundColor(e.Checked);
-                _service.Model.UiHasToBeUpdated = true;
+                _services.Model.UiHasToBeUpdated = true;
             };
 
             moveStatUpwardsButton.Click += (s, e) =>
             {
-                var index = _service.Model.Stats.IndexOf(stat);
+                var index = _services.Model.Stats.IndexOf(stat);
 
                 const int firstStatIndex = 0;
                 if (index > firstStatIndex)
                 {
-                    _service.Model.Stats.Remove(stat);
-                    _service.Model.Stats.Insert(index - 1, stat);
+                    _services.Model.Stats.Remove(stat);
+                    _services.Model.Stats.Insert(index - 1, stat);
                     UpdateStatRows();
                 }
             };
 
             moveStatDownwardsButton.Click += (s, e) =>
             {
-                var index = _service.Model.Stats.IndexOf(stat);
+                var index = _services.Model.Stats.IndexOf(stat);
 
-                var lastStatIndex = _service.Model.Stats.Count - 1;
+                var lastStatIndex = _services.Model.Stats.Count - 1;
                 if (index < lastStatIndex)
                 {
-                    _service.Model.Stats.Remove(stat);
-                    _service.Model.Stats.Insert(index + 1, stat);
+                    _services.Model.Stats.Remove(stat);
+                    _services.Model.Stats.Insert(index + 1, stat);
                     UpdateStatRows();
                 }
             };
@@ -194,12 +194,12 @@ namespace SessionTracker.SettingsWindow
         {
             var scrollDistance = _scrollbar.ScrollDistance;
             _statRowsFlowPanel.ClearChildren();
-            ShowStatRows(_service.Model.Stats, _statRowsFlowPanel);
-            _service.Model.UiHasToBeUpdated = true;
+            ShowStatRows(_services.Model.Stats, _statRowsFlowPanel);
+            _services.Model.UiHasToBeUpdated = true;
 
             Task.Run(async () =>
             {
-                await Task.Delay(_service.SettingService.ScrollbarFixDelay.Value);
+                await Task.Delay(_services.SettingService.ScrollbarFixDelay.Value);
                 _scrollbar.ScrollDistance = scrollDistance;
             });
         }
@@ -207,7 +207,7 @@ namespace SessionTracker.SettingsWindow
         private Scrollbar _scrollbar;
         private FlowPanel _rootFlowPanel;
         private FlowPanel _statRowsFlowPanel;
-        private readonly Services _service;
+        private readonly Services _services;
         private readonly Dictionary<string, Checkbox> _visibilityCheckBoxByStatId = new Dictionary<string, Checkbox>();
         private static readonly Color VISIBLE_COLOR = new Color(17, 64, 9) * 0.9f;
         private static readonly Color NOT_VISIBLE_COLOR = new Color(Color.Black, 0.5f);
