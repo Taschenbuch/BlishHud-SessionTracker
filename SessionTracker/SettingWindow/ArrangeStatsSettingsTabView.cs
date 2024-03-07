@@ -32,9 +32,9 @@ namespace SessionTracker.SettingsWindow
                 .AutoSizeWidth()
                 .AutoSizeHeight()
                 .SetVerticalAlignment(VerticalAlignment.Top)
-                .CreatePart("UPDATE: You CANNOT select stats here anymore. Use the other tab for selecting stats", builder => builder
+                .CreatePart("UPDATE: You CANNOT select stats here anymore! In this tab you can only arrange stats now!\nUse the other tab to select stats!", builder => builder
                 .SetFontSize(Blish_HUD.ContentService.FontSize.Size18)
-                .SetTextColor(Color.Red)
+                .SetTextColor(Color.Yellow)
                 .MakeBold())
                 .Build()
                 .Parent = trackedStatsSectionFlowPanel;

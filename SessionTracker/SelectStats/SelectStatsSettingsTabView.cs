@@ -128,7 +128,7 @@ namespace SessionTracker.SelectStats
             var helpButton = new StandardButton()
             {
                 Text = SHOW_HELP_BUTTON_TEXT,
-                BackgroundColor = Color.Red,
+                BackgroundColor = Color.Yellow,
                 Width = 100,
                 Top = 5,
                 Left = 5,
@@ -245,7 +245,7 @@ namespace SessionTracker.SelectStats
         {
             var expandAllCategories = new StandardButton()
             {
-                Text = "Expand All",
+                Text = "Expand all",
                 BasicTooltipText = "Expand all categories",
                 Width = 90,
                 Left = 460,
@@ -254,7 +254,7 @@ namespace SessionTracker.SelectStats
 
             var collapseAllCategories = new StandardButton()
             {
-                Text = "Collapse All",
+                Text = "Collapse all",
                 BasicTooltipText = "Collapse all sub categories and expand all super categories",
                 Width = 90,
                 Top = expandAllCategories.Top,
