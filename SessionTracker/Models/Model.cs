@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
+using SessionTracker.OtherServices;
 
 namespace SessionTracker.Models
 {
@@ -26,6 +27,13 @@ namespace SessionTracker.Models
         public Stat GetStat(string statId)
         {
             return Stats.Single(e => e.Id == statId);
-        }        
+        }
+
+        public void MoveSelectedStatsToTop()
+        {
+            var statsSortedByVisibility = Stats.OrderByDescending(stat => stat.IsVisible).ToList();
+            Stats.Clear();
+            Stats.AddRange(statsSortedByVisibility);
+        }
     }
 }

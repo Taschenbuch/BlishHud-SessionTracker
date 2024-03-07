@@ -17,23 +17,43 @@ namespace SessionTracker.SettingsWindow
             _services = services;
         }
 
+        protected override void Unload()
+        {
+        }
+
         protected override void Build(Container buildPanel)
         {
-            _rootFlowPanel = ControlFactory.CreateSettingsRootFlowPanel(buildPanel);
-            _scrollbar = (Scrollbar)buildPanel.Children.FirstOrDefault(c => c is Scrollbar);
+            var rootFlowPanel = ControlFactory.CreateSettingsRootFlowPanel(buildPanel); // must be created before getting scrollbar. scrollbar is null otherwise
+            var scrollbar = (Scrollbar)buildPanel.Children.FirstOrDefault(c => c is Scrollbar);
+            var trackedStatsSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Arrange Stats", rootFlowPanel);
+            trackedStatsSectionFlowPanel.OuterControlPadding = new Vector2(10);
 
-            var trackedStatsSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Arrange Stats", _rootFlowPanel);
-
+            var warningLabel = new FormattedLabelBuilder()
+                .AutoSizeWidth()
+                .AutoSizeHeight()
+                .SetVerticalAlignment(VerticalAlignment.Top)
+                .CreatePart("UPDATE: You CANNOT select stats here anymore. Use the other tab for selecting stats", builder => builder
+                .SetFontSize(Blish_HUD.ContentService.FontSize.Size18)
+                .SetTextColor(Color.Red)
+                .MakeBold())
+                .Build()
+                .Parent = trackedStatsSectionFlowPanel;
+                 
             ControlFactory.CreateHintLabel(
                 trackedStatsSectionFlowPanel,
-                "Click the hide 'All'-button and then show or hide the stats you want to see by clicking on the\n" + // todo x text wird nicht mehr passen
-                "stats category buttons (e.g. 'PvP', 'Fractals') or by clicking on the individual stats below.\n" +
-                "After that click on the 'Move visible to top'-button to make hiding or reordering easier.\n" +
-                "You can reorder the stats with the up and down buttons.");
+                // todo x ersetzen durch help button
+                // todo x text updaten
+                "You can arrange the stats with the up and down buttons.");
 
-            ShowMoveVisibleToTopButton(trackedStatsSectionFlowPanel); // todo x überflüssig
+            var selectedStats = _services.Model.Stats.Where(s => s.IsVisible).ToList();
+            var hasNoSelectedStats = !selectedStats.Any();
+            if (hasNoSelectedStats)
+            {
+                ControlFactory.CreateHintLabel(trackedStatsSectionFlowPanel, "You have to select stats in 'Select Stats' tab first!");
+                return;
+            }
 
-            _statRowsFlowPanel = new FlowPanel
+            var statRowsFlowPanel = new FlowPanel
             {
                 FlowDirection = ControlFlowDirection.SingleTopToBottom,
                 OuterControlPadding = new Vector2(0, 5),
@@ -43,59 +63,28 @@ namespace SessionTracker.SettingsWindow
                 Parent = trackedStatsSectionFlowPanel
             };
 
-            ShowStatRows(_services.Model.Stats, _statRowsFlowPanel);
+            ShowStatRows(scrollbar, statRowsFlowPanel);
         }
 
-        private void ShowMoveVisibleToTopButton(FlowPanel statsFlowPanel)
+        private void ShowStatRows(Scrollbar scrollbar, Container parent)
         {
-            var moveVisibleStatRowsToTopButton = new StandardButton
-            {
-                Text = "Move visible to top",
-                BasicTooltipText = "Move all visible stats to the top for easier hiding or reordering.",
-                Width = 200,
-                Parent = statsFlowPanel
-            };
+            // MoveSelectedStatsToTop is required for up/down arrange buttons to work. otherwise index+/-1 will just move a selected stat between unselected stats
+            _services.Model.MoveSelectedStatsToTop(); 
 
-            moveVisibleStatRowsToTopButton.Click += (s, e) => MoveVisibleStatsToTop();
+            foreach (var stat in _services.Model.Stats.Where(s => s.IsVisible))
+                ShowStatRow(stat, scrollbar, parent);
         }
 
-        private void MoveVisibleStatsToTop()
-        {
-            var sortedStats = _services.Model.Stats.OrderByDescending(stat => stat.IsVisible).ToList();
-            _services.Model.Stats.Clear();
-            _services.Model.Stats.AddRange(sortedStats);
-            UpdateStatRows();
-        }       
-
-        private void ShowStatRows(List<Stat> stats, FlowPanel statRowsFlowPanel)
-        {
-            foreach (var stat in stats)
-                ShowStatRow(statRowsFlowPanel, stat);
-        }
-
-        private void ShowStatRow(FlowPanel statRowsFlowPanel, Stat stat)
+        private void ShowStatRow(Stat stat, Scrollbar scrollbar, Container parent)
         {
             var statFlowPanel = new FlowPanel
             {
                 FlowDirection = ControlFlowDirection.SingleLeftToRight,
-                BackgroundColor = DetermineBackgroundColor(stat.IsVisible),
+                BackgroundColor = new Color(Color.Black, 0.5f),
                 Width = 400,
                 HeightSizingMode = SizingMode.AutoSize,
-                Parent = statRowsFlowPanel
+                Parent = parent
             };
-
-            var checkBoxContainer = ControlFactory.CreateAdjustableChildLocationContainer(statFlowPanel);
-
-            var isVisibleCheckbox = new Checkbox
-            {
-                Checked = stat.IsVisible,
-                BasicTooltipText = SHOW_HIDE_STAT_TOOLTIP,
-                Size = new Point(16, 16),
-                Location = new Point(5, 5),
-                Parent = checkBoxContainer
-            };
-
-            _visibilityCheckBoxByStatId[stat.Id] = isVisibleCheckbox;
 
             var moveStatUpwardsButton = new GlowButton
             {
@@ -115,27 +104,13 @@ namespace SessionTracker.SettingsWindow
                 Parent = statFlowPanel
             };
 
-            var clickFlowPanel = new FlowPanel()
-            {
-                FlowDirection = ControlFlowDirection.SingleLeftToRight,
-                HeightSizingMode = SizingMode.Fill,
-                WidthSizingMode = SizingMode.Fill,
-                BasicTooltipText = SHOW_HIDE_STAT_TOOLTIP,
-                Parent = statFlowPanel
-            };
-
-            var iconContainer = ControlFactory.CreateAdjustableChildLocationContainer(clickFlowPanel);
-            var asyncTexture2D = _services.TextureService.StatTextureByStatId[stat.Id];
-
-            new Image(asyncTexture2D)
+            new Image(_services.TextureService.StatTextureByStatId[stat.Id])
             {
                 BasicTooltipText = stat.GetTextWithNameAndDescription(),
                 Size = new Point(24),
                 Location = new Point(20, 0),
-                Parent = iconContainer,
+                Parent = ControlFactory.CreateAdjustableChildLocationContainer(statFlowPanel),
             };
-
-            var labelContainer = ControlFactory.CreateAdjustableChildLocationContainer(clickFlowPanel);
 
             new Label
             {
@@ -144,73 +119,49 @@ namespace SessionTracker.SettingsWindow
                 AutoSizeWidth    = true,
                 AutoSizeHeight   = true,
                 Location         = new Point(5, 3),
-                Parent           = labelContainer
-            };
-
-            clickFlowPanel.Click += (s, e) => isVisibleCheckbox.Checked = isVisibleCheckbox.Checked == false;
-
-            isVisibleCheckbox.CheckedChanged += (s, e) =>
-            {
-                stat.IsVisible = e.Checked;
-                statFlowPanel.BackgroundColor = DetermineBackgroundColor(e.Checked);
-                _services.Model.UiHasToBeUpdated = true;
+                Parent           = ControlFactory.CreateAdjustableChildLocationContainer(statFlowPanel)
             };
 
             moveStatUpwardsButton.Click += (s, e) =>
             {
                 var index = _services.Model.Stats.IndexOf(stat);
-
-                const int firstStatIndex = 0;
+                var firstStatIndex = 0;
                 if (index > firstStatIndex)
                 {
-                    _services.Model.Stats.Remove(stat);
-                    _services.Model.Stats.Insert(index - 1, stat);
-                    UpdateStatRows();
+                    _services.Model.Stats.Remove(stat); 
+                    _services.Model.Stats.Insert(index - 1, stat); // todo x. falsch? bezieht sich ja nur noch auf visible stats
+                    UpdateStatRows(scrollbar, parent);
                 }
             };
 
             moveStatDownwardsButton.Click += (s, e) =>
             {
                 var index = _services.Model.Stats.IndexOf(stat);
-
-                var lastStatIndex = _services.Model.Stats.Count - 1;
+                var lastStatIndex = _services.Model.Stats.Where(s => s.IsVisible).Count() - 1;
                 if (index < lastStatIndex)
                 {
                     _services.Model.Stats.Remove(stat);
-                    _services.Model.Stats.Insert(index + 1, stat);
-                    UpdateStatRows();
+                    _services.Model.Stats.Insert(index + 1, stat); // todo x. falsch? bezieht sich ja nur noch auf visible stats
+                    UpdateStatRows(scrollbar, parent);
                 }
             };
         }
-
-        private static Color DetermineBackgroundColor(bool isVisible)
+   
+        private void UpdateStatRows(Scrollbar scrollbar, Container parent)
         {
-            return isVisible
-                ? VISIBLE_COLOR
-                : NOT_VISIBLE_COLOR;
-        }
-
-        private void UpdateStatRows()
-        {
-            var scrollDistance = _scrollbar.ScrollDistance;
-            _statRowsFlowPanel.ClearChildren();
-            ShowStatRows(_services.Model.Stats, _statRowsFlowPanel);
+            var scrollDistance = scrollbar.ScrollDistance;
+            parent.ClearChildren();
+            ShowStatRows(scrollbar, parent);
             _services.Model.UiHasToBeUpdated = true;
 
             Task.Run(async () =>
             {
                 await Task.Delay(_services.SettingService.ScrollbarFixDelay.Value);
-                _scrollbar.ScrollDistance = scrollDistance;
+                if(scrollbar != null) // not sure if necessary, but may happen when this view gets destroyed while this task is still running
+                    scrollbar.ScrollDistance = scrollDistance;
             });
         }
 
-        private Scrollbar _scrollbar;
-        private FlowPanel _rootFlowPanel;
-        private FlowPanel _statRowsFlowPanel;
         private readonly Services _services;
-        private readonly Dictionary<string, Checkbox> _visibilityCheckBoxByStatId = new Dictionary<string, Checkbox>();
-        private static readonly Color VISIBLE_COLOR = new Color(17, 64, 9) * 0.9f;
-        private static readonly Color NOT_VISIBLE_COLOR = new Color(Color.Black, 0.5f);
-        private const string SHOW_HIDE_STAT_TOOLTIP = "Show or hide stat by clicking on the checkbox or directly on the row. Values for hidden stats are still tracked.";
     }
 }
