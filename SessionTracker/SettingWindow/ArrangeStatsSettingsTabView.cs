@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Blish_HUD.Controls;
 using Blish_HUD.Graphics.UI;
@@ -39,21 +38,24 @@ namespace SessionTracker.SettingsWindow
                 .Build()
                 .Parent = trackedStatsSectionFlowPanel;
                  
-            ControlFactory.CreateHintLabel(
-                trackedStatsSectionFlowPanel,
-                // todo x ersetzen durch help button
-                // todo x text updaten
-                "You can arrange the stats with the up and down buttons.");
+            ControlFactory.CreateHintLabel(trackedStatsSectionFlowPanel, "You can arrange the stats with the up and down buttons.");
 
-            var selectedStats = _services.Model.Stats.Where(s => s.IsVisible).ToList();
-            var hasNoSelectedStats = !selectedStats.Any();
+            var hasNoSelectedStats = !_services.Model.Stats.Where(s => s.IsVisible).Any();
             if (hasNoSelectedStats)
             {
                 ControlFactory.CreateHintLabel(trackedStatsSectionFlowPanel, "You have to select stats in 'Select Stats' tab first!");
                 return;
             }
 
-            var statRowsFlowPanel = new FlowPanel
+            var resetStatsToCategoryOrderButton = new StandardButton
+            {
+                Text = "Reset stats arrangement",
+                BasicTooltipText = "Reset order of stats to how they are displayed in 'Select Stats' tab.",
+                Width = 200,
+                Parent = trackedStatsSectionFlowPanel
+            };
+
+            var statRowsFlowPanel = new FlowPanel // required because this can be cleared without clearing the buttons above it.
             {
                 FlowDirection = ControlFlowDirection.SingleTopToBottom,
                 OuterControlPadding = new Vector2(0, 5),
@@ -61,6 +63,16 @@ namespace SessionTracker.SettingsWindow
                 HeightSizingMode = SizingMode.AutoSize,
                 WidthSizingMode = SizingMode.AutoSize,
                 Parent = trackedStatsSectionFlowPanel
+            };
+
+            var statsSortedByCategory  = _services.Model.GetDistinctStatsSortedByCategory();
+            
+            resetStatsToCategoryOrderButton.Click += (s, e) =>
+            {
+                _services.Model.Stats.Clear();
+                _services.Model.Stats.AddRange(statsSortedByCategory);
+                statRowsFlowPanel.ClearChildren();
+                ShowStatRows(scrollbar, statRowsFlowPanel);
             };
 
             ShowStatRows(scrollbar, statRowsFlowPanel);

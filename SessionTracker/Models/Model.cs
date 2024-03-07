@@ -35,5 +35,17 @@ namespace SessionTracker.Models
             Stats.Clear();
             Stats.AddRange(statsSortedByVisibility);
         }
+
+        public List<Stat> GetDistinctStatsSortedByCategory()
+        {
+            return StatCategories
+                .Where(c => c.IsSuperCategory)
+                .SelectMany(c => c.SubCategoryIds)
+                .Select(id => StatCategories.Single(c => c.Id == id))
+                .SelectMany(c => c.StatIds)
+                .Distinct() // get rid of stats that are in multiple categories
+                .Select(id => Stats.Single(s => s.Id == id))
+                .ToList();
+        }
     }
 }
