@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
-using SessionTracker.OtherServices;
 
 namespace SessionTracker.Models
 {
@@ -45,6 +44,19 @@ namespace SessionTracker.Models
                 .SelectMany(c => c.StatIds)
                 .Distinct() // get rid of stats that are in multiple categories
                 .Select(id => Stats.Single(s => s.Id == id))
+                .ToList();
+        }
+
+        public List<string> GetDistinctStatIds(StatCategory category)
+        {
+            if (category.IsSubCategory)
+                return category.StatIds;
+
+            // is SuperCategory
+            return category.SubCategoryIds
+                .Select(categoryId => StatCategories.Single(c => c.Id == categoryId))
+                .SelectMany(category => category.StatIds)
+                .Distinct() // prevents statId duplicates from stats which belong to multiple categories
                 .ToList();
         }
     }

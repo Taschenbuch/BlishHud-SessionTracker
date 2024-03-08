@@ -24,65 +24,134 @@ namespace SessionTracker.SettingsWindow
         {
             var rootFlowPanel = ControlFactory.CreateSettingsRootFlowPanel(buildPanel); // must be created before getting scrollbar. scrollbar is null otherwise
             var scrollbar = (Scrollbar)buildPanel.Children.FirstOrDefault(c => c is Scrollbar);
-            var trackedStatsSectionFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Arrange Stats", rootFlowPanel);
-            trackedStatsSectionFlowPanel.OuterControlPadding = new Vector2(10);
+            var settingsFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Arrange Stats", rootFlowPanel);
+            settingsFlowPanel.OuterControlPadding = new Vector2(10);
 
             var warningLabel = new FormattedLabelBuilder()
                 .AutoSizeWidth()
                 .AutoSizeHeight()
                 .SetVerticalAlignment(VerticalAlignment.Top)
-                .CreatePart("UPDATE: You CANNOT select stats here anymore! In this tab you can only arrange stats now!\nUse the other tab to select stats!", builder => builder
+                .CreatePart("UPDATE: You CANNOT select stats here anymore. In this tab you can only arrange stats now.\nUse the other tab to select stats first!", builder => builder
                 .SetFontSize(Blish_HUD.ContentService.FontSize.Size18)
                 .SetTextColor(Color.Yellow)
                 .MakeBold())
                 .Build()
-                .Parent = trackedStatsSectionFlowPanel;
-                 
-            ControlFactory.CreateHintLabel(trackedStatsSectionFlowPanel, "You can arrange the stats with the up and down buttons.");
+                .Parent = settingsFlowPanel;
+
+            ControlFactory.CreateHintLabel(
+                settingsFlowPanel, 
+                "You can arrange single stats with the up and down buttons. " +
+                "To move all stats of a category at once, use the buttons on the right.\n" +
+                "A stat is not duplicated if it belongs to multiple categories. It will be only displayed once."); // todo x passt text?
 
             var hasNoSelectedStats = !_services.Model.Stats.Where(s => s.IsVisible).Any();
             if (hasNoSelectedStats)
             {
-                ControlFactory.CreateHintLabel(trackedStatsSectionFlowPanel, "You have to select stats in 'Select Stats' tab first!");
+                var noStatsSelectedHint = ControlFactory.CreateHintLabel(settingsFlowPanel, "You have to select stats in 'Select Stats' tab first!");
+                noStatsSelectedHint.TextColor = Color.Yellow;
                 return;
             }
 
-            var resetStatsToCategoryOrderButton = new StandardButton
+            var twoColumnFlowPanel = new FlowPanel
             {
-                Text = "Reset stats arrangement",
-                BasicTooltipText = "Reset order of stats to how they are displayed in 'Select Stats' tab.",
-                Width = 200,
-                Parent = trackedStatsSectionFlowPanel
+                FlowDirection = ControlFlowDirection.SingleLeftToRight,
+                ControlPadding = new Vector2(10),
+                HeightSizingMode = SizingMode.AutoSize,
+                WidthSizingMode = SizingMode.AutoSize,
+                Parent = settingsFlowPanel
             };
 
-            var statRowsFlowPanel = new FlowPanel // required because this can be cleared without clearing the buttons above it.
+            var statRowsFlowPanel = new FlowPanel // required because this can be cleared without clearing the controls/labels above it.
             {
                 FlowDirection = ControlFlowDirection.SingleTopToBottom,
                 OuterControlPadding = new Vector2(0, 5),
                 ControlPadding = new Vector2(0, 5),
                 HeightSizingMode = SizingMode.AutoSize,
                 WidthSizingMode = SizingMode.AutoSize,
-                Parent = trackedStatsSectionFlowPanel
+                Parent = twoColumnFlowPanel
             };
 
-            var statsSortedByCategory  = _services.Model.GetDistinctStatsSortedByCategory();
-            
-            resetStatsToCategoryOrderButton.Click += (s, e) =>
+            AddMoveStatsOfCategoryToTopButtons(statRowsFlowPanel, scrollbar, twoColumnFlowPanel);
+            ShowStatRows(scrollbar, statRowsFlowPanel);
+        }
+
+        private void AddMoveStatsOfCategoryToTopButtons(Container statRowsFlowPanel, Scrollbar scrollbar, Container parent)
+        {
+            var buttonsFlowPanel = new FlowPanel 
+            {
+                FlowDirection = ControlFlowDirection.SingleTopToBottom,
+                OuterControlPadding = new Vector2(0, 5),
+                ControlPadding = new Vector2(0, 5),
+                HeightSizingMode = SizingMode.AutoSize,
+                WidthSizingMode = SizingMode.AutoSize,
+                Parent = parent
+            };
+
+            var resetButton = new StandardButton
+            {
+                Text = "Reset stats arrangement",
+                BasicTooltipText = "Reset order of stats to how they are displayed in 'Select Stats' tab.",
+                Width = 230,
+                Parent = buttonsFlowPanel
+            };
+
+            var statsSortedByCategory = _services.Model.GetDistinctStatsSortedByCategory();
+            resetButton.Click += (s, e) =>
             {
                 _services.Model.Stats.Clear();
                 _services.Model.Stats.AddRange(statsSortedByCategory);
-                statRowsFlowPanel.ClearChildren();
                 ShowStatRows(scrollbar, statRowsFlowPanel);
             };
 
-            ShowStatRows(scrollbar, statRowsFlowPanel);
+            ControlFactory.CreateHintLabel(buttonsFlowPanel, "Super categories");
+
+            var previousCategory = new StatCategory();
+            foreach (var category in _services.Model.StatCategories.OrderBy(c => c.IsSubCategory))
+            {
+                if(category.IsSubCategory && previousCategory.IsSuperCategory)
+                {
+                    ControlFactory.CreateHintLabel(buttonsFlowPanel, "Sub categories");
+                }
+                previousCategory = category;
+
+                var orderedCategoryStats = _services.Model.GetDistinctStatIds(category)
+                    .Select(id => _services.Model.GetStat(id))
+                    .Where(s => s.IsVisible)
+                    .ToList();
+
+                var remainingStats = _services.Model.Stats // includes selected and not selected stats
+                    .Except(orderedCategoryStats)
+                    .ToList();
+
+                var moveToTopButton = new StandardButton()
+                {
+                    Text = category.Name.Localized,
+                    BasicTooltipText = "Move selected stats from this category to the top and sort them like in 'Select stats' tab. " +
+                    "Button is disabled when no stats from this category are selected",
+                    Enabled = orderedCategoryStats.Any(),
+                    Width = 230,
+                    Parent = buttonsFlowPanel,
+                };
+
+                moveToTopButton.Click += (s, e) =>
+                {
+                    var isNoStatOfCategorySelected = !orderedCategoryStats.Any();
+                    if (isNoStatOfCategorySelected)
+                        return;
+
+                    _services.Model.Stats.Clear();
+                    _services.Model.Stats.AddRange(orderedCategoryStats);
+                    _services.Model.Stats.AddRange(remainingStats);
+                    ShowStatRows(scrollbar, statRowsFlowPanel);
+                };
+            }
         }
 
         private void ShowStatRows(Scrollbar scrollbar, Container parent)
         {
             // MoveSelectedStatsToTop is required for up/down arrange buttons to work. otherwise index+/-1 will just move a selected stat between unselected stats
-            _services.Model.MoveSelectedStatsToTop(); 
-
+            _services.Model.MoveSelectedStatsToTop();
+            parent.ClearChildren();
             foreach (var stat in _services.Model.Stats.Where(s => s.IsVisible))
                 ShowStatRow(stat, scrollbar, parent);
         }
@@ -162,7 +231,6 @@ namespace SessionTracker.SettingsWindow
         private void UpdateStatRows(Scrollbar scrollbar, Container parent)
         {
             var scrollDistance = scrollbar.ScrollDistance;
-            parent.ClearChildren();
             ShowStatRows(scrollbar, parent);
             _services.Model.UiHasToBeUpdated = true;
 

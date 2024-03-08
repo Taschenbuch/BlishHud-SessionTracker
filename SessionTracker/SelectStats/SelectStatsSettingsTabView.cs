@@ -43,9 +43,8 @@ namespace SessionTracker.SelectStats
 
             foreach (var superCategory in _services.Model.StatCategories.Where(c => c.IsSuperCategory))
             {
-                var superStatViewModels = superCategory.SubCategoryIds
-                    .Select(categoryId => _services.Model.StatCategories.Single(c => c.Id == categoryId))
-                    .SelectMany(category => category.StatIds)
+                var superStatViewModels = _services.Model
+                    .GetDistinctStatIds(superCategory)
                     .Distinct() // this way the super category counter does not count the same stat twice. May look a bit confusing because numbers wont add up.
                     .Select(statId => selectStatViewModelByStatId[statId])
                     .ToList();
