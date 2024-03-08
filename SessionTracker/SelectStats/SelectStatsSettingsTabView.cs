@@ -30,8 +30,7 @@ namespace SessionTracker.SelectStats
             var rootFlowPanel = ControlFactory.CreateSettingsRootFlowPanel(buildPanel);
             var settingsFlowPanel = ControlFactory.CreateSettingsGroupFlowPanel("Select Stats", rootFlowPanel);
             settingsFlowPanel.ControlPadding = new Vector2(0, 5);
-            AddHelp(settingsFlowPanel);
-
+            new CollapsibleHelp(HELP_TEXT, 850, settingsFlowPanel);
             var topControlsContainer = ControlFactory.CreateAdjustableChildLocationContainer(settingsFlowPanel);
             var searchTextBox = new StatsSearchTextBox(_services, _controlsByCategoryId, settingsFlowPanel, topControlsContainer);
             var iconSizePanel = AddIconSizeDropdown(_services, topControlsContainer, searchTextBox.Right);
@@ -119,76 +118,6 @@ namespace SessionTracker.SelectStats
                 OuterControlPadding = new Vector2(2),
                 CanCollapse = true,
                 Parent = parent
-            };
-        }
-
-        private static void AddHelp(Container parent)
-        {
-            var helpButton = new StandardButton()
-            {
-                Text = SHOW_HELP_BUTTON_TEXT,
-                BackgroundColor = Color.Yellow,
-                Width = 100,
-                Top = 5,
-                Left = 5,
-            };
-
-            var collapsedHeight = helpButton.Height + 30;
-            var collapsedWidth = helpButton.Width + 30;
-
-            var helpPanel = new Panel()
-            {
-                ShowBorder = true,
-                Height = collapsedHeight,
-                Width = collapsedWidth,
-                Parent = parent
-            };
-
-            var isHelpExpanded = false;
-
-            helpButton.Click += (s, e) =>
-            {
-                isHelpExpanded = !isHelpExpanded;
-                helpButton.Text = isHelpExpanded ? HIDE_HELP_BUTTON_TEXT : SHOW_HELP_BUTTON_TEXT;
-                helpPanel.Height = isHelpExpanded ? EXPANDED_HELP_HEIGHT : collapsedHeight;
-                helpPanel.Width = isHelpExpanded ? EXPANDED_HELP_WIDTH : collapsedWidth;
-            };
-
-            var helpContainer = new LocationContainer()
-            {
-                BackgroundColor = Color.Black * 0.5f,
-                Width = EXPANDED_HELP_WIDTH - 20,
-                Height = EXPANDED_HELP_HEIGHT - 20,
-                Top = 3,
-                Left = 4,
-                Parent = helpPanel
-            };
-
-            helpButton.Parent = helpContainer;
-
-            // VORSICHT: label ist aus irgendeinem grund immer Zentriert und verschiebt sich.
-            var helpText =  // todo x line breaks nötig weil cut off. wrapText property klappt nicht. schneidet oben/unten ab.
-                "todo x XXXXXXXX Step by step anleitung: collapse all button. categories bei bedarf öffnen (expand all oder auf category title clicken). stat suchen per search. \n" +
-                "- To select stats click on a stat icon or use the (un)select buttons above the categories. Not selected stats are transparent.\n" +
-                "- WARNING: some stats are part of multiple categories. Unselecting a whole category can result in unselecting stats from other categories as well." +
-                "E.g. 'deaths' stat is part of 'WvW' category and 'PvP' category. E.g. 'Mystic Coin' stat is part of 'Raid', 'Fractal' and 'Material Storage' category.\n" +
-                "- Expand/Collapse categories for a better overview by clicking on category headers (no need to click the arrow icon) or the 'Expand/Collapse all' buttons. " +
-                "BUG: expand/collapse causes the scrollbar to jump to the top. At the moment i have no idea how to fix that.\n" +
-                "- Search input helps to find stats faster.\n" +
-                "- If you want to track many stats it is recommended to enable 'hide stats with value = 0' setting and/or 'fixed window height' setting.\n" +
-                "- Selected counter will count duplicated stats as 1. Because of that it may look like numbers dont add up.\n" +
-                "- Arrange stats: Not here. Rearrange stats in the other settings tab";
-
-            new Label
-            {
-                Text = helpText,
-                VerticalAlignment = VerticalAlignment.Top,
-                WrapText = true,
-                Width = helpContainer.Width - 2 * HELP_LABEL_BORDER_SIZE,
-                Height = helpContainer.Height - 2 * HELP_LABEL_BORDER_SIZE,
-                Top = collapsedHeight - 20,
-                Left = HELP_LABEL_BORDER_SIZE,
-                Parent = helpContainer
             };
         }
 
@@ -331,11 +260,25 @@ namespace SessionTracker.SelectStats
 
         private readonly Services _services;
         private readonly Dictionary<string, SelectStatsControls> _controlsByCategoryId = new Dictionary<string, SelectStatsControls>();
-        private const int HELP_LABEL_BORDER_SIZE = 10;
-        private const int EXPANDED_HELP_HEIGHT = 280;
-        private const int EXPANDED_HELP_WIDTH = 850;
-        private const string SHOW_HELP_BUTTON_TEXT = "Show Help";
-        private const string HIDE_HELP_BUTTON_TEXT = "Hide Help";
+
         private const int SUPER_CATEGORY_LOCATION_RIGHT_SHIFT = 14;
+        private const string HELP_TEXT =
+            "Here you can select stats you want to track.\n" +
+            "- Click 'collapse all' to get a better overview of the stat categories.\n" +
+            "- Click on category names to expand/collapse them individually. Just click on the black bars. No need to click on those small arrows at the right.\n" +
+            "- Click 'unselect all' to unselect all stats to get a fresh start before selecting any stats.\n" +
+            "- Click 'select' button of a category to select all stats of that category at once.\n" +
+            "- To select a single stat instead of a whole category, expand a category and click on the stat icon to select it.\n" +
+            "- Selected stats are opaque, unselected stats are transparent.\n" +
+            "- Use search input to find stats fast.\n" +
+            "- WARNING: some stats are part of multiple categories. " +
+            "Because of that (un)selecting a whole category can result in (un)selecting stats from other categories as well. " +
+            "E.g. 'deaths' stat is part of the 'WvW' and 'PvP' categories. " +
+            "E.g. 'Mystic Coin' stat is part of 'Raid', 'Fractal' and 'Material Storage' category.\n" +
+            "- Selected stats counter will count duplicated stats as 1 stat. Because of that it may look like numbers dont add up.\n" +
+            "- If you want to track many stats it is recommended to enable 'hide stats with value = 0' setting and/or 'fixed window height' setting " +
+            "in the other settings tab.\n" +
+            "- Arrange stats in the other settings tab. Not here.\n" +
+            "- Bug: expand/collapse causes the scrollbar to jump to the top. At the moment i have no idea how to fix that. Sorry! :-(\n";
     }
 }

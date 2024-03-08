@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using SessionTracker.Controls;
 using SessionTracker.Models;
 using SessionTracker.OtherServices;
+using SessionTracker.SelectStats;
 
 namespace SessionTracker.SettingsWindow
 {
@@ -31,18 +32,14 @@ namespace SessionTracker.SettingsWindow
                 .AutoSizeWidth()
                 .AutoSizeHeight()
                 .SetVerticalAlignment(VerticalAlignment.Top)
-                .CreatePart("UPDATE: You CANNOT select stats here anymore. In this tab you can only arrange stats now.\nUse the other tab to select stats first!", builder => builder
+                .CreatePart("UPDATE: Stats CANNOT be selected here anymore. This tab is for arranging stats now.\nUse the other tab to select stats first!", builder => builder
                 .SetFontSize(Blish_HUD.ContentService.FontSize.Size18)
                 .SetTextColor(Color.Yellow)
                 .MakeBold())
                 .Build()
                 .Parent = settingsFlowPanel;
 
-            ControlFactory.CreateHintLabel(
-                settingsFlowPanel, 
-                "You can arrange single stats with the up and down buttons. " +
-                "To move all stats of a category at once, use the buttons on the right.\n" +
-                "A stat is not duplicated if it belongs to multiple categories. It will be only displayed once."); // todo x passt text?
+            new CollapsibleHelp(HELP_TEXT, 850, settingsFlowPanel);
 
             var hasNoSelectedStats = !_services.Model.Stats.Where(s => s.IsVisible).Any();
             if (hasNoSelectedStats)
@@ -126,7 +123,8 @@ namespace SessionTracker.SettingsWindow
                 var moveToTopButton = new StandardButton()
                 {
                     Text = category.Name.Localized,
-                    BasicTooltipText = "Move selected stats from this category to the top and sort them like in 'Select stats' tab. " +
+                    BasicTooltipText = 
+                    "Move selected stats from this category to the top and arrange them like in 'Select stats' tab. " +
                     "Button is disabled when no stats from this category are selected",
                     Enabled = orderedCategoryStats.Any(),
                     Width = 230,
@@ -243,5 +241,11 @@ namespace SessionTracker.SettingsWindow
         }
 
         private readonly Services _services;
+        private const string HELP_TEXT =
+            "- Stats that are selected in the 'Select stats' tab can be arranged here.\n" +
+            "- A selected stat will appear only once. A stat is not duplicated if it belongs to multiple categories.\n" +
+            "- Use the up and down buttons next to a stat to move it.\n" + // todo x passt text?
+            "- Use the move-category-up-buttons on the right to move all stats of a category to the top at once. " +
+            "A move-category-up-button is disabled when no stats of that category are selected.";
     }
 }
