@@ -23,7 +23,7 @@ namespace SessionTracker.JsonFileCreator
             var categories = await CategoryCreator.CreateCategories();
             var stats = await CreateStatsAndAddTheirIdsToCategories(categories);
             var model = CreateModel(categories, stats);
-            ModelValidatorService.ThrowIfModelIsInvalid(model);
+            ModelValidator.ThrowIfModelIsInvalid(model);
             WriteModelToFile(model);
             
             Console.WriteLine($"create model.json finished: {MODEL_FILE_PATH}");
