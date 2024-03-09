@@ -43,38 +43,24 @@ namespace SessionTracker.SelectStats
                 var hasSearchTerm = !string.IsNullOrWhiteSpace(Text);
                 clearSearchButton.Visible = hasSearchTerm;
 
-                //// clear all
+                // clear all
                 foreach (var categoryId in categoryIds)
                 {
                     controlsByCategoryId[categoryId].CategoryContainer.Parent = null;
-                    controlsByCategoryId[categoryId].CategoryFlowPanel.ClearChildren(); 
+                    controlsByCategoryId[categoryId].CategoryFlowPanel.ClearChildren();
                 }
 
                 noSearchResultsHintLabel.Parent = null;
 
-                // no search term -> add all
-                var hasNoSearchTerm = string.IsNullOrWhiteSpace(Text);
-                if (hasNoSearchTerm)
+                // no search term -> show all stats
+                if (!hasSearchTerm)
                 {
-                    // todo x viel einfacher per foreach(statContainer) ohne verschachtelte loops lösbar? 
-                    foreach (var superCategory in services.Model.StatCategories.Where(c => c.IsSuperCategory))
-                    {
-                        controlsByCategoryId[superCategory.Id].CategoryContainer.Parent = rootFlowPanel;
-                        var superCategoryFlowPanel = controlsByCategoryId[superCategory.Id].CategoryFlowPanel;
-
-                        foreach (var subCategoryId in superCategory.SubCategoryIds)
-                        {
-                            controlsByCategoryId[subCategoryId].CategoryContainer.Parent = superCategoryFlowPanel;
-                            var subCategoryFlowPanel = controlsByCategoryId[subCategoryId].CategoryFlowPanel;
-
-                            foreach (var statContainer in controlsByCategoryId[subCategoryId].StatContainers)
-                                statContainer.Parent = subCategoryFlowPanel;
-                        }
-                    }
+                    var statContainers = controlsByCategoryId.Values.SelectMany(c => c.StatContainers).ToList();
+                    showCategoriesWithStats(statContainers, controlsByCategoryId, rootFlowPanel);
                     return;
                 }
 
-                // search term -> no stats found -> show hint
+                // no stats found -> show hint
                 var matchingStatsContainers = controlsByCategoryId.Values
                     .SelectMany(c => c.StatContainers)
                     .Where(c => c.Stat.Name.Localized.ToLower().Contains(Text.ToLower()))
@@ -87,21 +73,28 @@ namespace SessionTracker.SelectStats
                     return;
                 }
 
-                // stearch term -> stats found -> show found stats
-                foreach (var matchingStatContainer in matchingStatsContainers)
-                {
-                    var subCategoryId = matchingStatContainer.SubCategoryId;
-                    var superCategoryId = matchingStatContainer.SuperCategoryId;
-                    var subCategoryFlowPanel = controlsByCategoryId[subCategoryId].CategoryFlowPanel;
-                    var superCategoryFlowPanel = controlsByCategoryId[superCategoryId].CategoryFlowPanel;
-
-                    matchingStatContainer.Parent = subCategoryFlowPanel;
-                    controlsByCategoryId[subCategoryId].CategoryContainer.Parent = superCategoryFlowPanel;
-                    controlsByCategoryId[superCategoryId].CategoryContainer.Parent = rootFlowPanel;
-                    subCategoryFlowPanel.Expand();
-                    superCategoryFlowPanel.Expand();
-                }
+                // stats found -> show found stats
+                showCategoriesWithStats(matchingStatsContainers, controlsByCategoryId, rootFlowPanel);
             };
+        }
+
+        private static void showCategoriesWithStats(
+            List<SelectStatContainer> matchingStatsContainers, 
+            Dictionary<string, SelectStatsControls> controlsByCategoryId, 
+            Container parent)
+        {
+            foreach (var matchingStatContainer in matchingStatsContainers)
+            {
+                var subCategoryId = matchingStatContainer.SubCategoryId;
+                var superCategoryId = matchingStatContainer.SuperCategoryId;
+                var subCategoryFlowPanel = controlsByCategoryId[subCategoryId].CategoryFlowPanel;
+                var superCategoryFlowPanel = controlsByCategoryId[superCategoryId].CategoryFlowPanel;
+                matchingStatContainer.Parent = subCategoryFlowPanel;
+                controlsByCategoryId[subCategoryId].CategoryContainer.Parent = superCategoryFlowPanel;
+                controlsByCategoryId[superCategoryId].CategoryContainer.Parent = parent;
+                subCategoryFlowPanel.Expand();
+                superCategoryFlowPanel.Expand();
+            }
         }
     }
 }
