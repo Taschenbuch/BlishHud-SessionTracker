@@ -44,7 +44,7 @@ namespace SessionTracker.SettingsWindow
             var hasNoSelectedStats = !_services.Model.Stats.Where(s => s.IsVisible).Any();
             if (hasNoSelectedStats)
             {
-                var noStatsSelectedHint = ControlFactory.CreateHintLabel(settingsFlowPanel, "You have to select stats in 'Select Stats' tab first!");
+                var noStatsSelectedHint = ControlFactory.CreateHintLabel(settingsFlowPanel, "Select stats in 'Select Stats' tab first. Then you can arrange them here!");
                 noStatsSelectedHint.TextColor = Color.Yellow;
                 return;
             }
@@ -208,7 +208,7 @@ namespace SessionTracker.SettingsWindow
                 if (index > firstStatIndex)
                 {
                     _services.Model.Stats.Remove(stat); 
-                    _services.Model.Stats.Insert(index - 1, stat); // todo x. falsch? bezieht sich ja nur noch auf visible stats
+                    _services.Model.Stats.Insert(index - 1, stat);
                     UpdateStatRows(scrollbar, parent);
                 }
             };
@@ -220,7 +220,7 @@ namespace SessionTracker.SettingsWindow
                 if (index < lastStatIndex)
                 {
                     _services.Model.Stats.Remove(stat);
-                    _services.Model.Stats.Insert(index + 1, stat); // todo x. falsch? bezieht sich ja nur noch auf visible stats
+                    _services.Model.Stats.Insert(index + 1, stat);
                     UpdateStatRows(scrollbar, parent);
                 }
             };
@@ -242,9 +242,9 @@ namespace SessionTracker.SettingsWindow
 
         private readonly Services _services;
         private const string HELP_TEXT =
-            "- Stats that are selected in the 'Select stats' tab can be arranged here.\n" +
+            "Here you can arrange stats that are selected in the 'Select stats' tab.\n" +
             "- A selected stat will appear only once. A stat is not duplicated if it belongs to multiple categories.\n" +
-            "- Use the up and down buttons next to a stat to move it.\n" + // todo x passt text?
+            "- Use the up and down buttons next to a stat to move it.\n" +
             "- Use the move-category-up-buttons on the right to move all stats of a category to the top at once. " +
             "A move-category-up-button is disabled when no stats of that category are selected.";
     }
