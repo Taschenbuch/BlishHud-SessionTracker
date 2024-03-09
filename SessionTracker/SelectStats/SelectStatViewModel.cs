@@ -16,13 +16,13 @@ namespace SessionTracker.SelectStats
         public event EventHandler IsSelectedChanged;
         public bool IsSelected
         {
-            get => Stat.IsVisible;
+            get => Stat.IsSelectedByUser;
             set
             {
-                if (Stat.IsVisible == value)
+                if (Stat.IsSelectedByUser == value)
                     return; 
 
-                Stat.IsVisible = value;
+                Stat.IsSelectedByUser = value;
                 IsSelectedChanged?.Invoke(this, EventArgs.Empty);
                 _services.Model.UiHasToBeUpdated = true;
             }

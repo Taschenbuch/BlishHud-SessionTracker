@@ -29,7 +29,7 @@ namespace SessionTracker.JsonFileCreator.StatCreators
                     {
                         AssetId = CreatorCommon.GetIconAssetIdFromIconUrl(item.Icon.Url.AbsoluteUri),
                     },
-                    IsVisible   = false,
+                    IsSelectedByUser   = false,
                 };
 
                 stats.Add(stat);
@@ -65,7 +65,7 @@ namespace SessionTracker.JsonFileCreator.StatCreators
                         { 
                             AssetId = CreatorCommon.GetIconAssetIdFromIconUrl(item.Icon.Url.AbsoluteUri)
                         },
-                        IsVisible = false,
+                        IsSelectedByUser = false,
                     };
 
                     singleCategoryStats.Add(stat);

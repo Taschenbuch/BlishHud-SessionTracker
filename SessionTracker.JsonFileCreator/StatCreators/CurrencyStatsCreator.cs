@@ -34,7 +34,7 @@ namespace SessionTracker.JsonFileCreator.StatCreators
                     { 
                         AssetId = CreatorCommon.GetIconAssetIdFromIconUrl(currency.Icon.Url.AbsoluteUri)
                     },
-                    IsVisible = false,
+                    IsSelectedByUser = false,
                 };
 
                 stats.Add(stat);

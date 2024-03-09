@@ -266,12 +266,12 @@ namespace SessionTracker.StatsWindow
         {
             _statTitlesFlowPanel.ClearChildren();
             _statValuesFlowPanel.ClearChildren();
-            var visibleStats = _model.Stats.Where(e => e.IsVisible);
+            var selectedStats = _model.Stats.Where(e => e.IsSelectedByUser);
 
             if (_services.SettingService.StatsWithZeroValueAreHiddenSetting.Value)
-                visibleStats = visibleStats.Where(e => e.HasNonZeroSessionValue);
+                selectedStats = selectedStats.Where(e => e.HasNonZeroSessionValue);
 
-            foreach (var stat in visibleStats)
+            foreach (var stat in selectedStats)
             {
                 _titleFlowPanelByStatId[stat.Id].Parent = _statTitlesFlowPanel;
                 _valueLabelByStatId[stat.Id].Parent = _statValuesFlowPanel;

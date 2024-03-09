@@ -30,9 +30,9 @@ namespace SessionTracker.Models
 
         public void MoveSelectedStatsToTop()
         {
-            var statsSortedByVisibility = Stats.OrderByDescending(stat => stat.IsVisible).ToList();
+            var statsWhereSelectedStatsAreFirst = Stats.OrderByDescending(stat => stat.IsSelectedByUser).ToList();
             Stats.Clear();
-            Stats.AddRange(statsSortedByVisibility);
+            Stats.AddRange(statsWhereSelectedStatsAreFirst);
         }
 
         public List<Stat> GetDistinctStatsSortedByCategory()

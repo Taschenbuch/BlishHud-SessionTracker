@@ -20,7 +20,7 @@ namespace SessionTracker.StatsWindow
             FlowDirection    = ControlFlowDirection.SingleLeftToRight;
             WidthSizingMode  = SizingMode.AutoSize;
             HeightSizingMode = SizingMode.AutoSize;
-            Parent           = stat.IsVisible ? parent : null;
+            Parent           = stat.IsSelectedByUser ? parent : null;
 
             var titleLabel = new Label()
             {

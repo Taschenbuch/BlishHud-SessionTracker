@@ -40,7 +40,7 @@ namespace SessionTracker.SettingsWindow
 
             new CollapsibleHelp(HELP_TEXT, 850, settingsFlowPanel);
 
-            var hasNoSelectedStats = !_services.Model.Stats.Where(s => s.IsVisible).Any();
+            var hasNoSelectedStats = !_services.Model.Stats.Where(s => s.IsSelectedByUser).Any();
             if (hasNoSelectedStats)
             {
                 var noStatsSelectedHint = ControlFactory.CreateHintLabel(settingsFlowPanel, "Select stats in 'Select Stats' tab first. Then you can arrange them here!");
@@ -112,7 +112,7 @@ namespace SessionTracker.SettingsWindow
 
                 var orderedCategoryStats = _services.Model.GetDistinctStatIds(category)
                     .Select(id => _services.Model.GetStat(id))
-                    .Where(s => s.IsVisible)
+                    .Where(s => s.IsSelectedByUser)
                     .ToList();
 
                 var remainingStats = _services.Model.Stats // includes selected and not selected stats
@@ -149,7 +149,7 @@ namespace SessionTracker.SettingsWindow
             // MoveSelectedStatsToTop is required for up/down arrange buttons to work. otherwise index+/-1 will just move a selected stat between unselected stats
             _services.Model.MoveSelectedStatsToTop();
             parent.ClearChildren();
-            foreach (var stat in _services.Model.Stats.Where(s => s.IsVisible))
+            foreach (var stat in _services.Model.Stats.Where(s => s.IsSelectedByUser))
                 ShowStatRow(stat, scrollbar, parent);
         }
 
@@ -215,7 +215,7 @@ namespace SessionTracker.SettingsWindow
             moveStatDownwardsButton.Click += (s, e) =>
             {
                 var index = _services.Model.Stats.IndexOf(stat);
-                var lastStatIndex = _services.Model.Stats.Where(s => s.IsVisible).Count() - 1;
+                var lastStatIndex = _services.Model.Stats.Where(s => s.IsSelectedByUser).Count() - 1;
                 if (index < lastStatIndex)
                 {
                     _services.Model.Stats.Remove(stat);

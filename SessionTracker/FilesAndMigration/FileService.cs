@@ -63,7 +63,7 @@ namespace SessionTracker.Files
                 return remoteModel;
 
             var localModel = await LoadModelFromModuleFolder(_localModelFilePath, remoteModel);
-            remoteModel = RemoteModelService.UpdateStatIsVisibleInRemoteModel(localModel, remoteModel);
+            remoteModel = RemoteModelService.UpdateStatIsSelectedByUserInRemoteModel(localModel, remoteModel);
             remoteModel = RemoteModelService.UpdateStatsOrderInRemoteModel(localModel, remoteModel);
             remoteModel = RemoteModelService.UpdateTotalAtSessionStartInRemoteModel(localModel, remoteModel);
             remoteModel = RemoteModelService.UpdateSessionDurationAndResetTimeInRemoteModel(localModel, remoteModel);

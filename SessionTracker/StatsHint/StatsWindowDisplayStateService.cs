@@ -80,7 +80,7 @@ namespace SessionTracker.StatsHint
 
         private static StatsWindowDisplayState DetermineStatsWindowDisplayState(Services services, string errorText)
         {
-            var noStatsAreSelectedByUser = !services.Model.Stats.Any(e => e.IsVisible);
+            var noStatsAreSelectedByUser = !services.Model.Stats.Any(e => e.IsSelectedByUser);
             if (noStatsAreSelectedByUser)
                 return StatsWindowDisplayState.UserHasToSelectStatsHint;
 
@@ -88,7 +88,7 @@ namespace SessionTracker.StatsHint
             if (errorText != string.Empty)
                 return StatsWindowDisplayState.Error; 
 
-            var allStatsHiddenBecauseOfZeroValuesAreHiddenSetting = services.Model.Stats.Any(e => e.IsVisible && e.HasNonZeroSessionValue) == false;
+            var allStatsHiddenBecauseOfZeroValuesAreHiddenSetting = services.Model.Stats.Any(e => e.IsSelectedByUser && e.HasNonZeroSessionValue) == false;
             var hasModuleInitializedStatValues = services.UpdateLoop.State != UpdateLoopState.WaitingForApiTokenAfterModuleStart;
             if (services.SettingService.StatsWithZeroValueAreHiddenSetting.Value && allStatsHiddenBecauseOfZeroValuesAreHiddenSetting && hasModuleInitializedStatValues)
                 return StatsWindowDisplayState.AllStatsHiddenByZeroValuesAreHiddenSetting;

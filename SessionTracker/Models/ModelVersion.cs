@@ -32,7 +32,7 @@ namespace SessionTracker.Models
 // 
 // 2:
 // - (not released internal version for trying out migration logic)
-// - string IconUrl -> int IconAssetId (handled automatically because currently remote model is used with updated order and isVisible property)
+// - string IconUrl -> int IconAssetId (handled automatically because remote model is used with updated order and isSelected property)
 //
 // 1:
 // - (module versions before 2.0.0)
@@ -40,3 +40,5 @@ namespace SessionTracker.Models
 // MinorVersion property was removed. MajorVersion (= 1) was renamed to Version (= 1). Migration logic was introduced.
 // Module versions lower than 2.0.0 had a MajorVersion = 1, MinorVersion = 0 and not a Version 1. Because at that point migration was planned but no concept existed yet.
 // But since module version 2.0.0 this will be refered to as Version 1.
+// So the first real migration that took place for released versions was from Version 1 (MajorVersion 1, MinorVersion 0) to Version 3 skipping Version 2 while at
+// the same time the blish static host was used for the first time in Version 3. 
