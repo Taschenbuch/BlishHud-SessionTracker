@@ -6,7 +6,6 @@ using Microsoft.Xna.Framework;
 using SessionTracker.Controls;
 using SessionTracker.Models;
 using SessionTracker.OtherServices;
-using SessionTracker.SelectStats;
 
 namespace SessionTracker.SettingsWindow
 {

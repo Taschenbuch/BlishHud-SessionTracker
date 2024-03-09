@@ -5,19 +5,9 @@ using SessionTracker.Other;
 using System;
 using System.Collections.Generic;
 
-// ======== CHANGE LOG ========
-// 3.0:
-// - Entries -> Stats
-// - MajorVersion -> Version (will be handled in special method)
-// 
-// 2.0:
-// - string IconUrl -> int IconAssetId (is handled automatically because currently remote model is used with updated order and isVisible property)
-// - was never part of a release because 3.0 came earlier. 2.0 and 3.0 were still not merged into 2.0 because they were usefull to test migration logic.
-//
-// ======== Version definitions ======== 
-// - model format has changed
-// - OR statIds of existing stats have been modified.
-
+// =====================================================================
+// For model.json CHANGE LOG see comment for model version property.
+// =====================================================================
 namespace SessionTracker.FilesAndMigration
 {
     public static class MigrationService
