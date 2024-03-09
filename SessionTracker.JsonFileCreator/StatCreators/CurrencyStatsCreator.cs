@@ -72,18 +72,19 @@ namespace SessionTracker.JsonFileCreator.StatCreators
 
         private static readonly IReadOnlyList<int> _obsoleteCurrencyIds = new List<int>
         {
-            // Those are currencyIds and NOT itemIds. No idea why currencies both have a currency and and item id.
-            56, // "Red Prophet Crystal", // replaced by Blue Prophet Crystal
-            52, // "Red Prophet Shard", // replaced by BLue Prophet Shard
-            39, // "Gaeting Crystal", // replaced by Magnetite Shards
-            5, // "Ascalonian Tear", // replaced by Tales Of Dungeon Devling
-            9, // "Seal of Beetletun", // replaced by Tales Of Dungeon Devling
-            11, // "Deadly Bloom", // replaced by Tales Of Dungeon Devling
-            10, // "Manifesto of the Moletariate", // replaced by Tales Of Dungeon Devling
-            13, // "Flame Legion Charr Carving", // replaced by Tales Of Dungeon Devling
-            12, // "Symbol of Koda", // replaced by Tales Of Dungeon Devling
-            14, // "Knowledge Crystal", // replaced by Tales Of Dungeon Devling
-            6, // "Shard of Zhaitan" // replaced by Tales Of Dungeon Devling
+            // Those are currencyIds and NOT itemIds. No idea why currencies both have a currency and an item id.
+            74, // "Astral Claim" without name and without description, was replaced by other Astral Claim (id 74): https://api.guildwars2.com/v2/currencies?ids=63,74
+            56, // "Red Prophet Crystal", replaced by Blue Prophet Crystal
+            52, // "Red Prophet Shard", replaced by BLue Prophet Shard
+            39, // "Gaeting Crystal", replaced by Magnetite Shards
+            5,  // "Ascalonian Tear", replaced by Tales Of Dungeon Devling
+            9,  // "Seal of Beetletun", replaced by Tales Of Dungeon Devling
+            11, // "Deadly Bloom", replaced by Tales Of Dungeon Devling
+            10, // "Manifesto of the Moletariate", replaced by Tales Of Dungeon Devling
+            13, // "Flame Legion Charr Carving", replaced by Tales Of Dungeon Devling
+            12, // "Symbol of Koda", replaced by Tales Of Dungeon Devling
+            14, // "Knowledge Crystal", replaced by Tales Of Dungeon Devling
+            6,  // "Shard of Zhaitan" replaced by Tales Of Dungeon Devling
         }.AsReadOnly();
     }
 }
