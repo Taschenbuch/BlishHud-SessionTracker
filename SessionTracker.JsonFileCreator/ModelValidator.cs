@@ -9,34 +9,28 @@ namespace SessionTracker.JsonFileCreator
     {
         public static void ThrowIfModelIsInvalid(Model model)
         {
-            ThrowIfCategoryIdsAreNotUnique(model.StatCategories); // todo x testen
-            ThrowIfStatIdsAreNotUnique(model.Stats); // todo x testen
-            ThrowIfSubCategoryHasNoSuperCategory(model.StatCategories); // todo x testen
-            ThrowIfSubCategoryOfSuperCategoryDoesNotExist(model.StatCategories); // todo x testen
-            ThrowIfStatBelongsToNoCategory(model); // todo x testen
-            ThrowIfStatInCategoryDoesNotExist(model); // todo x testen
+            ThrowIfCategoryIdsAreNotUnique(model.StatCategories);
+            ThrowIfStatIdsAreNotUnique(model.Stats);
+            ThrowIfSubCategoryHasNoSuperCategory(model.StatCategories);
+            ThrowIfSubCategoryOfSuperCategoryDoesNotExist(model.StatCategories);
+            ThrowIfStatBelongsToNoCategory(model);
+            ThrowIfStatInCategoryDoesNotExist(model);
         }
 
         private static void ThrowIfCategoryIdsAreNotUnique(List<StatCategory> statCategories)
         {
             var statCategoryIds = statCategories.Select(c => c.Id).ToList();
-            var idsAreNotUnique = statCategoryIds.Count() != statCategoryIds.Distinct().Count();
-            if (idsAreNotUnique)
-            {
-                var notUniqueIds = statCategoryIds.Except(statCategoryIds.Distinct()).ToList();
-                throw new Exception($"Error: category ids must be unique. not unique category ids: {string.Join(" ,", notUniqueIds)}");
-            }
+            var duplicates = FindDuplicates(statCategoryIds);
+            if (duplicates.Any())
+                throw new Exception($"Error: category ids must be unique. not unique category ids: {string.Join(" ,", duplicates)}");
         }
 
         private static void ThrowIfStatIdsAreNotUnique(List<Stat> stats)
         {
             var statIds = stats.Select(c => c.Id).ToList();
-            var idsAreNotUnique = statIds.Count() != statIds.Distinct().Count();
-            if (idsAreNotUnique)
-            {
-                var notUniqueIds = statIds.Except(statIds.Distinct()).ToList();
-                throw new Exception($"Error: stat ids must be unique. not unique stat ids: {string.Join(" ,", notUniqueIds)}");
-            }
+            var duplicates = FindDuplicates(statIds);
+            if (duplicates.Any())
+                throw new Exception($"Error: stat ids must be unique. not unique stat ids: {string.Join(" ,", duplicates)}");
         }
 
         private static void ThrowIfSubCategoryHasNoSuperCategory(List<StatCategory> statCategories)
@@ -100,6 +94,15 @@ namespace SessionTracker.JsonFileCreator
             var notExistingCategoryStatIds = categoryStatIds.Except(statIds);
             if (notExistingCategoryStatIds.Any())
                 throw new Exception($"Error: category stat ids for which no stat exists: {string.Join(" ,", notExistingCategoryStatIds)}");
+        }
+
+        private static List<T> FindDuplicates<T>(List<T> values)
+        {
+            return values
+                .GroupBy(v => v)
+                .Where(g => g.Count() > 1)
+                .Select(y => y.Key)
+                .ToList();
         }
     }
 }
