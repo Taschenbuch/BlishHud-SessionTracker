@@ -189,7 +189,7 @@ namespace SessionTracker.SettingEntries
 
             UiHeightIsFixedSetting = settings.DefineSetting(
                 "ui height is fixed",
-                false,
+                true,
                 () => "fixed window height",
                 () => "CHECKED: height is fixed and can be adjusted with the window height slider.\n" +
                       "Stats can be scrolled in the window via mouse wheel or by dragging the scrollbar. Dragging the scrollbar only works when 'drag with mouse' setting is disabled.\n" +
