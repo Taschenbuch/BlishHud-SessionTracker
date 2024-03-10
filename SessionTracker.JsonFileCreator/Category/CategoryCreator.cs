@@ -1,12 +1,13 @@
 ﻿using Gw2Sharp;
 using Gw2Sharp.WebApi;
-using SessionTracker.Constants;
+using SessionTracker.JsonFileCreator.Constants;
+using SessionTracker.JsonFileCreator.Other;
 using SessionTracker.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SessionTracker.JsonFileCreator.OtherCreators
+namespace SessionTracker.JsonFileCreator.Category
 {
     public class CategoryCreator
     {
@@ -89,6 +90,7 @@ namespace SessionTracker.JsonFileCreator.OtherCreators
                     {
                         CategoryId.MISC,
                         CategoryId.CURRENCY,
+                        CategoryId.FESTIVAL,
                     }
                 },
                 new StatCategory()
@@ -142,6 +144,20 @@ namespace SessionTracker.JsonFileCreator.OtherCreators
                             [Locale.French]  = "Autre",
                             [Locale.German]  = "Sonstiges",
                             [Locale.Spanish] = "Otros",
+                        }
+                    }
+                },
+                new StatCategory()
+                {
+                    Id   = CategoryId.FESTIVAL,
+                    Name =
+                    {
+                        LocalizedTextByLocale =
+                        {
+                            [Locale.English] = "Festival",
+                            [Locale.French]  = "Festival",
+                            [Locale.German]  = "Feiertagsevent",
+                            [Locale.Spanish] = "Festival",
                         }
                     }
                 },

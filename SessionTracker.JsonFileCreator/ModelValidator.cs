@@ -22,7 +22,7 @@ namespace SessionTracker.JsonFileCreator
             var statCategoryIds = statCategories.Select(c => c.Id).ToList();
             var duplicates = FindDuplicates(statCategoryIds);
             if (duplicates.Any())
-                throw new Exception($"Error: category ids must be unique. not unique category ids: {string.Join(" ,", duplicates)}");
+                throw new Exception($"Error: category ids must be unique. not unique category ids: {string.Join(", ", duplicates)}");
         }
 
         private static void ThrowIfStatIdsAreNotUnique(List<Stat> stats)
@@ -30,7 +30,7 @@ namespace SessionTracker.JsonFileCreator
             var statIds = stats.Select(c => c.Id).ToList();
             var duplicates = FindDuplicates(statIds);
             if (duplicates.Any())
-                throw new Exception($"Error: stat ids must be unique. not unique stat ids: {string.Join(" ,", duplicates)}");
+                throw new Exception($"Error: stat ids must be unique. not unique stat ids: {string.Join(", ", duplicates)}");
         }
 
         private static void ThrowIfSubCategoryHasNoSuperCategory(List<StatCategory> statCategories)
@@ -48,7 +48,7 @@ namespace SessionTracker.JsonFileCreator
 
             var subCategoryIdsWithoutSuperCategory = subCategoryIds.Except(subCategoryIdsFromSuperCategories).ToList();
             if (subCategoryIdsWithoutSuperCategory.Any())
-                throw new Exception($"Error: sub category ids which dont belong to a super category: {string.Join(" ,", subCategoryIdsWithoutSuperCategory)}");
+                throw new Exception($"Error: sub category ids which dont belong to a super category: {string.Join(", ", subCategoryIdsWithoutSuperCategory)}");
         }
 
         private static void ThrowIfSubCategoryOfSuperCategoryDoesNotExist(List<StatCategory> statCategories)
@@ -67,7 +67,7 @@ namespace SessionTracker.JsonFileCreator
 
             var missingSubCategoryIds = subCategoryIdsFromSuperCategories.Except(subCategoryIds).ToList();
             if (missingSubCategoryIds.Any())
-                throw new Exception($"Error: sub category ids which dont exist but are part of a super category: {string.Join(" ,", missingSubCategoryIds)}");
+                throw new Exception($"Error: sub category ids which dont exist but are part of a super category: {string.Join(", ", missingSubCategoryIds)}");
         }
 
         private static void ThrowIfStatBelongsToNoCategory(Model model)
@@ -80,7 +80,7 @@ namespace SessionTracker.JsonFileCreator
             var statIds = model.Stats.Select(s => s.Id).ToList();
             var statIdsWithoutCategory = statIds.Except(categoryStatIds);
             if(statIdsWithoutCategory.Any())
-                throw new Exception($"Error: stat ids without category: {string.Join(" ,", statIdsWithoutCategory)}");
+                throw new Exception($"Error: stat ids without category: {string.Join(", ", statIdsWithoutCategory)}");
         }
 
         private static void ThrowIfStatInCategoryDoesNotExist(Model model)
@@ -93,7 +93,7 @@ namespace SessionTracker.JsonFileCreator
             var statIds = model.Stats.Select(s => s.Id).ToList();
             var notExistingCategoryStatIds = categoryStatIds.Except(statIds);
             if (notExistingCategoryStatIds.Any())
-                throw new Exception($"Error: category stat ids for which no stat exists: {string.Join(" ,", notExistingCategoryStatIds)}");
+                throw new Exception($"Error: category stat ids for which no stat exists: {string.Join(", ", notExistingCategoryStatIds)}");
         }
 
         private static List<T> FindDuplicates<T>(List<T> values)

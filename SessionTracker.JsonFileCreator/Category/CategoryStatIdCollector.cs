@@ -1,9 +1,11 @@
 ﻿using SessionTracker.Constants;
+using SessionTracker.JsonFileCreator.Constants;
+using SessionTracker.JsonFileCreator.Other;
 using SessionTracker.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SessionTracker.JsonFileCreator.OtherCreators
+namespace SessionTracker.JsonFileCreator.Category
 {
     public class CategoryStatIdCollector
     {
@@ -44,17 +46,21 @@ namespace SessionTracker.JsonFileCreator.OtherCreators
 
         public static List<string> GetMiscStatIds()
         {
-            return new List<string>()
+            var miscStatIds = new List<string>()
             {
                 StatId.DEATHS,
                 StatId.LUCK,
-                CreatorCommon.CreateItemStatId(ItemIds.TRICK_OR_TREAT_BAG),
             };
+            miscStatIds.AddRange(ItemIds.Misc.Select(i => CreatorCommon.CreateItemStatId(i)));
+            return miscStatIds;
         }
 
         public static List<string> GetPvpStatIds(List<Stat> pvpStats)
         {
-            var pvpStatIds = new List<string>() { StatId.DEATHS };
+            var pvpStatIds = new List<string>()
+            {
+                StatId.DEATHS
+            };
             pvpStatIds.AddRange(pvpStats.Select(s => s.Id));
             pvpStatIds.AddRange(CurrencyIds.Pvp.Select(i => CreatorCommon.CreateCurrencyStatId(i)));
             return pvpStatIds;
@@ -62,11 +68,23 @@ namespace SessionTracker.JsonFileCreator.OtherCreators
 
         public static List<string> GetWvwStatIds(List<Stat> wvwStats)
         {
-            var wvwStatIds = new List<string>() { StatId.DEATHS };
+            var wvwStatIds = new List<string>()
+            {
+                StatId.DEATHS
+            };
             wvwStatIds.AddRange(wvwStats.Select(s => s.Id));
             wvwStatIds.AddRange(CurrencyIds.Wvw.Select(i => CreatorCommon.CreateCurrencyStatId(i)));
             wvwStatIds.AddRange(ItemIds.Wvw.Select(i => CreatorCommon.CreateItemStatId(i)));
             return wvwStatIds;
+        }
+
+        // material storage has its own festival sub category, but for now it wont be included here. too much duplication.
+        // Though I may change my mind about this in the future.
+        public static List<string> GetFestivalStatIds()
+        {
+            var festivalStatIds = new List<string>();
+            festivalStatIds.AddRange(ItemIds.Festival.Select(i => CreatorCommon.CreateItemStatId(i)));
+            return festivalStatIds;
         }
     }
 }

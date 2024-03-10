@@ -92,8 +92,8 @@ namespace SessionTracker.FilesAndMigration
             Module.Logger.Info("migrate model from version 3 to 4: rename 'isVisible' to 'IsSelectedByUser'");
             var modelJObject = JObject.Parse(modelJson);
             var statsJArray = (JArray)modelJObject.GetValue("Stats");
-            foreach (JObject statJObject in statsJArray)
-                statJObject.Property("IsVisible")?.Rename("IsSelectedByUser"); // null-conditional because isVisible = false is the default and not stored in model.json. 
+            foreach (var statJToken in statsJArray)
+                ((JObject)statJToken).Property("IsVisible")?.Rename("IsSelectedByUser"); // null-conditional because isVisible = false is the default and not stored in model.json. 
             
             return modelJObject.ToString();
         }

@@ -3,10 +3,11 @@ using System.Threading.Tasks;
 using SessionTracker.Files;
 using SessionTracker.Models;
 using System;
-using SessionTracker.JsonFileCreator.StatCreators;
+using SessionTracker.JsonFileCreator.Stats;
 using System.Collections.Generic;
-using SessionTracker.JsonFileCreator.OtherCreators;
-using SessionTracker.Constants;
+using SessionTracker.JsonFileCreator.Other;
+using SessionTracker.JsonFileCreator.Category;
+using SessionTracker.JsonFileCreator.Constants;
 using System.Linq;
 
 namespace SessionTracker.JsonFileCreator
@@ -46,23 +47,15 @@ namespace SessionTracker.JsonFileCreator
             var currencyStats = await CurrencyStatsCreator.CreateCurrencyStats();
             var materialStorageStats = await ItemStatsCreator.CreateMaterialStorageItemStats(categories);
 
-            var wvwStatIds = CategoryStatIdCollector.GetWvwStatIds(wvwStats);
-            var pvpStatIds = CategoryStatIdCollector.GetPvpStatIds(pvpStats);
-            var miscStatIds = CategoryStatIdCollector.GetMiscStatIds();
-            var currencyStatIds = CategoryStatIdCollector.GetCurrencyStatIds(currencyStats);
-            var fractalStatIds = CategoryStatIdCollector.GetFractalStatIds();
-            var raidStatIds = CategoryStatIdCollector.GetRaidStatIds();
-            var strikeStatIds = CategoryStatIdCollector.GetStrikeStatIds();
-            var openWorldStatIds = CategoryStatIdCollector.GetOpenWorldStatIds();
-
-            CreatorCommon.AddStatIdsToCategory(CategoryId.WVW, categories, wvwStatIds);
-            CreatorCommon.AddStatIdsToCategory(CategoryId.PVP, categories, pvpStatIds);
-            CreatorCommon.AddStatIdsToCategory(CategoryId.MISC, categories, miscStatIds);
-            CreatorCommon.AddStatIdsToCategory(CategoryId.CURRENCY, categories, currencyStatIds);
-            CreatorCommon.AddStatIdsToCategory(CategoryId.FRACTAL, categories, fractalStatIds);
-            CreatorCommon.AddStatIdsToCategory(CategoryId.RAID, categories, raidStatIds);
-            CreatorCommon.AddStatIdsToCategory(CategoryId.STRIKE, categories, strikeStatIds);
-            CreatorCommon.AddStatIdsToCategory(CategoryId.OPEN_WORLD, categories, openWorldStatIds);
+            CreatorCommon.AddStatIdsToCategory(CategoryId.WVW, categories, CategoryStatIdCollector.GetWvwStatIds(wvwStats));
+            CreatorCommon.AddStatIdsToCategory(CategoryId.PVP, categories, CategoryStatIdCollector.GetPvpStatIds(pvpStats));
+            CreatorCommon.AddStatIdsToCategory(CategoryId.MISC, categories, CategoryStatIdCollector.GetMiscStatIds());
+            CreatorCommon.AddStatIdsToCategory(CategoryId.CURRENCY, categories, CategoryStatIdCollector.GetCurrencyStatIds(currencyStats));
+            CreatorCommon.AddStatIdsToCategory(CategoryId.FESTIVAL, categories, CategoryStatIdCollector.GetFestivalStatIds());
+            CreatorCommon.AddStatIdsToCategory(CategoryId.FRACTAL, categories, CategoryStatIdCollector.GetFractalStatIds());
+            CreatorCommon.AddStatIdsToCategory(CategoryId.RAID, categories, CategoryStatIdCollector.GetRaidStatIds());
+            CreatorCommon.AddStatIdsToCategory(CategoryId.STRIKE, categories, CategoryStatIdCollector.GetStrikeStatIds());
+            CreatorCommon.AddStatIdsToCategory(CategoryId.OPEN_WORLD, categories, CategoryStatIdCollector.GetOpenWorldStatIds());
 
             var stats = new List<Stat>();
             stats.AddRange(wvwStats);
@@ -70,7 +63,17 @@ namespace SessionTracker.JsonFileCreator
             stats.AddRange(miscStats);
             stats.AddRange(currencyStats);
             stats.AddRange(materialStorageStats);
+            stats = RemoveStatDuplicates(stats);
             return stats;
+        }
+
+        // duplicate examples: Mystic Coin (raid, fractal, material storage), Memory of Battle (wvw, material storage)
+        private static List<Stat> RemoveStatDuplicates(List<Stat> stats)
+        {
+            return stats
+                .GroupBy(p => p.Id)
+                .Select(g => g.First())
+                .ToList();
         }
 
         private static void WriteModelToFile(Model model)

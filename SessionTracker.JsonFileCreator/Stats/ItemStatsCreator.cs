@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 using Gw2Sharp;
 using Gw2Sharp.WebApi;
 using Gw2Sharp.WebApi.V2.Models;
-using SessionTracker.Constants;
-using SessionTracker.JsonFileCreator.OtherCreators;
+using SessionTracker.JsonFileCreator.Constants;
+using SessionTracker.JsonFileCreator.Other;
 using SessionTracker.Models;
 
-namespace SessionTracker.JsonFileCreator.StatCreators
+namespace SessionTracker.JsonFileCreator.Stats
 {
     public class ItemStatsCreator
     {
@@ -16,7 +16,14 @@ namespace SessionTracker.JsonFileCreator.StatCreators
         {
             var stats = new List<Stat>();
             using var gw2Client = new Gw2Client(new Connection(Locale.English));
-            var items = await gw2Client.WebApi.V2.Items.ManyAsync(MISC_ITEM_IDS);
+            var itemIds = new List<int>();
+            itemIds.AddRange(ItemIds.Wvw);
+            itemIds.AddRange(ItemIds.Misc);
+            itemIds.AddRange(ItemIds.Fractal);
+            itemIds.AddRange(ItemIds.Raid);
+            itemIds.AddRange(ItemIds.Festival);
+            var distinctItemIds = itemIds.Distinct().ToList();
+            var items = await gw2Client.WebApi.V2.Items.ManyAsync(distinctItemIds);
 
             foreach (var item in items)
             {
@@ -100,13 +107,6 @@ namespace SessionTracker.JsonFileCreator.StatCreators
             var matchingStat = stats.Single(e => e.ApiId == localItem.Id);
             matchingStat.Name.SetLocalizedText(localItem.Name, locale);
             matchingStat.Description.SetLocalizedText(localItem.Description, locale);
-        }
-
-        public static readonly List<int> MISC_ITEM_IDS = new List<int>
-        {
-            ItemIds.HEAVY_LOOT_BAG,
-            ItemIds.TRICK_OR_TREAT_BAG,
-            ItemIds.FRACTAL_ENCRYPTION,
-        };
+        }   
     }
 }

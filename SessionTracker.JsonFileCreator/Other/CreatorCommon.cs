@@ -1,13 +1,12 @@
 ﻿using Gw2Sharp.WebApi;
-using Gw2Sharp.WebApi.V2.Models;
-using SessionTracker.Constants;
+using SessionTracker.JsonFileCreator.Constants;
 using SessionTracker.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 
-namespace SessionTracker.JsonFileCreator.OtherCreators
+namespace SessionTracker.JsonFileCreator.Other
 {
     public class CreatorCommon
     {

@@ -19,7 +19,7 @@ namespace SessionTracker.Models
         [JsonIgnore] public bool IsAchievement => ApiIdType == ApiIdType.Achievement;
         [JsonIgnore] public bool IsCurrency => ApiIdType == ApiIdType.Currency;
         [JsonIgnore] public bool IsItem => ApiIdType == ApiIdType.Item;
-        [JsonIgnore] public bool IsCoin => IsCurrency && ApiId == CurrencyIds.COIN_IN_COPPER;
+        [JsonIgnore] public bool IsCoin => IsCurrency && ApiId == CurrencyId.COIN_IN_COPPER;
         [JsonIgnore] public bool IsKdr => Id == StatId.PVP_KDR || Id == StatId.WVW_KDR;
 
         public string GetTextWithNameAndDescription()
