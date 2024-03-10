@@ -46,8 +46,6 @@ namespace SessionTracker
 
         protected override async Task LoadAsync()
         {
-            RunShiftBlishCornerIconsWorkaroundBecauseOfNewWizardVaultIcon();
-
             if (await ApiService.IsApiTokenGeneratedWithoutRequiredPermissions(DirectoriesManager))
             {
                 _moduleLoadError.HasModuleLoadFailed = true;
@@ -112,22 +110,6 @@ namespace SessionTracker
                 return;
 
             _statsContainer.Update2(gameTime);
-        }
-
-        private static void RunShiftBlishCornerIconsWorkaroundBecauseOfNewWizardVaultIcon()
-        {
-            if (Program.OverlayVersion < new SemVer.Version(1, 1, 0))
-            {
-                try
-                {
-                    var tacoActive = typeof(TacOIntegration).GetProperty(nameof(TacOIntegration.TacOIsRunning)).GetSetMethod(true);
-                    tacoActive?.Invoke(GameService.GameIntegration.TacO, new object[] { true });
-                }
-                catch 
-                {
-                    /* NOOP */ 
-                }
-            }
         }
 
         public static readonly Logger Logger = Logger.GetLogger<Module>();
