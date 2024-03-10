@@ -70,6 +70,7 @@ namespace SessionTracker.FilesAndMigration
         {
             (modelJson) => MigrateModelFromVersion1to2(modelJson),
             (modelJson) => MigrateModelFromVersion2To3(modelJson),
+            (modelJson) => MigrateModelFromVersion3To4(modelJson),
         };
 
         // no migration required for 1 -> 2
@@ -84,6 +85,17 @@ namespace SessionTracker.FilesAndMigration
             Module.Logger.Info("migrate model from version 2 to 3: rename 'Entries' to 'Stats'");
             var modelJObject = JObject.Parse(modelJson);
             modelJObject.Property("Entries").Rename("Stats");
+            return modelJObject.ToString();
+        }
+
+        private static string MigrateModelFromVersion3To4(string modelJson)
+        {
+            Module.Logger.Info("migrate model from version 3 to 4: rename 'isVisible' to 'IsSelectedByUser'");
+            var modelJObject = JObject.Parse(modelJson);
+            var statsJArray = (JArray)modelJObject.GetValue("Stats");
+            foreach (JObject statJObject in statsJArray)
+                statJObject.Property("IsVisible")?.Rename("IsSelectedByUser"); // null-conditional because isVisible = false is the default and not stored in model.json. 
+            
             return modelJObject.ToString();
         }
 
