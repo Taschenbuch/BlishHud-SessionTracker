@@ -2,37 +2,35 @@
 using Blish_HUD;
 using Blish_HUD.Controls;
 using Microsoft.Xna.Framework;
-using SessionTracker.DateTimeUtcNow;
-using SessionTracker.Models;
-using SessionTracker.Services;
-using SessionTracker.SettingEntries;
-using SessionTracker.StatsWindow;
+using SessionTracker.OtherServices;
+using SessionTracker.SelectStats;
 
 namespace SessionTracker.SettingsWindow
 {
     public class SettingsWindowService : IDisposable
     {
-        public SettingsWindowService(Model model, SettingService settingService, DateTimeService dateTimeService, TextureService textureService, UpdateLoop updateLoop)
+        public SettingsWindowService(Services services)
         {
             _settingsWindow = new TabbedWindow2(
-                textureService.SettingsWindowBackgroundTexture,
-                new Rectangle(40, 30, 720, 700),
-                new Rectangle(80, 30, 680, 630))
+                services.TextureService.SelectStatsWindowBackgroundTexture,
+                new Rectangle(40, 30, 950, 950), 
+                new Rectangle(80, 30, 910, 930))
             {
                 Title = "Session Tracker",
-                Emblem = textureService.SettingsWindowEmblemTexture,
+                Emblem = services.TextureService.SettingsWindowEmblemTexture,
                 Location = new Point(300, 300),
                 SavesPosition = true,
-                Id = "SessionTracker settings window",
+                Id = "Ecksofa.SessionTracker: settings window",
                 Parent = GameService.Graphics.SpriteScreen,
             };
 
-            _statsTab = new Tab(textureService.StatsTabTexture, () => new StatsSettingsTabView(model, settingService, textureService), "Tracked Stats");
-            _settingsWindow.Tabs.Add(_statsTab);
-            _settingsWindow.Tabs.Add(new Tab(textureService.GeneralTabTexture, () => new GeneralSettingsTabView(settingService), "General"));
-            _settingsWindow.Tabs.Add(new Tab(textureService.VisibilityTabTexture, () => new VisibilitySettingsTabView(settingService), "Window Visibility"));
+            _selectStatsTab = new Tab(services.TextureService.SelectStatsTabTexture, () => new SelectStatsSettingsTabView(services), "Select Stats");
+            _settingsWindow.Tabs.Add(_selectStatsTab);
+            _settingsWindow.Tabs.Add(new Tab(services.TextureService.ArrangeStatsTabTexture, () => new ArrangeStatsSettingsTabView(services), "Arrange Stats"));
+            _settingsWindow.Tabs.Add(new Tab(services.TextureService.GeneralTabTexture, () => new GeneralSettingsTabView(services.SettingService), "General"));
+            _settingsWindow.Tabs.Add(new Tab(services.TextureService.VisibilityTabTexture, () => new VisibilitySettingsTabView(services.SettingService), "Window Visibility"));
 #if DEBUG
-            _settingsWindow.Tabs.Add(new Tab(textureService.DebugTabTexture, () => new DebugSettingsTabView(settingService, dateTimeService, updateLoop), "Debug"));
+            _settingsWindow.Tabs.Add(new Tab(services.TextureService.DebugTabTexture, () => new DebugSettingsTabView(services), "Debug"));
 #endif
         }
 
@@ -49,10 +47,10 @@ namespace SessionTracker.SettingsWindow
         public void ShowWindowAndSelectStatsTab()
         {
             _settingsWindow.Show();
-            _settingsWindow.SelectedTab = _statsTab;
+            _settingsWindow.SelectedTab = _selectStatsTab;
         }
 
         private readonly TabbedWindow2 _settingsWindow;
-        private readonly Tab _statsTab;
+        private readonly Tab _selectStatsTab;
     }
 }

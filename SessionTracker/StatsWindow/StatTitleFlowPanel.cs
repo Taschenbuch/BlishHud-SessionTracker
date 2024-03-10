@@ -2,9 +2,8 @@
 using Blish_HUD.Controls;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended.BitmapFonts;
-using SessionTracker.Constants;
 using SessionTracker.Models;
-using SessionTracker.Services;
+using SessionTracker.OtherServices;
 using SessionTracker.SettingEntries;
 using SessionTracker.StatTooltip;
 using System;
@@ -13,27 +12,27 @@ namespace SessionTracker.StatsWindow
 {
     public class StatTitleFlowPanel : FlowPanel
     {
-        public StatTitleFlowPanel(Stat stat, Container parent, TextureService textureService, SettingService settingService)
+        public StatTitleFlowPanel(Stat stat, Container parent, Services services)
         {
             _stat           = stat;
-            _settingService = settingService;
+            _settingService = services.SettingService;
 
             FlowDirection    = ControlFlowDirection.SingleLeftToRight;
             WidthSizingMode  = SizingMode.AutoSize;
             HeightSizingMode = SizingMode.AutoSize;
-            Parent           = stat.IsVisible ? parent : null;
+            Parent           = stat.IsSelectedByUser ? parent : null;
 
             var titleLabel = new Label()
             {
                 Text           = stat.Name.Localized,
-                TextColor      = settingService.TitleLabelColorSetting.Value.GetColor(),
+                TextColor      = _settingService.TitleLabelColorSetting.Value.GetColor(),
                 ShowShadow     = true,
                 AutoSizeHeight = true,
                 AutoSizeWidth  = true,
                 Tooltip        = new SummaryTooltip()
             };
 
-            var asyncTexture2D = textureService.StatTextureByStatId[stat.Id];
+            var asyncTexture2D = services.TextureService.StatTextureByStatId[stat.Id];
             _titleImage = new Image(asyncTexture2D)
             {
                 Size    = new Point(titleLabel.Height),
@@ -46,12 +45,12 @@ namespace SessionTracker.StatsWindow
 
             OnStatTitlePaddingSettingChanged();
             OnStatTitleWidthOrIsFixedSettingChanged();
-            ShowOrHideTextAndIcon(settingService.LabelTypeSetting.Value);
-            settingService.StatTitleWidthIsFixedSetting.SettingChanged += OnStatTitleWidthOrIsFixedSettingChanged;
-            settingService.StatTitleWidthSetting.SettingChanged        += OnStatTitleWidthOrIsFixedSettingChanged;
-            settingService.StatTitlePaddingSetting.SettingChanged      += OnStatTitlePaddingSettingChanged;
-            settingService.LabelTypeSetting.SettingChanged             += OnLabelTypeSettingChanged;
-            settingService.TitleLabelColorSetting.SettingChanged       += OnTitleLabelColorSettingChanged;
+            ShowOrHideTextAndIcon(_settingService.LabelTypeSetting.Value);
+            _settingService.StatTitleWidthIsFixedSetting.SettingChanged += OnStatTitleWidthOrIsFixedSettingChanged;
+            _settingService.StatTitleWidthSetting.SettingChanged        += OnStatTitleWidthOrIsFixedSettingChanged;
+            _settingService.StatTitlePaddingSetting.SettingChanged      += OnStatTitlePaddingSettingChanged;
+            _settingService.LabelTypeSetting.SettingChanged             += OnLabelTypeSettingChanged;
+            _settingService.TitleLabelColorSetting.SettingChanged       += OnTitleLabelColorSettingChanged;
         }
 
         protected override void DisposeControl()
@@ -122,7 +121,7 @@ namespace SessionTracker.StatsWindow
         private void ShowOrHideTextAndIcon(LabelType labelType)
         {
             // without reset the icon may end up left or right of the text because container is a flowPanel
-            _titleImage.Parent                      = null;
+            _titleImage.Parent                     = null;
             _paddingLabelBetweenIconAndText.Parent = null;
             _titleLabel.Parent                     = null;
             _paddingLabelBeforeValue.Parent        = null;
@@ -130,7 +129,7 @@ namespace SessionTracker.StatsWindow
             switch (labelType)
             {
                 case LabelType.Icon:
-                    _titleImage.Parent               = this;
+                    _titleImage.Parent              = this;
                     _paddingLabelBeforeValue.Parent = this;
                     break;
                 case LabelType.Text:
@@ -138,7 +137,7 @@ namespace SessionTracker.StatsWindow
                     _paddingLabelBeforeValue.Parent = this;
                     break;
                 case LabelType.IconAndText:
-                    _titleImage.Parent                      = this;
+                    _titleImage.Parent                     = this;
                     _paddingLabelBetweenIconAndText.Parent = this;
                     _titleLabel.Parent                     = this;
                     _paddingLabelBeforeValue.Parent        = this;

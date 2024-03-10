@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using Blish_HUD.Controls;
-using SessionTracker.Models;
-using SessionTracker.Services;
-using SessionTracker.SettingEntries;
+using SessionTracker.OtherServices;
 using SessionTracker.StatsWindow;
 
 namespace SessionTracker.StatTooltip
@@ -12,19 +10,17 @@ namespace SessionTracker.StatTooltip
         public SummaryTooltipService(
             Dictionary<string, StatTitleFlowPanel> titleFlowPanelByStatId,
             Dictionary<string, Label> valueLabelByStatId,
-            Model model,
-            SettingService settingService,
-            TextureService textureService)
+            Services services)
         {
             _titleFlowPanelByStatId    = titleFlowPanelByStatId;
             _valueLabelByStatId        = valueLabelByStatId;
-            _model                     = model;
-            _summaryTooltipTextService = new SummaryTooltipContentService(model, settingService, textureService);
+            _services                  = services;
+            _summaryTooltipTextService = new SummaryTooltipContentService(services);
         }
 
         public void UpdateSummaryTooltip()
         {
-            foreach (var stat in _model.Stats)
+            foreach (var stat in _services.Model.Stats)
             {
                 _summaryTooltipTextService.UpdateSessionHistory(stat);
                 var summaryTooltipContent = _summaryTooltipTextService.CreateSummaryToolTipContent(stat);
@@ -34,7 +30,7 @@ namespace SessionTracker.StatTooltip
 
         public void ResetSummaryTooltip()
         {
-            foreach (var stat in _model.Stats)
+            foreach (var stat in _services.Model.Stats)
             {
                 _summaryTooltipTextService.ResetSessionHistory(stat);
                 var summaryTooltipContent = _summaryTooltipTextService.CreateSummaryToolTipContent(stat);
@@ -51,6 +47,6 @@ namespace SessionTracker.StatTooltip
         private readonly SummaryTooltipContentService _summaryTooltipTextService;
         private readonly Dictionary<string, StatTitleFlowPanel> _titleFlowPanelByStatId;
         private readonly Dictionary<string, Label> _valueLabelByStatId;
-        private readonly Model _model;
+        private readonly Services _services;
     }
 }

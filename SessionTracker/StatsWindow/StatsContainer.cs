@@ -5,19 +5,16 @@ using System.Threading.Tasks;
 using Blish_HUD;
 using Blish_HUD.Controls;
 using Blish_HUD.Input;
-using Blish_HUD.Modules.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using SessionTracker.Api;
 using SessionTracker.AutomaticReset;
-using SessionTracker.Files;
 using SessionTracker.Models;
 using SessionTracker.Other;
 using SessionTracker.RelativePositionWindow;
 using SessionTracker.Reset;
-using SessionTracker.Services;
+using SessionTracker.OtherServices;
 using SessionTracker.SettingEntries;
-using SessionTracker.SettingsWindow;
 using SessionTracker.StatsHint;
 using SessionTracker.StatTooltip;
 using SessionTracker.Text;
@@ -26,57 +23,54 @@ namespace SessionTracker.StatsWindow
 {
     public class StatsContainer : RelativePositionAndMouseDraggableContainer
     {
-        public StatsContainer(Model model,
-                              Gw2ApiManager gw2ApiManager,
-                              TextureService textureService,
-                              FileService fileService,
-                              UpdateLoop updateLoop,
-                              SettingsWindowService settingsWindowService,
-                              SettingService settingService)
-            : base(settingService)
-        {
-            _model          = model;
-            _gw2ApiManager  = gw2ApiManager;
-            _fileService    = fileService;
-            _updateLoop     = updateLoop;
-            _settingService = settingService;
 
-            _resetService = new ResetService(model, settingService.AutomaticSessionResetSetting, settingService.MinutesUntilResetAfterModuleShutdownSetting);
-            model.SessionDuration.StartMeasuring();
-            CreateUi(model, settingsWindowService, textureService, settingService);
-            _valueLabelTextService = new ValueLabelTextService(_valueLabelByStatId, model, settingService);
-            _summaryTooltipService = new SummaryTooltipService(_titleFlowPanelByStatId, _valueLabelByStatId, model, settingService, textureService);
+        public StatsContainer(Services services)
+            : base(services.SettingService)
+        {
+            _services = services;
+            _model = services.Model;
+            _updateLoop = services.UpdateLoop;
+
+            HeightSizingMode = SizingMode.AutoSize;
+            WidthSizingMode = SizingMode.AutoSize;
+            BackgroundColor = ColorService.CreateBackgroundColor(services.SettingService);
+            Visible = services.SettingService.UiIsVisibleSetting.Value;
+            Parent = GameService.Graphics.SpriteScreen;
+
+            _resetService = new ResetService(services);
+            services.Model.SessionDuration.StartMeasuring();
+            CreateUi(services);
+            _valueLabelTextService = new ValueLabelTextService(_valueLabelByStatId, services);
+            _summaryTooltipService = new SummaryTooltipService(_titleFlowPanelByStatId, _valueLabelByStatId, services);
 
             _statsWindowDisplayStateService = new StatsWindowDisplayStateService(
                 _userHasToSelectStatsFlowPanel,
                 _errorLabel,
                 _allStatsHiddenByZeroValuesSettingImage,
                 _statsRootFlowPanel,
-                updateLoop,
-                model,
-                settingService.StatsWithZeroValueAreHiddenSetting,
+                services,
                 this);
 
             _statsWindowDisplayStateService.ShowUpdatedDisplayState();
 
-            settingService.StatsWithZeroValueAreHiddenSetting.SettingChanged  += OnStatsWithZeroValueAreHiddenSettingChanged;
-            settingService.FontSizeIndexSetting.SettingChanged                += OnFontSizeIndexSettingChanged;
-            settingService.BackgroundOpacitySetting.SettingChanged            += OnBackgroundSettingChanged;
-            settingService.BackgroundColorSetting.SettingChanged              += OnBackgroundSettingChanged;
-            settingService.ValueLabelColorSetting.SettingChanged              += OnValueLabelColorSettingChanged;
-            GameService.Overlay.UserLocaleChanged                             += OnUserChangedLanguageInBlishSettings;
+            services.SettingService.StatsWithZeroValueAreHiddenSetting.SettingChanged  += OnStatsWithZeroValueAreHiddenSettingChanged;
+            services.SettingService.FontSizeIndexSetting.SettingChanged                += OnFontSizeIndexSettingChanged;
+            services.SettingService.BackgroundOpacitySetting.SettingChanged            += OnBackgroundSettingChanged;
+            services.SettingService.BackgroundColorSetting.SettingChanged              += OnBackgroundSettingChanged;
+            services.SettingService.ValueLabelColorSetting.SettingChanged              += OnValueLabelColorSettingChanged;
+            GameService.Overlay.UserLocaleChanged                                      += OnUserChangedLanguageInBlishSettings;
 
             OnFontSizeIndexSettingChanged();
-        }
+        } 
 
         protected override void DisposeControl()
         {
-            _settingService.StatsWithZeroValueAreHiddenSetting.SettingChanged -= OnStatsWithZeroValueAreHiddenSettingChanged;
-            _settingService.FontSizeIndexSetting.SettingChanged               -= OnFontSizeIndexSettingChanged;
-            _settingService.BackgroundOpacitySetting.SettingChanged           -= OnBackgroundSettingChanged;
-            _settingService.BackgroundColorSetting.SettingChanged             -= OnBackgroundSettingChanged;
-            _settingService.ValueLabelColorSetting.SettingChanged             -= OnValueLabelColorSettingChanged;
-            GameService.Overlay.UserLocaleChanged                             -= OnUserChangedLanguageInBlishSettings;
+            _services.SettingService.StatsWithZeroValueAreHiddenSetting.SettingChanged -= OnStatsWithZeroValueAreHiddenSettingChanged;
+            _services.SettingService.FontSizeIndexSetting.SettingChanged               -= OnFontSizeIndexSettingChanged;
+            _services.SettingService.BackgroundOpacitySetting.SettingChanged           -= OnBackgroundSettingChanged;
+            _services.SettingService.BackgroundColorSetting.SettingChanged             -= OnBackgroundSettingChanged;
+            _services.SettingService.ValueLabelColorSetting.SettingChanged             -= OnValueLabelColorSettingChanged;
+            GameService.Overlay.UserLocaleChanged                                     -= OnUserChangedLanguageInBlishSettings;
 
             _visibilityService?.Dispose();
             _updateLoop.Dispose();
@@ -88,8 +82,8 @@ namespace SessionTracker.StatsWindow
 
         public override Control TriggerMouseInput(MouseEventType mouseEventType, MouseState ms)
         {
-            var windowCanBeClickedThrough = !_settingService.DragWindowWithMouseIsEnabledSetting.Value
-                                          && _settingService.WindowCanBeClickedThroughSetting.Value
+            var windowCanBeClickedThrough = !_services.SettingService.DragWindowWithMouseIsEnabledSetting.Value
+                                          && _services.SettingService.WindowCanBeClickedThroughSetting.Value
                                           && GameService.Input.Keyboard.ActiveModifiers != ModifierKeys.Alt;
 
             return windowCanBeClickedThrough
@@ -99,7 +93,7 @@ namespace SessionTracker.StatsWindow
 
         public void ToggleVisibility()
         {
-            _settingService.UiIsVisibleSetting.Value = !_settingService.UiIsVisibleSetting.Value;
+            _services.SettingService.UiIsVisibleSetting.Value = !_services.SettingService.UiIsVisibleSetting.Value;
         }
 
         public void ResetSession()
@@ -110,7 +104,7 @@ namespace SessionTracker.StatsWindow
         // Update2() because Update() already exists in base class. Update() is not always called but Update2() is!
         public void Update2(GameTime gameTime)
         {
-            _visibilityService ??= new VisibilityService(this, _settingService);  // this cannot be done in StatsContainer ctor because hiding window on startup would not work.
+            _visibilityService ??= new VisibilityService(this, _services.SettingService);  // this cannot be done in StatsContainer ctor because hiding window on startup would not work.
 
             if (_model.UiHasToBeUpdated)
             {
@@ -129,7 +123,7 @@ namespace SessionTracker.StatsWindow
                     if (!_apiTokenAvailableCheckInterval.HasEnded())
                         return;
 
-                    var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _gw2ApiManager);
+                    var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _services.Gw2ApiManager);
                     var canUpdateOrStartNewSession = apiTokenService.CanAccessApi || _waitedLongEnoughForApiTokenInterval.HasEnded();
                     if(!canUpdateOrStartNewSession)
                     {
@@ -190,7 +184,7 @@ namespace SessionTracker.StatsWindow
         {
             try
             {
-                var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _gw2ApiManager);
+                var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _services.Gw2ApiManager);
                 if (!apiTokenService.CanAccessApi)
                 {
                     _statsWindowDisplayStateService.ShowApiTokenIssue(apiTokenService);
@@ -198,7 +192,7 @@ namespace SessionTracker.StatsWindow
                     return;
                 }
 
-                await ApiService.UpdateTotalValuesInModel(_model, _gw2ApiManager);
+                await ApiService.UpdateTotalValuesInModel(_services);
                 _resetService.UpdateNextResetDateTime();
                 _model.ResetDurationAndStats();
                 _valueLabelTextService.UpdateValueLabelTexts();
@@ -227,7 +221,7 @@ namespace SessionTracker.StatsWindow
             {
                 _resetService.UpdateNextResetDateTimeForMinutesAfterShutdownReset();
 
-                var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _gw2ApiManager);
+                var apiTokenService = new ApiTokenService(ApiService.API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE, _services.Gw2ApiManager);
                 if (!apiTokenService.CanAccessApi)
                 {
                     _statsWindowDisplayStateService.ShowApiTokenIssue(apiTokenService);
@@ -236,14 +230,14 @@ namespace SessionTracker.StatsWindow
                     return;
                 }
 
-                await ApiService.UpdateTotalValuesInModel(_model, _gw2ApiManager);
+                await ApiService.UpdateTotalValuesInModel(_services);
                 _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit = false;
                 _valueLabelTextService.UpdateValueLabelTexts();
                 _summaryTooltipService.UpdateSummaryTooltip();
                 _updateLoop.UseRegularUpdateSessionInterval();
                 ShowOrHideStats();
                 _statsWindowDisplayStateService.RemoveErrorAndShowUpdatedDisplayState();
-                await _fileService.SaveModelToFileAsync(_model);
+                await _services.FileService.SaveModelToFileAsync(_model);
                 _updateLoop.State = UpdateLoopState.PauseBeforeUpdatingSession;
             }
             catch (LogWarnException e)
@@ -272,23 +266,23 @@ namespace SessionTracker.StatsWindow
         {
             _statTitlesFlowPanel.ClearChildren();
             _statValuesFlowPanel.ClearChildren();
-            var visibleStats = _model.Stats.Where(e => e.IsVisible);
+            var selectedStats = _model.Stats.Where(e => e.IsSelectedByUser);
 
-            if (_settingService.StatsWithZeroValueAreHiddenSetting.Value)
-                visibleStats = visibleStats.Where(e => e.HasNonZeroSessionValue);
+            if (_services.SettingService.StatsWithZeroValueAreHiddenSetting.Value)
+                selectedStats = selectedStats.Where(e => e.HasNonZeroSessionValue);
 
-            foreach (var stat in visibleStats)
+            foreach (var stat in selectedStats)
             {
                 _titleFlowPanelByStatId[stat.Id].Parent = _statTitlesFlowPanel;
                 _valueLabelByStatId[stat.Id].Parent = _statValuesFlowPanel;
             }
         }
 
-        private void CreateUi(Model model, SettingsWindowService settingsWindowService, TextureService textureService, SettingService settingService)
+        private void CreateUi(Services services)
         {
             _errorLabel = new ErrorLabel();
-            _userHasToSelectStatsFlowPanel = new UserHasToSelectStatsFlowPanel(settingsWindowService);            
-            _allStatsHiddenByZeroValuesSettingImage = new Image(textureService.AllStatsHiddenByZeroValuesSettingTexture)
+            _userHasToSelectStatsFlowPanel = new UserHasToSelectStatsFlowPanel(services.SettingsWindowService);            
+            _allStatsHiddenByZeroValuesSettingImage = new Image(_services.TextureService.AllStatsHiddenByZeroValuesSettingTexture)
             {
                 Size = new Point(30),
                 BasicTooltipText = "All stats are hidden because their current session values are 0.\n" +
@@ -296,7 +290,7 @@ namespace SessionTracker.StatsWindow
                                    "This hide-zero-value-stats-feature can be turned off in the session tracker module settings."
             };
 
-            _statsRootFlowPanel = new StatsRootFlowPanel(settingService);
+            _statsRootFlowPanel = new StatsRootFlowPanel(_services.SettingService);
 
             _statTitlesFlowPanel = new FlowPanel()
             {
@@ -314,14 +308,14 @@ namespace SessionTracker.StatsWindow
                 Parent           = _statsRootFlowPanel
             };
 
-            new RightWindowMarginForScrollbar(_statsRootFlowPanel, settingService); // is automatically disposed with _statsRootFlowPanel
+            new RightWindowMarginForScrollbar(_statsRootFlowPanel, _services.SettingService); // is automatically disposed with _statsRootFlowPanel
 
-            foreach (var stat in model.Stats)
+            foreach (var stat in _services.Model.Stats)
             {
                 _valueLabelByStatId[stat.Id] = new Label()
                 {
                     Text           = "-",
-                    TextColor      = settingService.ValueLabelColorSetting.Value.GetColor(),
+                    TextColor      = _services.SettingService.ValueLabelColorSetting.Value.GetColor(),
                     ShowShadow     = true,
                     AutoSizeHeight = true,
                     AutoSizeWidth  = true,
@@ -329,7 +323,7 @@ namespace SessionTracker.StatsWindow
                     Parent         = null
                 };
 
-                _titleFlowPanelByStatId[stat.Id] = new StatTitleFlowPanel(stat, _statTitlesFlowPanel, textureService, settingService);
+                _titleFlowPanelByStatId[stat.Id] = new StatTitleFlowPanel(stat, _statTitlesFlowPanel, _services);
             }
         }
 
@@ -348,7 +342,7 @@ namespace SessionTracker.StatsWindow
 
         private void OnFontSizeIndexSettingChanged(object sender = null, ValueChangedEventArgs<int> valueChangedEventArgs = null)
         {
-            var font = FontService.Fonts[_settingService.FontSizeIndexSetting.Value];
+            var font = FontService.Fonts[_services.SettingService.FontSizeIndexSetting.Value];
             _userHasToSelectStatsFlowPanel.SetFont(font);
             _errorLabel.Font = font;
             _allStatsHiddenByZeroValuesSettingImage.Size = new Point(font.LineHeight);
@@ -362,7 +356,7 @@ namespace SessionTracker.StatsWindow
         
         private void OnBackgroundSettingChanged(object sender, EventArgs e)
         {
-            BackgroundColor = ColorService.CreateBackgroundColor(_settingService);
+            BackgroundColor = ColorService.CreateBackgroundColor(_services.SettingService);
         }
 
         private void OnStatsWithZeroValueAreHiddenSettingChanged(object sender, ValueChangedEventArgs<bool> e)
@@ -370,13 +364,10 @@ namespace SessionTracker.StatsWindow
             _model.UiHasToBeUpdated = true;
         }
 
-        private readonly Gw2ApiManager _gw2ApiManager;
-        private readonly FileService _fileService;
         private VisibilityService _visibilityService;
         private readonly Interval _apiTokenAvailableCheckInterval = new Interval(TimeSpan.FromMilliseconds(200));
         private readonly Interval _waitedLongEnoughForApiTokenInterval = new Interval(TimeSpan.FromSeconds(20));
         private readonly Model _model;
-        private readonly SettingService _settingService;
         private readonly SummaryTooltipService _summaryTooltipService;
         private readonly ValueLabelTextService _valueLabelTextService;
         private readonly Dictionary<string, StatTitleFlowPanel> _titleFlowPanelByStatId = new Dictionary<string, StatTitleFlowPanel>();
@@ -391,5 +382,6 @@ namespace SessionTracker.StatsWindow
         private Image _allStatsHiddenByZeroValuesSettingImage;
         private readonly StatsWindowDisplayStateService _statsWindowDisplayStateService;
         private bool _hasToShowApiErrorInfoBecauseIsFirstUpdateWithoutInit;
+        private readonly Services _services;
     }
 }

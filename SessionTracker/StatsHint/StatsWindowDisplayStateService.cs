@@ -1,10 +1,8 @@
 ﻿using Blish_HUD.Controls;
-using Blish_HUD.Settings;
 using SessionTracker.Api;
-using SessionTracker.Models;
+using SessionTracker.OtherServices;
 using SessionTracker.StatsWindow;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace SessionTracker.StatsHint
@@ -15,19 +13,15 @@ namespace SessionTracker.StatsHint
             UserHasToSelectStatsFlowPanel userHasToSelectStatsFlowPanel,
             ErrorLabel errorLabel,
             Image allStatsHiddenByZeroValuesSettingImage,
-            StatsRootFlowPanel statsRootFlowPanel, 
-            UpdateLoop updateLoop, 
-            Model model, 
-            SettingEntry<bool> statsWithZeroValueAreHiddenSetting, 
+            StatsRootFlowPanel statsRootFlowPanel,
+            Services services, 
             Container parent)
         {
             _userHasToSelectStatsFlowPanel = userHasToSelectStatsFlowPanel;
             _errorLabel = errorLabel;
             _allStatsHiddenByZeroValuesSettingImage = allStatsHiddenByZeroValuesSettingImage;
             _statsRootFlowPanel = statsRootFlowPanel;
-            _updateLoop = updateLoop;
-            _model = model;
-            _statsWithZeroValueAreHiddenSetting = statsWithZeroValueAreHiddenSetting;
+            _services = services;
             _parent = parent;
         }
 
@@ -72,27 +66,21 @@ namespace SessionTracker.StatsHint
 
         public void ShowUpdatedDisplayState()
         {
-            var statsWindowDisplayState = DetermineStatsWindowDisplayState(_model.Stats, _updateLoop.State, _statsWithZeroValueAreHiddenSetting.Value, _errorLabel.Text);
+            var statsWindowDisplayState = DetermineStatsWindowDisplayState(_services, _errorLabel.Text);
             Show(statsWindowDisplayState);
         }
 
         private void Show(StatsWindowDisplayState statsWindowDisplayState)
         {
-            _allStatsHiddenByZeroValuesSettingImage.Parent 
-                = statsWindowDisplayState == StatsWindowDisplayState.AllStatsHiddenByZeroValuesAreHiddenSetting ? _parent : null;
-            
-            _userHasToSelectStatsFlowPanel.Parent 
-                = statsWindowDisplayState == StatsWindowDisplayState.UserHasToSelectStatsHint ? _parent : null;
-
+            _allStatsHiddenByZeroValuesSettingImage.Parent = statsWindowDisplayState == StatsWindowDisplayState.AllStatsHiddenByZeroValuesAreHiddenSetting ? _parent : null;
+            _userHasToSelectStatsFlowPanel.Parent = statsWindowDisplayState == StatsWindowDisplayState.UserHasToSelectStatsHint ? _parent : null;
             _statsRootFlowPanel.SetParentAndHandleScrollbar(statsWindowDisplayState == StatsWindowDisplayState.Stats ? _parent : null);
-            
-            _errorLabel.Parent 
-                = statsWindowDisplayState == StatsWindowDisplayState.Error ? _parent : null;
+            _errorLabel.Parent = statsWindowDisplayState == StatsWindowDisplayState.Error ? _parent : null;
         }
 
-        private static StatsWindowDisplayState DetermineStatsWindowDisplayState(List<Stat> stats, UpdateLoopState updateLoopState, bool statsWithZeroValueAreHidden, string errorText)
+        private static StatsWindowDisplayState DetermineStatsWindowDisplayState(Services services, string errorText)
         {
-            var noStatsAreSelectedByUser = !stats.Any(e => e.IsVisible);
+            var noStatsAreSelectedByUser = !services.Model.Stats.Any(e => e.IsSelectedByUser);
             if (noStatsAreSelectedByUser)
                 return StatsWindowDisplayState.UserHasToSelectStatsHint;
 
@@ -100,9 +88,9 @@ namespace SessionTracker.StatsHint
             if (errorText != string.Empty)
                 return StatsWindowDisplayState.Error; 
 
-            var allStatsHiddenBecauseOfZeroValuesAreHiddenSetting = stats.Any(e => e.IsVisible && e.HasNonZeroSessionValue) == false;
-            var hasModuleInitializedStatValues = updateLoopState != UpdateLoopState.WaitingForApiTokenAfterModuleStart;
-            if (statsWithZeroValueAreHidden && allStatsHiddenBecauseOfZeroValuesAreHiddenSetting && hasModuleInitializedStatValues)
+            var allStatsHiddenBecauseOfZeroValuesAreHiddenSetting = services.Model.Stats.Any(e => e.IsSelectedByUser && e.HasNonZeroSessionValue) == false;
+            var hasModuleInitializedStatValues = services.UpdateLoop.State != UpdateLoopState.WaitingForApiTokenAfterModuleStart;
+            if (services.SettingService.StatsWithZeroValueAreHiddenSetting.Value && allStatsHiddenBecauseOfZeroValuesAreHiddenSetting && hasModuleInitializedStatValues)
                 return StatsWindowDisplayState.AllStatsHiddenByZeroValuesAreHiddenSetting;
 
             return StatsWindowDisplayState.Stats;
@@ -111,10 +99,8 @@ namespace SessionTracker.StatsHint
         private readonly Container _parent;
         private readonly ErrorLabel _errorLabel;
         private readonly StatsRootFlowPanel _statsRootFlowPanel;
+        private readonly Services _services;
         private readonly Image _allStatsHiddenByZeroValuesSettingImage;
         private readonly UserHasToSelectStatsFlowPanel _userHasToSelectStatsFlowPanel;
-        private readonly UpdateLoop _updateLoop;
-        private readonly Model _model;
-        private readonly SettingEntry<bool> _statsWithZeroValueAreHiddenSetting;
     }
 }

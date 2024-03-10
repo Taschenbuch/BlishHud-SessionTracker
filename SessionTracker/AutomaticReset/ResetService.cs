@@ -3,18 +3,20 @@ using Blish_HUD.Settings;
 using SessionTracker.AutomaticReset;
 using SessionTracker.DateTimeUtcNow;
 using SessionTracker.Models;
+using SessionTracker.OtherServices;
 using System;
 
 namespace SessionTracker.Reset
 {
     public class ResetService : IDisposable
     {
-        public ResetService(Model model, SettingEntry<AutomaticSessionReset> automaticSessionResetSetting, SettingEntry<int> minutesUntilResetAfterModuleShutdownSetting)
+        public ResetService(Services services)
         {
-            _model = model;
-            _automaticSessionResetSetting = automaticSessionResetSetting;
-            _minutesUntilResetAfterModuleShutdownSetting = minutesUntilResetAfterModuleShutdownSetting;
-            automaticSessionResetSetting.SettingChanged += AutomaticSessionResetSettingChanged;
+            _model = services.Model;
+            _automaticSessionResetSetting = services.SettingService.AutomaticSessionResetSetting;
+            _minutesUntilResetAfterModuleShutdownSetting = services.SettingService.MinutesUntilResetAfterModuleShutdownSetting;
+            
+            services.SettingService.AutomaticSessionResetSetting.SettingChanged += AutomaticSessionResetSettingChanged;
         }
 
         public void Dispose()

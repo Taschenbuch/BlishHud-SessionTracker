@@ -5,19 +5,9 @@ using SessionTracker.Other;
 using System;
 using System.Collections.Generic;
 
-// ======== CHANGE LOG ========
-// 3.0:
-// - Entries -> Stats
-// - MajorVersion -> Version (will be handled in special method)
-// 
-// 2.0:
-// - string IconUrl -> int IconAssetId (is handled automatically because currently remote model is used with updated order and isVisible property)
-// - was never part of a release because 3.0 came earlier. 2.0 and 3.0 were still not merged into 2.0 because they were usefull to test migration logic.
-//
-// ======== Version definitions ======== 
-// - model format has changed
-// - OR statIds of existing stats have been modified.
-
+// =====================================================================
+// For model.json CHANGE LOG see comment for model version property.
+// =====================================================================
 namespace SessionTracker.FilesAndMigration
 {
     public static class MigrationService
@@ -54,13 +44,12 @@ namespace SessionTracker.FilesAndMigration
         {
             if (remoteModelVersion.Version < localModelVersion.Version)
             {
-                Module.Logger.Warn($"remote Version < local Version. " +
-                                   $"This can happen when previously a newer module version was installed. " +
-                                   $"This module version will not be able to handle the new data format. " +
-                                   $"Because of that it will use the remote model instead. " +
-                                   $"{settingsWillBeResetedText} {versionSummaryText} :(");
-
-                throw new LogWarnException($"remote Version < local Version. {versionSummaryText} {settingsWillBeResetedText}");
+                throw new LogWarnException(
+                    $"remote Version < local Version. " +
+                    $"This can happen when previously a newer module version was installed. " +
+                    $"This module version will not be able to handle the new data format. " +
+                    $"Because of that it will use the remote model instead. " +
+                    $"{settingsWillBeResetedText} {versionSummaryText} :(");
             }
         }
 
@@ -80,6 +69,7 @@ namespace SessionTracker.FilesAndMigration
         {
             (modelJson) => MigrateModelFromVersion1to2(modelJson),
             (modelJson) => MigrateModelFromVersion2To3(modelJson),
+            (modelJson) => MigrateModelFromVersion3To4(modelJson),
         };
 
         // no migration required for 1 -> 2
@@ -94,6 +84,17 @@ namespace SessionTracker.FilesAndMigration
             Module.Logger.Info("migrate model from version 2 to 3: rename 'Entries' to 'Stats'");
             var modelJObject = JObject.Parse(modelJson);
             modelJObject.Property("Entries").Rename("Stats");
+            return modelJObject.ToString();
+        }
+
+        private static string MigrateModelFromVersion3To4(string modelJson)
+        {
+            Module.Logger.Info("migrate model from version 3 to 4: rename 'isVisible' to 'IsSelectedByUser'");
+            var modelJObject = JObject.Parse(modelJson);
+            var statsJArray = (JArray)modelJObject.GetValue("Stats");
+            foreach (JObject statJObject in statsJArray)
+                statJObject.Property("IsVisible")?.Rename("IsSelectedByUser"); // null-conditional because isVisible = false is the default and not stored in model.json. 
+            
             return modelJObject.ToString();
         }
 

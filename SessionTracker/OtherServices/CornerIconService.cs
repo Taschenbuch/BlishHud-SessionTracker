@@ -2,37 +2,27 @@
 using Blish_HUD;
 using Blish_HUD.Controls;
 using Blish_HUD.Input;
-using Blish_HUD.Settings;
-using Microsoft.Xna.Framework.Graphics;
-using SessionTracker.SettingsWindow;
 using SessionTracker.StatsWindow;
 
-namespace SessionTracker.Services
+namespace SessionTracker.OtherServices
 {
     public class CornerIconService : IDisposable
     {
-        public CornerIconService(SettingEntry<bool> cornerIconIsVisibleSetting,
-                                 StatsContainer statsContainer,
-                                 SettingsWindowService settingsWindowService,
-                                 EventHandler<MouseEventArgs> cornerIconClickEventHandler,
-                                 TextureService textureService)
+        public CornerIconService(StatsContainer statsContainer, EventHandler<MouseEventArgs> cornerIconClickEventHandler, Services services)
         {
-            _settingsWindowService       = settingsWindowService;
-            _cornerIconIsVisibleSetting  = cornerIconIsVisibleSetting;
-            _statsContainer            = statsContainer;
+            _statsContainer              = statsContainer;
             _cornerIconClickEventHandler = cornerIconClickEventHandler;
-            _cornerIconTexture           = textureService.CornerIconTexture;
-            _cornerIconHoverTexture      = textureService.CornerIconHoverTexture;
+            _services = services;
 
-            cornerIconIsVisibleSetting.SettingChanged += OnCornerIconIsVisibleSettingChanged;
+            services.SettingService.CornerIconIsVisibleSetting.SettingChanged += OnCornerIconIsVisibleSettingChanged;
 
-            if (cornerIconIsVisibleSetting.Value)
+            if (services.SettingService.CornerIconIsVisibleSetting.Value)
                 CreateCornerIcon();
         }
 
         public void Dispose()
         {
-            _cornerIconIsVisibleSetting.SettingChanged -= OnCornerIconIsVisibleSettingChanged;
+            _services.SettingService.CornerIconIsVisibleSetting.SettingChanged -= OnCornerIconIsVisibleSettingChanged;
 
             if (_cornerIcon != null)
                 RemoveCornerIcon();
@@ -44,8 +34,8 @@ namespace SessionTracker.Services
 
             _cornerIcon = new CornerIcon
             {
-                Icon             = _cornerIconTexture,
-                HoverIcon        = _cornerIconHoverTexture,
+                Icon             = _services.TextureService.CornerIconTexture,
+                HoverIcon        = _services.TextureService.CornerIconHoverTexture,
                 BasicTooltipText = TOOLTIP_TEXT,
                 Parent           = GameService.Graphics.SpriteScreen,
                 Priority         = RANDOM_INTEGER_FOR_PRIORITY,
@@ -74,7 +64,7 @@ namespace SessionTracker.Services
 
         private void OnSettingsContextMenuStripItemClick(object sender, MouseEventArgs e)
         {
-            _settingsWindowService.ShowWindow();
+            _services.SettingsWindowService.ShowWindow();
         }
 
         private void RemoveCornerIcon()
@@ -100,12 +90,9 @@ namespace SessionTracker.Services
                 RemoveCornerIcon();
         }
 
-        private readonly Texture2D _cornerIconTexture;
-        private readonly Texture2D _cornerIconHoverTexture;
-        private readonly SettingEntry<bool> _cornerIconIsVisibleSetting;
         private readonly StatsContainer _statsContainer;
         private readonly EventHandler<MouseEventArgs> _cornerIconClickEventHandler;
-        private readonly SettingsWindowService _settingsWindowService;
+        private readonly Services _services;
         private CornerIcon _cornerIcon;
         private ContextMenuStripItem _settingsContextMenuStripItem;
         private ContextMenuStripItem _resetContextMenuStripItem;
