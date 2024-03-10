@@ -28,7 +28,7 @@ namespace SessionTracker.OtherServices
             CornerIconTexture = contentsManager.GetTexture(@"cornerIcon.png");
             CornerIconHoverTexture = contentsManager.GetTexture(@"cornerIconHover.png");
             AllStatsHiddenByZeroValuesSettingTexture = GetTextureFromAssetCache(358463, FallbackTexture, missingTextures);
-            SelectStatsTabTexture = GetTextureFromAssetCache(156909, FallbackTexture, missingTextures);
+            SelectStatsTabTexture = GetTextureFromAssetCache(440022, FallbackTexture, missingTextures);
             ArrangeStatsTabTexture = GetTextureFromAssetCache(156756, FallbackTexture, missingTextures);
             GeneralTabTexture = GetTextureFromAssetCache(156736, FallbackTexture, missingTextures); 
             VisibilityTabTexture = GetTextureFromAssetCache(358463, FallbackTexture, missingTextures);
