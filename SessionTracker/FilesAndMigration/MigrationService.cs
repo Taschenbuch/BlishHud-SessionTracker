@@ -44,13 +44,12 @@ namespace SessionTracker.FilesAndMigration
         {
             if (remoteModelVersion.Version < localModelVersion.Version)
             {
-                Module.Logger.Warn($"remote Version < local Version. " +
-                                   $"This can happen when previously a newer module version was installed. " +
-                                   $"This module version will not be able to handle the new data format. " +
-                                   $"Because of that it will use the remote model instead. " +
-                                   $"{settingsWillBeResetedText} {versionSummaryText} :(");
-
-                throw new LogWarnException($"remote Version < local Version. {versionSummaryText} {settingsWillBeResetedText}");
+                throw new LogWarnException(
+                    $"remote Version < local Version. " +
+                    $"This can happen when previously a newer module version was installed. " +
+                    $"This module version will not be able to handle the new data format. " +
+                    $"Because of that it will use the remote model instead. " +
+                    $"{settingsWillBeResetedText} {versionSummaryText} :(");
             }
         }
 
