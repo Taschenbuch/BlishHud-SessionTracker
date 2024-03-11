@@ -91,12 +91,13 @@ namespace SessionTracker.SettingsWindow
                 Parent = buttonsFlowPanel
             };
 
-            var statsSortedByCategory = _services.Model.GetDistinctStatsSortedByCategory();
+            var defaultStatsOrder = _services.Model.GetDistinctStatsSortedByCategory();
+
             resetButton.Click += (s, e) =>
             {
                 _services.Model.Stats.Clear();
-                _services.Model.Stats.AddRange(statsSortedByCategory);
-                ShowStatRows(scrollbar, statRowsFlowPanel);
+                _services.Model.Stats.AddRange(defaultStatsOrder);
+                UpdateStatRows(scrollbar, statRowsFlowPanel);
             };
 
             ControlFactory.CreateHintLabel(buttonsFlowPanel, "Super categories");
@@ -110,16 +111,12 @@ namespace SessionTracker.SettingsWindow
                 }
                 previousCategory = category;
 
-                var orderedCategoryStats = _services.Model.GetDistinctStatIds(category)
-                    .Select(id => _services.Model.GetStat(id))
-                    .Where(s => s.IsSelectedByUser)
-                    .ToList();
+                var orderedCategoryStats = _services.Model.GetDistinctStatIds(category) // order never changes
+                        .Select(id => _services.Model.GetStat(id))
+                        .Where(s => s.IsSelectedByUser)
+                        .ToList();
 
-                var remainingStats = _services.Model.Stats // includes selected and not selected stats
-                    .Except(orderedCategoryStats)
-                    .ToList();
-
-                var moveToTopButton = new StandardButton()
+                var moveCategoryToTopButton = new StandardButton()
                 {
                     Text = category.Name.Localized,
                     BasicTooltipText = 
@@ -130,8 +127,12 @@ namespace SessionTracker.SettingsWindow
                     Parent = buttonsFlowPanel,
                 };
 
-                moveToTopButton.Click += (s, e) =>
+                moveCategoryToTopButton.Click += (s, e) =>
                 {
+                    var remainingStats = _services.Model.Stats // includes selected and not selected stats. Determin in click handler because their order may have changed
+                        .Except(orderedCategoryStats)
+                        .ToList();
+
                     var isNoStatOfCategorySelected = !orderedCategoryStats.Any();
                     if (isNoStatOfCategorySelected)
                         return;
@@ -139,14 +140,15 @@ namespace SessionTracker.SettingsWindow
                     _services.Model.Stats.Clear();
                     _services.Model.Stats.AddRange(orderedCategoryStats);
                     _services.Model.Stats.AddRange(remainingStats);
-                    ShowStatRows(scrollbar, statRowsFlowPanel);
+                    UpdateStatRows(scrollbar, statRowsFlowPanel);
                 };
             }
         }
 
         private void ShowStatRows(Scrollbar scrollbar, Container parent)
         {
-            // MoveSelectedStatsToTop is required for up/down arrange buttons to work. otherwise index+/-1 will just move a selected stat between unselected stats
+            // MoveSelectedStatsToTop is required for up/down arrange buttons to work.
+            // Otherwise index+/-1 will just move a selected stat between unselected stats which would look like as if the stat is not moving in the UI.
             _services.Model.MoveSelectedStatsToTop();
             parent.ClearChildren();
             foreach (var stat in _services.Model.Stats.Where(s => s.IsSelectedByUser))
