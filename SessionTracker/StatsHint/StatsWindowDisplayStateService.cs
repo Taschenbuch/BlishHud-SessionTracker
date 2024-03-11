@@ -52,6 +52,12 @@ namespace SessionTracker.StatsHint
             ShowUpdatedDisplayState();
         }
 
+        public void ShowLoadingHint()
+        {
+            _errorLabel.SetTextAndTooltip("Loading...", "Waiting for first API response.");
+            ShowUpdatedDisplayState();
+        }
+
         public void ShowReadTooltipErrorWithRetryInfo(string tooltip)
         {
             _errorLabel.SetTextAndTooltip("Error: read tooltip!", $"{tooltip}\n{UpdateLoop.RETRY_IN_X_SECONDS_MESSAGE}");

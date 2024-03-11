@@ -130,6 +130,8 @@ namespace SessionTracker.StatsWindow
                         _statsWindowDisplayStateService.ShowLoadingOrApiTokenIssue(apiTokenService);
                         return;
                     }
+                    
+                    _statsWindowDisplayStateService.ShowLoadingHint(); // otherwise ui wont be visible for up 10+ seconds when api responds are slow
 
                     _resetService.InitializeNextResetDateTimeIfNecessary();
                     var hasToStartNewSession = _resetService.HasToAutomaticallyResetSession(ResetCheckLocation.ModuleStartup);
