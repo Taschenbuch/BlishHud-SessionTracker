@@ -27,7 +27,10 @@ namespace SessionTracker.SettingsWindow
 
             CreatePatchNotesButton(generalSectionFlowPanel);
             CreateAutomaticSessionResetSetting(generalSectionFlowPanel, _settingService.AutomaticSessionResetSetting);
-            CreateMinutesAfterModuleShutDownSetting(generalSectionFlowPanel, _settingService.MinutesUntilResetAfterModuleShutdownSetting, _settingService.AutomaticSessionResetSetting);
+            CreateMinutesAfterModuleShutDownSetting(
+                generalSectionFlowPanel, 
+                _settingService.MinutesUntilResetAfterModuleShutdownSetting,
+                _settingService.AutomaticSessionResetSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.ValueDisplayFormatSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.ValuesSeparatorSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.PerHourUnitText);
@@ -49,6 +52,7 @@ namespace SessionTracker.SettingsWindow
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.CornerIconIsVisibleSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.CoinDisplayFormatSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.StatsWithZeroValueAreHiddenSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.ScrollbarIsHiddenSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.ScrollbarFixDelay);
         }
 

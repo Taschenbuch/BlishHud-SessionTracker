@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SessionTracker.Constants;
 using SessionTracker.Models;
-using SessionTracker.Services;
+using SessionTracker.OtherServices;
 using SessionTracker.SettingEntries;
 using SessionTracker.Text;
 
@@ -11,11 +10,11 @@ namespace SessionTracker.StatTooltip
 {
     public class SummaryTooltipContentService
     {
-        public SummaryTooltipContentService(Model model, SettingService settingService, TextureService textureService)
+        public SummaryTooltipContentService(Services services)
         {
-            _model          = model;
-            _settingService = settingService;
-            _textureService = textureService;
+            _model          = services.Model;
+            _settingService = services.SettingService;
+            _textureService = services.TextureService;
         }
 
         public SummaryTooltipContent CreateSummaryToolTipContent(Stat stat)

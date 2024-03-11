@@ -2,7 +2,6 @@
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using Blish_HUD;
-using Blish_HUD.Controls;
 using Blish_HUD.GameIntegration;
 using Blish_HUD.Graphics.UI;
 using Blish_HUD.Input;
@@ -11,15 +10,9 @@ using Blish_HUD.Modules.Managers;
 using Blish_HUD.Settings;
 using Microsoft.Xna.Framework;
 using SessionTracker.Api;
-using SessionTracker.DateTimeUtcNow;
-using SessionTracker.Files;
 using SessionTracker.Files.RemoteFiles;
-using SessionTracker.Models;
-using SessionTracker.Other;
-using SessionTracker.Services;
-using SessionTracker.SettingEntries;
+using SessionTracker.OtherServices;
 using SessionTracker.Settings;
-using SessionTracker.SettingsWindow;
 using SessionTracker.StatsWindow;
 
 namespace SessionTracker
@@ -39,9 +32,8 @@ namespace SessionTracker
 
         protected override void DefineSettings(SettingCollection settings)
         {
-            _settingService = new SettingService(settings);
-            _dateTimeService.DefineSettings(settings);
-            _debugLogService = new DebugLogService(Version, settings);
+            _services.InitializeServicesAndDefineSettings(settings, Version, Gw2ApiManager);
+            _services.DateTimeService.DefineSettings(settings);
         }
 
         public override IView GetSettingsView()
@@ -49,13 +41,11 @@ namespace SessionTracker
             if (_moduleLoadError.HasModuleLoadFailed)
                 return _moduleLoadError.CreateErrorSettingsView();
             else
-                return new ModuleSettingsView(_settingsWindowService);
+                return new ModuleSettingsView(_services.SettingsWindowService);
         }
 
         protected override async Task LoadAsync()
         {
-            RunShiftBlishCornerIconsWorkaroundBecauseOfNewWizardVaultIcon();
-
             if (await ApiService.IsApiTokenGeneratedWithoutRequiredPermissions(DirectoriesManager))
             {
                 _moduleLoadError.HasModuleLoadFailed = true;
@@ -85,33 +75,13 @@ namespace SessionTracker
                 return;
             }
 
-            var fileService           = new FileService(localAndRemoteFileLocations);
-            var model                 = await fileService.LoadModelFromFile();
-            var textureService        = new TextureService(model, ContentsManager);
-            var updateLoop            = new UpdateLoop(_settingService);
-            var settingsWindowService = new SettingsWindowService(model, _settingService, _dateTimeService, textureService, updateLoop);
+            await _services.InitializeServices(localAndRemoteFileLocations, ContentsManager);
+            var statsContainer = new StatsContainer(_services);
+            _cornerIconService = new CornerIconService(statsContainer, CornerIconClickEventHandler, _services);
+            _statsContainer = statsContainer;
 
-            var statsContainer = new StatsContainer(model, Gw2ApiManager, textureService, fileService, updateLoop, settingsWindowService, _settingService)
-            {
-                HeightSizingMode = SizingMode.AutoSize,
-                WidthSizingMode  = SizingMode.AutoSize,
-                BackgroundColor  = ColorService.CreateBackgroundColor(_settingService),
-                Visible          = _settingService.UiIsVisibleSetting.Value,
-                Parent           = GameService.Graphics.SpriteScreen
-            };
-
-            _cornerIconService = new CornerIconService(_settingService.CornerIconIsVisibleSetting, statsContainer, settingsWindowService, CornerIconClickEventHandler, textureService);
-
-            // set at the end to prevent that one of the ctors accidently gets a null reference because of creating the objects above in the wrong order.
-            // e.g. creating model after textureService, though model needs the reference of model.
-            _model                 = model;
-            _textureService        = textureService;
-            _fileService           = fileService;
-            _statsContainer        = statsContainer;
-            _settingsWindowService = settingsWindowService;
-
-            _settingService.UiVisibilityKeyBindingSetting.Value.Activated += OnUiVisibilityKeyBindingActivated;
-            _settingService.UiVisibilityKeyBindingSetting.Value.Enabled   =  true;
+            _services.SettingService.UiVisibilityKeyBindingSetting.Value.Activated += OnUiVisibilityKeyBindingActivated;
+            _services.SettingService.UiVisibilityKeyBindingSetting.Value.Enabled   =  true;
         }
 
         private void CornerIconClickEventHandler(object s, MouseEventArgs e) => _statsContainer.ToggleVisibility();
@@ -119,22 +89,19 @@ namespace SessionTracker
 
         protected override void Unload()
         {
-            if (_model != null)
-                _fileService.SaveModelToFile(_model);
-
-            if (_settingService != null)
+            if(_services != null )
             {
-                _settingService.UiVisibilityKeyBindingSetting.Value.Enabled = false; // workaround to fix keybinding memory leak
-                _settingService.UiVisibilityKeyBindingSetting.Value.Activated -= OnUiVisibilityKeyBindingActivated;
+                _services?.Dispose();
+                if (_services.SettingService != null)
+                {
+                    _services.SettingService.UiVisibilityKeyBindingSetting.Value.Enabled = false; // workaround to fix keybinding memory leak
+                    _services.SettingService.UiVisibilityKeyBindingSetting.Value.Activated -= OnUiVisibilityKeyBindingActivated;
+                }
             }
 
-            _debugLogService?.Dispose();
-            _moduleLoadError?.Dispose();
-            _settingsWindowService?.Dispose();
             _cornerIconService?.Dispose();
-            _textureService?.Dispose();
+            _moduleLoadError?.Dispose();
             _statsContainer?.Dispose();
-            _dateTimeService?.Dispose();
         }
 
         protected override void Update(GameTime gameTime)
@@ -145,29 +112,10 @@ namespace SessionTracker
             _statsContainer.Update2(gameTime);
         }
 
-        private static void RunShiftBlishCornerIconsWorkaroundBecauseOfNewWizardVaultIcon()
-        {
-            if (Program.OverlayVersion < new SemVer.Version(1, 1, 0))
-            {
-                try
-                {
-                    var tacoActive = typeof(TacOIntegration).GetProperty(nameof(TacOIntegration.TacOIsRunning)).GetSetMethod(true);
-                    tacoActive?.Invoke(GameService.GameIntegration.TacO, new object[] { true });
-                }
-                catch { /* NOOP */ }
-            }
-        }
-
-        private SettingService _settingService;
         public static readonly Logger Logger = Logger.GetLogger<Module>();
+        private readonly Services _services = new Services();
         private StatsContainer _statsContainer;
-        private FileService _fileService;
-        private Model _model;
-        private TextureService _textureService;
         private CornerIconService _cornerIconService;
-        private SettingsWindowService _settingsWindowService;
-        private DebugLogService _debugLogService;
-        private readonly DateTimeService _dateTimeService = new DateTimeService();
         private readonly ModuleLoadError _moduleLoadError = new ModuleLoadError();
     }
 }

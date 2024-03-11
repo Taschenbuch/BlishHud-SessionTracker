@@ -8,8 +8,8 @@ using Gw2Sharp.WebApi.V2.Models;
 using Newtonsoft.Json.Linq;
 using SessionTracker.Constants;
 using SessionTracker.Files.RemoteFiles;
-using SessionTracker.Models;
 using SessionTracker.Other;
+using SessionTracker.OtherServices;
 
 namespace SessionTracker.Api
 {
@@ -40,17 +40,17 @@ namespace SessionTracker.Api
             }
         }
 
-        public static async Task UpdateTotalValuesInModel(Model model, Gw2ApiManager gw2ApiManager)
+        public static async Task UpdateTotalValuesInModel(Services services)
         {
-            var charactersTask      = gw2ApiManager.Gw2ApiClient.V2.Characters.AllAsync();
-            var pvpStatsTask        = gw2ApiManager.Gw2ApiClient.V2.Pvp.Stats.GetAsync();
-            var accountTask         = gw2ApiManager.Gw2ApiClient.V2.Account.GetAsync();
-            var achievementsTask    = gw2ApiManager.Gw2ApiClient.V2.Account.Achievements.GetAsync();
-            var walletTask          = gw2ApiManager.Gw2ApiClient.V2.Account.Wallet.GetAsync();
-            var progressionTask     = gw2ApiManager.Gw2ApiClient.V2.Account.Progression.GetAsync();
-            var bankTask            = gw2ApiManager.Gw2ApiClient.V2.Account.Bank.GetAsync();
-            var sharedInventoryTask = gw2ApiManager.Gw2ApiClient.V2.Account.Inventory.GetAsync();
-            var materialStorageTask = gw2ApiManager.Gw2ApiClient.V2.Account.Materials.GetAsync();
+            var charactersTask      = services.Gw2ApiManager.Gw2ApiClient.V2.Characters.AllAsync();
+            var pvpStatsTask        = services.Gw2ApiManager.Gw2ApiClient.V2.Pvp.Stats.GetAsync();
+            var accountTask         = services.Gw2ApiManager.Gw2ApiClient.V2.Account.GetAsync();
+            var achievementsTask    = services.Gw2ApiManager.Gw2ApiClient.V2.Account.Achievements.GetAsync();
+            var walletTask          = services.Gw2ApiManager.Gw2ApiClient.V2.Account.Wallet.GetAsync();
+            var progressionTask     = services.Gw2ApiManager.Gw2ApiClient.V2.Account.Progression.GetAsync();
+            var bankTask            = services.Gw2ApiManager.Gw2ApiClient.V2.Account.Bank.GetAsync();
+            var sharedInventoryTask = services.Gw2ApiManager.Gw2ApiClient.V2.Account.Inventory.GetAsync();
+            var materialStorageTask = services.Gw2ApiManager.Gw2ApiClient.V2.Account.Materials.GetAsync();
 
             var apiResponseTasks = new List<Task>
             {
@@ -74,13 +74,13 @@ namespace SessionTracker.Api
                 throw new LogWarnException("API error", e);
             }
 
-            model.GetStat(StatId.WVW_RANK).Value.Total = accountTask.Result.WvwRank ?? 0;
-            OtherTotalValueService.SetDeathsTotalValue(model, charactersTask);
-            OtherTotalValueService.SetLuckTotalValue(model, progressionTask);
-            OtherTotalValueService.SetPvpTotalValues(model, pvpStatsTask);
-            CurrencyTotalValueService.SetCurrencyTotalValues(model, walletTask);
-            AchievementTotalValueService.SetAchievementTotalValues(model, achievementsTask);
-            ItemSearchService.SetItemTotalValues(model, charactersTask, bankTask, sharedInventoryTask, materialStorageTask);
+            services.Model.GetStat(StatId.WVW_RANK).Value.Total = accountTask.Result.WvwRank ?? 0;
+            OtherTotalValueService.SetDeathsTotalValue(services.Model, charactersTask);
+            OtherTotalValueService.SetLuckTotalValue(services.Model, progressionTask);
+            OtherTotalValueService.SetPvpTotalValues(services.Model, pvpStatsTask);
+            CurrencyTotalValueService.SetCurrencyTotalValues(services.Model, walletTask);
+            AchievementTotalValueService.SetAchievementTotalValues(services.Model, achievementsTask);
+            ItemSearchService.SetItemTotalValues(services.Model, charactersTask, bankTask, sharedInventoryTask, materialStorageTask);
         }
 
         public static IReadOnlyList<TokenPermission> API_TOKEN_PERMISSIONS_REQUIRED_BY_MODULE => new List<TokenPermission>

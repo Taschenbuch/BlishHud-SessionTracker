@@ -6,14 +6,14 @@ namespace SessionTracker.FilesAndMigration
 {
     public class RemoteModelService
     {
-        public static Model UpdateStatIsVisibleInRemoteModel(Model localModel, Model remoteModel)
+        public static Model UpdateStatIsSelectedByUserInRemoteModel(Model localModel, Model remoteModel)
         {
-            var localVisibleStatIds = new List<string>();
-            foreach (var localVisibleStat in localModel.Stats.Where(s => s.IsVisible))
-                localVisibleStatIds.Add(localVisibleStat.Id);
+            var localSelectedStatIds = new List<string>();
+            foreach (var localSelectedStat in localModel.Stats.Where(s => s.IsSelectedByUser))
+                localSelectedStatIds.Add(localSelectedStat.Id);
 
             foreach (var remoteStat in remoteModel.Stats)
-                remoteStat.IsVisible = localVisibleStatIds.Contains(remoteStat.Id); // new stats are not visible to prevent messing up users custom stats setup
+                remoteStat.IsSelectedByUser = localSelectedStatIds.Contains(remoteStat.Id); // new stats are not selected to prevent messing up users custom stats setup
 
             return remoteModel;
         }

@@ -4,8 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Blish_HUD;
-using SessionTracker.Files;
 
 namespace SessionTracker.Files.RemoteFiles
 {

@@ -4,7 +4,7 @@ using SessionTracker.SettingEntries;
 using SessionTracker.StatsWindow;
 using System;
 
-namespace SessionTracker.Services
+namespace SessionTracker.OtherServices
 {
     public class VisibilityService: IDisposable
     {

@@ -12,7 +12,7 @@ namespace SessionTracker.Files.RemoteFiles
             Title = windowTitle;
             BackgroundColor = new Color(Color.Black, 0.8f);
             Location = new Point(300, 300);
-            Id = "ecksofa error window";
+            Id = "Ecksofa.SessionTracker: error window";
             Parent = GameService.Graphics.SpriteScreen;
 
             var formattedLabel = new FormattedLabelBuilder()
