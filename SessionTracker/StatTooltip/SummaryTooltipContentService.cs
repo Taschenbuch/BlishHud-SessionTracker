@@ -67,7 +67,33 @@ namespace SessionTracker.StatTooltip
         private void InsertNewHistoryEntryAtBeginning(Stat stat)
         {
             var sessionValueText = StatValueTextService.CreateValueText(stat.Value.Session, stat, _settingService.CoinDisplayFormatSetting.Value);
+            RemoveConsecutiveDuplicate(stat);
             stat.SessionHistoryEntries.Insert(0, ($"{DateTime.Now:HH:mm}", sessionValueText));
+        }
+
+        // this prevents showing consecutive duplicate values
+        // e.g. it is showing this:
+        // 00:25 3 // the newest entry is allowed to be a duplicate, so that users see the last update.
+        // 00:20 2
+        // 00:10 1
+        // 00:00 0
+        // instead of showing many duplicates like this:
+        // 00:25 3
+        // 00:20 2
+        // 00:15 1
+        // 00:10 1
+        // 00:05 0
+        // 00:00 0
+        private static void RemoveConsecutiveDuplicate(Stat stat)
+        {
+            if (stat.SessionHistoryEntries.Count >= 2)
+            {
+                var lastValue = stat.SessionHistoryEntries[0].sessionValueText;
+                var secondLastValue = stat.SessionHistoryEntries[1].sessionValueText;
+                var v = lastValue == secondLastValue;
+                if (v)
+                    stat.SessionHistoryEntries.RemoveAt(0);
+            }
         }
 
         private static void RemoveOldestHistoryEntry(List<(string time, string sessionValue)> historyEntries)
