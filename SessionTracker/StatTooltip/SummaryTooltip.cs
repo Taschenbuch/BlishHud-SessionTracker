@@ -237,13 +237,28 @@ namespace SessionTracker.StatTooltip
                 .Parent = iconAndNameFlowPanel;
 
             // description
-            new FormattedLabelBuilder()
-                .AutoSizeWidth()
-                .AutoSizeHeight()
-                .CreatePart(summaryTooltipContent.Description, builder => builder
-                .SetFontSize(FontSize.Size14))
-                .Build()
-                .Parent = rootFlowPanel;
+            if (summaryTooltipContent.Description.Length > 36)
+            {
+                // limit width because some tooltips ended up using half screen width. This solution is not perfect, but works for now.
+                new FormattedLabelBuilder()
+                    .SetWidth(450)
+                    .Wrap()
+                    .AutoSizeHeight()
+                    .CreatePart(summaryTooltipContent.Description, builder => builder
+                    .SetFontSize(FontSize.Size14))
+                    .Build()
+                    .Parent = rootFlowPanel;
+            }
+            else
+            {
+                new FormattedLabelBuilder()
+                    .AutoSizeWidth()
+                    .AutoSizeHeight()
+                    .CreatePart(summaryTooltipContent.Description, builder => builder
+                    .SetFontSize(FontSize.Size14))
+                    .Build()
+                    .Parent = rootFlowPanel;
+            }
         }
 
         private static void AddEmptyLine(FlowPanel flowPanel)
