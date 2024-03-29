@@ -50,31 +50,30 @@ namespace SessionTracker.StatsWindow
                 Height = _settingService.UiHeightSetting.Value;
         }
 
-        public void UpdateHeight(int childHeight) // todo x rename
+        public void UpdateHeight(int childHeight)
         {
-            Module.Logger.Debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"); // todo x weg
-            if (true)
+            //Module.Logger.Debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"); // todo x weg
+            if (true) 
             //if (_settingService.UiHasMaxHeightSetting.Value) // ALWAYS FALSE. why????
             {
-                Module.Logger.Debug("UiHasMaxHeightSetting"); // todo x weg
+                //Module.Logger.Debug("UiHasMaxHeightSetting"); // todo x weg
 
                 if (childHeight < _settingService.UiHeightSetting.Value)
                 {
-                    Module.Logger.Debug("Height >"); // todo x weg
-
+                    //Module.Logger.Debug("Height >"); // todo x weg
                     _scrollbar = null;
                     HeightSizingMode = SizingMode.AutoSize;
                     CanScroll = false;
                 }
                 else
                 {
-                    Module.Logger.Debug("Height <"); // todo x weg
+                    //Module.Logger.Debug("Height <"); // todo x weg
 
                     // todo code identisch zu OnUiHeightIsFixedSettingChanged. gucken wie man das zusammenführen kann?
                     HeightSizingMode = SizingMode.Standard;
                     Height = _settingService.UiHeightSetting.Value;
                     CanScroll = true;
-                    _scrollbar = (Scrollbar)Parent.Children.First(c => c is Scrollbar);
+                    _scrollbar = (Scrollbar)Parent?.Children.FirstOrDefault(c => c is Scrollbar); // parent null ref exception happened a few times
                     HideScrollbarIfExists();
                 }
             }
@@ -89,7 +88,7 @@ namespace SessionTracker.StatsWindow
             if (Parent == null) // prevents exception when this flowpanel is hidden and this code trys to get the scrollbar
                 return;
 
-            if (_settingService.UiHeightIsFixedSetting.Value)
+            if (true) // permanently ignored in this version
             {
                 HeightSizingMode = SizingMode.Standard;
                 Height           = _settingService.UiHeightSetting.Value;

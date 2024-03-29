@@ -14,21 +14,23 @@ namespace SessionTracker.Controls
         protected override void OnChildRemoved(ChildChangedEventArgs e)
         {
             base.OnChildRemoved(e);
-            Task.Run(async () =>
-            {
-                await Task.Delay(500);
-                _statsRootFlowPanel.UpdateHeight(Height);
-            });
+            _statsRootFlowPanel.UpdateHeight(Height);
+            //Task.Run(async () =>
+            //{
+            //    await Task.Delay(500);
+            //    _statsRootFlowPanel.UpdateHeight(Height);
+            //});
         }
 
         protected override void OnChildAdded(ChildChangedEventArgs e)
         {
             base.OnChildAdded(e);
-            Task.Run(async () =>
-            {
-                await Task.Delay(500);
-                _statsRootFlowPanel.UpdateHeight(Height);
-            });
+            _statsRootFlowPanel.UpdateHeight(Height);
+            //Task.Run(async () =>
+            //{
+            //    await Task.Delay(500);
+            //    _statsRootFlowPanel.UpdateHeight(Height);
+            //});
         }
 
         private readonly StatsRootFlowPanel _statsRootFlowPanel;
