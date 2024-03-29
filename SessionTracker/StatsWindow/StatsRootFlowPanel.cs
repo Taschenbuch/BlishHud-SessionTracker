@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Blish_HUD;
@@ -47,6 +48,40 @@ namespace SessionTracker.StatsWindow
         {
             if (_settingService.UiHeightIsFixedSetting.Value)
                 Height = _settingService.UiHeightSetting.Value;
+        }
+
+        public void UpdateHeight(int childHeight) // todo x rename
+        {
+            Module.Logger.Debug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"); // todo x weg
+            if (true)
+            //if (_settingService.UiHasMaxHeightSetting.Value) // ALWAYS FALSE. why????
+            {
+                Module.Logger.Debug("UiHasMaxHeightSetting"); // todo x weg
+
+                if (childHeight < _settingService.UiHeightSetting.Value)
+                {
+                    Module.Logger.Debug("Height >"); // todo x weg
+
+                    _scrollbar = null;
+                    HeightSizingMode = SizingMode.AutoSize;
+                    CanScroll = false;
+                }
+                else
+                {
+                    Module.Logger.Debug("Height <"); // todo x weg
+
+                    // todo code identisch zu OnUiHeightIsFixedSettingChanged. gucken wie man das zusammenführen kann?
+                    HeightSizingMode = SizingMode.Standard;
+                    Height = _settingService.UiHeightSetting.Value;
+                    CanScroll = true;
+                    _scrollbar = (Scrollbar)Parent.Children.First(c => c is Scrollbar);
+                    HideScrollbarIfExists();
+                }
+            }
+            else
+            {
+                HeightSizingMode = SizingMode.AutoSize;
+            }
         }
 
         private void OnUiHeightIsFixedSettingChanged(object sender = null, ValueChangedEventArgs<bool> e = null)

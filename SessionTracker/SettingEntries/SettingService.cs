@@ -188,6 +188,16 @@ namespace SessionTracker.SettingEntries
                       "e.g. when 'on world map' is unchecked, using the key binding will still not show the window on the world map.");
 
             UiHeightIsFixedSetting = settings.DefineSetting(
+                "ui has max height",
+                true,
+                () => "max window height",
+                () => "CHECKED: height adjust automatically below max height. Height becomes fixed height above max height.\n" +
+                      "Stats can be scrolled in the window via mouse wheel or by dragging the scrollbar. Dragging the scrollbar only works when 'drag with mouse' setting is disabled.\n" +
+                      "UNCHECKED: height adjusts automatically to the number of stats shown.\n" +
+                      "BUG: There is a not fixable bug, that the scrollbar is visible when the mouse is not " +
+                      "over the window after adding/removing stats or loading the module. Just move the mouse one time over the window to hide the scrollbar again.");
+
+            UiHasMaxHeightSetting = settings.DefineSetting(
                 "ui height is fixed",
                 true,
                 () => "fixed window height",
@@ -283,6 +293,7 @@ namespace SessionTracker.SettingEntries
         public SettingEntry<int> RightMarginForScrollbarSetting { get; }
         public SettingEntry<int> UiHeightSetting { get; }
         public SettingEntry<bool> UiHeightIsFixedSetting { get; }
+        public SettingEntry<bool> UiHasMaxHeightSetting { get; }
         public SettingEntry<ColorType> ValueLabelColorSetting { get; }
         public SettingEntry<ColorType> TitleLabelColorSetting { get; }
         public SettingEntry<ColorType> BackgroundColorSetting { get; }

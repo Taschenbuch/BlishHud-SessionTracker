@@ -37,6 +37,7 @@ namespace SessionTracker.SettingsWindow
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.LabelTypeSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.WindowAnchorSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.UiHeightIsFixedSetting);
+            ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.UiHasMaxHeightSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.UiHeightSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.RightMarginForScrollbarSetting);
             ControlFactory.CreateSetting(generalSectionFlowPanel, _settingService.FontSizeIndexSetting);

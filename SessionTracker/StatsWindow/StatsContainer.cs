@@ -18,6 +18,7 @@ using SessionTracker.SettingEntries;
 using SessionTracker.StatsHint;
 using SessionTracker.StatTooltip;
 using SessionTracker.Text;
+using SessionTracker.Controls;
 
 namespace SessionTracker.StatsWindow
 {
@@ -294,7 +295,7 @@ namespace SessionTracker.StatsWindow
 
             _statsRootFlowPanel = new StatsRootFlowPanel(_services.SettingService);
 
-            _statTitlesFlowPanel = new FlowPanel()
+            _statTitlesFlowPanel = new MaxHeightFlowPanel(_statsRootFlowPanel) // only one has to be MaxHeightFlowPanel
             {
                 FlowDirection    = ControlFlowDirection.SingleTopToBottom,
                 HeightSizingMode = SizingMode.AutoSize,
@@ -302,7 +303,7 @@ namespace SessionTracker.StatsWindow
                 Parent           = _statsRootFlowPanel
             };
 
-            _statValuesFlowPanel = new FlowPanel()
+            _statValuesFlowPanel = new FlowPanel() 
             {
                 FlowDirection    = ControlFlowDirection.SingleTopToBottom,
                 HeightSizingMode = SizingMode.AutoSize,
