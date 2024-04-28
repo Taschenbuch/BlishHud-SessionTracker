@@ -39,6 +39,7 @@ namespace SessionTracker.JsonFileCreator.Constants
             45177, // Essence of Luck (rare)
             45178, // Essence of Luck (exotic)
             45179, // Essence of Luck (legendary)
+            67826, // Silverwastes Shovel
         }.AsReadOnly();
 
         public static readonly ReadOnlyCollection<int> Festival = new List<int>
