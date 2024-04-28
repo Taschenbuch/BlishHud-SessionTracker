@@ -1027,6 +1027,35 @@
       "Value": {}
     },
     {
+      "Id": "item67826",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Silverwastes Shovel",
+          "French": "Pelle des Contrées sauvages d'argent",
+          "German": "Silberwüsten-Schaufel",
+          "Spanish": "Pala de los Páramos Argentos",
+          "Chinese": "白银荒地铲子",
+          "Korean": "Silverwastes Shovel"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Double-click to equip a shovel specially designed for finding lost bandit chests in the Silverwastes. Use bandit skeleton keys to unlock the chests. <c=@warning>Single-use item.</c>",
+          "French": "Double-cliquez pour équiper une pelle conçue spécialement pour trouver les coffres de bandit perdus dans les Contrées sauvages d'argent. Utilisez les passe-partout de bandit pour déverrouiller les coffres. <c=@warning>Objet à utilisation unique.</c>",
+          "German": "Doppelklicken, um eine Schaufel auszurüsten, mit der man verlorene Banditen-Truhen in der Silberwüste aufspüren kann. Verwendet einen Banditen-Dietrich, um die Truhen zu öffnen. <c=@warning>Einmalige Verwendung.</c>",
+          "Spanish": "Haz doble clic para equipar una pala especialmente diseñada para encontrar cofres de bandido perdidos en los Páramos Argentos. Utiliza las llaves maestras de bandido para abrir los cofres. <c=@warning>Un solo uso.</c>\n",
+          "Chinese": "双击装备一把专门用来在白银荒地挖掘的铲子，可以找到遗失的强盗宝箱。需要强盗万能钥匙才能打开。<c=@warning>一次性使用。</c>",
+          "Korean": "Double-click to equip a shovel specially designed for finding lost bandit chests in the Silverwastes. Use bandit skeleton keys to unlock the chests. <c=@warning>Single-use item.</c>"
+        }
+      },
+      "ApiId": 67826,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 526107
+      },
+      "Value": {}
+    },
+    {
       "Id": "item19976",
       "Name": {
         "LocalizedTextByLocale": {
@@ -9164,7 +9193,7 @@
           "French": "À raffiner pour obtenir des tas de cristaux luisants.",
           "German": "Kann zu Haufen schillernder Kristalle veredelt werden.",
           "Spanish": "Puede refinarse para conseguir cristales luminosos.",
-          "Chinese": "可以提炼成透明微尘。",
+          "Chinese": "可以提炼成透明水晶堆。",
           "Korean": "Can be refined into piles of lucent crystals."
         }
       },
@@ -9183,7 +9212,7 @@
           "French": "Tas de cristaux luisants",
           "German": "Haufen Schimmernden Kristalls",
           "Spanish": "Montón de cristal luminoso",
-          "Chinese": "透明微尘",
+          "Chinese": "透明水晶堆",
           "Korean": "Pile of Lucent Crystal"
         }
       },
@@ -22242,7 +22271,8 @@
         "item45176",
         "item45177",
         "item45178",
-        "item45179"
+        "item45179",
+        "item67826"
       ]
     },
     {
