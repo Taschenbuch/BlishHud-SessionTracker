@@ -1649,12 +1649,12 @@
       },
       "Description": {
         "LocalizedTextByLocale": {
-          "English": "Earned through the Log-in Reward Chest. Spent in major cities. Used to purchase various rewards.",
-          "French": "À gagner via le coffre de récompense de connexion. À dépenser dans les villes principales. À utiliser pour acheter diverses récompenses.",
-          "German": "Kann durch Login-Belohnungstruhen verdient werden. Kann in den großen Städten ausgegeben werden. Verwendbar zum Kauf verschiedener Belohnungen.",
-          "Spanish": "Se pueden conseguir en el cofre de recompensas por iniciar sesión. Se pueden gastar en las ciudades principales. Se pueden usar para comprar varias recompensas.",
-          "Chinese": "打开登陆奖励宝箱即可获得。可在主城里购买各种奖励。",
-          "Korean": "Earned through the Log-in Reward Chest. Spent in major cities. Used to purchase various rewards."
+          "English": "Obtained from Wizard's Vault rewards. Used to purchase various rewards from laurel merchants.",
+          "French": "À obtenir parmi les récompenses de la chambre forte du sorcier. À utiliser pour acheter diverses récompenses auprès des marchands de lauriers.",
+          "German": "Erhalten aus Belohnungen im Gewölbe des Zauberers. Dient zum Erwerb diverser Belohnungen von Lorbeer-Kaufleuten.",
+          "Spanish": "Se obtienen en las recompensas de la Cámara del Brujo. Se utilizan para comprarles varias recompensas a los mercaderes de laureles.",
+          "Chinese": "通过巫师宝库奖励获得。可向桂冠商人购买各种奖励。",
+          "Korean": "Obtained from Wizard's Vault rewards. Used to purchase various rewards from laurel merchants."
         }
       },
       "ApiId": 3,
@@ -2059,7 +2059,7 @@
           "French": "À obtenir sur les boss et dans les événements des raids de \"Heart of Thorns\" et \"Path of Fire\".",
           "German": "Kann bei Bossen und Events in \"Heart of Thorns\"- und \"Path of Fire\"-Schlachtzügen verdient werden.",
           "Spanish": "Se obtiene de jefes y eventos en incursiones de Heart of Thorns y Path of Fire.",
-          "Chinese": "前往决战迈古玛和烈焰征途的大型地下城，通过头目和事件获得。",
+          "Chinese": "前往决战迈古玛和火焰之路的大型地下城，通过头目和事件获得。",
           "Korean": "Earned from bosses and events inside Heart of Thorns and Path of Fire raids."
         }
       },
@@ -2542,7 +2542,7 @@
           "French": "Bon de tournoi JcJ",
           "German": "PvP-Turnier-Gutschein",
           "Spanish": "Vale de torneo PvP",
-          "Chinese": "PvP联赛兑换券",
+          "Chinese": "PvP锦标赛兑换券",
           "Korean": "PvP Tournament Voucher"
         }
       },
@@ -2929,7 +2929,7 @@
           "French": "S'obtient en ouvrant des coffres cachés dans le contenu de l'extension la plus récente. À échanger auprès de collectionneurs de pièces inhabituelles contre des récompenses.",
           "German": "Erworben durch das Öffnen verborgener Truhen im Inhalt der neuesten Erweiterung. Kann bei Sammlern ungewöhnlicher Münzen gegen Belohnungen eingetauscht werden.",
           "Spanish": "Se consigue abriendo cofres ocultos en el contenido de la expansión más reciente. Se puede intercambiar con coleccionistas de monedas inusuales por recompensas.",
-          "Chinese": "通过开启最新版本内容的隐藏宝箱获得。可以和不寻常硬币收藏家交易换取奖励。",
+          "Chinese": "通过开启最新版本内容的隐藏宝箱获得。可以和独特硬币收藏者交易换取奖励。",
           "Korean": "Acquired by opening hidden chests in the most recent expansion's content. Can be traded with Unusual Coin Collectors for rewards."
         }
       },
@@ -3285,6 +3285,35 @@
       "ApiIdType": "Currency",
       "Icon": {
         "AssetId": 3188140
+      },
+      "Value": {}
+    },
+    {
+      "Id": "currency76",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Ursus Oblige",
+          "French": "Faveur ursine",
+          "German": "Ursus-Obolus",
+          "Spanish": "Obligo ursus",
+          "Chinese": "熊族恩惠",
+          "Korean": "Ursus Oblige"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Acquired by assisting in events throughout Janthir. Used at vendors across Janthir Wilds.",
+          "French": "S'obtient en participant à des événements en Janthir. À utiliser auprès de vendeurs des Terres sauvages de Janthir.",
+          "German": "Erworben durch Mithilfe bei Events überall in Janthir. Bei Händlern in der Janthir-Wildnis einzulösen.",
+          "Spanish": "Se pueden adquirir asistiendo a eventos por toda Janthir. Se usan con comerciantes de las Tierras Salvajes de Janthir.",
+          "Chinese": "通过参加珍瑟各处的事件获得。可在珍瑟荒野商人处使用。",
+          "Korean": "Acquired by assisting in events throughout Janthir. Used at vendors across Janthir Wilds."
+        }
+      },
+      "ApiId": 76,
+      "ApiIdType": "Currency",
+      "Icon": {
+        "AssetId": 3376072
       },
       "Value": {}
     },
@@ -5642,7 +5671,7 @@
       "Name": {
         "LocalizedTextByLocale": {
           "English": "Shallot",
-          "French": "Echalote",
+          "French": "Échalote",
           "German": "Schalotte",
           "Spanish": "Chalote",
           "Chinese": "火葱",
@@ -6370,7 +6399,7 @@
           "French": "Moule",
           "German": "Miesmuschel",
           "Spanish": "Mejillón",
-          "Chinese": "淡菜",
+          "Chinese": "贻贝",
           "Korean": "Mussel"
         }
       },
@@ -16777,22 +16806,22 @@
       "Id": "item100078",
       "Name": {
         "LocalizedTextByLocale": {
-          "English": "Essence of Despair",
-          "French": "Essence de désespoir",
-          "German": "Essenz der Verzweiflung",
-          "Spanish": "Esencia de desesperación",
-          "Chinese": "绝望精华",
-          "Korean": "Essence of Despair"
+          "English": "Fine Rift Essence",
+          "French": "Essence de brèche raffinée",
+          "German": "Edle Riss-Essenz",
+          "Spanish": "Esencia selecta de fisura",
+          "Chinese": "优质裂隙精华",
+          "Korean": "Fine Rift Essence"
         }
       },
       "Description": {
         "LocalizedTextByLocale": {
-          "English": "Found in Kryptis rifts.",
-          "French": "À trouver dans les brèches des Kryptis.",
-          "German": "Gefunden in Kryptis-Rissen.",
-          "Spanish": "Se encuentra en fisuras kryptis.",
-          "Chinese": "在氪族裂隙中找到。",
-          "Korean": "Found in Kryptis rifts."
+          "English": "Found from rift hunting.",
+          "French": "À trouver lors de chasses aux brèches.",
+          "German": "Bei der Rissjagd gefunden.",
+          "Spanish": "Se encuentra al cazar fisuras.",
+          "Chinese": "通过裂隙狩猎找到。",
+          "Korean": "Found from rift hunting."
         }
       },
       "ApiId": 100078,
@@ -16806,22 +16835,22 @@
       "Id": "item100414",
       "Name": {
         "LocalizedTextByLocale": {
-          "English": "Essence of Greed",
-          "French": "Essence d'avidité",
-          "German": "Essenz der Gier",
-          "Spanish": "Esencia de avaricia",
-          "Chinese": "贪婪精华",
-          "Korean": "Essence of Greed"
+          "English": "Masterwork Rift Essence",
+          "French": "Essence de brèche prodigieuse",
+          "German": "Meisterwerk-Riss-Essenz",
+          "Spanish": "Esencia de fisura sobresaliente",
+          "Chinese": "精制裂隙精华",
+          "Korean": "Masterwork Rift Essence"
         }
       },
       "Description": {
         "LocalizedTextByLocale": {
-          "English": "Found in tier 2 Kryptis rifts.",
-          "French": "À trouver dans les brèches des Kryptis de niveau 2.",
-          "German": "Gefunden in Kryptis-Rissen von Rang 2.",
-          "Spanish": "Se encuentra en fisuras kryptis de rango 2.",
-          "Chinese": "在2级氪族裂隙中找到。",
-          "Korean": "Found in tier 2 Kryptis rifts."
+          "English": "Found in tier 2 rifts.",
+          "French": "À trouver dans les brèches de niveau 2.",
+          "German": "Gefunden in Rissen von Rang 2.",
+          "Spanish": "Se encuentra en fisuras de rango 2.",
+          "Chinese": "在2级裂隙中找到。",
+          "Korean": "Found in tier 2 rifts."
         }
       },
       "ApiId": 100414,
@@ -16835,22 +16864,22 @@
       "Id": "item100055",
       "Name": {
         "LocalizedTextByLocale": {
-          "English": "Essence of Triumph",
-          "French": "Essence de triomphe",
-          "German": "Essenz des Triumphs",
-          "Spanish": "Esencia de triunfo",
-          "Chinese": "凯旋精华",
-          "Korean": "Essence of Triumph"
+          "English": "Rare Rift Essence",
+          "French": "Essence de brèche rare",
+          "German": "Seltene Riss-Essenz",
+          "Spanish": "Esencia excepcional de fisura",
+          "Chinese": "稀有裂隙精华",
+          "Korean": "Rare Rift Essence"
         }
       },
       "Description": {
         "LocalizedTextByLocale": {
-          "English": "Found in tier 3 Kryptis rifts.",
-          "French": "À trouver dans les brèches des Kryptis de niveau 3.",
-          "German": "Gefunden in Kryptis-Rissen von Rang 3.",
-          "Spanish": "Se encuentra en fisuras kryptis de rango 3.",
-          "Chinese": "在3级氪族裂隙中找到。",
-          "Korean": "Found in tier 3 Kryptis rifts."
+          "English": "Found in tier 3 rifts.",
+          "French": "À trouver dans les brèches de niveau 3.",
+          "German": "Gefunden in Rissen von Rang 3.",
+          "Spanish": "Se encuentra en fisuras de rango 3.",
+          "Chinese": "在3级裂隙中找到。",
+          "Korean": "Found in tier 3 rifts."
         }
       },
       "ApiId": 100055,
@@ -16864,28 +16893,347 @@
       "Id": "item100930",
       "Name": {
         "LocalizedTextByLocale": {
-          "English": "Amalgamated Kryptis Essence",
-          "French": "Essence kryptis amalgamée",
-          "German": "Verschmolzene Kryptis-Essenz",
-          "Spanish": "Esencia amalgamada de kryptis",
-          "Chinese": "融合氪族精华",
-          "Korean": "Amalgamated Kryptis Essence"
+          "English": "Amalgamated Rift Essence",
+          "French": "Essence de brèche amalgamée",
+          "German": "Verschmolzene Riss-Essenz",
+          "Spanish": "Esencia amalgamada de fisura",
+          "Chinese": "合成裂隙精华",
+          "Korean": "Amalgamated Rift Essence"
         }
       },
       "Description": {
         "LocalizedTextByLocale": {
-          "English": "An amalgamation of Kryptis essences used for crafting.\nThe recipe can be purchased from Lyhr in the Wizard's Tower.",
-          "French": "Un amalgame d'essences kryptis à utiliser en artisanat.\nLa recette peut être achetée auprès de Lyhr, dans la Tour du sorcier.",
-          "German": "Ein zur Herstellung von Gegenständen verwendetes Fusionsprodukt von Kryptis-Essenzen.\nDas Rezept gibt es bei Lyhr im Turm des Zauberers zu kaufen.",
-          "Spanish": "Una amalgama de esencias kryptis que se usa para artesanía.\nLe puedes comprar la receta a Lyhr en la torre del brujo.",
-          "Chinese": "可用于制作的融合氪族精华。\n你可以向巫师塔的莱尔购买该配方。",
-          "Korean": "An amalgamation of Kryptis essences used for crafting.\nThe recipe can be purchased from Lyhr in the Wizard's Tower."
+          "English": "An amalgamation of rift essences used for crafting.\nThe recipe can be purchased from Lyhr in the Wizard's Tower.",
+          "French": "Un amalgame d'essences de brèche à utiliser en artisanat.\nLa recette peut être achetée auprès de Lyhr, dans la Tour du sorcier.",
+          "German": "Ein zur Herstellung von Gegenständen verwendetes Fusionsprodukt von Riss-Essenzen.\nDas Rezept gibt es bei Lyhr im Turm des Zauberers zu kaufen.",
+          "Spanish": "Una amalgama de esencias de fisura que se usa para artesanía.\nLe puedes comprar la receta a Lyhr en la torre del brujo.",
+          "Chinese": "可用于制作的合成裂隙精华。\n你可以向巫师塔的莱尔购买该配方。",
+          "Korean": "An amalgamation of rift essences used for crafting.\nThe recipe can be purchased from Lyhr in the Wizard's Tower."
         }
       },
       "ApiId": 100930,
       "ApiIdType": "Item",
       "Icon": {
         "AssetId": 3123730
+      },
+      "Value": {}
+    },
+    {
+      "Id": "item102558",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Honey Flower",
+          "French": "Fleur de miel",
+          "German": "Honigblume",
+          "Spanish": "Flor mielera",
+          "Chinese": "蜜花",
+          "Korean": "Honey Flower"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Ingredient",
+          "French": "Ingrédient",
+          "German": "Zutat",
+          "Spanish": "Ingrediente",
+          "Chinese": "原料",
+          "Korean": "Ingredient"
+        }
+      },
+      "ApiId": 102558,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 3375060
+      },
+      "Value": {}
+    },
+    {
+      "Id": "item102503",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Lowland Pine Log",
+          "French": "Rondin de pin des basses terres",
+          "German": "Tiefland-Kiefernholz-Block",
+          "Spanish": "Tronco de pino de las tierras bajas",
+          "Chinese": "低地松木",
+          "Korean": "Lowland Pine Log"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Ingredient",
+          "French": "Ingrédient",
+          "German": "Zutat",
+          "Spanish": "Ingrediente",
+          "Chinese": "原料",
+          "Korean": "Ingredient"
+        }
+      },
+      "ApiId": 102503,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 3375064
+      },
+      "Value": {}
+    },
+    {
+      "Id": "item103103",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Sweet-Treated Pine Plank",
+          "French": "Planche de bois traité au sucre",
+          "German": "Honigimprägnierte Kiefernholzplanke",
+          "Spanish": "Tabla de pino endulzada",
+          "Chinese": "加工松木板",
+          "Korean": "Sweet-Treated Pine Plank"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": null,
+          "French": null,
+          "German": null,
+          "Spanish": null,
+          "Chinese": null,
+          "Korean": null
+        }
+      },
+      "ApiId": 103103,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 3375065
+      },
+      "Value": {}
+    },
+    {
+      "Id": "item103038",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Curious Lowland Honeycomb",
+          "French": "Rayon de miel des basses terres étrange",
+          "German": "Sonderbare Tiefland-Honigwabe",
+          "Spanish": "Panal curioso de las tierras bajas",
+          "Chinese": "奇异低地蜂巢",
+          "Korean": "Curious Lowland Honeycomb"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Can be spent at vendors in Lowland Shore or consumed to add 5 ursus obliges to your wallet.",
+          "French": "À échanger auprès des vendeurs de la Côte des basses terres ou à consommer pour ajouter 5 faveurs ursines dans votre portefeuille.",
+          "German": "Kann entweder bei Händlern an der Tiefland-Küste ausgegeben oder verbraucht werden, um Eurer Geldbörse 5 Ursus-Obolusse hinzuzufügen.",
+          "Spanish": "Se pueden gastar con los comerciantes de las Costas Bajas o consumir para añadir 5 obligos ursus a tu cartera.",
+          "Chinese": "双击将5个熊族恩惠加入你的钱包，也可以在低地海岸的商贩处消费。",
+          "Korean": "Can be spent at vendors in Lowland Shore or consumed to add 5 ursus obliges to your wallet."
+        }
+      },
+      "ApiId": 103038,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 3376073
+      },
+      "Value": {}
+    },
+    {
+      "Id": "item103279",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Charged Titan Ore",
+          "French": "Minerai de Titan chargé",
+          "German": "Sucher des Weißen Mantels",
+          "Spanish": "Mineral de titán cargado",
+          "Chinese": "充能泰坦矿石",
+          "Korean": "Charged Titan Ore"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Ingredient",
+          "French": "Ingrédient",
+          "German": "Zutat",
+          "Spanish": "Ingrediente",
+          "Chinese": "原料",
+          "Korean": "Ingredient"
+        }
+      },
+      "ApiId": 103279,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 3375061
+      },
+      "Value": {}
+    },
+    {
+      "Id": "item102255",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Rotted Titan Amber",
+          "French": "Ambre de Titan putrescent",
+          "German": "Vermoderter Titanen-Bernstein\n",
+          "Spanish": "Ámbar de titán podrido",
+          "Chinese": "腐烂泰坦琥珀",
+          "Korean": "Rotted Titan Amber"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Ingredient",
+          "French": "Ingrédient",
+          "German": "Zutat",
+          "Spanish": "Ingrediente",
+          "Chinese": "原料",
+          "Korean": "Ingredient"
+        }
+      },
+      "ApiId": 102255,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 3375062
+      },
+      "Value": {}
+    },
+    {
+      "Id": "item102467",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Neutralized Titan Alloy",
+          "French": "Alliage de Titan neutralisé",
+          "German": "Neutralisierte Titanen-Legierung",
+          "Spanish": "Aleación del titán neutralizada",
+          "Chinese": "中和泰坦合金",
+          "Korean": "Neutralized Titan Alloy"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": null,
+          "French": null,
+          "German": null,
+          "Spanish": null,
+          "Chinese": null,
+          "Korean": null
+        }
+      },
+      "ApiId": 102467,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 3375058
+      },
+      "Value": {}
+    },
+    {
+      "Id": "item102494",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Curious Mursaat Currency",
+          "French": "Monnaie mursaat étrange",
+          "German": "Seltsame Mursaat-Währung",
+          "Spanish": "Divisa curiosa mursaat",
+          "Chinese": "奇异末世魔货币",
+          "Korean": "Curious Mursaat Currency"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Can be spent at vendors in Janthir Syntri or consumed to add 5 ursus obliges to your wallet.",
+          "French": "À échanger auprès des vendeurs de la Syntri de Janthir ou à consommer pour ajouter 5 faveurs ursines dans votre portefeuille.",
+          "German": "Kann entweder bei Händlern auf Janthir Syntri ausgegeben oder verbraucht werden, um Eurer Geldbörse 5 Ursus-Obolusse hinzuzufügen.",
+          "Spanish": "Se pueden gastar con los comerciantes de Janthir Syntri o consumir para añadir 5 obligos ursus a tu cartera.",
+          "Chinese": "双击将5个熊族恩惠加入你的钱包，也可以在珍瑟新萃的商贩处消费。",
+          "Korean": "Can be spent at vendors in Janthir Syntri or consumed to add 5 ursus obliges to your wallet."
+        }
+      },
+      "ApiId": 102494,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 3376074
+      },
+      "Value": {}
+    },
+    {
+      "Id": "item102306",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Refined Homestead Fiber",
+          "French": "Fibre de pavillon raffinée",
+          "German": "Veredelte Heimstatt-Faser",
+          "Spanish": "Fibra de la heredad refinada",
+          "Chinese": "精炼庄园纤维",
+          "Korean": "Refined Homestead Fiber"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Obtained by refining basic plant materials at the Homestead Fiber Refiner.",
+          "French": "À obtenir en raffinant des matériaux végétaux de base auprès du raffineur de fibres du pavillon.",
+          "German": "Erhalten durch die Veredelung einfachen Pflanzenmaterials am Faserveredler Eurer Heimstatt.",
+          "Spanish": "Se obtiene refinando materiales básicos de plantas en el refinador de fibras de la heredad.",
+          "Chinese": "在庄园的纤维精炼机加工基础植物材料即可获得。",
+          "Korean": "Obtained by refining basic plant materials at the Homestead Fiber Refiner."
+        }
+      },
+      "ApiId": 102306,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 3375059
+      },
+      "Value": {}
+    },
+    {
+      "Id": "item102205",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Refined Homestead Metal",
+          "French": "Métal de pavillon raffiné",
+          "German": "Veredeltes Heimstatt-Metall",
+          "Spanish": "Metal de la heredad refinado",
+          "Chinese": "精炼庄园金属",
+          "Korean": "Refined Homestead Metal"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Obtained by refining basic ore materials at the Homestead Metal Refiner.",
+          "French": "À obtenir en raffinant des matériaux de minerai de base auprès du raffineur de métal du pavillon.",
+          "German": "Erhalten durch die Veredelung einfacher Erz-Materialen am Metallveredler Eurer Heimstatt.",
+          "Spanish": "Se obtiene refinando materiales básicos de mineral en el refinador de metales de la heredad.",
+          "Chinese": "在庄园的金属精炼机加工基础矿石材料即可获得。",
+          "Korean": "Obtained by refining basic ore materials at the Homestead Metal Refiner."
+        }
+      },
+      "ApiId": 102205,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 3375057
+      },
+      "Value": {}
+    },
+    {
+      "Id": "item103049",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Refined Homestead Wood",
+          "French": "Bois de pavillon raffiné",
+          "German": "Veredeltes Heimstatt-Holz",
+          "Spanish": "Madera de la heredad refinada",
+          "Chinese": "精炼庄园木材",
+          "Korean": "Refined Homestead Wood"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Obtained by refining basic log materials at the Homestead Wood Refiner.",
+          "French": "À obtenir en raffinant des matériaux de rondins de base auprès du raffineur de bois du pavillon.",
+          "German": "Erhalten durch die Veredelung einfacher Holzblock-Materialen am Holzveredler Eurer Heimstatt.",
+          "Spanish": "Se obtiene refinando materiales básicos de troncos en el refinador de madera de la heredad.",
+          "Chinese": "在庄园的木材精炼机加工基础树木材料即可获得。",
+          "Korean": "Obtained by refining basic log materials at the Homestead Wood Refiner."
+        }
+      },
+      "ApiId": 103049,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 3375063
       },
       "Value": {}
     },
@@ -18672,12 +19020,12 @@
       },
       "Description": {
         "LocalizedTextByLocale": {
-          "English": "Double-click to apply to an unused aquatic headgear infusion slot. Infuses character with increased swimming speed.",
-          "French": "Double-cliquez pour appliquer à un emplacement d'infusion de couvre-chef aquatique inutilisé. Imprègne le personnage d'une vitesse natatoire accrue.",
-          "German": "Doppelklicken, um auf einen freien Atemgeräte-Infusionsplatz anzuwenden. Der Charakter wird mit erhöhter Schwimmgeschwindigkeit infundiert.",
-          "Spanish": "Haz doble clic para aplicar a una casilla de infusión sin usar de armadura de cabeza acuática. Otorga al personaje un aumento en la velocidad de natación.",
-          "Chinese": "双击添加至未使用的呼吸器灌注槽。灌注可以提升人物的游泳速度。",
-          "Korean": "Double-click to apply to an unused aquatic headgear infusion slot. Infuses character with increased swimming speed."
+          "English": "Double-click to apply to an unused aquatic headgear infusion slot.\n\nDive Master Astora in Lion's Arch can refine this infusion to upgrade it.",
+          "French": "Double-cliquez pour appliquer à un emplacement d'infusion de couvre-chef aquatique inutilisé.\n\nLa maîtresse de la plongée Astora à l'Arche du Lion peut raffiner cette infusion pour l'améliorer.",
+          "German": "Doppelklicken, um dies auf einem freien Atemgeräte-Infusionsplatz anzuwenden.\n\nTauchmeisterin Astora in Löwenstein kann diese Infusion verfeinern, um sie aufzuwerten.",
+          "Spanish": "Haz doble clic para aplicarlo a una casilla de infusión sin usar de armadura de cabeza acuática.\n\nLa maestra submarinista Astora de Arco del León puede refinar esta infusión para mejorarla.",
+          "Chinese": "双击添加至未使用的呼吸器灌注槽。\n\n狮子拱门的跳水大师亚斯特拉可以升级这个灌注。",
+          "Korean": "Double-click to apply to an unused aquatic headgear infusion slot.\n\nDive Master Astora in Lion's Arch can refine this infusion to upgrade it."
         }
       },
       "ApiId": 87528,
@@ -19097,22 +19445,22 @@
       "Id": "item100569",
       "Name": {
         "LocalizedTextByLocale": {
-          "English": "Purified Kryptis Essence",
-          "French": "Essence kryptis purifiée",
-          "German": "Gereinigte Kryptis-Essenz",
-          "Spanish": "Esencia purificada de kryptis",
-          "Chinese": "纯净氪族精华",
-          "Korean": "Purified Kryptis Essence"
+          "English": "Purified Rift Essence",
+          "French": "Essence de brèche purifiée",
+          "German": "Gereinigte Riss-Essenz",
+          "Spanish": "Esencia purificada de fisura",
+          "Chinese": "纯净裂隙精华",
+          "Korean": "Purified Rift Essence"
         }
       },
       "Description": {
         "LocalizedTextByLocale": {
-          "English": "An amalgamation of Kryptis essences used for crafting that have been purified by magic...and more than a little luck.",
-          "French": "Un amalgame d'essences de Kryptis utilisables en artisanat, purifiées grâce à la magie... et une bonne dose de chance.",
-          "German": "Ein zur Herstellung von Gegenständen verwendetes Fusionsprodukt von Kryptis-Essenzen, die durch Magie gereinigt wurden ... mit sehr viel Glück.",
-          "Spanish": "Una amalgama de esencias de kryptis empleada en artesanía que se ha purificado con ayuda de magia... y una buena dosis de suerte.",
-          "Chinese": "被魔法净化的合成氪族精华，用于制作......以及带来好运。",
-          "Korean": "An amalgamation of Kryptis essences used for crafting that have been purified by magic...and more than a little luck."
+          "English": "An amalgamation of rift essences used for crafting that have been purified by magic...and more than a little luck.",
+          "French": "Un amalgame d'essences de brèche utilisables en artisanat, purifiées grâce à la magie... et une bonne dose de chance.",
+          "German": "Ein zur Herstellung von Gegenständen verwendetes Fusionsprodukt von Riss-Essenzen, die durch Magie gereinigt wurden ... mit sehr viel Glück.",
+          "Spanish": "Una amalgama de esencias de esencias de fisura empleada en artesanía que se ha purificado con ayuda de magia... y una buena dosis de suerte.",
+          "Chinese": "可用于制作的合成裂隙精华，已被魔法净化......还能带来好运。",
+          "Korean": "An amalgamation of rift essences used for crafting that have been purified by magic...and more than a little luck."
         }
       },
       "ApiId": 100569,
@@ -22523,7 +22871,8 @@
         "currency71",
         "currency72",
         "currency73",
-        "currency75"
+        "currency75",
+        "currency76"
       ]
     },
     {
@@ -22870,7 +23219,18 @@
         "item100078",
         "item100414",
         "item100055",
-        "item100930"
+        "item100930",
+        "item102558",
+        "item102503",
+        "item103103",
+        "item103038",
+        "item103279",
+        "item102255",
+        "item102467",
+        "item102494",
+        "item102306",
+        "item102205",
+        "item103049"
       ]
     },
     {
