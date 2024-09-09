@@ -9,7 +9,7 @@ namespace SessionTracker.StatsWindow
         {
             // do not store times as timespans. timespan has good readability as parameter, but bad performance for comparison and other operations.
             _intervalInMilliseconds = intervalTimeSpan.TotalMilliseconds; 
-            _intervalEndInMilliseconds = GameService.Overlay.CurrentGameTime.TotalGameTime.TotalMilliseconds + _intervalInMilliseconds;
+            UpdateIntervalEnd();
         }
 
         public bool HasEnded()
@@ -17,8 +17,13 @@ namespace SessionTracker.StatsWindow
             if (_intervalEndInMilliseconds > GameService.Overlay.CurrentGameTime.TotalGameTime.TotalMilliseconds)
                 return false;
 
-            _intervalEndInMilliseconds = GameService.Overlay.CurrentGameTime.TotalGameTime.TotalMilliseconds + _intervalEndInMilliseconds;
+            UpdateIntervalEnd();
             return true;
+        }
+
+        private void UpdateIntervalEnd()
+        {
+            _intervalEndInMilliseconds = GameService.Overlay.CurrentGameTime.TotalGameTime.TotalMilliseconds + _intervalInMilliseconds;
         }
 
         private readonly double _intervalInMilliseconds;
