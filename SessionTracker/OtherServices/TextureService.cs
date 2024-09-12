@@ -40,7 +40,7 @@ namespace SessionTracker.OtherServices
                 StatTextureByStatId[stat.Id] = CreateStatTexture(stat, missingTextures);
 
             if (missingTextures.Any())
-                Module.Logger.Error($"Using fallbacks because could not get texture for: {string.Join(", ", missingTextures)}. :(");
+                Module.Logger.Warn($"Using fallbacks because could not get texture for: {string.Join(", ", missingTextures)}. :(");
         }
 
         public void Dispose()
