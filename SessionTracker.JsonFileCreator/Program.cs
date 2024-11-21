@@ -21,8 +21,24 @@ namespace SessionTracker.JsonFileCreator
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("create model.json...");
 
-            var categories = await CategoryCreator.CreateCategories();
-            var stats = await CreateStatsAndAddTheirIdsToCategories(categories);
+            var categories = new List<StatCategory>();
+            var stats = new List<Stat>();
+
+            var hasToRequestApi = true;
+            while (hasToRequestApi) // retry logic because gw2 api times out a lot
+            {
+                try
+                {
+                    categories = await CategoryCreator.CreateCategories();
+                    stats = await CreateStatsAndAddTheirIdsToCategories(categories);
+                    hasToRequestApi = false;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"API request failed. Retry attempt in progress.\nReason for failure:\n{e.Message}");
+                }
+            }
+
             var model = CreateModel(categories, stats);
             ModelValidator.ThrowIfModelIsInvalid(model);
             WriteModelToFile(model);
