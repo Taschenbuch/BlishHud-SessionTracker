@@ -609,7 +609,7 @@
           "French": "Double-cliquez pour ouvrir.",
           "German": "Zum Öffnen doppelklicken.",
           "Spanish": "Haz doble clic para abrir.",
-          "Chinese": "双击后打开。",
+          "Chinese": "双击打开。",
           "Korean": "Double-click to open."
         }
       },
@@ -1508,7 +1508,7 @@
           "French": "Double-cliquez pour ouvrir.",
           "German": "Zum Öffnen doppelklicken.",
           "Spanish": "Haz doble clic para abrir.",
-          "Chinese": "双击后打开。",
+          "Chinese": "双击打开。",
           "Korean": "Double-click to open."
         }
       },
@@ -1537,7 +1537,7 @@
           "French": "Double-cliquez pour ouvrir.",
           "German": "Zum Öffnen doppelklicken.",
           "Spanish": "Haz doble clic para abrir.",
-          "Chinese": "双击后打开。",
+          "Chinese": "双击打开。",
           "Korean": "Double-click to open."
         }
       },
@@ -1566,7 +1566,7 @@
           "French": "Double-cliquez pour ouvrir.",
           "German": "Zum Öffnen doppelklicken.",
           "Spanish": "Haz doble clic para abrir.",
-          "Chinese": "双击后打开。",
+          "Chinese": "双击打开。",
           "Korean": "Double-click to open."
         }
       },
@@ -2896,12 +2896,12 @@
       },
       "Description": {
         "LocalizedTextByLocale": {
-          "English": "Acquired by deconstructing crafted items with research kits. Used at vendors in Cantha and to craft newer recipes.",
-          "French": "À obtenir en démontant des objets fabriqués à l'aide de kits de recherches. À utiliser auprès de vendeurs canthiens et pour fabriquer de nouvelles recettes.",
-          "German": "Erworben durch die Dekonstruktion von hergestellten Gegenständen mit Forschungskits. Zum Eintauschen bei Händlern in Cantha und zur Herstellung neuerer Rezepte.",
-          "Spanish": "Se consigue desmantelando objetos fabricados con kits de investigación y sirven para vendérselos a comerciantes de Cantha y fabricar nuevas recetas.",
-          "Chinese": "通过使用研究套件分解制作物品获得。可在凯珊的商贩处使用，或制作新的配方。",
-          "Korean": "Acquired by deconstructing crafted items with research kits. Used at vendors in Cantha and to craft newer recipes."
+          "English": "Acquired by deconstructing crafted items with research kits. Used at vendors in Cantha, the Horn of Maguuma, and Janthir, and to craft newer recipes.",
+          "French": "À obtenir en démontant des objets fabriqués à l'aide de kits de recherche. À utiliser auprès de vendeurs de Cantha, de la Corne de Maguuma et de Janthir, et pour fabriquer de nouvelles recettes.",
+          "German": "Erworben durch die Dekonstruktion von hergestellten Gegenständen mit Forschungskits. Zum Eintauschen bei Händlern in Cantha, am Horn von Maguuma und in Janthir, und zur Herstellung neuerer Rezepte.",
+          "Spanish": "Se consigue desmantelando objetos fabricados con kits de investigación y sirven para venderlos en Cantha, el Cuerno de Maguuma y Janthir, y para fabricar nuevas recetas.",
+          "Chinese": "使用研究套件分解制作物品获得。可在凯珊、迈古玛之角、珍瑟的商贩处使用，或制作新配方。",
+          "Korean": "Acquired by deconstructing crafted items with research kits. Used at vendors in Cantha, the Horn of Maguuma, and Janthir, and to craft newer recipes."
         }
       },
       "ApiId": 61,
@@ -3314,6 +3314,35 @@
       "ApiIdType": "Currency",
       "Icon": {
         "AssetId": 3376072
+      },
+      "Value": {}
+    },
+    {
+      "Id": "currency77",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Gaeting Crystal",
+          "French": "Cristal de Gaets",
+          "German": "Gaets-Kristall",
+          "Spanish": "Cristal de Gaets",
+          "Chinese": "盖廷水晶",
+          "Korean": "Gaeting Crystal"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Earned from bosses and events inside Janthir Wilds raids. Used at specific raid vendors in the Janthir region.",
+          "French": "À obtenir sur les boss et dans les événements de raid de \"Janthir Wilds\". Utilisable chez certains vendeurs de raid de la région de Janthir.",
+          "German": "Kann von Bossen und Events bei \"Janthir Wilds\"-Schlachtzügen verdient werden. Bei bestimmten Schlachtzug-Händlern in der Janthir-Region einsetzbar.",
+          "Spanish": "Se consigue de jefes y en eventos de las incursiones de Janthir Wilds. Se usa con comerciantes de incursión específicos de la región de Janthir.",
+          "Chinese": "通过珍瑟荒野大型地下城的头目和事件获得。在珍瑟区域特定大型地下城商人处使用。",
+          "Korean": "Earned from bosses and events inside Janthir Wilds raids. Used at specific raid vendors in the Janthir region."
+        }
+      },
+      "ApiId": 77,
+      "ApiIdType": "Currency",
+      "Icon": {
+        "AssetId": 3442797
       },
       "Value": {}
     },
@@ -17040,7 +17069,7 @@
         "LocalizedTextByLocale": {
           "English": "Charged Titan Ore",
           "French": "Minerai de Titan chargé",
-          "German": "Sucher des Weißen Mantels",
+          "German": "Aufgeladenes Titanen-Erz",
           "Spanish": "Mineral de titán cargado",
           "Chinese": "充能泰坦矿石",
           "Korean": "Charged Titan Ore"
@@ -22872,7 +22901,8 @@
         "currency72",
         "currency73",
         "currency75",
-        "currency76"
+        "currency76",
+        "currency77"
       ]
     },
     {
