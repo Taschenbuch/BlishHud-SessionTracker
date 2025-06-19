@@ -885,12 +885,12 @@
       "Id": "item45175",
       "Name": {
         "LocalizedTextByLocale": {
-          "English": "Essence of Luck",
-          "French": "Essence de chance",
-          "German": "Essenz des Glücks",
-          "Spanish": "Esencia de la suerte",
-          "Chinese": "幸运精华",
-          "Korean": "Essence of Luck"
+          "English": "Fine Essence of Luck",
+          "French": "Essence de chance raffinée",
+          "German": "Edle Essenz des Glücks",
+          "Spanish": "Esencia de la suerte selecta",
+          "Chinese": "优质幸运精华",
+          "Korean": "Fine Essence of Luck"
         }
       },
       "Description": {
@@ -914,12 +914,12 @@
       "Id": "item45176",
       "Name": {
         "LocalizedTextByLocale": {
-          "English": "Essence of Luck",
-          "French": "Essence de chance",
-          "German": "Essenz des Glücks",
-          "Spanish": "Esencia de la suerte",
-          "Chinese": "幸运精华",
-          "Korean": "Essence of Luck"
+          "English": "Masterwork Essence of Luck",
+          "French": "Essence de chance chef-d'œuvre",
+          "German": "Meisterwerk-Essenz des Glücks",
+          "Spanish": "Esencia de la suerte sobresaliente",
+          "Chinese": "精制幸运精华",
+          "Korean": "Masterwork Essence of Luck"
         }
       },
       "Description": {
@@ -943,12 +943,12 @@
       "Id": "item45177",
       "Name": {
         "LocalizedTextByLocale": {
-          "English": "Essence of Luck",
-          "French": "Essence de chance",
-          "German": "Essenz des Glücks",
-          "Spanish": "Esencia de la suerte",
-          "Chinese": "幸运精华",
-          "Korean": "Essence of Luck"
+          "English": "Rare Essence of Luck",
+          "French": "Essence de chance rare",
+          "German": "Seltene Essenz des Glücks",
+          "Spanish": "Esencia de la suerte excepcional",
+          "Chinese": "稀有幸运精华",
+          "Korean": "Rare Essence of Luck"
         }
       },
       "Description": {
@@ -972,12 +972,12 @@
       "Id": "item45178",
       "Name": {
         "LocalizedTextByLocale": {
-          "English": "Essence of Luck",
-          "French": "Essence de chance",
-          "German": "Essenz des Glücks",
-          "Spanish": "Esencia de la suerte",
-          "Chinese": "幸运精华",
-          "Korean": "Essence of Luck"
+          "English": "Exotic Essence of Luck",
+          "French": "Essence de chance exotique",
+          "German": "Exotische Essenz des Glücks",
+          "Spanish": "Esencia de la suerte exótica",
+          "Chinese": "特异幸运精华",
+          "Korean": "Exotic Essence of Luck"
         }
       },
       "Description": {
@@ -1001,12 +1001,12 @@
       "Id": "item45179",
       "Name": {
         "LocalizedTextByLocale": {
-          "English": "Essence of Luck",
-          "French": "Essence de chance",
-          "German": "Essenz des Glücks",
-          "Spanish": "Esencia de la suerte",
-          "Chinese": "幸运精华",
-          "Korean": "Essence of Luck"
+          "English": "Legendary Essence of Luck",
+          "French": "Essence de chance légendaire",
+          "German": "Legendäre Essenz des Glücks",
+          "Spanish": "Esencia de la suerte legendaria",
+          "Chinese": "传奇幸运精华",
+          "Korean": "Legendary Essence of Luck"
         }
       },
       "Description": {
@@ -3313,7 +3313,7 @@
       "ApiId": 76,
       "ApiIdType": "Currency",
       "Icon": {
-        "AssetId": 3376072
+        "AssetId": 3593176
       },
       "Value": {}
     },
@@ -3343,6 +3343,93 @@
       "ApiIdType": "Currency",
       "Icon": {
         "AssetId": 3442797
+      },
+      "Value": {}
+    },
+    {
+      "Id": "currency78",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Fine Rift Essence",
+          "French": "Essence de brèche raffinée",
+          "German": "Edle Riss-Essenz",
+          "Spanish": "Esencia selecta de fisura",
+          "Chinese": "优质裂隙精华",
+          "Korean": "Fine Rift Essence"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Found in rift hunts and Convergences.",
+          "French": "À trouver lors des chasses aux brèches et des convergences.",
+          "German": "Zu finden in Rissjagden und Konvergenzen.",
+          "Spanish": "Se encuentra en cazas de fisuras y Convergencias.",
+          "Chinese": "通过裂隙狩猎和汇聚找到。",
+          "Korean": "Found in rift hunts and Convergences."
+        }
+      },
+      "ApiId": 78,
+      "ApiIdType": "Currency",
+      "Icon": {
+        "AssetId": 3630022
+      },
+      "Value": {}
+    },
+    {
+      "Id": "currency79",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Rare Rift Essence",
+          "French": "Essence de brèche rare",
+          "German": "Seltene Riss-Essenz",
+          "Spanish": "Esencia excepcional de fisura",
+          "Chinese": "稀有裂隙精华",
+          "Korean": "Rare Rift Essence"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Found in tier 3 rift hunts and Convergences.",
+          "French": "À trouver lors des chasses aux brèches de niveau 3 et des convergences.",
+          "German": "Zu finden in Rissjagden Rang 3 und Konvergenzen.",
+          "Spanish": "Se encuentra en Convergencias y fisuras de rango 3.",
+          "Chinese": "通过3级裂隙狩猎和汇聚找到。",
+          "Korean": "Found in tier 3 rift hunts and Convergences."
+        }
+      },
+      "ApiId": 79,
+      "ApiIdType": "Currency",
+      "Icon": {
+        "AssetId": 3630024
+      },
+      "Value": {}
+    },
+    {
+      "Id": "currency80",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Masterwork Rift Essence",
+          "French": "Essence de brèche prodigieuse",
+          "German": "Meisterwerk-Riss-Essenz",
+          "Spanish": "Esencia de fisura sobresaliente",
+          "Chinese": "精制裂隙精华",
+          "Korean": "Masterwork Rift Essence"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Found in tier 2 rift hunts and Convergences.",
+          "French": "À trouver lors des chasses aux brèches de niveau 2 et des convergences.",
+          "German": "Zu finden in Rissjagden Rang 2 und Konvergenzen.",
+          "Spanish": "Se encuentra en Convergencias y fisuras de rango 2.",
+          "Chinese": "通过2级裂隙狩猎和汇聚获得。",
+          "Korean": "Found in tier 2 rift hunts and Convergences."
+        }
+      },
+      "ApiId": 80,
+      "ApiIdType": "Currency",
+      "Icon": {
+        "AssetId": 3630023
       },
       "Value": {}
     },
@@ -8630,7 +8717,7 @@
         "LocalizedTextByLocale": {
           "English": "Cured Thick Leather Square",
           "French": "Pièce de cuir épais traité",
-          "German": "Getrockneter dicker Lederflicken",
+          "German": "Gegerbter dicker Lederflicken",
           "Spanish": "Retal de cuero curado grueso",
           "Chinese": "熟化厚实皮革片",
           "Korean": "Cured Thick Leather Square"
@@ -16588,7 +16675,7 @@
           "French": "À échanger auprès des vendeurs de la Province de Seitung ou à consommer pour ajouter 5 faveurs impériales dans votre portefeuille.",
           "German": "Kann entweder bei Händlern in der Provinz Seitung ausgegeben oder verbraucht werden, um Eurer Geldbörse 5 Kaiserliche Gunst hinzuzufügen.",
           "Spanish": "Se puede gastar con los comerciantes de la Provincia de Seitung o consumir para añadir 5 favores imperiales a tu cartera.",
-          "Chinese": "双击将5个帝国恩典加入你的钱包。也可在青函省的商贩处使用。",
+          "Chinese": "双击将5个帝国恩典加入你的钱包。也可在青函省的商贩处消费。",
           "Korean": "Can be spent at vendors in Seitung Province or consumed to add 5 Imperial Favors to your wallet."
         }
       },
@@ -16646,7 +16733,7 @@
           "French": "À échanger auprès des vendeurs des Terres sauvages d'Echovald ou à consommer pour ajouter 5 faveurs impériales dans votre portefeuille.",
           "German": "Kann entweder bei Händlern in der Echowald-Wildnis ausgegeben oder verbraucht werden, um Eurer Geldbörse 5 Kaiserliche Gunst hinzuzufügen.",
           "Spanish": "Se puede gastar con los comerciantes de las Selvas de Echovald o consumir para añadir 5 favores imperiales a tu cartera.",
-          "Chinese": "双击将5个帝国恩典加入你的钱包。也可在科瓦德荒野的商贩处使用。",
+          "Chinese": "双击将5个帝国恩典加入你的钱包。也可在科瓦德荒野的商贩处消费。",
           "Korean": "Can be spent at vendors in the Echovald Wilds or consumed to add 5 Imperial Favors to your wallet."
         }
       },
@@ -16675,7 +16762,7 @@
           "French": "À échanger auprès des vendeurs du Trépas du dragon ou à consommer pour ajouter 5 faveurs impériales dans votre portefeuille.",
           "German": "Kann entweder bei Händlern in Drachen-Ende ausgegeben oder verbraucht werden, um Eurer Geldbörse 5 Kaiserliche Gunst hinzuzufügen.",
           "Spanish": "Se puede gastar con los comerciantes de Muerte del Dragón o consumir para añadir 5 favores imperiales a tu cartera.",
-          "Chinese": "双击将5个帝国恩典加入你的钱包。也可在巨龙尽头的商贩处使用。",
+          "Chinese": "双击将5个帝国恩典加入你的钱包。也可在巨龙尽头的商贩处消费。",
           "Korean": "Can be spent at vendors in Dragon's End or consumed to add 5 Imperial Favors to your wallet."
         }
       },
@@ -16845,12 +16932,12 @@
       },
       "Description": {
         "LocalizedTextByLocale": {
-          "English": "Found from rift hunting.",
-          "French": "À trouver lors de chasses aux brèches.",
-          "German": "Bei der Rissjagd gefunden.",
-          "Spanish": "Se encuentra al cazar fisuras.",
-          "Chinese": "通过裂隙狩猎找到。",
-          "Korean": "Found from rift hunting."
+          "English": "Found in Convergences and rift hunts. Consume this item to convert it into a currency.",
+          "French": "À trouver dans les convergences et les chasses aux brèches. Le fait de consommer cet objet le transforme en monnaie.",
+          "German": "In Konvergenzen und Rissjagden zu finden. Verbraucht diesen Gegenstand, um ihn in eine Währung zu verwandeln.",
+          "Spanish": "Se encuentra en Convergencias y cazas de fisuras. Consume este artículo para convertirlo en una divisa.",
+          "Chinese": "通过裂隙狩猎和汇聚找到。消耗该物品即可把它转变成货币。",
+          "Korean": "Found in Convergences and rift hunts. Consume this item to convert it into a currency."
         }
       },
       "ApiId": 100078,
@@ -16874,12 +16961,12 @@
       },
       "Description": {
         "LocalizedTextByLocale": {
-          "English": "Found in tier 2 rifts.",
-          "French": "À trouver dans les brèches de niveau 2.",
-          "German": "Gefunden in Rissen von Rang 2.",
-          "Spanish": "Se encuentra en fisuras de rango 2.",
-          "Chinese": "在2级裂隙中找到。",
-          "Korean": "Found in tier 2 rifts."
+          "English": "Found in Convergences and tier 2 rift hunts. Consume this item to convert it into a currency.",
+          "French": "À trouver dans les convergences et les chasses aux brèches de niveau 2. Le fait de consommer cet objet le transforme en monnaie.",
+          "German": "In Konvergenzen und Rissjagden mit Rang 2 zu finden. Verbraucht diesen Gegenstand, um ihn in eine Währung zu verwandeln.",
+          "Spanish": "Se encuentra en Convergencias y cazas de fisuras de nivel 2. Consume este artículo para convertirlo en una divisa.",
+          "Chinese": "在汇聚和2级裂隙中找到。消耗该物品即可把它转变成货币。",
+          "Korean": "Found in Convergences and tier 2 rift hunts. Consume this item to convert it into a currency."
         }
       },
       "ApiId": 100414,
@@ -16903,12 +16990,12 @@
       },
       "Description": {
         "LocalizedTextByLocale": {
-          "English": "Found in tier 3 rifts.",
-          "French": "À trouver dans les brèches de niveau 3.",
-          "German": "Gefunden in Rissen von Rang 3.",
-          "Spanish": "Se encuentra en fisuras de rango 3.",
-          "Chinese": "在3级裂隙中找到。",
-          "Korean": "Found in tier 3 rifts."
+          "English": "Found in Convergences and tier 3 rift hunts. Consume this item to convert it into a currency.",
+          "French": "À trouver dans les convergences et les chasses aux brèches de niveau 3. Le fait de consommer cet objet le transforme en monnaie.",
+          "German": "In Konvergenzen und Rissjagden mit Rang 3 zu finden. Verbraucht diesen Gegenstand, um ihn in eine Währung zu verwandeln.",
+          "Spanish": "Se encuentra en Convergencias y cazas de fisuras de nivel 3. Consume este artículo para convertirlo en una divisa.",
+          "Chinese": "在汇聚和3级裂隙中找到。消耗该物品即可把它转变成货币。",
+          "Korean": "Found in Convergences and tier 3 rift hunts. Consume this item to convert it into a currency."
         }
       },
       "ApiId": 100055,
@@ -17069,7 +17156,7 @@
         "LocalizedTextByLocale": {
           "English": "Charged Titan Ore",
           "French": "Minerai de Titan chargé",
-          "German": "Aufgeladenes Titanen-Erz",
+          "German": "Aufgeladenes Titanen-Erz",
           "Spanish": "Mineral de titán cargado",
           "Chinese": "充能泰坦矿石",
           "Korean": "Charged Titan Ore"
@@ -17098,7 +17185,7 @@
         "LocalizedTextByLocale": {
           "English": "Rotted Titan Amber",
           "French": "Ambre de Titan putrescent",
-          "German": "Vermoderter Titanen-Bernstein\n",
+          "German": "Vermoderter Titanen-Bernstein(pl:\"Bernsteine\"]",
           "Spanish": "Ámbar de titán podrido",
           "Chinese": "腐烂泰坦琥珀",
           "Korean": "Rotted Titan Amber"
@@ -17263,6 +17350,267 @@
       "ApiIdType": "Item",
       "Icon": {
         "AssetId": 3375063
+      },
+      "Value": {}
+    },
+    {
+      "Id": "item103587",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Shard of the Homestead",
+          "French": "Éclat de pavillon",
+          "German": "Scherbe der Heimstatt",
+          "Spanish": "Esquirla de la heredad",
+          "Chinese": "庄园碎片",
+          "Korean": "Shard of the Homestead"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Combine 250 Refined Metal, 250 Refined Wood, 250 Refined Fiber, and 250 Shards of the Homestead to create the Gift of Embracing Refuge.\n\nThis item is purchased from Deft Lahar in your homestead.",
+          "French": "Assemblez 250 unités de métal raffiné, 250 de bois raffiné, 250 de fibres raffinées et 250 éclats de pavillon pour créer le don de Refuge accueillant.\n\nCet objet s'achète auprès de Lahar habile dans votre pavillon.",
+          "German": "Kombiniert 250 Stücke veredeltes Metall, 250 Stücke veredeltes Holz, 250 veredelte Fasern und 250 Scherben der Heimstatt, um die Gabe der Umarmten Flucht herzustellen.\n\nDiesen Gegenstand gibt es bei Hurtiger Lahar in Eurer Heimstatt zu kaufen.",
+          "Spanish": "Combina 250 unidades de metal refinado, 250 de madera refinada, 250 de fibra refinada y 250 esquirlas de heredad para crear el don de Refugio Amoroso.\n\nPuedes comprarle este objeto a Lahar Hábil en tu heredad.",
+          "Chinese": "使用250个精炼金属，250个精炼木材，250个精炼纤维，250个庄园碎片，制作庇护之拥礼赠。\n\n前往庄园，向灵泥购买该物品。",
+          "Korean": "Combine 250 Refined Metal, 250 Refined Wood, 250 Refined Fiber, and 250 Shards of the Homestead to create the Gift of Embracing Refuge.\n\nThis item is purchased from Deft Lahar in your homestead."
+        }
+      },
+      "ApiId": 103587,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 3441843
+      },
+      "Value": {}
+    },
+    {
+      "Id": "item102655",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Titan Heatstone",
+          "French": "Pierre de chaleur de Titan",
+          "German": "Titanen-Hitzestein",
+          "Spanish": "Quematerita de titán",
+          "Chinese": "泰坦热能石",
+          "Korean": "Titan Heatstone"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Ingredient",
+          "French": "Ingrédient",
+          "German": "Zutat",
+          "Spanish": "Ingrediente",
+          "Chinese": "原料",
+          "Korean": "Ingredient"
+        }
+      },
+      "ApiId": 102655,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 3592778
+      },
+      "Value": {}
+    },
+    {
+      "Id": "item103427",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Mursaat Obsidian Chunk",
+          "French": "Morceau d'obsidienne mursaat",
+          "German": "Mursaat-Obsidianbrocken",
+          "Spanish": "Pedazo de obsidiana de los mursaat",
+          "Chinese": "末世魔黑曜石块",
+          "Korean": "Mursaat Obsidian Chunk"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Ingredient",
+          "French": "Ingrédient",
+          "German": "Zutat",
+          "Spanish": "Ingrediente",
+          "Chinese": "原料",
+          "Korean": "Ingredient"
+        }
+      },
+      "ApiId": 103427,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 3592776
+      },
+      "Value": {}
+    },
+    {
+      "Id": "item104229",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Vial of Titan Melted Liquid Obsidian",
+          "French": "Fiole d'obsidienne liquide fondue des Titans",
+          "German": "Phiole mit titanengeschmolzenem flüssigem Obsidian",
+          "Spanish": "Frasco de obsidiana líquida derretida de titán",
+          "Chinese": "瓶装泰坦融化液体黑曜石",
+          "Korean": "Vial of Titan Melted Liquid Obsidian"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": null,
+          "French": null,
+          "German": null,
+          "Spanish": null,
+          "Chinese": null,
+          "Korean": null
+        }
+      },
+      "ApiId": 104229,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 3592775
+      },
+      "Value": {}
+    },
+    {
+      "Id": "item104331",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Curious Mursaat Ruin Shard",
+          "French": "Fragment de ruine mursaat étrange",
+          "German": "Seltsame Mursaat-Ruinenscherbe",
+          "Spanish": "Esquirla curiosa de ruinas mursaat",
+          "Chinese": "新奇末世魔废墟碎片",
+          "Korean": "Curious Mursaat Ruin Shard"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Can be spent at vendors in Mistburned Barrens or consumed to add 5 ursus obliges to your wallet.",
+          "French": "À échanger auprès des vendeurs des Landes de Feu-de-Brume ou à consommer pour ajouter 5 faveurs ursines dans votre portefeuille.",
+          "German": "Kann entweder bei Händlern im Nebelbrand-Ödland ausgegeben oder verbraucht werden, um Eurer Geldbörse 5 Ursus-Obolusse hinzuzufügen.",
+          "Spanish": "Se puede gastar con los comerciantes de los Yermos de Pavesas de Niebla o consumir para añadir 5 obligos ursus a tu cartera.",
+          "Chinese": "双击将5个熊族恩典加入你的钱包。也可在雾灼荒地的商贩处消费。",
+          "Korean": "Can be spent at vendors in Mistburned Barrens or consumed to add 5 ursus obliges to your wallet."
+        }
+      },
+      "ApiId": 104331,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 3592777
+      },
+      "Value": {}
+    },
+    {
+      "Id": "item102569",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Shard of Lowland Shore",
+          "French": "Éclat de la Côte des basses terres",
+          "German": "Scherbe der Tiefland-Küste",
+          "Spanish": "Esquirla de las Costas Bajas",
+          "Chinese": "低地海岸碎片",
+          "Korean": "Shard of Lowland Shore"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Used in the crafting of Janthir Wilds legendary items.\n\nPurchased from Lowland Shore Renown Heart vendors, or purchased from the Trading Post.",
+          "French": "À utiliser pour fabriquer des objets légendaires de \"Janthir Wilds\".\n\nS'achète auprès des vendeurs de cœur de renommée de la Côte des basses terres, ou au comptoir.",
+          "German": "Wird zur Herstellung von legendären \"Janthir Wilds\"-Gegenständen verwendet.\n\nKann von Händlern für Ansehen-Herzen an der Tiefland-Küste oder am Handelsposten erworben werden.",
+          "Spanish": "Se utiliza para fabricar objetos legendarios de Janthir Wilds.\n\nSe compra a comerciantes de corazón de prestigio de las Costas Bajas o en el bazar.",
+          "Chinese": "用于制作珍瑟荒野的传奇物品。\n\n向低地海岸的爱心商人或者交易商会购买。",
+          "Korean": "Used in the crafting of Janthir Wilds legendary items.\n\nPurchased from Lowland Shore Renown Heart vendors, or purchased from the Trading Post."
+        }
+      },
+      "ApiId": 102569,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 3441851
+      },
+      "Value": {}
+    },
+    {
+      "Id": "item103316",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Shard of Janthir Syntri",
+          "French": "Éclat de la Syntri de Janthir",
+          "German": "Scherbe von Janthir Syntri",
+          "Spanish": "Esquirla de Janthir Syntri",
+          "Chinese": "珍瑟新萃碎片",
+          "Korean": "Shard of Janthir Syntri"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Used in the crafting of Janthir Wilds legendary items.\n\nPurchased from Janthir Syntri Renown Heart vendors, or purchased from the Trading Post.",
+          "French": "À utiliser pour fabriquer des objets légendaires de \"Janthir Wilds\".\n\nS'achète auprès des vendeurs de cœur de renommée de la Syntri de Janthir, ou au comptoir.",
+          "German": "Wird zur Herstellung von legendären \"Janthir Wilds\"-Gegenständen verwendet.\n\nKann von Händlern für Ansehen-Herzen auf Janthir Syntri oder am Handelsposten erworben werden.",
+          "Spanish": "Se utiliza para fabricar objetos legendarios de Janthir Wilds.\n\nSe compra a comerciantes de corazón de prestigio de Janthir Syntri o en el bazar.",
+          "Chinese": "用于制作珍瑟荒野的传奇物品。\n\n向珍瑟新萃的爱心商人或者交易商会购买。",
+          "Korean": "Used in the crafting of Janthir Wilds legendary items.\n\nPurchased from Janthir Syntri Renown Heart vendors, or purchased from the Trading Post."
+        }
+      },
+      "ApiId": 103316,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 3441850
+      },
+      "Value": {}
+    },
+    {
+      "Id": "item104282",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Shard of Mistburned Barrens",
+          "French": "Éclat des Landes de Feu-de-Brume",
+          "German": "Scherbe des Nebelbrand-Ödlands",
+          "Spanish": "Esquirla de los Yermos de Pavesas de Niebla",
+          "Chinese": "雾灼荒地碎片",
+          "Korean": "Shard of Mistburned Barrens"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Used in the crafting of Janthir Wilds legendary items.\n\nPurchased from the Mistburned Barrens renown heart vendor, or purchased from the Trading Post.",
+          "French": "À utiliser pour fabriquer des objets légendaires de \"Janthir Wilds\".\n\nS'achète auprès du vendeur de cœur de renommée des Landes de Feu-de-Brume, ou au comptoir.",
+          "German": "Wird zur Herstellung von legendären \"Janthir Wilds\"-Gegenständen verwendet.\n\nKann vom Händler für Ansehen-Herzen im Nebelbrand-Ödland oder am Handelsposten erworben werden.",
+          "Spanish": "Se utiliza para fabricar objetos legendarios de Janthir Wilds.\n\nSe compra al comerciante de corazón de prestigio de los Yermos de Pavesas de Niebla o en el bazar.",
+          "Chinese": "用于制作珍瑟荒野传奇物品。\n\n向雾灼荒地的爱心商人或者交易商会购买。",
+          "Korean": "Used in the crafting of Janthir Wilds legendary items.\n\nPurchased from the Mistburned Barrens renown heart vendor, or purchased from the Trading Post."
+        }
+      },
+      "ApiId": 104282,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 3592774
+      },
+      "Value": {}
+    },
+    {
+      "Id": "item103351",
+      "Name": {
+        "LocalizedTextByLocale": {
+          "English": "Mursaat Runestone",
+          "French": "Pierre de rune mursaat",
+          "German": "Mursaat-Runenstein",
+          "Spanish": "Piedra rúnica de mursaat",
+          "Chinese": "末世魔符文石",
+          "Korean": "Mursaat Runestone"
+        }
+      },
+      "Description": {
+        "LocalizedTextByLocale": {
+          "English": "Used in the crafting of Janthir Wilds legendary items.",
+          "French": "À utiliser pour fabriquer des objets légendaires de \"Janthir Wilds\".",
+          "German": "Wird zur Herstellung von legendären \"Janthir Wilds\"-Gegenständen verwendet.",
+          "Spanish": "Se utiliza para fabricar objetos legendarios de Janthir Wilds.",
+          "Chinese": "用于制作珍瑟荒野的传奇物品。",
+          "Korean": "Used in the crafting of Janthir Wilds legendary items."
+        }
+      },
+      "ApiId": 103351,
+      "ApiIdType": "Item",
+      "Icon": {
+        "AssetId": 3376085
       },
       "Value": {}
     },
@@ -18809,7 +19157,7 @@
         "LocalizedTextByLocale": {
           "English": "Empowered Cured Thick Leather Square",
           "French": "Pièce de cuir épais traité surpuissant",
-          "German": "Gestärkter getrockneter dicker Lederflicken",
+          "German": "Gestärkter gegerbter dicker Lederflicken",
           "Spanish": "Retal de cuero curado grueso potenciado",
           "Chinese": "增强熟化厚实皮革片",
           "Korean": "Empowered Cured Thick Leather Square"
@@ -18925,7 +19273,7 @@
         "LocalizedTextByLocale": {
           "English": "Weaponized Cured Thick Leather Square",
           "French": "Pièce de cuir épais traité de combat",
-          "German": "Waffenfähiger getrockneter dicker Lederflicken",
+          "German": "Waffenfähiger gegerbter dicker Lederflicken",
           "Spanish": "Retal de cuero curado grueso armado",
           "Chinese": "武器化的增强熟化厚实皮革片",
           "Korean": "Weaponized Cured Thick Leather Square"
@@ -22902,7 +23250,10 @@
         "currency73",
         "currency75",
         "currency76",
-        "currency77"
+        "currency77",
+        "currency78",
+        "currency79",
+        "currency80"
       ]
     },
     {
@@ -23260,7 +23611,16 @@
         "item102494",
         "item102306",
         "item102205",
-        "item103049"
+        "item103049",
+        "item103587",
+        "item102655",
+        "item103427",
+        "item104229",
+        "item104331",
+        "item102569",
+        "item103316",
+        "item104282",
+        "item103351"
       ]
     },
     {
